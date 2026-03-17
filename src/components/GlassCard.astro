@@ -1,0 +1,15 @@
+---
+interface Props {
+  class?: string;
+  tag?: string;
+  sharp?: boolean;
+}
+
+const { class: className = '', tag = 'div', sharp = false } = Astro.props;
+const Tag = tag as any;
+const radius = sharp ? 'border-radius: 4px;' : 'border-radius: 12px;';
+---
+
+<Tag class:list={['glass-panel', className]} style={radius}>
+  <slot />
+</Tag>

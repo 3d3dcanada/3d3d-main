@@ -1,0 +1,298 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BrandSidebar from '../../components/BrandSidebar.tsx';
+import {
+  CATALOG,
+  SOURCE_LABELS,
+  getCatalogItemPurchaseOptions,
+  getCatalogDefaultSelection,
+  getCatalogItemStartingPrice,
+  getCatalogItemHasPriceRange,
+  getCatalogItemMaterialSummary,
+  SHOP_CATEGORY_LABELS,
+} from '../../lib/catalog';
+import type { CatalogItem } from '../../lib/types';
+
+export function getStaticPaths() {
+  return CATALOG.map((item) => ({
+    params: { id: item.id },
+    props: { item },
+  }));
+}
+
+interface Props {
+  item: CatalogItem;
+}
+
+const { item } = Astro.props;
+const { option: defaultOption, pricing: defaultPricing } = getCatalogDefaultSelection(item);
+const purchaseOptions = getCatalogItemPurchaseOptions(item);
+const startPrice = getCatalogItemStartingPrice(item);
+const hasRange = getCatalogItemHasPriceRange(item);
+const materialSummary = getCatalogItemMaterialSummary(item);
+const sourceInfo = item.source ? SOURCE_LABELS[item.source] : null;
+const categoryLabel = SHOP_CATEGORY_LABELS[item.category] ?? item.category;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: item.name,
+  description: item.description,
+  image: item.images,
+  brand: { '@type': 'Brand', name: '3D3D Atlantic Cooperative' },
+  offers: {
+    '@type': 'Offer',
+    price: startPrice,
+    priceCurrency: 'CAD',
+    availability: 'https://schema.org/InStock',
+    seller: { '@type': 'Organization', name: '3D3D Atlantic Cooperative' },
+  },
+};
+
+const sidebarTheme = {
+  accent: '#00C4CC',
+  accentDark: '#0891B2',
+  bg: '#0D0E1A',
+  bgAlt: '#141525',
+  border: 'rgba(255,255,255,0.07)',
+  text: '#E8E8F2',
+  muted: '#7878A0',
+  dimmed: '#4A4A6A',
+  glow: 'rgba(0,196,204,0.3)',
+};
+
+const sidebarNav = [
+  {
+    label: '3D3D',
+    items: [
+      { id: 'shop', label: 'Shop', href: '/shop' },
+      { id: 'quote', label: 'Quote Calculator', href: '/quote' },
+      { id: 'makers', label: 'Makers', href: '/makers' },
+      { id: 'blog', label: 'Blog', href: '/blog' },
+      { id: 'about', label: 'About', href: '/about' },
+      { id: 'contact', label: 'Contact', href: '/contact' },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title={`${item.name} — 3D3D Print Shop`}
+  description={item.seoDescription || item.description}
+  schema={schema}
+>
+  <BrandSidebar slot="sidebar" client:load navGroups={sidebarNav} theme={sidebarTheme} activePath="/shop" />
+
+  <div class="pt-16 pl-0 lg:pl-4">
+    {/* Breadcrumb */}
+    <nav class="px-6 lg:px-12 py-4" aria-label="Breadcrumb">
+      <ol class="flex items-center gap-2 font-tech text-[10px] uppercase tracking-[0.15em] text-[#4A4A6A]">
+        <li><a href="/shop" class="hover:text-[#00C4CC] transition-colors">Shop</a></li>
+        <li>/</li>
+        <li class="text-[#7878A0]">{item.name}</li>
+      </ol>
+    </nav>
+
+    <section class="px-6 lg:px-12 pb-16">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+        {/* Gallery */}
+        <div class="space-y-3">
+          <div class="aspect-square rounded-xl overflow-hidden relative" style="background: #0D0E1A; border: 1px solid rgba(255,255,255,0.05);">
+            {item.images[0] ? (
+              <img
+                src={item.images[0]}
+                alt={item.name}
+                class="w-full h-full object-cover"
+                id="main-image"
+              />
+            ) : (
+              <div class="w-full h-full flex items-center justify-center">
+                <span class="font-tech text-xs text-[#4A4A6A] uppercase tracking-widest">No image available</span>
+              </div>
+            )}
+            <div class="absolute top-3 left-3 flex gap-1.5">
+              {sourceInfo && (
+                <span class="px-2.5 py-1 rounded text-[9px] font-tech uppercase tracking-wider font-semibold" style={`background: ${sourceInfo.color}; color: #fff;`}>
+                  {sourceInfo.label}
+                </span>
+              )}
+              {item.isNew && <span class="px-2.5 py-1 rounded text-[9px] font-tech uppercase tracking-wider font-semibold" style="background: #FF2D92; color: #fff;">New</span>}
+              {item.isPopular && <span class="px-2.5 py-1 rounded text-[9px] font-tech uppercase tracking-wider font-semibold" style="background: #00C4CC; color: #0D0E1A;">Popular</span>}
+            </div>
+          </div>
+          {item.images.length > 1 && (
+            <div class="grid grid-cols-4 gap-2">
+              {item.images.slice(0, 4).map((img, i) => (
+                <button
+                  class="thumb-btn aspect-square rounded-lg overflow-hidden cursor-pointer transition-all duration-200"
+                  style={`background: #0D0E1A; border: 2px solid ${i === 0 ? '#00C4CC' : 'rgba(255,255,255,0.05)'};`}
+                  data-src={img}
+                >
+                  <img src={img} alt={`${item.name} view ${i + 1}`} class="w-full h-full object-cover" loading="lazy" decoding="async" />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Product details */}
+        <div>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="font-tech text-[10px] uppercase tracking-[0.2em] text-[#4A4A6A]">{categoryLabel}</span>
+            <span class="text-[#4A4A6A]">/</span>
+            <span class="font-tech text-[10px] uppercase tracking-[0.2em] text-[#4A4A6A]">{materialSummary}</span>
+          </div>
+
+          <h1 class="font-display text-2xl sm:text-3xl font-bold text-[#E8E8F2]">{item.name}</h1>
+          <p class="mt-3 text-sm leading-relaxed text-[#7878A0]">{item.description}</p>
+
+          {item.makerNote && (
+            <div class="mt-4 p-3 rounded-lg" style="background: rgba(0,196,204,0.06); border: 1px solid rgba(0,196,204,0.12);">
+              <p class="font-tech text-[10px] uppercase tracking-[0.15em] text-[#00C4CC] mb-1">Maker Note</p>
+              <p class="text-xs text-[#7878A0]">{item.makerNote}</p>
+            </div>
+          )}
+
+          {/* Price */}
+          <div class="mt-6 flex items-baseline gap-2">
+            <span class="font-tech text-3xl font-bold text-[#00C4CC]">
+              {hasRange ? 'From ' : ''}${startPrice.toFixed(2)}
+            </span>
+            <span class="font-tech text-xs text-[#4A4A6A] uppercase tracking-wider">CAD</span>
+          </div>
+
+          {/* Purchase options */}
+          {purchaseOptions.length > 1 && (
+            <div class="mt-6">
+              <p class="font-tech text-[10px] uppercase tracking-[0.2em] text-[#4A4A6A] mb-2">Options</p>
+              <div class="flex flex-wrap gap-2">
+                {purchaseOptions.map((opt) => (
+                  <button
+                    class="px-4 py-2 rounded-lg text-xs font-medium transition-all"
+                    style={`background: ${opt.isDefault ? 'rgba(0,196,204,0.12)' : 'rgba(255,255,255,0.04)'}; border: 1px solid ${opt.isDefault ? 'rgba(0,196,204,0.25)' : 'rgba(255,255,255,0.06)'}; color: ${opt.isDefault ? '#00C4CC' : '#7878A0'};`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Colors */}
+          {item.colors.length > 0 && (
+            <div class="mt-6">
+              <p class="font-tech text-[10px] uppercase tracking-[0.2em] text-[#4A4A6A] mb-2">Colors</p>
+              <div class="flex flex-wrap gap-2">
+                {item.colors.map((color) => (
+                  <span class="px-3 py-1.5 rounded text-xs font-medium" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); color: #E8E8F2;">
+                    {color}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Size presets */}
+          {item.sizePresets && item.sizePresets.length > 0 && (
+            <div class="mt-6">
+              <p class="font-tech text-[10px] uppercase tracking-[0.2em] text-[#4A4A6A] mb-2">Sizes</p>
+              <div class="flex flex-wrap gap-2">
+                {item.sizePresets.map((preset) => (
+                  <span class="px-3 py-1.5 rounded text-xs font-medium" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); color: #E8E8F2;">
+                    {preset.label} ({preset.scale}×)
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Recommended settings */}
+          {item.recommendedSettings && (
+            <div class="mt-6">
+              <p class="font-tech text-[10px] uppercase tracking-[0.2em] text-[#4A4A6A] mb-2">Recommended Print Settings</p>
+              <div class="grid grid-cols-2 gap-2">
+                <div class="p-2.5 rounded-lg" style="background: rgba(255,255,255,0.03);">
+                  <span class="block font-tech text-[9px] uppercase tracking-widest text-[#4A4A6A]">Layer</span>
+                  <span class="text-xs text-[#E8E8F2]">{item.recommendedSettings.layerHeight}mm</span>
+                </div>
+                <div class="p-2.5 rounded-lg" style="background: rgba(255,255,255,0.03);">
+                  <span class="block font-tech text-[9px] uppercase tracking-widest text-[#4A4A6A]">Infill</span>
+                  <span class="text-xs text-[#E8E8F2]">{item.recommendedSettings.infill}% {item.recommendedSettings.infillType}</span>
+                </div>
+                <div class="p-2.5 rounded-lg" style="background: rgba(255,255,255,0.03);">
+                  <span class="block font-tech text-[9px] uppercase tracking-widest text-[#4A4A6A]">Supports</span>
+                  <span class="text-xs text-[#E8E8F2]">{item.recommendedSettings.supports}</span>
+                </div>
+                <div class="p-2.5 rounded-lg" style="background: rgba(255,255,255,0.03);">
+                  <span class="block font-tech text-[9px] uppercase tracking-widest text-[#4A4A6A]">Walls</span>
+                  <span class="text-xs text-[#E8E8F2]">{item.recommendedSettings.walls}</span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* CTA */}
+          <div class="mt-8 flex gap-3">
+            <a
+              href={`/quote?product=${item.id}`}
+              class="flex-1 text-center py-3 rounded-lg font-medium text-sm transition-all duration-200"
+              style="background: #00C4CC; color: #0D0E1A;"
+            >
+              Get Custom Quote
+            </a>
+            <a
+              href="mailto:info@3d3d.ca?subject=Order: {item.name}"
+              class="px-5 py-3 rounded-lg font-medium text-sm transition-all duration-200 border"
+              style="border-color: rgba(255,255,255,0.1); color: #7878A0;"
+            >
+              Contact
+            </a>
+          </div>
+
+          {/* Specs */}
+          <div class="mt-8 grid grid-cols-3 gap-3">
+            <div class="text-center p-3 rounded-lg" style="background: rgba(255,255,255,0.03);">
+              <span class="block font-tech text-2xl font-bold text-[#00C4CC]">{item.grams}g</span>
+              <span class="font-tech text-[9px] uppercase tracking-widest text-[#4A4A6A]">Weight</span>
+            </div>
+            <div class="text-center p-3 rounded-lg" style="background: rgba(255,255,255,0.03);">
+              <span class="block font-tech text-2xl font-bold text-[#00C4CC]">{item.hours}h</span>
+              <span class="font-tech text-[9px] uppercase tracking-widest text-[#4A4A6A]">Print Time</span>
+            </div>
+            <div class="text-center p-3 rounded-lg" style="background: rgba(255,255,255,0.03);">
+              <span class="block font-tech text-2xl font-bold text-[#00C4CC]">{item.colors.length}</span>
+              <span class="font-tech text-[9px] uppercase tracking-widest text-[#4A4A6A]">Colors</span>
+            </div>
+          </div>
+
+          {/* Tags */}
+          {item.tags.length > 0 && (
+            <div class="mt-6 flex flex-wrap gap-1.5">
+              {item.tags.map((tag) => (
+                <span class="px-2 py-0.5 rounded text-[10px] font-tech uppercase tracking-wider text-[#4A4A6A]" style="background: rgba(255,255,255,0.03);">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.thumb-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const main = document.getElementById('main-image') as HTMLImageElement;
+      if (main && btn.dataset.src) {
+        main.src = btn.dataset.src;
+        document.querySelectorAll('.thumb-btn').forEach((b) => {
+          (b as HTMLElement).style.borderColor = 'rgba(255,255,255,0.05)';
+        });
+        btn.style.borderColor = '#00C4CC';
+      }
+    });
+  });
+</script>

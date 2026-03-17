@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BrandSidebar from '../components/BrandSidebar.tsx';
+
+const sidebarTheme = {
+  accent: '#00C4CC', accentDark: '#0891B2', bg: '#0D0E1A', bgAlt: '#141525',
+  border: 'rgba(255,255,255,0.07)', text: '#E8E8F2', muted: '#7878A0', dimmed: '#4A4A6A', glow: 'rgba(0,196,204,0.3)',
+};
+
+const sidebarNav = [{
+  label: '3D3D',
+  items: [
+    { id: 'shop', label: 'Shop', href: '/shop' },
+    { id: 'quote', label: 'Quote Calculator', href: '/quote' },
+    { id: 'makers', label: 'Makers', href: '/makers' },
+    { id: 'blog', label: 'Blog', href: '/blog' },
+    { id: 'about', label: 'About', href: '/about' },
+    { id: 'contact', label: 'Contact', href: '/contact' },
+  ],
+}];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: '3D3D Atlantic Cooperative',
+  description: 'Distributed 3D printing cooperative in Atlantic Canada. 50+ makers, 5 materials, 24-48 hour turnaround.',
+  url: 'https://3d3d.ca',
+  telephone: '+15069532678',
+  email: 'info@3d3d.ca',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Moncton',
+    addressRegion: 'NB',
+    addressCountry: 'CA',
+  },
+};
+
+const stats = [
+  { value: '50+', label: 'Active Makers' },
+  { value: '27', label: 'Products' },
+  { value: '5', label: 'Materials' },
+  { value: '4', label: 'Provinces' },
+  { value: '75%', label: 'Maker Payout' },
+  { value: '24-48h', label: 'Turnaround' },
+];
+---
+
+<BaseLayout title="About — 3D3D Atlantic Cooperative" description="Distributed 3D printing cooperative. 50+ makers across Atlantic Canada. Makers retain 75% of revenue." schema={schema}>
+  <BrandSidebar slot="sidebar" client:load navGroups={sidebarNav} theme={sidebarTheme} activePath="/about" />
+
+  <div class="pt-16 pl-0 lg:pl-4">
+    <section class="px-6 lg:px-12 py-12">
+      <div class="max-w-4xl mx-auto">
+        <p class="font-tech text-[10px] uppercase tracking-[0.25em] text-[#7878A0] mb-2">About</p>
+        <h1 class="font-display text-3xl sm:text-4xl font-bold text-[#E8E8F2] mb-6">3D3D Atlantic Cooperative</h1>
+
+        <div class="space-y-4 text-sm leading-relaxed text-[#7878A0]">
+          <p>
+            3D3D is a distributed 3D printing cooperative headquartered in Moncton, New Brunswick. We coordinate a network of 50+ independent makers across Atlantic Canada to deliver custom 3D printed products with 24-48 hour turnaround.
+          </p>
+          <p>
+            The cooperative model is simple: makers keep 75% of every order. 3D3D provides the platform, marketing, order routing, quality standards, and customer support. Makers do what they do best — print.
+          </p>
+          <p>
+            We stock five materials across the network: PLA, PETG, TPU, ABS, and ASA. Every product in our catalog has been tested, documented, and priced through our calculator system that accounts for material cost, machine time, infill, supports, and overhead.
+          </p>
+        </div>
+
+        {/* Stats grid */}
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mt-12">
+          {stats.map((stat) => (
+            <div class="text-center p-4 rounded-xl" style="background: #141525; border: 1px solid rgba(255,255,255,0.05);">
+              <span class="block font-tech text-2xl font-bold text-[#00C4CC]">{stat.value}</span>
+              <span class="font-tech text-[9px] uppercase tracking-widest text-[#4A4A6A]">{stat.label}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* How it works */}
+        <div class="mt-16">
+          <h2 class="font-display text-xl font-bold text-[#E8E8F2] mb-6">How It Works</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { step: '01', title: 'Browse or Quote', desc: 'Pick a product from the shop or configure a custom quote with exact material, quality, and finish specifications.' },
+              { step: '02', title: 'We Route to a Maker', desc: 'Your order goes to the nearest qualified maker with the right material in stock. Most orders start printing within hours.' },
+              { step: '03', title: 'Print, Pack, Ship', desc: 'The maker prints your order, quality-checks it, packages it, and ships directly to you. Most orders arrive within 3-5 business days.' },
+            ].map((item) => (
+              <div class="p-5 rounded-xl" style="background: #141525; border: 1px solid rgba(255,255,255,0.05);">
+                <span class="font-tech text-3xl font-bold text-[#00C4CC] opacity-40">{item.step}</span>
+                <h3 class="font-display text-base font-semibold text-[#E8E8F2] mt-2 mb-2">{item.title}</h3>
+                <p class="text-xs text-[#7878A0] leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Old Girl */}
+        <div class="mt-16">
+          <h2 class="font-display text-xl font-bold text-[#E8E8F2] mb-4">The Old Girl</h2>
+          <p class="text-sm text-[#7878A0] leading-relaxed mb-4">
+            A sister project — a Prusa i3 MK2.5S restored and given over to the community. Print queue, donations, livestream. A printer that belongs to the internet.
+          </p>
+          <a href="https://oldgirl.3d3d.ca" class="font-tech text-xs uppercase tracking-[0.15em] text-[#A3E635] hover:underline">
+            Visit Old Girl →
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

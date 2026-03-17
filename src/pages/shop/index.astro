@@ -1,0 +1,207 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BrandSidebar from '../../components/BrandSidebar.tsx';
+import { CATALOG, SHOP_CATEGORIES, SOURCE_LABELS, getCatalogItemStartingPrice, getCatalogItemHasPriceRange } from '../../lib/catalog';
+import type { CatalogCategory } from '../../lib/types';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Store',
+  name: '3D3D Print Shop',
+  description: 'Custom 3D printing — 27 products, 5 materials, 50+ makers across Atlantic Canada.',
+  url: 'https://3d3d.ca/shop',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Moncton',
+    addressRegion: 'NB',
+    addressCountry: 'CA',
+  },
+};
+
+const sidebarTheme = {
+  accent: '#00C4CC',
+  accentDark: '#0891B2',
+  bg: '#0D0E1A',
+  bgAlt: '#141525',
+  border: 'rgba(255,255,255,0.07)',
+  text: '#E8E8F2',
+  muted: '#7878A0',
+  dimmed: '#4A4A6A',
+  glow: 'rgba(0,196,204,0.3)',
+};
+
+const sidebarNav = [
+  {
+    label: '3D3D',
+    items: [
+      { id: 'shop', label: 'Shop', href: '/shop' },
+      { id: 'quote', label: 'Quote Calculator', href: '/quote' },
+      { id: 'makers', label: 'Makers', href: '/makers' },
+      { id: 'blog', label: 'Blog', href: '/blog' },
+      { id: 'about', label: 'About', href: '/about' },
+      { id: 'contact', label: 'Contact', href: '/contact' },
+    ],
+  },
+];
+
+const categoryIds = SHOP_CATEGORIES.map((c) => c.id);
+---
+
+<BaseLayout title="3D3D Print Shop — Custom 3D Printing" description="27 custom 3D printed products. PLA, PETG, TPU, ABS, ASA. 50+ makers across Atlantic Canada. Ships to Canada & USA." schema={schema}>
+  <BrandSidebar slot="sidebar" client:load navGroups={sidebarNav} theme={sidebarTheme} activePath="/shop" />
+
+  <div class="pt-16 pl-0 lg:pl-4">
+    {/* Hero strip */}
+    <section class="px-6 lg:px-12 py-12 relative overflow-hidden">
+      <div class="absolute inset-0 opacity-[0.03]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;); pointer-events: none;"></div>
+      <div class="max-w-7xl mx-auto">
+        <p class="font-tech text-[10px] uppercase tracking-[0.25em] text-[#7878A0] mb-2">3D3D Atlantic Cooperative</p>
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-[#E8E8F2] leading-tight">
+          Print Shop
+        </h1>
+        <p class="mt-3 text-[#7878A0] max-w-xl text-sm sm:text-base">
+          27 products. 5 materials. 50+ makers across Atlantic Canada. Every order is custom printed and ships within 24–48 hours.
+        </p>
+        <div class="flex flex-wrap gap-4 mt-6">
+          <a href="/quote" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200" style="background: #00C4CC; color: #0D0E1A;">
+            Get a Quote
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 7h8m-3-3 3 3-3 3"/></svg>
+          </a>
+          <a href="/makers" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium border transition-all duration-200" style="border-color: rgba(255,255,255,0.1); color: #7878A0;">
+            Join as Maker
+          </a>
+        </div>
+      </div>
+    </section>
+
+    {/* Category filter tabs */}
+    <section class="px-6 lg:px-12 pb-4 overflow-x-auto">
+      <div class="max-w-7xl mx-auto flex gap-2 flex-nowrap" id="category-tabs">
+        <button class="category-tab active font-tech text-[11px] uppercase tracking-[0.15em] px-4 py-2 rounded-full whitespace-nowrap transition-all" data-cat="all" style="background: #00C4CC; color: #0D0E1A;">
+          All
+        </button>
+        {SHOP_CATEGORIES.map((cat) => (
+          <button
+            class="category-tab font-tech text-[11px] uppercase tracking-[0.15em] px-4 py-2 rounded-full whitespace-nowrap transition-all"
+            data-cat={cat.id}
+            style="background: rgba(255,255,255,0.04); color: #7878A0; border: 1px solid rgba(255,255,255,0.06);"
+          >
+            {cat.label}
+          </button>
+        ))}
+      </div>
+    </section>
+
+    {/* Product grid */}
+    <section class="px-6 lg:px-12 py-8">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5" id="product-grid">
+        {CATALOG.map((item) => {
+          const startPrice = getCatalogItemStartingPrice(item);
+          const hasRange = getCatalogItemHasPriceRange(item);
+          const sourceInfo = item.source ? SOURCE_LABELS[item.source] : null;
+
+          return (
+            <a
+              href={`/shop/${item.id}`}
+              class="product-card group relative rounded-xl overflow-hidden transition-all duration-300"
+              data-category={item.category}
+              style="background: #141525; border: 1px solid rgba(255,255,255,0.05);"
+            >
+              {/* Image */}
+              <div class="aspect-[4/3] overflow-hidden relative" style="background: #0D0E1A;">
+                {item.images[0] ? (
+                  <img
+                    src={item.images[0]}
+                    alt={item.name}
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  <div class="w-full h-full flex items-center justify-center">
+                    <span class="font-tech text-[10px] uppercase tracking-widest text-[#4A4A6A]">No image</span>
+                  </div>
+                )}
+
+                {/* Badges */}
+                <div class="absolute top-2 left-2 flex gap-1.5">
+                  {sourceInfo && (
+                    <span class="px-2 py-0.5 rounded text-[9px] font-tech uppercase tracking-wider font-semibold" style={`background: ${sourceInfo.color}; color: #fff;`}>
+                      {sourceInfo.label}
+                    </span>
+                  )}
+                  {item.isNew && (
+                    <span class="px-2 py-0.5 rounded text-[9px] font-tech uppercase tracking-wider font-semibold" style="background: #FF2D92; color: #fff;">
+                      New
+                    </span>
+                  )}
+                  {item.isPopular && (
+                    <span class="px-2 py-0.5 rounded text-[9px] font-tech uppercase tracking-wider font-semibold" style="background: #00C4CC; color: #0D0E1A;">
+                      Popular
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Info */}
+              <div class="p-4">
+                <p class="font-tech text-[9px] uppercase tracking-[0.2em] text-[#4A4A6A] mb-1">{item.material}</p>
+                <h3 class="font-display text-sm font-semibold text-[#E8E8F2] leading-snug group-hover:text-[#00C4CC] transition-colors">
+                  {item.name}
+                </h3>
+                <div class="flex items-baseline justify-between mt-2">
+                  <span class="font-tech text-lg font-bold text-[#00C4CC]">
+                    {hasRange ? 'From ' : ''}${startPrice.toFixed(2)}
+                  </span>
+                  <svg class="w-4 h-4 text-[#4A4A6A] group-hover:text-[#00C4CC] transition-all duration-200 group-hover:translate-x-0.5" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                    <path d="M3 7h8m-3-3 3 3-3 3" />
+                  </svg>
+                </div>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll<HTMLButtonElement>('.category-tab');
+    const cards = document.querySelectorAll<HTMLElement>('.product-card');
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const cat = tab.dataset.cat;
+
+        tabs.forEach((t) => {
+          if (t === tab) {
+            t.style.background = '#00C4CC';
+            t.style.color = '#0D0E1A';
+            t.style.border = 'none';
+          } else {
+            t.style.background = 'rgba(255,255,255,0.04)';
+            t.style.color = '#7878A0';
+            t.style.border = '1px solid rgba(255,255,255,0.06)';
+          }
+        });
+
+        cards.forEach((card) => {
+          if (cat === 'all' || card.dataset.category === cat) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
+
+<style>
+  .product-card:hover {
+    border-color: rgba(0, 196, 204, 0.2) !important;
+    box-shadow: 0 0 20px rgba(0, 196, 204, 0.06);
+  }
+</style>

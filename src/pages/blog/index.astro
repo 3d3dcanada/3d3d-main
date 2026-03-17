@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BrandSidebar from '../../components/BrandSidebar.tsx';
+
+const sidebarTheme = {
+  accent: '#00C4CC', accentDark: '#0891B2', bg: '#0D0E1A', bgAlt: '#141525',
+  border: 'rgba(255,255,255,0.07)', text: '#E8E8F2', muted: '#7878A0', dimmed: '#4A4A6A', glow: 'rgba(0,196,204,0.3)',
+};
+
+const sidebarNav = [{
+  label: '3D3D',
+  items: [
+    { id: 'shop', label: 'Shop', href: '/shop' },
+    { id: 'quote', label: 'Quote Calculator', href: '/quote' },
+    { id: 'makers', label: 'Makers', href: '/makers' },
+    { id: 'blog', label: 'Blog', href: '/blog' },
+    { id: 'about', label: 'About', href: '/about' },
+    { id: 'contact', label: 'Contact', href: '/contact' },
+  ],
+}];
+
+const posts = [
+  {
+    slug: 'why-cooperative-3d-printing',
+    title: 'Why Cooperative 3D Printing Is the Future of Local Manufacturing',
+    excerpt: 'Distributed manufacturing powered by maker cooperatives is reshaping how communities produce goods. Here\'s how 3D3D is building that future in Atlantic Canada.',
+    date: '2026-03-10',
+    category: '3D Printing',
+    readTime: '5 min',
+  },
+  {
+    slug: 'material-guide-pla-petg-tpu',
+    title: 'Material Guide: PLA vs PETG vs TPU — Choosing the Right Filament',
+    excerpt: 'Each material has trade-offs. PLA for precision, PETG for durability, TPU for flex. We break down when to use each and what it costs.',
+    date: '2026-03-12',
+    category: 'Materials',
+    readTime: '7 min',
+  },
+  {
+    slug: 'atlantic-canada-maker-network',
+    title: 'Building a 50+ Maker Network Across Atlantic Canada',
+    excerpt: 'From Moncton to Halifax, St. John\'s to Charlottetown — how we recruited and onboarded makers across four provinces.',
+    date: '2026-03-15',
+    category: 'Community',
+    readTime: '4 min',
+  },
+];
+---
+
+<BaseLayout title="Blog — 3D3D" description="Articles on 3D printing, materials, cooperative manufacturing, and the maker economy in Atlantic Canada.">
+  <BrandSidebar slot="sidebar" client:load navGroups={sidebarNav} theme={sidebarTheme} activePath="/blog" />
+
+  <div class="pt-16 pl-0 lg:pl-4">
+    <section class="px-6 lg:px-12 py-12">
+      <div class="max-w-4xl mx-auto">
+        <p class="font-tech text-[10px] uppercase tracking-[0.25em] text-[#7878A0] mb-2">3D3D Blog</p>
+        <h1 class="font-display text-3xl sm:text-4xl font-bold text-[#E8E8F2] mb-2">Blog</h1>
+        <p class="text-sm text-[#7878A0] mb-12">3D printing, materials, maker economy, cooperative manufacturing.</p>
+
+        <div class="space-y-6">
+          {posts.map((post) => (
+            <a
+              href={`/blog/${post.slug}`}
+              class="group block p-6 rounded-xl transition-all duration-300"
+              style="background: #141525; border: 1px solid rgba(255,255,255,0.05);"
+            >
+              <div class="flex items-center gap-3 mb-3">
+                <span class="font-tech text-[10px] uppercase tracking-[0.2em] text-[#00C4CC]">{post.category}</span>
+                <span class="text-[#4A4A6A]">·</span>
+                <span class="font-tech text-[10px] uppercase tracking-[0.15em] text-[#4A4A6A]">{post.date}</span>
+                <span class="text-[#4A4A6A]">·</span>
+                <span class="font-tech text-[10px] uppercase tracking-[0.15em] text-[#4A4A6A]">{post.readTime}</span>
+              </div>
+              <h2 class="font-display text-lg font-semibold text-[#E8E8F2] group-hover:text-[#00C4CC] transition-colors mb-2">
+                {post.title}
+              </h2>
+              <p class="text-sm text-[#7878A0] leading-relaxed">{post.excerpt}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  a[href^="/blog/"]:hover {
+    border-color: rgba(0, 196, 204, 0.15) !important;
+  }
+</style>

@@ -1,0 +1,100 @@
+---
+interface Props {
+  accent?: string;
+  showCooperativeInfo?: boolean;
+}
+
+const { accent = '#00C4CC', showCooperativeInfo = true } = Astro.props;
+
+const navLinks = [
+  { label: 'Shop', href: '/shop' },
+  { label: 'Quote Calculator', href: '/quote' },
+  { label: 'Makers', href: '/makers' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+  { label: 'Old Girl', href: 'https://oldgirl.3d3d.ca' },
+];
+
+const legalLinks = [
+  { label: 'Privacy Policy', href: '/privacy' },
+  { label: 'Terms of Service', href: '/terms' },
+  { label: 'CASL Compliance', href: '/casl' },
+  { label: 'Accessibility', href: '/accessibility' },
+];
+---
+
+<footer class="relative border-t" style={`border-color: ${accent}18; background: var(--color-bg-primary);`}>
+  <div class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+    <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
+
+      {/* Cooperative info */}
+      {showCooperativeInfo && (
+        <div>
+          <h3 class="font-display text-lg font-bold" style={`color: ${accent};`}>
+            3D3D Atlantic Cooperative
+          </h3>
+          <p class="mt-3 text-sm leading-relaxed" style="color: var(--color-text-secondary);">
+            Distributed 3D printing cooperative. 50+ makers across Atlantic Canada.
+            Makers retain 75% of revenue. 24-48 hour turnaround. Ships to Canada and USA.
+          </p>
+          <div class="mt-4 space-y-1 font-tech text-xs uppercase tracking-widest" style="color: var(--color-text-secondary);">
+            <p>Moncton, NB, Canada</p>
+            <p><a href="tel:+15069532678" class="hover:underline" style={`color: ${accent};`}>506-953-2678</a></p>
+            <p><a href="mailto:info@3d3d.ca" class="hover:underline" style={`color: ${accent};`}>info@3d3d.ca</a></p>
+          </div>
+        </div>
+      )}
+
+      {/* Navigation */}
+      <div>
+        <h4 class="font-tech text-[10px] font-semibold uppercase tracking-[0.2em]" style="color: var(--color-charcoal-muted);">
+          Navigation
+        </h4>
+        <ul class="mt-3 space-y-2">
+          {navLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-sm transition-colors duration-150"
+                style="color: var(--color-text-secondary);"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Legal */}
+      <div>
+        <h4 class="font-tech text-[10px] font-semibold uppercase tracking-[0.2em]" style="color: var(--color-charcoal-muted);">
+          Legal
+        </h4>
+        <ul class="mt-3 space-y-2">
+          {legalLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-sm transition-colors duration-150"
+                style="color: var(--color-text-secondary);"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    {/* Bottom bar */}
+    <div class="mt-12 border-t pt-8 flex flex-col sm:flex-row items-center justify-between gap-4" style={`border-color: ${accent}12;`}>
+      <p class="font-tech text-[10px] uppercase tracking-[0.15em]" style="color: var(--color-charcoal-muted);">
+        &copy; {new Date().getFullYear()} 3D3D Atlantic Cooperative. Moncton, NB, Canada.
+      </p>
+      <p class="font-tech text-[10px] uppercase tracking-[0.15em]" style="color: var(--color-charcoal-muted);">
+        Materials: PLA &middot; PETG &middot; TPU &middot; ABS &middot; ASA
+      </p>
+    </div>
+  </div>
+</footer>

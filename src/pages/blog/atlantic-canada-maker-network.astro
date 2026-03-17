@@ -1,0 +1,64 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+
+const frontmatter = {
+  title: 'Building a 50+ Maker Network Across Atlantic Canada',
+  description: 'From Moncton to Halifax, St. John\'s to Charlottetown — how we recruited and onboarded makers across four provinces.',
+  date: '2026-03-15',
+  author: '3D3D Editorial',
+  category: 'Community',
+  readTime: '4 min',
+};
+---
+
+<BlogLayout
+  title={`${frontmatter.title} — 3D3D Blog`}
+  description={frontmatter.description}
+  datePublished={frontmatter.date}
+  author={frontmatter.author}
+>
+  <h1>{frontmatter.title}</h1>
+
+  <p>
+    When we started 3D3D, the pitch was simple: you already own a 3D printer. You already know how to use it. We'll bring you customers, handle the business side, and pay you 75% of every order. You print, ship, and get paid.
+  </p>
+
+  <h2>The Recruitment Process</h2>
+
+  <p>
+    We started in Moncton — our home base. Local maker spaces, Facebook groups for 3D printing enthusiasts, Reddit's r/3Dprinting and r/newbrunswick. The first 10 makers came from personal referrals.
+  </p>
+
+  <p>
+    From there, we expanded city by city. Halifax and Fredericton came next, then St. John's and Charlottetown. Each city had its own maker community with different dynamics. Halifax had the largest pool of hobbyist printers. St. John's had fewer makers but higher average capacity per maker.
+  </p>
+
+  <h2>Onboarding Standards</h2>
+
+  <p>
+    Not everyone with a printer qualifies. Our onboarding process includes:
+  </p>
+
+  <ul>
+    <li><strong>Print quality test:</strong> Three calibration prints evaluated for dimensional accuracy, surface finish, and layer adhesion.</li>
+    <li><strong>Material verification:</strong> Makers must demonstrate competency with at least PLA and PETG. TPU, ABS, and ASA are optional certifications.</li>
+    <li><strong>Turnaround commitment:</strong> 24-hour print start time, 48-hour ship time for standard orders.</li>
+    <li><strong>Equipment inventory:</strong> We track each maker's printer models, build volumes, and material stock.</li>
+  </ul>
+
+  <h2>The Network Today</h2>
+
+  <p>
+    As of March 2026, the network spans 50+ active makers across all four Atlantic provinces. Average maker fleet size is 2.8 printers. Total network capacity exceeds 400 print-hours per day.
+  </p>
+
+  <p>
+    The geographic distribution means most orders in Atlantic Canada can be fulfilled by a maker within 100km of the customer. This cuts shipping time and cost dramatically compared to centralized fulfillment.
+  </p>
+
+  <h2>Join the Network</h2>
+
+  <p>
+    We're always looking for quality-focused makers to join the cooperative. If you run a 3D printer in Atlantic Canada (or anywhere in Canada — we're expanding), <a href="/makers">apply to join</a>. The application takes 5 minutes and we'll schedule a print quality review within a week.
+  </p>
+</BlogLayout>

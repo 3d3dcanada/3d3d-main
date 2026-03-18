@@ -1,0 +1,59 @@
+---
+interface Props {
+  headline: string;
+  subhead?: string;
+  accent?: string;
+  bgColor?: string;
+  gradient?: boolean;
+}
+
+const {
+  headline,
+  subhead,
+  accent = '#84CC16',
+  bgColor = 'var(--color-surface-primary)',
+  gradient = true,
+} = Astro.props;
+---
+
+<section
+  class="relative min-h-[80dvh] flex items-center overflow-hidden"
+  style={`background: ${bgColor};`}
+>
+  {/* Ambient gradient mesh */}
+  {gradient && (
+    <div
+      class="absolute inset-0 pointer-events-none"
+      style={`
+        background:
+          radial-gradient(ellipse at 20% 50%, rgba(132, 204, 22, 0.12) 0%, transparent 50%),
+          radial-gradient(ellipse at 80% 20%, rgba(239, 68, 68, 0.08) 0%, transparent 50%),
+          radial-gradient(ellipse at 50% 80%, rgba(163, 230, 53, 0.06) 0%, transparent 40%);
+      `}
+    />
+  )}
+
+  <div class="relative z-10 mx-auto max-w-5xl px-6 py-24 lg:px-8">
+    <h1
+      class="font-display font-bold tracking-tight leading-[1.08]"
+      style={`font-size: clamp(2.5rem, 5.2vw, 5rem); color: var(--color-text-primary);`}
+    >
+      <slot name="headline">
+        {headline}
+      </slot>
+    </h1>
+
+    {subhead && (
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed" style="color: var(--color-text-secondary);">
+        {subhead}
+      </p>
+    )}
+
+    <div class="mt-10">
+      <slot />
+    </div>
+  </div>
+
+  {/* Visual slot (right side, absolute) */}
+  <slot name="visual" />
+</section>

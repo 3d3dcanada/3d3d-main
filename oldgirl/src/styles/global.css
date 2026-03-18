@@ -1,0 +1,297 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────────
+OLD GIRL - LIGHT THEME - Human-Made Aesthetic
+March 2026
+
+NO DARK MODE. NO PURE WHITE. NO OFF-WHITE.
+Colorful pastel surfaces with bold accents.
+Distinct from 3D3D - Old Girl has lime/red accents.
+───────────────────────────────────────────────────────────────── */
+
+@theme {
+/* ── Surface Palette - Colorful Pastels ─────────────────────── */
+--color-surface-primary: #E8F4E8;
+--color-surface-secondary: #FFF0F0;
+--color-surface-tertiary: #F8F0E8;
+--color-surface-card: #F5FAF0;
+--color-surface-hover: #F0E8F0;
+--color-surface-elevated: #FFFFFF;
+
+/* ── Brand Colors - Old Girl Lime/Red ───────────────────────── */
+--color-lime-primary: #84CC16;
+--color-lime-light: #A3E635;
+--color-lime-dark: #65A30D;
+--color-lime-surface: #ECFCCB;
+
+--color-red-primary: #EF4444;
+--color-red-light: #F87171;
+--color-red-dark: #DC2626;
+--color-red-surface: #FEE2E2;
+
+/* ── Text Colors - Dark on Light ────────────────────────────── */
+--color-text-primary: #1A1A2E;
+--color-text-secondary: #3A3A4E;
+--color-text-muted: #5A5A6E;
+--color-text-accent: #65A30D;
+--color-text-on-accent: #1A1A2E;
+
+/* ── Border Colors ──────────────────────────────────────────── */
+--color-border-default: rgba(132, 204, 22, 0.25);
+--color-border-subtle: rgba(132, 204, 22, 0.15);
+--color-border-strong: rgba(132, 204, 22, 0.4);
+--color-border-red: rgba(239, 68, 68, 0.3);
+
+/* ── Shadow System - Colored Shadows ────────────────────────── */
+--shadow-sm: 0 2px 8px rgba(101, 163, 13, 0.12);
+--shadow-md: 0 4px 16px rgba(101, 163, 13, 0.15);
+--shadow-lg: 0 8px 32px rgba(101, 163, 13, 0.18);
+--shadow-xl: 0 12px 48px rgba(101, 163, 13, 0.2);
+--shadow-red: 0 4px 16px rgba(220, 38, 38, 0.15);
+--shadow-card: 0 4px 20px rgba(58, 58, 78, 0.1);
+--shadow-card-hover: 0 8px 32px rgba(101, 163, 13, 0.18);
+
+/* ── Typography ─────────────────────────────────────────────── */
+--font-display: 'Outfit', system-ui, sans-serif;
+--font-body: 'DM Sans', system-ui, sans-serif;
+--font-mono: 'JetBrains Mono', monospace;
+
+/* ── Border Radius - Organic Feel ───────────────────────────── */
+--radius-sm: 8px;
+--radius-md: 16px;
+--radius-lg: 24px;
+--radius-xl: 40px;
+--radius-full: 9999px;
+
+/* ── Spacing ────────────────────────────────────────────────── */
+--sidebar-width: 220px;
+--sidebar-collapsed: 60px;
+--content-padding: 48px;
+--content-padding-mobile: 24px;
+}
+
+/* ── Base Styles ───────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-surface-primary);
+  color: var(--color-text-primary);
+  background-image:
+    radial-gradient(ellipse at 20% 30%, rgba(132, 204, 22, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(239, 68, 68, 0.10) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(163, 230, 53, 0.08) 0%, transparent 40%);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Typography Utilities ─────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.2;
+}
+
+.text-hero {
+  font-size: clamp(2.5rem, 1rem + 8vw, 6rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.text-display {
+  font-size: clamp(2rem, 1rem + 5vw, 4rem);
+  font-weight: 700;
+}
+
+.text-heading-xl {
+  font-size: clamp(1.5rem, 1rem + 2.5vw, 2.5rem);
+}
+
+.text-heading-lg {
+  font-size: clamp(1.25rem, 1rem + 1.25vw, 1.75rem);
+}
+
+.text-body-lg {
+  font-size: clamp(1.125rem, 0.9rem + 0.5vw, 1.25rem);
+  line-height: 1.7;
+}
+
+.text-mono {
+  font-family: var(--font-mono);
+}
+
+/* ── Skip to Content (a11y) ───────────────────────────────────── */
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 100;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-lime-primary);
+  color: var(--color-text-on-accent);
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  border-radius: var(--radius-md);
+}
+
+.skip-to-content:focus {
+  position: fixed;
+  left: 16px;
+  top: 16px;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  text-decoration: none;
+}
+
+/* ── Light Theme Body Class ───────────────────────────────────── */
+.light-theme {
+  background-color: var(--color-surface-primary);
+  color: var(--color-text-primary);
+}
+
+/* ── Card Styles ──────────────────────────────────────────────── */
+.card {
+  background: var(--color-surface-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px) rotate(0.5deg);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* ── Button Styles ────────────────────────────────────────────── */
+.btn-primary {
+  background: var(--color-lime-primary);
+  color: var(--color-text-on-accent);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-family: var(--font-display);
+  font-weight: 600;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:hover {
+  background: var(--color-lime-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+  background: var(--color-surface-elevated);
+  color: var(--color-text-primary);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-family: var(--font-display);
+  font-weight: 600;
+  border: 2px solid var(--color-border-default);
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--color-surface-hover);
+  border-color: var(--color-border-strong);
+}
+
+/* ── Prose Styles ─────────────────────────────────────────────── */
+.prose {
+  max-width: 65ch;
+  line-height: 1.7;
+}
+
+.prose p {
+  margin-bottom: 1.25em;
+}
+
+.prose a {
+  color: var(--color-lime-dark);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.prose a:hover {
+  color: var(--color-lime-primary);
+}
+
+.prose code {
+  font-family: var(--font-mono);
+  background: var(--color-surface-hover);
+  padding: 0.125em 0.375em;
+  border-radius: var(--radius-sm);
+  font-size: 0.9em;
+}
+
+.prose pre {
+  background: var(--color-surface-card);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  box-shadow: var(--shadow-sm);
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+}
+
+/* ── Section Divider (Organic) ────────────────────────────────── */
+.section-divider {
+  height: 60px;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,30 Q300,60 600,30 T1200,30 L1200,60 L0,60 Z' fill='%23FFF0F0'/%3E%3C/svg%3E");
+  background-size: cover;
+}
+
+/* ── Utility Classes ──────────────────────────────────────────── */
+.surface-primary { background-color: var(--color-surface-primary); }
+.surface-secondary { background-color: var(--color-surface-secondary); }
+.surface-card { background-color: var(--color-surface-card); }
+
+.text-primary { color: var(--color-text-primary); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-muted { color: var(--color-text-muted); }
+.text-accent { color: var(--color-lime-dark); }
+
+.border-default { border-color: var(--color-border-default); }
+.border-subtle { border-color: var(--color-border-subtle); }
+
+.shadow-card { box-shadow: var(--shadow-card); }
+.shadow-hover { box-shadow: var(--shadow-card-hover); }
+
+/* ── Animation Utilities ───────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(1deg); }
+  }
+}
+
+/* ── Focus Styles ─────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-lime-primary);
+  outline-offset: 2px;
+}
+
+/* ── Selection Styles ─────────────────────────────────────────── */
+::selection {
+  background: var(--color-lime-surface);
+  color: var(--color-text-primary);
+}

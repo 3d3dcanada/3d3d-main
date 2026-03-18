@@ -1,0 +1,29 @@
+---
+interface Props {
+  class?: string;
+  tag?: string;
+  sharp?: boolean;
+}
+
+const { class: className = '', tag = 'div', sharp = false } = Astro.props;
+const Tag = tag as any;
+const radius = sharp ? 'border-radius: 8px;' : 'border-radius: 24px;';
+---
+
+<Tag
+  class:list={['glass-panel', className]}
+  style={`${radius} background: var(--color-surface-card); box-shadow: var(--shadow-card); border: 1px solid var(--color-border-subtle);`}
+>
+  <slot />
+</Tag>
+
+<style>
+  .glass-panel {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .glass-panel:hover {
+    transform: translateY(-4px) rotate(0.5deg);
+    box-shadow: var(--shadow-card-hover);
+  }
+</style>

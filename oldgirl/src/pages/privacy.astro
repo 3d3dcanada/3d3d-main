@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BrandSidebar from '../components/BrandSidebar.tsx';
+
+const sidebarNav = [{ label: 'Old Girl', items: [
+  { id: 'home', label: 'Home', href: '/' },
+  { id: 'about', label: 'About', href: '/about' },
+  { id: 'contact', label: 'Contact', href: '/contact' },
+]}];
+---
+
+<BaseLayout title="Privacy Policy — The Old Girl" description="How 3D3D Atlantic Cooperative collects and uses your personal information on oldgirl.3d3d.ca." accent="#84CC16">
+  <BrandSidebar slot="sidebar" client:load navGroups={sidebarNav} activePath="/privacy" />
+
+  <div class="pt-16 pl-0 lg:pl-4">
+    <section class="px-6 lg:px-12 py-12">
+      <div class="max-w-3xl">
+        <p class="font-display text-[10px] uppercase tracking-[0.25em] mb-2" style="color: var(--color-text-muted);">Legal</p>
+        <h1 class="font-display text-3xl font-bold mb-2" style="color: var(--color-text-primary);">Privacy Policy</h1>
+        <p class="font-display text-xs mb-8" style="color: var(--color-text-muted);">Last updated: March 2026</p>
+
+        <div class="space-y-6 text-sm leading-relaxed" style="color: var(--color-text-secondary);">
+          <div>
+            <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">Information We Collect</h2>
+            <p>When you submit a contact form, we collect your name and email address. If you join the print queue (Stage Two), we will collect your email and model name. Payment data (Stage Two) is processed by Stripe and never stored on our servers.</p>
+          </div>
+          <div>
+            <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">How We Use Your Information</h2>
+            <p>We use your information to respond to enquiries, manage print queue requests, and (with your consent) send updates about the Old Girl project. Your information will not be used for purposes other than those described here without your additional consent (PIPEDA Principle 3).</p>
+          </div>
+          <div>
+            <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">Information Sharing</h2>
+            <p>We do not sell, rent, or trade your personal information. Third-party services we use: Formspree (form handling), Cloudflare (DNS and hosting), Vercel (hosting). Stripe will be added when queue payments are enabled.</p>
+          </div>
+          <div>
+            <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">Data Retention</h2>
+            <p>Contact form submissions are retained for up to 2 years or until you request deletion. Queue and payment data will be retained for 7 years for tax and legal compliance.</p>
+          </div>
+          <div>
+            <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">Cookies</h2>
+            <p>This site uses essential cookies only. No tracking or advertising cookies are used.</p>
+          </div>
+          <div>
+            <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">Your Rights</h2>
+            <p>Under PIPEDA, you have the right to access, correct, and request deletion of your personal information. Access requests will be addressed within 30 days. Contact our Privacy Officer at <a href="mailto:info@3d3d.ca" class="underline" style="color: #84CC16;">info@3d3d.ca</a>.</p>
+          </div>
+          <div>
+            <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">Complaints</h2>
+            <p>If you are not satisfied with our response, you may file a complaint with the Office of the Privacy Commissioner of Canada at <a href="https://www.priv.gc.ca" class="underline" style="color: #84CC16;" target="_blank" rel="noopener noreferrer">priv.gc.ca</a> or 1-800-282-1376.</p>
+          </div>
+          <div>
+            <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">Privacy Officer</h2>
+            <p>3D3D Atlantic Cooperative, Moncton, NB, Canada. <a href="mailto:info@3d3d.ca" class="underline" style="color: #84CC16;">info@3d3d.ca</a> · 506-953-2678</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

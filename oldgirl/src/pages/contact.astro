@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BrandSidebar from '../components/BrandSidebar.tsx';
+
+const sidebarNav = [{
+  label: 'Old Girl',
+  items: [
+    { id: 'home', label: 'Home', href: '/' },
+    { id: 'about', label: 'About', href: '/about' },
+    { id: 'blog', label: 'Blog', href: '/blog' },
+    { id: 'contact', label: 'Contact', href: '/contact' },
+  ],
+}];
+---
+
+<BaseLayout
+  title="Contact — The Old Girl"
+  description="Get in touch about the Old Girl community printer project."
+  accent="#84CC16"
+>
+  <BrandSidebar slot="sidebar" client:load navGroups={sidebarNav} activePath="/contact" />
+
+  <div class="pt-16 pl-0 lg:pl-4">
+    <section class="px-6 lg:px-12 py-12">
+      <div class="max-w-3xl">
+        <p class="text-[10px] uppercase tracking-[0.25em] mb-2" style="color: var(--color-text-muted); font-family: var(--font-display);">Get in Touch</p>
+        <h1 class="text-3xl font-bold mb-8" style="color: var(--color-text-primary); font-family: var(--font-display);">Contact</h1>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+          <div class="p-5 rounded-xl" style="background: var(--color-surface-card); border: 1px solid var(--color-border-subtle);">
+            <h2 class="text-sm font-semibold mb-3" style="color: var(--color-text-primary); font-family: var(--font-display);">Direct</h2>
+            <div class="space-y-2 text-sm">
+              <div>
+                <span class="block text-[9px] uppercase tracking-widest mb-0.5" style="color: var(--color-text-muted); font-family: var(--font-display);">Email</span>
+                <a href="mailto:info@3d3d.ca" style="color: #65A30D;" class="hover:underline">info@3d3d.ca</a>
+              </div>
+              <div>
+                <span class="block text-[9px] uppercase tracking-widest mb-0.5" style="color: var(--color-text-muted); font-family: var(--font-display);">Phone</span>
+                <a href="tel:+15069532678" style="color: var(--color-text-primary);" class="hover:underline">506-953-2678</a>
+              </div>
+              <div>
+                <span class="block text-[9px] uppercase tracking-widest mb-0.5" style="color: var(--color-text-muted); font-family: var(--font-display);">Location</span>
+                <span style="color: var(--color-text-secondary);">Moncton, NB, Canada</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-xl" style="background: var(--color-surface-card); border: 1px solid var(--color-border-subtle);">
+            <h2 class="text-sm font-semibold mb-3" style="color: var(--color-text-primary); font-family: var(--font-display);">Quick Links</h2>
+            <div class="space-y-2 text-sm">
+              <a href="https://ko-fi.com/3d3dca" target="_blank" rel="noopener noreferrer" class="block hover:underline" style="color: #65A30D;">Support on Ko-fi →</a>
+              <a href="/about" class="block hover:underline" style="color: var(--color-text-secondary);">About the printer →</a>
+              <a href="/blog" class="block hover:underline" style="color: var(--color-text-secondary);">Read the blog →</a>
+              <a href="https://3d3d.ca" class="block hover:underline" style="color: var(--color-text-secondary);">3D3D Atlantic Cooperative →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 rounded-xl" style="background: var(--color-surface-card); border: 1px solid var(--color-border-subtle);">
+          <h2 class="text-lg font-semibold mb-5" style="color: var(--color-text-primary); font-family: var(--font-display);">Send a Message</h2>
+          <form action="https://formspree.io/f/mldlydbl" method="POST" class="space-y-4">
+            <input type="hidden" name="_subject" value="Old Girl Enquiry" />
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[10px] uppercase tracking-[0.2em] mb-1.5" for="name" style="color: var(--color-text-muted); font-family: var(--font-display);">Name</label>
+                <input type="text" id="name" name="name" required
+                  class="w-full px-4 py-2.5 rounded-lg text-sm outline-none"
+                  style="background: var(--color-surface-primary); border: 2px solid var(--color-border-subtle); color: var(--color-text-primary);" />
+              </div>
+              <div>
+                <label class="block text-[10px] uppercase tracking-[0.2em] mb-1.5" for="email" style="color: var(--color-text-muted); font-family: var(--font-display);">Email</label>
+                <input type="email" id="email" name="email" required
+                  class="w-full px-4 py-2.5 rounded-lg text-sm outline-none"
+                  style="background: var(--color-surface-primary); border: 2px solid var(--color-border-subtle); color: var(--color-text-primary);" />
+              </div>
+            </div>
+            <div>
+              <label class="block text-[10px] uppercase tracking-[0.2em] mb-1.5" for="message" style="color: var(--color-text-muted); font-family: var(--font-display);">Message</label>
+              <textarea id="message" name="message" rows="5" required
+                class="w-full px-4 py-2.5 rounded-lg text-sm outline-none resize-none"
+                style="background: var(--color-surface-primary); border: 2px solid var(--color-border-subtle); color: var(--color-text-primary);"></textarea>
+            </div>
+            <button type="submit"
+              class="px-6 py-3 rounded-lg text-[11px] font-semibold uppercase tracking-[0.12em] transition-all duration-200"
+              style="background: #84CC16; color: var(--color-text-primary); font-family: var(--font-display);">
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

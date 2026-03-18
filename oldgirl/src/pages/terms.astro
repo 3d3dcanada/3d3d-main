@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BrandSidebar from '../components/BrandSidebar.tsx';
+
+const sidebarNav = [{ label: 'Old Girl', items: [
+  { id: 'home', label: 'Home', href: '/' },
+  { id: 'about', label: 'About', href: '/about' },
+  { id: 'contact', label: 'Contact', href: '/contact' },
+]}];
+---
+
+<BaseLayout title="Terms of Service — The Old Girl" description="Terms and conditions for using oldgirl.3d3d.ca and participating in the community print queue." accent="#84CC16">
+  <BrandSidebar slot="sidebar" client:load navGroups={sidebarNav} activePath="/terms" />
+
+  <div class="pt-16 pl-0 lg:pl-4">
+    <section class="px-6 lg:px-12 py-12">
+      <div class="max-w-3xl">
+        <p class="font-display text-[10px] uppercase tracking-[0.25em] mb-2" style="color: var(--color-text-muted);">Legal</p>
+        <h1 class="font-display text-3xl font-bold mb-2" style="color: var(--color-text-primary);">Terms of Service</h1>
+        <p class="font-display text-xs mb-8" style="color: var(--color-text-muted);">Last updated: March 2026</p>
+
+        <div class="space-y-6 text-sm leading-relaxed" style="color: var(--color-text-secondary);">
+          <div>
+            <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">1. Overview</h2>
+            <p>3D3D Atlantic Cooperative ("3D3D", "we") operates the Old Girl community printer project at oldgirl.3d3d.ca. By using this site or submitting to the print queue, you agree to these terms.</p>
+          </div>
+          <div>
+            <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">2. Print Queue</h2>
+            <p>Queue submissions are accepted in good faith. We do not guarantee print completion timelines, specific materials, or print quality for community prints. Queue positions may change. Queue jumps are non-refundable if the printer is operational at the time of purchase.</p>
+          </div>
+          <div>
+            <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">3. Donations</h2>
+            <p>All Ko-fi donations go directly to printer maintenance and filament. Donations are voluntary and non-refundable. Donor recognition is at our discretion.</p>
+          </div>
+          <div>
+            <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">4. Intellectual Property</h2>
+            <p>By submitting a print file to the queue, you warrant that you have the right to reproduce the design. We are not responsible for copyright infringement by users. Infringing submissions will be removed.</p>
+          </div>
+          <div>
+            <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">5. Limitation of Liability</h2>
+            <p>3D3D is not liable for indirect, incidental, or consequential damages. Our total liability is limited to the amount paid for a specific queue jump, if applicable.</p>
+          </div>
+          <div>
+            <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">6. Governing Law</h2>
+            <p>These terms are governed by the laws of the Province of New Brunswick, Canada. Disputes shall be resolved in the courts of the Province of New Brunswick.</p>
+          </div>
+          <div>
+            <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">6A. Consumer Protection</h2>
+            <p>These terms are subject to the New Brunswick Consumer Product Warranty and Liability Act (SNB 1978, c. C-18.1) and applicable consumer protection legislation. Nothing in these terms limits your rights under provincial consumer protection law.</p>
+          </div>
+          <div>
+            <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">7. Contact</h2>
+            <p>Questions: <a href="mailto:info@3d3d.ca" class="underline" style="color: #84CC16;">info@3d3d.ca</a> · 506-953-2678</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BrandSidebar from '../components/BrandSidebar.tsx';
+
+const sidebarNav = [{ label: 'Old Girl', items: [
+  { id: 'home', label: 'Home', href: '/' },
+  { id: 'about', label: 'About', href: '/about' },
+  { id: 'contact', label: 'Contact', href: '/contact' },
+]}];
+---
+
+<BaseLayout title="CASL Compliance — The Old Girl" description="How 3D3D Atlantic Cooperative complies with Canada's Anti-Spam Legislation (CASL) on oldgirl.3d3d.ca." accent="#84CC16">
+  <BrandSidebar slot="sidebar" client:load navGroups={sidebarNav} activePath="/casl" />
+
+  <div class="pt-16 pl-0 lg:pl-4">
+    <section class="px-6 lg:px-12 py-12">
+      <div class="max-w-3xl">
+        <p class="font-display text-[10px] uppercase tracking-[0.25em] mb-2" style="color: var(--color-text-muted);">Legal</p>
+        <h1 class="font-display text-3xl font-bold mb-2" style="color: var(--color-text-primary);">CASL Compliance</h1>
+        <p class="font-display text-xs mb-8" style="color: var(--color-text-muted);">Canada's Anti-Spam Legislation</p>
+
+        <div class="space-y-6 text-sm leading-relaxed" style="color: var(--color-text-secondary);">
+          <div>
+            <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">Our Commitment</h2>
+            <p>3D3D Atlantic Cooperative complies with Canada's Anti-Spam Legislation (CASL). We only send commercial electronic messages to recipients who have given express or implied consent.</p>
+          </div>
+          <div>
+            <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">Express Consent</h2>
+            <p>We obtain express consent via opt-in checkboxes on our contact forms. Checkboxes are never pre-checked. Consent records (date, source, method) are stored securely.</p>
+          </div>
+          <div>
+            <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">Implied Consent</h2>
+            <p>Implied consent applies for 24 months after a transaction or 6 months after an enquiry. After this period, express consent is required to continue sending commercial messages.</p>
+          </div>
+          <div>
+            <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">Unsubscribe</h2>
+            <p>Every commercial email includes a clear unsubscribe mechanism. Requests are processed within 10 business days. You may also email <a href="mailto:info@3d3d.ca" class="underline" style="color: #84CC16;">info@3d3d.ca</a> to unsubscribe at any time.</p>
+          </div>
+          <div>
+            <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">Identification</h2>
+            <p>All commercial emails clearly identify 3D3D Atlantic Cooperative as the sender, include our physical address (Moncton, NB), and provide contact information.</p>
+          </div>
+          <div>
+            <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">Transactional Messages</h2>
+            <p>Queue confirmations and account-related messages are transactional and exempt from CASL consent requirements. These are sent only in relation to an existing transaction.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

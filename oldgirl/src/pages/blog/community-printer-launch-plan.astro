@@ -1,0 +1,72 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+
+const frontmatter = {
+  title: 'How the Community Printer Launch Works',
+  description: 'Staged rollout, honest preview mode, and why we refused to fake a live system. The plan behind the Old Girl launch.',
+  pubDate: '2026-03-14',
+  author: 'Ken · 3D3D Atlantic Cooperative',
+};
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: frontmatter.title,
+  description: frontmatter.description,
+  datePublished: frontmatter.pubDate,
+  author: { '@type': 'Person', name: 'Ken' },
+  publisher: { '@type': 'Organization', name: '3D3D Atlantic Cooperative', url: 'https://3d3d.ca' },
+  url: 'https://oldgirl.3d3d.ca/blog/community-printer-launch-plan',
+};
+---
+
+<BlogLayout
+  title={`${frontmatter.title} — Old Girl`}
+  description={frontmatter.description}
+  schema={schema}
+  accent="#84CC16"
+>
+  <article class="max-w-3xl mx-auto px-6 lg:px-12 py-12">
+    <div class="mb-8">
+      <p class="font-display text-[10px] uppercase tracking-[0.25em] mb-3" style="color: var(--color-text-muted);">Blog · {frontmatter.pubDate}</p>
+      <h1 class="font-display text-3xl sm:text-4xl font-bold mb-3" style="color: var(--color-text-primary);">{frontmatter.title}</h1>
+      <p class="text-sm" style="color: var(--color-text-muted);">{frontmatter.author}</p>
+    </div>
+
+    <div class="space-y-5 text-sm leading-relaxed" style="color: var(--color-text-secondary);">
+      <p>The Old Girl is a community 3D printer. It takes jobs from the internet, runs on Ko-fi donations, and prints whatever the community votes on next. That's the concept.</p>
+      <p>But shipping a community-facing system with payment processing, realtime database subscriptions, and public write access requires care. We didn't want to launch broken, or — worse — launch with fake live data that pretended to be real.</p>
+
+      <h2 class="font-display text-xl font-bold mt-8 mb-3" style="color: var(--color-text-primary);">Stage One: Honest Preview</h2>
+      <p>Stage One is live right now. The printer is operational. The page is real. But the queue, the voting, and the Ko-fi integration are locked in "preview mode" — a controlled state where every button that would trigger a real action shows an honest "coming soon" instead.</p>
+      <p>The seed data on the page (the three queue items, the suggestions, the filament fund total) is real preview data — not fabricated numbers designed to make the system look more active than it is. The filament fund shows $18 because that's what was in the Ko-fi account when Stage One launched. The queue items are real planned prints.</p>
+
+      <h2 class="font-display text-xl font-bold mt-8 mb-3" style="color: var(--color-text-primary);">Why Bother with Preview Mode?</h2>
+      <p>The alternative is to ship a half-built system where buttons do nothing, forms 404, and payments fail silently. We've seen that on too many indie projects. It destroys trust before it's built.</p>
+      <p>Preview mode means the code path for every write operation — job submissions, votes, payments — is fully implemented and gated at the server level. The only change between Stage One and Stage Two is flipping an environment variable from <code class="font-mono text-[11px] px-1 rounded" style="background: var(--color-surface-card); color: #84CC16;">preview</code> to <code class="font-mono text-[11px] px-1 rounded" style="background: var(--color-surface-card); color: #84CC16;">live</code>. The infrastructure is already there.</p>
+
+      <h2 class="font-display text-xl font-bold mt-8 mb-3" style="color: var(--color-text-primary);">Stage Two: Going Live</h2>
+      <p>Stage Two requires three things to be hardened before the switch flips:</p>
+      <ul class="space-y-2 mt-3">
+        {[
+          'Cloudflare Turnstile on all public write paths (spam protection without user friction)',
+          'Stripe queue-jump with idempotent fulfillment (payment intent ID deduplication, webhook replay protection)',
+          'Server-side vote deduplication (no more localStorage-only vote tracking)',
+        ].map(item => (
+          <li class="flex items-start gap-2">
+            <span style="color: #84CC16;" class="mt-0.5 flex-shrink-0">→</span>
+            {item}
+          </li>
+        ))}
+      </ul>
+      <p class="mt-4">When those are done, the queue opens. No announcement, no fanfare — just a page that works.</p>
+
+      <h2 class="font-display text-xl font-bold mt-8 mb-3" style="color: var(--color-text-primary);">The Principle</h2>
+      <p>We build things that work before we ship them. The Old Girl is not a demo. It's a real printer that will take real jobs from real people. It deserves to launch correctly.</p>
+    </div>
+
+    <div class="mt-12 pt-6 border-t" style="border-color: var(--color-border-subtle);">
+      <a href="/blog" class="font-display text-[10px] uppercase tracking-[0.15em] hover:underline" style="color: #84CC16;">← All Posts</a>
+    </div>
+  </article>
+</BlogLayout>

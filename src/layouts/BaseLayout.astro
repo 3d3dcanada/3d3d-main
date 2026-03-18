@@ -1,7 +1,13 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
+import BrandSidebar from '../components/BrandSidebar';
 import '../styles/global.css';
+
+interface NavGroup {
+  label: string;
+  items: { id: string; label: string; href?: string }[];
+}
 
 interface Props {
   title: string;
@@ -15,6 +21,8 @@ interface Props {
   showFooter?: boolean;
   showCooperativeInfo?: boolean;
   bodyClass?: string;
+  navGroups?: NavGroup[];
+  activePath?: string;
 }
 
 const {
@@ -25,40 +33,81 @@ const {
   ogType,
   schema,
   noindex = false,
-  accent = '#00C4CC',
+  accent = '#40C4C4',
   showFooter = true,
   showCooperativeInfo = true,
   bodyClass = '',
+  navGroups = [],
+  activePath = '',
 } = Astro.props;
+
+// Default navigation groups for 3D3D main site
+const defaultNavGroups: NavGroup[] = [
+  {
+    label: 'Shop',
+    items: [
+      { id: 'shop', label: 'All Products', href: '/shop' },
+      { id: 'quote', label: 'Get a Quote', href: '/quote' },
+    ],
+  },
+  {
+    label: 'About',
+    items: [
+      { id: 'about', label: 'Our Story', href: '/about' },
+      { id: 'makers', label: 'Our Makers', href: '/makers' },
+    ],
+  },
+  {
+    label: 'Connect',
+    items: [
+      { id: 'contact', label: 'Contact Us', href: '/contact' },
+      { id: 'blog', label: 'Blog', href: '/blog' },
+    ],
+  },
+];
+
+const finalNavGroups = navGroups.length > 0 ? navGroups : defaultNavGroups;
 ---
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <BaseHead
-      title={title}
-      description={description}
-      canonicalURL={canonicalURL}
-      ogImage={ogImage}
-      ogType={ogType}
-      schema={schema}
-      noindex={noindex}
-    />
-  </head>
-  <body class:list={[bodyClass]}>
-    <a href="#main-content" class="skip-to-content">Skip to content</a>
+<head>
+  <BaseHead
+    title={title}
+    description={description}
+    canonicalURL={canonicalURL}
+    ogImage={ogImage}
+    ogType={ogType}
+    schema={schema}
+    noindex={noindex}
+  />
+</head>
+<body class:list={[bodyClass, 'light-theme']}>
+  <a href="#main-content" class="skip-to-content">Skip to content</a>
 
-    {/* Sidebar slot — injected per-site via named slot */}
-    <slot name="sidebar" />
+  {/* Sidebar Navigation */}
+  <BrandSidebar
+    client:load
+    navGroups={finalNavGroups}
+    activePath={activePath}
+  />
 
-    <div class="flex-1 flex flex-col min-h-screen">
-      <main id="main-content" class="flex-1">
-        <slot />
-      </main>
+  {/* Main Content Area - accounts for sidebar */}
+  <div class="content-wrapper">
+    <main id="main-content" class="min-h-screen">
+      <slot />
+    </main>
 
-      {showFooter && (
-        <Footer accent={accent} showCooperativeInfo={showCooperativeInfo} />
-      )}
-    </div>
-  </body>
+    {showFooter && (
+      <Footer accent={accent} showCooperativeInfo={showCooperativeInfo} />
+    )}
+  </div>
+</body>
 </html>
+
+<style is:global>
+  .light-theme {
+    background-color: var(--color-surface-primary);
+    color: var(--color-text-primary);
+  }
+</style>

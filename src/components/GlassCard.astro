@@ -2,14 +2,37 @@
 interface Props {
   class?: string;
   tag?: string;
-  sharp?: boolean;
+  variant?: 'default' | 'feature' | 'flat' | 'organic';
+  hover?: boolean;
 }
 
-const { class: className = '', tag = 'div', sharp = false } = Astro.props;
+const {
+  class: className = '',
+  tag = 'div',
+  variant = 'default',
+  hover = true,
+} = Astro.props;
+
 const Tag = tag as any;
-const radius = sharp ? 'border-radius: 4px;' : 'border-radius: 12px;';
+
+// Organic border radius variations
+const variantStyles = {
+  default: 'rounded-organic',
+  feature: 'rounded-feature',
+  flat: 'rounded-md',
+  organic: 'rounded-lg rounded-br-sm',
+};
 ---
 
-<Tag class:list={['glass-panel', className]} style={radius}>
+<Tag
+  class:list={[
+    'card',
+    variantStyles[variant],
+    hover && 'hover:scale-[1.02]',
+    'transition-all duration-300',
+    'p-6',
+    className,
+  ]}
+>
   <slot />
 </Tag>

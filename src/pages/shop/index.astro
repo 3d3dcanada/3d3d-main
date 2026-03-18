@@ -18,18 +18,6 @@ const schema = {
   },
 };
 
-const sidebarTheme = {
-  accent: '#00C4CC',
-  accentDark: '#0891B2',
-  bg: '#0D0E1A',
-  bgAlt: '#141525',
-  border: 'rgba(255,255,255,0.07)',
-  text: '#E8E8F2',
-  muted: '#7878A0',
-  dimmed: '#4A4A6A',
-  glow: 'rgba(0,196,204,0.3)',
-};
-
 const sidebarNav = [
   {
     label: '3D3D',
@@ -43,31 +31,28 @@ const sidebarNav = [
     ],
   },
 ];
-
-const categoryIds = SHOP_CATEGORIES.map((c) => c.id);
 ---
 
 <BaseLayout title="3D3D Print Shop — Custom 3D Printing" description="27 custom 3D printed products. PLA, PETG, TPU, ABS, ASA. 50+ makers across Atlantic Canada. Ships to Canada & USA." schema={schema}>
-  <BrandSidebar slot="sidebar" client:load navGroups={sidebarNav} theme={sidebarTheme} activePath="/shop" />
+  <BrandSidebar slot="sidebar" client:load navGroups={sidebarNav} activePath="/shop" />
 
-  <div class="pt-16 pl-0 lg:pl-4">
+  <div class="pt-8 pl-0 lg:pl-4">
     {/* Hero strip */}
-    <section class="px-6 lg:px-12 py-12 relative overflow-hidden">
-      <div class="absolute inset-0 opacity-[0.03]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;); pointer-events: none;"></div>
+    <section class="px-6 lg:px-12 py-10 relative overflow-hidden bg-surface-secondary">
       <div class="max-w-7xl mx-auto">
-        <p class="font-tech text-[10px] uppercase tracking-[0.25em] text-[#7878A0] mb-2">3D3D Atlantic Cooperative</p>
-        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-[#E8E8F2] leading-tight">
+        <p class="font-body text-xs uppercase tracking-widest text-teal-dark mb-2">3D3D Atlantic Cooperative</p>
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary leading-tight">
           Print Shop
         </h1>
-        <p class="mt-3 text-[#7878A0] max-w-xl text-sm sm:text-base">
+        <p class="mt-3 text-text-secondary max-w-xl text-sm sm:text-base">
           27 products. 5 materials. 50+ makers across Atlantic Canada. Every order is custom printed and ships within 24–48 hours.
         </p>
         <div class="flex flex-wrap gap-4 mt-6">
-          <a href="/quote" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200" style="background: #00C4CC; color: #0D0E1A;">
+          <a href="/quote" class="btn-primary">
             Get a Quote
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 7h8m-3-3 3 3-3 3"/></svg>
           </a>
-          <a href="/makers" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium border transition-all duration-200" style="border-color: rgba(255,255,255,0.1); color: #7878A0;">
+          <a href="/makers" class="btn-secondary">
             Join as Maker
           </a>
         </div>
@@ -75,16 +60,15 @@ const categoryIds = SHOP_CATEGORIES.map((c) => c.id);
     </section>
 
     {/* Category filter tabs */}
-    <section class="px-6 lg:px-12 pb-4 overflow-x-auto">
+    <section class="px-6 lg:px-12 py-4 overflow-x-auto bg-surface-primary">
       <div class="max-w-7xl mx-auto flex gap-2 flex-nowrap" id="category-tabs">
-        <button class="category-tab active font-tech text-[11px] uppercase tracking-[0.15em] px-4 py-2 rounded-full whitespace-nowrap transition-all" data-cat="all" style="background: #00C4CC; color: #0D0E1A;">
+        <button class="category-tab active font-body text-xs uppercase tracking-wider px-4 py-2 rounded-full whitespace-nowrap transition-all" data-cat="all">
           All
         </button>
         {SHOP_CATEGORIES.map((cat) => (
           <button
-            class="category-tab font-tech text-[11px] uppercase tracking-[0.15em] px-4 py-2 rounded-full whitespace-nowrap transition-all"
+            class="category-tab font-body text-xs uppercase tracking-wider px-4 py-2 rounded-full whitespace-nowrap transition-all"
             data-cat={cat.id}
-            style="background: rgba(255,255,255,0.04); color: #7878A0; border: 1px solid rgba(255,255,255,0.06);"
           >
             {cat.label}
           </button>
@@ -93,7 +77,7 @@ const categoryIds = SHOP_CATEGORIES.map((c) => c.id);
     </section>
 
     {/* Product grid */}
-    <section class="px-6 lg:px-12 py-8">
+    <section class="px-6 lg:px-12 py-8 bg-surface-primary">
       <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5" id="product-grid">
         {CATALOG.map((item) => {
           const startPrice = getCatalogItemStartingPrice(item);
@@ -103,12 +87,11 @@ const categoryIds = SHOP_CATEGORIES.map((c) => c.id);
           return (
             <a
               href={`/shop/${item.id}`}
-              class="product-card group relative rounded-xl overflow-hidden transition-all duration-300"
+              class="product-card group relative rounded-2xl overflow-hidden transition-all duration-300"
               data-category={item.category}
-              style="background: #141525; border: 1px solid rgba(255,255,255,0.05);"
             >
               {/* Image */}
-              <div class="aspect-[4/3] overflow-hidden relative" style="background: #0D0E1A;">
+              <div class="aspect-[4/3] overflow-hidden relative bg-surface-tertiary">
                 {item.images[0] ? (
                   <img
                     src={item.images[0]}
@@ -119,24 +102,24 @@ const categoryIds = SHOP_CATEGORIES.map((c) => c.id);
                   />
                 ) : (
                   <div class="w-full h-full flex items-center justify-center">
-                    <span class="font-tech text-[10px] uppercase tracking-widest text-[#4A4A6A]">No image</span>
+                    <span class="font-body text-xs uppercase tracking-widest text-text-muted">No image</span>
                   </div>
                 )}
 
                 {/* Badges */}
-                <div class="absolute top-2 left-2 flex gap-1.5">
+                <div class="absolute top-2 left-2 flex gap-1.5 flex-wrap">
                   {sourceInfo && (
-                    <span class="px-2 py-0.5 rounded text-[9px] font-tech uppercase tracking-wider font-semibold" style={`background: ${sourceInfo.color}; color: #fff;`}>
+                    <span class="badge" style={`background: ${sourceInfo.color};`}>
                       {sourceInfo.label}
                     </span>
                   )}
                   {item.isNew && (
-                    <span class="px-2 py-0.5 rounded text-[9px] font-tech uppercase tracking-wider font-semibold" style="background: #FF2D92; color: #fff;">
+                    <span class="badge badge-magenta">
                       New
                     </span>
                   )}
                   {item.isPopular && (
-                    <span class="px-2 py-0.5 rounded text-[9px] font-tech uppercase tracking-wider font-semibold" style="background: #00C4CC; color: #0D0E1A;">
+                    <span class="badge badge-teal">
                       Popular
                     </span>
                   )}
@@ -144,16 +127,16 @@ const categoryIds = SHOP_CATEGORIES.map((c) => c.id);
               </div>
 
               {/* Info */}
-              <div class="p-4">
-                <p class="font-tech text-[9px] uppercase tracking-[0.2em] text-[#4A4A6A] mb-1">{item.material}</p>
-                <h3 class="font-display text-sm font-semibold text-[#E8E8F2] leading-snug group-hover:text-[#00C4CC] transition-colors">
+              <div class="p-4 bg-surface-card">
+                <p class="font-body text-[10px] uppercase tracking-widest text-text-muted mb-1">{item.material}</p>
+                <h3 class="font-display text-sm font-semibold text-text-primary leading-snug group-hover:text-teal-primary transition-colors">
                   {item.name}
                 </h3>
                 <div class="flex items-baseline justify-between mt-2">
-                  <span class="font-tech text-lg font-bold text-[#00C4CC]">
+                  <span class="font-display text-lg font-bold text-teal-primary">
                     {hasRange ? 'From ' : ''}${startPrice.toFixed(2)}
                   </span>
-                  <svg class="w-4 h-4 text-[#4A4A6A] group-hover:text-[#00C4CC] transition-all duration-200 group-hover:translate-x-0.5" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                  <svg class="w-4 h-4 text-text-muted group-hover:text-teal-primary transition-all duration-200 group-hover:translate-x-0.5" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
                     <path d="M3 7h8m-3-3 3 3-3 3" />
                   </svg>
                 </div>
@@ -171,21 +154,20 @@ const categoryIds = SHOP_CATEGORIES.map((c) => c.id);
     const tabs = document.querySelectorAll<HTMLButtonElement>('.category-tab');
     const cards = document.querySelectorAll<HTMLElement>('.product-card');
 
+    function setActiveTab(activeTab: HTMLButtonElement) {
+      tabs.forEach((t) => {
+        if (t === activeTab) {
+          t.classList.add('active');
+        } else {
+          t.classList.remove('active');
+        }
+      });
+    }
+
     tabs.forEach((tab) => {
       tab.addEventListener('click', () => {
         const cat = tab.dataset.cat;
-
-        tabs.forEach((t) => {
-          if (t === tab) {
-            t.style.background = '#00C4CC';
-            t.style.color = '#0D0E1A';
-            t.style.border = 'none';
-          } else {
-            t.style.background = 'rgba(255,255,255,0.04)';
-            t.style.color = '#7878A0';
-            t.style.border = '1px solid rgba(255,255,255,0.06)';
-          }
-        });
+        setActiveTab(tab);
 
         cards.forEach((card) => {
           if (cat === 'all' || card.dataset.category === cat) {
@@ -200,8 +182,51 @@ const categoryIds = SHOP_CATEGORIES.map((c) => c.id);
 </script>
 
 <style>
+  .category-tab {
+    background: var(--color-surface-card);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border-light);
+  }
+  
+  .category-tab:hover {
+    background: var(--color-surface-secondary);
+    border-color: var(--color-teal-light);
+  }
+  
+  .category-tab.active {
+    background: var(--color-teal-primary);
+    color: white;
+    border-color: var(--color-teal-primary);
+  }
+  
+  .product-card {
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-light);
+    box-shadow: 0 2px 8px oklch(0 0 0 / 0.04);
+  }
+  
   .product-card:hover {
-    border-color: rgba(0, 196, 204, 0.2) !important;
-    box-shadow: 0 0 20px rgba(0, 196, 204, 0.06);
+    border-color: var(--color-teal-light);
+    box-shadow: 0 4px 20px oklch(from var(--color-teal-primary) l c h / 0.15);
+    transform: translateY(-2px);
+  }
+  
+  .badge {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: white;
+  }
+  
+  .badge-magenta {
+    background: var(--color-magenta-primary);
+  }
+  
+  .badge-teal {
+    background: var(--color-teal-primary);
+    color: white;
   }
 </style>

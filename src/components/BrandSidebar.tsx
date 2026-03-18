@@ -16,22 +16,31 @@ export interface NavGroup {
 export interface SidebarTheme {
   accent: string;
   accentDark: string;
-  bg: string;
-  bgAlt: string;
+  surface: string;
+  surfaceHover: string;
   border: string;
   text: string;
-  muted: string;
-  dimmed: string;
-  glow: string;
+  textMuted: string;
 }
 
 interface Props {
   navGroups: NavGroup[];
-  theme: SidebarTheme;
+  theme?: SidebarTheme;
   activePath?: string;
   actionButton?: ReactNode;
   siteName?: string;
 }
+
+/* ── Default light theme ───────────────────────────────────────── */
+const DEFAULT_THEME: SidebarTheme = {
+  accent: '#40C4C4',
+  accentDark: '#2A8A8A',
+  surface: '#E8F4F4',
+  surfaceHover: '#D4F0F0',
+  border: 'rgba(64, 196, 196, 0.3)',
+  text: '#1A1A2E',
+  textMuted: '#5A5A6E',
+};
 
 /* ── Default ecosystem nav (cross-site links) ──────────────────── */
 const ECOSYSTEM_NAV: NavGroup = {
@@ -42,12 +51,12 @@ const ECOSYSTEM_NAV: NavGroup = {
   ],
 };
 
-/* ── Cubic bezier constant ─────────────────────────────────────── */
+/* ── Easing constant ───────────────────────────────────────────── */
 const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)';
 
 export default function BrandSidebar({
   navGroups,
-  theme,
+  theme = DEFAULT_THEME,
   activePath = '',
   actionButton,
 }: Props) {
@@ -63,52 +72,47 @@ export default function BrandSidebar({
   }, []);
 
   const close = useCallback(() => setOpen(false), []);
-
   const allGroups = [...navGroups, ECOSYSTEM_NAV];
 
-  /* ── Toggle button ───────────────────────────────────────────── */
-  const toggleLeft = open && !isMobile ? '272px' : '12px';
+  const toggleLeft = open && !isMobile ? '232px' : '16px';
 
   return (
     <>
-      {/* Toggle */}
+      {/* Toggle Button */}
       <button
         onClick={() => setOpen((o) => !o)}
         aria-label={open ? 'Close navigation' : 'Open navigation'}
         style={{
           position: 'fixed',
           zIndex: 30,
-          top: '12px',
+          top: '16px',
           left: toggleLeft,
           transition: `left 0.3s ${EASE}`,
-          background: 'rgba(0,0,0,0.45)',
-          backdropFilter: 'blur(8px)',
-          WebkitBackdropFilter: 'blur(8px)',
-          border: `1px solid ${theme.border}`,
-          borderRadius: '8px',
-          padding: '8px',
+          background: theme.surface,
+          border: `2px solid ${theme.border}`,
+          borderRadius: '12px',
+          padding: '10px',
           color: theme.text,
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          width: '36px',
-          height: '36px',
-          minWidth: '44px',
-          minHeight: '44px',
+          width: '44px',
+          height: '44px',
+          boxShadow: '0 2px 8px rgba(42, 138, 138, 0.15)',
         }}
       >
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
           {open ? (
             <>
-              <line x1="4" y1="4" x2="14" y2="14" />
-              <line x1="14" y1="4" x2="4" y2="14" />
+              <line x1="5" y1="5" x2="15" y2="15" />
+              <line x1="15" y1="5" x2="5" y2="15" />
             </>
           ) : (
             <>
-              <line x1="3" y1="5" x2="15" y2="5" />
-              <line x1="3" y1="9" x2="15" y2="9" />
-              <line x1="3" y1="13" x2="15" y2="13" />
+              <line x1="3" y1="6" x2="17" y2="6" />
+              <line x1="3" y1="10" x2="17" y2="10" />
+              <line x1="3" y1="14" x2="17" y2="14" />
             </>
           )}
         </svg>
@@ -122,9 +126,9 @@ export default function BrandSidebar({
             position: 'fixed',
             inset: 0,
             zIndex: 40,
-            background: 'rgba(0,0,0,0.6)',
-            backdropFilter: 'blur(2px)',
-            WebkitBackdropFilter: 'blur(2px)',
+            background: 'rgba(26, 26, 46, 0.4)',
+            backdropFilter: 'blur(4px)',
+            WebkitBackdropFilter: 'blur(4px)',
           }}
         />
       )}
@@ -133,36 +137,45 @@ export default function BrandSidebar({
       <nav
         aria-label="Site navigation"
         style={{
-          position: isMobile ? 'fixed' : 'sticky',
+          position: isMobile ? 'fixed' : 'fixed',
           top: 0,
           left: 0,
-          zIndex: isMobile ? 50 : 30,
+          zIndex: isMobile ? 50 : 20,
           height: '100dvh',
-          width: isMobile ? '280px' : (open ? '260px' : '0px'),
+          width: isMobile ? '280px' : (open ? '220px' : '0px'),
           overflow: 'hidden',
-          background: theme.bg,
-          borderRight: `1px solid ${theme.border}`,
+          background: theme.surface,
+          borderRight: `2px solid ${theme.border}`,
           transition: isMobile
-            ? `transform 0.25s ${EASE}`
+            ? `transform 0.3s ${EASE}`
             : `width 0.3s ${EASE}`,
-          transform: isMobile ? (open ? 'translateX(0)' : 'translateX(-100%)') : undefined,
+          transform: isMobile
+            ? (open ? 'translateX(0)' : 'translateX(-100%)')
+            : undefined,
           display: 'flex',
           flexDirection: 'column',
           flexShrink: 0,
         }}
       >
-        <div style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden', padding: '56px 12px 16px' }}>
+        <div
+          style={{
+            flex: 1,
+            overflowY: 'auto',
+            overflowX: 'hidden',
+            padding: '72px 16px 24px',
+          }}
+        >
           {allGroups.map((group) => (
-            <div key={group.label} style={{ marginBottom: '16px' }}>
+            <div key={group.label} style={{ marginBottom: '20px' }}>
               <div
                 style={{
                   fontSize: '10px',
                   textTransform: 'uppercase',
-                  letterSpacing: '0.2em',
-                  color: theme.dimmed,
-                  fontFamily: 'var(--font-tech)',
+                  letterSpacing: '0.15em',
+                  color: theme.textMuted,
+                  fontFamily: 'Outfit, system-ui, sans-serif',
                   fontWeight: 600,
-                  padding: '4px 12px 6px',
+                  padding: '6px 12px 8px',
                   whiteSpace: 'nowrap',
                 }}
               >
@@ -178,24 +191,31 @@ export default function BrandSidebar({
                     style={{
                       display: 'flex',
                       alignItems: 'center',
-                      gap: '8px',
-                      padding: '8px 12px',
+                      gap: '10px',
+                      padding: '12px 14px',
                       borderLeft: `3px solid ${isActive ? theme.accent : 'transparent'}`,
-                      background: isActive ? `${theme.accent}14` : 'transparent',
-                      color: isActive ? theme.text : theme.dimmed,
-                      fontSize: '13px',
-                      fontFamily: 'var(--font-sans)',
+                      background: isActive ? theme.surfaceHover : 'transparent',
+                      color: isActive ? theme.text : theme.textMuted,
+                      fontSize: '14px',
+                      fontFamily: 'DM Sans, system-ui, sans-serif',
+                      fontWeight: isActive ? 600 : 500,
                       textDecoration: 'none',
-                      borderRadius: '0 6px 6px 0',
-                      transition: 'all 0.15s ease',
+                      borderRadius: '0 12px 12px 0',
+                      transition: 'all 0.2s ease',
                       whiteSpace: 'nowrap',
-                      minHeight: '44px',
+                      minHeight: '48px',
                     }}
                     onMouseEnter={(e) => {
-                      if (!isActive) e.currentTarget.style.color = theme.muted;
+                      if (!isActive) {
+                        e.currentTarget.style.background = theme.surfaceHover;
+                        e.currentTarget.style.color = theme.text;
+                      }
                     }}
                     onMouseLeave={(e) => {
-                      if (!isActive) e.currentTarget.style.color = theme.dimmed;
+                      if (!isActive) {
+                        e.currentTarget.style.background = 'transparent';
+                        e.currentTarget.style.color = theme.textMuted;
+                      }
                     }}
                   >
                     {item.icon}
@@ -207,10 +227,30 @@ export default function BrandSidebar({
           ))}
 
           {actionButton && (
-            <div style={{ padding: '8px 12px', marginTop: '8px' }}>
+            <div style={{ padding: '12px 12px', marginTop: '12px' }}>
               {actionButton}
             </div>
           )}
+        </div>
+
+        {/* Sidebar footer accent */}
+        <div
+          style={{
+            padding: '16px',
+            borderTop: `2px solid ${theme.border}`,
+            background: `linear-gradient(135deg, ${theme.surface}, ${theme.surfaceHover})`,
+          }}
+        >
+          <div
+            style={{
+              fontSize: '11px',
+              color: theme.textMuted,
+              fontFamily: 'Outfit, system-ui, sans-serif',
+              fontWeight: 500,
+            }}
+          >
+            3D3D Cooperative
+          </div>
         </div>
       </nav>
     </>

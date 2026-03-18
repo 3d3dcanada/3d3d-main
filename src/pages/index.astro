@@ -1,23 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import BrandSidebar from '../components/BrandSidebar.tsx';
-
-const sidebarTheme = {
-  accent: '#00C4CC', accentDark: '#0891B2', bg: '#0D0E1A', bgAlt: '#141525',
-  border: 'rgba(255,255,255,0.07)', text: '#E8E8F2', muted: '#7878A0', dimmed: '#4A4A6A', glow: 'rgba(0,196,204,0.3)',
-};
-
-const sidebarNav = [{
-  label: '3D3D',
-  items: [
-    { id: 'shop', label: 'Shop', href: '/shop' },
-    { id: 'quote', label: 'Quote Calculator', href: '/quote' },
-    { id: 'makers', label: 'Makers', href: '/makers' },
-    { id: 'blog', label: 'Blog', href: '/blog' },
-    { id: 'about', label: 'About', href: '/about' },
-    { id: 'contact', label: 'Contact', href: '/contact' },
-  ],
-}];
 
 const orgSchema = {
   '@context': 'https://schema.org',
@@ -35,191 +17,202 @@ const stats = [
   { val: '50+', label: 'Makers' },
   { val: '75%', label: 'To Creators' },
   { val: '24-48h', label: 'Turnaround' },
-  { val: '5', label: 'Materials' },
-  { val: 'NB', label: 'HQ' },
 ];
 
 const features = [
   {
-    title: 'Custom 3D Printing',
-    desc: 'Order from 27 catalog products or get a custom quote. PLA, PETG, TPU, ABS, and ASA in stock across the network.',
+    title: 'Browse Products',
+    desc: '27 ready-to-print items from our catalog. Home decor, tools, gifts, and more. Each made by a local maker.',
     href: '/shop',
-    cta: 'Browse Shop',
-    accent: '#00C4CC',
+    cta: 'View Shop',
   },
   {
-    title: 'Quote Calculator',
-    desc: 'Configure your print exactly — material, quality, infill, supports, scale, quantity. Instant pricing, no surprises.',
+    title: 'Custom Quote',
+    desc: 'Upload your own design or describe what you need. Configure material, quality, and scale for instant pricing.',
     href: '/quote',
-    cta: 'Get a Quote',
-    accent: '#00C4CC',
+    cta: 'Get Quote',
   },
   {
-    title: 'Makers Program',
-    desc: 'Own a printer? Join the cooperative. Makers keep 75% of every order. We handle platform, orders, and support.',
+    title: 'Join as Maker',
+    desc: 'Own a 3D printer? Join the cooperative and keep 75% of every order. We handle the rest.',
     href: '/makers',
-    cta: 'Apply as Maker',
-    accent: '#00C4CC',
+    cta: 'Apply Now',
   },
+];
+
+const featuredProducts = [
+  { name: 'Wave Holder', href: '/shop/wave-holder', tag: 'Home Decor' },
+  { name: 'Coin Vortex', href: '/shop/coin-vortex', tag: 'Toys' },
+  { name: 'Secret Note', href: '/shop/secret-note', tag: 'Gifts' },
+  { name: 'Memory Book', href: '/shop/memory-book', tag: 'Crafts' },
 ];
 ---
 
 <BaseLayout
   title="3D3D Atlantic Cooperative — Custom 3D Printing"
-  description="Distributed 3D printing cooperative in Atlantic Canada. 27 products, 50+ makers, 75% revenue to creators. Custom prints with 24-48h turnaround. PLA, PETG, TPU, ABS, ASA."
+  description="Distributed 3D printing cooperative in Atlantic Canada. 27 products, 50+ makers, 75% revenue to creators. Custom prints with 24-48h turnaround."
   schema={orgSchema}
+  activePath="/"
 >
-  <BrandSidebar slot="sidebar" client:load navGroups={sidebarNav} theme={sidebarTheme} activePath="/" />
+  {/* ── HERO ── */}
+  <section class="pt-8 pb-12">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="font-display text-2xl font-bold" style="color: var(--color-teal-primary);">3D3D</span>
+      <span class="badge badge-teal">Atlantic Cooperative</span>
+    </div>
 
-  <div class="pt-16 pl-0 lg:pl-4">
+    <h1 class="text-display">
+      Distributed 3D printing.
+      <br />
+      <span class="text-gradient-teal">Built in Atlantic Canada.</span>
+    </h1>
 
-    {/* ── HERO ── */}
-    <section class="relative px-6 lg:px-12 py-16">
-      <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse at 20% 0%, rgba(0,196,204,0.05) 0%, transparent 55%);" aria-hidden="true" />
+    <p class="mt-6 max-w-2xl text-body-lg" style="color: var(--color-text-secondary);">
+      A cooperative network of 50+ independent makers across Atlantic Canada.
+      Order from our catalog, get a custom quote, or join as a maker and keep 75% of every print.
+    </p>
 
-      <div class="relative max-w-4xl">
-        <div class="flex items-center gap-3 mb-6">
-          <span class="font-display text-2xl font-bold" style="color: #00C4CC;">3D3D</span>
-          <span class="font-tech text-[9px] uppercase tracking-[0.2em] px-2 py-0.5 rounded" style="color: #7878A0; border: 1px solid rgba(255,255,255,0.07);">
-            Atlantic Cooperative
+    <div class="mt-8 flex flex-wrap gap-4">
+      <a href="/shop" class="btn btn-primary">
+        Browse Products
+      </a>
+      <a href="/quote" class="btn btn-secondary">
+        Get a Quote
+      </a>
+    </div>
+
+    {/* Stats */}
+    <div class="mt-12 flex flex-wrap gap-8 pt-8" style="border-top: 2px solid var(--color-border-default);">
+      {stats.map(s => (
+        <div>
+          <span class="block font-display text-2xl font-bold" style="color: var(--color-teal-primary);">{s.val}</span>
+          <span class="block font-display text-sm" style="color: var(--color-text-muted);">{s.label}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  {/* ── FEATURED PRODUCTS ── */}
+  <section class="py-12">
+    <h2 class="section-header text-heading-xl">Featured Products</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {featuredProducts.map((product) => (
+        <a
+          href={product.href}
+          class="card group p-4"
+        >
+          <span class="badge badge-magenta mb-3">{product.tag}</span>
+          <h3 class="font-display text-lg font-semibold" style="color: var(--color-text-primary);">
+            {product.name}
+          </h3>
+          <span class="mt-2 inline-flex items-center text-sm font-medium" style="color: var(--color-teal-dark);">
+            View details
+            <svg class="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
           </span>
-        </div>
+        </a>
+      ))}
+    </div>
 
-        <h1 class="font-display font-bold tracking-tight leading-[1.1] max-w-3xl" style="font-size: clamp(2rem, 4vw, 3.25rem); color: #E8E8F2;">
-          Distributed 3D printing.<br />
-          <span style="color: #00C4CC;">Built in Atlantic Canada.</span>
-        </h1>
+    <div class="mt-8">
+      <a href="/shop" class="btn btn-ghost">
+        View all 27 products
+      </a>
+    </div>
+  </section>
 
-        <p class="mt-5 max-w-2xl leading-relaxed" style="font-size: 1rem; color: #7878A0;">
-          A cooperative network of 50+ independent makers across Atlantic Canada. Order from 27 catalog products, configure a custom quote, or join as a maker and keep 75% of every print you fulfill.
-        </p>
+  {/* ── FEATURES GRID ── */}
+  <section class="py-12" style="background: var(--color-surface-secondary);">
+    <div class="-mx-12 px-12 py-12 rounded-feature" style="background: var(--color-surface-secondary);">
+      <h2 class="section-header text-heading-xl">How It Works</h2>
 
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a href="/shop" class="inline-flex items-center gap-2 rounded-md px-6 py-3 font-tech text-[11px] font-semibold uppercase tracking-[0.12em] transition-all duration-200"
-            style="background: #00C4CC; color: #0A0A0F; min-height: 44px;">
-            Browse Shop
-          </a>
-          <a href="/quote" class="inline-flex items-center gap-2 rounded-md px-6 py-3 font-tech text-[11px] font-semibold uppercase tracking-[0.12em] transition-all duration-200"
-            style="background: transparent; color: #E8E8F2; border: 1px solid rgba(255,255,255,0.12); min-height: 44px;">
-            Get a Quote
-          </a>
-          <a href="/makers" class="inline-flex items-center gap-2 rounded-md px-6 py-3 font-tech text-[11px] font-semibold uppercase tracking-[0.12em] transition-all duration-200"
-            style="background: transparent; color: #7878A0; border: 1px solid rgba(255,255,255,0.07); min-height: 44px;">
-            Join as Maker
-          </a>
-        </div>
-
-        {/* Stats strip */}
-        <div class="mt-12 grid grid-cols-3 sm:grid-cols-6 gap-4 pt-8 border-t" style="border-color: rgba(255,255,255,0.07);">
-          {stats.map(s => (
-            <div class="text-center">
-              <span class="block font-display text-xl font-bold" style="color: #00C4CC;">{s.val}</span>
-              <span class="block font-tech text-[9px] uppercase tracking-[0.18em] mt-0.5" style="color: #4A4A6A;">{s.label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* ── HOW IT WORKS ── */}
-    <section class="px-6 lg:px-12 pb-16" aria-labelledby="features-heading">
-      <div class="max-w-5xl">
-        <h2 id="features-heading" class="font-tech text-[10px] font-semibold uppercase tracking-[0.25em] mb-8" style="color: #4A4A6A;">
-          What We Offer
-        </h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {features.map(f => (
-            <div class="p-6 rounded-xl flex flex-col" style="background: #141525; border: 1px solid rgba(255,255,255,0.05);">
-              <div class="w-2 h-2 rounded-full mb-4" style={`background: ${f.accent};`} />
-              <h3 class="font-display text-base font-bold text-[#E8E8F2] mb-2">{f.title}</h3>
-              <p class="text-[13px] leading-relaxed text-[#7878A0] flex-1">{f.desc}</p>
-              <a href={f.href}
-                class="mt-5 inline-flex items-center font-tech text-[10px] uppercase tracking-[0.15em] transition-colors"
-                style={`color: ${f.accent};`}>
-                {f.cta} →
-              </a>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* ── HOW ORDER FLOW WORKS ── */}
-    <section class="px-6 lg:px-12 pb-16" aria-labelledby="process-heading">
-      <div class="max-w-5xl">
-        <div class="border-t pt-10" style="border-color: rgba(255,255,255,0.07);">
-          <h2 id="process-heading" class="font-display text-lg font-bold text-[#E8E8F2] mb-8">How It Works</h2>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {[
-              { step: '01', title: 'Order or Quote', desc: 'Browse 27 catalog products or use the calculator to configure a custom print with exact material, quality, and scale.' },
-              { step: '02', title: 'We Route to a Maker', desc: 'Your order goes to the nearest qualified maker with the right material in stock. Most orders start printing within hours.' },
-              { step: '03', title: 'Print, Pack, Ship', desc: 'The maker prints, quality-checks, packages, and ships directly to you. Most orders arrive within 3-5 business days.' },
-            ].map(item => (
-              <div class="p-5 rounded-xl" style="background: #141525; border: 1px solid rgba(255,255,255,0.05);">
-                <span class="font-tech text-3xl font-bold opacity-30" style="color: #00C4CC;">{item.step}</span>
-                <h3 class="font-display text-sm font-semibold text-[#E8E8F2] mt-2 mb-2">{item.title}</h3>
-                <p class="text-xs text-[#7878A0] leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    {/* ── MATERIALS ── */}
-    <section class="px-6 lg:px-12 pb-16" aria-labelledby="materials-heading">
-      <div class="max-w-5xl border-t pt-10" style="border-color: rgba(255,255,255,0.07);">
-        <h2 id="materials-heading" class="font-tech text-[10px] font-semibold uppercase tracking-[0.25em] mb-6" style="color: #4A4A6A;">
-          Materials in Stock
-        </h2>
-        <div class="flex flex-wrap gap-3">
-          {[
-            { name: 'PLA', desc: 'General purpose, biodegradable. Best for decor, gifts, prototypes.' },
-            { name: 'PETG', desc: 'Food-safe, durable, slight flex. Best for functional parts.' },
-            { name: 'TPU', desc: 'Flexible, rubber-like. Best for phone cases, gaskets, wearables.' },
-            { name: 'ABS', desc: 'Heat resistant, rigid. Best for automotive, enclosures.' },
-            { name: 'ASA', desc: 'UV stable, weather resistant. Best for outdoor use.' },
-          ].map(m => (
-            <div class="px-4 py-3 rounded-lg" style="background: #141525; border: 1px solid rgba(255,255,255,0.05);">
-              <span class="block font-tech text-xs font-semibold" style="color: #00C4CC;">{m.name}</span>
-              <span class="block text-[11px] mt-0.5" style="color: #7878A0;">{m.desc}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* ── OLD GIRL TEASER ── */}
-    <section class="px-6 lg:px-12 pb-20" aria-labelledby="oldgirl-heading">
-      <div class="max-w-5xl border-t pt-10" style="border-color: rgba(255,255,255,0.07);">
-        <div class="p-6 rounded-xl flex flex-col sm:flex-row items-start sm:items-center gap-6" style="background: #0f0f0f; border: 1px solid rgba(163,230,53,0.12);">
-          <div class="flex-1">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="w-2 h-2 rounded-full" style="background: #A3E635; box-shadow: 0 0 6px rgba(163,230,53,0.5);" />
-              <span class="font-tech text-[10px] uppercase tracking-[0.2em]" style="color: #A3E635;">Community Printer</span>
-            </div>
-            <h2 id="oldgirl-heading" class="font-display text-lg font-bold text-[#E8E8F2] mb-2">The Old Girl</h2>
-            <p class="text-[13px] text-[#7878A0] leading-relaxed">
-              A Prusa i3 MK2.5S with MMU2S — restored and handed over to the community. Print queue, donations, livestream, and fleet monitoring. Stage One preview is live.
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {features.map((feature) => (
+          <div class="card-flat p-6" style="background: var(--color-surface-primary);">
+            <h3 class="font-display text-lg font-bold" style="color: var(--color-teal-dark);">
+              {feature.title}
+            </h3>
+            <p class="mt-3 text-sm leading-relaxed" style="color: var(--color-text-secondary);">
+              {feature.desc}
             </p>
+            <a
+              href={feature.href}
+              class="mt-4 inline-flex items-center text-sm font-semibold"
+              style="color: var(--color-magenta-primary);"
+            >
+              {feature.cta}
+              <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
           </div>
-          <a href="https://oldgirl.3d3d.ca" class="flex-shrink-0 inline-flex items-center gap-2 rounded-md px-5 py-2.5 font-tech text-[11px] font-semibold uppercase tracking-[0.12em] transition-all duration-200"
-            style="background: rgba(163,230,53,0.1); color: #A3E635; border: 1px solid rgba(163,230,53,0.2); min-height: 44px;">
-            Visit Old Girl →
-          </a>
-        </div>
+        ))}
       </div>
-    </section>
+    </div>
+  </section>
 
-    {/* ── CONTACT STRIP ── */}
-    <section class="px-6 lg:px-12 pb-16">
-      <div class="max-w-5xl border-t pt-8 flex flex-wrap items-center gap-x-8 gap-y-3" style="border-color: rgba(255,255,255,0.07);">
-        <a href="mailto:info@3d3d.ca" class="font-tech text-[10px] uppercase tracking-[0.15em] transition-colors hover:underline" style="color: #7878A0;">info@3d3d.ca</a>
-        <a href="tel:+15069532678" class="font-tech text-[10px] uppercase tracking-[0.15em] transition-colors hover:underline" style="color: #7878A0;">506-953-2678</a>
-        <span class="font-tech text-[10px] uppercase tracking-[0.15em]" style="color: #4A4A6A;">Moncton, NB, Canada</span>
+  {/* ── COOPERATIVE STORY ── */}
+  <section class="py-12">
+    <h2 class="section-header text-heading-xl">Why Cooperative?</h2>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div>
+        <p class="text-body-lg" style="color: var(--color-text-secondary);">
+          Most marketplaces take 30-50% of each sale. We flipped that model.
+          Makers in the 3D3D cooperative keep <strong style="color: var(--color-teal-dark);">75% of every order</strong>.
+          The remaining 25% covers platform costs, payment processing, and growing the network.
+        </p>
+        <p class="mt-4 text-body-lg" style="color: var(--color-text-secondary);">
+          We're not a company printing products. We're a network of 50+ independent makers
+          across Atlantic Canada — each with their own equipment, materials, and expertise.
+          When you order, your print goes to a real person in your region.
+        </p>
       </div>
-    </section>
+      <div class="card p-6" style="background: var(--color-teal-surface);">
+        <h3 class="font-display text-xl font-bold" style="color: var(--color-teal-dark);">
+          The Maker Model
+        </h3>
+        <ul class="mt-4 space-y-3">
+          <li class="flex items-start gap-3">
+            <span class="mt-1 w-2 h-2 rounded-full flex-shrink-0" style="background: var(--color-teal-primary);"></span>
+            <span class="text-sm" style="color: var(--color-text-secondary);">75% revenue goes directly to the maker</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-1 w-2 h-2 rounded-full flex-shrink-0" style="background: var(--color-magenta-primary);"></span>
+            <span class="text-sm" style="color: var(--color-text-secondary);">24-48 hour turnaround for standard prints</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-1 w-2 h-2 rounded-full flex-shrink-0" style="background: var(--color-teal-primary);"></span>
+            <span class="text-sm" style="color: var(--color-text-secondary);">Ships to Canada and USA</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-1 w-2 h-2 rounded-full flex-shrink-0" style="background: var(--color-magenta-primary);"></span>
+            <span class="text-sm" style="color: var(--color-text-secondary);">PLA, PETG, TPU, ABS, ASA available</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-  </div>
+  {/* ── CTA ── */}
+  <section class="py-12">
+    <div class="card-feature p-8 text-center" style="background: linear-gradient(135deg, var(--color-teal-surface), var(--color-magenta-surface));">
+      <h2 class="font-display text-2xl font-bold" style="color: var(--color-text-primary);">
+        Ready to start printing?
+      </h2>
+      <p class="mt-3" style="color: var(--color-text-secondary);">
+        Browse our catalog or get a custom quote for your project.
+      </p>
+      <div class="mt-6 flex justify-center gap-4">
+        <a href="/shop" class="btn btn-primary">
+          Browse Shop
+        </a>
+        <a href="/quote" class="btn btn-secondary">
+          Get a Quote
+        </a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>

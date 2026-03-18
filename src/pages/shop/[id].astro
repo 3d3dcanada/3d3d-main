@@ -49,18 +49,6 @@ const schema = {
   },
 };
 
-const sidebarTheme = {
-  accent: '#00C4CC',
-  accentDark: '#0891B2',
-  bg: '#0D0E1A',
-  bgAlt: '#141525',
-  border: 'rgba(255,255,255,0.07)',
-  text: '#E8E8F2',
-  muted: '#7878A0',
-  dimmed: '#4A4A6A',
-  glow: 'rgba(0,196,204,0.3)',
-};
-
 const sidebarNav = [
   {
     label: '3D3D',
@@ -81,24 +69,24 @@ const sidebarNav = [
   description={item.seoDescription || item.description}
   schema={schema}
 >
-  <BrandSidebar slot="sidebar" client:load navGroups={sidebarNav} theme={sidebarTheme} activePath="/shop" />
+  <BrandSidebar slot="sidebar" client:load navGroups={sidebarNav} activePath="/shop" />
 
-  <div class="pt-16 pl-0 lg:pl-4">
+  <div class="pt-8 pl-0 lg:pl-4">
     {/* Breadcrumb */}
-    <nav class="px-6 lg:px-12 py-4" aria-label="Breadcrumb">
-      <ol class="flex items-center gap-2 font-tech text-[10px] uppercase tracking-[0.15em] text-[#4A4A6A]">
-        <li><a href="/shop" class="hover:text-[#00C4CC] transition-colors">Shop</a></li>
-        <li>/</li>
-        <li class="text-[#7878A0]">{item.name}</li>
+    <nav class="px-6 lg:px-12 py-4 bg-surface-primary" aria-label="Breadcrumb">
+      <ol class="flex items-center gap-2 font-body text-xs uppercase tracking-wider text-text-muted">
+        <li><a href="/shop" class="hover:text-teal-primary transition-colors">Shop</a></li>
+        <li class="text-text-muted">/</li>
+        <li class="text-text-secondary">{item.name}</li>
       </ol>
     </nav>
 
-    <section class="px-6 lg:px-12 pb-16">
+    <section class="px-6 lg:px-12 pb-16 bg-surface-primary">
       <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
 
         {/* Gallery */}
         <div class="space-y-3">
-          <div class="aspect-square rounded-xl overflow-hidden relative" style="background: #0D0E1A; border: 1px solid rgba(255,255,255,0.05);">
+          <div class="aspect-square rounded-2xl overflow-hidden relative product-gallery-main">
             {item.images[0] ? (
               <img
                 src={item.images[0]}
@@ -108,26 +96,26 @@ const sidebarNav = [
               />
             ) : (
               <div class="w-full h-full flex items-center justify-center">
-                <span class="font-tech text-xs text-[#4A4A6A] uppercase tracking-widest">No image available</span>
+                <span class="font-body text-xs text-text-muted uppercase tracking-widest">No image available</span>
               </div>
             )}
-            <div class="absolute top-3 left-3 flex gap-1.5">
+            <div class="absolute top-3 left-3 flex gap-1.5 flex-wrap">
               {sourceInfo && (
-                <span class="px-2.5 py-1 rounded text-[9px] font-tech uppercase tracking-wider font-semibold" style={`background: ${sourceInfo.color}; color: #fff;`}>
+                <span class="badge" style={`background: ${sourceInfo.color};`}>
                   {sourceInfo.label}
                 </span>
               )}
-              {item.isNew && <span class="px-2.5 py-1 rounded text-[9px] font-tech uppercase tracking-wider font-semibold" style="background: #FF2D92; color: #fff;">New</span>}
-              {item.isPopular && <span class="px-2.5 py-1 rounded text-[9px] font-tech uppercase tracking-wider font-semibold" style="background: #00C4CC; color: #0D0E1A;">Popular</span>}
+              {item.isNew && <span class="badge badge-magenta">New</span>}
+              {item.isPopular && <span class="badge badge-teal">Popular</span>}
             </div>
           </div>
           {item.images.length > 1 && (
             <div class="grid grid-cols-4 gap-2">
               {item.images.slice(0, 4).map((img, i) => (
                 <button
-                  class="thumb-btn aspect-square rounded-lg overflow-hidden cursor-pointer transition-all duration-200"
-                  style={`background: #0D0E1A; border: 2px solid ${i === 0 ? '#00C4CC' : 'rgba(255,255,255,0.05)'};`}
+                  class="thumb-btn aspect-square rounded-xl overflow-hidden cursor-pointer transition-all duration-200"
                   data-src={img}
+                  data-index={i}
                 >
                   <img src={img} alt={`${item.name} view ${i + 1}`} class="w-full h-full object-cover" loading="lazy" decoding="async" />
                 </button>
@@ -139,38 +127,38 @@ const sidebarNav = [
         {/* Product details */}
         <div>
           <div class="flex items-center gap-2 mb-3">
-            <span class="font-tech text-[10px] uppercase tracking-[0.2em] text-[#4A4A6A]">{categoryLabel}</span>
-            <span class="text-[#4A4A6A]">/</span>
-            <span class="font-tech text-[10px] uppercase tracking-[0.2em] text-[#4A4A6A]">{materialSummary}</span>
+            <span class="font-body text-xs uppercase tracking-wider text-text-muted">{categoryLabel}</span>
+            <span class="text-text-muted">/</span>
+            <span class="font-body text-xs uppercase tracking-wider text-text-muted">{materialSummary}</span>
           </div>
 
-          <h1 class="font-display text-2xl sm:text-3xl font-bold text-[#E8E8F2]">{item.name}</h1>
-          <p class="mt-3 text-sm leading-relaxed text-[#7878A0]">{item.description}</p>
+          <h1 class="font-display text-2xl sm:text-3xl font-bold text-text-primary">{item.name}</h1>
+          <p class="mt-3 text-sm leading-relaxed text-text-secondary">{item.description}</p>
 
           {item.makerNote && (
-            <div class="mt-4 p-3 rounded-lg" style="background: rgba(0,196,204,0.06); border: 1px solid rgba(0,196,204,0.12);">
-              <p class="font-tech text-[10px] uppercase tracking-[0.15em] text-[#00C4CC] mb-1">Maker Note</p>
-              <p class="text-xs text-[#7878A0]">{item.makerNote}</p>
+            <div class="mt-4 p-4 rounded-xl maker-note">
+              <p class="font-body text-xs uppercase tracking-wider text-teal-primary mb-1 font-semibold">Maker Note</p>
+              <p class="text-sm text-text-secondary">{item.makerNote}</p>
             </div>
           )}
 
           {/* Price */}
           <div class="mt-6 flex items-baseline gap-2">
-            <span class="font-tech text-3xl font-bold text-[#00C4CC]">
+            <span class="font-display text-3xl font-bold text-teal-primary">
               {hasRange ? 'From ' : ''}${startPrice.toFixed(2)}
             </span>
-            <span class="font-tech text-xs text-[#4A4A6A] uppercase tracking-wider">CAD</span>
+            <span class="font-body text-xs text-text-muted uppercase tracking-wider">CAD</span>
           </div>
 
           {/* Purchase options */}
           {purchaseOptions.length > 1 && (
             <div class="mt-6">
-              <p class="font-tech text-[10px] uppercase tracking-[0.2em] text-[#4A4A6A] mb-2">Options</p>
+              <p class="font-body text-xs uppercase tracking-wider text-text-muted mb-2">Options</p>
               <div class="flex flex-wrap gap-2">
-                {purchaseOptions.map((opt) => (
+                {purchaseOptions.map((opt, i) => (
                   <button
-                    class="px-4 py-2 rounded-lg text-xs font-medium transition-all"
-                    style={`background: ${opt.isDefault ? 'rgba(0,196,204,0.12)' : 'rgba(255,255,255,0.04)'}; border: 1px solid ${opt.isDefault ? 'rgba(0,196,204,0.25)' : 'rgba(255,255,255,0.06)'}; color: ${opt.isDefault ? '#00C4CC' : '#7878A0'};`}
+                    class="option-btn px-4 py-2 rounded-lg text-sm font-medium transition-all"
+                    data-default={opt.isDefault ? 'true' : 'false'}
                   >
                     {opt.label}
                   </button>
@@ -182,10 +170,10 @@ const sidebarNav = [
           {/* Colors */}
           {item.colors.length > 0 && (
             <div class="mt-6">
-              <p class="font-tech text-[10px] uppercase tracking-[0.2em] text-[#4A4A6A] mb-2">Colors</p>
+              <p class="font-body text-xs uppercase tracking-wider text-text-muted mb-2">Colors</p>
               <div class="flex flex-wrap gap-2">
                 {item.colors.map((color) => (
-                  <span class="px-3 py-1.5 rounded text-xs font-medium" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); color: #E8E8F2;">
+                  <span class="color-chip">
                     {color}
                   </span>
                 ))}
@@ -196,10 +184,10 @@ const sidebarNav = [
           {/* Size presets */}
           {item.sizePresets && item.sizePresets.length > 0 && (
             <div class="mt-6">
-              <p class="font-tech text-[10px] uppercase tracking-[0.2em] text-[#4A4A6A] mb-2">Sizes</p>
+              <p class="font-body text-xs uppercase tracking-wider text-text-muted mb-2">Sizes</p>
               <div class="flex flex-wrap gap-2">
                 {item.sizePresets.map((preset) => (
-                  <span class="px-3 py-1.5 rounded text-xs font-medium" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); color: #E8E8F2;">
+                  <span class="color-chip">
                     {preset.label} ({preset.scale}×)
                   </span>
                 ))}
@@ -210,23 +198,23 @@ const sidebarNav = [
           {/* Recommended settings */}
           {item.recommendedSettings && (
             <div class="mt-6">
-              <p class="font-tech text-[10px] uppercase tracking-[0.2em] text-[#4A4A6A] mb-2">Recommended Print Settings</p>
+              <p class="font-body text-xs uppercase tracking-wider text-text-muted mb-2">Recommended Print Settings</p>
               <div class="grid grid-cols-2 gap-2">
-                <div class="p-2.5 rounded-lg" style="background: rgba(255,255,255,0.03);">
-                  <span class="block font-tech text-[9px] uppercase tracking-widest text-[#4A4A6A]">Layer</span>
-                  <span class="text-xs text-[#E8E8F2]">{item.recommendedSettings.layerHeight}mm</span>
+                <div class="setting-card">
+                  <span class="block font-body text-[10px] uppercase tracking-widest text-text-muted">Layer</span>
+                  <span class="text-sm text-text-primary font-medium">{item.recommendedSettings.layerHeight}mm</span>
                 </div>
-                <div class="p-2.5 rounded-lg" style="background: rgba(255,255,255,0.03);">
-                  <span class="block font-tech text-[9px] uppercase tracking-widest text-[#4A4A6A]">Infill</span>
-                  <span class="text-xs text-[#E8E8F2]">{item.recommendedSettings.infill}% {item.recommendedSettings.infillType}</span>
+                <div class="setting-card">
+                  <span class="block font-body text-[10px] uppercase tracking-widest text-text-muted">Infill</span>
+                  <span class="text-sm text-text-primary font-medium">{item.recommendedSettings.infill}% {item.recommendedSettings.infillType}</span>
                 </div>
-                <div class="p-2.5 rounded-lg" style="background: rgba(255,255,255,0.03);">
-                  <span class="block font-tech text-[9px] uppercase tracking-widest text-[#4A4A6A]">Supports</span>
-                  <span class="text-xs text-[#E8E8F2]">{item.recommendedSettings.supports}</span>
+                <div class="setting-card">
+                  <span class="block font-body text-[10px] uppercase tracking-widest text-text-muted">Supports</span>
+                  <span class="text-sm text-text-primary font-medium">{item.recommendedSettings.supports}</span>
                 </div>
-                <div class="p-2.5 rounded-lg" style="background: rgba(255,255,255,0.03);">
-                  <span class="block font-tech text-[9px] uppercase tracking-widest text-[#4A4A6A]">Walls</span>
-                  <span class="text-xs text-[#E8E8F2]">{item.recommendedSettings.walls}</span>
+                <div class="setting-card">
+                  <span class="block font-body text-[10px] uppercase tracking-widest text-text-muted">Walls</span>
+                  <span class="text-sm text-text-primary font-medium">{item.recommendedSettings.walls}</span>
                 </div>
               </div>
             </div>
@@ -236,15 +224,13 @@ const sidebarNav = [
           <div class="mt-8 flex gap-3">
             <a
               href={`/quote?product=${item.id}`}
-              class="flex-1 text-center py-3 rounded-lg font-medium text-sm transition-all duration-200"
-              style="background: #00C4CC; color: #0D0E1A;"
+              class="btn-primary flex-1 text-center py-3"
             >
               Get Custom Quote
             </a>
             <a
               href="mailto:info@3d3d.ca?subject=Order: {item.name}"
-              class="px-5 py-3 rounded-lg font-medium text-sm transition-all duration-200 border"
-              style="border-color: rgba(255,255,255,0.1); color: #7878A0;"
+              class="btn-secondary px-5 py-3"
             >
               Contact
             </a>
@@ -252,17 +238,17 @@ const sidebarNav = [
 
           {/* Specs */}
           <div class="mt-8 grid grid-cols-3 gap-3">
-            <div class="text-center p-3 rounded-lg" style="background: rgba(255,255,255,0.03);">
-              <span class="block font-tech text-2xl font-bold text-[#00C4CC]">{item.grams}g</span>
-              <span class="font-tech text-[9px] uppercase tracking-widest text-[#4A4A6A]">Weight</span>
+            <div class="spec-card">
+              <span class="block font-display text-2xl font-bold text-teal-primary">{item.grams}g</span>
+              <span class="font-body text-[10px] uppercase tracking-widest text-text-muted">Weight</span>
             </div>
-            <div class="text-center p-3 rounded-lg" style="background: rgba(255,255,255,0.03);">
-              <span class="block font-tech text-2xl font-bold text-[#00C4CC]">{item.hours}h</span>
-              <span class="font-tech text-[9px] uppercase tracking-widest text-[#4A4A6A]">Print Time</span>
+            <div class="spec-card">
+              <span class="block font-display text-2xl font-bold text-teal-primary">{item.hours}h</span>
+              <span class="font-body text-[10px] uppercase tracking-widest text-text-muted">Print Time</span>
             </div>
-            <div class="text-center p-3 rounded-lg" style="background: rgba(255,255,255,0.03);">
-              <span class="block font-tech text-2xl font-bold text-[#00C4CC]">{item.colors.length}</span>
-              <span class="font-tech text-[9px] uppercase tracking-widest text-[#4A4A6A]">Colors</span>
+            <div class="spec-card">
+              <span class="block font-display text-2xl font-bold text-teal-primary">{item.colors.length}</span>
+              <span class="font-body text-[10px] uppercase tracking-widest text-text-muted">Colors</span>
             </div>
           </div>
 
@@ -270,7 +256,7 @@ const sidebarNav = [
           {item.tags.length > 0 && (
             <div class="mt-6 flex flex-wrap gap-1.5">
               {item.tags.map((tag) => (
-                <span class="px-2 py-0.5 rounded text-[10px] font-tech uppercase tracking-wider text-[#4A4A6A]" style="background: rgba(255,255,255,0.03);">
+                <span class="tag-chip">
                   {tag}
                 </span>
               ))}
@@ -288,11 +274,106 @@ const sidebarNav = [
       const main = document.getElementById('main-image') as HTMLImageElement;
       if (main && btn.dataset.src) {
         main.src = btn.dataset.src;
-        document.querySelectorAll('.thumb-btn').forEach((b) => {
-          (b as HTMLElement).style.borderColor = 'rgba(255,255,255,0.05)';
-        });
-        btn.style.borderColor = '#00C4CC';
+        document.querySelectorAll('.thumb-btn').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
       }
     });
   });
 </script>
+
+<style>
+  .product-gallery-main {
+    background: var(--color-surface-tertiary);
+    border: 1px solid var(--color-border-light);
+  }
+  
+  .thumb-btn {
+    background: var(--color-surface-tertiary);
+    border: 2px solid var(--color-border-light);
+    border-radius: 0.75rem;
+  }
+  
+  .thumb-btn:hover,
+  .thumb-btn.active {
+    border-color: var(--color-teal-primary);
+  }
+  
+  .thumb-btn:first-child {
+    border-color: var(--color-teal-primary);
+  }
+  
+  .maker-note {
+    background: oklch(from var(--color-teal-primary) l c h / 0.08);
+    border: 1px solid oklch(from var(--color-teal-primary) l c h / 0.2);
+  }
+  
+  .option-btn {
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-light);
+    color: var(--color-text-secondary);
+  }
+  
+  .option-btn:hover {
+    border-color: var(--color-teal-light);
+  }
+  
+  .option-btn[data-default='true'] {
+    background: oklch(from var(--color-teal-primary) l c h / 0.12);
+    border-color: oklch(from var(--color-teal-primary) l c h / 0.3);
+    color: var(--color-teal-dark);
+  }
+  
+  .color-chip {
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-light);
+    color: var(--color-text-primary);
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  
+  .setting-card {
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-light);
+    padding: 0.625rem;
+    border-radius: 0.5rem;
+  }
+  
+  .spec-card {
+    background: var(--color-surface-secondary);
+    border: 1px solid var(--color-border-light);
+    text-align: center;
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+  }
+  
+  .tag-chip {
+    background: var(--color-surface-card);
+    color: var(--color-text-muted);
+    padding: 0.125rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .badge {
+    padding: 0.25rem 0.625rem;
+    border-radius: 0.25rem;
+    font-size: 0.5625rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: white;
+  }
+  
+  .badge-magenta {
+    background: var(--color-magenta-primary);
+  }
+  
+  .badge-teal {
+    background: var(--color-teal-primary);
+    color: white;
+  }
+</style>

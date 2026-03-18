@@ -1,129 +1,97 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import BrandSidebar from '../components/BrandSidebar.tsx';
-
-const sidebarTheme = {
-  accent: '#00C4CC', accentDark: '#0891B2', bg: '#0D0E1A', bgAlt: '#141525',
-  border: 'rgba(255,255,255,0.07)', text: '#E8E8F2', muted: '#7878A0', dimmed: '#4A4A6A', glow: 'rgba(0,196,204,0.3)',
-};
-
-const sidebarNav = [{
-  label: '3D3D',
-  items: [
-    { id: 'shop', label: 'Shop', href: '/shop' },
-    { id: 'quote', label: 'Quote Calculator', href: '/quote' },
-    { id: 'makers', label: 'Makers', href: '/makers' },
-    { id: 'blog', label: 'Blog', href: '/blog' },
-    { id: 'about', label: 'About', href: '/about' },
-    { id: 'contact', label: 'Contact', href: '/contact' },
-  ],
-}];
 ---
 
-<BaseLayout title="Contact — 3D3D" description="Get in touch. Custom print requests, maker applications, partnerships, or general inquiries.">
-  <BrandSidebar slot="sidebar" client:load navGroups={sidebarNav} theme={sidebarTheme} activePath="/contact" />
+<BaseLayout title="Contact — 3D3D" description="Get in touch. Custom print requests, maker applications, partnerships, or general inquiries." activePath="/contact">
 
-  <div class="pt-16 pl-0 lg:pl-4">
-    <section class="px-6 lg:px-12 py-12">
-      <div class="max-w-3xl mx-auto">
-        <p class="font-tech text-[10px] uppercase tracking-[0.25em] text-[#7878A0] mb-2">Get in Touch</p>
-        <h1 class="font-display text-3xl sm:text-4xl font-bold text-[#E8E8F2] mb-6">Contact</h1>
+  <div class="pt-8 pb-12">
+    <section class="max-w-3xl mx-auto">
+      <p class="font-display text-xs font-semibold uppercase tracking-wider" style="color: var(--color-text-muted);">Get in Touch</p>
+      <h1 class="font-display text-3xl sm:text-4xl font-bold mt-2 mb-6" style="color: var(--color-text-primary);">Contact</h1>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          <div class="p-6 rounded-xl" style="background: #141525; border: 1px solid rgba(255,255,255,0.05);">
-            <h2 class="font-display text-base font-semibold text-[#E8E8F2] mb-4">Direct</h2>
-            <div class="space-y-3 text-sm">
-              <div>
-                <span class="block font-tech text-[9px] uppercase tracking-widest text-[#4A4A6A] mb-0.5">Email</span>
-                <a href="mailto:info@3d3d.ca" class="text-[#00C4CC] hover:underline">info@3d3d.ca</a>
-              </div>
-              <div>
-                <span class="block font-tech text-[9px] uppercase tracking-widest text-[#4A4A6A] mb-0.5">Phone</span>
-                <a href="tel:+15069532678" class="text-[#E8E8F2] hover:text-[#00C4CC] transition-colors">506-953-2678</a>
-              </div>
-              <div>
-                <span class="block font-tech text-[9px] uppercase tracking-widest text-[#4A4A6A] mb-0.5">Location</span>
-                <span class="text-[#7878A0]">Moncton, NB, Canada</span>
-              </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div class="p-6 rounded-xl" style="background: var(--color-surface-card); border: 1px solid var(--color-border-subtle); box-shadow: var(--shadow-sm);">
+          <h2 class="font-display text-base font-semibold mb-4" style="color: var(--color-text-primary);">Direct</h2>
+          <div class="space-y-3 text-sm">
+            <div>
+              <span class="block font-display text-[9px] uppercase tracking-widest mb-0.5" style="color: var(--color-text-muted);">Email</span>
+              <a href="mailto:info@3d3d.ca" class="hover:underline" style="color: var(--color-teal-primary);">info@3d3d.ca</a>
             </div>
-          </div>
-
-          <div class="p-6 rounded-xl" style="background: #141525; border: 1px solid rgba(255,255,255,0.05);">
-            <h2 class="font-display text-base font-semibold text-[#E8E8F2] mb-4">Quick Links</h2>
-            <div class="space-y-3 text-sm">
-              <a href="/quote" class="block text-[#7878A0] hover:text-[#00C4CC] transition-colors">
-                Get a custom quote →
-              </a>
-              <a href="/makers" class="block text-[#7878A0] hover:text-[#00C4CC] transition-colors">
-                Apply as a maker →
-              </a>
-              <a href="/shop" class="block text-[#7878A0] hover:text-[#00C4CC] transition-colors">
-                Browse the shop →
-              </a>
-              <a href="/blog" class="block text-[#7878A0] hover:text-[#00C4CC] transition-colors">
-                Read the blog →
-              </a>
+            <div>
+              <span class="block font-display text-[9px] uppercase tracking-widest mb-0.5" style="color: var(--color-text-muted);">Phone</span>
+              <a href="tel:+15069532678" class="transition-colors" style="color: var(--color-text-primary);">506-953-2678</a>
+            </div>
+            <div>
+              <span class="block font-display text-[9px] uppercase tracking-widest mb-0.5" style="color: var(--color-text-muted);">Location</span>
+              <span style="color: var(--color-text-secondary);">Moncton, NB, Canada</span>
             </div>
           </div>
         </div>
 
-        {/* Contact form */}
-        <div class="p-8 rounded-xl" style="background: #141525; border: 1px solid rgba(255,255,255,0.05);">
-          <h2 class="font-display text-lg font-semibold text-[#E8E8F2] mb-6">Send a Message</h2>
-          <form action="https://formspree.io/f/mldlydbl" method="POST" class="space-y-5">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label class="block font-tech text-[10px] uppercase tracking-[0.2em] text-[#4A4A6A] mb-1.5" for="name">Name</label>
-                <input type="text" id="name" name="name" required
-                  class="w-full px-4 py-2.5 rounded-lg text-sm outline-none transition-colors"
-                  style="background: #1C1D30; border: 1px solid rgba(255,255,255,0.07); color: #E8E8F2;"
-                />
-              </div>
-              <div>
-                <label class="block font-tech text-[10px] uppercase tracking-[0.2em] text-[#4A4A6A] mb-1.5" for="email">Email</label>
-                <input type="email" id="email" name="email" required
-                  class="w-full px-4 py-2.5 rounded-lg text-sm outline-none transition-colors"
-                  style="background: #1C1D30; border: 1px solid rgba(255,255,255,0.07); color: #E8E8F2;"
-                />
-              </div>
-            </div>
+        <div class="p-6 rounded-xl" style="background: var(--color-surface-card); border: 1px solid var(--color-border-subtle); box-shadow: var(--shadow-sm);">
+          <h2 class="font-display text-base font-semibold mb-4" style="color: var(--color-text-primary);">Quick Links</h2>
+          <div class="space-y-3 text-sm">
+            <a href="/quote" class="block transition-colors" style="color: var(--color-text-secondary);">Get a custom quote →</a>
+            <a href="/makers" class="block transition-colors" style="color: var(--color-text-secondary);">Apply as a maker →</a>
+            <a href="/shop" class="block transition-colors" style="color: var(--color-text-secondary);">Browse the shop →</a>
+            <a href="/blog" class="block transition-colors" style="color: var(--color-text-secondary);">Read the blog →</a>
+          </div>
+        </div>
+      </div>
+
+      {/* Contact form */}
+      <div class="p-8 rounded-xl" style="background: var(--color-surface-card); border: 1px solid var(--color-border-subtle); box-shadow: var(--shadow-sm);">
+        <h2 class="font-display text-lg font-semibold mb-6" style="color: var(--color-text-primary);">Send a Message</h2>
+        <form action="https://formspree.io/f/mldlydbl" method="POST" class="space-y-5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block font-tech text-[10px] uppercase tracking-[0.2em] text-[#4A4A6A] mb-1.5" for="subject">Subject</label>
-              <select id="subject" name="subject"
-                class="w-full px-4 py-2.5 rounded-lg text-sm outline-none"
-                style="background: #1C1D30; border: 1px solid rgba(255,255,255,0.07); color: #E8E8F2;"
-              >
-                <option value="custom-print">Custom Print Request</option>
-                <option value="maker-application">Maker Application</option>
-                <option value="partnership">Partnership Inquiry</option>
-                <option value="support">Order Support</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-            <div>
-              <label class="block font-tech text-[10px] uppercase tracking-[0.2em] text-[#4A4A6A] mb-1.5" for="message">Message</label>
-              <textarea id="message" name="message" rows={5} required
-                class="w-full px-4 py-2.5 rounded-lg text-sm outline-none resize-y"
-                style="background: #1C1D30; border: 1px solid rgba(255,255,255,0.07); color: #E8E8F2;"
-              ></textarea>
-            </div>
-            <div class="flex items-start gap-3">
-              <input type="checkbox" id="casl-consent" name="casl_consent" value="yes"
-                class="mt-1 w-4 h-4 rounded"
-                style="background: #1C1D30; border: 1px solid rgba(255,255,255,0.12); accent-color: #00C4CC; flex-shrink: 0;"
+              <label class="block font-display text-[10px] uppercase tracking-wider mb-1.5" style="color: var(--color-text-muted);" for="name">Name</label>
+              <input type="text" id="name" name="name" required
+                class="w-full px-4 py-2.5 rounded-lg text-sm outline-none transition-colors"
+                style="background: var(--color-surface-elevated); border: 1px solid var(--color-border-default); color: var(--color-text-primary);"
               />
-              <label for="casl-consent" class="text-[11px] leading-relaxed" style="color: #4A4A6A;">
-                I consent to receiving commercial electronic messages from 3D3D Atlantic Cooperative. You may unsubscribe at any time. See our <a href="/casl" class="underline" style="color: #00C4CC;">CASL policy</a> and <a href="/privacy" class="underline" style="color: #00C4CC;">privacy policy</a>.
-              </label>
             </div>
-            <button type="submit"
-              class="px-6 py-3 rounded-lg font-medium text-sm transition-all duration-200"
-              style="background: #00C4CC; color: #0D0E1A;"
+            <div>
+              <label class="block font-display text-[10px] uppercase tracking-wider mb-1.5" style="color: var(--color-text-muted);" for="email">Email</label>
+              <input type="email" id="email" name="email" required
+                class="w-full px-4 py-2.5 rounded-lg text-sm outline-none transition-colors"
+                style="background: var(--color-surface-elevated); border: 1px solid var(--color-border-default); color: var(--color-text-primary);"
+              />
+            </div>
+          </div>
+          <div>
+            <label class="block font-display text-[10px] uppercase tracking-wider mb-1.5" style="color: var(--color-text-muted);" for="subject">Subject</label>
+            <select id="subject" name="subject"
+              class="w-full px-4 py-2.5 rounded-lg text-sm outline-none"
+              style="background: var(--color-surface-elevated); border: 1px solid var(--color-border-default); color: var(--color-text-primary);"
             >
-              Send Message
-            </button>
-          </form>
-        </div>
+              <option value="custom-print">Custom Print Request</option>
+              <option value="maker-application">Maker Application</option>
+              <option value="partnership">Partnership Inquiry</option>
+              <option value="support">Order Support</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-display text-[10px] uppercase tracking-wider mb-1.5" style="color: var(--color-text-muted);" for="message">Message</label>
+            <textarea id="message" name="message" rows={5} required
+              class="w-full px-4 py-2.5 rounded-lg text-sm outline-none resize-y"
+              style="background: var(--color-surface-elevated); border: 1px solid var(--color-border-default); color: var(--color-text-primary);"
+            ></textarea>
+          </div>
+          <div class="flex items-start gap-3">
+            <input type="checkbox" id="casl-consent" name="casl_consent" value="yes"
+              class="mt-1 w-4 h-4 rounded flex-shrink-0"
+              style="accent-color: var(--color-teal-primary);"
+            />
+            <label for="casl-consent" class="text-[11px] leading-relaxed" style="color: var(--color-text-muted);">
+              I consent to receiving commercial electronic messages from 3D3D Atlantic Cooperative. You may unsubscribe at any time. See our <a href="/casl" class="underline" style="color: var(--color-teal-primary);">CASL policy</a> and <a href="/privacy" class="underline" style="color: var(--color-teal-primary);">privacy policy</a>.
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            Send Message
+          </button>
+        </form>
       </div>
     </section>
   </div>

@@ -2,62 +2,79 @@
 @import "tailwindcss";
 
 /* ─────────────────────────────────────────────────────────────────
-OLD GIRL - LIGHT THEME - Human-Made Aesthetic
+OLD GIRL - LIGHT THEME - The Printer's Own Colors
 March 2026
 
-NO DARK MODE. NO PURE WHITE. NO OFF-WHITE.
-Colorful pastel surfaces with bold accents.
-Distinct from 3D3D - Old Girl has lime/red accents.
+Colors drawn from the actual Prusa i3 MK2.5S hardware:
+  Galaxy Purple — frame accent panels
+  Neon Lime Green — filament / MMU tubes
+  Prusa Orange — classic Prusa brand
+  Black Frame — structural steel
+
+NO DARK MODE. NO PURE WHITE. Colorful pastel surfaces.
 ───────────────────────────────────────────────────────────────── */
 
 @theme {
-/* ── Surface Palette - Colorful Pastels ─────────────────────── */
---color-surface-primary: #E8F4E8;
---color-surface-secondary: #FFF0F0;
---color-surface-tertiary: #F8F0E8;
---color-surface-card: #F5FAF0;
---color-surface-hover: #F0E8F0;
+/* ── Surface Palette - Warm Pastels ─────────────────────────── */
+--color-surface-primary: #F0EBF5;
+--color-surface-secondary: #FFF3E8;
+--color-surface-tertiary: #E8F4E8;
+--color-surface-card: #F8F4FC;
+--color-surface-hover: #EDE4F5;
 --color-surface-elevated: #FFFFFF;
 
-/* ── Brand Colors - Old Girl Lime/Red ───────────────────────── */
+/* ── Galaxy Purple — primary accent ─────────────────────────── */
+--color-purple-primary: #8B5CF6;
+--color-purple-light: #A78BFA;
+--color-purple-dark: #6D28D9;
+--color-purple-surface: #EDE9FE;
+
+/* ── Neon Lime Green — filament color ───────────────────────── */
 --color-lime-primary: #84CC16;
 --color-lime-light: #A3E635;
 --color-lime-dark: #65A30D;
 --color-lime-surface: #ECFCCB;
 
---color-red-primary: #EF4444;
---color-red-light: #F87171;
---color-red-dark: #DC2626;
---color-red-surface: #FEE2E2;
+/* ── Prusa Orange — brand heritage ──────────────────────────── */
+--color-orange-primary: #F97316;
+--color-orange-light: #FB923C;
+--color-orange-dark: #EA580C;
+--color-orange-surface: #FFF7ED;
+
+/* ── Black Frame — structural ───────────────────────────────── */
+--color-frame-primary: #1C1917;
+--color-frame-light: #292524;
+--color-frame-muted: #57534E;
 
 /* ── Text Colors - Dark on Light ────────────────────────────── */
---color-text-primary: #1A1A2E;
---color-text-secondary: #3A3A4E;
---color-text-muted: #5A5A6E;
---color-text-accent: #65A30D;
---color-text-on-accent: #1A1A2E;
+--color-text-primary: #1C1917;
+--color-text-secondary: #3A3632;
+--color-text-muted: #57534E;
+--color-text-accent: #6D28D9;
+--color-text-on-accent: #FFFFFF;
 
 /* ── Border Colors ──────────────────────────────────────────── */
---color-border-default: rgba(132, 204, 22, 0.25);
---color-border-subtle: rgba(132, 204, 22, 0.15);
---color-border-strong: rgba(132, 204, 22, 0.4);
---color-border-red: rgba(239, 68, 68, 0.3);
+--color-border-default: rgba(139, 92, 246, 0.25);
+--color-border-subtle: rgba(139, 92, 246, 0.12);
+--color-border-strong: rgba(139, 92, 246, 0.4);
+--color-border-orange: rgba(249, 115, 22, 0.3);
+--color-border-lime: rgba(132, 204, 22, 0.3);
 
-/* ── Shadow System - Colored Shadows ────────────────────────── */
---shadow-sm: 0 2px 8px rgba(101, 163, 13, 0.12);
---shadow-md: 0 4px 16px rgba(101, 163, 13, 0.15);
---shadow-lg: 0 8px 32px rgba(101, 163, 13, 0.18);
---shadow-xl: 0 12px 48px rgba(101, 163, 13, 0.2);
---shadow-red: 0 4px 16px rgba(220, 38, 38, 0.15);
---shadow-card: 0 4px 20px rgba(58, 58, 78, 0.1);
---shadow-card-hover: 0 8px 32px rgba(101, 163, 13, 0.18);
+/* ── Shadow System ──────────────────────────────────────────── */
+--shadow-sm: 0 2px 8px rgba(109, 40, 217, 0.08);
+--shadow-md: 0 4px 16px rgba(109, 40, 217, 0.12);
+--shadow-lg: 0 8px 32px rgba(109, 40, 217, 0.15);
+--shadow-xl: 0 12px 48px rgba(109, 40, 217, 0.18);
+--shadow-orange: 0 4px 16px rgba(234, 88, 12, 0.15);
+--shadow-card: 0 4px 20px rgba(58, 54, 50, 0.08);
+--shadow-card-hover: 0 8px 32px rgba(109, 40, 217, 0.15);
 
 /* ── Typography ─────────────────────────────────────────────── */
 --font-display: 'Outfit', system-ui, sans-serif;
 --font-body: 'DM Sans', system-ui, sans-serif;
 --font-mono: 'JetBrains Mono', monospace;
 
-/* ── Border Radius - Organic Feel ───────────────────────────── */
+/* ── Border Radius ──────────────────────────────────────────── */
 --radius-sm: 8px;
 --radius-md: 16px;
 --radius-lg: 24px;
@@ -81,9 +98,9 @@ body {
   background-color: var(--color-surface-primary);
   color: var(--color-text-primary);
   background-image:
-    radial-gradient(ellipse at 20% 30%, rgba(132, 204, 22, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 70%, rgba(239, 68, 68, 0.10) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(163, 230, 53, 0.08) 0%, transparent 40%);
+    radial-gradient(ellipse at 20% 30%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(249, 115, 22, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(132, 204, 22, 0.06) 0%, transparent 40%);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -135,7 +152,7 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
   z-index: 100;
   padding: 0.75rem 1.5rem;
-  background: var(--color-lime-primary);
+  background: var(--color-purple-primary);
   color: var(--color-text-on-accent);
   font-family: var(--font-display);
   font-weight: 600;
@@ -176,7 +193,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ── Button Styles ────────────────────────────────────────────── */
 .btn-primary {
-  background: var(--color-lime-primary);
+  background: var(--color-purple-primary);
   color: var(--color-text-on-accent);
   padding: 0.75rem 1.5rem;
   border-radius: var(--radius-md);
@@ -187,7 +204,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-primary:hover {
-  background: var(--color-lime-dark);
+  background: var(--color-purple-dark);
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
@@ -219,13 +236,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .prose a {
-  color: var(--color-lime-dark);
+  color: var(--color-purple-dark);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
 .prose a:hover {
-  color: var(--color-lime-primary);
+  color: var(--color-purple-primary);
 }
 
 .prose code {
@@ -249,10 +266,10 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0;
 }
 
-/* ── Section Divider (Organic) ────────────────────────────────── */
+/* ── Section Divider ──────────────────────────────────────────── */
 .section-divider {
   height: 60px;
-  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,30 Q300,60 600,30 T1200,30 L1200,60 L0,60 Z' fill='%23FFF0F0'/%3E%3C/svg%3E");
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,30 Q300,60 600,30 T1200,30 L1200,60 L0,60 Z' fill='%23FFF3E8'/%3E%3C/svg%3E");
   background-size: cover;
 }
 
@@ -264,7 +281,7 @@ h1, h2, h3, h4, h5, h6 {
 .text-primary { color: var(--color-text-primary); }
 .text-secondary { color: var(--color-text-secondary); }
 .text-muted { color: var(--color-text-muted); }
-.text-accent { color: var(--color-lime-dark); }
+.text-accent { color: var(--color-purple-dark); }
 
 .border-default { border-color: var(--color-border-default); }
 .border-subtle { border-color: var(--color-border-subtle); }
@@ -277,7 +294,7 @@ h1, h2, h3, h4, h5, h6 {
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
-  
+
   @keyframes float {
     0%, 100% { transform: translateY(0) rotate(0deg); }
     50% { transform: translateY(-10px) rotate(1deg); }
@@ -286,12 +303,12 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ── Focus Styles ─────────────────────────────────────────────── */
 :focus-visible {
-  outline: 2px solid var(--color-lime-primary);
+  outline: 2px solid var(--color-purple-primary);
   outline-offset: 2px;
 }
 
 /* ── Selection Styles ─────────────────────────────────────────── */
 ::selection {
-  background: var(--color-lime-surface);
+  background: var(--color-purple-surface);
   color: var(--color-text-primary);
 }

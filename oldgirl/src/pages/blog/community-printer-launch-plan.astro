@@ -24,7 +24,7 @@ const schema = {
   title={`${frontmatter.title} — Old Girl`}
   description={frontmatter.description}
   schema={schema}
-  accent="#84CC16"
+  accent="#8B5CF6"
 >
   <article class="max-w-3xl mx-auto px-6 lg:px-12 py-12">
     <div class="mb-8">
@@ -43,7 +43,7 @@ const schema = {
 
       <h2 class="font-display text-xl font-bold mt-8 mb-3" style="color: var(--color-text-primary);">Why Bother with Preview Mode?</h2>
       <p>The alternative is to ship a half-built system where buttons do nothing, forms 404, and payments fail silently. We've seen that on too many indie projects. It destroys trust before it's built.</p>
-      <p>Preview mode means the code path for every write operation — job submissions, votes, payments — is fully implemented and gated at the server level. The only change between Stage One and Stage Two is flipping an environment variable from <code class="font-mono text-[11px] px-1 rounded" style="background: var(--color-surface-card); color: #84CC16;">preview</code> to <code class="font-mono text-[11px] px-1 rounded" style="background: var(--color-surface-card); color: #84CC16;">live</code>. The infrastructure is already there.</p>
+      <p>Preview mode means the code path for every write operation — job submissions, votes, payments — is fully implemented and gated at the server level. The only change between Stage One and Stage Two is flipping an environment variable from <code class="font-mono text-[11px] px-1 rounded" style="background: var(--color-surface-card); color: var(--color-purple-primary);">preview</code> to <code class="font-mono text-[11px] px-1 rounded" style="background: var(--color-surface-card); color: var(--color-purple-primary);">live</code>. The infrastructure is already there.</p>
 
       <h2 class="font-display text-xl font-bold mt-8 mb-3" style="color: var(--color-text-primary);">Stage Two: Going Live</h2>
       <p>Stage Two requires three things to be hardened before the switch flips:</p>
@@ -54,7 +54,7 @@ const schema = {
           'Server-side vote deduplication (no more localStorage-only vote tracking)',
         ].map(item => (
           <li class="flex items-start gap-2">
-            <span style="color: #84CC16;" class="mt-0.5 flex-shrink-0">→</span>
+            <span style="color: var(--color-purple-primary);" class="mt-0.5 flex-shrink-0">→</span>
             {item}
           </li>
         ))}
@@ -66,7 +66,7 @@ const schema = {
     </div>
 
     <div class="mt-12 pt-6 border-t" style="border-color: var(--color-border-subtle);">
-      <a href="/blog" class="font-display text-[10px] uppercase tracking-[0.15em] hover:underline" style="color: #84CC16;">← All Posts</a>
+      <a href="/blog" class="font-display text-[10px] uppercase tracking-[0.15em] hover:underline" style="color: var(--color-purple-primary);">← All Posts</a>
     </div>
   </article>
 </BlogLayout>

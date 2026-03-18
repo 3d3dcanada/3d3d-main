@@ -4,7 +4,7 @@ interface Props {
   showCooperativeInfo?: boolean;
 }
 
-const { accent = '#84CC16', showCooperativeInfo = true } = Astro.props;
+const { accent = '#8B5CF6', showCooperativeInfo = true } = Astro.props;
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -22,7 +22,7 @@ const legalLinks = [
 ];
 ---
 
-<footer class="relative border-t" style={`border-color: rgba(132, 204, 22, 0.2); background: linear-gradient(180deg, var(--color-surface-secondary), var(--color-surface-primary));`}>
+<footer class="relative border-t" style={`border-color: rgba(139, 92, 246, 0.2); background: linear-gradient(180deg, var(--color-surface-secondary), var(--color-surface-primary));`}>
   <div class="mx-auto max-w-5xl px-6 py-12 lg:px-8">
     <div class="grid grid-cols-1 gap-10 sm:grid-cols-3">
 
@@ -78,7 +78,7 @@ const legalLinks = [
     </div>
 
     {/* Bottom bar */}
-    <div class="mt-10 border-t pt-6 flex flex-col sm:flex-row items-center justify-between gap-4" style={`border-color: rgba(132, 204, 22, 0.15);`}>
+    <div class="mt-10 border-t pt-6 flex flex-col sm:flex-row items-center justify-between gap-4" style={`border-color: rgba(139, 92, 246, 0.15);`}>
       <p class="text-[10px] uppercase tracking-[0.15em]" style="color: var(--color-text-muted); font-family: var(--font-display);">
         &copy; {new Date().getFullYear()} 3D3D Atlantic Cooperative. Moncton, NB, Canada.
       </p>

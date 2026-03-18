@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import BrandSidebar from '../components/BrandSidebar.tsx';
 import QuoteCalculator from '../components/QuoteCalculator.tsx';
 
 const schema = {
@@ -11,48 +10,19 @@ const schema = {
   url: 'https://3d3d.ca/quote',
   applicationCategory: 'BusinessApplication',
 };
-
-const sidebarTheme = {
-  accent: '#00C4CC',
-  accentDark: '#0891B2',
-  bg: '#0D0E1A',
-  bgAlt: '#141525',
-  border: 'rgba(255,255,255,0.07)',
-  text: '#E8E8F2',
-  muted: '#7878A0',
-  dimmed: '#4A4A6A',
-  glow: 'rgba(0,196,204,0.3)',
-};
-
-const sidebarNav = [
-  {
-    label: '3D3D',
-    items: [
-      { id: 'shop', label: 'Shop', href: '/shop' },
-      { id: 'quote', label: 'Quote Calculator', href: '/quote' },
-      { id: 'makers', label: 'Makers', href: '/makers' },
-      { id: 'blog', label: 'Blog', href: '/blog' },
-      { id: 'about', label: 'About', href: '/about' },
-      { id: 'contact', label: 'Contact', href: '/contact' },
-    ],
-  },
-];
 ---
 
-<BaseLayout title="Quote Calculator — 3D3D" description="Instant pricing for custom 3D prints. Configure material, quality, infill, supports, scale, and quantity." schema={schema}>
-  <BrandSidebar slot="sidebar" client:load navGroups={sidebarNav} theme={sidebarTheme} activePath="/quote" />
+<BaseLayout title="Quote Calculator — 3D3D" description="Instant pricing for custom 3D prints. Configure material, quality, infill, supports, scale, and quantity." schema={schema} activePath="/quote">
 
-  <div class="pt-16 pl-0 lg:pl-4">
-    <section class="px-6 lg:px-12 py-12">
-      <div class="max-w-7xl mx-auto">
-        <p class="font-tech text-[10px] uppercase tracking-[0.25em] text-[#7878A0] mb-2">Pricing Tool</p>
-        <h1 class="font-display text-3xl sm:text-4xl font-bold text-[#E8E8F2] mb-2">Quote Calculator</h1>
-        <p class="text-sm text-[#7878A0] max-w-lg mb-10">
-          Configure your print parameters below. Prices include material, machine time, surcharges, and the 75/25 maker split.
-        </p>
+  <div class="pt-8 pb-12">
+    <section class="max-w-7xl mx-auto">
+      <p class="font-display text-xs font-semibold uppercase tracking-wider" style="color: var(--color-text-muted);">Pricing Tool</p>
+      <h1 class="font-display text-3xl sm:text-4xl font-bold mt-2 mb-2" style="color: var(--color-text-primary);">Quote Calculator</h1>
+      <p class="text-sm max-w-lg mb-10" style="color: var(--color-text-secondary);">
+        Configure your print parameters below. Prices include material, machine time, surcharges, and the 75/25 maker split.
+      </p>
 
-        <QuoteCalculator client:load />
-      </div>
+      <QuoteCalculator client:load />
     </section>
   </div>
 </BaseLayout>

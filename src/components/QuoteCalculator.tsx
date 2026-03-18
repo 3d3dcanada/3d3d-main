@@ -18,27 +18,28 @@ const INFILL_TYPES: InfillType[] = ['grid', 'gyroid', 'honeycomb', 'lightning'];
 const PROVINCES = Object.keys(TAX_RATES);
 
 const T = {
-  bg: '#0D0E1A',
-  surface: '#141525',
-  surface2: '#1C1D30',
-  border: 'rgba(255,255,255,0.07)',
-  text: '#E8E8F2',
-  muted: '#7878A0',
-  dimmed: '#4A4A6A',
-  teal: '#00C4CC',
-  magenta: '#FF2D92',
+  surface: 'var(--color-surface-card)',
+  surface2: 'var(--color-surface-elevated)',
+  border: 'var(--color-border-subtle)',
+  borderStrong: 'var(--color-border-default)',
+  text: 'var(--color-text-primary)',
+  muted: 'var(--color-text-secondary)',
+  dimmed: 'var(--color-text-muted)',
+  teal: 'var(--color-teal-primary)',
+  tealDark: 'var(--color-teal-dark)',
+  magenta: 'var(--color-magenta-primary)',
 };
 
 function Select({ label, value, onChange, options }: { label: string; value: string; onChange: (v: string) => void; options: { value: string; label: string }[] }) {
   return (
     <div>
-      <label style={{ display: 'block', fontFamily: 'var(--font-tech)', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.2em', color: T.dimmed, marginBottom: '6px' }}>
+      <label style={{ display: 'block', fontFamily: 'var(--font-display)', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.2em', color: T.dimmed, marginBottom: '6px' }}>
         {label}
       </label>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        style={{ width: '100%', padding: '10px 12px', background: T.surface2, border: `1px solid ${T.border}`, borderRadius: '8px', color: T.text, fontSize: '13px', fontFamily: 'var(--font-sans)', outline: 'none' }}
+        style={{ width: '100%', padding: '10px 12px', background: T.surface2, border: `1px solid ${T.borderStrong}`, borderRadius: '8px', color: T.text, fontSize: '13px', fontFamily: 'var(--font-body)', outline: 'none' }}
       >
         {options.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
       </select>
@@ -50,8 +51,8 @@ function Slider({ label, value, onChange, min, max, step, unit }: { label: strin
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
-        <label style={{ fontFamily: 'var(--font-tech)', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.2em', color: T.dimmed }}>{label}</label>
-        <span style={{ fontFamily: 'var(--font-tech)', fontSize: '12px', fontWeight: 700, color: T.teal }}>{value}{unit}</span>
+        <label style={{ fontFamily: 'var(--font-display)', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.2em', color: T.dimmed }}>{label}</label>
+        <span style={{ fontFamily: 'var(--font-display)', fontSize: '12px', fontWeight: 700, color: T.teal }}>{value}{unit}</span>
       </div>
       <input
         type="range"
@@ -90,7 +91,7 @@ export default function QuoteCalculator({ initialProduct }: { initialProduct?: s
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px', maxWidth: '960px' }} className="lg:!grid-cols-[1fr_340px]">
       {/* Controls */}
-      <div style={{ background: T.surface, border: `1px solid ${T.border}`, borderRadius: '12px', padding: '24px' }}>
+      <div style={{ background: T.surface, border: `1px solid ${T.border}`, borderRadius: '16px', padding: '24px', boxShadow: 'var(--shadow-sm)' }}>
         <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '18px', fontWeight: 700, color: T.text, marginBottom: '20px' }}>Print Parameters</h2>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '16px' }}>
@@ -108,14 +109,14 @@ export default function QuoteCalculator({ initialProduct }: { initialProduct?: s
         </div>
 
         {quantity >= 5 && (
-          <div style={{ marginTop: '12px', padding: '8px 12px', borderRadius: '8px', background: 'rgba(0,196,204,0.08)', border: '1px solid rgba(0,196,204,0.15)', fontSize: '12px', color: T.teal }}>
+          <div style={{ marginTop: '12px', padding: '8px 12px', borderRadius: '8px', background: 'var(--color-teal-surface)', border: '1px solid var(--color-border-default)', fontSize: '12px', color: T.tealDark }}>
             10% volume discount applied (5+ units)
           </div>
         )}
       </div>
 
       {/* Summary */}
-      <div style={{ background: T.surface, border: `1px solid ${T.border}`, borderRadius: '12px', padding: '24px', alignSelf: 'start', position: 'sticky', top: '80px' }}>
+      <div style={{ background: T.surface, border: `1px solid ${T.border}`, borderRadius: '16px', padding: '24px', alignSelf: 'start', position: 'sticky', top: '80px', boxShadow: 'var(--shadow-sm)' }}>
         <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '18px', fontWeight: 700, color: T.text, marginBottom: '16px' }}>Quote Summary</h2>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -132,11 +133,11 @@ export default function QuoteCalculator({ initialProduct }: { initialProduct?: s
 
           <div style={{ borderTop: `1px solid ${T.border}`, paddingTop: '8px', marginTop: '4px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-              <span style={{ fontFamily: 'var(--font-tech)', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.15em', color: T.text, fontWeight: 700 }}>Total</span>
-              <span style={{ fontFamily: 'var(--font-tech)', fontSize: '28px', fontWeight: 900, color: T.teal }}>${total.toFixed(2)}</span>
+              <span style={{ fontFamily: 'var(--font-display)', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.15em', color: T.text, fontWeight: 700 }}>Total</span>
+              <span style={{ fontFamily: 'var(--font-display)', fontSize: '28px', fontWeight: 900, color: T.teal }}>${total.toFixed(2)}</span>
             </div>
             {quantity > 1 && (
-              <p style={{ textAlign: 'right', fontFamily: 'var(--font-tech)', fontSize: '11px', color: T.dimmed }}>
+              <p style={{ textAlign: 'right', fontFamily: 'var(--font-display)', fontSize: '11px', color: T.dimmed }}>
                 ${quote.perUnit.toFixed(2)}/unit
               </p>
             )}
@@ -149,7 +150,7 @@ export default function QuoteCalculator({ initialProduct }: { initialProduct?: s
 
         <a
           href={`mailto:info@3d3d.ca?subject=Quote Request&body=Material: ${material}%0AQuantity: ${quantity}%0AEstimated: $${total.toFixed(2)}`}
-          style={{ display: 'block', width: '100%', textAlign: 'center', padding: '12px', marginTop: '16px', borderRadius: '8px', background: T.teal, color: T.bg, fontWeight: 600, fontSize: '14px', textDecoration: 'none' }}
+          style={{ display: 'block', width: '100%', textAlign: 'center', padding: '12px', marginTop: '16px', borderRadius: '8px', background: T.teal, color: 'var(--color-text-on-accent)', fontWeight: 600, fontSize: '14px', textDecoration: 'none' }}
         >
           Request This Quote
         </a>
@@ -161,10 +162,10 @@ export default function QuoteCalculator({ initialProduct }: { initialProduct?: s
 function Row({ label, value, bold, dim, accent }: { label: string; value: string; bold?: boolean; dim?: boolean; accent?: boolean }) {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-      <span style={{ fontFamily: 'var(--font-tech)', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.1em', color: dim ? T.dimmed : T.muted }}>
+      <span style={{ fontFamily: 'var(--font-display)', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.1em', color: dim ? T.dimmed : T.muted }}>
         {label}
       </span>
-      <span style={{ fontFamily: 'var(--font-tech)', fontSize: bold ? '16px' : '13px', fontWeight: bold ? 700 : 500, color: accent ? T.teal : (dim ? T.dimmed : T.text) }}>
+      <span style={{ fontFamily: 'var(--font-display)', fontSize: bold ? '16px' : '13px', fontWeight: bold ? 700 : 500, color: accent ? T.teal : (dim ? T.dimmed : T.text) }}>
         {value}
       </span>
     </div>

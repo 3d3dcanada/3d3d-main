@@ -1,23 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import BrandSidebar from '../components/BrandSidebar.tsx';
-
-const sidebarTheme = {
-  accent: '#00C4CC', accentDark: '#0891B2', bg: '#0D0E1A', bgAlt: '#141525',
-  border: 'rgba(255,255,255,0.07)', text: '#E8E8F2', muted: '#7878A0', dimmed: '#4A4A6A', glow: 'rgba(0,196,204,0.3)',
-};
-
-const sidebarNav = [{
-  label: '3D3D',
-  items: [
-    { id: 'shop', label: 'Shop', href: '/shop' },
-    { id: 'quote', label: 'Quote Calculator', href: '/quote' },
-    { id: 'makers', label: 'Makers', href: '/makers' },
-    { id: 'blog', label: 'Blog', href: '/blog' },
-    { id: 'about', label: 'About', href: '/about' },
-    { id: 'contact', label: 'Contact', href: '/contact' },
-  ],
-}];
 
 const benefits = [
   { title: '75% Revenue Share', desc: 'Industry-leading payout. You keep three quarters of every order you print.' },
@@ -38,88 +20,85 @@ const requirements = [
 ];
 ---
 
-<BaseLayout title="Join as Maker — 3D3D" description="Apply to join the 3D3D maker network. 75% revenue share, flexible schedule, order routing, and community support.">
-  <BrandSidebar slot="sidebar" client:load navGroups={sidebarNav} theme={sidebarTheme} activePath="/makers" />
+<BaseLayout title="Join as Maker — 3D3D" description="Apply to join the 3D3D maker network. 75% revenue share, flexible schedule, order routing, and community support." activePath="/makers">
 
-  <div class="pt-16 pl-0 lg:pl-4">
-    <section class="px-6 lg:px-12 py-12">
-      <div class="max-w-4xl mx-auto">
-        <p class="font-tech text-[10px] uppercase tracking-[0.25em] text-[#7878A0] mb-2">Maker Network</p>
-        <h1 class="font-display text-3xl sm:text-4xl font-bold text-[#E8E8F2] mb-4">Join the Cooperative</h1>
-        <p class="text-sm text-[#7878A0] max-w-xl mb-10">
-          Turn your 3D printer into income. Join 50+ makers across Atlantic Canada earning $800-$2,400/month printing for customers in their region.
-        </p>
+  <div class="pt-8 pb-12">
+    <section class="max-w-4xl mx-auto">
+      <p class="font-display text-xs font-semibold uppercase tracking-wider" style="color: var(--color-text-muted);">Maker Network</p>
+      <h1 class="font-display text-3xl sm:text-4xl font-bold mt-2 mb-4" style="color: var(--color-text-primary);">Join the Cooperative</h1>
+      <p class="text-sm max-w-xl mb-10" style="color: var(--color-text-secondary);">
+        Turn your 3D printer into income. Join 50+ makers across Atlantic Canada earning $800-$2,400/month printing for customers in their region.
+      </p>
 
-        {/* Benefits */}
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
-          {benefits.map((b) => (
-            <div class="p-5 rounded-xl" style="background: #141525; border: 1px solid rgba(255,255,255,0.05);">
-              <h3 class="font-display text-sm font-semibold text-[#00C4CC] mb-2">{b.title}</h3>
-              <p class="text-xs text-[#7878A0] leading-relaxed">{b.desc}</p>
-            </div>
+      {/* Benefits */}
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
+        {benefits.map((b) => (
+          <div class="p-5 rounded-xl" style="background: var(--color-surface-card); border: 1px solid var(--color-border-subtle); box-shadow: var(--shadow-sm);">
+            <h3 class="font-display text-sm font-semibold mb-2" style="color: var(--color-teal-primary);">{b.title}</h3>
+            <p class="text-xs leading-relaxed" style="color: var(--color-text-secondary);">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Requirements */}
+      <div class="mb-16">
+        <h2 class="font-display text-xl font-bold mb-4" style="color: var(--color-text-primary);">Requirements</h2>
+        <ul class="space-y-2">
+          {requirements.map((req) => (
+            <li class="flex items-start gap-2 text-sm" style="color: var(--color-text-secondary);">
+              <span class="mt-0.5" style="color: var(--color-teal-primary);">→</span>
+              {req}
+            </li>
           ))}
-        </div>
+        </ul>
+      </div>
 
-        {/* Requirements */}
-        <div class="mb-16">
-          <h2 class="font-display text-xl font-bold text-[#E8E8F2] mb-4">Requirements</h2>
-          <ul class="space-y-2">
-            {requirements.map((req) => (
-              <li class="flex items-start gap-2 text-sm text-[#7878A0]">
-                <span class="text-[#00C4CC] mt-0.5">→</span>
-                {req}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Application form */}
-        <div class="p-8 rounded-xl" style="background: #141525; border: 1px solid rgba(255,255,255,0.05);">
-          <h2 class="font-display text-lg font-semibold text-[#E8E8F2] mb-6">Apply Now</h2>
-          <form action="https://formspree.io/f/mldlydbl" method="POST" class="space-y-5">
-            <input type="hidden" name="_subject" value="Maker Application — 3D3D" />
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label class="block font-tech text-[10px] uppercase tracking-[0.2em] text-[#4A4A6A] mb-1.5">Name</label>
-                <input type="text" name="name" required class="w-full px-4 py-2.5 rounded-lg text-sm outline-none" style="background: #1C1D30; border: 1px solid rgba(255,255,255,0.07); color: #E8E8F2;" />
-              </div>
-              <div>
-                <label class="block font-tech text-[10px] uppercase tracking-[0.2em] text-[#4A4A6A] mb-1.5">Email</label>
-                <input type="email" name="email" required class="w-full px-4 py-2.5 rounded-lg text-sm outline-none" style="background: #1C1D30; border: 1px solid rgba(255,255,255,0.07); color: #E8E8F2;" />
-              </div>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label class="block font-tech text-[10px] uppercase tracking-[0.2em] text-[#4A4A6A] mb-1.5">City / Province</label>
-                <input type="text" name="location" required class="w-full px-4 py-2.5 rounded-lg text-sm outline-none" style="background: #1C1D30; border: 1px solid rgba(255,255,255,0.07); color: #E8E8F2;" />
-              </div>
-              <div>
-                <label class="block font-tech text-[10px] uppercase tracking-[0.2em] text-[#4A4A6A] mb-1.5">Number of Printers</label>
-                <input type="number" name="printers" min="1" required class="w-full px-4 py-2.5 rounded-lg text-sm outline-none" style="background: #1C1D30; border: 1px solid rgba(255,255,255,0.07); color: #E8E8F2;" />
-              </div>
+      {/* Application form */}
+      <div class="p-8 rounded-xl" style="background: var(--color-surface-card); border: 1px solid var(--color-border-subtle); box-shadow: var(--shadow-sm);">
+        <h2 class="font-display text-lg font-semibold mb-6" style="color: var(--color-text-primary);">Apply Now</h2>
+        <form action="https://formspree.io/f/mldlydbl" method="POST" class="space-y-5">
+          <input type="hidden" name="_subject" value="Maker Application — 3D3D" />
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block font-display text-[10px] uppercase tracking-wider mb-1.5" style="color: var(--color-text-muted);">Name</label>
+              <input type="text" name="name" required class="w-full px-4 py-2.5 rounded-lg text-sm outline-none" style="background: var(--color-surface-elevated); border: 1px solid var(--color-border-default); color: var(--color-text-primary);" />
             </div>
             <div>
-              <label class="block font-tech text-[10px] uppercase tracking-[0.2em] text-[#4A4A6A] mb-1.5">Printer Models & Materials</label>
-              <textarea name="equipment" rows={3} required class="w-full px-4 py-2.5 rounded-lg text-sm outline-none resize-y" style="background: #1C1D30; border: 1px solid rgba(255,255,255,0.07); color: #E8E8F2;" placeholder="e.g. Prusa MK4S (PLA, PETG), Bambu Lab X1C (PLA, PETG, TPU, ABS)"></textarea>
+              <label class="block font-display text-[10px] uppercase tracking-wider mb-1.5" style="color: var(--color-text-muted);">Email</label>
+              <input type="email" name="email" required class="w-full px-4 py-2.5 rounded-lg text-sm outline-none" style="background: var(--color-surface-elevated); border: 1px solid var(--color-border-default); color: var(--color-text-primary);" />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block font-display text-[10px] uppercase tracking-wider mb-1.5" style="color: var(--color-text-muted);">City / Province</label>
+              <input type="text" name="location" required class="w-full px-4 py-2.5 rounded-lg text-sm outline-none" style="background: var(--color-surface-elevated); border: 1px solid var(--color-border-default); color: var(--color-text-primary);" />
             </div>
             <div>
-              <label class="block font-tech text-[10px] uppercase tracking-[0.2em] text-[#4A4A6A] mb-1.5">Why do you want to join?</label>
-              <textarea name="motivation" rows={3} class="w-full px-4 py-2.5 rounded-lg text-sm outline-none resize-y" style="background: #1C1D30; border: 1px solid rgba(255,255,255,0.07); color: #E8E8F2;"></textarea>
+              <label class="block font-display text-[10px] uppercase tracking-wider mb-1.5" style="color: var(--color-text-muted);">Number of Printers</label>
+              <input type="number" name="printers" min="1" required class="w-full px-4 py-2.5 rounded-lg text-sm outline-none" style="background: var(--color-surface-elevated); border: 1px solid var(--color-border-default); color: var(--color-text-primary);" />
             </div>
-            <div class="flex items-start gap-3">
-              <input type="checkbox" id="casl-consent" name="casl_consent" value="yes"
-                class="mt-1 w-4 h-4 rounded"
-                style="background: #1C1D30; border: 1px solid rgba(255,255,255,0.12); accent-color: #00C4CC; flex-shrink: 0;"
-              />
-              <label for="casl-consent" class="text-[11px] leading-relaxed" style="color: #4A4A6A;">
-                I consent to receiving commercial electronic messages from 3D3D Atlantic Cooperative regarding my maker application and cooperative updates. You may unsubscribe at any time. See our <a href="/casl" class="underline" style="color: #00C4CC;">CASL policy</a> and <a href="/privacy" class="underline" style="color: #00C4CC;">privacy policy</a>.
-              </label>
-            </div>
-            <button type="submit" class="px-6 py-3 rounded-lg font-medium text-sm transition-all duration-200" style="background: #00C4CC; color: #0D0E1A;">
-              Submit Application
-            </button>
-          </form>
-        </div>
+          </div>
+          <div>
+            <label class="block font-display text-[10px] uppercase tracking-wider mb-1.5" style="color: var(--color-text-muted);">Printer Models & Materials</label>
+            <textarea name="equipment" rows={3} required class="w-full px-4 py-2.5 rounded-lg text-sm outline-none resize-y" style="background: var(--color-surface-elevated); border: 1px solid var(--color-border-default); color: var(--color-text-primary);" placeholder="e.g. Prusa MK4S (PLA, PETG), Bambu Lab X1C (PLA, PETG, TPU, ABS)"></textarea>
+          </div>
+          <div>
+            <label class="block font-display text-[10px] uppercase tracking-wider mb-1.5" style="color: var(--color-text-muted);">Why do you want to join?</label>
+            <textarea name="motivation" rows={3} class="w-full px-4 py-2.5 rounded-lg text-sm outline-none resize-y" style="background: var(--color-surface-elevated); border: 1px solid var(--color-border-default); color: var(--color-text-primary);"></textarea>
+          </div>
+          <div class="flex items-start gap-3">
+            <input type="checkbox" id="casl-consent" name="casl_consent" value="yes"
+              class="mt-1 w-4 h-4 rounded flex-shrink-0"
+              style="accent-color: var(--color-teal-primary);"
+            />
+            <label for="casl-consent" class="text-[11px] leading-relaxed" style="color: var(--color-text-muted);">
+              I consent to receiving commercial electronic messages from 3D3D Atlantic Cooperative regarding my maker application and cooperative updates. You may unsubscribe at any time. See our <a href="/casl" class="underline" style="color: var(--color-teal-primary);">CASL policy</a> and <a href="/privacy" class="underline" style="color: var(--color-teal-primary);">privacy policy</a>.
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            Submit Application
+          </button>
+        </form>
       </div>
     </section>
   </div>

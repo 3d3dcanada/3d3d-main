@@ -24,7 +24,7 @@ const schema = {
   title={`${frontmatter.title} — Old Girl`}
   description={frontmatter.description}
   schema={schema}
-  accent="#84CC16"
+  accent="#8B5CF6"
 >
   <article class="max-w-3xl mx-auto px-6 lg:px-12 py-12">
     <div class="mb-8">
@@ -38,12 +38,12 @@ const schema = {
       <p>That's the fleet monitoring problem. Here's how we approached it.</p>
 
       <h2 class="font-display text-xl font-bold mt-8 mb-3" style="color: var(--color-text-primary);">The Stack</h2>
-      <p>The monitoring backbone runs on Supabase — specifically its realtime subscriptions, which use PostgreSQL logical replication under the hood. Each printer status is a single row in a <code class="font-mono text-[11px] px-1 rounded" style="background: var(--color-surface-card); color: #84CC16;">printer_status</code> table. When the row updates, Supabase broadcasts the change to all connected clients within ~200ms.</p>
+      <p>The monitoring backbone runs on Supabase — specifically its realtime subscriptions, which use PostgreSQL logical replication under the hood. Each printer status is a single row in a <code class="font-mono text-[11px] px-1 rounded" style="background: var(--color-surface-card); color: var(--color-purple-primary);">printer_status</code> table. When the row updates, Supabase broadcasts the change to all connected clients within ~200ms.</p>
       <p>On the client side, we subscribe to these changes with a simple React hook. No polling, no WebSocket management, no custom server infrastructure. Supabase handles the multiplexing.</p>
 
       <h2 class="font-display text-xl font-bold mt-8 mb-3" style="color: var(--color-text-primary);">The Data Model</h2>
-      <p>The <code class="font-mono text-[11px] px-1 rounded" style="background: var(--color-surface-card); color: #84CC16;">printer_status</code> table is intentionally minimal:</p>
-      <ul class="space-y-1 mt-3 font-mono text-[11px]" style="color: #84CC16;">
+      <p>The <code class="font-mono text-[11px] px-1 rounded" style="background: var(--color-surface-card); color: var(--color-purple-primary);">printer_status</code> table is intentionally minimal:</p>
+      <ul class="space-y-1 mt-3 font-mono text-[11px]" style="color: var(--color-purple-primary);">
         {['status (idle | printing | paused | error | offline)', 'current_job (text | null)', 'progress (0–100)', 'eta_minutes (int | null)', 'material (text)', 'temperature_nozzle (float)', 'temperature_bed (float)', 'updated_at (timestamp)'].map(field => (
           <li class="px-3 py-1 rounded" style="background: var(--color-surface-card);">{field}</li>
         ))}
@@ -55,14 +55,14 @@ const schema = {
       <p>The same infrastructure powers the private maker dashboard, where cooperative staff can see all 50+ printers and route orders accordingly. The difference is access level — the Old Girl page is public; the fleet dashboard is internal.</p>
 
       <h2 class="font-display text-xl font-bold mt-8 mb-3" style="color: var(--color-text-primary);">What We Learned</h2>
-      <p>The hardest part wasn't the realtime infrastructure — Supabase handles that well. The hard part was designing for graceful degradation. When a printer goes offline (power cut, network drop, maker stepped away), the UI needs to clearly indicate "last seen X minutes ago" rather than showing stale data as if it were live. Every status field has a <code class="font-mono text-[11px] px-1 rounded" style="background: var(--color-surface-card); color: #84CC16;">updated_at</code> timestamp for exactly this reason.</p>
+      <p>The hardest part wasn't the realtime infrastructure — Supabase handles that well. The hard part was designing for graceful degradation. When a printer goes offline (power cut, network drop, maker stepped away), the UI needs to clearly indicate "last seen X minutes ago" rather than showing stale data as if it were live. Every status field has a <code class="font-mono text-[11px] px-1 rounded" style="background: var(--color-surface-card); color: var(--color-purple-primary);">updated_at</code> timestamp for exactly this reason.</p>
       <p>We also learned to never trust client-side state for anything that writes to the queue. Server actions with null-checks on every required environment variable, closed by default. Preview mode as a first-class concept, not an afterthought.</p>
 
-      <p>The fleet monitoring stack will be open-sourced when Stage Two stabilizes. Follow the Old Girl project at <a href="https://oldgirl.3d3d.ca" class="underline" style="color: #84CC16;">oldgirl.3d3d.ca</a>.</p>
+      <p>The fleet monitoring stack will be open-sourced when Stage Two stabilizes. Follow the Old Girl project at <a href="https://oldgirl.3d3d.ca" class="underline" style="color: var(--color-purple-primary);">oldgirl.3d3d.ca</a>.</p>
     </div>
 
     <div class="mt-12 pt-6 border-t" style="border-color: var(--color-border-subtle);">
-      <a href="/blog" class="font-display text-[10px] uppercase tracking-[0.15em] hover:underline" style="color: #84CC16;">← All Posts</a>
+      <a href="/blog" class="font-display text-[10px] uppercase tracking-[0.15em] hover:underline" style="color: var(--color-purple-primary);">← All Posts</a>
     </div>
   </article>
 </BlogLayout>

@@ -1,82 +1,64 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import BrandSidebar from '../components/BrandSidebar.tsx';
-
-const sidebarTheme = {
-  accent: '#00C4CC', accentDark: '#0891B2', bg: '#0D0E1A', bgAlt: '#141525',
-  border: 'rgba(255,255,255,0.07)', text: '#E8E8F2', muted: '#7878A0', dimmed: '#4A4A6A', glow: 'rgba(0,196,204,0.3)',
-};
-
-const sidebarNav = [{
-  label: '3D3D',
-  items: [
-    { id: 'shop', label: 'Shop', href: '/shop' },
-    { id: 'about', label: 'About', href: '/about' },
-    { id: 'contact', label: 'Contact', href: '/contact' },
-  ],
-}];
 ---
 
-<BaseLayout title="Accessibility — 3D3D" description="3D3D Atlantic Cooperative accessibility statement. Our commitment to WCAG 2.1 and the Accessible Canada Act.">
-  <BrandSidebar slot="sidebar" client:load navGroups={sidebarNav} theme={sidebarTheme} activePath="/accessibility" />
+<BaseLayout title="Accessibility — 3D3D" description="3D3D Atlantic Cooperative accessibility statement. Our commitment to WCAG 2.1 and the Accessible Canada Act." activePath="/accessibility">
 
-  <div class="pt-16 pl-0 lg:pl-4">
-    <section class="px-6 lg:px-12 py-12">
-      <div class="max-w-3xl mx-auto">
-        <p class="font-tech text-[10px] uppercase tracking-[0.25em] text-[#7878A0] mb-2">Legal</p>
-        <h1 class="font-display text-3xl font-bold text-[#E8E8F2] mb-2">Accessibility Statement</h1>
-        <p class="font-tech text-xs text-[#4A4A6A] mb-8">Last updated: March 2026</p>
+  <div class="pt-8 pb-12">
+    <section class="max-w-3xl mx-auto">
+      <p class="font-display text-xs font-semibold uppercase tracking-wider" style="color: var(--color-text-muted);">Legal</p>
+      <h1 class="font-display text-3xl font-bold mt-2 mb-2" style="color: var(--color-text-primary);">Accessibility Statement</h1>
+      <p class="font-display text-xs mb-8" style="color: var(--color-text-muted);">Last updated: March 2026</p>
 
-        <div class="space-y-6 text-sm leading-relaxed text-[#7878A0]">
-          <div>
-            <h2 class="font-display text-base font-semibold text-[#E8E8F2] mb-2">Our Commitment</h2>
-            <p>3D3D Atlantic Cooperative is committed to making our website accessible to everyone, including people with disabilities. We aim to conform to the Web Content Accessibility Guidelines (WCAG) 2.1, Level AA, as referenced by the <em>Accessible Canada Act</em> (S.C. 2019, c. 10) and Accessibility Standards Canada.</p>
+      <div class="space-y-6 text-sm leading-relaxed" style="color: var(--color-text-secondary);">
+        <div>
+          <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">Our Commitment</h2>
+          <p>3D3D Atlantic Cooperative is committed to making our website accessible to everyone, including people with disabilities. We aim to conform to the Web Content Accessibility Guidelines (WCAG) 2.1, Level AA, as referenced by the <em>Accessible Canada Act</em> (S.C. 2019, c. 10) and Accessibility Standards Canada.</p>
+        </div>
+
+        <div>
+          <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">What We've Implemented</h2>
+          <ul class="space-y-2 mt-2">
+            {[
+              'Skip-to-content link on every page for keyboard users',
+              'Semantic HTML with proper heading hierarchy (h1 → h2 → h3)',
+              'ARIA landmark regions (main, nav, footer)',
+              'Keyboard-navigable sidebar and interactive components',
+              'Minimum 44×44px touch target sizes on all interactive elements',
+              'Sufficient color contrast ratios meeting WCAG 2.1 AA standards',
+              'Responsive design supporting zoom up to 200% without horizontal scrolling',
+              'Reduced-motion support via prefers-reduced-motion media query',
+              'Alt text for all meaningful images',
+              'Form labels associated with their inputs',
+              'Language attribute (lang="en") on all pages',
+            ].map(item => (
+              <li class="flex items-start gap-2">
+                <span style="color: var(--color-teal-primary);" class="mt-0.5 flex-shrink-0">→</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">Known Limitations</h2>
+          <p>Some product images may not yet have descriptive alt text as our catalog expands. We are actively working to address this. Third-party embedded content (such as the Old Girl livestream) is subject to those providers' accessibility practices.</p>
+        </div>
+
+        <div>
+          <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">Feedback and Contact</h2>
+          <p>If you encounter any accessibility barriers on this site or require content in an alternative format, please contact us:</p>
+          <div class="mt-3 space-y-1">
+            <p>Email: <a href="mailto:info@3d3d.ca" class="hover:underline" style="color: var(--color-teal-primary);">info@3d3d.ca</a></p>
+            <p>Phone: <a href="tel:+15069532678" class="hover:underline" style="color: var(--color-teal-primary);">506-953-2678</a></p>
+            <p>Mail: 3D3D Atlantic Cooperative, Moncton, NB, Canada</p>
           </div>
+          <p class="mt-3">We will respond to accessibility feedback within 5 business days and work to resolve issues in a reasonable timeframe.</p>
+        </div>
 
-          <div>
-            <h2 class="font-display text-base font-semibold text-[#E8E8F2] mb-2">What We've Implemented</h2>
-            <ul class="space-y-2 mt-2">
-              {[
-                'Skip-to-content link on every page for keyboard users',
-                'Semantic HTML with proper heading hierarchy (h1 → h2 → h3)',
-                'ARIA landmark regions (main, nav, footer)',
-                'Keyboard-navigable sidebar and interactive components',
-                'Minimum 44×44px touch target sizes on all interactive elements',
-                'Sufficient color contrast ratios meeting WCAG 2.1 AA standards',
-                'Responsive design supporting zoom up to 200% without horizontal scrolling',
-                'Reduced-motion support via prefers-reduced-motion media query',
-                'Alt text for all meaningful images',
-                'Form labels associated with their inputs',
-                'Language attribute (lang="en") on all pages',
-              ].map(item => (
-                <li class="flex items-start gap-2">
-                  <span style="color: #00C4CC;" class="mt-0.5 flex-shrink-0">→</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h2 class="font-display text-base font-semibold text-[#E8E8F2] mb-2">Known Limitations</h2>
-            <p>Some product images may not yet have descriptive alt text as our catalog expands. We are actively working to address this. Third-party embedded content (such as the Old Girl livestream) is subject to those providers' accessibility practices.</p>
-          </div>
-
-          <div>
-            <h2 class="font-display text-base font-semibold text-[#E8E8F2] mb-2">Feedback and Contact</h2>
-            <p>If you encounter any accessibility barriers on this site or require content in an alternative format, please contact us:</p>
-            <div class="mt-3 space-y-1">
-              <p>Email: <a href="mailto:info@3d3d.ca" class="text-[#00C4CC] hover:underline">info@3d3d.ca</a></p>
-              <p>Phone: <a href="tel:+15069532678" class="text-[#00C4CC] hover:underline">506-953-2678</a></p>
-              <p>Mail: 3D3D Atlantic Cooperative, Moncton, NB, Canada</p>
-            </div>
-            <p class="mt-3">We will respond to accessibility feedback within 5 business days and work to resolve issues in a reasonable timeframe.</p>
-          </div>
-
-          <div>
-            <h2 class="font-display text-base font-semibold text-[#E8E8F2] mb-2">Formal Complaints</h2>
-            <p>If you are not satisfied with our response, you may contact the <a href="https://accessibilitycanada.ca" class="text-[#00C4CC] hover:underline" target="_blank" rel="noopener noreferrer">Accessibility Standards Canada</a> or the Canadian Human Rights Commission.</p>
-          </div>
+        <div>
+          <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">Formal Complaints</h2>
+          <p>If you are not satisfied with our response, you may contact the <a href="https://accessibilitycanada.ca" class="hover:underline" style="color: var(--color-teal-primary);" target="_blank" rel="noopener noreferrer">Accessibility Standards Canada</a> or the Canadian Human Rights Commission.</p>
         </div>
       </div>
     </section>

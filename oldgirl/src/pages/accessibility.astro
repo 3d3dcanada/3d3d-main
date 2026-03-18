@@ -9,7 +9,7 @@ const sidebarNav = [{ label: 'Old Girl', items: [
 ]}];
 ---
 
-<BaseLayout title="Accessibility — The Old Girl" description="Accessibility statement for oldgirl.3d3d.ca. Our commitment to WCAG 2.1 and the Accessible Canada Act." accent="#84CC16">
+<BaseLayout title="Accessibility — The Old Girl" description="Accessibility statement for oldgirl.3d3d.ca. Our commitment to WCAG 2.1 and the Accessible Canada Act." accent="#8B5CF6">
   <BrandSidebar slot="sidebar" client:load navGroups={sidebarNav} activePath="/accessibility" />
 
   <div class="pt-16 pl-0 lg:pl-4">
@@ -29,7 +29,7 @@ const sidebarNav = [{ label: 'Old Girl', items: [
             <ul class="space-y-2 mt-2">
               {['Skip-to-content link for keyboard users', 'Semantic HTML with proper heading hierarchy', 'ARIA landmark regions (main, nav, footer)', 'Keyboard-navigable sidebar', 'Minimum 44×44px touch targets', 'Sufficient color contrast (WCAG 2.1 AA)', 'Responsive design up to 200% zoom', 'Reduced-motion media query support', 'Form labels associated with inputs', 'Language attribute (lang="en") on all pages'].map(item => (
                 <li class="flex items-start gap-2">
-                  <span style="color: #84CC16;" class="mt-0.5 flex-shrink-0">→</span>
+                  <span style="color: var(--color-purple-primary);" class="mt-0.5 flex-shrink-0">→</span>
                   {item}
                 </li>
               ))}
@@ -43,13 +43,13 @@ const sidebarNav = [{ label: 'Old Girl', items: [
             <h2 class="text-base font-semibold mb-2" style="color: var(--color-text-primary); font-family: var(--font-display);">Feedback</h2>
             <p>If you encounter accessibility barriers, please contact us. We respond within 5 business days.</p>
             <div class="mt-2 space-y-1">
-              <p>Email: <a href="mailto:info@3d3d.ca" class="underline" style="color: #65A30D;">info@3d3d.ca</a></p>
-              <p>Phone: <a href="tel:+15069532678" class="underline" style="color: #65A30D;">506-953-2678</a></p>
+              <p>Email: <a href="mailto:info@3d3d.ca" class="underline" style="color: var(--color-purple-primary);">info@3d3d.ca</a></p>
+              <p>Phone: <a href="tel:+15069532678" class="underline" style="color: var(--color-purple-primary);">506-953-2678</a></p>
             </div>
           </div>
           <div>
             <h2 class="text-base font-semibold mb-2" style="color: var(--color-text-primary); font-family: var(--font-display);">Formal Complaints</h2>
-            <p>If not satisfied, contact <a href="https://accessibilitycanada.ca" class="underline" style="color: #65A30D;" target="_blank" rel="noopener noreferrer">Accessibility Standards Canada</a> or the Canadian Human Rights Commission.</p>
+            <p>If not satisfied, contact <a href="https://accessibilitycanada.ca" class="underline" style="color: var(--color-purple-primary);" target="_blank" rel="noopener noreferrer">Accessibility Standards Canada</a> or the Canadian Human Rights Commission.</p>
           </div>
         </div>
       </div>

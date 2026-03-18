@@ -31,15 +31,15 @@ interface Props {
   siteName?: string;
 }
 
-/* ── Default light theme (Old Girl lime accent) ────────────────── */
+/* ── Default light theme (Old Girl — galaxy purple accent) ─────── */
 const DEFAULT_THEME: SidebarTheme = {
-  accent: '#84CC16',
-  accentDark: '#65A30D',
-  surface: '#E8F4E8',
-  surfaceHover: '#D4F0D4',
-  border: 'rgba(132, 204, 22, 0.3)',
-  text: '#1A1A2E',
-  textMuted: '#5A5A6E',
+  accent: '#8B5CF6',
+  accentDark: '#6D28D9',
+  surface: '#F0EBF5',
+  surfaceHover: '#EDE4F5',
+  border: 'rgba(139, 92, 246, 0.25)',
+  text: '#1C1917',
+  textMuted: '#57534E',
 };
 
 /* ── Default ecosystem nav (cross-site links) ──────────────────── */

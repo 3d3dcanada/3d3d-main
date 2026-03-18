@@ -16,7 +16,7 @@ const sidebarNav = [{
 <BaseLayout
   title="About — The Old Girl"
   description="The story of a broken Prusa i3 MK2.5S, restored by one operator and handed over to the internet. Community 3D printing from Moncton, NB."
-  accent="#84CC16"
+  accent="#8B5CF6"
 >
   <BrandSidebar slot="sidebar" client:load navGroups={sidebarNav} activePath="/about" />
 
@@ -37,7 +37,7 @@ const sidebarNav = [{
             The concept is simple: a community-owned printer that takes print jobs from the internet, funded by Ko-fi donations, with a public queue and community voting on what gets printed. No accounts, no subscriptions — just a printer that belongs to everyone.
           </p>
           <p>
-            The Old Girl is run by <a href="https://3d3d.ca" class="underline" style="color: #65A30D;">3D3D Atlantic Cooperative</a> in Moncton, NB. The cooperative coordinates 50+ independent 3D printing makers across Atlantic Canada.
+            The Old Girl is run by <a href="https://3d3d.ca" class="underline" style="color: var(--color-purple-primary);">3D3D Atlantic Cooperative</a> in Moncton, NB. The cooperative coordinates 50+ independent 3D printing makers across Atlantic Canada.
           </p>
         </div>
 
@@ -71,7 +71,7 @@ const sidebarNav = [{
             ].map(r => (
               <div class="p-5 rounded-xl" style={`background: var(--color-surface-card); border: 1px solid ${r.status === 'done' ? 'var(--color-border-default)' : 'var(--color-border-subtle)'};`}>
                 <div class="flex items-center gap-2 mb-3">
-                  <span class="w-2 h-2 rounded-full" style={`background: ${r.status === 'done' ? '#84CC16' : 'var(--color-text-muted)'};`} />
+                  <span class="w-2 h-2 rounded-full" style={`background: ${r.status === 'done' ? 'var(--color-lime-primary)' : 'var(--color-text-muted)'};`} />
                   <span class="text-sm font-bold" style="color: var(--color-text-primary); font-family: var(--font-display);">{r.stage}</span>
                 </div>
                 <ul class="space-y-1">

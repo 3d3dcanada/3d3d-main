@@ -37,7 +37,7 @@ const posts = [
 <BaseLayout
   title="Blog — The Old Girl"
   description="Posts about 3D printer restoration, community printing, and fleet monitoring from the Old Girl project."
-  accent="#84CC16"
+  accent="#8B5CF6"
 >
   <BrandSidebar slot="sidebar" client:load navGroups={sidebarNav} activePath="/blog" />
 
@@ -55,7 +55,7 @@ const posts = [
                 <span class="text-[9px] uppercase tracking-wider flex-shrink-0" style="color: var(--color-text-muted); font-family: var(--font-display);">{post.date}</span>
               </div>
               <p class="text-[13px] leading-relaxed" style="color: var(--color-text-secondary);">{post.excerpt}</p>
-              <span class="inline-block mt-3 text-[10px] uppercase tracking-wider" style="color: #65A30D; font-family: var(--font-display);">Read →</span>
+              <span class="inline-block mt-3 text-[10px] uppercase tracking-wider" style="color: var(--color-purple-primary); font-family: var(--font-display);">Read →</span>
             </a>
           ))}
         </div>

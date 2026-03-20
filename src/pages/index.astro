@@ -6,23 +6,16 @@ const orgSchema = {
   '@type': ['LocalBusiness', 'Organization'],
   name: '3D3D',
   url: 'https://3d3d.ca',
-  description: 'Precision 3D printing and fabrication — marine parts, automotive components, replacement parts, and retained fabrication support. Built from the ground up in New Brunswick, Canada.',
+  description: 'Precision fabrication for marine, automotive, and field deployment. Founder-operated out of Fredericton, New Brunswick.',
   telephone: '+1-506-953-2678',
   email: 'info@3d3d.ca',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Fredericton',
     addressRegion: 'NB',
-    postalCode: 'E3B 0A1',
     addressCountry: 'CA',
   },
   founder: { '@type': 'Person', name: 'Ken' },
-  contactPoint: {
-    '@type': 'ContactPoint',
-    telephone: '+1-506-953-2678',
-    email: 'info@3d3d.ca',
-    contactType: 'customer service',
-  },
   sameAs: [
     'https://www.youtube.com/@3D3Dcanada',
     'https://www.tiktok.com/@3d3dcanada',
@@ -43,10 +36,10 @@ const homeNavGroups = [
     items: [
       { id: 'home', label: 'Home', href: '/' },
       { id: 'services', label: 'Services', href: '#services' },
-      { id: 'story', label: 'Our Story', href: '#story' },
+      { id: 'origin', label: 'Origin', href: '#origin' },
       { id: 'deployment', label: 'Deployment', href: '#deployment' },
-      { id: 'tiers', label: 'Service Tiers', href: '#tiers' },
-      { id: 'open-source', label: 'Open Source', href: '#open-source' },
+      { id: 'support', label: 'Support', href: '#support' },
+      { id: 'open-build', label: 'Open Build', href: '#open-build' },
       { id: 'partners', label: 'Partners', href: '#partners' },
       { id: 'contact', label: 'Contact', href: '#contact' },
     ],
@@ -54,11 +47,18 @@ const homeNavGroups = [
   {
     label: 'Site',
     items: [
-      { id: 'blog', label: 'Updates', href: '/blog' },
+      { id: 'blog', label: 'Blog', href: '/blog' },
       { id: 'shop', label: 'Shop', href: '/shop' },
       { id: 'about', label: 'About', href: '/about' },
     ],
   },
+];
+
+const heroProofRail = [
+  'Founder-operated',
+  'Fredericton, NB',
+  'Marine · Motorsport · Field-tested',
+  'Newport Bermuda 2026',
 ];
 
 const heroStats = [
@@ -69,1161 +69,2152 @@ const heroStats = [
 
 const services = [
   {
-    title: 'Marine & Offshore',
+    id: 'marine',
+    drawerId: 'drawer-marine',
+    eyebrow: 'Marine & Offshore',
+    stakes: "If it fails at sea, it can't be MacGyvered.",
     body: 'Winch components, deck hardware, replacement fittings, and custom parts built to survive saltwater, UV, and open-ocean conditions. If it goes on a boat, we print it to last.',
-    img: '/media/workshop/winch-cup-holder.jpg',
-    alt: 'Custom winch-top cup holder — marine-grade 3D print',
+    bullets: [
+      'Saltwater-resistant materials: ASA, PETG, CF compounds',
+      'Dimensional accuracy for mechanical fitment',
+      'Replacements for discontinued or unavailable marine parts',
+    ],
+    cta: 'Send your fitment problem →',
+    image: '/media/workshop/winch-cup-holder.jpg',
+    alt: 'Marine winch accessory fabricated for offshore use',
+    drawer: {
+      photos: [
+        {
+          src: '/media/workshop/winch-cup-holder.jpg',
+          alt: 'Winch-top cup holder printed for marine use',
+        },
+        {
+          src: '/media/workshop/printer-action-cf.jpg',
+          alt: 'Carbon-fibre print running in the workshop',
+        },
+        {
+          src: '/media/real/helm-close.jpg',
+          alt: 'Close view from the helm during offshore sailing',
+        },
+      ],
+      materials: 'ASA, PETG, and carbon-fibre compounds are the baseline when salt, UV, and constant load are part of the job.',
+      turnaround: 'Marine jobs move fastest when fitment dimensions or a reference part come in with the request.',
+    },
   },
   {
-    title: 'Automotive & Motorsport',
-    body: 'Radio knob replacements, custom brackets, aftermarket accessories, and parts that no longer exist. Cars, trucks, rally rigs, drag cars — if it broke or never existed, we make it.',
-    img: '/media/workshop/radio-button-replacement.jpg',
-    alt: 'Replacement radio button for Pontiac Vibe — precision fit',
+    id: 'automotive',
+    drawerId: 'drawer-automotive',
+    eyebrow: 'Automotive & Motorsport',
+    stakes: "Cars, trucks, rally rigs — if it broke or never existed, we make it.",
+    body: 'Radio knob replacements, custom brackets, aftermarket accessories, and parts that no longer exist. Drag cars, daily drivers, build cars — if it needs a part, we figure out the part.',
+    bullets: [
+      'Heat-resistant materials for engine-adjacent applications',
+      'Rapid iteration for fitment and clearance',
+      'One-off or small production runs',
+    ],
+    cta: 'Send your build spec →',
+    image: '/media/workshop/radio-button-replacement.jpg',
+    alt: 'Replacement automotive radio knob beside the original part',
+    drawer: {
+      photos: [
+        {
+          src: '/media/workshop/radio-button-replacement.jpg',
+          alt: 'Replacement Pontiac Vibe radio button',
+        },
+        {
+          src: '/media/workshop/mouse-body-petgcf.jpg',
+          alt: 'PETG-CF mouse body on the print bed',
+        },
+        {
+          src: '/media/workshop/fan-reducers.jpg',
+          alt: 'Precision black functional parts lined up after printing',
+        },
+      ],
+      materials: 'PETG-CF, ASA, and higher-temp compounds are selected around heat, vibration, and clearance requirements.',
+      turnaround: 'Fitment-first automotive work usually starts with photos, measurements, or the broken part itself.',
+    },
   },
   {
-    title: 'Custom Fabrication',
-    body: 'Carbon-fibre mouse bodies, spray-can adapters, TV mounts, desk organizers — whatever the problem, we design, scan, or source the file and print it in the right material for the job.',
-    img: '/media/workshop/mouse-body-petgcf.jpg',
-    alt: 'Custom gaming mouse body printed in PETG carbon fibre',
+    id: 'repair',
+    drawerId: 'drawer-repair',
+    eyebrow: 'Repair & Replacement',
+    stakes: 'The part is discontinued. The supplier is gone. We print the replacement.',
+    body: 'If you have a broken component, a worn piece, or a part that simply no longer exists anywhere, 3D3D can reverse-engineer and produce it. One piece. Exact fit. Ships to you.',
+    bullets: [
+      'From measurement or reference sample',
+      'Functional-grade materials, not display prints',
+      'Full review before shipping',
+    ],
+    cta: 'Describe what broke →',
+    image: '/media/workshop/spray-can-adapter.jpg',
+    alt: 'Purple functional adapter printed for replacement use',
+    drawer: {
+      photos: [
+        {
+          src: '/media/workshop/spray-can-adapter.jpg',
+          alt: 'Functional spray can adapter',
+        },
+        {
+          src: '/media/workshop/radio-button-replacement.jpg',
+          alt: 'Replacement automotive button',
+        },
+        {
+          src: '/media/workshop/nomad-joe-holder.jpg',
+          alt: 'Functional holder printed for daily use',
+        },
+      ],
+      materials: 'Material choice is driven by what the broken part had to survive in the first place: load, heat, weather, or repeated handling.',
+      turnaround: 'If the geometry is straightforward and the measurements are clean, repair parts can move quickly from review to production.',
+    },
   },
   {
-    title: 'Retained Support',
-    body: 'Monthly retainer for clients who need a fabrication partner on call. Priority queue, direct line to the founder. No tickets, no wait, no guessing. You call, we build.',
-    img: '/media/workshop/fan-reducers.jpg',
-    alt: 'Precision-printed fan reducer brackets in black',
+    id: 'custom',
+    drawerId: 'drawer-custom',
+    eyebrow: 'Custom & Field Fabrication',
+    stakes: 'No blueprint required. Bring the problem.',
+    body: 'Custom mounts, jigs, adapters, enclosures, tools, and one-off solutions. If you can describe it — or even just describe the problem — 3D3D can design and build it.',
+    bullets: [
+      'Design-from-brief available',
+      'Carbon-fibre, flexible, rigid, high-temp compound options',
+      'Prototypes and production runs',
+    ],
+    cta: 'Start a custom build →',
+    image: '/media/workshop/printer-action-cf.jpg',
+    alt: 'Carbon-fibre print in progress on a fabrication platform',
+    drawer: {
+      photos: [
+        {
+          src: '/media/workshop/printer-action-cf.jpg',
+          alt: 'Printer producing a carbon-fibre part',
+        },
+        {
+          src: '/media/workshop/custom-tv-mount.jpg',
+          alt: 'Custom TV mount fixed to a stair railing',
+        },
+        {
+          src: '/media/workshop/rv-lab-01.jpg',
+          alt: 'The original RV fabrication setup with printers running',
+        },
+      ],
+      materials: 'Rigid, flexible, carbon-fibre, and higher-temp compounds stay on the table until the use case narrows the answer down.',
+      turnaround: 'Custom work starts with the problem statement first, then design, then fitment and print once the direction is right.',
+    },
   },
 ];
 
-const proofPoints = [
-  'Started in an RV running on a generator — $30/day in gas, 35-degree heat, everything that could break, broke',
-  'One year of daily printing, failing, learning, and building until the operation was stable and the work spoke for itself',
-  'Prusa Research recognized that commitment and is sending a CORE One L — their flagship machine',
-  'High-performance materials as standard: PETG-CF, ASA, annealed PLA, UV-stable compounds — not the cheapest filament, the right filament',
-  'Every part reviewed, processed, and tested before it ships. Direct access to the founder on every engagement',
+const originParagraphs = [
+  '3D3D was not started in a workshop with a budget. It was started in a recreational vehicle, running three printers off a generator that cost $30 a day in gas. In 35-degree heat. With everything breaking — the printers, the power, the plans, all of it.',
+  'That was the sacrifice required to build this. A year of daily printing, failing, iterating, and producing parts that hold up — not because the setup was ideal, but because the standards were non-negotiable.',
+  "Today the operation is stable, Prusa Research is sending a CORE One L, and the Newport Bermuda Race deployment is on the horizon. But the mentality hasn't changed: if it can break, it will. So it is built not to.",
 ];
 
-const racePhotos = [
-  { src: '/media/real/sunrise-offshore.jpg', alt: 'Sunrise offshore during passage' },
-  { src: '/media/real/race-morning-crew.jpg', alt: 'Crew preparing for race start' },
-  { src: '/media/real/coastal-landmark.jpg', alt: 'Coastal approach at the end of a passage' },
-  { src: '/media/real/golden-hour-01.jpg', alt: 'Golden-hour sailing conditions' },
+const originProofPoints = [
+  'Started in an RV on a generator — $30/day in gas, 35-degree heat',
+  'One year of daily printing, failing, and building until the work spoke for itself',
+  "Prusa Research recognized that commitment — they're sending their flagship machine",
+  'High-performance materials as standard: PETG-CF, ASA, annealed PLA, UV compounds',
+  'Every part reviewed, processed, and tested before it ships',
 ];
 
-const tiers = [
+const deploymentParagraphs = [
+  "Ken's first sail was a duo passage with CSM — Halifax, Nova Scotia to Antigua. No experience. They hit a cat-one storm: 70-knot winds, 90-knot gusts. No turning back. That passage taught him everything that matters about what breaks, why it breaks, and what you have to accept when there is no option to stop.",
+  'Since then: transatlantics, the Rolex Fastnet Race, two days solo up the Saint John River. The offshore experience is real, and it informs everything built at 3D3D.',
+  "For the 2026 Newport Bermuda Race — the 120th running — Ken is sailing aboard CSM's boat with a Prusa CORE One L printing live onboard. This is not a sponsorship. It is proof: real parts, real problems, real conditions, no fallback.",
+];
+
+const deploymentPhotos = [
   {
-    name: 'Standard',
-    intro: 'One-off requests and production orders.',
-    body: 'Standard fabrication queue. Full material and process review. Global shipping. You submit the request, we produce the part — reviewed, tested, and shipped. Not an estimate. A part.',
-    cta: 'Request a build',
+    src: '/media/real/sunrise-offshore.jpg',
+    alt: 'Sunrise offshore before a race day',
+    caption: 'Daybreak before the system gets tested.',
   },
   {
-    name: 'Priority',
-    intro: 'Faster turnaround. Direct access. Preferred scheduling.',
-    body: 'Jump the queue. Accelerated fabrication, direct communication with the founder, and priority access when timing matters. Choosing Priority also directly funds the 3D3D mission and expansion.',
-    cta: 'Get priority access',
+    src: '/media/real/helm-close.jpg',
+    alt: 'Close-up at the helm under load',
+    caption: 'Helm time is where failure stops being theoretical.',
   },
   {
-    name: 'Patron',
-    intro: 'Monthly retainer. On-call fabrication. Part of the campaign.',
-    body: 'A recurring arrangement for clients and supporters who want 3D3D on call. Concierge fabrication priority, founder access, recognition on the race campaign, field updates, and the knowledge that you are one of the people making this possible.',
-    cta: 'Become a patron',
+    src: '/media/real/coastal-landmark.jpg',
+    alt: 'Coastal landmark at the edge of a passage',
+    caption: 'Landfall is where the tolerances have to be right.',
+  },
+];
+
+const workBands = [
+  {
+    label: 'Standard',
+    intro: 'One-off requests and production needs',
+    body: 'Standard queue placement, fabrication review, dimensional confirmation, and global shipping.',
+    cta: 'Request a build →',
+    href: '/contact',
+  },
+  {
+    label: 'Priority',
+    intro: 'Clients who need faster response and preferred scheduling',
+    body: 'Accelerated turnaround, direct communication, priority queue position, and material confirmation before print. Also directly supports the 3D3D mission and operational expansion.',
+    cta: 'Get priority access →',
+    href: '/contact',
+  },
+  {
+    label: 'Expedition & Retained Support',
+    intro: 'Long-term partners and serious operators',
+    body: 'Retained fabrication access, project involvement, concierge-level support, regular field updates, and recognition on the campaign. Direct access to the founder on every engagement. This is not a subscription. It is an operational relationship.',
+    cta: 'Become a patron →',
+    href: '/contact',
     featured: true,
   },
 ];
 
-const openSourceLinks = [
+const openBuildParagraphs = [
+  '3D3D is built on open tools, open hardware, and open community values. The repository is open. The knowledge is shared. If you want the file, you can have the file.',
+];
+
+const openResources = [
   {
-    label: 'Printables',
+    label: 'Printable Designs',
+    explanation: 'Browse functional parts, tested objects, and open files available for download on Printables.',
     href: 'https://www.printables.com/@KTK3D_3050116',
-    note: 'Open files, shared models, and fabrication-ready print releases.',
+    display: 'printables.com/@KTK3D_3050116',
+    image: '/media/real/dawn-approach.jpg',
+  },
+  {
+    label: 'Support the Work',
+    explanation: "Ko-fi is where you can directly support 3D3D's operational costs, campaign prep, and open-source contributions. This is not a shop. It is a direct line.",
+    href: 'https://ko-fi.com/3d3dca',
+    display: 'ko-fi.com/3d3dca',
   },
   {
     label: 'GitHub',
+    explanation: 'Code, tooling, and documentation published openly as the operation grows.',
     href: 'https://github.com/3d3dcanada/3d3d-main',
-    note: 'The open repository behind the 3D3D platform and this site.',
-  },
-  {
-    label: 'Ko-fi',
-    href: 'https://ko-fi.com/3d3dca',
-    note: 'Support the project directly. Every contribution funds materials, travel, and deployment.',
+    display: 'github.com/3d3dcanada/3d3d-main',
   },
 ];
 
 const partners = [
   {
-    title: 'Prusa Research',
-    body: 'Official platform partner. The Prusa CORE One L — enclosed CoreXY, 300 × 300 × 330 mm build volume — is arriving after one year of building 3D3D from the ground up. This machine is part of the arsenal now. It is here because a year of demonstrated commitment to open-source principles, quality manufacturing, and real-world deployment earned it.',
+    name: 'Prusa Research',
+    context: '3D3D has operated on the Prusa ecosystem since day one. After a year of documented work and demonstrated commitment, Prusa Research is sending a CORE One L — their flagship machine. That is not a marketing arrangement. That is a recognition of output.',
+    cta: 'About Prusa →',
+    href: 'https://prusa3d.com',
+    external: true,
+    image: '/media/workshop/printer-action-cf.jpg',
+    alt: 'Carbon-fibre print running in the Prusa-aligned production workflow',
   },
   {
-    title: 'Christopher Stanmore-Major · CSM The Mariner',
-    body: 'Captain, mentor, and the reason 3D3D is going to sea. Chris is sponsoring Ken\'s place on the boat for the 2026 Newport Bermuda Race and partnering to bring a 3D printer onboard — live fabrication in a race environment. A lifelong sailor who has circumnavigated and raced at the highest levels, Chris saw what 3D3D was building and backed it.',
+    name: 'Christopher Stanmore-Major',
+    context: "Captain, offshore sailor, and the reason Ken ever stepped on a boat. CSM sponsored Ken's place aboard for the 2026 Newport Bermuda Race and is the operational partner for the live deployment. He is not a client. He is a collaborator.",
+    cta: 'The 2026 campaign →',
+    href: '/blog',
+    image: '/media/real/helm-close.jpg',
+    alt: 'Christopher Stanmore-Major at the helm',
   },
   {
-    title: 'Your brand here',
-    body: 'This project runs on partnerships. If your brand, team, or organization is aligned with precision manufacturing, marine performance, motorsport, or open-source innovation — sponsor the campaign. Fund the deployment. Get 3D3D to your event, your boat, your track. Reach out.',
+    name: 'Sponsorship & Partnership',
+    context: 'One slot available for campaign alignment, equipment partnership, or brand presence on the Newport Bermuda deployment. This is an offshore race. This is live printing. This is real proof.',
+    cta: 'Talk to us →',
+    href: '/contact',
+    image: '/media/real/golden-hour-02.jpg',
+    alt: 'Golden-hour offshore sailing during campaign conditions',
+    overlay: true,
   },
-];
-
-const blogSubjects = [
-  'The CORE One L arrives — what it means for 3D3D',
-  'Printing for saltwater: material selection for marine parts',
-  'Newport Bermuda 2026 — the deployment plan',
-  'From an RV to a fabrication operation: the first year',
-  'PETG-CF vs ASA: when carbon fibre composites matter',
-  'Corporate team building with 3D printing — how to book a demo',
-  'Why we anneal every structural part',
-  'Open-source ethics in a paid fabrication service',
 ];
 ---
 
 <BaseLayout
-  title="3D3D — Precision fabrication for marine, automotive, and everything that breaks"
-  description="3D3D produces precision 3D-printed parts for boats, cars, and anything else. Marine-grade fabrication, replacement parts, and retained support — built from the ground up in New Brunswick, Canada. Open-source. Field-tested. Obsessive about quality."
+  title="3D3D | Precision fabrication for marine, automotive, and field deployment"
+  description="3D3D builds functional parts for boats, cars, and anything else that needs to work under real conditions. Founder-operated out of Fredericton, NB."
   schema={orgSchema}
   activePath="/"
   navGroups={homeNavGroups}
+  bodyClass="home-editorial"
 >
-  <!-- ═══════════════════ HERO ═══════════════════ -->
-  <section id="home" class="page-section home-hero">
-    <div class="hero-grid">
-      <div class="hero-copy reveal">
-        <span class="eyebrow">Precision Fabrication · Marine · Automotive · Custom</span>
-        <h1 class="hero-title">
-          You have a problem.
-          <br />
-          We have a printer.
-        </h1>
-        <p class="hero-subheadline">
-          3D3D builds precision parts for boats, cars, and anything else that needs to work under real conditions. Marine fittings, automotive replacements, custom components that don't exist yet. Open-source at the core. Built from nothing but stubbornness and a generator.
-        </p>
-
-        <div class="hero-actions">
-          <a
-            href="/contact"
-            class="btn btn-primary"
-            data-analytics-event="contact_started"
-            data-analytics-source="home-hero"
-          >
-            Request Service
-          </a>
-          <a
-            href="/blog"
-            class="btn btn-secondary"
-            data-analytics-event="blog_viewed"
-            data-analytics-source="home-hero"
-          >
-            Follow the Project
-          </a>
-        </div>
-
-        <div class="hero-trust" aria-label="Trust strip">
-          <span>Prusa-backed</span>
-          <span>Marine-grade materials</span>
-          <span>Open-source</span>
-          <span>Newport Bermuda 2026</span>
-        </div>
-      </div>
-
-      <div class="hero-visual surface-panel reveal reveal-delay-1">
-        <video
-          class="hero-video"
-          src="/media/hero-loop.mp4"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-          poster="/media/real/race-morning-crew.jpg"
-        ></video>
-      </div>
-    </div>
-
-    <div class="hero-stats reveal reveal-delay-2">
-      {heroStats.map((stat) => (
-        <div class="hero-stat surface-panel">
-          <strong>{stat.value}</strong>
-          <span>{stat.label}</span>
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <!-- ═══════════════════ SERVICES ═══════════════════ -->
-  <section id="services" class="page-section home-section">
-    <div class="section-heading reveal">
-      <span class="eyebrow">Services</span>
-      <h2 class="section-title">Whatever you need. We print it right.</h2>
-    </div>
-
-    <div class="services-grid">
-      {services.map((service, i) => (
-        <article class={`service-card surface-panel reveal reveal-delay-${i % 4}`}>
-          <figure class="service-card__img">
-            <img src={service.img} alt={service.alt} loading="lazy" />
-          </figure>
-          <div class="service-card__copy">
-            <h3>{service.title}</h3>
-            <p>{service.body}</p>
+  <div class="home-page">
+    <section id="home" class="home-section home-section--dark home-hero" data-reveal-section>
+      <div class="section-shell hero-shell">
+        <div class="hero-copy">
+          <p class="eyebrow hero-eyebrow">Precision Fabrication · Marine · Automotive · Custom</p>
+          <h1 class="hero-title" aria-label="You have a problem. We have a printer.">
+            <span class="hero-line">You have a problem.</span>
+            <span class="hero-line">We have a printer.</span>
+          </h1>
+          <p class="hero-subhead">
+            3D3D builds functional parts for boats, cars, and anything else that needs to work under real conditions. Marine fittings, automotive replacements, custom components that don't exist yet. Open-source at the core. Built from nothing but stubbornness and a generator.
+          </p>
+          <div class="hero-actions">
+            <a href="/contact" class="hero-button hero-button--primary">Request Service →</a>
+            <a href="/blog" class="hero-button hero-button--ghost">Follow the Campaign →</a>
           </div>
-        </article>
-      ))}
-    </div>
-  </section>
+          <ul class="hero-proof-rail" aria-label="3D3D proof points">
+            {heroProofRail.map((item, index) => (
+              <li class="hero-proof-item" style={`animation-delay: ${0.4 + index * 0.08}s;`}>
+                <span class="hero-proof-dot" aria-hidden="true"></span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-  <!-- ═══════════════════ OUR STORY ═══════════════════ -->
-  <section id="story" class="page-section home-section story-section">
-    <div class="story-photos reveal">
-      <figure class="story-photo story-photo--main surface-panel">
-        <img
-          src="/media/workshop/rv-lab-02.jpg"
-          alt="The original 3D3D workshop — multiple printers running inside an RV"
-          loading="lazy"
-        />
-      </figure>
-      <figure class="story-photo story-photo--inset surface-panel reveal reveal-delay-1">
-        <img
-          src="/media/workshop/rv-lab-03.jpg"
-          alt="The RV lab at night — printers, neon, and the work"
-          loading="lazy"
-        />
-      </figure>
-    </div>
+        <div class="hero-media">
+          <div class="hero-video-frame">
+            <video
+              class="hero-video"
+              src="/media/hero-loop.mp4"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              poster="/media/real/race-morning-crew.jpg"
+              aria-label="3D3D deployment video reel"
+            ></video>
+          </div>
+        </div>
+      </div>
 
-    <div class="story-copy reveal reveal-delay-1">
-      <span class="eyebrow">Where this started</span>
-      <h2 class="section-title">
-        An RV, a generator,
-        <br />
-        and every reason to quit.
-      </h2>
-      <p class="section-body">
-        3D3D was not started in a workshop with a budget. It was started in a recreational vehicle, running three printers off a generator that cost $30 a day in gas. In 35-degree heat. With everything breaking — the printers, the power, the plans, all of it.
-      </p>
-      <p class="section-body">
-        That was the sacrifice required to build this. A year of daily printing, failing, iterating, and producing parts that hold up — not because the setup was ideal, but because the standards were non-negotiable. The parts that leave 3D3D are reviewed, processed, annealed when required, and printed in materials chosen for the job, not the price.
-      </p>
-      <p class="section-body">
-        Today the operation is stable, Prusa Research is sending a CORE One L, and the Newport Bermuda Race deployment is on the horizon. But the mentality hasn't changed: if it can break, it will. So it is built not to.
-      </p>
+      <div class="section-shell hero-stats-shell">
+        <div class="hero-stats">
+          {heroStats.map((stat, index) => (
+            <article class="hero-stat-card" style={`animation-delay: ${0.5 + index * 0.1}s;`}>
+              <strong>{stat.value}</strong>
+              <span>{stat.label}</span>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
 
-      <ul class="proof-list">
-        {proofPoints.map((point) => (
-          <li>{point}</li>
+    <section id="services" class="home-section home-section--light services-section" data-reveal-section aria-labelledby="services-label">
+      <h2 id="services-label" class="sr-only">Services</h2>
+      <div class="section-shell services-shell">
+        {services.map((service, index) => (
+          <article class:list={['service-module', index % 2 === 1 && 'service-module--reverse']}>
+            <div
+              class:list={[
+                'service-module__media',
+                'mask-wipe',
+                index % 2 === 0 ? 'mask-wipe-left' : 'mask-wipe-right',
+              ]}
+              data-reveal
+            >
+              <img src={service.image} alt={service.alt} loading="lazy" decoding="async" />
+            </div>
+
+            <div class="service-module__content">
+              <div class:list={['service-module__text', index % 2 === 0 ? 'reveal-right' : 'reveal-left']} data-reveal>
+                <p class="eyebrow reveal-left" data-reveal>{service.eyebrow}</p>
+                <p class="service-module__stakes reveal-up delay-1" data-reveal>{service.stakes}</p>
+                <p class="service-module__body reveal-fade delay-2" data-reveal>{service.body}</p>
+                <ul class="service-module__bullets" aria-label={`${service.eyebrow} capabilities`}>
+                  {service.bullets.map((bullet, bulletIndex) => (
+                    <li class="reveal-left" data-reveal style={`transition-delay: ${0.12 + bulletIndex * 0.06}s;`}>
+                      {bullet}
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  type="button"
+                  class="service-module__cta reveal-up delay-3"
+                  data-reveal
+                  data-drawer-trigger
+                  data-drawer-id={service.drawerId}
+                >
+                  {service.cta}
+                </button>
+              </div>
+            </div>
+          </article>
         ))}
-      </ul>
-    </div>
-  </section>
+      </div>
+    </section>
 
-  <!-- ═══════════════════ FABRICATION SHOWCASE ═══════════════════ -->
-  <div class="fab-showcase reveal">
-    <figure class="fab-showcase__item surface-panel">
-      <img src="/media/workshop/spray-can-adapter.jpg" alt="Custom spray-can trigger adapter — functional print" loading="lazy" />
-      <figcaption>Spray can adapter</figcaption>
-    </figure>
-    <figure class="fab-showcase__item surface-panel">
-      <img src="/media/workshop/nomad-joe-holder.jpg" alt="Nomad Joe custom coffee drip holder — branded fabrication" loading="lazy" />
-      <figcaption>Custom branded holder</figcaption>
-    </figure>
-    <figure class="fab-showcase__item surface-panel">
-      <img src="/media/workshop/printer-action-cf.jpg" alt="Flashforge Adventurer 4 printing carbon fibre composite" loading="lazy" />
-      <figcaption>Carbon fibre printing</figcaption>
-    </figure>
-    <figure class="fab-showcase__item surface-panel">
-      <img src="/media/workshop/custom-tv-mount.jpg" alt="Custom 3D-printed TV mount bracket installed on stair railing" loading="lazy" />
-      <figcaption>Custom TV mount</figcaption>
-    </figure>
+    <section id="origin" class="home-section home-section--dark origin-section" data-reveal-section>
+      <div class="section-shell origin-shell">
+        <div class="origin-grid">
+          <div class="origin-photo mask-wipe mask-wipe-left" data-reveal>
+            <img src="/media/workshop/rv-lab-02.jpg" alt="The RV fabrication setup that started 3D3D" loading="lazy" decoding="async" />
+          </div>
+
+          <div class="origin-copy">
+            <p class="eyebrow reveal-left" data-reveal>Where this started</p>
+            <h2 class="section-title section-title--light reveal-up" data-reveal>
+              An RV, a generator,
+              <br />
+              and every reason to quit.
+            </h2>
+
+            {originParagraphs.map((paragraph, index) => (
+              <p class:list={['section-body', 'section-body--light', 'reveal-fade', index > 0 && `delay-${index}`]} data-reveal>
+                {paragraph}
+              </p>
+            ))}
+
+            <ul class="proof-list" aria-label="Origin proof points">
+              {originProofPoints.map((point, index) => (
+                <li class="reveal-left" data-reveal style={`transition-delay: ${0.12 + index * 0.08}s;`}>
+                  <span class="proof-dot" aria-hidden="true"></span>
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div class="origin-inset mask-wipe mask-wipe-left" data-reveal>
+          <img src="/media/workshop/rv-lab-03.jpg" alt="Close look at the RV lab with multiple printers running" loading="lazy" decoding="async" />
+        </div>
+      </div>
+    </section>
+
+    <section id="deployment" class="home-section home-section--dark deployment-section" data-reveal-section>
+      <div class="section-bg section-bg--photo" data-parallax="0.4" style="background-image: url('/media/real/fleet-running.jpg');"></div>
+      <div class="section-shell deployment-shell">
+        <div class="deployment-copy">
+          <p class="eyebrow reveal-left" data-reveal>2026 Newport Bermuda Race — 120th Anniversary</p>
+          <h2 class="deployment-title" aria-label="A fabrication studio in motion.">
+            <span class="word-reveal" data-reveal>A</span>
+            <span class="word-reveal" data-reveal style="transition-delay: 0.1s;">fabrication</span>
+            <span class="word-reveal" data-reveal style="transition-delay: 0.2s;">studio</span>
+            <br />
+            <span class="word-reveal" data-reveal style="transition-delay: 0.3s;">in</span>
+            <span class="word-reveal" data-reveal style="transition-delay: 0.4s;">motion.</span>
+          </h2>
+
+          {deploymentParagraphs.map((paragraph, index) => (
+            <p class:list={['section-body', 'section-body--light', 'reveal-fade', index > 0 && `delay-${index}`]} data-reveal>
+              {paragraph}
+            </p>
+          ))}
+
+          <a href="/blog" class="hero-button hero-button--ghost reveal-up delay-3" data-reveal>Follow the campaign →</a>
+        </div>
+
+        <div class="deployment-strip" aria-label="Campaign photo strip">
+          {deploymentPhotos.map((photo, index) => (
+            <figure class="deployment-card reveal-scale" data-reveal style={`transition-delay: ${0.1 + index * 0.12}s;`}>
+              <div class="deployment-card__media">
+                <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" />
+              </div>
+              <figcaption>{photo.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="support" class="home-section home-section--light work-section" data-reveal-section aria-labelledby="support-label">
+      <h2 id="support-label" class="sr-only">How to work with 3D3D</h2>
+      <div class="section-shell work-shell">
+        {workBands.map((band, index) => (
+          <article class:list={['work-band', band.featured && 'work-band--featured', 'reveal-left']} data-reveal style={`transition-delay: ${index * 0.12}s;`}>
+            {band.featured && (
+              <div class="work-band__image" aria-hidden="true">
+                <img src="/media/real/golden-hour-01.jpg" alt="" loading="lazy" decoding="async" />
+              </div>
+            )}
+
+            <div class="work-band__content">
+              <p class="work-band__label">{band.label}</p>
+              <div class="work-band__meta">
+                <p><span>For:</span> {band.intro}</p>
+                <p><span>What you get:</span> {band.body}</p>
+              </div>
+              <a href={band.href} class:list={['work-band__cta', band.featured && 'work-band__cta--featured']}>
+                {band.cta}
+              </a>
+            </div>
+          </article>
+        ))}
+
+        <div class="partner-band reveal-up" data-reveal>
+          <div>
+            <p class="partner-band__label">Partnerships & Sponsorships</p>
+            <p class="partner-band__body">
+              For brands, marine organizations, event sponsors, and media partners. Contact us to discuss campaign alignment, product placement, or equipment partnerships.
+            </p>
+          </div>
+          <a href="/contact" class="partner-band__cta">Partner with 3D3D →</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="open-build" class="home-section home-section--light open-build-section" data-reveal-section>
+      <div class="section-shell open-build-shell">
+        <div class="open-build-copy">
+          <p class="eyebrow reveal-left" data-reveal>Open-source at the core</p>
+          <h2 class="section-title reveal-up" data-reveal>
+            The ecosystem matters
+            <br />
+            more than the lock-in.
+          </h2>
+          {openBuildParagraphs.map((paragraph) => (
+            <p class="section-body reveal-fade delay-1" data-reveal>{paragraph}</p>
+          ))}
+        </div>
+
+        <div class="resource-grid">
+          {openResources.map((resource, index) => (
+            <a
+              href={resource.href}
+              class:list={[
+                'resource-card',
+                index === 0 && 'resource-card--photo',
+                index > 0 && 'resource-card--dark',
+                'reveal-right',
+              ]}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-reveal
+              style={[
+                resource.image ? `--resource-image: url('${resource.image}');` : '',
+                `transition-delay: ${index * 0.1}s;`,
+              ].join(' ')}
+            >
+              <span class="resource-card__label">{resource.label}</span>
+              <p>{resource.explanation}</p>
+              <span class="resource-card__link">{resource.display}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="partners" class="home-section home-section--dark partners-section" data-reveal-section aria-labelledby="partners-label">
+      <h2 id="partners-label" class="sr-only">Partners</h2>
+      <div class="section-shell partners-shell">
+        <div class="partner-grid">
+          {partners.map((partner, index) => (
+            <article class="partner-card reveal-scale" data-reveal style={`transition-delay: ${index * 0.12}s;`}>
+              <div class:list={['partner-card__media', partner.overlay && 'partner-card__media--overlay']}>
+                <img src={partner.image} alt={partner.alt} loading="lazy" decoding="async" />
+              </div>
+              <div class="partner-card__body">
+                <h3>{partner.name}</h3>
+                <p>{partner.context}</p>
+                <a
+                  href={partner.href}
+                  class="partner-card__cta"
+                  target={partner.external ? '_blank' : undefined}
+                  rel={partner.external ? 'noopener noreferrer' : undefined}
+                >
+                  {partner.cta}
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="home-section home-section--teal final-cta-section" data-reveal-section>
+      <div class="section-bg section-bg--photo section-bg--faint" data-parallax="0.3" style="background-image: url('/media/real/fleet-start-press.jpg');"></div>
+      <div class="section-shell final-cta-shell">
+        <div class="final-cta-copy">
+          <h2 class="section-title section-title--inverse reveal-up" data-reveal>
+            Need a part, a prototype, or a
+            <br />
+            fabrication partner on call?
+          </h2>
+          <p class="section-body section-body--inverse reveal-fade delay-1" data-reveal>
+            3D3D builds for people who need performance, not excuses.
+          </p>
+          <div class="final-cta-actions">
+            <a href="/contact" class="final-cta-button final-cta-button--light reveal-up delay-2" data-reveal>Request Service →</a>
+            <a href="/blog" class="final-cta-button final-cta-button--ghost reveal-up delay-3" data-reveal>Follow the project →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="drawer" id="service-drawer" data-open="false" hidden>
+      <div class="drawer__backdrop" data-drawer-close></div>
+      <aside class="drawer__panel" role="dialog" aria-modal="true" aria-label="Service details">
+        <button class="drawer__close" data-drawer-close aria-label="Close">✕</button>
+        <div class="drawer__content" id="drawer-content"></div>
+      </aside>
+    </div>
+
+    {services.map((service) => (
+      <template id={service.drawerId}>
+        <div class="drawer-copy">
+          <p class="drawer-copy__eyebrow">{service.eyebrow}</p>
+          <h3 class="drawer-copy__title">{service.eyebrow}</h3>
+          <p class="drawer-copy__stakes">{service.stakes}</p>
+          <div class="drawer-copy__gallery">
+            {service.drawer.photos.map((photo) => (
+              <figure>
+                <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" />
+              </figure>
+            ))}
+          </div>
+          <div class="drawer-copy__notes">
+            <div>
+              <span>Materials note</span>
+              <p>{service.drawer.materials}</p>
+            </div>
+            <div>
+              <span>Turnaround note</span>
+              <p>{service.drawer.turnaround}</p>
+            </div>
+          </div>
+          <a href="/contact" class="drawer-copy__cta">Request this type of work</a>
+        </div>
+      </template>
+    ))}
   </div>
 
-  <!-- ═══════════════════ DEPLOYMENT ═══════════════════ -->
-  <section
-    id="deployment"
-    class="home-race"
-    style={`--race-bg: url('/media/real/fleet-running.jpg');`}
-  >
-    <div class="race-inner">
-      <div class="race-copy reveal">
-        <span class="eyebrow eyebrow-light">2026 Newport Bermuda Race — 120th Anniversary</span>
-        <h2 class="race-title">
-          A fabrication studio
-          <br />
-          in motion.
-        </h2>
-        <p class="race-body">
-          Captain Christopher Stanmore-Major is sponsoring 3D3D's place aboard for the 2026 Newport Bermuda Race — the 120th running of one of offshore sailing's most demanding competitions. A Prusa CORE One L goes onboard. Parts get printed, tested, and used at sea. Weeks from any supply chain, far from any shop.
-        </p>
-        <p class="race-body">
-          This is not a sponsorship logo on a hull. It is a live deployment — proof that additive manufacturing works where it matters most. And it is an invitation: if you want to bring 3D3D to your boat, your event, your corporate team build, your track day — we deploy.
-        </p>
-        <div class="race-actions">
-          <a
-            href="/contact"
-            class="btn btn-primary"
-            data-analytics-event="contact_started"
-            data-analytics-source="home-deployment"
-          >
-            Book a deployment
-          </a>
-          <a
-            href="/blog"
-            class="btn btn-secondary home-cta-band__secondary"
-            data-analytics-event="blog_viewed"
-            data-analytics-source="home-deployment"
-          >
-            Follow the campaign
-          </a>
-        </div>
-      </div>
+  <script is:inline>
+    (() => {
+      const revealItems = Array.from(document.querySelectorAll('[data-reveal]'));
+      const sectionItems = Array.from(document.querySelectorAll('[data-reveal-section]'));
+      const parallaxItems = Array.from(document.querySelectorAll('[data-parallax]'));
 
-      <div class="race-photo-grid reveal reveal-delay-1">
-        {racePhotos.map((photo) => (
-          <figure class="race-photo-card">
-            <img src={photo.src} alt={photo.alt} loading="lazy" />
-          </figure>
-        ))}
-      </div>
-    </div>
-  </section>
+      const updateVisibleState = () => {
+        const threshold = window.innerHeight + 300;
 
-  <!-- ═══════════════════ SERVICE TIERS ═══════════════════ -->
-  <section id="tiers" class="page-section home-section">
-    <div class="section-heading reveal">
-      <span class="eyebrow">Service Tiers</span>
-      <h2 class="section-title">How to work with 3D3D</h2>
-    </div>
+        revealItems.forEach((item) => {
+          if (!(item instanceof HTMLElement)) return;
+          if (item.getBoundingClientRect().top < threshold) {
+            item.classList.add('revealed');
+          }
+        });
 
-    <div class="tiers-grid">
-      {tiers.map((tier, i) => (
-        <article class={`tier-card surface-panel reveal reveal-delay-${i} ${tier.featured ? 'tier-card--featured' : ''}`}>
-          <h3>{tier.name}</h3>
-          <p class="tier-intro">{tier.intro}</p>
-          <p class="tier-body">{tier.body}</p>
-          <a
-            href="/contact"
-            class="btn btn-primary tier-cta"
-            data-analytics-event="contact_started"
-            data-analytics-source={`home-tier-${tier.name.toLowerCase()}`}
-          >
-            {tier.cta}
-          </a>
-        </article>
-      ))}
-    </div>
+        sectionItems.forEach((item) => {
+          if (!(item instanceof HTMLElement)) return;
+          if (item.getBoundingClientRect().top < threshold) {
+            item.classList.add('revealed-section');
+          }
+        });
 
-    <div class="tier-partnership surface-panel reveal">
-      <figure class="tier-partnership__photo">
-        <img
-          src="/media/real/golden-hour-03.jpg"
-          alt="Golden-hour wide shot on the water"
-          loading="lazy"
-        />
-      </figure>
-      <div class="tier-partnership__copy">
-        <h3>Partnerships &amp; Sponsorships</h3>
-        <p>Bring 3D3D to your event, your vessel, your track. Sponsor the campaign. Fund a deployment. Get your brand in front of the people who build and race and break things for a living.</p>
-        <a
-          href="/contact"
-          class="btn btn-secondary"
-          data-analytics-event="contact_started"
-          data-analytics-source="home-partnerships"
-        >
-          Partner with 3D3D
-        </a>
-      </div>
-    </div>
-  </section>
+        parallaxItems.forEach((item) => {
+          if (!(item instanceof HTMLElement)) return;
+          const host = item.parentElement instanceof HTMLElement ? item.parentElement : item;
+          const rect = host.getBoundingClientRect();
+          const speed = Number(item.dataset.parallax || '0.3');
+          item.style.transform = `translate3d(0, ${rect.top * speed}px, 0)`;
+        });
+      };
 
-  <!-- ═══════════════════ OPEN SOURCE ═══════════════════ -->
-  <section id="open-source" class="page-section home-section open-source-grid">
-    <div class="open-source-copy reveal">
-      <span class="eyebrow">Open-source at the core</span>
-      <h2 class="section-title">The ecosystem matters more than the lock-in.</h2>
-      <p class="section-body">
-        3D3D runs on Prusa hardware, Printables files, and the open ecosystem that makes this kind of operation possible. The files are shared. The models are public. The knowledge is open. If you find something worth printing, 3D3D can build it, refine it, and ship it — and the community stays intact.
-      </p>
-    </div>
+      let ticking = false;
+      const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(() => {
+          updateVisibleState();
+          ticking = false;
+        });
+      };
 
-    <div class="open-source-media reveal reveal-delay-1">
-      <figure class="open-source-photo surface-panel">
-        <img
-          src="/media/workshop/galaxy-vase.jpg"
-          alt="Galaxy-effect vase — open-source model printed by 3D3D"
-          loading="lazy"
-        />
-      </figure>
+      updateVisibleState();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+    })();
 
-      <div class="open-source-links">
-        {openSourceLinks.map((link) => (
-          <a
-            href={link.href}
-            class="open-source-link surface-panel"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <strong>{link.label}</strong>
-            <span>{link.note}</span>
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
+    (() => {
+      const drawer = document.getElementById('service-drawer');
+      const content = document.getElementById('drawer-content');
+      const triggers = Array.from(document.querySelectorAll('[data-drawer-trigger]'));
 
-  <!-- ═══════════════════ PARTNERS ═══════════════════ -->
-  <section id="partners" class="page-section home-section partners-section">
-    <div class="section-heading reveal">
-      <span class="eyebrow">Partners</span>
-      <h2 class="section-title">The people behind this</h2>
-    </div>
+      if (!(drawer instanceof HTMLElement) || !(content instanceof HTMLElement) || triggers.length === 0) {
+        return;
+      }
 
-    <div class="partners-grid">
-      {partners.map((partner, i) => (
-        <article class={`partner-card surface-panel reveal reveal-delay-${i}`}>
-          <h3>{partner.title}</h3>
-          <p>{partner.body}</p>
-        </article>
-      ))}
-    </div>
-  </section>
+      const closeTargets = () => Array.from(drawer.querySelectorAll('[data-drawer-close]'));
+      let closeTimer = 0;
 
-  <!-- ═══════════════════ FINAL CTA ═══════════════════ -->
-  <section
-    id="contact"
-    class="home-cta-band"
-    style={`--cta-bg: url('/media/real/fleet-start-press.jpg');`}
-  >
-    <div class="home-cta-band__inner reveal">
-      <div class="home-cta-band__copy">
-        <h2>Whatever breaks, we build it back better.</h2>
-        <p>One-off part, monthly retainer, race deployment, corporate demo — reach out. No sales deck. Just a direct conversation with the person who runs the printer.</p>
-      </div>
+      const closeDrawer = () => {
+        drawer.dataset.open = 'false';
+        document.body.classList.remove('drawer-open');
+        window.clearTimeout(closeTimer);
+        closeTimer = window.setTimeout(() => {
+          drawer.hidden = true;
+          content.innerHTML = '';
+        }, 320);
+      };
 
-      <div class="home-cta-band__actions">
-        <a
-          href="/contact"
-          class="btn btn-primary home-cta-band__primary"
-          data-analytics-event="contact_started"
-          data-analytics-source="home-final-cta"
-        >
-          Request Service
-        </a>
-        <a
-          href="https://ko-fi.com/3d3dca"
-          class="btn btn-secondary home-cta-band__secondary"
-          target="_blank"
-          rel="noopener noreferrer"
-          data-analytics-event="kofi_clicked"
-          data-analytics-source="home-final-cta"
-        >
-          Support on Ko-fi
-        </a>
-      </div>
-    </div>
-  </section>
+      const openDrawer = (templateId) => {
+        const template = document.getElementById(templateId);
+        if (!(template instanceof HTMLTemplateElement)) return;
 
-  <!-- ═══════════════════ BLOG SUBJECTS (hidden, for future use) ═══════════════════ -->
-  <template data-blog-subjects>
-    {blogSubjects.map((subject) => (
-      <span>{subject}</span>
-    ))}
-  </template>
+        window.clearTimeout(closeTimer);
+        content.innerHTML = template.innerHTML;
+        drawer.hidden = false;
+        document.body.classList.add('drawer-open');
+
+        window.requestAnimationFrame(() => {
+          drawer.dataset.open = 'true';
+        });
+      };
+
+      triggers.forEach((trigger) => {
+        trigger.addEventListener('click', () => {
+          if (!(trigger instanceof HTMLElement)) return;
+          const templateId = trigger.dataset.drawerId;
+          if (!templateId) return;
+          openDrawer(templateId);
+        });
+      });
+
+      drawer.addEventListener('click', (event) => {
+        const target = event.target instanceof Element ? event.target.closest('[data-drawer-close]') : null;
+        if (!target) return;
+        closeDrawer();
+      });
+
+      window.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && drawer.dataset.open === 'true') {
+          closeDrawer();
+        }
+      });
+
+      closeTargets().forEach((target) => {
+        target.addEventListener('click', closeDrawer);
+      });
+    })();
+  </script>
 </BaseLayout>
 
 <style>
-  /* ── Scroll Reveal System ─────────────────────────── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  :global(body.home-editorial) {
+    background: #F6F7FA;
+    background-image: none;
   }
 
-  .reveal.revealed {
-    opacity: 1;
-    transform: translateY(0);
+  :global(body.drawer-open) {
+    overflow: hidden;
   }
 
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.3s; }
+  .home-page {
+    --page-accent: #40C4C4;
+    --page-accent-secondary: #E84A8A;
+    --page-bg-light: #F6F7FA;
+    --page-bg-dark: #111214;
+    --page-surface: #FFFFFF;
+    --page-text: #1A1A1A;
+    --page-text-muted: #666666;
+    --page-border: rgba(64, 196, 196, 0.2);
+    --page-thick-border: 2px solid #40C4C4;
+    --page-shell-width: min(100% - clamp(1.5rem, 4vw, 4rem), 1320px);
+    background: var(--page-bg-light);
+    color: var(--page-text);
+  }
 
-  /* ── Shared Section Styles ────────────────────────── */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .section-shell {
+    position: relative;
+    z-index: 1;
+    width: var(--page-shell-width);
+    margin: 0 auto;
+  }
+
   .home-section {
-    display: grid;
-    gap: 1.75rem;
+    position: relative;
+    overflow: clip;
+    padding-block: clamp(4.5rem, 8vw, 8rem);
   }
 
-  .section-heading {
-    display: grid;
-    gap: 0.8rem;
+  .home-section--light {
+    background: var(--page-bg-light);
   }
 
-  .section-title,
-  .race-title,
-  .hero-title,
-  .home-cta-band h2 {
-    margin: 0;
-    letter-spacing: -0.03em;
+  .home-section--dark {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0)),
+      var(--page-bg-dark);
+    color: #F6F7FA;
   }
 
-  .hero-title {
-    font-size: clamp(2.6rem, 1.8rem + 4vw, 5.2rem);
-    line-height: 0.96;
-    max-width: 16ch;
+  .home-section--teal {
+    background: var(--page-accent);
+    color: #FFFFFF;
   }
 
-  .section-title,
-  .race-title,
-  .home-cta-band h2 {
-    font-size: clamp(2rem, 1.2rem + 2.4vw, 3.6rem);
-    line-height: 1.02;
+  .home-section--dark[data-reveal-section]::before,
+  .home-section--teal[data-reveal-section]::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--page-bg-light);
+    transform-origin: top;
+    transform: scaleY(1);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 0;
   }
 
-  .hero-subheadline,
-  .section-body,
-  .race-body,
-  .home-cta-band p {
-    margin: 0;
-    max-width: 64ch;
-    font-size: clamp(1rem, 0.95rem + 0.3vw, 1.15rem);
-    line-height: 1.7;
-    color: var(--color-text-secondary);
+  .home-section--dark.revealed-section::before,
+  .home-section--teal.revealed-section::before {
+    transform: scaleY(0);
   }
 
-  /* ── Hero ──────────────────────────────────────────── */
-  .home-hero {
-    padding-top: clamp(2.4rem, 4vw, 4rem);
-    padding-bottom: clamp(3rem, 4vw, 4.6rem);
+  .section-bg {
+    position: absolute;
+    inset: -8% 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.3;
+    pointer-events: none;
+    will-change: transform;
   }
 
-  .hero-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(1.75rem, 3vw, 3.5rem);
+  .section-bg--faint {
+    opacity: 0.1;
+  }
+
+  .eyebrow {
+    display: inline-flex;
     align-items: center;
+    gap: 0.8rem;
+    margin: 0;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .eyebrow::before {
+    content: '';
+    width: 2.75rem;
+    height: 2px;
+    background: var(--page-accent);
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 1.5rem + 4vw, 4.9rem);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+
+  .section-title--light,
+  .section-title--inverse {
+    color: #F6F7FA;
+  }
+
+  .section-body {
+    margin: 0;
+    max-width: 42rem;
+    font-size: clamp(1rem, 0.94rem + 0.35vw, 1.18rem);
+    line-height: 1.75;
+    color: var(--page-text);
+  }
+
+  .section-body--light {
+    color: rgba(246, 247, 250, 0.86);
+  }
+
+  .section-body--inverse {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .home-hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: clamp(2.5rem, 5vw, 4rem);
+    padding-top: clamp(5rem, 8vw, 7rem);
+  }
+
+  .hero-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1.03fr) minmax(0, 0.97fr);
+    align-items: center;
+    gap: clamp(2rem, 4vw, 4rem);
   }
 
   .hero-copy {
     display: grid;
-    gap: 1.35rem;
+    gap: 1.5rem;
+  }
+
+  .hero-eyebrow {
+    color: rgba(246, 247, 250, 0.72);
+    animation: hero-line-in 0.72s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .hero-title {
+    margin: 0;
+    display: grid;
+    gap: 0.15em;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 1.8rem + 5vw, 6.6rem);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: #FFFFFF;
+    text-transform: uppercase;
+  }
+
+  .hero-line {
+    display: block;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(48px);
+    animation: hero-line-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .hero-line:nth-child(1) {
+    animation-delay: 0s;
+  }
+
+  .hero-line:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+
+  .hero-subhead {
+    margin: 0;
+    max-width: 40rem;
+    font-size: clamp(1.02rem, 0.94rem + 0.3vw, 1.18rem);
+    line-height: 1.8;
+    color: rgba(246, 247, 250, 0.8);
+    opacity: 0;
+    transform: translateY(28px);
+    animation: hero-line-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
   }
 
   .hero-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.85rem;
+    gap: 1rem;
+    opacity: 0;
+    transform: translateY(28px);
+    animation: hero-line-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
   }
 
-  .hero-trust {
+  .hero-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3.4rem;
+    padding: 0.95rem 1.55rem;
+    border: 2px solid transparent;
+    font-family: var(--font-tech);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease,
+      background-color 0.3s ease,
+      color 0.3s ease,
+      border-color 0.3s ease;
+  }
+
+  .hero-button:hover {
+    transform: translateY(-2px);
+  }
+
+  .hero-button--primary {
+    background: var(--page-accent);
+    color: #0F1112;
+    box-shadow: 0 14px 32px rgba(64, 196, 196, 0.24);
+  }
+
+  .hero-button--primary:hover {
+    background: #53D3D3;
+    color: #0F1112;
+  }
+
+  .hero-button--ghost {
+    border-color: var(--page-accent);
+    color: #F6F7FA;
+    background: transparent;
+  }
+
+  .hero-button--ghost:hover {
+    border-color: var(--page-accent-secondary);
+    background: rgba(232, 74, 138, 0.14);
+    color: #FFFFFF;
+  }
+
+  .hero-proof-rail {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.85rem 1.25rem;
+    gap: 0.8rem 1.4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .hero-proof-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
     font-family: var(--font-tech);
-    font-size: 0.74rem;
+    font-size: 0.76rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--color-text-muted);
+    color: rgba(246, 247, 250, 0.72);
+    opacity: 0;
+    transform: translateX(-16px);
+    animation: hero-proof-in 0.45s ease forwards;
   }
 
-  .hero-trust span {
+  .hero-proof-dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 999px;
+    background: var(--page-accent);
+    box-shadow: 0 0 0 0 rgba(64, 196, 196, 0.32);
+  }
+
+  .hero-media {
     position: relative;
-    padding-left: 0.85rem;
   }
 
-  .hero-trust span::before {
+  .hero-video-frame {
+    position: relative;
+    overflow: hidden;
+    min-height: clamp(24rem, 52vw, 44rem);
+    border: var(--page-thick-border);
+    border-radius: 1.6rem;
+    box-shadow: 0 30px 72px rgba(0, 0, 0, 0.38);
+    clip-path: inset(0 100% 0 0 round 1.6rem);
+    animation: hero-video-reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+  }
+
+  .hero-video-frame::after {
     content: '';
     position: absolute;
-    left: 0;
-    top: 50%;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: var(--color-teal-primary);
-    transform: translateY(-50%);
-  }
-
-  .hero-visual {
-    min-height: clamp(22rem, 48vw, 38rem);
-    overflow: hidden;
-    border-radius: 20px;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(17, 18, 20, 0.05), rgba(17, 18, 20, 0.18));
+    pointer-events: none;
   }
 
   .hero-video {
     width: 100%;
     height: 100%;
-    display: block;
+    min-height: inherit;
     object-fit: cover;
+    display: block;
+  }
+
+  .hero-stats-shell {
+    padding-top: 0.5rem;
   }
 
   .hero-stats {
-    margin-top: 1.5rem;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.9rem;
-  }
-
-  .hero-stat {
-    padding: 1.2rem 1.1rem;
-    display: grid;
-    gap: 0.35rem;
-    background: linear-gradient(135deg, rgba(64, 196, 196, 0.1), rgba(255, 255, 255, 0.96));
-  }
-
-  .hero-stat strong {
-    font-family: var(--font-display);
-    font-size: clamp(1.5rem, 1.1rem + 0.8vw, 2.1rem);
-    font-weight: 400;
-    color: var(--color-text-primary);
-  }
-
-  .hero-stat span {
-    font-family: var(--font-tech);
-    font-size: 0.72rem;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
-  }
-
-  /* ── Services ──────────────────────────────────────── */
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
   }
 
-  .service-card {
+  .hero-stat-card {
     display: grid;
-    grid-template-rows: 14rem auto;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    min-height: 10rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: var(--page-thick-border);
+    border-radius: 1.2rem;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: hero-stat-in 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .hero-stat-card strong {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 1.1rem + 2vw, 3rem);
+    line-height: 0.9;
+    color: #FFFFFF;
+  }
+
+  .hero-stat-card span {
+    font-family: var(--font-tech);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(246, 247, 250, 0.76);
+  }
+
+  .services-shell {
+    display: grid;
+    gap: 1.6rem;
+  }
+
+  .service-module {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    min-height: 420px;
+    background: var(--page-surface);
+    border: 1px solid rgba(17, 18, 20, 0.08);
+    border-radius: 1.4rem;
     overflow: hidden;
+    box-shadow: 0 18px 44px rgba(17, 18, 20, 0.08);
   }
 
-  .service-card__img {
-    overflow: hidden;
-    margin: 0;
+  .service-module--reverse .service-module__media {
+    order: 2;
   }
 
-  .service-card__img img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  .service-module--reverse .service-module__content {
+    order: 1;
   }
 
-  .service-card:hover .service-card__img img {
-    transform: scale(1.04);
-  }
-
-  .service-card__copy {
-    padding: 1.25rem;
-  }
-
-  .service-card__copy h3 {
-    margin: 0 0 0.6rem;
-    font-size: 1.15rem;
-    line-height: 1.15;
-  }
-
-  .service-card__copy p {
-    margin: 0;
-    color: var(--color-text-secondary);
-    line-height: 1.65;
-    font-size: 0.95rem;
-  }
-
-  /* ── Story ─────────────────────────────────────────── */
-  .story-section {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
-    align-items: start;
-  }
-
-  .story-photos {
+  .service-module__media {
     position: relative;
-    min-height: clamp(26rem, 52vw, 42rem);
+    min-height: 100%;
   }
 
-  .story-photo {
-    overflow: hidden;
-    margin: 0;
-  }
-
-  .story-photo img {
+  .service-module__media img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
     display: block;
+  }
+
+  .service-module__content {
+    display: flex;
+    align-items: stretch;
+    min-height: 100%;
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .service-module__text {
+    display: grid;
+    align-content: center;
+    gap: 1rem;
+    width: 100%;
+    padding-left: clamp(1rem, 2vw, 1.6rem);
+    border-left: 2px solid var(--page-accent);
+  }
+
+  .service-module__stakes {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.7rem, 1.1rem + 1.4vw, 2.6rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: var(--page-text);
+  }
+
+  .service-module__body {
+    margin: 0;
+    max-width: 34rem;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: #3F4348;
+  }
+
+  .service-module__bullets {
+    display: grid;
+    gap: 0.7rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .service-module__bullets li {
+    position: relative;
+    padding-left: 1.1rem;
+    font-family: var(--font-body);
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: #34383D;
+  }
+
+  .service-module__bullets li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--page-accent);
+    font-weight: 700;
+  }
+
+  .service-module__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 3.1rem;
+    padding: 0.8rem 1.2rem;
+    border: 2px solid var(--page-accent);
+    background: transparent;
+    color: var(--page-text);
+    font-family: var(--font-tech);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+      transform 0.25s ease,
+      background-color 0.25s ease,
+      color 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  .service-module__cta:hover {
+    transform: translateY(-2px);
+    background: var(--page-accent);
+    color: #0F1112;
+    border-color: var(--page-accent);
+  }
+
+  .origin-shell {
+    display: grid;
+    gap: clamp(2rem, 5vw, 3rem);
+  }
+
+  .origin-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.96fr) minmax(0, 1.04fr);
+    align-items: start;
+    gap: clamp(2rem, 4vw, 4rem);
+  }
+
+  .origin-photo,
+  .origin-inset {
+    overflow: hidden;
+    border: var(--page-thick-border);
+    border-radius: 1.4rem;
+  }
+
+  .origin-photo img,
+  .origin-inset img {
+    display: block;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 
-  .story-photo--main {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    inset: 0;
+  .origin-photo {
+    min-height: clamp(26rem, 52vw, 40rem);
   }
 
-  .story-photo--inset {
-    position: absolute;
-    bottom: -1.5rem;
-    right: -1.5rem;
-    width: 52%;
-    height: 45%;
-    z-index: 2;
-    border: 3px solid var(--color-surface-primary);
-  }
-
-  .story-copy {
+  .origin-copy {
     display: grid;
     gap: 1.2rem;
   }
 
   .proof-list {
-    margin: 0;
-    padding-left: 1.15rem;
     display: grid;
-    gap: 0.75rem;
-    color: var(--color-text-secondary);
-    line-height: 1.65;
-    font-size: 0.95rem;
+    gap: 0.8rem;
+    margin: 0.5rem 0 0;
+    padding: 0;
+    list-style: none;
   }
 
-  .proof-list li::marker {
-    color: var(--color-teal-primary);
+  .proof-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: rgba(246, 247, 250, 0.82);
   }
 
-  /* ── Fabrication Showcase Strip ────────────────────── */
-  .fab-showcase {
-    width: min(calc(100% - 3rem), var(--page-max-width));
-    margin-inline: auto;
+  .proof-dot {
+    width: 0.6rem;
+    height: 0.6rem;
+    margin-top: 0.45rem;
+    border-radius: 999px;
+    background: var(--page-accent);
+    flex-shrink: 0;
+  }
+
+  .origin-inset {
+    width: min(50%, 34rem);
+    margin-left: 0;
+  }
+
+  .deployment-shell {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0.9rem;
-    padding-block: 1rem;
+    gap: 2.5rem;
+    max-width: 760px;
+    text-align: center;
   }
 
-  .fab-showcase__item {
-    overflow: hidden;
+  .deployment-copy {
+    display: grid;
+    gap: 1.2rem;
+    justify-items: center;
+  }
+
+  .deployment-copy .section-body {
+    max-width: 44rem;
+  }
+
+  .deployment-title {
     margin: 0;
-    transition: transform 0.35s ease;
-  }
-
-  .fab-showcase__item:hover {
-    transform: translateY(-3px);
-  }
-
-  .fab-showcase__item img {
-    width: 100%;
-    height: 12rem;
-    display: block;
-    object-fit: cover;
-  }
-
-  .fab-showcase__item figcaption {
-    padding: 0.7rem 0.85rem;
-    font-family: var(--font-tech);
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
-  }
-
-  /* ── Deployment / Race ─────────────────────────────── */
-  .home-race {
-    position: relative;
-    margin-block: clamp(3rem, 5vw, 5rem);
-    padding-block: clamp(4rem, 7vw, 6rem);
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 1.5rem + 4vw, 5rem);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
     color: #FFFFFF;
-    background-image:
-      linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.55)),
-      var(--race-bg);
-    background-position: center;
-    background-size: cover;
   }
 
-  .race-inner {
-    width: min(calc(100% - 3rem), var(--page-max-width));
-    margin-inline: auto;
+  .word-reveal {
+    display: inline-block;
+    margin-right: 0.22em;
+    opacity: 0;
+    transform: translateY(18px);
+    clip-path: inset(0 0 100% 0);
+    transition:
+      opacity 0.65s ease,
+      transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+      clip-path 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .word-reveal.revealed {
+    opacity: 1;
+    transform: none;
+    clip-path: inset(0 0 0 0);
+  }
+
+  .deployment-strip {
     display: grid;
-    gap: 2rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    width: min(100%, 1100px);
+    margin-inline: auto;
   }
 
-  .race-copy {
+  .deployment-card {
+    display: grid;
+    gap: 0.8rem;
+    margin: 0;
+  }
+
+  .deployment-card__media {
+    overflow: hidden;
+    border: var(--page-thick-border);
+    border-radius: 1.2rem;
+  }
+
+  .deployment-card__media img {
+    width: 100%;
+    height: clamp(15rem, 24vw, 18rem);
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .deployment-card:hover .deployment-card__media img {
+    transform: scale(1.04);
+  }
+
+  .deployment-card figcaption {
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(246, 247, 250, 0.72);
+  }
+
+  .work-shell {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .work-band {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    gap: 1.2rem;
+    padding: clamp(1.6rem, 3vw, 2.4rem);
+    background: #FFFFFF;
+    border: 1px solid rgba(17, 18, 20, 0.08);
+    border-radius: 1.25rem;
+    box-shadow: 0 14px 36px rgba(17, 18, 20, 0.06);
+  }
+
+  .work-band:nth-child(2) {
+    border-left: 6px solid var(--page-accent);
+  }
+
+  .work-band--featured {
+    min-height: 23rem;
+    background: var(--page-bg-dark);
+    color: #F6F7FA;
+    border-top: 2px solid var(--page-accent);
+    border-left: none;
+  }
+
+  .work-band--featured.revealed {
+    animation: patron-glow 0.6s ease 1;
+  }
+
+  .work-band__image {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: min(38%, 22rem);
+    opacity: 0.18;
+    pointer-events: none;
+  }
+
+  .work-band__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .work-band__content {
+    position: relative;
+    z-index: 1;
     display: grid;
     gap: 1rem;
     max-width: 52rem;
   }
 
-  .race-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.85rem;
-    margin-top: 0.5rem;
-  }
-
-  .eyebrow-light { color: rgba(255, 255, 255, 0.82); }
-  .eyebrow-light::before { background: rgba(255, 255, 255, 0.6); }
-  .race-body { color: rgba(255, 255, 255, 0.88); }
-
-  .race-photo-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0.9rem;
-  }
-
-  .race-photo-card {
-    overflow: hidden;
-    border-radius: var(--radius-lg);
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    min-height: 12rem;
-  }
-
-  .race-photo-card img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-  }
-
-  /* ── Tiers ─────────────────────────────────────────── */
-  .tiers-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
-  }
-
-  .tier-card {
-    display: grid;
-    gap: 0.85rem;
-    padding: 1.5rem;
-    align-content: start;
-  }
-
-  .tier-card--featured {
-    border-color: var(--color-teal-primary);
-    box-shadow: 0 0 0 1px var(--color-teal-primary), var(--shadow-card);
-  }
-
-  .tier-card h3 {
+  .work-band__label {
     margin: 0;
-    font-size: 1.25rem;
-    line-height: 1.15;
+    font-family: var(--font-display);
+    font-size: clamp(1.7rem, 1.1rem + 1.5vw, 2.6rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
   }
 
-  .tier-intro {
-    font-weight: 600;
-    color: var(--color-text-primary);
-    margin: 0;
-    line-height: 1.5;
-  }
-
-  .tier-body {
-    margin: 0;
-    color: var(--color-text-secondary);
-    line-height: 1.65;
-    font-size: 0.95rem;
-  }
-
-  .tier-cta {
-    justify-self: start;
-    margin-top: auto;
-    padding: 10px 20px;
-    font-size: 0.82rem;
-  }
-
-  .tier-card p {
-    margin: 0;
-  }
-
-  .tier-partnership {
+  .work-band__meta {
     display: grid;
-    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
-    gap: 0;
-    overflow: hidden;
+    gap: 0.75rem;
   }
 
-  .tier-partnership__photo {
-    min-height: 100%;
-  }
-
-  .tier-partnership__photo img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-  }
-
-  .tier-partnership__copy {
-    padding: 1.5rem;
-    display: grid;
-    gap: 0.95rem;
-    align-content: center;
-  }
-
-  .tier-partnership__copy h3 {
-    margin: 0 0 0.5rem;
-    font-size: 1.15rem;
-  }
-
-  .tier-partnership__copy p {
+  .work-band__meta p {
     margin: 0;
-    color: var(--color-text-secondary);
-    line-height: 1.65;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: inherit;
+    max-width: 48rem;
   }
 
-  /* ── Open Source ────────────────────────────────────── */
-  .open-source-grid {
-    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  .work-band__meta span {
+    font-family: var(--font-tech);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--page-accent);
+  }
+
+  .work-band__cta {
+    width: fit-content;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding: 0.9rem 1.3rem;
+    border: 2px solid var(--page-accent);
+    color: var(--page-text);
+    font-family: var(--font-tech);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    background: transparent;
+  }
+
+  .work-band__cta:hover {
+    background: var(--page-accent);
+    color: #0F1112;
+  }
+
+  .work-band__cta--featured {
+    background: var(--page-accent);
+    color: #0F1112;
+    min-height: 3.4rem;
+    padding-inline: 1.6rem;
+    box-shadow: 0 16px 36px rgba(64, 196, 196, 0.22);
+  }
+
+  .partner-band {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1.5rem clamp(1.4rem, 3vw, 2.2rem);
+    background: var(--page-accent);
+    color: #FFFFFF;
+    border-radius: 1.2rem;
+  }
+
+  .partner-band__label {
+    margin: 0 0 0.4rem;
+    font-family: var(--font-tech);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .partner-band__body {
+    margin: 0;
+    max-width: 44rem;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .partner-band__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding: 0.9rem 1.3rem;
+    background: #FFFFFF;
+    color: #111214;
+    border: 2px solid #FFFFFF;
+    font-family: var(--font-tech);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .partner-band__cta:hover {
+    background: transparent;
+    color: #FFFFFF;
+  }
+
+  .open-build-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+    gap: clamp(2rem, 4vw, 4rem);
     align-items: start;
   }
 
-  .open-source-copy,
-  .open-source-media {
+  .open-build-copy {
     display: grid;
     gap: 1.2rem;
   }
 
-  .open-source-photo {
-    min-height: 22rem;
+  .resource-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .resource-card {
+    position: relative;
     overflow: hidden;
-  }
-
-  .open-source-photo img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-  }
-
-  .open-source-links {
     display: grid;
-    gap: 0.9rem;
+    gap: 0.85rem;
+    padding: 1.6rem;
+    min-height: 12rem;
+    border-radius: 1.2rem;
+    border: 1px solid rgba(17, 18, 20, 0.1);
+    background: #FFFFFF;
+    color: var(--page-text);
+    box-shadow: 0 16px 40px rgba(17, 18, 20, 0.08);
   }
 
-  .open-source-link {
-    display: grid;
-    gap: 0.45rem;
-    color: inherit;
-    padding: 1.25rem;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  .resource-card--photo {
+    background:
+      linear-gradient(180deg, rgba(17, 18, 20, 0.2), rgba(17, 18, 20, 0.52)),
+      var(--resource-image) center / cover no-repeat;
+    color: #FFFFFF;
+    border-color: rgba(255, 255, 255, 0.1);
   }
 
-  .open-source-link:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-card-hover);
+  .resource-card--dark {
+    background: var(--page-bg-dark);
+    color: #F6F7FA;
+    border-color: rgba(64, 196, 196, 0.22);
   }
 
-  .open-source-link strong {
-    font-family: var(--font-tech);
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-magenta-primary);
+  .resource-card__label {
+    font-family: var(--font-display);
+    font-size: clamp(1.55rem, 1.1rem + 0.9vw, 2.2rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
   }
 
-  .open-source-link span {
+  .resource-card p {
     margin: 0;
-    color: var(--color-text-secondary);
-    line-height: 1.6;
-    font-size: 0.92rem;
+    max-width: 34rem;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: inherit;
   }
 
-  /* ── Partners ──────────────────────────────────────── */
-  .partners-section {
-    padding: clamp(2.6rem, 4vw, 3.5rem);
-    border-radius: 20px;
-    background-image:
-      linear-gradient(rgba(246, 247, 250, 0.92), rgba(246, 247, 250, 0.92)),
-      url('/media/real/fleet-aerial.jpg');
-    background-position: center;
-    background-size: cover;
+  .resource-card__link {
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
+    color: var(--page-accent);
   }
 
-  .partners-grid {
+  .partners-shell {
+    display: grid;
+  }
+
+  .partner-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1rem;
   }
 
   .partner-card {
-    padding: 1.35rem;
-  }
-
-  .partner-card h3 {
-    margin: 0 0 0.75rem;
-    font-size: 1.1rem;
-    line-height: 1.2;
-  }
-
-  .partner-card p {
-    margin: 0;
-    color: var(--color-text-secondary);
-    line-height: 1.65;
-    font-size: 0.93rem;
-  }
-
-  /* ── CTA Band ──────────────────────────────────────── */
-  .home-cta-band {
-    margin-top: clamp(3rem, 5vw, 5rem);
-    padding-block: clamp(4rem, 7vw, 5.5rem);
-    color: #FFFFFF;
-    background-image:
-      linear-gradient(rgba(64, 196, 196, 0.92), rgba(64, 196, 196, 0.92)),
-      var(--cta-bg);
-    background-position: center;
-    background-size: cover;
-  }
-
-  .home-cta-band__inner {
-    width: min(calc(100% - 3rem), var(--page-max-width));
-    margin-inline: auto;
+    overflow: hidden;
     display: grid;
-    gap: 1.4rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(64, 196, 196, 0.2);
+    border-radius: 1.2rem;
+    min-height: 100%;
   }
 
-  .home-cta-band__copy {
+  .partner-card__media {
+    position: relative;
+    min-height: 16rem;
+  }
+
+  .partner-card__media img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .partner-card__media--overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(17, 18, 20, 0.48);
+  }
+
+  .partner-card__body {
     display: grid;
     gap: 1rem;
-    max-width: 48rem;
+    padding: 1.5rem;
   }
 
-  .home-cta-band p { color: rgba(255, 255, 255, 0.9); }
+  .partner-card__body h3 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    line-height: 1;
+    color: #FFFFFF;
+    letter-spacing: -0.03em;
+  }
 
-  .home-cta-band__actions {
+  .partner-card__body p {
+    margin: 0;
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: rgba(246, 247, 250, 0.78);
+  }
+
+  .partner-card__cta {
+    width: fit-content;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding: 0.85rem 1.25rem;
+    border: 2px solid var(--page-accent);
+    color: #FFFFFF;
+    font-family: var(--font-tech);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .partner-card__cta:hover {
+    background: var(--page-accent);
+    color: #0F1112;
+  }
+
+  .final-cta-shell {
+    display: grid;
+    place-items: center;
+  }
+
+  .final-cta-copy {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 1.2rem;
+    max-width: 640px;
+    text-align: center;
+  }
+
+  .final-cta-actions {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .final-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3.2rem;
+    padding: 0.9rem 1.35rem;
+    font-family: var(--font-tech);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    border: 2px solid transparent;
+    transition:
+      transform 0.25s ease,
+      background-color 0.25s ease,
+      color 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  .final-cta-button:hover {
+    transform: translateY(-2px);
+  }
+
+  .final-cta-button--light {
+    background: #FFFFFF;
+    color: #111214;
+  }
+
+  .final-cta-button--ghost {
+    border-color: #FFFFFF;
+    color: #FFFFFF;
+    background: transparent;
+  }
+
+  .final-cta-button--ghost:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 120;
+  }
+
+  .drawer__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(17, 18, 20, 0.58);
+    backdrop-filter: blur(4px);
+  }
+
+  .drawer__panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    width: min(350px, 100vw);
+    height: 100%;
+    padding: 1.25rem 1.1rem 1.4rem;
+    background: var(--page-bg-dark);
+    border-left: 2px solid var(--page-accent);
+    box-shadow: -20px 0 48px rgba(0, 0, 0, 0.3);
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .drawer[data-open='true'] .drawer__panel {
+    transform: translateX(0);
+  }
+
+  .drawer__close {
+    align-self: flex-end;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid rgba(64, 196, 196, 0.28);
+    background: transparent;
+    color: #FFFFFF;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+
+  .drawer__content {
+    overflow-y: auto;
+    padding-right: 0.2rem;
+  }
+
+  .drawer-copy {
+    display: grid;
+    gap: 1rem;
+    color: #F6F7FA;
+  }
+
+  .drawer-copy__eyebrow {
+    margin: 0;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(246, 247, 250, 0.58);
+  }
+
+  .drawer-copy__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 2rem;
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    color: #FFFFFF;
+  }
+
+  .drawer-copy__stakes {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(246, 247, 250, 0.82);
+  }
+
+  .drawer-copy__gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .drawer-copy__gallery figure {
+    margin: 0;
+    overflow: hidden;
+    border-radius: 0.9rem;
+    border: 1px solid rgba(64, 196, 196, 0.18);
+  }
+
+  .drawer-copy__gallery img {
+    display: block;
+    width: 100%;
+    height: 6.6rem;
+    object-fit: cover;
+  }
+
+  .drawer-copy__notes {
+    display: grid;
     gap: 0.9rem;
   }
 
-  .home-cta-band__primary {
-    background: #FFFFFF;
-    color: var(--color-text-primary);
-    box-shadow: none;
+  .drawer-copy__notes div {
+    padding-top: 0.9rem;
+    border-top: 1px solid rgba(64, 196, 196, 0.18);
   }
 
-  .home-cta-band__primary:hover {
-    background: rgba(255, 255, 255, 0.9);
-    color: var(--color-text-primary);
+  .drawer-copy__notes span {
+    display: inline-block;
+    margin-bottom: 0.45rem;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--page-accent);
   }
 
-  .home-cta-band__secondary {
-    color: #FFFFFF;
-    border-color: rgba(255, 255, 255, 0.76);
+  .drawer-copy__notes p {
+    margin: 0;
+    font-size: 0.96rem;
+    line-height: 1.7;
+    color: rgba(246, 247, 250, 0.82);
   }
 
-  .home-cta-band__secondary:hover {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: #FFFFFF;
-    color: #FFFFFF;
+  .drawer-copy__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    margin-top: 0.4rem;
+    padding: 0.9rem 1.2rem;
+    background: var(--page-accent);
+    color: #0F1112;
+    font-family: var(--font-tech);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
   }
 
-  /* ── Responsive ────────────────────────────────────── */
-  @media (max-width: 1100px) {
-    .services-grid,
-    .race-photo-grid,
-    .tiers-grid,
-    .partners-grid,
-    .fab-showcase {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+  .drawer-copy__cta:hover {
+    color: #0F1112;
+    background: #53D3D3;
+  }
+
+  .reveal-fade {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .reveal-up {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.65s, transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.65s, transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal-right {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.65s, transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal-scale {
+    opacity: 0;
+    transform: scale(0.96);
+    transition: opacity 0.6s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .revealed {
+    opacity: 1;
+    transform: none;
+  }
+
+  .delay-1 {
+    transition-delay: 0.1s;
+  }
+
+  .delay-2 {
+    transition-delay: 0.2s;
+  }
+
+  .delay-3 {
+    transition-delay: 0.3s;
+  }
+
+  .delay-4 {
+    transition-delay: 0.4s;
+  }
+
+  .delay-5 {
+    transition-delay: 0.5s;
+  }
+
+  .mask-wipe {
+    opacity: 0;
+    transition:
+      opacity 0.8s ease,
+      clip-path 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .mask-wipe-left {
+    clip-path: inset(0 100% 0 0 round 1.4rem);
+  }
+
+  .mask-wipe-right {
+    clip-path: inset(0 0 0 100% round 1.4rem);
+  }
+
+  .mask-wipe.revealed {
+    opacity: 1;
+    clip-path: inset(0 0 0 0 round 1.4rem);
+  }
+
+  @keyframes hero-line-in {
+    from {
+      opacity: 0;
+      transform: translateY(48px);
     }
 
-    .hero-grid,
-    .story-section,
-    .open-source-grid,
-    .tier-partnership {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes hero-proof-in {
+    from {
+      opacity: 0;
+      transform: translateX(-16px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes hero-video-reveal {
+    from {
+      opacity: 0.2;
+      clip-path: inset(0 100% 0 0 round 1.6rem);
+    }
+
+    to {
+      opacity: 1;
+      clip-path: inset(0 0 0 0 round 1.6rem);
+    }
+  }
+
+  @keyframes hero-stat-in {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes patron-glow {
+    0% {
+      box-shadow: 0 0 0 rgba(64, 196, 196, 0);
+    }
+
+    50% {
+      box-shadow: 0 0 0 6px rgba(64, 196, 196, 0.16);
+    }
+
+    100% {
+      box-shadow: 0 0 0 rgba(64, 196, 196, 0);
+    }
+  }
+
+  @media (max-width: 1120px) {
+    .hero-shell,
+    .origin-grid,
+    .open-build-shell {
       grid-template-columns: 1fr;
     }
 
-    .story-photos {
-      min-height: 22rem;
+    .hero-stats,
+    .partner-grid {
+      grid-template-columns: 1fr;
     }
 
-    .story-photo--inset {
-      bottom: -1rem;
-      right: -1rem;
-      width: 48%;
+    .service-module {
+      grid-template-columns: 1fr;
+    }
+
+    .service-module--reverse .service-module__media,
+    .service-module--reverse .service-module__content {
+      order: initial;
+    }
+
+    .service-module__media {
+      min-height: 18rem;
+    }
+
+    .origin-inset {
+      width: min(75%, 34rem);
+    }
+
+    .deployment-strip {
+      grid-template-columns: 1fr;
+    }
+
+    .partner-band {
+      grid-template-columns: 1fr;
     }
   }
 
-  @media (max-width: 820px) {
+  @media (max-width: 768px) {
+    .home-section {
+      padding-block: 4rem;
+    }
+
     .home-hero {
-      padding-top: 1.25rem;
+      min-height: auto;
     }
 
-    .hero-grid,
-    .race-photo-grid {
-      grid-template-columns: 1fr;
+    .hero-shell {
+      gap: 1.6rem;
+    }
+
+    .hero-video-frame {
+      min-height: auto;
+      aspect-ratio: 16 / 9;
+      border-radius: 1rem;
     }
 
     .hero-stats {
       grid-template-columns: 1fr;
     }
 
-    .open-source-links {
-      grid-template-columns: 1fr;
+    .origin-photo {
+      min-height: 20rem;
+    }
+
+    .origin-inset {
+      width: 100%;
+    }
+
+    .deployment-strip {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(15rem, 82%);
+      overflow-x: auto;
+      padding-bottom: 0.4rem;
+      scroll-snap-type: x proximity;
+    }
+
+    .deployment-card {
+      scroll-snap-align: start;
+    }
+
+    .work-band__image {
+      width: 100%;
+      opacity: 0.14;
+    }
+
+    .resource-card {
+      min-height: 10rem;
+    }
+
+    .drawer__panel {
+      top: auto;
+      bottom: 0;
+      width: 100%;
+      height: min(80vh, 42rem);
+      border-left: none;
+      border-top: 2px solid var(--page-accent);
+      transform: translateY(100%);
+    }
+
+    .drawer[data-open='true'] .drawer__panel {
+      transform: translateY(0);
+    }
+
+    .drawer-copy__gallery {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
-  @media (max-width: 560px) {
-    .services-grid,
-    .tiers-grid,
-    .partners-grid {
-      grid-template-columns: 1fr;
+  @media (prefers-reduced-motion: reduce) {
+    .hero-eyebrow,
+    .hero-line,
+    .hero-subhead,
+    .hero-actions,
+    .hero-proof-item,
+    .hero-video-frame,
+    .hero-stat-card {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+      clip-path: inset(0 0 0 0 round 1.4rem) !important;
     }
 
-    .fab-showcase {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .service-card {
-      grid-template-rows: 11rem auto;
-    }
-
-    .fab-showcase__item img {
-      height: 10rem;
-    }
-
-    .story-photo--inset {
-      position: relative;
-      bottom: auto;
-      right: auto;
-      width: 100%;
-      height: 14rem;
-      border: none;
-      margin-top: 0.75rem;
-    }
-
-    .story-photos {
-      min-height: auto;
-      display: grid;
-      gap: 0;
-    }
-
-    .story-photo--main {
-      position: relative;
-      min-height: 18rem;
+    .section-bg,
+    .reveal-fade,
+    .reveal-up,
+    .reveal-left,
+    .reveal-right,
+    .reveal-scale,
+    .mask-wipe,
+    .word-reveal {
+      transition: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+      clip-path: inset(0 0 0 0 round 1.4rem) !important;
     }
   }
 </style>
-
-<script>
-  // Scroll-triggered reveal animation
-  (() => {
-    const reveals = Array.from(document.querySelectorAll('.reveal'));
-    if (!reveals.length) return;
-
-    const revealInRange = () => {
-      const limit = window.innerHeight + 300;
-      reveals.forEach((el) => {
-        if (!el.classList.contains('revealed') && el.getBoundingClientRect().top < limit) {
-          el.classList.add('revealed');
-        }
-      });
-    };
-
-    // Run on load, scroll, and resize
-    revealInRange();
-    window.addEventListener('scroll', revealInRange, { passive: true });
-    window.addEventListener('resize', revealInRange, { passive: true });
-  })();
-</script>

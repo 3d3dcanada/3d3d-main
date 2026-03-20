@@ -17,9 +17,9 @@ const navLinks = [
 ];
 
 const legalLinks = [
-  { label: 'Privacy Policy', href: '/privacy' },
-  { label: 'Terms of Service', href: '/terms' },
-  { label: 'CASL Compliance', href: '/casl' },
+  { label: 'Privacy', href: '/privacy' },
+  { label: 'Terms', href: '/terms' },
+  { label: 'CASL', href: '/casl' },
   { label: 'Accessibility', href: '/accessibility' },
 ];
 
@@ -69,71 +69,25 @@ const socialLinks = [
 ];
 ---
 
-<footer
-  class="relative mt-16"
-  style={`
-    background: linear-gradient(180deg, var(--color-surface-primary), var(--color-surface-secondary));
-    border-top: 2px solid var(--color-border-default);
-  `}
->
-  {/* Organic wave divider at top */}
-  <div
-    class="absolute -top-[58px] left-0 right-0 h-[60px]"
-    style="
-      background: var(--color-surface-secondary);
-      -webkit-mask-image: url('data:image/svg+xml,%3Csvg viewBox=%270 0 1200 60%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cpath d=%27M0,30 Q300,60 600,30 T1200,30 L1200,60 L0,60 Z%27 fill=%27white%27/%3E%3C/svg%3E');
-      mask-image: url('data:image/svg+xml,%3Csvg viewBox=%270 0 1200 60%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cpath d=%27M0,30 Q300,60 600,30 T1200,30 L1200,60 L0,60 Z%27 fill=%27white%27/%3E%3C/svg%3E');
-      -webkit-mask-size: cover;
-      mask-size: cover;
-    "
-  />
-
-  <div class="mx-auto max-w-5xl px-6 py-12 lg:px-8">
-    <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
-      {/* Business info */}
+<footer class="site-footer" style={`--footer-accent: ${accent};`}>
+  <div class="site-footer__inner">
+    <div class="site-footer__grid">
       {showCooperativeInfo && (
-      	<div class="lg:col-span-2">
-      		<h3
-      			class="font-display text-xl font-bold"
-      			style={`color: var(--color-teal-dark);`}
-      		>
-      			3D3D
-      		</h3>
-      		<p
-      			class="mt-3 text-base leading-relaxed"
-      			style="color: var(--color-text-secondary);"
-      		>
-      			Precision 3D printing, marine-grade fabrication, and field-ready production. Based in Fredericton, NB.
-      		</p>
-          <div
-            class="mt-4 space-y-2 font-display text-sm"
-            style="color: var(--color-text-secondary);"
-          >
-            <p>Fredericton, NB, Canada</p>
-            <p>
-              <a
-                href="tel:+15069532678"
-                class="font-medium transition-colors duration-150"
-                style={`color: ${accent};`}
-              >
-                506-953-2678
-              </a>
-            </p>
-            <p>
-              <a
-                href="mailto:info@3d3d.ca"
-                class="font-medium transition-colors duration-150"
-                style={`color: ${accent};`}
-              >
-                info@3d3d.ca
-              </a>
-            </p>
+        <div class="site-footer__brand">
+          <h2>3D3D</h2>
+          <p class="site-footer__tagline">
+            Precision fabrication for marine, automotive, and field deployment. Founder-operated. Fredericton, NB.
+          </p>
+
+          <div class="site-footer__contact">
+            <a href="tel:+15069532678">506-953-2678</a>
+            <a href="mailto:info@3d3d.ca">info@3d3d.ca</a>
           </div>
-          <div class="footer-socials" aria-label="3D3D social links">
+
+          <div class="site-footer__socials" aria-label="3D3D social links">
             {socialLinks.map((link) => (
               <a
                 href={link.href}
-                class="footer-social"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={link.label}
@@ -149,106 +103,196 @@ const socialLinks = [
         </div>
       )}
 
-      {/* Navigation */}
-      <div>
-        <h4
-          class="font-display text-xs font-semibold uppercase tracking-wider"
-          style="color: var(--color-text-muted);"
-        >
-          Navigate
-        </h4>
-        <ul class="mt-3 space-y-3">
+      <nav class="site-footer__column" aria-label="Navigate">
+        <p class="site-footer__heading">Navigate</p>
+        <ul>
           {navLinks.map((link) => (
             <li>
-              <a
-                href={link.href}
-                class="text-sm font-medium transition-colors duration-150 hover:underline"
-                style="color: var(--color-text-secondary);"
-              >
-                {link.label}
-              </a>
+              <a href={link.href}>{link.label}</a>
             </li>
           ))}
         </ul>
-      </div>
+      </nav>
 
-      {/* Legal */}
-      <div>
-        <h4
-          class="font-display text-xs font-semibold uppercase tracking-wider"
-          style="color: var(--color-text-muted);"
-        >
-          Legal
-        </h4>
-        <ul class="mt-3 space-y-3">
+      <nav class="site-footer__column" aria-label="Legal">
+        <p class="site-footer__heading">Legal</p>
+        <ul>
           {legalLinks.map((link) => (
             <li>
-              <a
-                href={link.href}
-                class="text-sm font-medium transition-colors duration-150 hover:underline"
-                style="color: var(--color-text-secondary);"
-              >
-                {link.label}
-              </a>
+              <a href={link.href}>{link.label}</a>
             </li>
           ))}
         </ul>
-      </div>
+      </nav>
     </div>
 
-    {/* Bottom bar */}
-    <div
-      class="mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
-      style="border-top: 1px solid var(--color-border-subtle);"
-    >
-      <p
-      	class="font-display text-xs font-medium"
-      	style="color: var(--color-text-muted);"
-      >
-      	&copy; {new Date().getFullYear()} 3D3D. Fredericton, NB.
-      </p>
-      <p
-        class="font-display text-xs"
-        style="color: var(--color-text-muted);"
-      >
-        Materials: PLA &middot; PETG &middot; TPU &middot; ABS &middot; ASA
-      </p>
+    <div class="site-footer__bottom">
+      <p>© 2026 3D3D. Founder-operated fabrication for marine, motorsport, and field deployment. Fredericton, NB.</p>
     </div>
   </div>
 </footer>
 
 <style>
-  .footer-socials {
+  .site-footer {
+    margin-top: 0;
+    background:
+      radial-gradient(circle at top right, rgba(232, 74, 138, 0.12), transparent 28%),
+      linear-gradient(180deg, #111214 0%, #0B0C0D 100%);
+    border-top: 2px solid var(--footer-accent);
+    color: #F6F7FA;
+  }
+
+  .site-footer__inner {
+    width: min(calc(100% - 3rem), 1320px);
+    margin: 0 auto;
+    padding: clamp(3rem, 5vw, 4.5rem) 0 1.5rem;
+  }
+
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .site-footer__brand {
+    display: grid;
+    gap: 1rem;
+    padding-right: 2rem;
+  }
+
+  .site-footer__brand h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 1.1rem + 1.5vw, 3rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: #FFFFFF;
+  }
+
+  .site-footer__tagline {
+    margin: 0;
+    max-width: 34rem;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(246, 247, 250, 0.76);
+  }
+
+  .site-footer__contact {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.65rem;
-    margin-top: 1rem;
+    gap: 0.8rem 1.2rem;
   }
 
-  .footer-social {
+  .site-footer__contact a {
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    color: var(--footer-accent);
+  }
+
+  .site-footer__contact a:hover,
+  .site-footer__column a:hover,
+  .site-footer__socials a:hover {
+    color: #FFFFFF;
+  }
+
+  .site-footer__socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .site-footer__socials a {
     display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
-    padding: 0.55rem 0.8rem;
+    gap: 0.5rem;
+    min-height: 2.5rem;
+    padding: 0.6rem 0.9rem;
+    border: 1px solid rgba(64, 196, 196, 0.22);
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.7);
-    box-shadow: inset 0 0 0 1px rgba(64, 196, 196, 0.18);
-    color: var(--color-text-primary);
-    font-family: var(--font-display);
-    font-size: 0.82rem;
-    font-weight: 600;
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(246, 247, 250, 0.84);
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
 
-  .footer-social:hover {
-    color: var(--color-text-primary);
-    background: rgba(255, 255, 255, 0.94);
-    transform: translateY(-1px);
-  }
-
-  .footer-social svg {
-    width: 1rem;
-    height: 1rem;
-    color: var(--color-teal-dark);
+  .site-footer__socials svg {
+    width: 0.95rem;
+    height: 0.95rem;
+    color: var(--footer-accent);
     flex-shrink: 0;
   }
- </style>
+
+  .site-footer__column {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .site-footer__heading {
+    margin: 0;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(246, 247, 250, 0.58);
+  }
+
+  .site-footer__column ul {
+    display: grid;
+    gap: 0.8rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .site-footer__column a {
+    font-size: 0.98rem;
+    line-height: 1.5;
+    color: rgba(246, 247, 250, 0.84);
+  }
+
+  .site-footer__bottom {
+    margin-top: 2.25rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid rgba(64, 196, 196, 0.16);
+  }
+
+  .site-footer__bottom p {
+    margin: 0;
+    font-family: var(--font-tech);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(246, 247, 250, 0.6);
+  }
+
+  @media (max-width: 900px) {
+    .site-footer__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .site-footer__brand {
+      padding-right: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .site-footer__inner {
+      width: min(calc(100% - 1.5rem), 1320px);
+    }
+
+    .site-footer__socials a {
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+    }
+
+    .site-footer__bottom p {
+      line-height: 1.6;
+    }
+  }
+</style>

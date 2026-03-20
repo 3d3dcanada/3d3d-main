@@ -532,8 +532,8 @@ const blogSubjects = [
   .reveal {
     opacity: 0;
     transform: translateY(28px);
-    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .reveal.revealed {
@@ -541,9 +541,9 @@ const blogSubjects = [
     transform: translateY(0);
   }
 
-  .reveal-delay-1 { transition-delay: 0.12s; }
-  .reveal-delay-2 { transition-delay: 0.24s; }
-  .reveal-delay-3 { transition-delay: 0.36s; }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
 
   /* ── Shared Section Styles ────────────────────────── */
   .home-section {
@@ -1209,18 +1209,21 @@ const blogSubjects = [
 <script>
   // Scroll-triggered reveal animation
   (() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0, rootMargin: '0px 0px 200px 0px' }
-    );
+    const reveals = Array.from(document.querySelectorAll('.reveal'));
+    if (!reveals.length) return;
 
-    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    const revealInRange = () => {
+      const limit = window.innerHeight + 300;
+      reveals.forEach((el) => {
+        if (!el.classList.contains('revealed') && el.getBoundingClientRect().top < limit) {
+          el.classList.add('revealed');
+        }
+      });
+    };
+
+    // Run on load, scroll, and resize
+    revealInRange();
+    window.addEventListener('scroll', revealInRange, { passive: true });
+    window.addEventListener('resize', revealInRange, { passive: true });
   })();
 </script>

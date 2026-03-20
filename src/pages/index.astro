@@ -705,7 +705,16 @@ const partners = [
         });
       };
 
-      updateVisibleState();
+      const scheduleInitialChecks = () => {
+        updateVisibleState();
+        window.requestAnimationFrame(updateVisibleState);
+        window.setTimeout(updateVisibleState, 120);
+        window.setTimeout(updateVisibleState, 320);
+      };
+
+      scheduleInitialChecks();
+      window.addEventListener('load', scheduleInitialChecks);
+      window.addEventListener('hashchange', scheduleInitialChecks);
       window.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('resize', onScroll);
     })();
@@ -822,6 +831,7 @@ const partners = [
     position: relative;
     overflow: clip;
     padding-block: clamp(4.5rem, 8vw, 8rem);
+    scroll-margin-top: 1rem;
   }
 
   .home-section--light {
@@ -845,11 +855,20 @@ const partners = [
     content: '';
     position: absolute;
     inset: 0;
-    background: var(--page-bg-light);
     transform-origin: top;
     transform: scaleY(1);
     transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 0;
+  }
+
+  .home-section--dark[data-reveal-section]::before {
+    background:
+      linear-gradient(180deg, rgba(64, 196, 196, 0.16) 0%, rgba(17, 18, 20, 0.98) 18%, rgba(17, 18, 20, 1) 100%),
+      var(--page-bg-dark);
+  }
+
+  .home-section--teal[data-reveal-section]::before {
+    background: linear-gradient(180deg, #69D8D8 0%, #40C4C4 100%);
   }
 
   .home-section--dark.revealed-section::before,
@@ -978,13 +997,17 @@ const partners = [
 
   .hero-subhead {
     margin: 0;
-    max-width: 40rem;
-    font-size: clamp(1.02rem, 0.94rem + 0.3vw, 1.18rem);
+    max-width: 43rem;
+    font-size: clamp(1.08rem, 0.98rem + 0.45vw, 1.28rem);
     line-height: 1.8;
     color: rgba(246, 247, 250, 0.8);
     opacity: 0;
     transform: translateY(28px);
     animation: hero-line-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+  }
+
+  .services-section {
+    padding-top: clamp(1.75rem, 3.2vw, 3rem);
   }
 
   .hero-actions {
@@ -2122,12 +2145,21 @@ const partners = [
       padding-block: 4rem;
     }
 
+    .services-section {
+      padding-top: 1.25rem;
+    }
+
     .home-hero {
       min-height: auto;
+      padding-top: 4.25rem;
     }
 
     .hero-shell {
       gap: 1.6rem;
+    }
+
+    .hero-copy {
+      gap: 1.15rem;
     }
 
     .hero-video-frame {

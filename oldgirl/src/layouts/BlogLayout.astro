@@ -5,23 +5,26 @@ interface Props {
   title: string;
   description: string;
   author?: string;
-  datePublished: string;
+  datePublished?: string;
   dateModified?: string;
   image?: string;
   accent?: string;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
   title,
   description,
   author = 'Ken',
-  datePublished,
-  dateModified = datePublished,
+  datePublished = '',
+  dateModified,
   image,
   accent = '#00C4CC',
+  schema: providedSchema,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+const resolvedDateModified = dateModified ?? datePublished;
 
 const articleSchema = {
   '@context': 'https://schema.org',
@@ -30,7 +33,7 @@ const articleSchema = {
   description,
   author: { '@type': 'Person', name: author },
   datePublished,
-  dateModified,
+  dateModified: resolvedDateModified,
   publisher: {
     '@type': 'Organization',
     name: '3D3D Atlantic Cooperative',
@@ -39,6 +42,8 @@ const articleSchema = {
   mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalURL },
   ...(image ? { image: { '@type': 'ImageObject', url: image } } : {}),
 };
+
+const finalSchema = providedSchema ?? articleSchema;
 ---
 
 <BaseLayout
@@ -47,7 +52,7 @@ const articleSchema = {
   canonicalURL={canonicalURL}
   ogType="article"
   ogImage={image}
-  schema={articleSchema}
+  schema={finalSchema}
   accent={accent}
 >
   <article class="mx-auto max-w-3xl px-6 pt-16 pb-20 lg:px-8" itemscope itemtype="https://schema.org/Article">

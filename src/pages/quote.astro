@@ -5,32 +5,92 @@ import QuoteCalculator from '../components/QuoteCalculator.tsx';
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'WebApplication',
-  name: '3D3D Quote Calculator',
-  description: 'Get instant pricing for custom 3D printed parts. Adjust material, quality, infill, supports, and more.',
+  name: '3D3D Quote Request',
+  description: 'Upload files, describe your part, and send a structured custom 3D printing request to 3D3D.',
   url: 'https://3d3d.ca/quote',
   applicationCategory: 'BusinessApplication',
 };
 ---
 
-<BaseLayout title="Quote Calculator — 3D3D" description="Instant pricing for custom 3D prints. Configure material, quality, infill, supports, scale, and quantity." schema={schema} activePath="/quote">
+<BaseLayout title="Get a Quote — 3D3D" description="Request a custom 3D print quote. Upload your design or describe what you need." schema={schema} activePath="/quote">
+  <section class="page-section">
+    <div class="surface-panel quote-page-intro">
+      <div>
+        <span class="eyebrow">Custom print intake</span>
+        <h1 class="quote-page-intro__title">Request a quote without fighting a calculator first.</h1>
+        <p class="quote-page-intro__copy">
+          The new flow captures your files, notes, quantities, location, and deadline before diving
+          into advanced print settings. If you know the technical details, the optional planning
+          estimate is still here.
+        </p>
+      </div>
+      <div class="quote-page-intro__meta">
+        <div>
+          <strong>Upload support</strong>
+          <span>STL, 3MF, STEP, STP, OBJ, PDF, and image files.</span>
+        </div>
+        <div>
+          <strong>Better lead capture</strong>
+          <span>Name, email, notes, quantity, timing, and routing context in one submit.</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <div class="pt-8 pb-12">
-    <section class="max-w-7xl mx-auto">
-      <p class="font-display text-xs font-semibold uppercase tracking-wider" style="color: var(--color-text-muted);">Pricing Tool</p>
-      <h1 class="font-display text-3xl sm:text-4xl font-bold mt-2 mb-2" style="color: var(--color-text-primary);">Quote Calculator</h1>
-      <p class="text-sm max-w-lg mb-10" style="color: var(--color-text-secondary);">
-        Configure your print parameters below. Prices include material, machine time, surcharges, and the 75/25 maker split.
-      </p>
-
-      <QuoteCalculator client:load />
-    </section>
-  </div>
+  <section class="page-section pt-0">
+    <QuoteCalculator client:load />
+  </section>
 </BaseLayout>
 
 <style>
-  :global(.lg\:\!grid-cols-\[1fr_340px\]) {
-    @media (min-width: 1024px) {
-      grid-template-columns: 1fr 340px !important;
+  .quote-page-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.8fr);
+    gap: 1.2rem;
+    padding: 1.4rem;
+  }
+
+  .quote-page-intro__title {
+    margin: 0.9rem 0 0.65rem;
+    font-size: clamp(2rem, 3.5vw, 3.4rem);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+  }
+
+  .quote-page-intro__copy,
+  .quote-page-intro__meta span {
+    color: var(--color-text-secondary);
+    line-height: 1.75;
+  }
+
+  .quote-page-intro__meta {
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .quote-page-intro__meta div {
+    padding: 1rem;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.62);
+  }
+
+  .quote-page-intro__meta strong,
+  .quote-page-intro__meta span {
+    display: block;
+  }
+
+  .quote-page-intro__meta strong {
+    font-family: var(--font-display);
+    color: var(--color-text-primary);
+  }
+
+  .quote-page-intro__meta span {
+    margin-top: 0.35rem;
+  }
+
+  @media (max-width: 900px) {
+    .quote-page-intro {
+      grid-template-columns: 1fr;
     }
   }
 </style>

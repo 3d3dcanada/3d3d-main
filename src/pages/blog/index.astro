@@ -3,9 +3,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const posts = [
   {
-    slug: 'why-cooperative-3d-printing',
-    title: 'Why Cooperative 3D Printing Is the Future of Local Manufacturing',
-    excerpt: 'Distributed manufacturing powered by maker cooperatives is reshaping how communities produce goods. Here\'s how 3D3D is building that future in Atlantic Canada.',
+    slug: 'why-distributed-3d-printing',
+    title: 'Why Distributed 3D Printing Is the Future of Local Manufacturing',
+    excerpt: 'Distributed manufacturing powered by maker networks is reshaping how communities produce goods. Here\'s how 3D3D is building that future in Atlantic Canada.',
     date: '2026-03-10',
     category: '3D Printing',
     readTime: '5 min',
@@ -20,7 +20,7 @@ const posts = [
   },
   {
     slug: 'atlantic-canada-maker-network',
-    title: 'Building a 50+ Maker Network Across Atlantic Canada',
+    title: 'Building a Maker Network Across Atlantic Canada',
     excerpt: 'From Moncton to Halifax, St. John\'s to Charlottetown — how we recruited and onboarded makers across four provinces.',
     date: '2026-03-15',
     category: 'Community',
@@ -29,13 +29,13 @@ const posts = [
 ];
 ---
 
-<BaseLayout title="Blog — 3D3D" description="Articles on 3D printing, materials, cooperative manufacturing, and the maker economy in Atlantic Canada." activePath="/blog">
+<BaseLayout title="Blog — 3D3D" description="Articles on 3D printing, materials, event projects, and maker stories from Atlantic Canada." activePath="/blog">
 
   <div class="pt-8 pb-12">
     <section class="max-w-4xl mx-auto">
       <p class="font-display text-xs font-semibold uppercase tracking-wider" style="color: var(--color-text-muted);">3D3D Blog</p>
       <h1 class="font-display text-3xl sm:text-4xl font-bold mt-2 mb-2" style="color: var(--color-text-primary);">Blog</h1>
-      <p class="text-sm mb-12" style="color: var(--color-text-secondary);">3D printing, materials, maker economy, cooperative manufacturing.</p>
+      <p class="text-sm mb-12" style="color: var(--color-text-secondary);">3D printing, materials, maker economy, event projects.</p>
 
       <div class="space-y-6">
         {posts.map((post) => (

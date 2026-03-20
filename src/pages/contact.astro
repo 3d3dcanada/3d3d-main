@@ -8,7 +8,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <section class="max-w-3xl mx-auto">
       <p class="font-display text-xs font-semibold uppercase tracking-wider" style="color: var(--color-text-muted);">Get in Touch</p>
       <h1 class="font-display text-3xl sm:text-4xl font-bold mt-2 mb-6" style="color: var(--color-text-primary);">Contact</h1>
-
+      <p class="text-sm mb-8" style="color: var(--color-text-secondary);">Book 3D3D for your event, or get in touch about a custom print.</p>
+      
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
         <div class="p-6 rounded-xl" style="background: var(--color-surface-card); border: 1px solid var(--color-border-subtle); box-shadow: var(--shadow-sm);">
           <h2 class="font-display text-base font-semibold mb-4" style="color: var(--color-text-primary);">Direct</h2>
@@ -18,12 +19,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <a href="mailto:info@3d3d.ca" class="hover:underline" style="color: var(--color-teal-primary);">info@3d3d.ca</a>
             </div>
             <div>
-              <span class="block font-display text-[9px] uppercase tracking-widest mb-0.5" style="color: var(--color-text-muted);">Phone</span>
-              <a href="tel:+15069532678" class="transition-colors" style="color: var(--color-text-primary);">506-953-2678</a>
+              <span class="block font-display text-[9px] uppercase tracking-widest mb-0.5" style="color: var(--color-text-muted);">Phone / WhatsApp</span>
+              <a
+                href="https://wa.me/15069532678"
+                class="transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+                style="color: var(--color-text-primary);"
+              >
+                506-953-2678 (WhatsApp)
+              </a>
             </div>
             <div>
               <span class="block font-display text-[9px] uppercase tracking-widest mb-0.5" style="color: var(--color-text-muted);">Location</span>
-              <span style="color: var(--color-text-secondary);">Moncton, NB, Canada</span>
+              <span style="color: var(--color-text-secondary);">Fredericton, NB, Canada</span>
             </div>
           </div>
         </div>
@@ -42,7 +51,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       {/* Contact form */}
       <div class="p-8 rounded-xl" style="background: var(--color-surface-card); border: 1px solid var(--color-border-subtle); box-shadow: var(--shadow-sm);">
         <h2 class="font-display text-lg font-semibold mb-6" style="color: var(--color-text-primary);">Send a Message</h2>
-        <form action="https://formspree.io/f/mldlydbl" method="POST" class="space-y-5">
+        <form action="https://formspree.io/f/mldlydbl" method="POST" class="space-y-5" data-analytics-submit="contact_submitted" data-analytics-source="contact-page">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label class="block font-display text-[10px] uppercase tracking-wider mb-1.5" style="color: var(--color-text-muted);" for="name">Name</label>
@@ -65,6 +74,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               class="w-full px-4 py-2.5 rounded-lg text-sm outline-none"
               style="background: var(--color-surface-elevated); border: 1px solid var(--color-border-default); color: var(--color-text-primary);"
             >
+              <option value="event-booking">Event Booking</option>
               <option value="custom-print">Custom Print Request</option>
               <option value="maker-application">Maker Application</option>
               <option value="partnership">Partnership Inquiry</option>
@@ -85,7 +95,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               style="accent-color: var(--color-teal-primary);"
             />
             <label for="casl-consent" class="text-[11px] leading-relaxed" style="color: var(--color-text-muted);">
-              I consent to receiving commercial electronic messages from 3D3D Atlantic Cooperative. You may unsubscribe at any time. See our <a href="/casl" class="underline" style="color: var(--color-teal-primary);">CASL policy</a> and <a href="/privacy" class="underline" style="color: var(--color-teal-primary);">privacy policy</a>.
+            I consent to receiving commercial electronic messages from 3D3D. You may unsubscribe at any time. See our <a href="/casl" class="underline" style="color: var(--color-teal-primary);">CASL policy</a> and <a href="/privacy" class="underline" style="color: var(--color-teal-primary);">privacy policy</a>.
             </label>
           </div>
           <button type="submit" class="btn btn-primary">

@@ -1,0 +1,217 @@
+---
+interface NavItem {
+  id: string;
+  label: string;
+  href?: string;
+}
+
+interface NavGroup {
+  label: string;
+  items: NavItem[];
+}
+
+interface Props {
+  navGroups: NavGroup[];
+  activePath?: string;
+}
+
+const { navGroups, activePath = '' } = Astro.props;
+
+const normalizePath = (value?: string) => {
+  if (!value) return '';
+  if (value === '/') return '/';
+
+  return value.replace(/\/+$/, '');
+};
+
+const currentPath = normalizePath(activePath);
+
+const isActiveLink = (item: NavItem) => {
+  if (!item.href) return item.id === activePath;
+
+  return normalizePath(item.href) === currentPath;
+};
+
+const socialLinks = [
+  {
+    label: 'YouTube',
+    href: 'https://www.youtube.com/@3D3Dcanada',
+    viewBox: '0 0 24 24',
+    path: 'M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8ZM9.6 15.9V8.1l6.8 3.9Z',
+  },
+  {
+    label: 'TikTok',
+    href: 'https://www.tiktok.com/@3d3dcanada',
+    viewBox: '0 0 24 24',
+    path: 'M14.5 2c.5 2 1.7 3.6 3.5 4.6 1.1.7 2.3 1 3.5 1v3.6c-1.8 0-3.7-.5-5.2-1.5v6.2a6 6 0 1 1-6-6c.3 0 .7 0 1 .1v3.7a2.5 2.5 0 1 0 1.5 2.3V2h1.7Z',
+  },
+  {
+    label: 'Instagram',
+    href: 'https://www.instagram.com/3d3dca/',
+    viewBox: '0 0 24 24',
+    path: 'M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2.3A2.7 2.7 0 0 0 4.3 7v10A2.7 2.7 0 0 0 7 19.7h10a2.7 2.7 0 0 0 2.7-2.7V7A2.7 2.7 0 0 0 17 4.3Zm5 2.2A5.5 5.5 0 1 1 6.5 12 5.5 5.5 0 0 1 12 6.5Zm0 2.3A3.2 3.2 0 1 0 15.2 12 3.2 3.2 0 0 0 12 8.8Zm5.6-3.1a1.3 1.3 0 1 1-1.3 1.3 1.3 1.3 0 0 1 1.3-1.3Z',
+  },
+  {
+    label: 'Facebook',
+    href: 'https://www.facebook.com/profile.php?id=61575548079847',
+    viewBox: '0 0 24 24',
+    path: 'M13.4 21.9v-7h2.4l.4-2.9h-2.8v-1.9c0-.8.2-1.4 1.4-1.4h1.5V6.1c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8V12H8v2.9h2.4v7h3Z',
+  },
+  {
+    label: 'Printables',
+    href: 'https://www.printables.com/@KTK3D_3050116',
+    viewBox: '0 0 24 24',
+    path: 'M4 5.5 12 2l8 3.5V18L12 22l-8-4Zm2.2 1.4v9.7l5 2.4v-4.8l-2.6-1.2v-2.4l2.6 1.2 2.6-1.2v-2.6L12 6.8Zm9.6 0L14.8 8v4.8l-2.6 1.2v5l5-2.4Z',
+  },
+  {
+    label: 'WhatsApp',
+    href: 'https://wa.me/15069532678',
+    viewBox: '0 0 24 24',
+    path: 'M17.5 14.4c-.3-.1-1.8-.9-2.1-1-.3-.1-.5-.1-.7.1-.2.2-.8 1-1 1.2-.2.2-.4.2-.7.1-1.9-.9-3.2-1.7-4.4-3.8-.3-.5 0-.5.3-1.5.1-.3 0-.5-.1-.7-.1-.2-.7-1.7-1-2.3-.2-.7-.5-.6-.7-.6h-.6c-.2 0-.5.1-.7.3-.2.3-1 1-1 2.3s1 2.6 1.1 2.8c.1.2 1.9 3 4.7 4.2 2.7 1.1 2.7.7 3.2.7.5-.1 1.7-.7 2-1.4.2-.7.2-1.3.1-1.4ZM12.1 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.6a10 10 0 1 0 5.2-18.4Z',
+  },
+  {
+    label: 'Ko-fi',
+    href: 'https://ko-fi.com/3d3dca',
+    viewBox: '0 0 24 24',
+    path: 'M20 3H4v10a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4v-3h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 5h-2V5h2v3zm-4 13H8v2h8v-2z',
+  },
+];
+---
+
+<button
+  type="button"
+  class="sidebar-toggle"
+  data-sidebar-toggle
+  data-open="false"
+  aria-expanded="false"
+  aria-controls="site-sidebar"
+  aria-label="Open navigation menu"
+>
+  <span class="sidebar-toggle__bar"></span>
+  <span class="sidebar-toggle__bar"></span>
+  <span class="sidebar-toggle__bar"></span>
+</button>
+
+<div class="sidebar-backdrop" data-sidebar-backdrop hidden></div>
+
+<aside id="site-sidebar" class="site-sidebar" data-sidebar-open="false">
+  <div class="site-sidebar__content">
+    <a href="/" class="site-sidebar__brand" aria-label="3D3D home">
+      <span class="site-sidebar__brand-pill">3D3D</span>
+      <span class="site-sidebar__tagline">Precision Fabrication · Marine · Racing</span>
+    </a>
+
+    <nav class="site-sidebar__nav" aria-label="Primary navigation">
+      {navGroups.map((group) => (
+        <section class="site-sidebar__group">
+          <p class="site-sidebar__group-label">{group.label}</p>
+          <div class="site-sidebar__group-links">
+            {group.items.map((item) => {
+              const isActive = isActiveLink(item);
+
+              return (
+                <a
+                  href={item.href || `#${item.id}`}
+                  class:list={['site-sidebar__link', isActive && 'site-sidebar__link--active']}
+                  aria-current={isActive ? 'page' : undefined}
+                  data-sidebar-link
+                >
+                  {item.label}
+                </a>
+              );
+            })}
+          </div>
+        </section>
+      ))}
+    </nav>
+  </div>
+
+  <div class="site-sidebar__bottom">
+    <a
+      href="/contact"
+      class="btn btn-primary site-sidebar__cta"
+      data-analytics-event="contact_started"
+      data-analytics-source="sidebar-cta"
+      data-sidebar-link
+    >
+      Request Service
+    </a>
+
+    <div class="site-sidebar__socials" aria-label="3D3D social links">
+      {socialLinks.map((link) => (
+        <a
+          href={link.href}
+          class="site-sidebar__social-link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={link.label}
+          title={link.label}
+        >
+          <svg viewBox={link.viewBox} aria-hidden="true" focusable="false">
+            <path d={link.path} fill="currentColor"></path>
+          </svg>
+        </a>
+      ))}
+    </div>
+  </div>
+</aside>
+
+<script>
+  (() => {
+    const sidebar = document.querySelector('.site-sidebar');
+    const toggle = document.querySelector('[data-sidebar-toggle]');
+    const backdrop = document.querySelector('[data-sidebar-backdrop]');
+
+    if (!(sidebar instanceof HTMLElement) || !(toggle instanceof HTMLButtonElement) || !(backdrop instanceof HTMLElement)) {
+      return;
+    }
+
+    const mobileQuery = window.matchMedia('(max-width: 1023px)');
+    const closeTargets = sidebar.querySelectorAll('[data-sidebar-link]');
+
+    const setOpen = (open) => {
+      const nextOpen = mobileQuery.matches ? open : false;
+
+      sidebar.dataset.sidebarOpen = nextOpen ? 'true' : 'false';
+      toggle.dataset.open = nextOpen ? 'true' : 'false';
+      toggle.setAttribute('aria-expanded', String(nextOpen));
+      toggle.setAttribute('aria-label', nextOpen ? 'Close navigation menu' : 'Open navigation menu');
+      backdrop.hidden = !nextOpen;
+      document.body.classList.toggle('menu-open', nextOpen);
+    };
+
+    const close = () => setOpen(false);
+
+    toggle.addEventListener('click', () => {
+      if (!mobileQuery.matches) return;
+
+      setOpen(sidebar.dataset.sidebarOpen !== 'true');
+    });
+
+    backdrop.addEventListener('click', close);
+
+    closeTargets.forEach((target) => {
+      target.addEventListener('click', () => {
+        if (mobileQuery.matches) close();
+      });
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') close();
+    });
+
+    const handleViewportChange = () => {
+      if (!mobileQuery.matches) close();
+    };
+
+    if (typeof mobileQuery.addEventListener === 'function') {
+      mobileQuery.addEventListener('change', handleViewportChange);
+    } else if (typeof mobileQuery.addListener === 'function') {
+      mobileQuery.addListener(handleViewportChange);
+    }
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 1024) close();
+    });
+  })();
+</script>

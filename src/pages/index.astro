@@ -3,216 +3,972 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const orgSchema = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: '3D3D Atlantic Cooperative',
+  '@type': ['LocalBusiness', 'Organization'],
+  name: '3D3D',
   url: 'https://3d3d.ca',
-  description: 'Distributed 3D printing cooperative connecting makers across Atlantic Canada. Custom prints, 27 products, 50+ makers, 75% revenue to creators.',
-  address: { '@type': 'PostalAddress', addressLocality: 'Moncton', addressRegion: 'NB', addressCountry: 'CA' },
+  description: 'Precision 3D printing and fabrication service for marine-grade production, replacement parts, field deployment, and retained fabrication support.',
+  telephone: '+1-506-953-2678',
+  email: 'info@3d3d.ca',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Fredericton',
+    addressRegion: 'NB',
+    postalCode: 'E3B 0A1',
+    addressCountry: 'CA',
+  },
   founder: { '@type': 'Person', name: 'Ken' },
-  contactPoint: { '@type': 'ContactPoint', telephone: '+1-506-953-2678', email: 'info@3d3d.ca' },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: '+1-506-953-2678',
+    email: 'info@3d3d.ca',
+    contactType: 'customer service',
+  },
+  sameAs: [
+    'https://www.youtube.com/@3D3Dcanada',
+    'https://www.tiktok.com/@3d3dcanada',
+    'https://www.instagram.com/3d3dca/',
+    'https://www.facebook.com/profile.php?id=61575548079847',
+    'https://www.printables.com/@KTK3D_3050116',
+    'https://github.com/3d3dcanada/3d3d-main',
+  ],
+  image: 'https://3d3d.ca/media/real/race-morning-crew.jpg',
+  logo: 'https://3d3d.ca/media/brand/logo-badge.webp',
 };
 
-const stats = [
-  { val: '27', label: 'Products' },
-  { val: '50+', label: 'Makers' },
-  { val: '75%', label: 'To Creators' },
-  { val: '24-48h', label: 'Turnaround' },
-];
-
-const features = [
+const homeNavGroups = [
   {
-    title: 'Browse Products',
-    desc: '27 ready-to-print items from our catalog. Home decor, tools, gifts, and more. Each made by a local maker.',
-    href: '/shop',
-    cta: 'View Shop',
+    label: 'On This Page',
+    items: [
+      { id: 'home', label: 'Home', href: '/' },
+      { id: 'services', label: 'Services', href: '#services' },
+      { id: 'why', label: 'Why 3D3D', href: '#why' },
+      { id: 'race', label: 'Race / Field', href: '#race' },
+      { id: 'tiers', label: 'Service Tiers', href: '#tiers' },
+      { id: 'open-source', label: 'Open Source', href: '#open-source' },
+      { id: 'partners', label: 'Partners', href: '#partners' },
+      { id: 'contact', label: 'Contact', href: '#contact' },
+    ],
   },
   {
-    title: 'Custom Quote',
-    desc: 'Upload your own design or describe what you need. Configure material, quality, and scale for instant pricing.',
-    href: '/quote',
-    cta: 'Get Quote',
-  },
-  {
-    title: 'Join as Maker',
-    desc: 'Own a 3D printer? Join the cooperative and keep 75% of every order. We handle the rest.',
-    href: '/makers',
-    cta: 'Apply Now',
+    label: 'Site',
+    items: [
+      { id: 'blog', label: 'Updates', href: '/blog' },
+      { id: 'shop', label: 'Shop', href: '/shop' },
+      { id: 'about', label: 'About', href: '/about' },
+    ],
   },
 ];
 
-const featuredProducts = [
-  { name: 'Wave Holder', href: '/shop/wave-holder', tag: 'Home Decor' },
-  { name: 'Coin Vortex', href: '/shop/coin-vortex', tag: 'Toys' },
-  { name: 'Secret Note', href: '/shop/secret-note', tag: 'Gifts' },
-  { name: 'Memory Book', href: '/shop/memory-book', tag: 'Crafts' },
+const heroStats = [
+  { value: '3', label: 'Active print platforms' },
+  { value: '120th', label: 'Newport Bermuda Race — June 2026' },
+  { value: '1 yr', label: 'Building to this moment' },
+];
+
+const services = [
+  {
+    title: 'Precision Print Production',
+    body: 'Functional parts, prototypes, and custom fabrication built to dimension. High-performance filaments, proper post-processing, and no tolerance for shortcuts.',
+  },
+  {
+    title: 'Marine & Field Fabrication',
+    body: 'Parts built for saltwater, UV exposure, vibration, and the conditions that end lesser prints. Saltwater-resistant materials, annealed and processed for field life.',
+  },
+  {
+    title: 'Replacement Parts & Prototypes',
+    body: 'One-off replacements to low-volume production runs. You have the problem. 3D3D produces the part — reviewed, tested, and shipped.',
+  },
+  {
+    title: 'Retained Fabrication Support',
+    body: 'Monthly retainer access for clients who need a fabrication partner on call. Priority queue, direct line to the founder, no wait, no guessing.',
+  },
+];
+
+const proofPoints = [
+  'Built from scratch — not a funded startup, not a franchised print farm',
+  'High-performance materials: engineered filaments, annealing, and post-processing as standard',
+  'Marine, racing, and off-grid field experience — knows how things fail and builds against it',
+  'Every part reviewed, processed, and tested before it ships — no exceptions',
+  'Direct line to the founder on every retained engagement',
+];
+
+const raceVideos = [
+  { src: '/media/racing-01.mp4', title: 'Racing start line' },
+  { src: '/media/sailing-open.mp4', title: 'Open water passage' },
+  { src: '/media/race-day.mp4', title: 'Race-day deck work' },
+  { src: '/media/onboard-crew.mp4', title: 'Onboard crew' },
+];
+
+const racePhotos = [
+  {
+    src: '/media/real/sunrise-offshore.jpg',
+    alt: 'Sunrise offshore during race conditions',
+  },
+  {
+    src: '/media/real/onboard-crew.jpg',
+    alt: 'Crew working onboard during race preparation',
+  },
+  {
+    src: '/media/real/coastal-landmark.jpg',
+    alt: 'Coastal landmark on approach at the end of a passage',
+  },
+];
+
+const tiers = [
+  {
+    name: 'Standard',
+    intro: 'One-off requests and production orders.',
+    body: 'Standard fabrication queue, full material and process review, and global shipping. Submit your request and get a real part back — not an estimate.',
+    cta: 'Request a build',
+  },
+  {
+    name: 'Priority',
+    intro: 'Faster turnaround, preferred scheduling, direct support.',
+    body: 'Jump the queue. Accelerated fabrication, direct communication with the founder, and priority access when timing matters. Choosing Priority also directly supports the 3D3D mission.',
+    cta: 'Get priority access',
+  },
+  {
+    name: 'Patron / Expedition Support',
+    intro: 'Monthly retainer. Retained access. Close to the campaign.',
+    body: 'A recurring monthly arrangement for clients and supporters who want 3D3D on call. Concierge-level fabrication priority, direct founder access, recognition on the race campaign, and updates from the field. The people who make this possible.',
+    cta: 'Become a patron',
+  },
+];
+
+const openSourceLinks = [
+  {
+    label: 'Printables',
+    href: 'https://www.printables.com/@KTK3D_3050116',
+    note: 'Open files, shared models, and fabrication-ready print releases.',
+  },
+  {
+    label: 'GitHub',
+    href: 'https://github.com/3d3dcanada/3d3d-main',
+    note: 'The open repository behind the 3D3D platform and campaign site.',
+  },
+];
+
+const partners = [
+  {
+    title: 'Prusa Research',
+    body: 'Official platform partner. The Prusa CORE One L — enclosed CoreXY, 300 × 300 × 330 mm build volume — is on its way to 3D3D after one year of building this operation. A Prusa machine this capable arriving at this moment is not a coincidence. It is the result of a year of demonstrated commitment to open-source, quality manufacturing, and real-world deployment.',
+  },
+  {
+    title: 'CSM The Mariner',
+    body: 'Marine industry partner. CSM The Mariner has been part of the 3D3D story and supports the offshore race program and campaign deployment.',
+  },
+  {
+    title: 'Sponsorships open',
+    body: 'This project is funded by people who believe in what it is building. If your brand, organization, or team is aligned with precision manufacturing, marine performance, or open-source innovation — there is a place for you here.',
+  },
 ];
 ---
 
 <BaseLayout
-  title="3D3D Atlantic Cooperative — Custom 3D Printing"
-  description="Distributed 3D printing cooperative in Atlantic Canada. 27 products, 50+ makers, 75% revenue to creators. Custom prints with 24-48h turnaround."
+  title="3D3D — Built for the water. Built to last."
+  description="3D3D delivers rapid, high-quality 3D print production, marine-grade fabrication, replacement parts, and retained support — built on open-source principles and real-world field experience."
   schema={orgSchema}
   activePath="/"
+  navGroups={homeNavGroups}
 >
-  {/* ── HERO ── */}
-  <section class="pt-8 pb-12">
-    <div class="flex items-center gap-3 mb-4">
-      <span class="font-display text-2xl font-bold" style="color: var(--color-teal-primary);">3D3D</span>
-      <span class="badge badge-teal">Atlantic Cooperative</span>
+  <section id="home" class="page-section home-hero">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Precision Fabrication · Marine · Racing</span>
+        <h1 class="hero-title">
+          Built for the water.
+          <br />
+          Built to last.
+        </h1>
+        <p class="hero-subheadline">
+          Precision parts, marine-grade fabrication, and field-ready production. Built from real experience — not a lab, not a franchise. Open-source at the core. Obsessive about quality at every step.
+        </p>
+
+        <div class="hero-actions">
+          <a
+            href="/contact"
+            class="btn btn-primary"
+            data-analytics-event="contact_started"
+            data-analytics-source="home-hero"
+          >
+            Request Service
+          </a>
+          <a
+            href="/blog"
+            class="btn btn-secondary"
+            data-analytics-event="blog_viewed"
+            data-analytics-source="home-hero"
+          >
+            Follow the Project
+          </a>
+        </div>
+
+        <div class="hero-trust" aria-label="Trust strip">
+          <span>Prusa CORE One L</span>
+          <span>Marine-grade materials</span>
+          <span>Open-source</span>
+          <span>Newport Bermuda 2026</span>
+        </div>
+      </div>
+
+      <div class="hero-visual surface-panel">
+        <video
+          class="hero-video"
+          src="/media/hero-loop.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster="/media/real/race-morning-crew.jpg"
+        ></video>
+      </div>
     </div>
 
-    <h1 class="text-display">
-      Distributed 3D printing.
-      <br />
-      <span class="text-gradient-teal">Built in Atlantic Canada.</span>
-    </h1>
-
-    <p class="mt-6 max-w-2xl text-body-lg" style="color: var(--color-text-secondary);">
-      A cooperative network of 50+ independent makers across Atlantic Canada.
-      Order from our catalog, get a custom quote, or join as a maker and keep 75% of every print.
-    </p>
-
-    <div class="mt-8 flex flex-wrap gap-4">
-      <a href="/shop" class="btn btn-primary">
-        Browse Products
-      </a>
-      <a href="/quote" class="btn btn-secondary">
-        Get a Quote
-      </a>
-    </div>
-
-    {/* Stats */}
-    <div class="mt-12 flex flex-wrap gap-8 pt-8" style="border-top: 2px solid var(--color-border-default);">
-      {stats.map(s => (
-        <div>
-          <span class="block font-display text-2xl font-bold" style="color: var(--color-teal-primary);">{s.val}</span>
-          <span class="block font-display text-sm" style="color: var(--color-text-muted);">{s.label}</span>
+    <div class="hero-stats">
+      {heroStats.map((stat) => (
+        <div class="hero-stat surface-panel">
+          <strong>{stat.value}</strong>
+          <span>{stat.label}</span>
         </div>
       ))}
     </div>
   </section>
 
-  {/* ── FEATURED PRODUCTS ── */}
-  <section class="py-12">
-    <h2 class="section-header text-heading-xl">Featured Products</h2>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      {featuredProducts.map((product) => (
-        <a
-          href={product.href}
-          class="card group p-4"
-        >
-          <span class="badge badge-magenta mb-3">{product.tag}</span>
-          <h3 class="font-display text-lg font-semibold" style="color: var(--color-text-primary);">
-            {product.name}
-          </h3>
-          <span class="mt-2 inline-flex items-center text-sm font-medium" style="color: var(--color-teal-dark);">
-            View details
-            <svg class="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </span>
-        </a>
-      ))}
+  <section id="services" class="page-section home-section">
+    <div class="section-heading">
+      <span class="eyebrow">Services</span>
+      <h2 class="section-title">What we build</h2>
     </div>
 
-    <div class="mt-8">
-      <a href="/shop" class="btn btn-ghost">
-        View all 27 products
-      </a>
+    <figure class="services-scene surface-panel">
+      <img
+        src="/media/real/morning-dawn-deck.jpg"
+        alt="Dawn light across the deck and open water"
+        loading="lazy"
+      />
+    </figure>
+
+    <div class="services-grid">
+      {services.map((service) => (
+        <article class="service-card surface-panel">
+          <h3>{service.title}</h3>
+          <p>{service.body}</p>
+        </article>
+      ))}
     </div>
   </section>
 
-  {/* ── FEATURES GRID ── */}
-  <section class="py-12" style="background: var(--color-surface-secondary);">
-    <div class="-mx-12 px-12 py-12 rounded-feature" style="background: var(--color-surface-secondary);">
-      <h2 class="section-header text-heading-xl">How It Works</h2>
+  <section id="why" class="page-section home-section why-grid">
+    <div class="why-photo surface-panel">
+      <img
+        src="/media/real/helm-close.jpg"
+        alt="Close-up at the helm during an offshore passage"
+        loading="lazy"
+      />
+    </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {features.map((feature) => (
-          <div class="card-flat p-6" style="background: var(--color-surface-primary);">
-            <h3 class="font-display text-lg font-bold" style="color: var(--color-teal-dark);">
-              {feature.title}
-            </h3>
-            <p class="mt-3 text-sm leading-relaxed" style="color: var(--color-text-secondary);">
-              {feature.desc}
-            </p>
-            <a
-              href={feature.href}
-              class="mt-4 inline-flex items-center text-sm font-semibold"
-              style="color: var(--color-magenta-primary);"
-            >
-              {feature.cta}
-              <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </a>
-          </div>
+    <div class="why-copy">
+      <span class="eyebrow">Why hire 3D3D</span>
+      <h2 class="section-title">
+        Built from the ground up.
+        <br />
+        No theory. No shortcuts.
+      </h2>
+      <p class="section-body">
+        3D3D was not launched from a funded workshop. It was built from the ground up — in the field, under real constraint, on obsession and stubbornness. One year in, the operation carries Prusa backing, a Bermuda race deployment on the horizon, and a track record built on knowing exactly what breaks and why.
+
+        That background matters. Not for the story — but because every material call, every process decision, and every tolerance is informed by the same mentality that fixes things when they fail far from anywhere. If it can break, it will. So it is built not to.
+      </p>
+
+      <ul class="proof-list">
+        {proofPoints.map((point) => (
+          <li>{point}</li>
+        ))}
+      </ul>
+
+      <figure class="why-inset surface-panel">
+        <img
+          src="/media/real/offshore-day-01.jpg"
+          alt="Offshore sailing in full daylight"
+          loading="lazy"
+        />
+      </figure>
+    </div>
+  </section>
+
+  <section
+    id="race"
+    class="home-race"
+    style={`--race-bg: url('/media/real/fleet-running.jpg');`}
+  >
+    <div class="race-inner">
+      <div class="race-copy">
+        <span class="eyebrow eyebrow-light">2026 Newport Bermuda Race — 120th Anniversary</span>
+        <h2 class="race-title">
+          A fabrication studio
+          <br />
+          in motion.
+        </h2>
+        <p class="race-body">
+          The Prusa CORE One L is arriving at 3D3D after one year of building this operation from the ground up. It is going directly into the 2026 Newport Bermuda Race — the 120th running of one of offshore sailing&apos;s most demanding competitions.
+
+          This is not a demo. Parts printed, tested, and used onboard. A vessel at sea for weeks at a time, far from any supply chain. If additive manufacturing is serious, this is where it proves it.
+        </p>
+        <a
+          href="/blog"
+          class="btn btn-primary"
+          data-analytics-event="blog_viewed"
+          data-analytics-source="home-race"
+        >
+          Follow the campaign
+        </a>
+      </div>
+
+      <div class="race-video-grid">
+        {raceVideos.map((clip) => (
+          <figure class="race-video-card">
+            <video
+              src={clip.src}
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+            ></video>
+            <figcaption>{clip.title}</figcaption>
+          </figure>
+        ))}
+      </div>
+
+      <div class="race-photo-grid">
+        {racePhotos.map((photo) => (
+          <figure class="race-photo-card">
+            <img src={photo.src} alt={photo.alt} loading="lazy" />
+          </figure>
         ))}
       </div>
     </div>
   </section>
 
-  {/* ── COOPERATIVE STORY ── */}
-  <section class="py-12">
-    <h2 class="section-header text-heading-xl">Why Cooperative?</h2>
+  <section id="tiers" class="page-section home-section">
+    <div class="section-heading">
+      <span class="eyebrow">Service Tiers</span>
+      <h2 class="section-title">Service Tiers</h2>
+    </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-      <div>
-        <p class="text-body-lg" style="color: var(--color-text-secondary);">
-          Most marketplaces take 30-50% of each sale. We flipped that model.
-          Makers in the 3D3D cooperative keep <strong style="color: var(--color-teal-dark);">75% of every order</strong>.
-          The remaining 25% covers platform costs, payment processing, and growing the network.
-        </p>
-        <p class="mt-4 text-body-lg" style="color: var(--color-text-secondary);">
-          We're not a company printing products. We're a network of 50+ independent makers
-          across Atlantic Canada — each with their own equipment, materials, and expertise.
-          When you order, your print goes to a real person in your region.
-        </p>
-      </div>
-      <div class="card p-6" style="background: var(--color-teal-surface);">
-        <h3 class="font-display text-xl font-bold" style="color: var(--color-teal-dark);">
-          The Maker Model
-        </h3>
-        <ul class="mt-4 space-y-3">
-          <li class="flex items-start gap-3">
-            <span class="mt-1 w-2 h-2 rounded-full flex-shrink-0" style="background: var(--color-teal-primary);"></span>
-            <span class="text-sm" style="color: var(--color-text-secondary);">75% revenue goes directly to the maker</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="mt-1 w-2 h-2 rounded-full flex-shrink-0" style="background: var(--color-magenta-primary);"></span>
-            <span class="text-sm" style="color: var(--color-text-secondary);">24-48 hour turnaround for standard prints</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="mt-1 w-2 h-2 rounded-full flex-shrink-0" style="background: var(--color-teal-primary);"></span>
-            <span class="text-sm" style="color: var(--color-text-secondary);">Ships to Canada and USA</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="mt-1 w-2 h-2 rounded-full flex-shrink-0" style="background: var(--color-magenta-primary);"></span>
-            <span class="text-sm" style="color: var(--color-text-secondary);">PLA, PETG, TPU, ABS, ASA available</span>
-          </li>
-        </ul>
+    <div class="tiers-grid">
+      {tiers.map((tier) => (
+        <article class="tier-card surface-panel">
+          <h3>{tier.name}</h3>
+          <p class="tier-intro">{tier.intro}</p>
+          <p class="tier-body">{tier.body}</p>
+          <a
+            href="/contact"
+            class="link-accent"
+            data-analytics-event="contact_started"
+            data-analytics-source={`home-tier-${tier.name.toLowerCase()}`}
+          >
+            {tier.cta}
+          </a>
+        </article>
+      ))}
+    </div>
+
+    <div class="tier-partnership surface-panel">
+      <figure class="tier-partnership__photo">
+        <img
+          src="/media/real/golden-hour-03.jpg"
+          alt="Golden-hour wide shot on the water"
+          loading="lazy"
+        />
+      </figure>
+
+      <div class="tier-partnership__copy">
+        <h3>Partnerships &amp; Sponsorships</h3>
+        <p>For brands, marine organizations, event sponsors, and media partners.</p>
+        <p>Contact us to discuss campaign alignment, product placement, or equipment partnerships.</p>
+        <a
+          href="/contact"
+          class="btn btn-secondary"
+          data-analytics-event="contact_started"
+          data-analytics-source="home-partnerships"
+        >
+          Partner with 3D3D
+        </a>
       </div>
     </div>
   </section>
 
-  {/* ── CTA ── */}
-  <section class="py-12">
-    <div class="card-feature p-8 text-center" style="background: linear-gradient(135deg, var(--color-teal-surface), var(--color-magenta-surface));">
-      <h2 class="font-display text-2xl font-bold" style="color: var(--color-text-primary);">
-        Ready to start printing?
-      </h2>
-      <p class="mt-3" style="color: var(--color-text-secondary);">
-        Browse our catalog or get a custom quote for your project.
+  <section id="open-source" class="page-section home-section open-source-grid">
+    <div class="open-source-copy">
+      <span class="eyebrow">Open-source at the core</span>
+      <h2 class="section-title">We believe the ecosystem matters more than the lock-in.</h2>
+      <p class="section-body">
+        3D3D runs on Prusa hardware, Printables files, and the same open ecosystem that makes this kind of operation possible for anyone willing to put in the work. The files are shared. The models are public. If you find something worth printing, 3D3D can build it, refine it, and ship it — and the community that makes all of it possible stays intact.
       </p>
-      <div class="mt-6 flex justify-center gap-4">
-        <a href="/shop" class="btn btn-primary">
-          Browse Shop
+    </div>
+
+    <div class="open-source-media">
+      <figure class="open-source-photo surface-panel">
+        <img
+          src="/media/real/dawn-approach.jpg"
+          alt="Early morning approach before race preparation"
+          loading="lazy"
+        />
+      </figure>
+
+      <div class="open-source-links">
+        {openSourceLinks.map((link) => (
+          <a
+            href={link.href}
+            class="open-source-link surface-panel"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <strong>{link.label}</strong>
+            <span>{link.note}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="partners" class="page-section home-section partners-section">
+    <div class="section-heading">
+      <span class="eyebrow">Partners</span>
+      <h2 class="section-title">Who we work with</h2>
+    </div>
+
+    <div class="partners-grid">
+      {partners.map((partner) => (
+        <article class="partner-card surface-panel">
+          <h3>{partner.title}</h3>
+          <p>{partner.body}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section
+    id="contact"
+    class="home-cta-band"
+    style={`--cta-bg: url('/media/real/fleet-start-press.jpg');`}
+  >
+    <div class="home-cta-band__inner">
+      <div class="home-cta-band__copy">
+        <h2>You have a problem.<br />3D3D has a printer and the experience to use it.</h2>
+        <p>One-off build, monthly retainer, or race campaign partner — whatever you need, reach out. No sales process. Just a direct conversation.</p>
+      </div>
+
+      <div class="home-cta-band__actions">
+        <a
+          href="/contact"
+          class="btn btn-primary home-cta-band__primary"
+          data-analytics-event="contact_started"
+          data-analytics-source="home-final-cta"
+        >
+          Request Service
         </a>
-        <a href="/quote" class="btn btn-secondary">
-          Get a Quote
+        <a
+          href="/blog"
+          class="btn btn-secondary home-cta-band__secondary"
+          data-analytics-event="blog_viewed"
+          data-analytics-source="home-final-cta"
+        >
+          Follow the project
         </a>
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .home-section {
+    display: grid;
+    gap: 1.75rem;
+  }
+
+  .section-heading {
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .section-title,
+  .race-title,
+  .hero-title,
+  .home-cta-band h2 {
+    margin: 0;
+    letter-spacing: -0.03em;
+  }
+
+  .hero-title {
+    font-size: clamp(2.9rem, 2rem + 4.5vw, 5.8rem);
+    line-height: 0.96;
+    max-width: 12ch;
+  }
+
+  .section-title,
+  .race-title,
+  .home-cta-band h2 {
+    font-size: clamp(2.1rem, 1.3rem + 2.4vw, 3.8rem);
+    line-height: 1;
+  }
+
+  .hero-subheadline,
+  .section-body,
+  .race-body,
+  .home-cta-band p {
+    margin: 0;
+    max-width: 64ch;
+    font-size: clamp(1rem, 0.95rem + 0.3vw, 1.15rem);
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+
+  .home-hero {
+    padding-top: clamp(2.4rem, 4vw, 4rem);
+    padding-bottom: clamp(3rem, 4vw, 4.6rem);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: clamp(1.75rem, 3vw, 3.5rem);
+    align-items: center;
+  }
+
+  .hero-copy {
+    display: grid;
+    gap: 1.35rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+  }
+
+  .hero-trust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem 1.25rem;
+    font-family: var(--font-tech);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .hero-visual {
+    min-height: clamp(24rem, 54vw, 42rem);
+    overflow: hidden;
+    border-radius: 28px;
+  }
+
+  .hero-video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .hero-stats {
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+
+  .hero-stat {
+    padding: 1.2rem 1.1rem;
+    display: grid;
+    gap: 0.35rem;
+    background:
+      linear-gradient(135deg, rgba(64, 196, 196, 0.12), rgba(255, 255, 255, 0.96));
+  }
+
+  .hero-stat strong {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 1.2rem + 0.8vw, 2.2rem);
+    font-weight: 400;
+    color: var(--color-text-primary);
+  }
+
+  .hero-stat span {
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .services-scene {
+    overflow: hidden;
+    min-height: 14rem;
+  }
+
+  .services-scene img,
+  .why-photo img,
+  .why-inset img,
+  .tier-partnership__photo img,
+  .open-source-photo img,
+  .race-photo-card img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .service-card,
+  .tier-card,
+  .partner-card,
+  .open-source-link {
+    padding: 1.35rem;
+  }
+
+  .service-card h3,
+  .tier-card h3,
+  .partner-card h3,
+  .tier-partnership__copy h3 {
+    margin: 0 0 0.75rem;
+    font-size: 1.15rem;
+    line-height: 1.15;
+  }
+
+  .service-card p,
+  .tier-card p,
+  .partner-card p,
+  .tier-partnership__copy p,
+  .open-source-link span {
+    margin: 0;
+    color: var(--color-text-secondary);
+    line-height: 1.65;
+  }
+
+  .why-grid {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    align-items: start;
+  }
+
+  .why-photo {
+    min-height: clamp(25rem, 52vw, 40rem);
+    overflow: hidden;
+  }
+
+  .why-photo img {
+    object-position: center 28%;
+  }
+
+  .why-copy {
+    display: grid;
+    gap: 1.2rem;
+  }
+
+  .proof-list {
+    margin: 0;
+    padding-left: 1.15rem;
+    display: grid;
+    gap: 0.75rem;
+    color: var(--color-text-secondary);
+    line-height: 1.65;
+  }
+
+  .why-inset {
+    width: min(100%, 22rem);
+    min-height: 13rem;
+    overflow: hidden;
+    justify-self: start;
+  }
+
+  .home-race {
+    position: relative;
+    margin-block: clamp(4rem, 6vw, 6rem);
+    padding-block: clamp(4rem, 7vw, 6rem);
+    color: #FFFFFF;
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+      var(--race-bg);
+    background-position: center;
+    background-size: cover;
+  }
+
+  .race-inner {
+    width: min(calc(100% - 3rem), var(--page-max-width));
+    margin-inline: auto;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .race-copy {
+    display: grid;
+    gap: 1rem;
+    max-width: 48rem;
+  }
+
+  .eyebrow-light {
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .race-body {
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .race-video-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+
+  .race-video-card,
+  .race-photo-card {
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .race-video-card video {
+    width: 100%;
+    height: 15rem;
+    display: block;
+    object-fit: cover;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .race-video-card figcaption {
+    padding: 0.8rem 0.9rem;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .race-photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+
+  .race-photo-card {
+    min-height: 14rem;
+  }
+
+  .tiers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .tier-card {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .tier-intro {
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .tier-partnership {
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    gap: 0;
+    overflow: hidden;
+  }
+
+  .tier-partnership__photo {
+    min-height: 100%;
+  }
+
+  .tier-partnership__copy {
+    padding: 1.5rem;
+    display: grid;
+    gap: 0.95rem;
+    align-content: center;
+  }
+
+  .open-source-grid {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    align-items: start;
+  }
+
+  .open-source-copy,
+  .open-source-media {
+    display: grid;
+    gap: 1.2rem;
+  }
+
+  .open-source-photo {
+    min-height: 24rem;
+    overflow: hidden;
+  }
+
+  .open-source-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+
+  .open-source-link {
+    display: grid;
+    gap: 0.45rem;
+    color: inherit;
+  }
+
+  .open-source-link strong {
+    font-family: var(--font-tech);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-magenta-primary);
+  }
+
+  .partners-section {
+    padding: clamp(2.6rem, 4vw, 3.5rem);
+    border-radius: 28px;
+    background-image:
+      linear-gradient(rgba(246, 247, 250, 0.92), rgba(246, 247, 250, 0.92)),
+      url('/media/real/fleet-aerial.jpg');
+    background-position: center;
+    background-size: cover;
+  }
+
+  .partners-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .home-cta-band {
+    margin-top: clamp(4rem, 6vw, 6rem);
+    padding-block: clamp(4rem, 7vw, 5.5rem);
+    color: #FFFFFF;
+    background-image:
+      linear-gradient(rgba(64, 196, 196, 0.92), rgba(64, 196, 196, 0.92)),
+      var(--cta-bg);
+    background-position: center;
+    background-size: cover;
+  }
+
+  .home-cta-band__inner {
+    width: min(calc(100% - 3rem), var(--page-max-width));
+    margin-inline: auto;
+    display: grid;
+    gap: 1.4rem;
+    align-items: center;
+  }
+
+  .home-cta-band__copy {
+    display: grid;
+    gap: 1rem;
+    max-width: 48rem;
+  }
+
+  .home-cta-band p {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .home-cta-band__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+  }
+
+  .home-cta-band__primary {
+    background: #FFFFFF;
+    color: var(--color-text-primary);
+    box-shadow: none;
+  }
+
+  .home-cta-band__primary:hover {
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--color-text-primary);
+  }
+
+  .home-cta-band__secondary {
+    color: #FFFFFF;
+    border-color: rgba(255, 255, 255, 0.76);
+  }
+
+  .home-cta-band__secondary:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: #FFFFFF;
+    color: #FFFFFF;
+  }
+
+  @media (max-width: 1100px) {
+    .services-grid,
+    .race-video-grid,
+    .tiers-grid,
+    .partners-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hero-grid,
+    .why-grid,
+    .open-source-grid,
+    .tier-partnership {
+      grid-template-columns: 1fr;
+    }
+
+    .why-photo {
+      min-height: 20rem;
+    }
+
+    .open-source-photo {
+      min-height: 18rem;
+    }
+  }
+
+  @media (max-width: 820px) {
+    .home-hero {
+      padding-top: 1.25rem;
+    }
+
+    .hero-grid,
+    .race-photo-grid,
+    .open-source-links {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-stats {
+      grid-template-columns: 1fr;
+    }
+
+    .race-video-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 560px) {
+    .services-grid,
+    .tiers-grid,
+    .partners-grid,
+    .race-video-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .service-card,
+    .tier-card,
+    .partner-card,
+    .open-source-link {
+      padding: 1.1rem;
+    }
+
+    .race-video-card video {
+      height: 11rem;
+    }
+  }
+
+</style>

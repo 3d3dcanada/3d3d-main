@@ -1,15 +1,21 @@
 {
-  "name": "3D3D Atlantic Cooperative",
+  "name": "3D3D",
   "short_name": "3D3D",
+  "description": "On-location 3D printing, content creation, and custom fabrication.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0A0A0F",
-  "theme_color": "#00C4CC",
+  "background_color": "#FFFFFF",
+  "theme_color": "#40C4C4",
   "icons": [
     {
       "src": "/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
     }
   ]
 }

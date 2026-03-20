@@ -1,19 +1,30 @@
 User-agent: *
 Allow: /
 
-User-agent: GPTBot
+# AI retrieval bots (live answers — allow)
+User-agent: Claude-Web
 Allow: /
-
-User-agent: ClaudeBot
+User-agent: ChatGPT-User
 Allow: /
-
 User-agent: PerplexityBot
 Allow: /
-
-User-agent: Bytespider
+User-agent: OAI-SearchBot
 Allow: /
-
 User-agent: Applebot-Extended
 Allow: /
+
+# AI training crawlers (block)
+User-agent: GPTBot
+Disallow: /
+User-agent: ClaudeBot
+Disallow: /
+User-agent: anthropic-ai
+Disallow: /
+User-agent: Google-Extended
+Disallow: /
+User-agent: CCBot
+Disallow: /
+User-agent: Bytespider
+Disallow: /
 
 Sitemap: https://3d3d.ca/sitemap-index.xml

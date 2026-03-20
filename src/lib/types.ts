@@ -46,6 +46,7 @@ export interface CatalogItem {
   description: string;
   seoTitle?: string;
   seoDescription?: string;
+  seoKeywords?: string[];
   category: CatalogCategory;
   grams: number;
   hours: number;

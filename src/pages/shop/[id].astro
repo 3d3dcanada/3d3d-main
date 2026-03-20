@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import BrandSidebar from '../../components/BrandSidebar.tsx';
 import {
   CATALOG,
   SOURCE_LABELS,
@@ -39,39 +38,25 @@ const schema = {
   name: item.name,
   description: item.description,
   image: item.images,
-  brand: { '@type': 'Brand', name: '3D3D Atlantic Cooperative' },
+  brand: { '@type': 'Brand', name: '3D3D' },
   offers: {
     '@type': 'Offer',
     price: startPrice,
     priceCurrency: 'CAD',
     availability: 'https://schema.org/InStock',
-    seller: { '@type': 'Organization', name: '3D3D Atlantic Cooperative' },
+    seller: { '@type': 'Organization', name: '3D3D' },
   },
 };
 
-const sidebarNav = [
-  {
-    label: '3D3D',
-    items: [
-      { id: 'shop', label: 'Shop', href: '/shop' },
-      { id: 'quote', label: 'Quote Calculator', href: '/quote' },
-      { id: 'makers', label: 'Makers', href: '/makers' },
-      { id: 'blog', label: 'Blog', href: '/blog' },
-      { id: 'about', label: 'About', href: '/about' },
-      { id: 'contact', label: 'Contact', href: '/contact' },
-    ],
-  },
-];
 ---
 
 <BaseLayout
   title={`${item.name} — 3D3D Print Shop`}
   description={item.seoDescription || item.description}
   schema={schema}
+  activePath="/shop"
 >
-  <BrandSidebar slot="sidebar" client:load navGroups={sidebarNav} activePath="/shop" />
-
-  <div class="pt-8 pl-0 lg:pl-4">
+  <div class="pt-8">
     {/* Breadcrumb */}
     <nav class="px-6 lg:px-12 py-4 bg-surface-primary" aria-label="Breadcrumb">
       <ol class="flex items-center gap-2 font-body text-xs uppercase tracking-wider text-text-muted">
@@ -223,13 +208,15 @@ const sidebarNav = [
           {/* CTA */}
           <div class="mt-8 flex gap-3">
             <a
-              href={`/quote?product=${item.id}`}
+              href={`/quote?product=${item.id}&source=product-page`}
               class="btn-primary flex-1 text-center py-3"
+              data-analytics-event="quote_started"
+              data-analytics-source="product-page"
             >
               Get Custom Quote
             </a>
             <a
-              href="mailto:info@3d3d.ca?subject=Order: {item.name}"
+              href={`mailto:info@3d3d.ca?subject=${encodeURIComponent(`Order Inquiry - ${item.name}`)}`}
               class="btn-secondary px-5 py-3"
             >
               Contact

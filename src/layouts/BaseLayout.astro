@@ -1,7 +1,7 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
-import BrandSidebar from '../components/BrandSidebar';
+import SiteSidebar from '../components/SiteSidebar.astro';
 import '../styles/global.css';
 
 interface NavGroup {
@@ -15,7 +15,7 @@ interface Props {
   canonicalURL?: string;
   ogImage?: string;
   ogType?: string;
-  schema?: Record<string, unknown>;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
   noindex?: boolean;
   accent?: string;
   showFooter?: boolean;
@@ -44,24 +44,21 @@ const {
 // Default navigation groups for 3D3D main site
 const defaultNavGroups: NavGroup[] = [
   {
-    label: 'Shop',
+    label: 'Services',
     items: [
-      { id: 'shop', label: 'All Products', href: '/shop' },
-      { id: 'quote', label: 'Get a Quote', href: '/quote' },
+      { id: 'home', label: 'Overview', href: '/' },
+      { id: 'tiers', label: 'Service Tiers', href: '/#tiers' },
+      { id: 'contact', label: 'Request Service', href: '/contact' },
+      { id: 'events', label: 'Events', href: '/events' },
     ],
   },
   {
-    label: 'About',
+    label: 'Explore',
     items: [
-      { id: 'about', label: 'Our Story', href: '/about' },
-      { id: 'makers', label: 'Our Makers', href: '/makers' },
-    ],
-  },
-  {
-    label: 'Connect',
-    items: [
-      { id: 'contact', label: 'Contact Us', href: '/contact' },
-      { id: 'blog', label: 'Blog', href: '/blog' },
+      { id: 'shop', label: 'Shop', href: '/shop' },
+      { id: 'about', label: 'About', href: '/about' },
+      { id: 'blog', label: 'Updates', href: '/blog' },
+      { id: 'makers', label: 'Makers', href: '/makers' },
     ],
   },
 ];
@@ -84,17 +81,9 @@ const finalNavGroups = navGroups.length > 0 ? navGroups : defaultNavGroups;
 </head>
 <body class:list={[bodyClass, 'light-theme']}>
   <a href="#main-content" class="skip-to-content">Skip to content</a>
-
-  {/* Sidebar Navigation */}
-  <BrandSidebar
-    client:load
-    navGroups={finalNavGroups}
-    activePath={activePath}
-  />
-
-  {/* Main Content Area - accounts for sidebar */}
+  <SiteSidebar navGroups={finalNavGroups} activePath={activePath} />
   <div class="content-wrapper">
-    <main id="main-content" class="min-h-screen">
+    <main id="main-content" class="site-main min-h-screen">
       <slot />
     </main>
 
@@ -102,6 +91,40 @@ const finalNavGroups = navGroups.length > 0 ? navGroups : defaultNavGroups;
       <Footer accent={accent} showCooperativeInfo={showCooperativeInfo} />
     )}
   </div>
+
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    window.track3d3d = window.track3d3d || function (eventName, detail = {}) {
+      const payload = { event: eventName, ...detail };
+      window.dataLayer.push(payload);
+      window.dispatchEvent(new CustomEvent('3d3d-analytics', { detail: payload }));
+      if (typeof window.plausible === 'function') {
+        window.plausible(eventName, { props: detail });
+      }
+    };
+
+    document.addEventListener('click', (event) => {
+      const target = event.target instanceof Element ? event.target.closest('[data-analytics-event]') : null;
+      if (!target) return;
+
+      window.track3d3d(target.getAttribute('data-analytics-event'), {
+        source: target.getAttribute('data-analytics-source') || window.location.pathname,
+        href: target.getAttribute('href') || null,
+      });
+    });
+
+    document.addEventListener('submit', (event) => {
+      const form = event.target instanceof HTMLFormElement ? event.target : null;
+      if (!form) return;
+
+      const eventName = form.getAttribute('data-analytics-submit');
+      if (!eventName) return;
+
+      window.track3d3d(eventName, {
+        source: form.getAttribute('data-analytics-source') || window.location.pathname,
+      });
+    });
+  </script>
 </body>
 </html>
 

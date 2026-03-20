@@ -1,78 +1,114 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { CATALOG } from '../lib/catalog';
 
 const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: '3D3D Atlantic Cooperative',
-  description: 'Distributed 3D printing cooperative in Atlantic Canada. 50+ makers, 5 materials, 24-48 hour turnaround.',
-  url: 'https://3d3d.ca',
-  telephone: '+15069532678',
-  email: 'info@3d3d.ca',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Moncton',
-    addressRegion: 'NB',
-    addressCountry: 'CA',
-  },
+	'@context': 'https://schema.org',
+	'@type': 'Organization',
+	name: '3D3D',
+	description: 'On-location 3D printing and content creation. Wess\'s story — from Prusa MK2 to events, boats, and race cars.',
+	url: 'https://3d3d.ca',
+	telephone: '+15069532678',
+	email: 'info@3d3d.ca',
+	founder: { '@type': 'Person', name: 'Wess' },
+	address: {
+		'@type': 'PostalAddress',
+		addressLocality: 'Fredericton',
+		addressRegion: 'NB',
+		addressCountry: 'CA',
+	},
 };
 
 const stats = [
-  { value: '50+', label: 'Active Makers' },
-  { value: '27', label: 'Products' },
-  { value: '5', label: 'Materials' },
-  { value: '4', label: 'Provinces' },
-  { value: '75%', label: 'Maker Payout' },
-  { value: '24-48h', label: 'Turnaround' },
+	{ value: `${CATALOG.length}`, label: 'Products' },
+	{ value: '5', label: 'Materials' },
+	{ value: '24-48h', label: 'Turnaround' },
+	{ value: '2', label: 'Events' },
+];
+
+const aboutGallery = [
+  {
+    src: '/media/workshop/printed-cup-shell.jpg',
+    alt: '3D printed cup shell part on a printer bed',
+    title: 'Functional print work',
+  },
+  {
+    src: '/media/workshop/machine-parts-flatlay.jpg',
+    alt: 'Black machine parts and rings laid out on a workbench',
+    title: 'Small-batch parts',
+  },
+  {
+    src: '/media/workshop/blue-prototype-part.jpg',
+    alt: 'Blue 3D printed prototype part held in front of a monitor',
+    title: 'Prototype iterations',
+  },
 ];
 ---
 
-<BaseLayout title="About — 3D3D Atlantic Cooperative" description="Distributed 3D printing cooperative. 50+ makers across Atlantic Canada. Makers retain 75% of revenue." schema={schema} activePath="/about">
+<BaseLayout title="About — 3D3D" description="On-location 3D printing and content creation. Wess's story — from Prusa MK2 to events, boats, and race cars." schema={schema} activePath="/about">
 
-  <div class="pt-8 pb-12">
-    <section class="max-w-4xl mx-auto">
-      <p class="font-display text-xs font-semibold uppercase tracking-wider" style="color: var(--color-text-muted);">About</p>
-      <h1 class="font-display text-3xl sm:text-4xl font-bold mt-2 mb-6" style="color: var(--color-text-primary);">3D3D Atlantic Cooperative</h1>
+<div class="pt-8 pb-12">
+<section class="max-w-4xl mx-auto">
+<div class="about-hero surface-panel">
+<div class="about-hero__background" aria-hidden="true"></div>
+<div class="about-hero__content">
+<p class="font-display text-xs font-semibold uppercase tracking-wider" style="color: var(--color-text-muted);">About</p>
+<h1 class="font-display text-3xl sm:text-4xl font-bold mt-2 mb-6" style="color: var(--color-text-primary);">About 3D3D</h1>
 
-      <div class="space-y-4 text-sm leading-relaxed" style="color: var(--color-text-secondary);">
-        <p>
-          3D3D is a distributed 3D printing cooperative headquartered in Moncton, New Brunswick. We coordinate a network of 50+ independent makers across Atlantic Canada to deliver custom 3D printed products with 24-48 hour turnaround.
-        </p>
-        <p>
-          The cooperative model is simple: makers keep 75% of every order. 3D3D provides the platform, marketing, order routing, quality standards, and customer support. Makers do what they do best — print.
-        </p>
-        <p>
-          We stock five materials across the network: PLA, PETG, TPU, ABS, and ASA. Every product in our catalog has been tested, documented, and priced through our calculator system that accounts for material cost, machine time, infill, supports, and overhead.
-        </p>
-      </div>
+<div class="space-y-4 text-sm leading-relaxed" style="color: var(--color-text-secondary);">
+<p>
+It started with a Prusa MK2. Wess spent years printing in his basement, learning the craft, breaking nozzles, dialing in profiles, and building a network of makers across Atlantic Canada. That network became 3D3D.
+</p>
+<p>
+Now 3D3D brings 3D printing to events on location. Races, restorations, boats, old cars, extreme sports. Hard-to-find parts made where they're needed. The printers show up, the cameras roll, and people walk away with parts and a story.
+</p>
+<p>
+We run five materials — PLA, PETG, TPU, ABS, ASA — and everything in the catalog has been tested, documented, and priced through a calculator that accounts for material, time, infill, supports, and overhead.
+</p>
+<p>
+<strong style="color: var(--color-text-primary);">Prusa partnership:</strong> We're an official Prusa partner, working closely with their team. The upcoming Prusa Core 1-L is on our radar for on-location event printing.
+</p>
+</div>
 
-      {/* Stats grid */}
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mt-12">
-        {stats.map((stat) => (
-          <div class="text-center p-4 rounded-xl" style="background: var(--color-surface-card); border: 1px solid var(--color-border-subtle); box-shadow: var(--shadow-sm);">
-            <span class="block font-display text-2xl font-bold" style="color: var(--color-teal-primary);">{stat.value}</span>
-            <span class="font-display text-[9px] uppercase tracking-widest" style="color: var(--color-text-muted);">{stat.label}</span>
-          </div>
-        ))}
-      </div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-12">
+{stats.map((stat) => (
+<div class="text-center p-4 rounded-xl" style="background: rgba(255, 255, 255, 0.72); border: 1px solid var(--color-border-subtle); box-shadow: var(--shadow-sm);">
+<span class="block font-display text-2xl font-bold" style="color: var(--color-teal-primary);">{stat.value}</span>
+<span class="font-display text-[9px] uppercase tracking-widest" style="color: var(--color-text-muted);">{stat.label}</span>
+</div>
+))}
+</div>
+</div>
+</div>
 
-      {/* How it works */}
-      <div class="mt-16">
-        <h2 class="font-display text-xl font-bold mb-6" style="color: var(--color-text-primary);">How It Works</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            { step: '01', title: 'Browse or Quote', desc: 'Pick a product from the shop or configure a custom quote with exact material, quality, and finish specifications.' },
-            { step: '02', title: 'We Route to a Maker', desc: 'Your order goes to the nearest qualified maker with the right material in stock. Most orders start printing within hours.' },
-            { step: '03', title: 'Print, Pack, Ship', desc: 'The maker prints your order, quality-checks it, packages it, and ships directly to you. Most orders arrive within 3-5 business days.' },
-          ].map((item) => (
-            <div class="p-5 rounded-xl" style="background: var(--color-surface-card); border: 1px solid var(--color-border-subtle); box-shadow: var(--shadow-sm);">
-              <span class="font-display text-3xl font-bold opacity-40" style="color: var(--color-teal-primary);">{item.step}</span>
-              <h3 class="font-display text-base font-semibold mt-2 mb-2" style="color: var(--color-text-primary);">{item.title}</h3>
-              <p class="text-xs leading-relaxed" style="color: var(--color-text-secondary);">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+<div class="about-gallery">
+{aboutGallery.map((item) => (
+<figure class="surface-panel about-gallery__card">
+<img src={item.src} alt={item.alt} loading="lazy" decoding="async" />
+<figcaption>
+<strong>{item.title}</strong>
+</figcaption>
+</figure>
+))}
+</div>
+
+{/* How it works */}
+<div class="mt-16">
+<h2 class="font-display text-xl font-bold mb-6" style="color: var(--color-text-primary);">How It Works</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+{[
+{ step: '01', title: 'Tell us about your event or project', desc: 'Describe what you need — hard-to-find parts for a boat, props for a race, or custom pieces for a community build.' },
+{ step: '02', title: 'We show up with printers and cameras', desc: 'We bring the equipment on-site, print parts in real time, and document the process on video.' },
+{ step: '03', title: 'You get parts, content, and the experience', desc: 'Walk away with functional printed parts, video content of the build, and a story worth sharing.' },
+].map((item) => (
+<div class="p-5 rounded-xl" style="background: var(--color-surface-card); border: 1px solid var(--color-border-subtle); box-shadow: var(--shadow-sm);">
+<span class="font-display text-3xl font-bold opacity-40" style="color: var(--color-teal-primary);">{item.step}</span>
+<h3 class="font-display text-base font-semibold mt-2 mb-2" style="color: var(--color-text-primary);">{item.title}</h3>
+<p class="text-xs leading-relaxed" style="color: var(--color-text-secondary);">{item.desc}</p>
+</div>
+))}
+</div>
+</div>
 
       {/* Old Girl */}
       <div class="mt-16">
@@ -87,3 +123,61 @@ const stats = [
     </section>
   </div>
 </BaseLayout>
+
+<style>
+  .about-hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .about-hero__background {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(135deg, rgba(244, 251, 251, 0.92), rgba(255, 245, 250, 0.78)),
+      url('/media/backgrounds/about-print-lab.jpg') center / cover no-repeat;
+    opacity: 0.82;
+  }
+
+  .about-hero__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 1.2rem;
+  }
+
+  .about-gallery__card {
+    padding: 0.85rem;
+  }
+
+  .about-gallery__card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 22px;
+  }
+
+  .about-gallery__card figcaption {
+    margin-top: 0.8rem;
+  }
+
+  .about-gallery__card strong {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    color: var(--color-text-primary);
+  }
+
+  @media (max-width: 900px) {
+    .about-gallery {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

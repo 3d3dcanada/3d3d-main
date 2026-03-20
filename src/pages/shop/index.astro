@@ -1,60 +1,43 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import BrandSidebar from '../../components/BrandSidebar.tsx';
 import { CATALOG, SHOP_CATEGORIES, SOURCE_LABELS, getCatalogItemStartingPrice, getCatalogItemHasPriceRange } from '../../lib/catalog';
-import type { CatalogCategory } from '../../lib/types';
 
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'Store',
   name: '3D3D Print Shop',
-  description: 'Custom 3D printing — 27 products, 5 materials, 50+ makers across Atlantic Canada.',
+  description: 'Custom 3D printing — 27 products, 5 materials. Tested designs, fast turnaround.',
   url: 'https://3d3d.ca/shop',
   address: {
     '@type': 'PostalAddress',
-    addressLocality: 'Moncton',
+    addressLocality: 'Fredericton',
     addressRegion: 'NB',
     addressCountry: 'CA',
   },
 };
 
-const sidebarNav = [
-  {
-    label: '3D3D',
-    items: [
-      { id: 'shop', label: 'Shop', href: '/shop' },
-      { id: 'quote', label: 'Quote Calculator', href: '/quote' },
-      { id: 'makers', label: 'Makers', href: '/makers' },
-      { id: 'blog', label: 'Blog', href: '/blog' },
-      { id: 'about', label: 'About', href: '/about' },
-      { id: 'contact', label: 'Contact', href: '/contact' },
-    ],
-  },
-];
 ---
 
-<BaseLayout title="3D3D Print Shop — Custom 3D Printing" description="27 custom 3D printed products. PLA, PETG, TPU, ABS, ASA. 50+ makers across Atlantic Canada. Ships to Canada & USA." schema={schema}>
-  <BrandSidebar slot="sidebar" client:load navGroups={sidebarNav} activePath="/shop" />
-
-  <div class="pt-8 pl-0 lg:pl-4">
+<BaseLayout title="Shop — 3D3D" description="Custom 3D printed products. PLA, PETG, TPU, ABS, ASA. Tested designs, fast turnaround." schema={schema} activePath="/shop">
+  <div class="pt-8">
     {/* Hero strip */}
     <section class="px-6 lg:px-12 py-10 relative overflow-hidden bg-surface-secondary">
       <div class="max-w-7xl mx-auto">
-        <p class="font-body text-xs uppercase tracking-widest text-teal-dark mb-2">3D3D Atlantic Cooperative</p>
+        <p class="font-body text-xs uppercase tracking-widest text-teal-dark mb-2">3D3D Shop</p>
         <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary leading-tight">
           Print Shop
         </h1>
         <p class="mt-3 text-text-secondary max-w-xl text-sm sm:text-base">
-          27 products. 5 materials. 50+ makers across Atlantic Canada. Every order is custom printed and ships within 24–48 hours.
-        </p>
+              Tested products, organizers, gifts, and display pieces.
+            </p>
         <div class="flex flex-wrap gap-4 mt-6">
-          <a href="/quote" class="btn-primary">
+          <a href="/quote?source=shop-hero" class="btn-primary" data-analytics-event="quote_started" data-analytics-source="shop-hero">
             Get a Quote
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 7h8m-3-3 3 3-3 3"/></svg>
           </a>
           <a href="/makers" class="btn-secondary">
-            Join as Maker
-          </a>
+                  Find a Maker
+                </a>
         </div>
       </div>
     </section>
@@ -89,6 +72,8 @@ const sidebarNav = [
               href={`/shop/${item.id}`}
               class="product-card group relative rounded-2xl overflow-hidden transition-all duration-300"
               data-category={item.category}
+              data-analytics-event="featured_product_clicked"
+              data-analytics-source="shop-grid"
             >
               {/* Image */}
               <div class="aspect-[4/3] overflow-hidden relative bg-surface-tertiary">

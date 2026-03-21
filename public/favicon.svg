@@ -1,17 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="7" fill="#0A0A0F"/>
-  <!-- Top face of cube -->
-  <polygon points="16,4 26,9 16,14 6,9" fill="#00C4CC" opacity="0.95"/>
-  <!-- Left face of cube -->
-  <polygon points="6,9 16,14 16,24 6,19" fill="#007a82"/>
-  <!-- Right face of cube -->
-  <polygon points="26,9 16,14 16,24 26,19" fill="#009ba3"/>
-  <!-- Layer line 1 -->
-  <line x1="6" y1="13" x2="16" y2="18" stroke="#00C4CC" stroke-width="0.6" opacity="0.5"/>
-  <line x1="26" y1="13" x2="16" y2="18" stroke="#00C4CC" stroke-width="0.6" opacity="0.5"/>
-  <!-- Layer line 2 -->
-  <line x1="6" y1="17" x2="16" y2="22" stroke="#00C4CC" stroke-width="0.6" opacity="0.35"/>
-  <line x1="26" y1="17" x2="16" y2="22" stroke="#00C4CC" stroke-width="0.6" opacity="0.35"/>
-  <!-- "3D" mark bottom right -->
-  <text x="24" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="900" font-size="7" fill="#00C4CC" opacity="0.85">3D</text>
+  <!-- Background -->
+  <rect width="32" height="32" fill="#111214"/>
+
+  <!-- Isometric cube — centered, fills the space properly -->
+  <!-- Top face -->
+  <polygon points="16,5 27,11 16,17 5,11" fill="#40C4C4"/>
+  <!-- Left face -->
+  <polygon points="5,11 16,17 16,27 5,21" fill="#1D9A9A"/>
+  <!-- Right face -->
+  <polygon points="27,11 16,17 16,27 27,21" fill="#2BB0B0"/>
+
+  <!-- Edge highlights for crispness -->
+  <polyline points="5,11 16,5 27,11" fill="none" stroke="#62D8D8" stroke-width="0.8" stroke-linejoin="round"/>
+  <line x1="16" y1="5" x2="16" y2="17" stroke="#62D8D8" stroke-width="0.6" opacity="0.6"/>
 </svg>

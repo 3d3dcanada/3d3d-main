@@ -1,0 +1,149 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BookingEmbed from '../components/BookingEmbed';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'ScheduleAction',
+  name: 'Book a Call with Ken',
+  description: 'Schedule a 15-minute discovery call or 30-minute project discussion with Ken at 3D3D.',
+  target: {
+    '@type': 'EntryPoint',
+    urlTemplate: 'https://3d3d.ca/book',
+  },
+};
+---
+
+<BaseLayout
+  title="Book a Call | 3D3D"
+  description="Fifteen minutes. Tell me the problem. I will tell you whether I can solve it. Book a discovery call or project discussion."
+  schema={schema}
+  activePath="/book"
+>
+  <section class="book-page">
+    <div class="book-shell">
+
+      <div class="book-hero">
+        <p class="book-eyebrow scroll-in-left">Schedule</p>
+        <h1 class="book-title scroll-in">Book a Call</h1>
+        <p class="book-intro scroll-in-fade scroll-delay-1">
+          Fifteen minutes. Tell me the problem. I will tell you whether I can solve it, what material it needs, and what the job takes. That is the whole call.
+        </p>
+      </div>
+
+      <div class="book-embed scroll-in scroll-delay-2">
+        <BookingEmbed client:idle />
+      </div>
+
+      <div class="book-alt scroll-in scroll-delay-3">
+        <h2 class="book-alt__title">Prefer to reach out directly?</h2>
+        <div class="book-alt__options">
+          <a href="https://wa.me/15069532678" class="book-alt__link" target="_blank" rel="noopener noreferrer">
+            WhatsApp: +1-506-953-2678
+          </a>
+          <a href="mailto:info@3d3d.ca" class="book-alt__link">
+            Email: info@3d3d.ca
+          </a>
+          <a href="/contact" class="book-alt__link">
+            Full contact form
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .book-page {
+    background: #111214;
+    color: #F6F7FA;
+    min-height: 100svh;
+  }
+
+  .book-shell {
+    width: min(100% - clamp(1.5rem, 4vw, 4rem), 900px);
+    margin: 0 auto;
+    padding-block: clamp(4rem, 8vw, 7rem) clamp(4rem, 6vw, 6rem);
+  }
+
+  .book-eyebrow {
+    margin: 0;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #40C4C4;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .book-eyebrow::before {
+    content: '';
+    width: 2.75rem;
+    height: 2px;
+    background: #40C4C4;
+    flex-shrink: 0;
+  }
+
+  .book-title {
+    margin: 0.75rem 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 1.5rem + 4vw, 4.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    color: #FFFFFF;
+    text-transform: uppercase;
+  }
+
+  .book-intro {
+    margin: 1.25rem 0 clamp(2.5rem, 5vw, 4rem);
+    max-width: 38rem;
+    font-size: clamp(1rem, 0.94rem + 0.3vw, 1.12rem);
+    line-height: 1.75;
+    color: rgba(246, 247, 250, 0.7);
+  }
+
+  .book-embed {
+    min-height: 500px;
+    margin-bottom: 3rem;
+  }
+
+  .book-alt {
+    border-top: 1px solid rgba(64, 196, 196, 0.15);
+    padding-top: 2.5rem;
+  }
+
+  .book-alt__title {
+    margin: 0 0 1.2rem;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    color: #FFFFFF;
+  }
+
+  .book-alt__options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .book-alt__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.6rem 1.2rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(64, 196, 196, 0.15);
+    border-radius: 0.5rem;
+    color: #40C4C4;
+    font-size: 0.88rem;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .book-alt__link:hover {
+    background: rgba(64, 196, 196, 0.1);
+    border-color: rgba(64, 196, 196, 0.35);
+  }
+</style>

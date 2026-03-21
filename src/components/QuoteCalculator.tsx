@@ -332,7 +332,7 @@ export default function QuoteCalculator() {
 
     try {
       const formData = new FormData();
-      formData.append('_subject', selectedProduct ? `Quote Request — ${selectedProduct.name}` : 'Quote Request — 3D3D');
+      formData.append('_subject', selectedProduct ? `Quote Request |${selectedProduct.name}` : 'Quote Request |3D3D');
       formData.append('name', name);
       formData.append('email', email);
       formData.append('phone', phone);

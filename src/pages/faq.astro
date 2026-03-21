@@ -1,0 +1,313 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const faqs = [
+  {
+    category: 'Process',
+    items: [
+      {
+        q: 'How do I get a quote?',
+        a: 'Send me photos of the broken or missing part, the mounting area, and caliper measurements if you have them. Email, WhatsApp, or the contact form. I will assess the job and quote it within 24 hours.',
+      },
+      {
+        q: 'Do I need a CAD file?',
+        a: 'No. Most of my clients do not have CAD files. I reverse-engineer from the physical part, from photos, or from measurements taken on a rolling deck. If you have a file, great. If not, I handle it.',
+      },
+      {
+        q: 'What is the turnaround time?',
+        a: 'Most parts ship within 24 to 48 hours of design approval. Complex multi-part assemblies or on-site deployments are scoped individually. I will give you an exact timeline before I start.',
+      },
+      {
+        q: 'Do you ship internationally?',
+        a: 'Yes. Worldwide. I have shipped parts to the Caribbean, Europe, Southeast Asia, and the Pacific. If your vessel is somewhere, I can get the part there.',
+      },
+    ],
+  },
+  {
+    category: 'Materials',
+    items: [
+      {
+        q: 'Can I use PLA on a boat?',
+        a: 'No. PLA softens at 55 degrees Celsius, absorbs moisture, and degrades under UV. It belongs in a hobby shop. For marine applications, I use ASA above deck, PP Glass Fiber for saltwater contact, and PA11 CF near engines.',
+      },
+      {
+        q: 'What material goes above deck?',
+        a: 'ASA. UV-stable, 93 degree heat deflection, holds colour and geometry through full seasons of salt spray and sun. It is the default for any part that lives outside.',
+      },
+      {
+        q: 'What about parts near the engine?',
+        a: 'PA11 CF. 192 degree heat deflection under low load. Resists motor oils, fuels, benzene, ethanol, acetone. The only FDM compound that survives a working engine compartment.',
+      },
+      {
+        q: 'What material resists saltwater immersion?',
+        a: 'PP Glass Fiber. 0.11% moisture absorption. No swelling, no delamination, no geometry shift. Resists acids, solvents, and saltwater. The right call for through-hull fittings and anything in constant contact with water.',
+      },
+      {
+        q: 'Can you match metal part strength?',
+        a: 'PEI 1010 runs to 207 degrees and has 95 MPa tensile yield. It is positioned as a direct metal-alloy replacement for specific applications. Not everything, but many brackets, enclosures, and structural components.',
+      },
+    ],
+  },
+  {
+    category: 'On-Site Work',
+    items: [
+      {
+        q: 'Will you come to my boat?',
+        a: 'Yes. I travel worldwide with the equipment. Tell me where the vessel is and what the problem is. I will assess whether on-site work is the right approach and sort the logistics from there.',
+      },
+      {
+        q: 'What do you bring on-site?',
+        a: 'Full material stack, printer, measurement tools, and everything needed to assess, design, and fabricate on location. I am self-contained.',
+      },
+      {
+        q: 'Can you join a race crew?',
+        a: 'Yes. I stand my watch and bring the fabrication equipment. Newport-Bermuda 2026 aboard CSM the Mariner. When hardware fails at sea, I am below deck engineering the replacement while the boat holds heading.',
+      },
+    ],
+  },
+  {
+    category: 'Pricing',
+    items: [
+      {
+        q: 'How much does a part cost?',
+        a: 'Depends on the part. Simple brackets and fittings start around $30 to $50 CAD. Complex multi-component assemblies or high-temperature engineering compounds cost more. I quote every job individually after assessment.',
+      },
+      {
+        q: 'Is it cheaper than OEM?',
+        a: 'Almost always. And faster. A discontinued marine fitting from a dealer, if they even have it, can cost hundreds and take weeks. I can rebuild it in days for a fraction. The real savings are in dockage fees you are not paying while waiting.',
+      },
+      {
+        q: 'Do you charge for assessment?',
+        a: 'No. Send me the photos and measurements. I will tell you what it takes, what it costs, and whether I can do it. No obligation.',
+      },
+    ],
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.flatMap(cat =>
+    cat.items.map(item => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    }))
+  ),
+};
+---
+
+<BaseLayout
+  title="FAQ | 3D3D"
+  description="Frequently asked questions about 3D3D's fabrication services, materials, turnaround, pricing, and on-site deployment."
+  schema={schema}
+  activePath="/faq"
+>
+  <section class="faq-page">
+    <div class="faq-shell">
+      <p class="faq-eyebrow scroll-in-left">Questions</p>
+      <h1 class="faq-title scroll-in">Frequently Asked</h1>
+      <p class="faq-intro scroll-in-fade scroll-delay-1">
+        If the answer is not here, ask the chatbot or contact me directly. I do not charge for assessments.
+      </p>
+
+      {faqs.map((cat) => (
+        <div class="faq-category scroll-in">
+          <h2 class="faq-category__title">{cat.category}</h2>
+          <div class="faq-list">
+            {cat.items.map((item) => (
+              <details class="faq-item">
+                <summary class="faq-item__q">{item.q}</summary>
+                <p class="faq-item__a">{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <div class="faq-cta scroll-in scroll-delay-2">
+        <p>Still have questions?</p>
+        <div class="faq-cta__links">
+          <a href="/contact" class="faq-cta__btn">Contact Ken</a>
+          <a href="/book" class="faq-cta__btn faq-cta__btn--ghost">Book a Call</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .faq-page {
+    background: #111214;
+    color: #F6F7FA;
+    min-height: 100svh;
+  }
+
+  .faq-shell {
+    width: min(100% - clamp(1.5rem, 4vw, 4rem), 800px);
+    margin: 0 auto;
+    padding-block: clamp(4rem, 8vw, 7rem) clamp(4rem, 6vw, 6rem);
+  }
+
+  .faq-eyebrow {
+    margin: 0;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #40C4C4;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .faq-eyebrow::before {
+    content: '';
+    width: 2.75rem;
+    height: 2px;
+    background: #40C4C4;
+    flex-shrink: 0;
+  }
+
+  .faq-title {
+    margin: 0.75rem 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 1.5rem + 4vw, 4.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    color: #FFFFFF;
+    text-transform: uppercase;
+  }
+
+  .faq-intro {
+    margin: 1.25rem 0 clamp(3rem, 6vw, 5rem);
+    max-width: 36rem;
+    font-size: clamp(1rem, 0.94rem + 0.3vw, 1.1rem);
+    line-height: 1.75;
+    color: rgba(246, 247, 250, 0.65);
+  }
+
+  .faq-category {
+    margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
+  }
+
+  .faq-category__title {
+    margin: 0 0 1.2rem;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #40C4C4;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(64, 196, 196, 0.15);
+  }
+
+  .faq-list {
+    display: grid;
+    gap: 0;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .faq-item__q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #F6F7FA;
+    cursor: pointer;
+    list-style: none;
+    min-height: 44px;
+    -webkit-tap-highlight-color: transparent;
+    transition: color 0.15s ease;
+  }
+
+  .faq-item__q::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item__q::after {
+    content: '+';
+    font-family: var(--font-tech);
+    font-size: 1.1rem;
+    color: #40C4C4;
+    flex-shrink: 0;
+    margin-left: 1rem;
+    transition: transform 0.2s ease;
+  }
+
+  .faq-item[open] .faq-item__q::after {
+    content: '\2212';
+  }
+
+  .faq-item__q:hover {
+    color: #40C4C4;
+  }
+
+  .faq-item__a {
+    margin: 0;
+    padding: 0 0 1.2rem;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: rgba(246, 247, 250, 0.6);
+    max-width: 42rem;
+  }
+
+  .faq-cta {
+    margin-top: clamp(3rem, 5vw, 4rem);
+    padding-top: 2rem;
+    border-top: 1px solid rgba(64, 196, 196, 0.15);
+  }
+
+  .faq-cta p {
+    margin: 0 0 1rem;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: #FFFFFF;
+  }
+
+  .faq-cta__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .faq-cta__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0.7rem 1.4rem;
+    background: #40C4C4;
+    color: #0F1112;
+    border: 2px solid #40C4C4;
+    border-radius: 0.5rem;
+    font-family: var(--font-tech);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+
+  .faq-cta__btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .faq-cta__btn--ghost {
+    background: transparent;
+    color: #40C4C4;
+  }
+
+  .faq-cta__btn--ghost:hover {
+    background: rgba(64, 196, 196, 0.1);
+  }
+</style>

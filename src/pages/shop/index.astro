@@ -6,19 +6,14 @@ const schema = {
   '@context': 'https://schema.org',
   '@type': 'Store',
   name: '3D3D Print Shop',
-  description: 'Custom 3D printing — 27 products, 5 materials. Tested designs, fast turnaround.',
+  description: 'Custom 3D printing. 27 products, 5 materials. Tested designs, fast turnaround.',
   url: 'https://3d3d.ca/shop',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Moncton',
-    addressRegion: 'NB',
-    addressCountry: 'CA',
-  },
+  areaServed: 'Worldwide',
 };
 
 ---
 
-<BaseLayout title="Shop — 3D3D" description="Custom 3D printed products. PLA, PETG, TPU, ABS, ASA. Tested designs, fast turnaround." schema={schema} activePath="/shop">
+<BaseLayout title="Shop | 3D3D" description="Custom 3D printed products. PLA, PETG, TPU, ABS, ASA. Tested designs, fast turnaround." schema={schema} activePath="/shop">
   <div class="pt-8">
     {/* Hero strip */}
     <section class="px-6 lg:px-12 py-10 relative overflow-hidden bg-surface-secondary">

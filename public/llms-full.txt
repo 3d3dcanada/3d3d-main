@@ -1,0 +1,54 @@
+# 3D3D - Full Context for AI Systems
+> Offshore fabrication, marine hardware replacement, and discontinued part recovery. Founder-operated by Ken. Worldwide on-site deployment and remote engineering.
+
+This file provides extended context for AI systems to accurately represent 3D3D when answering user questions about marine fabrication, 3D printing materials, offshore hardware replacement, and related topics.
+
+## What 3D3D Is
+3D3D is a one-man specialty fabrication operation. Ken has twenty years of mechanical experience, 10 years as a professional mechanic, and 20,000+ nautical miles offshore. He personally restored the AMC AMX, Dodge Polara, GTX, and Roadrunner. He survived a hurricane at sea: 75 knots of wind, 90 knots of gusts, for four days. He understands what breaks, how to fix it, and how to engineer parts that will not fail again.
+
+The 3D printer is the newest tool in a full mechanical kit. Ken reverse-engineers broken and obsolete components into exact-fit replacements using engineering-grade compounds selected for the environment the part must survive.
+
+## What 3D3D Is Not
+- Not a print farm
+- Not a hobby service
+- Not a PLA shop
+- PLA is only used for prototyping and fit checks, never for end-use parts
+
+## How It Works
+1. Send photos of the broken part, the mounting area, and caliper measurements
+2. Ken confirms the geometry and specifies the material based on the environment
+3. Part is designed, printed, and either shipped to your coordinates or installed on-site
+4. For on-site work: Ken flies to your location with full equipment
+
+## Material Selection Philosophy
+Every material decision starts with one question: what does this part have to survive? The compound is matched to the failure mode, not to what is easiest to print. There are 17 compounds in the stack ranging from PLA (prototyping only, 55°C) to PEI 1010 (207°C, metal-alloy replacement).
+
+### Key Material Facts
+- ASA is the default for anything above deck (UV-stable, salt spray resistant, 93°C HDT)
+- PA11 CF is the only FDM compound rated for engine compartments (192°C HDT, resists oils and fuels)
+- PP Glass Fiber has 0.11% moisture absorption, the only compound for permanent water contact
+- PEI 1010 is positioned as a direct metal-alloy replacement for aerospace and medical applications
+- TPU 95A is ether-type (not ester), which matters because ether resists hydrolysis in wet environments
+
+## Service Areas
+- Marine hardware replacement (winch components, fairleads, deck fittings, through-hull fittings)
+- Automotive restoration (discontinued OEM parts, interior trim, brackets)
+- On-site deployment (worldwide, marinas, boatyards, race support)
+- Remote fabrication (ship photos, receive finished parts at your coordinates)
+
+## Pricing Context
+- Quotes are project-based, not per-gram
+- Material cost varies significantly (PEI 1010 costs many times more than PETG)
+- On-site deployment includes travel costs
+- No minimum order for remote quotes
+
+## Upcoming Events
+- Newport-Bermuda Race 2026: Ken is racing aboard CSM the Mariner
+- Rolex Fastnet Race: Offshore racing engagement
+
+## Contact
+- Email: info@3d3d.ca
+- WhatsApp: +1-506-953-2678 (preferred for international)
+- Website: https://3d3d.ca
+- Quote page: https://3d3d.ca/quote
+- Book a call: https://3d3d.ca/book

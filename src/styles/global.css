@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
+@import "./scroll-reveal.css";
 
 /* ─────────────────────────────────────────────────────────────────
    3D3D — Precision Fabrication Design System
@@ -88,6 +89,15 @@
 /* ── Base ────────────────────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
+}
+
+/* ── Touch Target Minimums ──────────────────────────────────────── */
+@media (pointer: coarse) {
+  a[href], button, [role="button"], select,
+  summary, input[type="checkbox"], input[type="radio"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
 }
 
 body {

@@ -2,6 +2,8 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import SiteSidebar from '../components/SiteSidebar.astro';
+import MobileCTA from '../components/MobileCTA.astro';
+
 import '../styles/global.css';
 
 interface NavGroup {
@@ -47,8 +49,8 @@ const defaultNavGroups: NavGroup[] = [
     label: 'Services',
     items: [
       { id: 'home', label: 'Home', href: '/' },
-      { id: 'tiers', label: 'Service Tiers', href: '/#tiers' },
       { id: 'contact', label: 'Request Service', href: '/contact' },
+      { id: 'book', label: 'Book a Call', href: '/book' },
       { id: 'events', label: 'Events', href: '/events' },
     ],
   },
@@ -57,6 +59,7 @@ const defaultNavGroups: NavGroup[] = [
     items: [
       { id: 'shop', label: 'Shop', href: '/shop' },
       { id: 'materials', label: 'Materials', href: '/materials' },
+      { id: 'faq', label: 'FAQ', href: '/faq' },
       { id: 'about', label: 'About', href: '/about' },
       { id: 'blog', label: 'Updates', href: '/blog' },
       { id: 'opportunities', label: 'Opportunities', href: '/opportunities' },
@@ -92,6 +95,56 @@ const finalNavGroups = navGroups.length > 0 ? navGroups : defaultNavGroups;
       <Footer accent={accent} showCooperativeInfo={showCooperativeInfo} />
     )}
   </div>
+
+  <MobileCTA />
+
+  <!-- AI bot feedback prompt -->
+  <a
+    href="/contact?subject=ai-bot-feedback"
+    class="ai-feedback-blip"
+    aria-label="Give feedback on AI assistant"
+  >
+    Should we add an AI assistant? <span class="ai-feedback-blip__cta">Give us feedback</span>
+  </a>
+
+  <style>
+    .ai-feedback-blip {
+      position: fixed;
+      bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+      right: 16px;
+      z-index: 950;
+      padding: 8px 14px;
+      border-radius: 20px;
+      background: var(--color-surface-primary, #111214);
+      color: var(--color-text-inverse, #F6F7FA);
+      font-family: 'Archivo', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      opacity: 0.85;
+    }
+    .ai-feedback-blip:hover {
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+    .ai-feedback-blip__cta {
+      color: #40C4C4;
+      font-weight: 700;
+    }
+    @media (max-width: 600px) {
+      .ai-feedback-blip {
+        right: 8px;
+        font-size: 0.65rem;
+        padding: 6px 10px;
+      }
+    }
+  </style>
+
+  <script>
+    import '../scripts/scroll-fallback';
+  </script>
 
   <script is:inline>
     window.dataLayer = window.dataLayer || [];

@@ -3,18 +3,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const orgSchema = {
   '@context': 'https://schema.org',
-  '@type': ['LocalBusiness', 'Organization'],
+  '@type': ['ProfessionalService', 'Organization'],
   name: '3D3D',
   url: 'https://3d3d.ca',
-  description: 'Specialty fabrication for marine, motorsport, and field deployment. Founder-operated. Atlantic Canada.',
+  description: 'Specialty fabrication for marine, motorsport, replacement parts, and field deployment. Founder-operated and serving worldwide buyers.',
   telephone: '+1-506-953-2678',
-  email: '3d3dcanada@gmail.com',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Moncton',
-    addressRegion: 'NB',
-    addressCountry: 'CA',
-  },
+  email: 'info@3d3d.ca',
+  areaServed: ['Worldwide', 'Caribbean', 'Coastal United States', 'Europe'],
   founder: { '@type': 'Person', name: 'Ken' },
   sameAs: [
     'https://www.youtube.com/@3D3Dcanada',
@@ -36,6 +31,7 @@ const homeNavGroups = [
     items: [
       { id: 'home', label: 'Home', href: '/' },
       { id: 'what-i-do', label: 'What I Do', href: '#what-i-do' },
+      { id: 'workshop', label: 'The Workshop', href: '#workshop' },
       { id: 'contact', label: 'Contact', href: '#contact' },
     ],
   },
@@ -54,45 +50,45 @@ const services = [
   {
     id: 'marine',
     drawerId: 'drawer-marine',
-    eyebrow: 'Marine & Offshore',
-    headline: 'Built for conditions that destroy everything else.',
-    description: 'Custom winch components, deck hardware, and purpose-built parts engineered for saltwater, UV exposure, and open-ocean conditions. If it lives on a vessel, I build it to last.',
+    eyebrow: 'Marine Hardware',
+    headline: 'The part does not exist anymore. So I build it.',
+    description: 'Supply chains do not care about your passage plan. When a stainless pawl wears through a bronze pocket on a discontinued Barient 27 winch, or a Spinlock XA clutch handle snaps under a loaded halyard, you cannot wait three weeks for a mismatched part that may not fit. I reverse-engineer deck fittings, fairleads, winch components, and custom brackets, all built to handle offshore dynamic loads.',
     drawer: {
-      materials: 'ASA above deck — UV-stable, 93°C heat deflection. PETG-CF below deck for structural fittings. PP Glass Fiber or PP Carbon Fiber for constant saltwater contact. TPU 95A for seals and gaskets. PA11 CF near engines — 192°C, resists oils and fuels.',
-      turnaround: 'Send the broken part, a photo, or caliper measurements. If you\'re offshore, send dimensions by message. I\'ve built from blurry photos and measurements taken on a rolling deck.',
+      materials: 'ASA above deck. UV-stable, 93°C heat deflection. PETG-CF below deck for structural fittings. PP Glass Fiber or PP Carbon Fiber for constant saltwater contact. TPU 95A for seals and gaskets. PA11 CF near engines. 192°C, resists oils and fuels.',
+      turnaround: 'Send the broken component, or provide precise caliper measurements. If you\'re offshore, dimensions by message are enough. I\'ve built from blurry photos and measurements taken on a rolling deck.',
     },
   },
   {
     id: 'automotive',
     drawerId: 'drawer-automotive',
-    eyebrow: 'Automotive & Motorsport',
-    headline: "I know performance. I've built it.",
-    description: 'Ten years as a mechanic. Engine builds, drag cars, daily drivers. Discontinued trim pieces, custom brackets, heat-resistant underhood components — if the dealer stopped making it or never made it, I do.',
+    eyebrow: 'Automotive Restoration',
+    headline: 'Unobtainium ceases to be a problem.',
+    description: 'I spent ten years turning wrenches on heavy iron. I have personally restored the AMC AMX, Dodge Polara, GTX, and Roadrunner. I know the frustration of halting a multi-year build because an interior trim panel, a dash overlay, or a specific retaining clip was last stamped forty years ago. I fabricate exact geometric replicas of discontinued OEM parts that fit and hold.',
     drawer: {
-      materials: 'PA11 CF for engine bay — 192°C heat deflection, resists oils and fuels. PETG-CF for structural brackets. ASA for exterior and underhood UV exposure. PC Blend for impact-critical parts. PEI 1010 when nothing else survives.',
-      turnaround: 'Send photos of where the part lives, the broken piece, and dimensions. For discontinued OEM parts, bring the original — I measure, model, and test-fit before committing. Tell me the date and I work backwards from it.',
+      materials: 'PA11 CF for engine bay. 192°C heat deflection, resists oils and fuels. PETG-CF for structural brackets. ASA for exterior and underhood UV exposure. PC Blend for impact-critical parts. PEI 1010 when nothing else survives.',
+      turnaround: 'Ship the shattered original piece or the surrounding housing. I will rebuild the geometry digitally and print the final part. For discontinued OEM parts, bring the original. I measure, model, and test-fit before committing.',
     },
   },
   {
-    id: 'scan',
-    drawerId: 'drawer-scan',
-    eyebrow: 'Scan · Measure · Recreate',
-    headline: 'If you can bring the part, I can recreate it.',
-    description: 'I reverse-engineer broken and discontinued components from physical reference — calipers, measurement, and scanning. Vessel hardware, vintage car parts, antique hardware, obsolete fittings. One piece is a real job.',
+    id: 'onsite',
+    drawerId: 'drawer-onsite',
+    eyebrow: 'On-Site Deployment',
+    headline: 'The vessel cannot move. I can.',
+    description: 'Marina fees bleed cruising budgets dry. If your vessel is tied up in Antigua, Newport, or a remote boatyard waiting on a critical refit component, the fastest path to the water is bringing the factory to the dock. I travel worldwide with the necessary equipment, assess the failure, design the fix, and fabricate the hardware on location.',
     drawer: {
-      materials: 'Material matched to what the original had to survive. TPU 95A for seals and dampening. PETG-CF or PA11 CF for structural and heat-exposed parts. PP Glass Fiber for chemical environments. PEI 1010 for high-heat metal replacement.',
-      turnaround: 'Bring whatever you have — the broken part, half a part, a photo. I measure with calipers and reference every surface. If it\'s completely gone, tell me what system it belongs to. Minimum order is one.',
+      materials: 'Full material stack on location. ASA, PA11 CF, PETG-CF, TPU, PP-CF, matched to the failure mode after I\'ve assessed it in person. No guessing from a product page.',
+      turnaround: 'Call me. Tell me where the boat is and what is broken. I will pack the cases and sort the flights.',
     },
   },
   {
-    id: 'custom',
-    drawerId: 'drawer-custom',
-    eyebrow: 'Custom & Field Fabrication',
-    headline: 'No blueprint required. Bring the problem.',
-    description: 'Custom mounts, jigs, adapters, enclosures, tooling, and one-off solutions. The full material stack — from flexible TPU to PEI 1010 at 207°C. I deploy — fly me to your location, your event, your boat.',
+    id: 'remote',
+    drawerId: 'drawer-remote',
+    eyebrow: 'Remote Fabrication',
+    headline: 'Engineered here. Deployed anywhere.',
+    description: 'For components that do not require my physical presence on deck. Send high-resolution photos, the load requirements, and exact caliper measurements. I design the replacement and ship the finished hardware to your current coordinates. Your marina, your boatyard, wherever the vessel is sitting.',
     drawer: {
-      materials: 'Full material stack matched to the use case. PETG-CF and ASA for structural and outdoor work. TPU 95A for flex. PP-CF for chemical exposure. PA11 CF for high heat. PEI 1010 for metal replacement. Material chosen after the problem is understood.',
-      turnaround: 'Tell me what the part has to do — the load, the environment, what failed before, and the schedule. Field deployment available: if the job can\'t wait on shipping, I bring the equipment to you.',
+      materials: 'Material matched to the environment after intake. Saltwater, UV, heat, chemical exposure, dynamic load. I specify based on what the part has to survive, not what is easiest to print.',
+      turnaround: 'Send photos of the broken component, the mounting area, and caliper measurements. I will confirm the geometry, quote the job, and ship to your coordinates.',
     },
   },
 ];
@@ -100,8 +96,8 @@ const services = [
 ---
 
 <BaseLayout
-  title="3D3D — Specialty Fabrication for Marine, Motorsport & Field Deployment"
-  description="3D3D builds functional parts for boats, cars, and anything that needs to work under real conditions. I scan, measure, and recreate broken or obsolete components. Founder-operated. Atlantic Canada."
+  title="3D3D | You Have a Problem. I Am Your Solution."
+  description="Offshore marine fabrication and discontinued part replacement. Worldwide on-site deployment and remote engineering by a 20,000nm offshore specialist."
   schema={orgSchema}
   activePath="/"
   navGroups={homeNavGroups}
@@ -112,22 +108,22 @@ const services = [
     <!-- ═══════════════════════════════════════════════════
          HERO — dark, full-height
          ═══════════════════════════════════════════════════ -->
-    <section id="home" class="home-section home-section--dark home-hero" data-reveal-section>
+    <section id="home" class="home-section home-section--dark home-hero" data-section>
       <div class="hero-bg" aria-hidden="true">
         <img src="/media/real/fleet-start-press.jpg" alt="" loading="eager" decoding="async" />
       </div>
       <div class="section-shell hero-shell">
         <div class="hero-copy">
-          <p class="eyebrow hero-eyebrow">Specialty Fabrication · Marine · Motorsport · Field Deployment</p>
+          <p class="eyebrow hero-eyebrow">Offshore Fabrication & Mechanical Specialist</p>
           <h1 class="hero-title" aria-label="You have a problem. I am your solution.">
             <span class="hero-line">You have a problem.</span>
             <span class="hero-line hero-line--accent">I am your solution.</span>
           </h1>
           <p class="hero-subhead">
-            If it's broken, discontinued, or doesn't exist yet — I build it. Marine hardware, automotive parts, field fabrication, on-site deployment. Atlantic Canada based, serving Canada and the United States.
+            I am not a 3D printing service. I am an offshore specialist with a twenty-year mechanical background, advanced fabrication tools, and the hard-won knowledge of what keeps a vessel moving. The printer is just the newest tool in a kit built to fix things that cannot fail at sea. Available for on-site work, worldwide. One call.
           </p>
           <div class="hero-actions">
-            <a href="/contact" class="hero-button hero-button--primary" data-analytics-event="contact_started" data-analytics-source="hero-cta">Request Service →</a>
+            <a href="/contact" class="hero-button hero-button--primary" data-analytics-event="contact_started" data-analytics-source="hero-cta">One Call. I'll Assess It. →</a>
             <a href="https://ko-fi.com/3d3dca" class="hero-button hero-button--ghost" target="_blank" rel="noopener noreferrer" data-analytics-event="kofi_clicked" data-analytics-source="hero-cta">Support the Campaign →</a>
           </div>
         </div>
@@ -153,26 +149,25 @@ const services = [
     <!-- ═══════════════════════════════════════════════════
          WHAT WE DO — light
          ═══════════════════════════════════════════════════ -->
-    <section id="what-i-do" class="home-section home-section--light work-section" data-reveal-section aria-labelledby="work-label">
+    <section id="what-i-do" class="home-section home-section--light work-section" data-section aria-labelledby="work-label">
       <div class="section-shell work-shell">
 
         <header class="work-header">
-          <p class="eyebrow reveal-left" data-reveal>What I Do</p>
-          <h2 class="section-title reveal-up" data-reveal aria-label="I scan it. I model it. I build it.">
+          <p class="eyebrow scroll-in-left">What I Do</p>
+          <h2 class="section-title scroll-in" aria-label="I scan it. I model it. I build it.">
             <span class="typewriter-line" data-typewriter>I scan it.</span><br />
             <span class="typewriter-line" data-typewriter>I model it.</span><br />
             <span class="typewriter-line" data-typewriter>I build it.</span>
           </h2>
-          <p class="section-body reveal-fade delay-1" data-reveal>
-            3D3D fabricates functional parts for boats, cars, machines, and anything that can't afford to fail. I measure and reverse-engineer broken or obsolete components into exact-fit replacements — hull hardware, deck fittings, vintage automotive parts, antique hardware, discontinued fittings. Bring me the part, a photo, or just the problem. I handle the rest.
+          <p class="section-body scroll-in-fade scroll-delay-1">
+            My background is not in software. It is in keeping complex machinery alive when failure has severe consequences. I reverse-engineer broken and obsolete components into exact-fit replacements: deck fittings, winch hardware, discontinued OEM parts, vintage automotive pieces, and one-off solutions that no supply chain carries anymore. Bring me the part, a photo, or just the problem.
           </p>
         </header>
 
         <div class="services-scroll" role="region" aria-label="Service areas" tabindex="0">
           {services.map((service, i) => (
             <article
-              class="service-card reveal-up"
-              data-reveal
+              class="service-card scroll-in"
               style={`transition-delay: ${i * 0.12}s;`}
               data-drawer-trigger
               data-drawer-id={service.drawerId}
@@ -191,20 +186,94 @@ const services = [
     </section>
 
     <!-- ═══════════════════════════════════════════════════
+         THE WORKSHOP — dark
+         ═══════════════════════════════════════════════════ -->
+    <section id="workshop" class="home-section home-section--dark workshop-section" data-section aria-labelledby="workshop-label">
+      <div class="section-shell workshop-shell">
+        <header class="workshop-header">
+          <p class="eyebrow eyebrow--light scroll-in-left">The Workshop</p>
+          <h2 class="section-title section-title--light scroll-in" id="workshop-label">
+            Built to solve problems.<br />Not to look pretty on a shelf.
+          </h2>
+          <p class="section-body section-body--inverse scroll-in-fade scroll-delay-1">
+            Two Prusa MK4S printers running engineering compounds. A full mechanical tool kit built over twenty years of turning wrenches. Calipers, micrometers, and a scanner for reverse engineering parts that no longer have drawings. This is not a hobby setup. It is a portable fabrication lab that travels to the job.
+          </p>
+        </header>
+
+        <div class="workshop-grid">
+          <figure class="workshop-card workshop-card--hero scroll-in">
+            <img src="/media/workshop/printer-action-cf.jpg" alt="Prusa MK4S printing carbon fiber compound" loading="lazy" decoding="async" />
+            <figcaption>
+              <span class="workshop-card__label">Live print</span>
+              <span class="workshop-card__note">PETG-CF structural bracket, 0.2mm layer height</span>
+            </figcaption>
+          </figure>
+          <figure class="workshop-card scroll-in scroll-delay-1">
+            <img src="/media/workshop/printer-frame-shot.jpg" alt="Prusa printer frame close-up" loading="lazy" decoding="async" />
+            <figcaption>
+              <span class="workshop-card__label">The machine</span>
+              <span class="workshop-card__note">Prusa MK4S with hardened nozzle for abrasive compounds</span>
+            </figcaption>
+          </figure>
+          <figure class="workshop-card scroll-in scroll-delay-2">
+            <img src="/media/workshop/machine-parts-flatlay.jpg" alt="Finished machine parts laid out for inspection" loading="lazy" decoding="async" />
+            <figcaption>
+              <span class="workshop-card__label">Output</span>
+              <span class="workshop-card__note">Finished parts ready for fitment and deployment</span>
+            </figcaption>
+          </figure>
+          <figure class="workshop-card scroll-in scroll-delay-1">
+            <img src="/media/workshop/modular-parts-flatlay.jpg" alt="Modular replacement parts array" loading="lazy" decoding="async" />
+            <figcaption>
+              <span class="workshop-card__label">Modular builds</span>
+              <span class="workshop-card__note">Replacement components printed in matched compounds</span>
+            </figcaption>
+          </figure>
+          <figure class="workshop-card scroll-in scroll-delay-2">
+            <img src="/media/workshop/rv-lab-01.jpg" alt="Mobile fabrication lab interior" loading="lazy" decoding="async" />
+            <figcaption>
+              <span class="workshop-card__label">Mobile lab</span>
+              <span class="workshop-card__note">The whole operation travels. Worldwide deployment ready.</span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="workshop-stats">
+          <div class="workshop-stat scroll-in">
+            <span class="workshop-stat__value">17+</span>
+            <span class="workshop-stat__label">Compounds in the stack</span>
+          </div>
+          <div class="workshop-stat scroll-in scroll-delay-1">
+            <span class="workshop-stat__value">207°C</span>
+            <span class="workshop-stat__label">Max heat deflection (PEI 1010)</span>
+          </div>
+          <div class="workshop-stat scroll-in scroll-delay-2">
+            <span class="workshop-stat__value">20,000+</span>
+            <span class="workshop-stat__label">Nautical miles offshore</span>
+          </div>
+          <div class="workshop-stat scroll-in scroll-delay-3">
+            <span class="workshop-stat__value">10 yr</span>
+            <span class="workshop-stat__label">Professional mechanic background</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
          CONTACT — teal/dark
          ═══════════════════════════════════════════════════ -->
-    <section id="contact" class="home-section home-section--teal final-cta-section" data-reveal-section>
+    <section id="contact" class="home-section home-section--teal final-cta-section" data-section>
       <div class="section-shell final-cta-shell">
         <div class="final-cta-copy">
-          <h2 class="section-title section-title--inverse reveal-up" data-reveal>
-            Need a part? Need a fabricator on call?<br />Need someone who actually knows what breaks?
+          <h2 class="section-title section-title--inverse scroll-in">
+            One call. I'll assess it.<br />We'll sort it out.
           </h2>
-          <p class="section-body section-body--inverse reveal-fade delay-1" data-reveal>
-            Send the problem. Send the broken part. Send the photo. 3D3D builds for people who need performance, not excuses.
+          <p class="section-body section-body--inverse scroll-in-fade scroll-delay-1">
+            Tell me the problem. Tell me where the vessel is. I will tell you whether I can solve it, how we will do it, and exactly what it takes. That is the whole process.
           </p>
           <div class="final-cta-actions">
-            <a href="/contact" class="final-cta-button final-cta-button--light reveal-up delay-2" data-reveal>Request Service →</a>
-            <a href="https://ko-fi.com/3d3dca" class="final-cta-button final-cta-button--ghost reveal-up delay-3" data-reveal target="_blank" rel="noopener noreferrer">Support on Ko-fi →</a>
+            <a href="/contact" class="final-cta-button final-cta-button--light scroll-in scroll-delay-2">Contact Ken →</a>
+            <a href="/book" class="final-cta-button final-cta-button--ghost scroll-in scroll-delay-3">Book a Call →</a>
           </div>
         </div>
       </div>
@@ -247,47 +316,6 @@ const services = [
        SCRIPTS
        ═══════════════════════════════════════════════════ -->
   <script is:inline>
-    (() => {
-      const revealItems = Array.from(document.querySelectorAll('[data-reveal]'));
-      const sectionItems = Array.from(document.querySelectorAll('[data-reveal-section]'));
-
-      const updateVisibleState = () => {
-        const threshold = window.innerHeight + 300;
-        revealItems.forEach((item) => {
-          if (!(item instanceof HTMLElement)) return;
-          if (item.getBoundingClientRect().top < threshold) {
-            item.classList.add('revealed');
-          }
-        });
-        sectionItems.forEach((item) => {
-          if (!(item instanceof HTMLElement)) return;
-          if (item.getBoundingClientRect().top < threshold) {
-            item.classList.add('revealed-section');
-          }
-        });
-      };
-
-      let ticking = false;
-      const onScroll = () => {
-        if (ticking) return;
-        ticking = true;
-        window.requestAnimationFrame(() => { updateVisibleState(); ticking = false; });
-      };
-
-      const scheduleInitialChecks = () => {
-        updateVisibleState();
-        window.requestAnimationFrame(updateVisibleState);
-        window.setTimeout(updateVisibleState, 120);
-        window.setTimeout(updateVisibleState, 320);
-      };
-
-      scheduleInitialChecks();
-      window.addEventListener('load', scheduleInitialChecks);
-      window.addEventListener('hashchange', scheduleInitialChecks);
-      window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', onScroll);
-    })();
-
     (() => {
       const drawer = document.getElementById('service-drawer');
       const content = document.getElementById('drawer-content');
@@ -443,19 +471,7 @@ const services = [
     color: #FFFFFF;
   }
 
-  /* ═══════════════════════════════════════════════════
-     REVEAL
-     ═══════════════════════════════════════════════════ */
-  .reveal-up    { opacity: 0; transform: translateY(32px); transition: opacity 0.65s, transform 0.65s cubic-bezier(0.16,1,0.3,1); }
-  .reveal-scale { opacity: 0; transform: scale(0.94); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.16,1,0.3,1); }
-  .reveal-left  { opacity: 0; transform: translateX(-40px); transition: opacity 0.65s, transform 0.65s cubic-bezier(0.16,1,0.3,1); }
-  .reveal-fade  { opacity: 0; transition: opacity 0.65s; }
-  .reveal-mask  { clip-path: inset(0 100% 0 0); transition: clip-path 0.8s cubic-bezier(0.16,1,0.3,1); }
-  .reveal-mask.revealed { clip-path: inset(0 0% 0 0); }
-  .revealed     { opacity: 1; transform: none; }
-  .delay-1 { transition-delay: 0.1s; }
-  .delay-2 { transition-delay: 0.2s; }
-  .delay-3 { transition-delay: 0.3s; }
+  /* Scroll animations handled by global scroll-reveal.css */
 
   .eyebrow {
     display: inline-flex;
@@ -807,6 +823,125 @@ const services = [
 
   .service-card:hover .service-card__cta {
     color: var(--page-text);
+  }
+
+  /* ═══════════════════════════════════════════════════
+     THE WORKSHOP
+     ═══════════════════════════════════════════════════ */
+  .eyebrow--light { color: rgba(246, 247, 250, 0.72); }
+  .eyebrow--light::before { background: var(--page-accent); }
+
+  .workshop-shell {
+    display: grid;
+    gap: clamp(3rem, 6vw, 5rem);
+  }
+
+  .workshop-header {
+    display: grid;
+    gap: 1.4rem;
+    max-width: 52rem;
+  }
+
+  .workshop-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    grid-template-rows: auto auto;
+    gap: 1rem;
+  }
+
+  .workshop-card {
+    margin: 0;
+    overflow: hidden;
+    border: 2px solid rgba(64, 196, 196, 0.15);
+    border-radius: 1rem;
+    position: relative;
+  }
+
+  .workshop-card--hero {
+    grid-row: 1 / 3;
+  }
+
+  .workshop-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    aspect-ratio: 4 / 3;
+    transition: transform 0.4s ease;
+  }
+
+  .workshop-card--hero img {
+    aspect-ratio: auto;
+    min-height: 100%;
+  }
+
+  .workshop-card:hover img {
+    transform: scale(1.03);
+  }
+
+  .workshop-card figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem 1.2rem;
+    background: linear-gradient(0deg, rgba(17, 18, 20, 0.88), transparent);
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .workshop-card__label {
+    font-family: var(--font-tech);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--page-accent);
+  }
+
+  .workshop-card__note {
+    font-size: 0.82rem;
+    line-height: 1.4;
+    color: rgba(246, 247, 250, 0.7);
+  }
+
+  .workshop-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.2rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(64, 196, 196, 0.2);
+  }
+
+  .workshop-stat {
+    display: grid;
+    gap: 0.3rem;
+  }
+
+  .workshop-stat__value {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 1.4rem + 2vw, 3rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--page-accent);
+  }
+
+  .workshop-stat__label {
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(246, 247, 250, 0.5);
+  }
+
+  @media (max-width: 640px) {
+    .workshop-grid {
+      grid-template-columns: 1fr;
+    }
+    .workshop-card--hero {
+      grid-row: auto;
+    }
   }
 
   /* ═══════════════════════════════════════════════════

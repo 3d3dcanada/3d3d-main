@@ -2,16 +2,38 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Contact — 3D3D" description="Get in touch with 3D3D. Custom fabrication requests, partnerships, printer setup, or anything else. Atlantic Canada based, serving the United States and Canada." activePath="/contact">
+<BaseLayout title="Contact | 3D3D" description="Offshore fabricator, worldwide. Tell me the problem. I will tell you whether I can solve it, and exactly how. Marine hardware, discontinued parts, on-site deployment." activePath="/contact">
 
   <div class="contact-page">
     <div class="contact-hero">
       <div class="contact-shell">
-        <p class="contact-eyebrow">Get in Touch</p>
-        <h1 class="contact-title">Let's build something.</h1>
+        <p class="contact-eyebrow">Direct Line</p>
+        <h1 class="contact-title scroll-in">Tell me the problem.</h1>
         <p class="contact-intro">
-          3D3D builds functional parts for marine, automotive, motorsport, and field deployment. Whether you need a replacement part, a custom fabrication, or printer setup help — send me the details.
+          I will tell you whether I can solve it, and exactly how we will do it. That is the whole process.
         </p>
+      </div>
+    </div>
+
+    <div class="contact-paths">
+      <div class="contact-shell">
+        <div class="contact-paths__grid">
+          <div class="contact-path">
+            <span class="contact-path__num">01</span>
+            <h2 class="contact-path__title">Remote Assessment</h2>
+            <p class="contact-path__body">Send high-resolution photos of the broken hardware, the surrounding mounting area, and a brief description of the failure. Include caliper measurements if you have them. I will assess what can be rebuilt, what material it requires, and what it will cost.</p>
+          </div>
+          <div class="contact-path">
+            <span class="contact-path__num">02</span>
+            <h2 class="contact-path__title">Reverse Engineering</h2>
+            <p class="contact-path__body">Box up the shattered part, the worn-out gear, or the broken bracket. Ship it to my workshop. I will measure, model, and rebuild it in the correct material, with the correct tolerances. Then ship it back or bring it aboard.</p>
+          </div>
+          <div class="contact-path">
+            <span class="contact-path__num">03</span>
+            <h2 class="contact-path__title">Direct Engagement</h2>
+            <p class="contact-path__body">For on-site deployment, extended refit support, race campaigns, or complex structural problems aboard the vessel, contact me directly. Tell me where the vessel is, what the job is, and when you need it done.</p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -22,7 +44,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <h2 class="contact-card__title">Direct Contact</h2>
             <div class="contact-card__row">
               <span class="contact-card__label">Email</span>
-              <a href="mailto:3d3dcanada@gmail.com" class="contact-card__value contact-card__value--accent">3d3dcanada@gmail.com</a>
+              <a href="mailto:info@3d3d.ca" class="contact-card__value contact-card__value--accent">info@3d3d.ca</a>
             </div>
             <div class="contact-card__row">
               <span class="contact-card__label">Phone / WhatsApp</span>
@@ -30,21 +52,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </div>
             <div class="contact-card__row">
               <span class="contact-card__label">Location</span>
-              <span class="contact-card__value">Atlantic Canada based. Serving the United States and Canada.</span>
+              <span class="contact-card__value">Remote-first. Serving worldwide buyers, coastal routes, and hard-to-source projects.</span>
             </div>
           </div>
 
           <div class="contact-card">
             <h2 class="contact-card__title">Quick Links</h2>
+            <a href="/book" class="contact-card__link contact-card__link--accent">Book a Call →</a>
+            <a href="/faq" class="contact-card__link">Frequently Asked Questions →</a>
             <a href="https://ko-fi.com/3d3dca" class="contact-card__link" target="_blank" rel="noopener noreferrer">Support on Ko-fi →</a>
-            <a href="/blog" class="contact-card__link">Read the blog →</a>
             <a href="https://www.printables.com/@KTK3D_3050116" class="contact-card__link" target="_blank" rel="noopener noreferrer">Free designs on Printables →</a>
             <a href="/shop" class="contact-card__link">Browse the shop →</a>
           </div>
         </div>
 
         <div class="contact-form-wrap">
-          <h2 class="contact-form__title">Send a Message</h2>
+          <h2 class="contact-form__title">Send me the details.</h2>
           <form action="https://formspree.io/f/mldlydbl" method="POST" class="contact-form" data-analytics-submit="contact_submitted" data-analytics-source="contact-page">
             <div aria-hidden="true" style="position: absolute; left: -100vw; width: 1px; height: 1px; overflow: hidden;">
               <label for="contact-website">Leave this field blank</label>
@@ -63,16 +86,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <div class="contact-form__field">
               <label for="subject">What do you need?</label>
               <select id="subject" name="subject">
-                <option value="custom-fabrication">Custom Fabrication Request</option>
-                <option value="replacement-part">Replacement Part</option>
-                <option value="printer-setup">Printer Setup Help</option>
-                <option value="event-booking">Event Booking</option>
+                <option value="marine-hardware">Marine Hardware: Broken or Discontinued</option>
+                <option value="on-site">On-Site Deployment: Race, Refit, or Passage</option>
+                <option value="remote-assessment">Remote Assessment: Send Photos</option>
+                <option value="reverse-engineering">Reverse Engineering: Ship the Part</option>
+                <option value="automotive">Automotive Restoration</option>
                 <option value="other">Other</option>
               </select>
             </div>
             <div class="contact-form__field">
               <label for="message">Describe your project or problem</label>
-              <textarea id="message" name="message" rows={6} required placeholder="Tell me about the part, the problem, or the project. Include dimensions, materials, or photos if you have them."></textarea>
+              <textarea id="message" name="message" rows={6} required placeholder="Tell me the problem. Where is the vessel? What broke? What do you need? I'll take it from there."></textarea>
             </div>
             <div class="contact-form__field">
               <label for="file" class="contact-form__file-label">
@@ -139,6 +163,48 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-size: clamp(1rem, 0.94rem + 0.3vw, 1.15rem);
     line-height: 1.75;
     color: rgba(246, 247, 250, 0.78);
+  }
+
+  /* ── Intake paths ── */
+  .contact-paths {
+    background: #1A1C1F;
+    padding: clamp(3rem, 5vw, 4.5rem) 0;
+    border-top: 1px solid rgba(64, 196, 196, 0.15);
+    border-bottom: 1px solid rgba(64, 196, 196, 0.15);
+  }
+
+  .contact-paths__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .contact-path {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .contact-path__num {
+    font-family: var(--font-tech);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: #40C4C4;
+  }
+
+  .contact-path__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    line-height: 1.2;
+    color: #F6F7FA;
+  }
+
+  .contact-path__body {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: rgba(246, 247, 250, 0.6);
   }
 
   .contact-body {
@@ -209,6 +275,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .contact-card__link:hover {
     color: var(--page-accent);
+  }
+
+  .contact-card__link--accent {
+    color: var(--page-accent);
+    font-weight: 600;
   }
 
   .contact-form-wrap {
@@ -344,6 +415,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     background: #53D3D3;
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(64, 196, 196, 0.3);
+  }
+
+  @media (max-width: 900px) {
+    .contact-paths__grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
   }
 
   @media (max-width: 768px) {

@@ -28,7 +28,7 @@ const materials = [
     full: 'Polycarbonate Blend',
     hdt: '113°C',
     tags: ['Tough', 'Impact-resistant', 'Heat-resistant'],
-    body: 'Strong, tough, and heat-resistant. PC Blend maintains toughness at low temperatures and resists creep under mechanical stress — properties that pure CF composites trade away for stiffness. 113°C heat deflection. The choice when a part takes real impacts and can\'t afford to shatter. Fan shrouds, structural enclosures, machine components.',
+    body: 'Strong, tough, and heat-resistant. PC Blend maintains toughness at low temperatures and resists creep under mechanical stress, properties that pure CF composites trade away for stiffness. 113°C heat deflection. The choice when a part takes real impacts and can\'t afford to shatter. Fan shrouds, structural enclosures, machine components.',
   },
   {
     tier: 'Engineering',
@@ -46,7 +46,7 @@ const materials = [
     full: 'Polypropylene Glass Fiber',
     hdt: '138°C',
     tags: ['Chemical-resistant', 'Marine', 'Lab'],
-    body: 'Polypropylene with glass fibre reinforcement. The standout property: 0.11% moisture absorption at both 24 hours and 7 days — stable, essentially zero. No swelling, no delamination, no geometry shift in saltwater or wet environments. Resists acids, solvents, non-oxidised bases, and oils. 138°C heat deflection. The right material for through-hull fittings, lab hardware, chemical-environment components, and anything in constant contact with water. Requires PP sheet and hardened nozzle.',
+    body: 'Polypropylene with glass fibre reinforcement. The standout property: 0.11% moisture absorption at both 24 hours and 7 days. Stable, essentially zero. No swelling, no delamination, no geometry shift in saltwater or wet environments. Resists acids, solvents, non-oxidised bases, and oils. 138°C heat deflection. The right material for through-hull fittings, lab hardware, chemical-environment components, and anything in constant contact with water. Requires PP sheet and hardened nozzle.',
   },
   {
     tier: 'Engineering',
@@ -55,7 +55,7 @@ const materials = [
     full: 'Polypropylene Carbon Fiber',
     hdt: '120°C',
     tags: ['Chemical-resistant', 'Lightweight', 'Structural'],
-    body: 'Polypropylene with recycled carbon fibre — the same near-zero moisture absorption and chemical resistance of PP Glass Fiber, with added structural stiffness and a higher stiffness-to-weight ratio. Lightweight. No warping. 120°C HDT. The choice when PP-GF\'s chemical resistance is required alongside structural load-bearing. Hardened nozzle required. PP sheet bed surface.',
+    body: 'Polypropylene with recycled carbon fibre. The same near-zero moisture absorption and chemical resistance of PP Glass Fiber, with added structural stiffness and a higher stiffness-to-weight ratio. Lightweight. No warping. 120°C HDT. The choice when PP-GF\'s chemical resistance is required alongside structural load-bearing. Hardened nozzle required. PP sheet bed surface.',
   },
   {
     tier: 'Engineering',
@@ -64,16 +64,16 @@ const materials = [
     full: 'Polyamide 11 Carbon Fiber',
     hdt: '192°C @ 0.45 MPa / 152°C @ 1.80 MPa',
     tags: ['High-temp', 'Automotive', 'Structural'],
-    body: 'The engine bay material. PA11 CF runs to 192°C under low load and 152°C under 1.80 MPa — the highest heat deflection of any standard FDM compound short of PEI. Chemical resistance includes motor oils, fuels, benzene, ethanol, methanol, toluene, acetone, and NaOH. Bio-based from castor oil, reinforced with recycled carbon fibre. Charpy impact of 30–51 kJ/m² depending on orientation. Hardened nozzle required, enclosure recommended.',
+    body: 'The engine bay material. PA11 CF runs to 192°C under low load and 152°C under 1.80 MPa, the highest heat deflection of any standard FDM compound short of PEI. Chemical resistance includes motor oils, fuels, benzene, ethanol, methanol, toluene, acetone, and NaOH. Bio-based from castor oil, reinforced with recycled carbon fibre. Charpy impact of 30–51 kJ/m² depending on orientation. Hardened nozzle required, enclosure recommended.',
   },
   {
     tier: 'Engineering',
     id: 'pc-space',
     name: 'PC Space Grade',
-    full: 'Polycarbonate ESD — Space Grade',
+    full: 'Polycarbonate ESD, Space Grade',
     hdt: '137°C',
     tags: ['ESD-safe', 'Low-outgassing', 'Structural'],
-    body: 'Purpose-built for space industry and particle physics. ESD-safe (surface resistivity 6.0×10⁷ Ω/sq). Total Mass Loss of 0.25% against an ESA limit of 1.0% — certified for vacuum environments. 137°C heat deflection, 72–75 MPa tensile yield strength. For electronics enclosures requiring ESD dissipation, satellite components, and any application where outgassing in vacuum is a disqualifying factor. Hardened nozzle required.',
+    body: 'Purpose-built for space industry and particle physics. ESD-safe (surface resistivity 6.0×10⁷ Ω/sq). Total Mass Loss of 0.25% against an ESA limit of 1.0%, certified for vacuum environments. 137°C heat deflection, 72–75 MPa tensile yield strength. For electronics enclosures requiring ESD dissipation, satellite components, and any application where outgassing in vacuum is a disqualifying factor. Hardened nozzle required.',
   },
   {
     tier: 'Engineering',
@@ -82,7 +82,7 @@ const materials = [
     full: 'PETG Flame Retardant',
     hdt: '68°C',
     tags: ['Flame-retardant', 'UL94 V0', 'Enclosures'],
-    body: 'The world\'s first UL94 V0-certified PETG filament. Self-extinguishing — forms a carbonised crust that cuts off oxygen and stops flame propagation. Compliant with IEC 60695-11-10. For electronics enclosures, insulation components, and machine guards where fire protection compliance is a requirement, not a preference. Must be dried before use. Natural and black available.',
+    body: 'The world\'s first UL94 V0-certified PETG filament. Self-extinguishing: forms a carbonised crust that cuts off oxygen and stops flame propagation. Compliant with IEC 60695-11-10. For electronics enclosures, insulation components, and machine guards where fire protection compliance is a requirement, not a preference. Must be dried before use. Natural and black available.',
   },
   {
     tier: 'Elite',
@@ -91,17 +91,17 @@ const materials = [
     full: 'Polyetherimide (Ultem-class)',
     hdt: '207°C @ 0.45 MPa / 194°C @ 1.80 MPa',
     tags: ['Metal-replacement', 'Extreme-temp', 'Flame-retardant'],
-    body: 'The ceiling. PEI 1010 runs to 207°C under low load and 194°C under 1.80 MPa — beyond anything else in FDM except specialised industrial systems. Inherent UL94 VTM-0 flame retardancy without additives. Autoclave sterilisable, gamma radiation resistant, electron beam sterilisable. 95 MPa tensile yield strength printed. Positioned as a direct metal-alloy replacement for aerospace, medical instruments, and any structural application that has exhausted every other material option. Requires Prusa Pro HT90 or equivalent heated-chamber system at 90°C minimum. Nozzle at 410°C. Must be dried 6–8 hours at 150°C before printing.',
+    body: 'The ceiling. PEI 1010 runs to 207°C under low load and 194°C under 1.80 MPa, beyond anything else in FDM except specialised industrial systems. Inherent UL94 VTM-0 flame retardancy without additives. Autoclave sterilisable, gamma radiation resistant, electron beam sterilisable. 95 MPa tensile yield strength printed. Positioned as a direct metal-alloy replacement for aerospace, medical instruments, and any structural application that has exhausted every other material option. Requires Prusa Pro HT90 or equivalent heated-chamber system at 90°C minimum. Nozzle at 410°C. Must be dried 6–8 hours at 150°C before printing.',
   },
   // ── FLEXIBLE ────────────────────────────────────────────
   {
     tier: 'Flexible',
     id: 'tpu-95a',
     name: 'TPU 95A',
-    full: 'Thermoplastic Polyurethane — Ether Type',
+    full: 'Thermoplastic Polyurethane, Ether Type',
     hdt: '78°C @ 1.80 MPa',
     tags: ['Flexible', 'Seals', 'Impact-resistant'],
-    body: 'Ether-type TPU — not ester. The distinction matters: ether formulation resists hydrolysis where ester degrades in wet environments over time. Maintains impact resistance to -50°C. Shore 95A hardness — firm at thick sections, flexible at thin. Extreme wear resistance. High microbial resistance. The compound for O-rings, seals, gaskets, cable boots, vibration dampening mounts, and any part that needs to flex without failing. Print slowly.',
+    body: 'Ether-type TPU, not ester. The distinction matters: ether formulation resists hydrolysis where ester degrades in wet environments over time. Maintains impact resistance to -50°C. Shore 95A hardness: firm at thick sections, flexible at thin. Extreme wear resistance. High microbial resistance. The compound for O-rings, seals, gaskets, cable boots, vibration dampening mounts, and any part that needs to flex without failing. Print slowly.',
   },
   // ── SPECIALTY ───────────────────────────────────────────
   {
@@ -111,7 +111,7 @@ const materials = [
     full: 'PETG 40% Magnetite',
     hdt: '93°C',
     tags: ['Paramagnetic', 'ESD', 'High-density'],
-    body: '40% magnetite fill by weight. Paramagnetic — attracted to magnets, cannot be permanently magnetised under standard conditions. Significantly higher density than standard PETG. For electromagnetic components, switches, induction loops, and weight-ballasting applications where mass per volume matters. Hardened nozzle required.',
+    body: '40% magnetite fill by weight. Paramagnetic: attracted to magnets, cannot be permanently magnetised under standard conditions. Significantly higher density than standard PETG. For electromagnetic components, switches, induction loops, and weight-ballasting applications where mass per volume matters. Hardened nozzle required.',
   },
   {
     tier: 'Specialty',
@@ -120,7 +120,7 @@ const materials = [
     full: 'PETG 75% Tungsten',
     hdt: '94°C',
     tags: ['Radiation-shielding', 'High-density', 'Lead-free'],
-    body: '75% tungsten fill — the highest filler concentration in the catalogue and the densest printable material available. ~19 g/cm³, comparable to gold. Non-toxic, hypoallergenic, non-reactive. Purpose-built for X-ray and gamma radiation shielding in medical and radiography environments where lead is not acceptable. Hardened nozzle required. Polishable surface.',
+    body: '75% tungsten fill, the highest filler concentration in the catalogue and the densest printable material available. ~19 g/cm³, comparable to gold. Non-toxic, hypoallergenic, non-reactive. Purpose-built for X-ray and gamma radiation shielding in medical and radiography environments where lead is not acceptable. Hardened nozzle required. Polishable surface.',
   },
   // ── STANDARD ────────────────────────────────────────────
   {
@@ -130,7 +130,7 @@ const materials = [
     full: 'Polyethylene Terephthalate Glycol',
     hdt: '68°C',
     tags: ['General-purpose', 'Tough', 'Low-warp'],
-    body: 'The general-purpose functional material. Tougher than PLA, lower warp than ABS, good chemical resistance, low moisture absorption. 68°C heat deflection limits it to non-heat-critical applications. Ductile — flexes before it shatters. Strong layer adhesion. The baseline for parts that need to work but don\'t face extreme conditions.',
+    body: 'The general-purpose functional material. Tougher than PLA, lower warp than ABS, good chemical resistance, low moisture absorption. 68°C heat deflection limits it to non-heat-critical applications. Ductile, flexes before it shatters. Strong layer adhesion. The baseline for parts that need to work but don\'t face extreme conditions.',
   },
   {
     tier: 'Standard',
@@ -139,7 +139,7 @@ const materials = [
     full: 'Polylactic Acid',
     hdt: '55°C',
     tags: ['Prototyping', 'Detail', 'Easy-print'],
-    body: 'The prototyping compound. Easy to print, excellent detail resolution, no enclosure needed. Softens at 55–60°C — not for functional parts exposed to heat, UV, or mechanical stress. Used for jigs, fit-check models, form prototypes, and anything that needs to be right before committing to an engineering compound. Not for end-use structural or outdoor applications.',
+    body: 'The prototyping compound. Easy to print, excellent detail resolution, no enclosure needed. Softens at 55–60°C. Not for functional parts exposed to heat, UV, or mechanical stress. Used for jigs, fit-check models, form prototypes, and anything that needs to be right before committing to an engineering compound. Not for end-use structural or outdoor applications.',
   },
   {
     tier: 'Standard',
@@ -155,7 +155,7 @@ const materials = [
 const tiers = ['Elite', 'Engineering', 'Flexible', 'Specialty', 'Standard'];
 const tierDescriptions: Record<string, string> = {
   Elite: 'Metal-replacement performance. Heated chamber required.',
-  Engineering: 'Purpose-built for real working environments — marine, automotive, industrial.',
+  Engineering: 'Purpose-built for real working environments: marine, automotive, industrial.',
   Flexible: 'Seals, gaskets, vibration dampening. Flex without failure.',
   Specialty: 'Functional fill materials for specific electromagnetic, shielding, or magnetic applications.',
   Standard: 'Prototyping and general use. Know the limits.',
@@ -163,17 +163,47 @@ const tierDescriptions: Record<string, string> = {
 ---
 
 <BaseLayout
-  title="Materials — 3D3D"
-  description="Every material I run. Engineering-grade compounds for marine, automotive, and field fabrication — from ASA to PEI 1010."
+  title="Materials | 3D3D"
+  description="Every material I run. Engineering-grade compounds for marine, automotive, and field fabrication | from ASA to PEI 1010."
   activePath="/materials"
 >
   <section class="mat-page">
     <div class="mat-shell">
       <p class="mat-eyebrow">Material Stack</p>
-      <h1 class="mat-title">Every compound<br />I run.</h1>
-      <p class="mat-intro">
-        I print with the full Prusa material catalogue — from standard PETG to PEI 1010 at 207°C. Material selection starts with the use case, not the spool. Here's what I work with and why.
+      <h1 class="mat-title scroll-in">What it takes<br />to survive<br />the salt.</h1>
+      <p class="mat-intro scroll-in">
+        Standard 3D printing plastics belong in a hobby shop. PLA softens at 55 degrees Celsius, absorbs moisture, and shatters under UV load. None of that is acceptable aboard a working vessel.
       </p>
+      <p class="mat-intro">
+        Every material I run is selected for the conditions it will face, not for ease of printing. Marine hardware sees salt spray, UV cycling, and sustained mechanical load. Automotive parts live near fuel, oil, and heat. Field deployment means no spare parts, no excuses. The material has to be correct on the first print.
+      </p>
+    </div>
+
+    <div class="mat-salt-rule">
+      <div class="mat-shell">
+        <div class="mat-salt-rule__grid">
+          <div class="mat-salt-rule__item">
+            <span class="mat-salt-rule__label">PLA at sea</span>
+            <span class="mat-salt-rule__verdict mat-salt-rule__verdict--no">Fails</span>
+            <p class="mat-salt-rule__note">Softens at 55°C. Absorbs moisture. Degrades under UV. Not for any functional application.</p>
+          </div>
+          <div class="mat-salt-rule__item">
+            <span class="mat-salt-rule__label">ASA above deck</span>
+            <span class="mat-salt-rule__verdict mat-salt-rule__verdict--yes">Correct</span>
+            <p class="mat-salt-rule__note">UV-stable. 93°C HDT. Holds colour and geometry through full seasons of salt spray and sun.</p>
+          </div>
+          <div class="mat-salt-rule__item">
+            <span class="mat-salt-rule__label">PP Glass Fiber through-hull</span>
+            <span class="mat-salt-rule__verdict mat-salt-rule__verdict--yes">Correct</span>
+            <p class="mat-salt-rule__note">0.11% moisture absorption. Resists solvents, acids, and saltwater. Zero geometry shift in wet environments.</p>
+          </div>
+          <div class="mat-salt-rule__item">
+            <span class="mat-salt-rule__label">PA11 CF in the engine bay</span>
+            <span class="mat-salt-rule__verdict mat-salt-rule__verdict--yes">Correct</span>
+            <p class="mat-salt-rule__note">192°C HDT. Resists motor oils, fuels, benzene, ethanol. The only FDM compound that survives a working engine compartment.</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     {tiers.map((tier) => {
@@ -208,6 +238,99 @@ const tierDescriptions: Record<string, string> = {
         </div>
       );
     })}
+
+    <!-- When To Use What guide -->
+    <div class="mat-guide">
+      <div class="mat-shell">
+        <p class="mat-eyebrow" style="padding-top: 0;">When To Use What</p>
+        <h2 class="mat-guide__title scroll-in">Start with the environment.<br />The material follows.</h2>
+        <p class="mat-intro scroll-in">
+          Every material decision starts with the same question: what does this part have to survive? Pick the scenario below that matches your application. The recommendation is the compound I would use.
+        </p>
+
+        <div class="mat-guide__grid">
+          <div class="mat-guide__card scroll-in">
+            <div class="mat-guide__icon">&#9875;</div>
+            <h3 class="mat-guide__scenario">Above deck, full sun</h3>
+            <p class="mat-guide__conditions">UV exposure, salt spray, temperature cycling, rain</p>
+            <div class="mat-guide__answer">
+              <span class="mat-guide__pick">ASA</span>
+              <p class="mat-guide__reason">UV-stable. 93°C HDT. Holds colour and geometry through full seasons of direct sun and salt. The only correct choice for anything permanently exposed above deck.</p>
+            </div>
+          </div>
+
+          <div class="mat-guide__card scroll-in">
+            <div class="mat-guide__icon">&#9881;</div>
+            <h3 class="mat-guide__scenario">Engine bay or exhaust proximity</h3>
+            <p class="mat-guide__conditions">Oil, fuel, high ambient heat, vibration</p>
+            <div class="mat-guide__answer">
+              <span class="mat-guide__pick">PA11 CF</span>
+              <p class="mat-guide__reason">192°C HDT. Resists motor oils, fuels, benzene, ethanol. The only FDM compound that survives a working engine compartment without softening or outgassing.</p>
+            </div>
+          </div>
+
+          <div class="mat-guide__card scroll-in">
+            <div class="mat-guide__icon">&#127754;</div>
+            <h3 class="mat-guide__scenario">Constant water contact</h3>
+            <p class="mat-guide__conditions">Submerged, through-hull, bilge, saltwater immersion</p>
+            <div class="mat-guide__answer">
+              <span class="mat-guide__pick">PP Glass Fiber</span>
+              <p class="mat-guide__reason">0.11% moisture absorption. Resists acids, solvents, and saltwater. Zero geometry shift in wet environments. The only compound rated for permanent water contact.</p>
+            </div>
+          </div>
+
+          <div class="mat-guide__card scroll-in">
+            <div class="mat-guide__icon">&#128296;</div>
+            <h3 class="mat-guide__scenario">Structural bracket or mount</h3>
+            <p class="mat-guide__conditions">Sustained mechanical load, vibration, impact risk</p>
+            <div class="mat-guide__answer">
+              <span class="mat-guide__pick">PETG-CF or PC Blend</span>
+              <p class="mat-guide__reason">PETG-CF for stiff, low-creep brackets. PC Blend when the part takes real impacts and cannot afford to shatter. Choose based on whether rigidity or toughness matters more.</p>
+            </div>
+          </div>
+
+          <div class="mat-guide__card scroll-in">
+            <div class="mat-guide__icon">&#128260;</div>
+            <h3 class="mat-guide__scenario">Seals, gaskets, vibration mounts</h3>
+            <p class="mat-guide__conditions">Flex cycling, compression, temperature range, water</p>
+            <div class="mat-guide__answer">
+              <span class="mat-guide__pick">TPU 95A</span>
+              <p class="mat-guide__reason">Ether-type, not ester. Resists hydrolysis. Maintains impact resistance to -50°C. Shore 95A hardness: firm at thick sections, flexible at thin. No substitute for parts that need to flex.</p>
+            </div>
+          </div>
+
+          <div class="mat-guide__card scroll-in">
+            <div class="mat-guide__icon">&#9889;</div>
+            <h3 class="mat-guide__scenario">ESD-sensitive electronics</h3>
+            <p class="mat-guide__conditions">Static discharge risk, clean environments, vacuum</p>
+            <div class="mat-guide__answer">
+              <span class="mat-guide__pick">PC Space Grade</span>
+              <p class="mat-guide__reason">ESD-safe with 6.0x10&#8311; ohm/sq surface resistivity. 0.25% total mass loss (ESA limit is 1.0%). For enclosures where static discharge would destroy what is inside.</p>
+            </div>
+          </div>
+
+          <div class="mat-guide__card scroll-in">
+            <div class="mat-guide__icon">&#128293;</div>
+            <h3 class="mat-guide__scenario">Fire compliance required</h3>
+            <p class="mat-guide__conditions">UL94 rating needed, electrical enclosures, machine guards</p>
+            <div class="mat-guide__answer">
+              <span class="mat-guide__pick">PETG V0 or PEI 1010</span>
+              <p class="mat-guide__reason">PETG V0 is UL94 V0 certified, self-extinguishing. PEI 1010 is inherent VTM-0 without additives and handles 207°C. Choose based on temperature and budget.</p>
+            </div>
+          </div>
+
+          <div class="mat-guide__card scroll-in">
+            <div class="mat-guide__icon">&#128736;</div>
+            <h3 class="mat-guide__scenario">Prototype or fit check</h3>
+            <p class="mat-guide__conditions">No heat, no UV, no structural load. Geometry verification only.</p>
+            <div class="mat-guide__answer">
+              <span class="mat-guide__pick">PLA</span>
+              <p class="mat-guide__reason">Easy to print, excellent detail. Softens at 55°C. Not for end-use. Used to confirm geometry before committing to an engineering compound. Prototyping only.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="mat-cta-block">
       <div class="mat-shell">
@@ -265,11 +388,65 @@ const tierDescriptions: Record<string, string> = {
   }
 
   .mat-intro {
-    margin: 0 0 clamp(3rem, 6vw, 5rem);
+    margin: 0 0 1.25rem;
     max-width: 44rem;
     font-size: clamp(1rem, 0.9rem + 0.4vw, 1.15rem);
     line-height: 1.75;
     color: rgba(246, 247, 250, 0.78);
+  }
+
+  /* ── Salt rule comparison ── */
+  .mat-salt-rule {
+    background: rgba(255,255,255,0.02);
+    border-top: 1px solid rgba(64, 196, 196, 0.15);
+    padding-block: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: clamp(1rem, 3vw, 2rem);
+  }
+
+  .mat-salt-rule__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+    gap: 1.2rem;
+  }
+
+  .mat-salt-rule__item {
+    display: grid;
+    gap: 0.5rem;
+    padding: 1.2rem 1.4rem;
+    border: 1px solid rgba(64, 196, 196, 0.12);
+    border-radius: 0.75rem;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .mat-salt-rule__label {
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(246, 247, 250, 0.5);
+  }
+
+  .mat-salt-rule__verdict {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .mat-salt-rule__verdict--yes {
+    color: #40C4C4;
+  }
+
+  .mat-salt-rule__verdict--no {
+    color: #E05C5C;
+  }
+
+  .mat-salt-rule__note {
+    margin: 0;
+    font-size: 0.82rem;
+    line-height: 1.65;
+    color: rgba(246, 247, 250, 0.52);
   }
 
   /* ── Tier sections ── */
@@ -383,6 +560,91 @@ const tierDescriptions: Record<string, string> = {
     font-size: 0.9rem;
     line-height: 1.7;
     color: rgba(246, 247, 250, 0.72);
+  }
+
+  /* ── When To Use What guide ── */
+  .mat-guide {
+    border-top: 1px solid rgba(64, 196, 196, 0.2);
+    padding-block: clamp(4rem, 8vw, 7rem);
+  }
+
+  .mat-guide__title {
+    margin: 1rem 0 1.2rem;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 1.2rem + 3vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: #FFFFFF;
+    text-transform: uppercase;
+  }
+
+  .mat-guide__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap: 1.2rem;
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+
+  .mat-guide__card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(64, 196, 196, 0.12);
+    border-radius: 1rem;
+    padding: clamp(1.2rem, 2.5vw, 1.6rem);
+    display: grid;
+    gap: 0.6rem;
+    align-content: start;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .mat-guide__card:hover {
+    border-color: rgba(64, 196, 196, 0.35);
+    background: rgba(64, 196, 196, 0.04);
+  }
+
+  .mat-guide__icon {
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+
+  .mat-guide__scenario {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+  }
+
+  .mat-guide__conditions {
+    margin: 0;
+    font-family: var(--font-tech);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(246, 247, 250, 0.4);
+  }
+
+  .mat-guide__answer {
+    margin-top: 0.4rem;
+    padding-top: 0.6rem;
+    border-top: 1px solid rgba(64, 196, 196, 0.12);
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .mat-guide__pick {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #40C4C4;
+  }
+
+  .mat-guide__reason {
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: rgba(246, 247, 250, 0.65);
   }
 
   /* ── CTA block ── */

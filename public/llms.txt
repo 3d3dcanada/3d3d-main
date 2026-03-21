@@ -1,28 +1,115 @@
-# 3D3D Atlantic Cooperative
-> Distributed 3D printing cooperative based in Fredericton, NB connecting customers with local makers across Atlantic Canada.
+# 3D3D
+> Offshore fabrication, marine hardware replacement, and discontinued part recovery. Founder-operated by Ken. Worldwide on-site deployment and remote engineering.
 
-3D3D is a cooperative that routes custom 3D printing jobs and ships ready-made printed products through a network of makers. Makers keep 75% of revenue. Turnaround is typically 24–48 hours for standard jobs.
+## Identity
+3D3D is a specialty fabrication service built on twenty years of mechanical experience and offshore sailing. Ken is an offshore specialist with 20,000+ nautical miles, 10 years as a professional mechanic, and advanced 3D printing capability using engineering-grade compounds. The printer is the newest tool in a kit built to fix things that cannot fail at sea. Not a print farm. Not a hobby shop. A one-man fabrication operation that flies to the problem.
 
 ## Services
-- [Custom 3D Printing Quote](https://3d3d.ca/quote): Upload STL, 3MF, STEP, OBJ, PDF, or describe your idea
-- [Print Shop](https://3d3d.ca/shop): Ready-made products for home decor, tools, automotive, marine, gifts, and seasonal use
-- [Join as a Maker](https://3d3d.ca/makers): Apply to the cooperative network
+- [Marine Hardware](https://3d3d.ca/#what-i-do): Reverse-engineered deck fittings, fairleads, winch components, custom brackets for offshore dynamic loads
+- [Automotive Restoration](https://3d3d.ca/#what-i-do): Discontinued OEM parts, interior trim, dash overlays, retaining clips for classic vehicles (AMC AMX, Dodge Polara, GTX, Roadrunner)
+- [On-Site Deployment](https://3d3d.ca/#what-i-do): Worldwide travel with full equipment to marinas, boatyards, race support. The vessel cannot move, Ken can.
+- [Remote Fabrication](https://3d3d.ca/#what-i-do): Send photos, measurements, and load requirements. Part designed and shipped to your coordinates.
+- [Custom Quote](https://3d3d.ca/quote): Upload STL, 3MF, STEP, OBJ, PDF, or describe your idea
+- [Print Shop](https://3d3d.ca/shop): Ready-made products for home, tools, automotive, marine, gifts
+- [Book a Call](https://3d3d.ca/book): Schedule a consultation via Cal.com
 
-## About
-- [About 3D3D](https://3d3d.ca/about): Cooperative model, how it works, and the Old Girl community printer
+## Materials (17 compounds)
+### Engineering Tier
+- ASA: UV-stable, 93°C HDT, above-deck marine hardware, outdoor. Acetone-smoothable.
+- PETG-CF: Carbon fiber reinforced, structural brackets, low-creep, matte black.
+- PC Blend: 113°C HDT, impact-resistant, tough at low temperatures.
+- PC Blend CF: 114°C / 130°C annealed, stiff structural parts with heat performance.
+- PP Glass Fiber: 138°C HDT, 0.11% moisture absorption, through-hull fittings, chemical-resistant.
+- PP Carbon Fiber: 120°C HDT, near-zero moisture, lightweight structural.
+- PA11 CF: 192°C HDT, engine bay compound, resists motor oils, fuels, benzene, ethanol.
+- PC Space Grade: 137°C HDT, ESD-safe (6.0x10^7 ohm/sq), low-outgassing for space/vacuum.
+- PETG V0: UL94 V0 flame retardant, self-extinguishing, electronics enclosures.
 
-## Blog
-- [Blog Index](https://3d3d.ca/blog)
-- [Why Cooperative 3D Printing](https://3d3d.ca/blog/why-cooperative-3d-printing)
-- [Material Guide: PLA, PETG, TPU](https://3d3d.ca/blog/material-guide-pla-petg-tpu)
+### Elite Tier
+- PEI 1010 (Ultem-class): 207°C HDT, inherent VTM-0 flame retardancy, autoclave-sterilisable, metal-alloy replacement. Highest performance FDM compound.
+
+### Flexible
+- TPU 95A: Ether-type, hydrolysis-resistant, Shore 95A, impact resistant to -50°C. Seals, gaskets, vibration mounts.
+
+### Specialty
+- PETG Magnetite: 40% magnetite, paramagnetic, high-density.
+- PETG Tungsten: 75% tungsten, ~19 g/cm3, radiation shielding, lead-free.
+
+### Standard
+- PETG: General-purpose functional, 68°C HDT.
+- PLA: Prototyping only, 55°C HDT, not for end-use.
+- PVB: IPA-smoothable to glass-like finish, transparent enclosures.
+
+## Material Selection Guide
+- Above deck, full sun: ASA
+- Engine bay or exhaust proximity: PA11 CF
+- Constant water contact / through-hull: PP Glass Fiber
+- Structural bracket or mount: PETG-CF or PC Blend
+- Seals, gaskets, vibration mounts: TPU 95A
+- ESD-sensitive electronics: PC Space Grade
+- Fire compliance required: PETG V0 or PEI 1010
+- Prototype or fit check only: PLA
+
+## Pages
+- [Home](https://3d3d.ca/): Hero, services overview, workshop, contact CTA
+- [About](https://3d3d.ca/about): Founder story, offshore background, hurricane survival, mechanical career
+- [Materials](https://3d3d.ca/materials): Full material stack with specs, "When To Use What" guide
+- [Events](https://3d3d.ca/events): Newport-Bermuda Race 2026, Rolex Fastnet Race
+- [FAQ](https://3d3d.ca/faq): 15 questions across Process, Materials, On-Site, Pricing
+- [Blog](https://3d3d.ca/blog): Technical articles, material science, field notes
+- [Contact](https://3d3d.ca/contact): Email form, WhatsApp, phone
+- [Book a Call](https://3d3d.ca/book): Cal.com scheduling
+- [Quote](https://3d3d.ca/quote): File upload quote request
+- [Shop](https://3d3d.ca/shop): Ready-made products
+- [Prusa](https://3d3d.ca/prusa): Printer platform details
+
+## Blog Articles
+- [2026 Advances in 3D Printing](https://3d3d.ca/blog/advances-2026)
+- [ASA for Outdoor Applications](https://3d3d.ca/blog/asa-outdoor)
 - [Atlantic Canada Maker Network](https://3d3d.ca/blog/atlantic-canada-maker-network)
+- [Automotive Restoration with 3D Printing](https://3d3d.ca/blog/automotive-restoration)
+- [Bambu vs Prusa Comparison](https://3d3d.ca/blog/bambu-vs-prusa)
+- [Campaign Update March](https://3d3d.ca/blog/campaign-update-march)
+- [Carbon Fibre Compounds Guide](https://3d3d.ca/blog/carbon-fibre-compounds)
+- [Prusa Core One L](https://3d3d.ca/blog/core-one-l)
+- [CSM the Mariner Profile](https://3d3d.ca/blog/csm-profile)
+- [Discontinued Parts Recovery](https://3d3d.ca/blog/discontinued-parts)
+- [Drag Car Parts](https://3d3d.ca/blog/drag-car-parts)
+- [Field Deployment](https://3d3d.ca/blog/field-deployment)
+- [First Sail](https://3d3d.ca/blog/first-sail)
+- [Global Impact](https://3d3d.ca/blog/global-impact)
+- [Ko-fi Support](https://3d3d.ca/blog/ko-fi-support)
+- [Marine Case Study](https://3d3d.ca/blog/marine-case-study)
+- [Marine Materials Deep Dive](https://3d3d.ca/blog/marine-materials)
+- [Material Guide: PLA, PETG, TPU](https://3d3d.ca/blog/material-guide-pla-petg-tpu)
+- [Newport-Bermuda Race Announcement](https://3d3d.ca/blog/newport-bermuda-announcement)
+- [Why Open Source](https://3d3d.ca/blog/open-source-why)
+- [PEEK and PPS: The Future](https://3d3d.ca/blog/peek-pps-future)
+- [Printer Setup Service](https://3d3d.ca/blog/printer-setup-service)
+- [Rolex Fastnet Race](https://3d3d.ca/blog/rolex-fastnet)
+- [RV Origin Story](https://3d3d.ca/blog/rv-origin)
+- [Shipping Printers](https://3d3d.ca/blog/shipping-printers)
+- [Solo Saint John](https://3d3d.ca/blog/solo-saint-john)
+- [Why Cooperative 3D Printing](https://3d3d.ca/blog/why-cooperative-3d-printing)
+- [Why Prusa](https://3d3d.ca/blog/why-prusa)
 
 ## Contact
 - Email: info@3d3d.ca
 - Phone and WhatsApp: +1-506-953-2678
-- Location: Fredericton, NB, Canada
+- Website: https://3d3d.ca
+- Service model: Remote-first, worldwide on-site deployment
+- YouTube: https://www.youtube.com/@3D3Dcanada
+- Instagram: https://www.instagram.com/3d3dca/
+- TikTok: https://www.tiktok.com/@3d3dcanada
+- Facebook: https://www.facebook.com/profile.php?id=61575548079847
+- Ko-fi: https://ko-fi.com/3d3dca
 
-## Optional
+## Events
+- Newport-Bermuda Race 2026: Aboard CSM the Mariner
+- Rolex Fastnet Race: Offshore racing engagement
+
+## Legal
 - [Privacy Policy](https://3d3d.ca/privacy)
 - [Terms of Service](https://3d3d.ca/terms)
+- [CASL Compliance](https://3d3d.ca/casl)
 - [Accessibility Statement](https://3d3d.ca/accessibility)

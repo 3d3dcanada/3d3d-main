@@ -42,7 +42,7 @@ const articleSchema = {
 ---
 
 <BaseLayout
-  title={`${title} — Blog`}
+  title={`${title} | Blog`}
   description={description}
   canonicalURL={canonicalURL}
   ogType="article"
@@ -68,7 +68,7 @@ const articleSchema = {
       </div>
 
       <h1
-        class="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-tight"
+        class="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-tight scroll-in"
         style="color: var(--color-text-primary);"
         itemprop="headline"
       >
@@ -142,6 +142,33 @@ const articleSchema = {
       padding: 1rem;
       overflow-x: auto;
       margin-bottom: 1.5rem;
+    }
+
+    /* Scroll-driven entrance animations for blog content */
+    .blog-content :global(h2),
+    .blog-content :global(h3),
+    .blog-content :global(p),
+    .blog-content :global(img),
+    .blog-content :global(ul),
+    .blog-content :global(ol),
+    .blog-content :global(blockquote),
+    .blog-content :global(pre) {
+      animation: scroll-enter-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 30%;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .blog-content :global(h2),
+      .blog-content :global(h3),
+      .blog-content :global(p),
+      .blog-content :global(img),
+      .blog-content :global(ul),
+      .blog-content :global(ol),
+      .blog-content :global(blockquote),
+      .blog-content :global(pre) {
+        animation: none;
+      }
     }
   </style>
 </BaseLayout>

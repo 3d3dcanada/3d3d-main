@@ -6,17 +6,12 @@ const schema = {
 	'@context': 'https://schema.org',
 	'@type': 'Organization',
 	name: '3D3D',
-	description: 'Founder-operated specialty fabrication. Ken\'s story — from the first Prusa builds to boats, motorsport, and field deployment.',
+	description: 'Founder-operated specialty fabrication for marine, restoration, and route-based field deployment.',
 	url: 'https://3d3d.ca',
 	telephone: '+15069532678',
-	email: '3d3dcanada@gmail.com',
+	email: 'info@3d3d.ca',
 	founder: { '@type': 'Person', name: 'Ken' },
-	address: {
-		'@type': 'PostalAddress',
-		addressLocality: 'Moncton',
-		addressRegion: 'NB',
-		addressCountry: 'CA',
-	},
+	areaServed: ['Worldwide', 'Caribbean', 'Coastal United States', 'Europe'],
 };
 
 const stats = [
@@ -45,7 +40,7 @@ const aboutGallery = [
 ];
 ---
 
-<BaseLayout title="About — 3D3D" description="Founder-operated specialty fabrication. Ken's story — from the first Prusa builds to boats, motorsport, and field deployment." schema={schema} activePath="/about">
+<BaseLayout title="About | 3D3D" description="Founder-operated specialty fabrication. Ken's story, from the first Prusa builds to boats, motorsport, route support, and field deployment." schema={schema} activePath="/about">
 
 <div class="pt-8 pb-12">
 <section class="max-w-4xl mx-auto">
@@ -53,20 +48,26 @@ const aboutGallery = [
 <div class="about-hero__background" aria-hidden="true"></div>
 <div class="about-hero__content">
 <p class="font-display text-xs font-semibold uppercase tracking-wider" style="color: var(--color-text-muted);">About</p>
-<h1 class="font-display text-3xl sm:text-4xl font-bold mt-2 mb-6" style="color: var(--color-text-primary);">About 3D3D</h1>
+<h1 class="font-display text-3xl sm:text-4xl font-bold mt-2 mb-6 scroll-in" style="color: var(--color-text-primary);">About 3D3D</h1>
 
-<div class="space-y-4 text-sm leading-relaxed" style="color: var(--color-text-secondary);">
+<div class="space-y-4 text-sm leading-relaxed scroll-in-fade scroll-delay-1" style="color: var(--color-text-secondary);">
 <p>
-It started with a Prusa MK2. I spent years learning the craft, breaking nozzles, dialing in profiles, and building a network of makers across Atlantic Canada. That work became 3D3D.
+Seventy-five knots sustained. Ninety-knot gusts. Four days of continuous survival in a bomb cyclone off the East Coast. There were only two of us on the sailboat, and it was my very first time at sea. During the worst of it, we assessed whether pulling the EPIRB was actually a survivable action. We chose to endure without it. When the storm finally broke, we sailed for another nine days to Antigua, detouring three hundred miles around Bermuda to dodge a second system, finally catching the tradewinds south. In a matter of weeks, I went from crawling on the deck in terror to standing solo night watches.
 </p>
 <p>
-Now I bring 3D printing to where it's needed — races, restorations, boats, old cars, extreme sports. Hard-to-find parts made on location. The printers show up, the cameras roll, and people walk away with parts and a story.
+That was my introduction to the ocean. I know what breaks, because I have been there when it did.
 </p>
 <p>
-I run five core materials — PLA, PETG, TPU, ABS, ASA — and everything in the catalog has been tested, documented, and priced through a calculator that accounts for material, time, infill, supports, and overhead.
+My background is not in software, and it is not in rapid prototyping. It is in keeping complex machinery alive when failure has severe consequences. Since that first passage, I have sailed over 20,000 nautical miles. I have crossed the North Atlantic in eleven days aboard a stripped-down Volvo 60. I have seen thirty-metre waves, and I have fallen off them in a 60-foot Kevlar hull. I have achieved twenty-six knots at the helm on a surf run. I spent seven months living and working aboard a 1946 Dutch-built 42-foot ketch, and I have stood watch alongside some of the best offshore sailors in the world. They trusted me when the weather turned foul.
 </p>
 <p>
-I started on a Prusa MK2 and have printed on every major platform since — because understanding every machine's strengths and weaknesses is the job. I run multiple platforms. I prefer Prusa.
+Before the ocean, I spent ten years as a professional mechanic. I have restored AMC AMXs, Roadrunners, Dodge Polaras, and GTOs. I know what it means to hunt for a part last manufactured in 1979, and I know how to fabricate it when the supply chain is dead.
+</p>
+<p>
+Trust is the only currency that matters in this work. A client in Thailand handed me a $50,000 credit card to fund a month-long project. I executed the work and returned the card without spending a dollar over what was strictly required. When I tell you what a job takes, that is exactly what it takes.
+</p>
+<p>
+The 3D printer is not my product. It is the most capable item in a toolkit built over two decades, and it allows me to bypass dead supply chains and put a finished, functional part in your hands the same day.
 </p>
 </div>
 
@@ -94,10 +95,10 @@ I started on a Prusa MK2 and have printed on every major platform since — beca
 
 {/* How it works */}
 <div class="mt-16">
-<h2 class="font-display text-xl font-bold mb-6" style="color: var(--color-text-primary);">How It Works</h2>
+<h2 class="font-display text-xl font-bold mb-6 scroll-in" style="color: var(--color-text-primary);">How It Works</h2>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 {[
-{ step: '01', title: 'Tell me about your event or project', desc: 'Describe what you need — hard-to-find parts for a boat, props for a race, or custom pieces for a community build.' },
+{ step: '01', title: 'Tell me about your event or project', desc: 'Describe what you need: hard-to-find parts for a boat, props for a race, or custom pieces for a community build.' },
 { step: '02', title: 'I show up with printers and cameras', desc: 'I bring the equipment on-site, print parts in real time, and document the process on video.' },
 { step: '03', title: 'You get parts, content, and the experience', desc: 'Walk away with functional printed parts, video content of the build, and a story worth sharing.' },
 ].map((item) => (
@@ -112,9 +113,9 @@ I started on a Prusa MK2 and have printed on every major platform since — beca
 
       {/* Old Girl */}
       <div class="mt-16">
-        <h2 class="font-display text-xl font-bold mb-4" style="color: var(--color-text-primary);">The Old Girl</h2>
+        <h2 class="font-display text-xl font-bold mb-4 scroll-in" style="color: var(--color-text-primary);">The Old Girl</h2>
         <p class="text-sm leading-relaxed mb-4" style="color: var(--color-text-secondary);">
-          A sister project — a Prusa i3 MK2.5S restored and given over to the community. Print queue, donations, livestream. A printer that belongs to the internet.
+          A sister project. A Prusa i3 MK2.5S restored and given over to the community. Print queue, donations, livestream. A printer that belongs to the internet.
         </p>
         <a href="https://oldgirl.3d3d.ca" class="font-display text-xs uppercase tracking-wider hover:underline" style="color: var(--color-teal-primary);">
           Visit Old Girl →

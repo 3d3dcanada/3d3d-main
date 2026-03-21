@@ -60,8 +60,8 @@ const services = [
     image: '/media/race/crew-helm-offshore.jpg',
     alt: 'Crew working the helm offshore during ocean racing',
     drawer: {
-      materials: 'ASA, PETG-CF, PPS, PPA — marine-grade compounds rated for salt, UV, and constant mechanical load. Standard PLA and PETG fail offshore. We specify compounds that survive teak decks, standing water, UV cycles, and the vibration of an engine running 24 hours straight.',
-      turnaround: 'Marine jobs start with the problem, not a file. Bring the broken part, a photo, or calipers measurements. If you\'re offshore or on the hook, send dimensions by message. We\'ve worked from blurry photos and hand-sketched dimensions. We figure it out.',
+      materials: 'Prusament ASA above deck — 93°C heat deflection, UV-stable, won\'t yellow or embrittle after seasons in the elements. It\'s the compound ABS should have been. Below deck and in wet lockers: Prusament PETG-CF for structural fittings where dimensional stability matters and UV isn\'t the threat. Constant saltwater contact goes to Prusament PP Glass Fiber or PP Carbon Fiber — polypropylene absorbs essentially zero moisture (0.11% at 7 days, stable), won\'t swell, won\'t delaminate, resists the acids and salt chemistry that destroy other materials over time. Seals, gaskets, and vibration dampening: Prusament TPU 95A, ether-type formulation — stays flexible to -50°C, resists hydrolysis, doesn\'t degrade in standing bilge water. For parts near engines or exhaust where temps exceed what ASA handles: Prusament PA11 CF runs to 192°C at low load and resists motor oils and fuels by spec. Plain PETG softens at 68°C and degrades under UV. PLA softens at 55°C and has no place offshore. We don\'t use them for marine work.',
+      turnaround: 'Start with the broken part or the problem, not a CAD file. Bring the hardware, a photo, or caliper measurements. If you\'re on the hook or already offshore, send dimensions by message — we\'ll work from them. We\'ve built from blurry photos, hand-sketched notes, and measurements taken with a tape measure on a rolling deck. We figure it out. Send what you have.',
     },
   },
   {
@@ -73,8 +73,8 @@ const services = [
     image: '/media/race/helm-racing-wake.jpg',
     alt: 'Helmsman steering at speed on open water',
     drawer: {
-      materials: 'PETG-CF for structural brackets. ASA for exterior and under-hood exposure. High-temp compounds — PPS, PA12-CF — for engine bay and exhaust-adjacent parts. Material selection starts with where the part lives: heat soak, vibration frequency, clearance requirements, and whether it\'s cosmetic or load-bearing.',
-      turnaround: 'Fitment-first. Send photos of the part location, the broken piece, and dimensions if you have them. For discontinued OEM parts, bring the original or a clear image — we\'ll measure, model, and test fit before committing to a run. One-off or batch — same process.',
+      materials: 'PA11 CF is the engine bay material — 192°C heat deflection at 0.45MPa, 152°C under 1.80MPa load, and it resists motor oils, fuels, benzene, and ethanol by spec. It\'s a bio-based compound from castor oil that outperforms most nylons on heat and chemical resistance simultaneously. PETG-CF handles structural brackets and mount systems where you need stiffness without creep — it doesn\'t yield under sustained load the way standard PETG does. ASA covers exterior, underhood, and any UV-cycling environment where ABS would yellow and crack. PC Blend and PC Blend CF step in where you need impact resistance — CF composites trade some toughness for stiffness, so when a part takes real hits, straight PC Blend keeps the impact strength. At the high end: PEI 1010 (Ultem-class) runs to 207°C, carries a UL94 VTM-0 flame rating, and is the compound you reach for when the environment would destroy anything else. Material gets decided by where the part lives and what loads it sees — not by what\'s easiest to print.',
+      turnaround: 'Send photos of where the part lives, the broken piece, and dimensions if you have them. For discontinued OEM parts, bring the original — we measure with calipers, model to fit, and test-fit before committing to a run. One-off is the same process as a batch. Racing teams needing parts between weekends: we understand the schedule. Tell us the date and we\'ll work backwards from it.',
     },
   },
   {
@@ -86,8 +86,8 @@ const services = [
     image: '/media/race/fastnet-fleet-horizon.jpg',
     alt: 'Racing fleet spread across the horizon offshore',
     drawer: {
-      materials: 'Material is matched to what the original had to survive. Nylon and PETG-CF for structural fittings. PPS and PEEK for high-temp or chemical exposure. Flexible TPU for seals, grommets, and vibration-dampening mounts. If the original was injection-moulded ABS, we match the mechanical properties, not just the appearance.',
-      turnaround: 'One piece is a real job. Bring the broken part — or what\'s left of it. We measure with calipers and take reference from the mating surfaces. If you don\'t have the part at all, tell us the system it belongs to and we can often source a drawing or work from photos. Turnaround depends on complexity, not on quantity — single parts are not a problem.',
+      materials: 'Material gets matched to what the original had to survive — not to what prints easiest. Seals, O-rings, grommets, and vibration dampening: TPU 95A, ether-type, rated to -50°C impact resistance and high hydrolysis resistance — it won\'t degrade in wet environments the way ester-type TPU does. Structural fittings and load-bearing hardware: PETG-CF for dimensional stability, PA11 CF where the part sees heat or chemical exposure. Chemical-environment parts — fuel system adjacents, lab hardware, marine through-hulls — go to PP Glass Fiber or PP Carbon Fiber, which absorb essentially zero moisture and resist acids, solvents, and oils. Impact-critical parts get PC Blend. High-heat structural metal-replacement: PEI 1010 at 207°C HDT, flame retardant, autoclave-sterilizable if the original was used in a medical or scientific context. Where the original had a known failure mode — a stress riser, a thin wall that cracked repeatedly, a brittle section — we correct it in the model. The reproduction is sometimes stronger than the factory part.',
+      turnaround: 'Bring whatever you have — the broken part, half a part, a mating surface, a photograph. We measure with calipers and reference every accessible surface. If the part is completely gone, tell us the system it belongs to and we\'ll work from documentation, archived drawings, or photos of the same fitting on other vessels or vehicles. We\'ll tell you exactly what we need. Minimum order is one — single parts are not a problem.',
     },
   },
   {
@@ -95,12 +95,12 @@ const services = [
     drawerId: 'drawer-custom',
     eyebrow: 'Custom & Field Fabrication',
     headline: 'No blueprint required. Bring the problem.',
-    description: 'Custom mounts, jigs, adapters, enclosures, tooling, and one-off solutions. Carbon fibre, flexible, rigid, high-temp compounds including PPS and PEEK. We deploy — fly us to your location, your event, your boat.',
+    description: 'Custom mounts, jigs, adapters, enclosures, tooling, and one-off solutions. The full material stack — from flexible TPU to PEI 1010 at 207°C. We deploy — fly us to your location, your event, your boat.',
     image: '/media/race/dragon-sail-racing.jpg',
     alt: 'Custom race boat with dramatic dragon sail design',
     drawer: {
-      materials: 'Full material roster: PLA for prototyping and jigs, PETG-CF and ASA for structural outdoor parts, flexible TPU for gaskets and dampening, carbon-fibre composites, PPS and PEEK for extreme heat or chemical environments. We select material after we understand the load case — not before.',
-      turnaround: 'Custom work starts with a conversation, not a quote. Tell us what the part has to do, where it lives, and what failed before. We\'ll design to fit the actual conditions. Field deployment is available — if your project is on-site, on a vessel, or at an event and you need fabrication in the field, we bring the equipment to you.',
+      materials: 'The full stack, matched to the use case. PETG-CF and ASA handle the majority of structural, outdoor, and mechanical work — stiff, UV-stable, no-creep. TPU 95A for anything that needs to flex: gaskets, dampening mounts, cable boots, protective covers. PP-CF and PP-GF where the environment has chemical exposure — solvents, acids, fuels, constant moisture. PA11 CF for high-heat structural parts — 192°C HDT, bio-based, resists the chemistry of real working environments. PC Blend CF where you need stiffness plus heat and can anneal to 130°C. PETG V0 for enclosures that need a UL94 V0 flame rating — the only UL-certified self-extinguishing PETG on the market. At the ceiling: PEI 1010 (Ultem-class) at 207°C continuous service, inherent UL94 VTM-0 flame retardancy, gamma and autoclave sterilizable — a metal replacement in the truest sense. If an application calls for ESD-safe parts with space-grade outgassing requirements, we run PC Space Grade, ESA-certified. Material gets chosen after the problem is understood — not before.',
+      turnaround: 'Start with what the part has to do — not what it should look like. Tell us the load, the environment, what failed before, and the schedule. We design to the actual conditions and select material last. Field deployment is available: if the job is on a boat, at a race, at a job site, or anywhere that can\'t wait on shipping, we bring the equipment to you. Send the problem first.',
     },
   },
 ];
@@ -264,11 +264,11 @@ const galleryImages = [
           <p class="drawer-copy__stakes">{service.description}</p>
           <div class="drawer-copy__notes">
             <div>
-              <span>Materials note</span>
+              <span>Materials & compounds</span>
               <p>{service.drawer.materials}</p>
             </div>
             <div>
-              <span>Turnaround note</span>
+              <span>How to start</span>
               <p>{service.drawer.turnaround}</p>
             </div>
           </div>

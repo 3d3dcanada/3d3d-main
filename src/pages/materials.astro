@@ -1,0 +1,438 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const materials = [
+  // ── ENGINEERING TIER ────────────────────────────────────
+  {
+    tier: 'Engineering',
+    id: 'asa',
+    name: 'ASA',
+    full: 'Acrylonitrile Styrene Acrylate',
+    hdt: '93°C',
+    tags: ['UV-stable', 'Outdoor', 'Marine'],
+    body: 'The outdoor compound. UV-stable where ABS yellows and cracks, ASA holds colour and geometry through full seasons of sun, salt spray, and temperature cycling. 93°C heat deflection. The default choice for above-deck marine hardware, exterior automotive panels, and anything that lives outside. Acetone-smoothable. Available in multiple colours.',
+  },
+  {
+    tier: 'Engineering',
+    id: 'petg-cf',
+    name: 'PETG-CF',
+    full: 'PETG Carbon Fiber',
+    hdt: '>68°C (improved)',
+    tags: ['Structural', 'Stiff', 'Low-creep'],
+    body: 'PETG with recycled carbon fibre reinforcement. Better dimensional stability, higher modulus, and lower creep than standard PETG. Nearly odourless during printing. Matte black finish. The right call for structural brackets, load-bearing mounts, and parts that need to hold geometry under sustained force. Hardened nozzle required.',
+  },
+  {
+    tier: 'Engineering',
+    id: 'pc-blend',
+    name: 'PC Blend',
+    full: 'Polycarbonate Blend',
+    hdt: '113°C',
+    tags: ['Tough', 'Impact-resistant', 'Heat-resistant'],
+    body: 'Strong, tough, and heat-resistant. PC Blend maintains toughness at low temperatures and resists creep under mechanical stress — properties that pure CF composites trade away for stiffness. 113°C heat deflection. The choice when a part takes real impacts and can\'t afford to shatter. Fan shrouds, structural enclosures, machine components.',
+  },
+  {
+    tier: 'Engineering',
+    id: 'pc-blend-cf',
+    name: 'PC Blend CF',
+    full: 'Polycarbonate Blend Carbon Fiber',
+    hdt: '114°C / 130°C annealed',
+    tags: ['Stiff', 'Structural', 'Heat-resistant'],
+    body: 'PC Blend with recycled carbon fibre for added stiffness and improved temperature resistance. Annealing at 140°C for two hours raises the effective heat deflection to 130°C with less than 1% shrinkage. Flexural modulus reaches 4.2–4.9 GPa depending on orientation. Matte black. Hardened nozzle required. For mechanically loaded parts that also need heat performance.',
+  },
+  {
+    tier: 'Engineering',
+    id: 'pp-gf',
+    name: 'PP Glass Fiber',
+    full: 'Polypropylene Glass Fiber',
+    hdt: '138°C',
+    tags: ['Chemical-resistant', 'Marine', 'Lab'],
+    body: 'Polypropylene with glass fibre reinforcement. The standout property: 0.11% moisture absorption at both 24 hours and 7 days — stable, essentially zero. No swelling, no delamination, no geometry shift in saltwater or wet environments. Resists acids, solvents, non-oxidised bases, and oils. 138°C heat deflection. The right material for through-hull fittings, lab hardware, chemical-environment components, and anything in constant contact with water. Requires PP sheet and hardened nozzle.',
+  },
+  {
+    tier: 'Engineering',
+    id: 'pp-cf',
+    name: 'PP Carbon Fiber',
+    full: 'Polypropylene Carbon Fiber',
+    hdt: '120°C',
+    tags: ['Chemical-resistant', 'Lightweight', 'Structural'],
+    body: 'Polypropylene with recycled carbon fibre — the same near-zero moisture absorption and chemical resistance of PP Glass Fiber, with added structural stiffness and a higher stiffness-to-weight ratio. Lightweight. No warping. 120°C HDT. The choice when PP-GF\'s chemical resistance is required alongside structural load-bearing. Hardened nozzle required. PP sheet bed surface.',
+  },
+  {
+    tier: 'Engineering',
+    id: 'pa11-cf',
+    name: 'PA11 CF',
+    full: 'Polyamide 11 Carbon Fiber',
+    hdt: '192°C @ 0.45 MPa / 152°C @ 1.80 MPa',
+    tags: ['High-temp', 'Automotive', 'Structural'],
+    body: 'The engine bay material. PA11 CF runs to 192°C under low load and 152°C under 1.80 MPa — the highest heat deflection of any standard FDM compound short of PEI. Chemical resistance includes motor oils, fuels, benzene, ethanol, methanol, toluene, acetone, and NaOH. Bio-based from castor oil, reinforced with recycled carbon fibre. Charpy impact of 30–51 kJ/m² depending on orientation. Hardened nozzle required, enclosure recommended.',
+  },
+  {
+    tier: 'Engineering',
+    id: 'pc-space',
+    name: 'PC Space Grade',
+    full: 'Polycarbonate ESD — Space Grade',
+    hdt: '137°C',
+    tags: ['ESD-safe', 'Low-outgassing', 'Structural'],
+    body: 'Purpose-built for space industry and particle physics. ESD-safe (surface resistivity 6.0×10⁷ Ω/sq). Total Mass Loss of 0.25% against an ESA limit of 1.0% — certified for vacuum environments. 137°C heat deflection, 72–75 MPa tensile yield strength. For electronics enclosures requiring ESD dissipation, satellite components, and any application where outgassing in vacuum is a disqualifying factor. Hardened nozzle required.',
+  },
+  {
+    tier: 'Engineering',
+    id: 'petg-v0',
+    name: 'PETG V0',
+    full: 'PETG Flame Retardant',
+    hdt: '68°C',
+    tags: ['Flame-retardant', 'UL94 V0', 'Enclosures'],
+    body: 'The world\'s first UL94 V0-certified PETG filament. Self-extinguishing — forms a carbonised crust that cuts off oxygen and stops flame propagation. Compliant with IEC 60695-11-10. For electronics enclosures, insulation components, and machine guards where fire protection compliance is a requirement, not a preference. Must be dried before use. Natural and black available.',
+  },
+  {
+    tier: 'Elite',
+    id: 'pei-1010',
+    name: 'PEI 1010',
+    full: 'Polyetherimide (Ultem-class)',
+    hdt: '207°C @ 0.45 MPa / 194°C @ 1.80 MPa',
+    tags: ['Metal-replacement', 'Extreme-temp', 'Flame-retardant'],
+    body: 'The ceiling. PEI 1010 runs to 207°C under low load and 194°C under 1.80 MPa — beyond anything else in FDM except specialised industrial systems. Inherent UL94 VTM-0 flame retardancy without additives. Autoclave sterilisable, gamma radiation resistant, electron beam sterilisable. 95 MPa tensile yield strength printed. Positioned as a direct metal-alloy replacement for aerospace, medical instruments, and any structural application that has exhausted every other material option. Requires Prusa Pro HT90 or equivalent heated-chamber system at 90°C minimum. Nozzle at 410°C. Must be dried 6–8 hours at 150°C before printing.',
+  },
+  // ── FLEXIBLE ────────────────────────────────────────────
+  {
+    tier: 'Flexible',
+    id: 'tpu-95a',
+    name: 'TPU 95A',
+    full: 'Thermoplastic Polyurethane — Ether Type',
+    hdt: '78°C @ 1.80 MPa',
+    tags: ['Flexible', 'Seals', 'Impact-resistant'],
+    body: 'Ether-type TPU — not ester. The distinction matters: ether formulation resists hydrolysis where ester degrades in wet environments over time. Maintains impact resistance to -50°C. Shore 95A hardness — firm at thick sections, flexible at thin. Extreme wear resistance. High microbial resistance. The compound for O-rings, seals, gaskets, cable boots, vibration dampening mounts, and any part that needs to flex without failing. Print slowly.',
+  },
+  // ── SPECIALTY ───────────────────────────────────────────
+  {
+    tier: 'Specialty',
+    id: 'petg-magnetite',
+    name: 'PETG Magnetite',
+    full: 'PETG 40% Magnetite',
+    hdt: '93°C',
+    tags: ['Paramagnetic', 'ESD', 'High-density'],
+    body: '40% magnetite fill by weight. Paramagnetic — attracted to magnets, cannot be permanently magnetised under standard conditions. Significantly higher density than standard PETG. For electromagnetic components, switches, induction loops, and weight-ballasting applications where mass per volume matters. Hardened nozzle required.',
+  },
+  {
+    tier: 'Specialty',
+    id: 'petg-tungsten',
+    name: 'PETG Tungsten',
+    full: 'PETG 75% Tungsten',
+    hdt: '94°C',
+    tags: ['Radiation-shielding', 'High-density', 'Lead-free'],
+    body: '75% tungsten fill — the highest filler concentration in the catalogue and the densest printable material available. ~19 g/cm³, comparable to gold. Non-toxic, hypoallergenic, non-reactive. Purpose-built for X-ray and gamma radiation shielding in medical and radiography environments where lead is not acceptable. Hardened nozzle required. Polishable surface.',
+  },
+  // ── STANDARD ────────────────────────────────────────────
+  {
+    tier: 'Standard',
+    id: 'petg',
+    name: 'PETG',
+    full: 'Polyethylene Terephthalate Glycol',
+    hdt: '68°C',
+    tags: ['General-purpose', 'Tough', 'Low-warp'],
+    body: 'The general-purpose functional material. Tougher than PLA, lower warp than ABS, good chemical resistance, low moisture absorption. 68°C heat deflection limits it to non-heat-critical applications. Ductile — flexes before it shatters. Strong layer adhesion. The baseline for parts that need to work but don\'t face extreme conditions.',
+  },
+  {
+    tier: 'Standard',
+    id: 'pla',
+    name: 'PLA',
+    full: 'Polylactic Acid',
+    hdt: '55°C',
+    tags: ['Prototyping', 'Detail', 'Easy-print'],
+    body: 'The prototyping compound. Easy to print, excellent detail resolution, no enclosure needed. Softens at 55–60°C — not for functional parts exposed to heat, UV, or mechanical stress. Used for jigs, fit-check models, form prototypes, and anything that needs to be right before committing to an engineering compound. Not for end-use structural or outdoor applications.',
+  },
+  {
+    tier: 'Standard',
+    id: 'pvb',
+    name: 'PVB',
+    full: 'Polyvinyl Butyral',
+    hdt: '<60°C',
+    tags: ['Smoothable', 'Transparent', 'Design'],
+    body: 'IPA-smoothable to a glass-like transparent finish. Similar mechanical properties to PETG. Used for design objects, lamp shades, transparent enclosures, and display components where surface quality and optical clarity matter more than structural performance. Isopropyl alcohol vapour or wipe produces near-glass surface quality.',
+  },
+];
+
+const tiers = ['Elite', 'Engineering', 'Flexible', 'Specialty', 'Standard'];
+const tierDescriptions: Record<string, string> = {
+  Elite: 'Metal-replacement performance. Heated chamber required.',
+  Engineering: 'Purpose-built for real working environments — marine, automotive, industrial.',
+  Flexible: 'Seals, gaskets, vibration dampening. Flex without failure.',
+  Specialty: 'Functional fill materials for specific electromagnetic, shielding, or magnetic applications.',
+  Standard: 'Prototyping and general use. Know the limits.',
+};
+---
+
+<BaseLayout
+  title="Materials — 3D3D"
+  description="Every material we run. Engineering-grade compounds for marine, automotive, and field fabrication — from ASA to PEI 1010."
+  activePath="/materials"
+>
+  <section class="mat-page">
+    <div class="mat-shell">
+      <p class="mat-eyebrow">Material Stack</p>
+      <h1 class="mat-title">Every compound<br />we run.</h1>
+      <p class="mat-intro">
+        We print with the full Prusa material catalogue — from standard PETG to PEI 1010 at 207°C. Material selection starts with the use case, not the spool. Here's what we work with and why.
+      </p>
+    </div>
+
+    {tiers.map((tier) => {
+      const tierMats = materials.filter(m => m.tier === tier);
+      return (
+        <div class="mat-tier">
+          <div class="mat-tier__header">
+            <div class="mat-shell">
+              <p class="mat-tier__label">{tier}</p>
+              <p class="mat-tier__desc">{tierDescriptions[tier]}</p>
+            </div>
+          </div>
+          <div class="mat-shell">
+            <div class="mat-grid">
+              {tierMats.map((m) => (
+                <article class="mat-card" id={m.id}>
+                  <div class="mat-card__head">
+                    <h2 class="mat-card__name">{m.name}</h2>
+                    <span class="mat-card__hdt">{m.hdt}</span>
+                  </div>
+                  <p class="mat-card__full">{m.full}</p>
+                  <div class="mat-card__tags">
+                    {m.tags.map(tag => (
+                      <span class="mat-tag">{tag}</span>
+                    ))}
+                  </div>
+                  <p class="mat-card__body">{m.body}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    })}
+
+    <div class="mat-cta-block">
+      <div class="mat-shell">
+        <p class="mat-cta-block__eyebrow">Not sure what you need?</p>
+        <h2 class="mat-cta-block__title">Tell us the problem.<br />We'll spec the material.</h2>
+        <a href="/contact" class="mat-cta">Request Service →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .mat-page {
+    background: #111214;
+    color: #F6F7FA;
+    min-height: 100svh;
+  }
+
+  .mat-shell {
+    width: min(100% - clamp(1.5rem, 4vw, 4rem), 1100px);
+    margin: 0 auto;
+  }
+
+  /* ── Hero ── */
+  .mat-eyebrow {
+    margin: 0;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #40C4C4;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding-top: clamp(5rem, 8vw, 8rem);
+  }
+
+  .mat-eyebrow::before {
+    content: '';
+    width: 2.75rem;
+    height: 2px;
+    background: #40C4C4;
+    flex-shrink: 0;
+  }
+
+  .mat-title {
+    margin: 1rem 0 1.2rem;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 2rem + 4vw, 6rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: #FFFFFF;
+    text-transform: uppercase;
+  }
+
+  .mat-intro {
+    margin: 0 0 clamp(3rem, 6vw, 5rem);
+    max-width: 44rem;
+    font-size: clamp(1rem, 0.9rem + 0.4vw, 1.15rem);
+    line-height: 1.75;
+    color: rgba(246, 247, 250, 0.78);
+  }
+
+  /* ── Tier sections ── */
+  .mat-tier {
+    padding-bottom: clamp(3rem, 5vw, 5rem);
+  }
+
+  .mat-tier__header {
+    padding-block: 1.6rem;
+    border-top: 1px solid rgba(64, 196, 196, 0.2);
+    margin-bottom: 2rem;
+  }
+
+  .mat-tier__label {
+    margin: 0 0 0.3rem;
+    font-family: var(--font-tech);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #40C4C4;
+  }
+
+  .mat-tier__desc {
+    margin: 0;
+    font-size: 0.9rem;
+    color: rgba(246, 247, 250, 0.5);
+    font-family: var(--font-tech);
+  }
+
+  /* ── Grid ── */
+  .mat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    gap: 1.2rem;
+  }
+
+  /* ── Card ── */
+  .mat-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(64, 196, 196, 0.12);
+    border-radius: 1rem;
+    padding: clamp(1.2rem, 2.5vw, 1.8rem);
+    display: grid;
+    gap: 0.8rem;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .mat-card:hover {
+    border-color: rgba(64, 196, 196, 0.35);
+    background: rgba(64, 196, 196, 0.04);
+  }
+
+  .mat-card__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .mat-card__name {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+  }
+
+  .mat-card__hdt {
+    font-family: var(--font-tech);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #40C4C4;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .mat-card__full {
+    margin: 0;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: rgba(246, 247, 250, 0.4);
+  }
+
+  .mat-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .mat-tag {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    background: rgba(64, 196, 196, 0.1);
+    border: 1px solid rgba(64, 196, 196, 0.2);
+    border-radius: 0.3rem;
+    font-family: var(--font-tech);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #40C4C4;
+  }
+
+  .mat-card__body {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(246, 247, 250, 0.72);
+  }
+
+  /* ── CTA block ── */
+  .mat-cta-block {
+    border-top: 1px solid rgba(64, 196, 196, 0.2);
+    padding-block: clamp(4rem, 8vw, 7rem);
+  }
+
+  .mat-cta-block__eyebrow {
+    margin: 0 0 0.8rem;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(246, 247, 250, 0.4);
+  }
+
+  .mat-cta-block__title {
+    margin: 0 0 2rem;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 1.2rem + 3vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: #FFFFFF;
+    text-transform: uppercase;
+  }
+
+  .mat-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 3.4rem;
+    padding: 0.95rem 1.6rem;
+    background: #40C4C4;
+    color: #0F1112;
+    border: 3px solid #1A1A1A;
+    font-family: var(--font-tech);
+    font-size: 0.84rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    box-shadow: 0 14px 32px rgba(64, 196, 196, 0.22);
+  }
+
+  .mat-cta:hover {
+    background: #53D3D3;
+    box-shadow: 0 8px 24px rgba(64, 196, 196, 0.4);
+    transform: translateY(-2px);
+  }
+</style>

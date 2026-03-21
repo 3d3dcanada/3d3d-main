@@ -1,0 +1,78 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+---
+
+<BlogLayout
+  title="What Actually Survives Saltwater: A Material Reality Check"
+  description="A no-nonsense breakdown of which 3D printing materials hold up in marine environments — and which ones fall apart embarrassingly fast."
+  datePublished="2025-06-08"
+  author="Ken"
+>
+  <h2>Stop Printing Boat Parts in PLA</h2>
+
+  <p>
+    I see it every week on forums and Facebook groups. Someone prints a cleat, a fairlead, a hose adapter — in PLA — bolts it to their boat, and acts surprised when it turns into a wet noodle two months later. PLA is cornstarch plastic. It absorbs water, softens in heat, and has zero UV resistance. It's great for prototypes. It is not a marine material.
+  </p>
+
+  <p>
+    If you're making parts that live on or near saltwater, you need to think about three things: UV stability, moisture resistance, and mechanical properties at temperature. Most desktop filaments fail at least one of those. Here's what I've learned from actually running parts in marine environments.
+  </p>
+
+  <h2>ASA — The Workhorse</h2>
+
+  <p>
+    ASA is my go-to for anything that lives outside on a boat. It's essentially ABS with UV stabilizers baked into the polymer. It prints at similar temperatures, bonds similarly, and has comparable mechanical properties — but it doesn't yellow and crumble after a season in the sun.
+  </p>
+
+  <p>
+    I've had ASA parts on boats for over a year with zero visible degradation. Fairleads, instrument housings, cable management clips, ventilation covers. It handles spray, direct sun, and the temperature swings from a cold Atlantic morning to an afternoon baking on deck.
+  </p>
+
+  <p>
+    The catch: ASA needs an enclosed printer and decent ventilation. It warps if you look at it wrong during printing. But once it's printed, it's tough.
+  </p>
+
+  <h2>PETG-CF — When You Need Stiffness</h2>
+
+  <p>
+    Carbon-fiber-filled PETG gives you a significant stiffness boost over standard PETG without making printing dramatically harder. The carbon fibers act like rebar in concrete — they add rigidity and dimensional stability.
+  </p>
+
+  <p>
+    I use PETG-CF for structural brackets, mounting plates, and anything that needs to resist flex under load. It machines well after printing if you need to drill or tap it. It's more moisture-resistant than nylon-based composites, which matters a lot at sea.
+  </p>
+
+  <p>
+    Downsides: it's abrasive. You need a hardened steel nozzle. And the surface finish is matte and rough — functional, not pretty. For marine work, nobody cares about pretty.
+  </p>
+
+  <h2>PPA and PPS — The Serious Stuff</h2>
+
+  <p>
+    When a part needs to survive next to an engine, in the bilge, or anywhere that combines heat, chemicals, and mechanical stress, I reach for the engineering polymers.
+  </p>
+
+  <p>
+    <strong>PPA (Polyphthalamide):</strong> Think of it as nylon's tougher cousin. Higher heat resistance, lower moisture absorption, excellent chemical resistance. I've used it for impeller housings and exhaust-adjacent brackets. It's expensive and demanding to print — needs chamber temps above 100C — but the results are legitimate engineering parts.
+  </p>
+
+  <p>
+    <strong>PPS (Polyphenylene Sulfide):</strong> This is the nuclear option. Chemical resistance that rivals PEEK at a fraction of the cost. Heat deflection above 200C. Near-zero moisture absorption. I've printed fuel system components in PPS that would have cost thousands to machine from metal. It requires a seriously capable printer, but the parts are extraordinary.
+  </p>
+
+  <h2>What About PETG and Nylon?</h2>
+
+  <p>
+    Standard PETG is fine for parts that get occasional spray but aren't submerged or in constant sun. It's my recommendation for casual boaters printing non-critical parts. Easy to print, decent toughness, reasonable moisture resistance.
+  </p>
+
+  <p>
+    Nylon is strong but absorbs water like a sponge. In a marine environment, that's a dealbreaker for most applications. Wet nylon loses up to 25% of its strength. Unless you're sealing it or using it in a dry compartment, skip it.
+  </p>
+
+  <h2>The Real Answer</h2>
+
+  <p>
+    There's no single "best marine filament." It depends on the application — UV exposure, mechanical load, temperature range, chemical contact. That's why 3D3D exists. We match the material to the environment, not the other way around. Send us the problem and we'll tell you what actually works. No guessing, no forum opinions — just real data from parts that have been in the water.
+  </p>
+</BlogLayout>

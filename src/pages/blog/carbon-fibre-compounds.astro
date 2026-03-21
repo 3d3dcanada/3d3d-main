@@ -1,0 +1,90 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+---
+
+<BlogLayout
+  title="Carbon Fibre Filaments: What They Actually Do (And Don't) — 3D3D Blog"
+  description="PETG-CF, PA-CF, PPA-CF — the real differences between carbon fibre filaments and what to actually expect from them."
+  datePublished="2026-01-20"
+  author="Ken"
+>
+  <h2>Let's Clear Something Up</h2>
+
+  <p>
+    Carbon fibre filament does not make your parts as strong as carbon fibre. I need to say that up front because every week someone asks me to print something in "carbon fibre" expecting it to rival a Formula 1 monocoque. That's not how this works.
+  </p>
+
+  <p>
+    Carbon fibre filaments are base polymers — PETG, Nylon (PA), PPA, PC — blended with short chopped carbon fibres, typically 10-20% by weight. The fibres add stiffness and dimensional stability. They do not add the kind of tensile strength you get from continuous carbon fibre layup. Different process, different result.
+  </p>
+
+  <p>
+    Now that we've got that out of the way, let's talk about what these materials actually do well.
+  </p>
+
+  <h2>PETG-CF: The Everyday Workhorse</h2>
+
+  <p>
+    PETG with carbon fibre is where most people should start. It prints almost as easily as regular PETG — same temperatures, same bed adhesion — but the parts come out stiffer and with much better dimensional accuracy. The carbon fibres reduce warping and shrinkage, which means tighter tolerances on functional parts.
+  </p>
+
+  <p>
+    I use PETG-CF for brackets, housings, jigs, and fixtures where the part needs to hold its shape under moderate load. It machines well after printing — you can tap threads into it, drill clean holes, sand it smooth. The surface finish is matte and professional-looking without any post-processing.
+  </p>
+
+  <p>
+    The downside: it's more brittle than plain PETG. You trade impact resistance for stiffness. Don't use it for clips, snap-fits, or anything that needs to flex repeatedly.
+  </p>
+
+  <h2>PA-CF: The Step Up</h2>
+
+  <p>
+    Nylon carbon fibre — PA6-CF or PA12-CF — is the serious engineering material. It's stiffer than PETG-CF, handles higher temperatures (up to about 120°C continuous for PA6-CF), and has much better chemical resistance. This is what I reach for when parts go near engines, fuel, or saltwater.
+  </p>
+
+  <p>
+    The catch is that nylon is hygroscopic. It absorbs moisture from the air, and wet nylon prints like garbage — stringing, bubbling, weak layer adhesion. You need a filament dryer running during the print or a sealed dry box feeding the machine. This isn't optional. I've ruined enough rolls to know.
+  </p>
+
+  <p>
+    PA-CF also needs a hardened steel nozzle. Carbon fibres are abrasive — they'll eat through a brass nozzle in a few hundred grams. A hardened steel or ruby-tipped nozzle is mandatory.
+  </p>
+
+  <ul>
+    <li><strong>PA6-CF:</strong> Higher heat resistance, stiffer, but harder to print and more moisture-sensitive</li>
+    <li><strong>PA12-CF:</strong> Easier to print, less moisture absorption, slightly lower performance. Good middle ground</li>
+  </ul>
+
+  <h2>PPA-CF: The High End</h2>
+
+  <p>
+    Polyphthalamide with carbon fibre. This is the material I recommend when people need parts that survive in truly hostile environments. PPA-CF handles continuous temperatures up to 150°C, resists automotive fluids, and maintains stiffness under sustained load better than PA-CF.
+  </p>
+
+  <p>
+    I've used PPA-CF for under-hood brackets on a project car and for sensor mounts on marine engines. The parts have been in service for months with zero degradation. It's expensive — roughly $80-100 per kilogram — and it requires a printer with an enclosed, heated chamber. But for the right application, nothing else comes close in FDM.
+  </p>
+
+  <h2>What Carbon Fibre Filament Won't Do</h2>
+
+  <p>
+    Let me be direct about the limitations:
+  </p>
+
+  <ul>
+    <li><strong>It won't replace metal</strong> in high-load structural applications. A CF-nylon bracket can replace a plastic bracket, sometimes an aluminum one, but not a steel one</li>
+    <li><strong>It won't give you continuous fibre performance.</strong> Chopped fibres add stiffness, not the tensile strength of laid-up carbon sheets</li>
+    <li><strong>It won't print on any machine.</strong> You need a hardened nozzle at minimum. For PA-CF and PPA-CF, you need drying capability and ideally a heated chamber</li>
+    <li><strong>It won't be cheap.</strong> CF filaments cost 2-4x their non-filled equivalents. Factor that into your quoting</li>
+  </ul>
+
+  <h2>My Recommendation</h2>
+
+  <p>
+    Start with PETG-CF for general-purpose stiff parts. Move to PA-CF when you need heat or chemical resistance. Use PPA-CF when the application truly demands it and you've got the printer to back it up. Skip CF-PLA entirely — it's marketing, not engineering.
+  </p>
+
+  <p>
+    And buy a hardened nozzle before your first roll. Not after. Trust me on that one.
+  </p>
+</BlogLayout>

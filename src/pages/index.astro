@@ -6,12 +6,12 @@ const orgSchema = {
   '@type': ['LocalBusiness', 'Organization'],
   name: '3D3D',
   url: 'https://3d3d.ca',
-  description: 'Precision fabrication for marine, automotive, and field deployment. Founder-operated out of Fredericton, New Brunswick.',
+  description: 'Specialty fabrication for marine, motorsport, and field deployment. Founder-operated. Atlantic Canada.',
   telephone: '+1-506-953-2678',
-  email: 'info@3d3d.ca',
+  email: '3d3dcanada@gmail.com',
   address: {
     '@type': 'PostalAddress',
-    addressLocality: 'Fredericton',
+    addressLocality: 'Moncton',
     addressRegion: 'NB',
     addressCountry: 'CA',
   },
@@ -26,7 +26,7 @@ const orgSchema = {
     'https://wa.me/15069532678',
     'https://ko-fi.com/3d3dca',
   ],
-  image: 'https://3d3d.ca/media/real/race-morning-crew.jpg',
+  image: 'https://3d3d.ca/media/real/fleet-start-press.jpg',
   logo: 'https://3d3d.ca/media/brand/logo-badge.webp',
 };
 
@@ -35,12 +35,7 @@ const homeNavGroups = [
     label: 'On This Page',
     items: [
       { id: 'home', label: 'Home', href: '/' },
-      { id: 'services', label: 'Services', href: '#services' },
-      { id: 'origin', label: 'Origin', href: '#origin' },
-      { id: 'deployment', label: 'Deployment', href: '#deployment' },
-      { id: 'support', label: 'Support', href: '#support' },
-      { id: 'open-build', label: 'Open Build', href: '#open-build' },
-      { id: 'partners', label: 'Partners', href: '#partners' },
+      { id: 'what-we-do', label: 'What We Do', href: '#what-we-do' },
       { id: 'contact', label: 'Contact', href: '#contact' },
     ],
   },
@@ -49,22 +44,10 @@ const homeNavGroups = [
     items: [
       { id: 'blog', label: 'Blog', href: '/blog' },
       { id: 'shop', label: 'Shop', href: '/shop' },
+      { id: 'prusa', label: 'Prusa', href: '/prusa' },
       { id: 'about', label: 'About', href: '/about' },
     ],
   },
-];
-
-const heroProofRail = [
-  'Founder-operated',
-  'Fredericton, NB',
-  'Marine · Motorsport · Field-tested',
-  'Newport Bermuda 2026',
-];
-
-const heroStats = [
-  { value: '3', label: 'Active print platforms' },
-  { value: '120th', label: 'Newport Bermuda Race — June 2026' },
-  { value: '1 yr', label: 'Built from nothing to here' },
 ];
 
 const services = [
@@ -72,32 +55,17 @@ const services = [
     id: 'marine',
     drawerId: 'drawer-marine',
     eyebrow: 'Marine & Offshore',
-    stakes: "If it fails at sea, it can't be MacGyvered.",
-    body: 'Winch components, deck hardware, replacement fittings, and custom parts built to survive saltwater, UV, and open-ocean conditions. If it goes on a boat, we print it to last.',
-    bullets: [
-      'Saltwater-resistant materials: ASA, PETG, CF compounds',
-      'Dimensional accuracy for mechanical fitment',
-      'Replacements for discontinued or unavailable marine parts',
-    ],
-    cta: 'Send your fitment problem →',
+    headline: 'Built for conditions that destroy everything else.',
+    description: 'Custom winch components, deck hardware, and purpose-built parts engineered for saltwater, UV exposure, and open-ocean conditions. If it lives on a vessel, we build it to last.',
     image: '/media/workshop/winch-cup-holder.jpg',
-    alt: 'Marine winch accessory fabricated for offshore use',
+    alt: 'Custom winch-top cup holder fabricated for marine use',
     drawer: {
       photos: [
-        {
-          src: '/media/workshop/winch-cup-holder.jpg',
-          alt: 'Winch-top cup holder printed for marine use',
-        },
-        {
-          src: '/media/workshop/printer-action-cf.jpg',
-          alt: 'Carbon-fibre print running in the workshop',
-        },
-        {
-          src: '/media/real/helm-close.jpg',
-          alt: 'Close view from the helm during offshore sailing',
-        },
+        { src: '/media/workshop/winch-cup-holder.jpg', alt: 'Winch-top cup holder printed for marine use' },
+        { src: '/media/workshop/blue-fitment-caps.jpg', alt: 'Blue fitment caps for marine hardware' },
+        { src: '/media/real/helm-close.jpg', alt: 'Helm view during offshore sailing' },
       ],
-      materials: 'ASA, PETG, and carbon-fibre compounds are the baseline when salt, UV, and constant load are part of the job.',
+      materials: 'ASA, PETG-CF, PPS, PPA — marine-grade compounds rated for salt, UV, and constant mechanical load.',
       turnaround: 'Marine jobs move fastest when fitment dimensions or a reference part come in with the request.',
     },
   },
@@ -105,254 +73,100 @@ const services = [
     id: 'automotive',
     drawerId: 'drawer-automotive',
     eyebrow: 'Automotive & Motorsport',
-    stakes: "Cars, trucks, rally rigs — if it broke or never existed, we make it.",
-    body: 'Radio knob replacements, custom brackets, aftermarket accessories, and parts that no longer exist. Drag cars, daily drivers, build cars — if it needs a part, we figure out the part.',
-    bullets: [
-      'Heat-resistant materials for engine-adjacent applications',
-      'Rapid iteration for fitment and clearance',
-      'One-off or small production runs',
-    ],
-    cta: 'Send your build spec →',
+    headline: "We know performance. We've built it.",
+    description: 'Ten years as a mechanic. Engine builds, drag cars, daily drivers. Radio knob replacements, custom brackets, aftermarket components in heat-resistant compounds.',
     image: '/media/workshop/radio-button-replacement.jpg',
-    alt: 'Replacement automotive radio knob beside the original part',
+    alt: 'Replacement automotive radio button beside the original part',
     drawer: {
       photos: [
-        {
-          src: '/media/workshop/radio-button-replacement.jpg',
-          alt: 'Replacement Pontiac Vibe radio button',
-        },
-        {
-          src: '/media/workshop/mouse-body-petgcf.jpg',
-          alt: 'PETG-CF mouse body on the print bed',
-        },
-        {
-          src: '/media/workshop/fan-reducers.jpg',
-          alt: 'Precision black functional parts lined up after printing',
-        },
+        { src: '/media/workshop/radio-button-replacement.jpg', alt: 'Replacement radio button beside original' },
+        { src: '/media/workshop/mouse-body-petgcf.jpg', alt: 'PETG-CF part on the print bed' },
+        { src: '/media/workshop/fan-reducers.jpg', alt: 'Precision functional parts after printing' },
       ],
-      materials: 'PETG-CF, ASA, and higher-temp compounds are selected around heat, vibration, and clearance requirements.',
+      materials: 'PETG-CF, ASA, and higher-temp compounds selected around heat, vibration, and clearance requirements.',
       turnaround: 'Fitment-first automotive work usually starts with photos, measurements, or the broken part itself.',
     },
   },
   {
-    id: 'repair',
-    drawerId: 'drawer-repair',
-    eyebrow: 'Repair & Replacement',
-    stakes: 'The part is discontinued. The supplier is gone. We print the replacement.',
-    body: 'If you have a broken component, a worn piece, or a part that simply no longer exists anywhere, 3D3D can reverse-engineer and produce it. One piece. Exact fit. Ships to you.',
-    bullets: [
-      'From measurement or reference sample',
-      'Functional-grade materials, not display prints',
-      'Full review before shipping',
-    ],
-    cta: 'Describe what broke →',
-    image: '/media/workshop/spray-can-adapter.jpg',
-    alt: 'Purple functional adapter printed for replacement use',
+    id: 'scan',
+    drawerId: 'drawer-scan',
+    eyebrow: 'Scan · Measure · Recreate',
+    headline: 'If you can bring the part, we can recreate it.',
+    description: 'We reverse-engineer broken and discontinued components from physical reference — calipers, measurement, and scanning techniques. Vessel hardware, vintage car parts, antique hardware, obsolete fittings. One piece is a real job.',
+    image: '/media/workshop/machine-parts-flatlay.jpg',
+    alt: 'Machine components laid out before reverse engineering',
     drawer: {
       photos: [
-        {
-          src: '/media/workshop/spray-can-adapter.jpg',
-          alt: 'Functional spray can adapter',
-        },
-        {
-          src: '/media/workshop/radio-button-replacement.jpg',
-          alt: 'Replacement automotive button',
-        },
-        {
-          src: '/media/workshop/nomad-joe-holder.jpg',
-          alt: 'Functional holder printed for daily use',
-        },
+        { src: '/media/workshop/machine-parts-flatlay.jpg', alt: 'Machine components before reverse engineering' },
+        { src: '/media/workshop/custom-tv-mount.jpg', alt: 'Custom TV mount — exact-fit replacement' },
+        { src: '/media/workshop/spray-can-adapter.jpg', alt: 'Custom spray can adapter' },
       ],
-      materials: 'Material choice is driven by what the broken part had to survive in the first place: load, heat, weather, or repeated handling.',
-      turnaround: 'If the geometry is straightforward and the measurements are clean, repair parts can move quickly from review to production.',
+      materials: 'Material is chosen based on what the original part had to survive — load, heat, weather, or repeated handling.',
+      turnaround: 'If geometry is clean and measurements are tight, repair parts can move from review to production quickly.',
     },
   },
   {
     id: 'custom',
     drawerId: 'drawer-custom',
     eyebrow: 'Custom & Field Fabrication',
-    stakes: 'No blueprint required. Bring the problem.',
-    body: 'Custom mounts, jigs, adapters, enclosures, tools, and one-off solutions. If you can describe it — or even just describe the problem — 3D3D can design and build it.',
-    bullets: [
-      'Design-from-brief available',
-      'Carbon-fibre, flexible, rigid, high-temp compound options',
-      'Prototypes and production runs',
-    ],
-    cta: 'Start a custom build →',
+    headline: 'No blueprint required. Bring the problem.',
+    description: 'Custom mounts, jigs, adapters, enclosures, tooling, and one-off solutions. Carbon fibre, flexible, rigid, high-temp compounds including PPS and PEEK. We also deploy — fly us to your location, your event, your boat.',
     image: '/media/workshop/printer-action-cf.jpg',
-    alt: 'Carbon-fibre print in progress on a fabrication platform',
+    alt: 'Carbon-fibre part in production on a fabrication platform',
     drawer: {
       photos: [
-        {
-          src: '/media/workshop/printer-action-cf.jpg',
-          alt: 'Printer producing a carbon-fibre part',
-        },
-        {
-          src: '/media/workshop/custom-tv-mount.jpg',
-          alt: 'Custom TV mount fixed to a stair railing',
-        },
-        {
-          src: '/media/workshop/rv-lab-01.jpg',
-          alt: 'The original RV fabrication setup with printers running',
-        },
+        { src: '/media/workshop/printer-action-cf.jpg', alt: 'Printer producing a carbon-fibre part' },
+        { src: '/media/workshop/custom-tv-mount.jpg', alt: 'Custom TV mount' },
+        { src: '/media/workshop/machine-parts-flatlay.jpg', alt: 'Machine parts flat lay' },
       ],
-      materials: 'Rigid, flexible, carbon-fibre, and higher-temp compounds stay on the table until the use case narrows the answer down.',
-      turnaround: 'Custom work starts with the problem statement first, then design, then fitment and print once the direction is right.',
+      materials: 'Rigid, flexible, carbon-fibre, PPS, PEEK — material stays open until the use case narrows the answer.',
+      turnaround: 'Custom work starts with the problem statement first, then design, then fitment and print.',
     },
   },
 ];
 
-const originParagraphs = [
-  '3D3D was not started in a workshop with a budget. It was started in a recreational vehicle, running three printers off a generator that cost $30 a day in gas. In 35-degree heat. With everything breaking — the printers, the power, the plans, all of it.',
-  'That was the sacrifice required to build this. A year of daily printing, failing, iterating, and producing parts that hold up — not because the setup was ideal, but because the standards were non-negotiable.',
-  "Today the operation is stable, Prusa Research is sending a CORE One L, and the Newport Bermuda Race deployment is on the horizon. But the mentality hasn't changed: if it can break, it will. So it is built not to.",
-];
-
-const originProofPoints = [
-  'Started in an RV on a generator — $30/day in gas, 35-degree heat',
-  'One year of daily printing, failing, and building until the work spoke for itself',
-  "Prusa Research recognized that commitment — they're sending their flagship machine",
-  'High-performance materials as standard: PETG-CF, ASA, annealed PLA, UV compounds',
-  'Every part reviewed, processed, and tested before it ships',
-];
-
-const deploymentParagraphs = [
-  "Ken's first sail was a duo passage with CSM — Halifax, Nova Scotia to Antigua. No experience. They hit a cat-one storm: 70-knot winds, 90-knot gusts. No turning back. That passage taught him everything that matters about what breaks, why it breaks, and what you have to accept when there is no option to stop.",
-  'Since then: transatlantics, the Rolex Fastnet Race, two days solo up the Saint John River. The offshore experience is real, and it informs everything built at 3D3D.',
-  "For the 2026 Newport Bermuda Race — the 120th running — Ken is sailing aboard CSM's boat with a Prusa CORE One L printing live onboard. This is not a sponsorship. It is proof: real parts, real problems, real conditions, no fallback.",
-];
-
-const deploymentPhotos = [
-  {
-    src: '/media/real/sunrise-offshore.jpg',
-    alt: 'Sunrise offshore before a race day',
-    caption: 'Daybreak before the system gets tested.',
-  },
-  {
-    src: '/media/real/helm-close.jpg',
-    alt: 'Close-up at the helm under load',
-    caption: 'Helm time is where failure stops being theoretical.',
-  },
-  {
-    src: '/media/real/coastal-landmark.jpg',
-    alt: 'Coastal landmark at the edge of a passage',
-    caption: 'Landfall is where the tolerances have to be right.',
-  },
-];
-
-const workBands = [
-  {
-    label: 'Standard',
-    intro: 'One-off requests and production needs',
-    body: 'Standard queue placement, fabrication review, dimensional confirmation, and global shipping.',
-    cta: 'Request a build →',
-    href: '/contact',
-  },
-  {
-    label: 'Priority',
-    intro: 'Clients who need faster response and preferred scheduling',
-    body: 'Accelerated turnaround, direct communication, priority queue position, and material confirmation before print. Also directly supports the 3D3D mission and operational expansion.',
-    cta: 'Get priority access →',
-    href: '/contact',
-  },
-  {
-    label: 'Expedition & Retained Support',
-    intro: 'Long-term partners and serious operators',
-    body: 'Retained fabrication access, project involvement, concierge-level support, regular field updates, and recognition on the campaign. Direct access to the founder on every engagement. This is not a subscription. It is an operational relationship.',
-    cta: 'Become a patron →',
-    href: '/contact',
-    featured: true,
-  },
-];
-
-const openBuildParagraphs = [
-  '3D3D is built on open tools, open hardware, and open community values. The repository is open. The knowledge is shared. If you want the file, you can have the file.',
-];
-
-const openResources = [
-  {
-    label: 'Printable Designs',
-    explanation: 'Browse functional parts, tested objects, and open files available for download on Printables.',
-    href: 'https://www.printables.com/@KTK3D_3050116',
-    display: 'printables.com/@KTK3D_3050116',
-    image: '/media/real/dawn-approach.jpg',
-  },
-  {
-    label: 'Support the Work',
-    explanation: "Ko-fi is where you can directly support 3D3D's operational costs, campaign prep, and open-source contributions. This is not a shop. It is a direct line.",
-    href: 'https://ko-fi.com/3d3dca',
-    display: 'ko-fi.com/3d3dca',
-  },
-  {
-    label: 'GitHub',
-    explanation: 'Code, tooling, and documentation published openly as the operation grows.',
-    href: 'https://github.com/3d3dcanada/3d3d-main',
-    display: 'github.com/3d3dcanada/3d3d-main',
-  },
-];
-
-const partners = [
-  {
-    name: 'Prusa Research',
-    context: '3D3D has operated on the Prusa ecosystem since day one. After a year of documented work and demonstrated commitment, Prusa Research is sending a CORE One L — their flagship machine. That is not a marketing arrangement. That is a recognition of output.',
-    cta: 'About Prusa →',
-    href: 'https://prusa3d.com',
-    external: true,
-    image: '/media/workshop/printer-action-cf.jpg',
-    alt: 'Carbon-fibre print running in the Prusa-aligned production workflow',
-  },
-  {
-    name: 'Christopher Stanmore-Major',
-    context: "Captain, offshore sailor, and the reason Ken ever stepped on a boat. CSM sponsored Ken's place aboard for the 2026 Newport Bermuda Race and is the operational partner for the live deployment. He is not a client. He is a collaborator.",
-    cta: 'The 2026 campaign →',
-    href: '/blog',
-    image: '/media/real/helm-close.jpg',
-    alt: 'Christopher Stanmore-Major at the helm',
-  },
-  {
-    name: 'Sponsorship & Partnership',
-    context: 'One slot available for campaign alignment, equipment partnership, or brand presence on the Newport Bermuda deployment. This is an offshore race. This is live printing. This is real proof.',
-    cta: 'Talk to us →',
-    href: '/contact',
-    image: '/media/real/golden-hour-02.jpg',
-    alt: 'Golden-hour offshore sailing during campaign conditions',
-    overlay: true,
-  },
+// Verified gallery images only — filename matches content
+const galleryImages = [
+  { src: '/media/workshop/fan-reducers.jpg', alt: 'Precision fan reducer components after printing' },
+  { src: '/media/workshop/spray-can-adapter.jpg', alt: 'Custom spray can adapter — functional field part' },
+  { src: '/media/workshop/blue-fitment-caps.jpg', alt: 'Marine fitment caps in progress' },
+  { src: '/media/workshop/modular-parts-flatlay.jpg', alt: 'Modular printed parts laid out for inspection' },
+  { src: '/media/workshop/printer-bed-benchy.jpg', alt: 'Calibration print on the printer bed' },
+  { src: '/media/workshop/mouse-body-petgcf.jpg', alt: 'PETG-CF body part on the print bed' },
 ];
 ---
 
 <BaseLayout
-  title="3D3D | Precision fabrication for marine, automotive, and field deployment"
-  description="3D3D builds functional parts for boats, cars, and anything else that needs to work under real conditions. Founder-operated out of Fredericton, NB."
+  title="3D3D — Specialty Fabrication for Marine, Motorsport & Field Deployment"
+  description="3D3D builds functional parts for boats, cars, and anything that needs to work under real conditions. We scan, measure, and recreate broken or obsolete components. Founder-operated. Atlantic Canada."
   schema={orgSchema}
   activePath="/"
   navGroups={homeNavGroups}
   bodyClass="home-editorial"
 >
   <div class="home-page">
+
+    <!-- ═══════════════════════════════════════════════════
+         HERO — dark, full-height
+         ═══════════════════════════════════════════════════ -->
     <section id="home" class="home-section home-section--dark home-hero" data-reveal-section>
+      <div class="hero-bg" aria-hidden="true">
+        <img src="/media/real/fleet-start-press.jpg" alt="" loading="eager" decoding="async" />
+      </div>
       <div class="section-shell hero-shell">
         <div class="hero-copy">
-          <p class="eyebrow hero-eyebrow">Precision Fabrication · Marine · Automotive · Custom</p>
-          <h1 class="hero-title" aria-label="You have a problem. We have a printer.">
+          <p class="eyebrow hero-eyebrow">Specialty Fabrication · Marine · Motorsport · Field Deployment</p>
+          <h1 class="hero-title" aria-label="You have a problem. I am your solution.">
             <span class="hero-line">You have a problem.</span>
-            <span class="hero-line">We have a printer.</span>
+            <span class="hero-line hero-line--accent">I am your solution.</span>
           </h1>
           <p class="hero-subhead">
-            3D3D builds functional parts for boats, cars, and anything else that needs to work under real conditions. Marine fittings, automotive replacements, custom components that don't exist yet. Open-source at the core. Built from nothing but stubbornness and a generator.
+            If it's broken, discontinued, or doesn't exist yet — we build it. Marine hardware, automotive parts, field fabrication, on-site deployment. Atlantic Canada based, serving Canada and the United States.
           </p>
           <div class="hero-actions">
-            <a href="/contact" class="hero-button hero-button--primary">Request Service →</a>
-            <a href="/blog" class="hero-button hero-button--ghost">Follow the Campaign →</a>
+            <a href="/contact" class="hero-button hero-button--primary" data-analytics-event="contact_started" data-analytics-source="hero-cta">Request Service →</a>
+            <a href="https://ko-fi.com/3d3dca" class="hero-button hero-button--ghost" target="_blank" rel="noopener noreferrer" data-analytics-event="kofi_clicked" data-analytics-source="hero-cta">Support the Campaign →</a>
           </div>
-          <ul class="hero-proof-rail" aria-label="3D3D proof points">
-            {heroProofRail.map((item, index) => (
-              <li class="hero-proof-item" style={`animation-delay: ${0.4 + index * 0.08}s;`}>
-                <span class="hero-proof-dot" aria-hidden="true"></span>
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
         </div>
 
         <div class="hero-media">
@@ -371,261 +185,90 @@ const partners = [
           </div>
         </div>
       </div>
-
-      <div class="section-shell hero-stats-shell">
-        <div class="hero-stats">
-          {heroStats.map((stat, index) => (
-            <article class="hero-stat-card" style={`animation-delay: ${0.5 + index * 0.1}s;`}>
-              <strong>{stat.value}</strong>
-              <span>{stat.label}</span>
-            </article>
-          ))}
-        </div>
-      </div>
     </section>
 
-    <section id="services" class="home-section home-section--light services-section" data-reveal-section aria-labelledby="services-label">
-      <h2 id="services-label" class="sr-only">Services</h2>
-      <div class="section-shell services-shell">
-        {services.map((service, index) => (
-          <article class:list={['service-module', index % 2 === 1 && 'service-module--reverse']}>
-            <div
-              class:list={[
-                'service-module__media',
-                'mask-wipe',
-                index % 2 === 0 ? 'mask-wipe-left' : 'mask-wipe-right',
-              ]}
-              data-reveal
-            >
-              <img src={service.image} alt={service.alt} loading="lazy" decoding="async" />
-            </div>
+    <!-- ═══════════════════════════════════════════════════
+         WHAT WE DO — light
+         ═══════════════════════════════════════════════════ -->
+    <section id="what-we-do" class="home-section home-section--light work-section" data-reveal-section aria-labelledby="work-label">
+      <div class="section-shell work-shell">
 
-            <div class="service-module__content">
-              <div class:list={['service-module__text', index % 2 === 0 ? 'reveal-right' : 'reveal-left']} data-reveal>
-                <p class="eyebrow reveal-left" data-reveal>{service.eyebrow}</p>
-                <p class="service-module__stakes reveal-up delay-1" data-reveal>{service.stakes}</p>
-                <p class="service-module__body reveal-fade delay-2" data-reveal>{service.body}</p>
-                <ul class="service-module__bullets" aria-label={`${service.eyebrow} capabilities`}>
-                  {service.bullets.map((bullet, bulletIndex) => (
-                    <li class="reveal-left" data-reveal style={`transition-delay: ${0.12 + bulletIndex * 0.06}s;`}>
-                      {bullet}
-                    </li>
-                  ))}
-                </ul>
+        <header class="work-header">
+          <p class="eyebrow reveal-left" data-reveal>What We Do</p>
+          <h2 class="section-title reveal-up" data-reveal>
+            We scan it.<br />We model it.<br />We build it.
+          </h2>
+          <p class="section-body reveal-fade delay-1" data-reveal>
+            3D3D fabricates functional parts for boats, cars, machines, and anything that can't afford to fail. We measure and reverse-engineer broken or obsolete components into exact-fit replacements — hull hardware, deck fittings, vintage automotive parts, antique hardware, discontinued fittings. Bring us the part, a photo, or just the problem. We handle the rest.
+          </p>
+        </header>
+
+        <div class="services-grid" aria-label="Service areas">
+          {services.map((service, i) => (
+            <article
+              class="service-card reveal-up"
+              data-reveal
+              style={`transition-delay: ${i * 0.08}s;`}
+            >
+              <div class="service-card__media">
+                <img
+                  src={service.image}
+                  alt={service.alt}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div class="service-card__body">
+                <p class="service-card__eyebrow">{service.eyebrow}</p>
+                <h3 class="service-card__headline">{service.headline}</h3>
                 <button
                   type="button"
-                  class="service-module__cta reveal-up delay-3"
-                  data-reveal
+                  class="service-card__cta"
                   data-drawer-trigger
                   data-drawer-id={service.drawerId}
                 >
-                  {service.cta}
+                  Learn more →
                 </button>
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-
-    <section id="origin" class="home-section home-section--dark origin-section" data-reveal-section>
-      <div class="section-shell origin-shell">
-        <div class="origin-grid">
-          <div class="origin-photo mask-wipe mask-wipe-left" data-reveal>
-            <img src="/media/workshop/rv-lab-02.jpg" alt="The RV fabrication setup that started 3D3D" loading="lazy" decoding="async" />
-          </div>
-
-          <div class="origin-copy">
-            <p class="eyebrow reveal-left" data-reveal>Where this started</p>
-            <h2 class="section-title section-title--light reveal-up" data-reveal>
-              An RV, a generator,
-              <br />
-              and every reason to quit.
-            </h2>
-
-            {originParagraphs.map((paragraph, index) => (
-              <p class:list={['section-body', 'section-body--light', 'reveal-fade', index > 0 && `delay-${index}`]} data-reveal>
-                {paragraph}
-              </p>
-            ))}
-
-            <ul class="proof-list" aria-label="Origin proof points">
-              {originProofPoints.map((point, index) => (
-                <li class="reveal-left" data-reveal style={`transition-delay: ${0.12 + index * 0.08}s;`}>
-                  <span class="proof-dot" aria-hidden="true"></span>
-                  <span>{point}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        <div class="origin-inset mask-wipe mask-wipe-left" data-reveal>
-          <img src="/media/workshop/rv-lab-03.jpg" alt="Close look at the RV lab with multiple printers running" loading="lazy" decoding="async" />
-        </div>
-      </div>
-    </section>
-
-    <section id="deployment" class="home-section home-section--dark deployment-section" data-reveal-section>
-      <div class="section-bg section-bg--photo" data-parallax="0.4" style="background-image: url('/media/real/fleet-running.jpg');"></div>
-      <div class="section-shell deployment-shell">
-        <div class="deployment-copy">
-          <p class="eyebrow reveal-left" data-reveal>2026 Newport Bermuda Race — 120th Anniversary</p>
-          <h2 class="deployment-title" aria-label="A fabrication studio in motion.">
-            <span class="word-reveal" data-reveal>A</span>
-            <span class="word-reveal" data-reveal style="transition-delay: 0.1s;">fabrication</span>
-            <span class="word-reveal" data-reveal style="transition-delay: 0.2s;">studio</span>
-            <br />
-            <span class="word-reveal" data-reveal style="transition-delay: 0.3s;">in</span>
-            <span class="word-reveal" data-reveal style="transition-delay: 0.4s;">motion.</span>
-          </h2>
-
-          {deploymentParagraphs.map((paragraph, index) => (
-            <p class:list={['section-body', 'section-body--light', 'reveal-fade', index > 0 && `delay-${index}`]} data-reveal>
-              {paragraph}
-            </p>
-          ))}
-
-          <a href="/blog" class="hero-button hero-button--ghost reveal-up delay-3" data-reveal>Follow the campaign →</a>
-        </div>
-
-        <div class="deployment-strip" aria-label="Campaign photo strip">
-          {deploymentPhotos.map((photo, index) => (
-            <figure class="deployment-card reveal-scale" data-reveal style={`transition-delay: ${0.1 + index * 0.12}s;`}>
-              <div class="deployment-card__media">
-                <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" />
-              </div>
-              <figcaption>{photo.caption}</figcaption>
-            </figure>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section id="support" class="home-section home-section--light work-section" data-reveal-section aria-labelledby="support-label">
-      <h2 id="support-label" class="sr-only">How to work with 3D3D</h2>
-      <div class="section-shell work-shell">
-        {workBands.map((band, index) => (
-          <article class:list={['work-band', band.featured && 'work-band--featured', 'reveal-left']} data-reveal style={`transition-delay: ${index * 0.12}s;`}>
-            {band.featured && (
-              <div class="work-band__image" aria-hidden="true">
-                <img src="/media/real/golden-hour-01.jpg" alt="" loading="lazy" decoding="async" />
-              </div>
-            )}
-
-            <div class="work-band__content">
-              <p class="work-band__label">{band.label}</p>
-              <div class="work-band__meta">
-                <p><span>For:</span> {band.intro}</p>
-                <p><span>What you get:</span> {band.body}</p>
-              </div>
-              <a href={band.href} class:list={['work-band__cta', band.featured && 'work-band__cta--featured']}>
-                {band.cta}
-              </a>
-            </div>
-          </article>
-        ))}
-
-        <div class="partner-band reveal-up" data-reveal>
-          <div>
-            <p class="partner-band__label">Partnerships & Sponsorships</p>
-            <p class="partner-band__body">
-              For brands, marine organizations, event sponsors, and media partners. Contact us to discuss campaign alignment, product placement, or equipment partnerships.
-            </p>
-          </div>
-          <a href="/contact" class="partner-band__cta">Partner with 3D3D →</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="open-build" class="home-section home-section--light open-build-section" data-reveal-section>
-      <div class="section-shell open-build-shell">
-        <div class="open-build-copy">
-          <p class="eyebrow reveal-left" data-reveal>Open-source at the core</p>
-          <h2 class="section-title reveal-up" data-reveal>
-            The ecosystem matters
-            <br />
-            more than the lock-in.
-          </h2>
-          {openBuildParagraphs.map((paragraph) => (
-            <p class="section-body reveal-fade delay-1" data-reveal>{paragraph}</p>
-          ))}
-        </div>
-
-        <div class="resource-grid">
-          {openResources.map((resource, index) => (
-            <a
-              href={resource.href}
-              class:list={[
-                'resource-card',
-                index === 0 && 'resource-card--photo',
-                index > 0 && 'resource-card--dark',
-                'reveal-right',
-              ]}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-reveal
-              style={[
-                resource.image ? `--resource-image: url('${resource.image}');` : '',
-                `transition-delay: ${index * 0.1}s;`,
-              ].join(' ')}
-            >
-              <span class="resource-card__label">{resource.label}</span>
-              <p>{resource.explanation}</p>
-              <span class="resource-card__link">{resource.display}</span>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section id="partners" class="home-section home-section--dark partners-section" data-reveal-section aria-labelledby="partners-label">
-      <h2 id="partners-label" class="sr-only">Partners</h2>
-      <div class="section-shell partners-shell">
-        <div class="partner-grid">
-          {partners.map((partner, index) => (
-            <article class="partner-card reveal-scale" data-reveal style={`transition-delay: ${index * 0.12}s;`}>
-              <div class:list={['partner-card__media', partner.overlay && 'partner-card__media--overlay']}>
-                <img src={partner.image} alt={partner.alt} loading="lazy" decoding="async" />
-              </div>
-              <div class="partner-card__body">
-                <h3>{partner.name}</h3>
-                <p>{partner.context}</p>
-                <a
-                  href={partner.href}
-                  class="partner-card__cta"
-                  target={partner.external ? '_blank' : undefined}
-                  rel={partner.external ? 'noopener noreferrer' : undefined}
-                >
-                  {partner.cta}
-                </a>
               </div>
             </article>
           ))}
         </div>
+
+        <!-- Swipeable gallery -->
+        <div class="gallery-strip" role="region" aria-label="Work gallery" tabindex="0">
+          {galleryImages.map((img) => (
+            <figure class="gallery-item">
+              <img src={img.src} alt={img.alt} loading="lazy" decoding="async" />
+            </figure>
+          ))}
+        </div>
+
       </div>
     </section>
 
+    <!-- ═══════════════════════════════════════════════════
+         CONTACT — teal/dark
+         ═══════════════════════════════════════════════════ -->
     <section id="contact" class="home-section home-section--teal final-cta-section" data-reveal-section>
-      <div class="section-bg section-bg--photo section-bg--faint" data-parallax="0.3" style="background-image: url('/media/real/fleet-start-press.jpg');"></div>
       <div class="section-shell final-cta-shell">
         <div class="final-cta-copy">
           <h2 class="section-title section-title--inverse reveal-up" data-reveal>
-            Need a part, a prototype, or a
-            <br />
-            fabrication partner on call?
+            Need a part? Need a fabricator on call?<br />Need someone who actually knows what breaks?
           </h2>
           <p class="section-body section-body--inverse reveal-fade delay-1" data-reveal>
-            3D3D builds for people who need performance, not excuses.
+            Send the problem. Send the broken part. Send the photo. 3D3D builds for people who need performance, not excuses.
           </p>
           <div class="final-cta-actions">
             <a href="/contact" class="final-cta-button final-cta-button--light reveal-up delay-2" data-reveal>Request Service →</a>
-            <a href="/blog" class="final-cta-button final-cta-button--ghost reveal-up delay-3" data-reveal>Follow the project →</a>
+            <a href="https://ko-fi.com/3d3dca" class="final-cta-button final-cta-button--ghost reveal-up delay-3" data-reveal target="_blank" rel="noopener noreferrer">Support on Ko-fi →</a>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- ═══════════════════════════════════════════════════
+         OFF-CANVAS DRAWER
+         ═══════════════════════════════════════════════════ -->
     <div class="drawer" id="service-drawer" data-open="false" hidden>
       <div class="drawer__backdrop" data-drawer-close></div>
       <aside class="drawer__panel" role="dialog" aria-modal="true" aria-label="Service details">
@@ -638,8 +281,8 @@ const partners = [
       <template id={service.drawerId}>
         <div class="drawer-copy">
           <p class="drawer-copy__eyebrow">{service.eyebrow}</p>
-          <h3 class="drawer-copy__title">{service.eyebrow}</h3>
-          <p class="drawer-copy__stakes">{service.stakes}</p>
+          <h3 class="drawer-copy__title">{service.headline}</h3>
+          <p class="drawer-copy__stakes">{service.description}</p>
           <div class="drawer-copy__gallery">
             {service.drawer.photos.map((photo) => (
               <figure>
@@ -663,35 +306,27 @@ const partners = [
     ))}
   </div>
 
+  <!-- ═══════════════════════════════════════════════════
+       SCRIPTS
+       ═══════════════════════════════════════════════════ -->
   <script is:inline>
     (() => {
       const revealItems = Array.from(document.querySelectorAll('[data-reveal]'));
       const sectionItems = Array.from(document.querySelectorAll('[data-reveal-section]'));
-      const parallaxItems = Array.from(document.querySelectorAll('[data-parallax]'));
 
       const updateVisibleState = () => {
         const threshold = window.innerHeight + 300;
-
         revealItems.forEach((item) => {
           if (!(item instanceof HTMLElement)) return;
           if (item.getBoundingClientRect().top < threshold) {
             item.classList.add('revealed');
           }
         });
-
         sectionItems.forEach((item) => {
           if (!(item instanceof HTMLElement)) return;
           if (item.getBoundingClientRect().top < threshold) {
             item.classList.add('revealed-section');
           }
-        });
-
-        parallaxItems.forEach((item) => {
-          if (!(item instanceof HTMLElement)) return;
-          const host = item.parentElement instanceof HTMLElement ? item.parentElement : item;
-          const rect = host.getBoundingClientRect();
-          const speed = Number(item.dataset.parallax || '0.3');
-          item.style.transform = `translate3d(0, ${rect.top * speed}px, 0)`;
         });
       };
 
@@ -699,10 +334,7 @@ const partners = [
       const onScroll = () => {
         if (ticking) return;
         ticking = true;
-        window.requestAnimationFrame(() => {
-          updateVisibleState();
-          ticking = false;
-        });
+        window.requestAnimationFrame(() => { updateVisibleState(); ticking = false; });
       };
 
       const scheduleInitialChecks = () => {
@@ -724,11 +356,8 @@ const partners = [
       const content = document.getElementById('drawer-content');
       const triggers = Array.from(document.querySelectorAll('[data-drawer-trigger]'));
 
-      if (!(drawer instanceof HTMLElement) || !(content instanceof HTMLElement) || triggers.length === 0) {
-        return;
-      }
+      if (!(drawer instanceof HTMLElement) || !(content instanceof HTMLElement) || triggers.length === 0) return;
 
-      const closeTargets = () => Array.from(drawer.querySelectorAll('[data-drawer-close]'));
       let closeTimer = 0;
 
       const closeDrawer = () => {
@@ -744,23 +373,19 @@ const partners = [
       const openDrawer = (templateId) => {
         const template = document.getElementById(templateId);
         if (!(template instanceof HTMLTemplateElement)) return;
-
-        window.clearTimeout(closeTimer);
-        content.innerHTML = template.innerHTML;
+        content.innerHTML = '';
+        content.appendChild(template.content.cloneNode(true));
         drawer.hidden = false;
-        document.body.classList.add('drawer-open');
-
         window.requestAnimationFrame(() => {
           drawer.dataset.open = 'true';
+          document.body.classList.add('drawer-open');
         });
       };
 
       triggers.forEach((trigger) => {
         trigger.addEventListener('click', () => {
-          if (!(trigger instanceof HTMLElement)) return;
-          const templateId = trigger.dataset.drawerId;
-          if (!templateId) return;
-          openDrawer(templateId);
+          const id = trigger instanceof HTMLElement ? trigger.dataset.drawerId : null;
+          if (id) openDrawer(id);
         });
       });
 
@@ -771,19 +396,16 @@ const partners = [
       });
 
       window.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && drawer.dataset.open === 'true') {
-          closeDrawer();
-        }
-      });
-
-      closeTargets().forEach((target) => {
-        target.addEventListener('click', closeDrawer);
+        if (event.key === 'Escape' && drawer.dataset.open === 'true') closeDrawer();
       });
     })();
   </script>
 </BaseLayout>
 
 <style>
+  /* ═══════════════════════════════════════════════════
+     PAGE TOKENS
+     ═══════════════════════════════════════════════════ */
   :global(body.home-editorial) {
     background: #F6F7FA;
     background-image: none;
@@ -801,8 +423,8 @@ const partners = [
     --page-surface: #FFFFFF;
     --page-text: #1A1A1A;
     --page-text-muted: #666666;
-    --page-border: rgba(64, 196, 196, 0.2);
-    --page-thick-border: 2px solid #40C4C4;
+    --page-border: 2px solid #1A1A1A;
+    --page-thick-border: 3px solid #1A1A1A;
     --page-shell-width: min(100% - clamp(1.5rem, 4vw, 4rem), 1320px);
     background: var(--page-bg-light);
     color: var(--page-text);
@@ -834,9 +456,7 @@ const partners = [
     scroll-margin-top: 1rem;
   }
 
-  .home-section--light {
-    background: var(--page-bg-light);
-  }
+  .home-section--light { background: var(--page-bg-light); }
 
   .home-section--dark {
     background:
@@ -850,46 +470,19 @@ const partners = [
     color: #FFFFFF;
   }
 
-  .home-section--dark[data-reveal-section]::before,
-  .home-section--teal[data-reveal-section]::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    transform-origin: top;
-    transform: scaleY(1);
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 0;
-  }
-
-  .home-section--dark[data-reveal-section]::before {
-    background:
-      linear-gradient(180deg, rgba(64, 196, 196, 0.16) 0%, rgba(17, 18, 20, 0.98) 18%, rgba(17, 18, 20, 1) 100%),
-      var(--page-bg-dark);
-  }
-
-  .home-section--teal[data-reveal-section]::before {
-    background: linear-gradient(180deg, #69D8D8 0%, #40C4C4 100%);
-  }
-
-  .home-section--dark.revealed-section::before,
-  .home-section--teal.revealed-section::before {
-    transform: scaleY(0);
-  }
-
-  .section-bg {
-    position: absolute;
-    inset: -8% 0;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    opacity: 0.3;
-    pointer-events: none;
-    will-change: transform;
-  }
-
-  .section-bg--faint {
-    opacity: 0.1;
-  }
+  /* ═══════════════════════════════════════════════════
+     REVEAL
+     ═══════════════════════════════════════════════════ */
+  .reveal-up    { opacity: 0; transform: translateY(32px); transition: opacity 0.65s, transform 0.65s cubic-bezier(0.16,1,0.3,1); }
+  .reveal-scale { opacity: 0; transform: scale(0.94); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+  .reveal-left  { opacity: 0; transform: translateX(-40px); transition: opacity 0.65s, transform 0.65s cubic-bezier(0.16,1,0.3,1); }
+  .reveal-fade  { opacity: 0; transition: opacity 0.65s; }
+  .reveal-mask  { clip-path: inset(0 100% 0 0); transition: clip-path 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .reveal-mask.revealed { clip-path: inset(0 0% 0 0); }
+  .revealed     { opacity: 1; transform: none; }
+  .delay-1 { transition-delay: 0.1s; }
+  .delay-2 { transition-delay: 0.2s; }
+  .delay-3 { transition-delay: 0.3s; }
 
   .eyebrow {
     display: inline-flex;
@@ -921,9 +514,7 @@ const partners = [
   }
 
   .section-title--light,
-  .section-title--inverse {
-    color: #F6F7FA;
-  }
+  .section-title--inverse { color: #F6F7FA; }
 
   .section-body {
     margin: 0;
@@ -933,34 +524,42 @@ const partners = [
     color: var(--page-text);
   }
 
-  .section-body--light {
-    color: rgba(246, 247, 250, 0.86);
-  }
+  .section-body--inverse { color: rgba(255, 255, 255, 0.9); }
 
-  .section-body--inverse {
-    color: rgba(255, 255, 255, 0.9);
-  }
-
+  /* ═══════════════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════════════ */
   .home-hero {
     min-height: 100svh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: clamp(2.5rem, 5vw, 4rem);
     padding-top: clamp(5rem, 8vw, 7rem);
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.35;
+    filter: brightness(0.6);
   }
 
   .hero-shell {
     display: grid;
-    grid-template-columns: minmax(0, 1.03fr) minmax(0, 0.97fr);
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
     align-items: center;
     gap: clamp(2rem, 4vw, 4rem);
   }
 
-  .hero-copy {
-    display: grid;
-    gap: 1.5rem;
-  }
+  .hero-copy { display: grid; gap: 1.5rem; }
 
   .hero-eyebrow {
     color: rgba(246, 247, 250, 0.72);
@@ -987,13 +586,9 @@ const partners = [
     animation: hero-line-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  .hero-line:nth-child(1) {
-    animation-delay: 0s;
-  }
-
-  .hero-line:nth-child(2) {
-    animation-delay: 0.1s;
-  }
+  .hero-line:nth-child(1) { animation-delay: 0s; }
+  .hero-line:nth-child(2) { animation-delay: 0.1s; }
+  .hero-line--accent { color: var(--page-accent); }
 
   .hero-subhead {
     margin: 0;
@@ -1004,10 +599,6 @@ const partners = [
     opacity: 0;
     transform: translateY(28px);
     animation: hero-line-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
-  }
-
-  .services-section {
-    padding-top: clamp(1.75rem, 3.2vw, 3rem);
   }
 
   .hero-actions {
@@ -1025,44 +616,38 @@ const partners = [
     justify-content: center;
     min-height: 3.4rem;
     padding: 0.95rem 1.55rem;
-    border: 2px solid transparent;
+    border: var(--page-thick-border);
     font-family: var(--font-tech);
     font-size: 0.82rem;
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    transition:
-      transform 0.3s ease,
-      box-shadow 0.3s ease,
-      background-color 0.3s ease,
-      color 0.3s ease,
-      border-color 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   }
 
-  .hero-button:hover {
-    transform: translateY(-2px);
-  }
+  .hero-button:hover { transform: translateY(-2px) scale(1.02); }
 
   .hero-button--primary {
     background: var(--page-accent);
     color: #0F1112;
+    border-color: #1A1A1A;
     box-shadow: 0 14px 32px rgba(64, 196, 196, 0.24);
   }
 
   .hero-button--primary:hover {
     background: #53D3D3;
-    color: #0F1112;
+    box-shadow: 0 8px 24px rgba(64, 196, 196, 0.4);
   }
 
   .hero-button--ghost {
-    border-color: var(--page-accent);
+    border-color: #F6F7FA;
     color: #F6F7FA;
     background: transparent;
   }
 
   .hero-button--ghost:hover {
-    border-color: var(--page-accent-secondary);
-    background: rgba(232, 74, 138, 0.14);
+    border-color: var(--page-accent);
+    background: rgba(64, 196, 196, 0.12);
     color: #FFFFFF;
   }
 
@@ -1095,12 +680,9 @@ const partners = [
     height: 0.55rem;
     border-radius: 999px;
     background: var(--page-accent);
-    box-shadow: 0 0 0 0 rgba(64, 196, 196, 0.32);
   }
 
-  .hero-media {
-    position: relative;
-  }
+  .hero-media { position: relative; }
 
   .hero-video-frame {
     position: relative;
@@ -1129,681 +711,193 @@ const partners = [
     display: block;
   }
 
-  .hero-stats-shell {
-    padding-top: 0.5rem;
-  }
-
-  .hero-stats {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
-  }
-
-  .hero-stat-card {
-    display: grid;
-    gap: 0.5rem;
-    padding: 1.5rem;
-    min-height: 10rem;
-    background: rgba(255, 255, 255, 0.04);
-    border: var(--page-thick-border);
-    border-radius: 1.2rem;
-    backdrop-filter: blur(10px);
-    opacity: 0;
-    transform: translateY(30px);
-    animation: hero-stat-in 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  .hero-stat-card strong {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 1.1rem + 2vw, 3rem);
-    line-height: 0.9;
-    color: #FFFFFF;
-  }
-
-  .hero-stat-card span {
-    font-family: var(--font-tech);
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(246, 247, 250, 0.76);
-  }
-
-  .services-shell {
-    display: grid;
-    gap: 1.6rem;
-  }
-
-  .service-module {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    min-height: 420px;
-    background: var(--page-surface);
-    border: 1px solid rgba(17, 18, 20, 0.08);
-    border-radius: 1.4rem;
-    overflow: hidden;
-    box-shadow: 0 18px 44px rgba(17, 18, 20, 0.08);
-  }
-
-  .service-module--reverse .service-module__media {
-    order: 2;
-  }
-
-  .service-module--reverse .service-module__content {
-    order: 1;
-  }
-
-  .service-module__media {
-    position: relative;
-    min-height: 100%;
-  }
-
-  .service-module__media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .service-module__content {
-    display: flex;
-    align-items: stretch;
-    min-height: 100%;
-    padding: clamp(1.5rem, 3vw, 2.5rem);
-  }
-
-  .service-module__text {
-    display: grid;
-    align-content: center;
-    gap: 1rem;
-    width: 100%;
-    padding-left: clamp(1rem, 2vw, 1.6rem);
-    border-left: 2px solid var(--page-accent);
-  }
-
-  .service-module__stakes {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: clamp(1.7rem, 1.1rem + 1.4vw, 2.6rem);
-    line-height: 1.02;
-    letter-spacing: -0.03em;
-    color: var(--page-text);
-  }
-
-  .service-module__body {
-    margin: 0;
-    max-width: 34rem;
-    font-size: 1.05rem;
-    line-height: 1.75;
-    color: #3F4348;
-  }
-
-  .service-module__bullets {
-    display: grid;
-    gap: 0.7rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .service-module__bullets li {
-    position: relative;
-    padding-left: 1.1rem;
-    font-family: var(--font-body);
-    font-size: 0.98rem;
-    line-height: 1.6;
-    color: #34383D;
-  }
-
-  .service-module__bullets li::before {
-    content: '·';
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: var(--page-accent);
-    font-weight: 700;
-  }
-
-  .service-module__cta {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: fit-content;
-    min-height: 3.1rem;
-    padding: 0.8rem 1.2rem;
-    border: 2px solid var(--page-accent);
-    background: transparent;
-    color: var(--page-text);
-    font-family: var(--font-tech);
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition:
-      transform 0.25s ease,
-      background-color 0.25s ease,
-      color 0.25s ease,
-      border-color 0.25s ease;
-  }
-
-  .service-module__cta:hover {
-    transform: translateY(-2px);
-    background: var(--page-accent);
-    color: #0F1112;
-    border-color: var(--page-accent);
-  }
-
-  .origin-shell {
-    display: grid;
-    gap: clamp(2rem, 5vw, 3rem);
-  }
-
-  .origin-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 0.96fr) minmax(0, 1.04fr);
-    align-items: start;
-    gap: clamp(2rem, 4vw, 4rem);
-  }
-
-  .origin-photo,
-  .origin-inset {
-    overflow: hidden;
-    border: var(--page-thick-border);
-    border-radius: 1.4rem;
-  }
-
-  .origin-photo img,
-  .origin-inset img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .origin-photo {
-    min-height: clamp(26rem, 52vw, 40rem);
-  }
-
-  .origin-copy {
-    display: grid;
-    gap: 1.2rem;
-  }
-
-  .proof-list {
-    display: grid;
-    gap: 0.8rem;
-    margin: 0.5rem 0 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .proof-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.8rem;
-    font-size: 0.98rem;
-    line-height: 1.6;
-    color: rgba(246, 247, 250, 0.82);
-  }
-
-  .proof-dot {
-    width: 0.6rem;
-    height: 0.6rem;
-    margin-top: 0.45rem;
-    border-radius: 999px;
-    background: var(--page-accent);
-    flex-shrink: 0;
-  }
-
-  .origin-inset {
-    width: min(50%, 34rem);
-    margin-left: 0;
-  }
-
-  .deployment-shell {
-    display: grid;
-    gap: 2.5rem;
-    max-width: 760px;
-    text-align: center;
-  }
-
-  .deployment-copy {
-    display: grid;
-    gap: 1.2rem;
-    justify-items: center;
-  }
-
-  .deployment-copy .section-body {
-    max-width: 44rem;
-  }
-
-  .deployment-title {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: clamp(2.8rem, 1.5rem + 4vw, 5rem);
-    line-height: 0.98;
-    letter-spacing: -0.04em;
-    color: #FFFFFF;
-  }
-
-  .word-reveal {
-    display: inline-block;
-    margin-right: 0.22em;
-    opacity: 0;
-    transform: translateY(18px);
-    clip-path: inset(0 0 100% 0);
-    transition:
-      opacity 0.65s ease,
-      transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-      clip-path 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .word-reveal.revealed {
-    opacity: 1;
-    transform: none;
-    clip-path: inset(0 0 0 0);
-  }
-
-  .deployment-strip {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
-    width: min(100%, 1100px);
-    margin-inline: auto;
-  }
-
-  .deployment-card {
-    display: grid;
-    gap: 0.8rem;
-    margin: 0;
-  }
-
-  .deployment-card__media {
-    overflow: hidden;
-    border: var(--page-thick-border);
-    border-radius: 1.2rem;
-  }
-
-  .deployment-card__media img {
-    width: 100%;
-    height: clamp(15rem, 24vw, 18rem);
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease;
-  }
-
-  .deployment-card:hover .deployment-card__media img {
-    transform: scale(1.04);
-  }
-
-  .deployment-card figcaption {
-    font-family: var(--font-tech);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: rgba(246, 247, 250, 0.72);
-  }
-
+  /* ═══════════════════════════════════════════════════
+     WHAT WE DO
+     ═══════════════════════════════════════════════════ */
   .work-shell {
     display: grid;
-    gap: 1rem;
+    gap: clamp(3rem, 6vw, 5rem);
   }
 
-  .work-band {
-    position: relative;
-    overflow: hidden;
+  .work-header {
     display: grid;
-    gap: 1.2rem;
-    padding: clamp(1.6rem, 3vw, 2.4rem);
-    background: #FFFFFF;
-    border: 1px solid rgba(17, 18, 20, 0.08);
-    border-radius: 1.25rem;
-    box-shadow: 0 14px 36px rgba(17, 18, 20, 0.06);
-  }
-
-  .work-band:nth-child(2) {
-    border-left: 6px solid var(--page-accent);
-  }
-
-  .work-band--featured {
-    min-height: 23rem;
-    background: var(--page-bg-dark);
-    color: #F6F7FA;
-    border-top: 2px solid var(--page-accent);
-    border-left: none;
-  }
-
-  .work-band--featured.revealed {
-    animation: patron-glow 0.6s ease 1;
-  }
-
-  .work-band__image {
-    position: absolute;
-    inset: 0 0 0 auto;
-    width: min(38%, 22rem);
-    opacity: 0.18;
-    pointer-events: none;
-  }
-
-  .work-band__image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .work-band__content {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    gap: 1rem;
+    gap: 1.4rem;
     max-width: 52rem;
   }
 
-  .work-band__label {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: clamp(1.7rem, 1.1rem + 1.5vw, 2.6rem);
-    line-height: 1;
-    letter-spacing: -0.03em;
-  }
-
-  .work-band__meta {
+  /* 2×2 service card grid */
+  .services-grid {
     display: grid;
-    gap: 0.75rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.2rem, 2.5vw, 2rem);
   }
 
-  .work-band__meta p {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.7;
-    color: inherit;
-    max-width: 48rem;
-  }
-
-  .work-band__meta span {
-    font-family: var(--font-tech);
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--page-accent);
-  }
-
-  .work-band__cta {
-    width: fit-content;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 3rem;
-    padding: 0.9rem 1.3rem;
-    border: 2px solid var(--page-accent);
-    color: var(--page-text);
-    font-family: var(--font-tech);
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    background: transparent;
-  }
-
-  .work-band__cta:hover {
-    background: var(--page-accent);
-    color: #0F1112;
-  }
-
-  .work-band__cta--featured {
-    background: var(--page-accent);
-    color: #0F1112;
-    min-height: 3.4rem;
-    padding-inline: 1.6rem;
-    box-shadow: 0 16px 36px rgba(64, 196, 196, 0.22);
-  }
-
-  .partner-band {
+  .service-card {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: center;
-    gap: 1.2rem;
-    padding: 1.5rem clamp(1.4rem, 3vw, 2.2rem);
-    background: var(--page-accent);
-    color: #FFFFFF;
-    border-radius: 1.2rem;
-  }
-
-  .partner-band__label {
-    margin: 0 0 0.4rem;
-    font-family: var(--font-tech);
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-  }
-
-  .partner-band__body {
-    margin: 0;
-    max-width: 44rem;
-    font-size: 1rem;
-    line-height: 1.7;
-  }
-
-  .partner-band__cta {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 3rem;
-    padding: 0.9rem 1.3rem;
-    background: #FFFFFF;
-    color: #111214;
-    border: 2px solid #FFFFFF;
-    font-family: var(--font-tech);
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-  }
-
-  .partner-band__cta:hover {
-    background: transparent;
-    color: #FFFFFF;
-  }
-
-  .open-build-shell {
-    display: grid;
-    grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
-    gap: clamp(2rem, 4vw, 4rem);
-    align-items: start;
-  }
-
-  .open-build-copy {
-    display: grid;
-    gap: 1.2rem;
-  }
-
-  .resource-grid {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .resource-card {
-    position: relative;
+    grid-template-rows: auto 1fr;
+    border: var(--page-thick-border);
+    background: var(--page-surface);
     overflow: hidden;
-    display: grid;
-    gap: 0.85rem;
-    padding: 1.6rem;
-    min-height: 12rem;
-    border-radius: 1.2rem;
-    border: 1px solid rgba(17, 18, 20, 0.1);
-    background: #FFFFFF;
-    color: var(--page-text);
-    box-shadow: 0 16px 40px rgba(17, 18, 20, 0.08);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
   }
 
-  .resource-card--photo {
-    background:
-      linear-gradient(180deg, rgba(17, 18, 20, 0.2), rgba(17, 18, 20, 0.52)),
-      var(--resource-image) center / cover no-repeat;
-    color: #FFFFFF;
-    border-color: rgba(255, 255, 255, 0.1);
+  .service-card:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
   }
 
-  .resource-card--dark {
-    background: var(--page-bg-dark);
-    color: #F6F7FA;
-    border-color: rgba(64, 196, 196, 0.22);
-  }
-
-  .resource-card__label {
-    font-family: var(--font-display);
-    font-size: clamp(1.55rem, 1.1rem + 0.9vw, 2.2rem);
-    line-height: 1;
-    letter-spacing: -0.03em;
-  }
-
-  .resource-card p {
-    margin: 0;
-    max-width: 34rem;
-    font-size: 1rem;
-    line-height: 1.7;
-    color: inherit;
-  }
-
-  .resource-card__link {
-    font-family: var(--font-mono);
-    font-size: 0.84rem;
-    color: var(--page-accent);
-  }
-
-  .partners-shell {
-    display: grid;
-  }
-
-  .partner-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
-  }
-
-  .partner-card {
+  .service-card__media {
     overflow: hidden;
-    display: grid;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(64, 196, 196, 0.2);
-    border-radius: 1.2rem;
-    min-height: 100%;
+    aspect-ratio: 16 / 9;
+    border-bottom: var(--page-thick-border);
   }
 
-  .partner-card__media {
-    position: relative;
-    min-height: 16rem;
-  }
-
-  .partner-card__media img {
+  .service-card__media img {
     width: 100%;
     height: 100%;
-    display: block;
     object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
   }
 
-  .partner-card__media--overlay::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(17, 18, 20, 0.48);
+  .service-card:hover .service-card__media img {
+    transform: scale(1.04);
   }
 
-  .partner-card__body {
+  .service-card__body {
     display: grid;
-    gap: 1rem;
-    padding: 1.5rem;
+    gap: 0.9rem;
+    padding: clamp(1.2rem, 2vw, 1.6rem);
+    border-left: 4px solid var(--page-accent);
   }
 
-  .partner-card__body h3 {
+  .service-card__eyebrow {
+    margin: 0;
+    font-family: var(--font-tech);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--page-accent);
+  }
+
+  .service-card__headline {
     margin: 0;
     font-family: var(--font-display);
-    font-size: 1.8rem;
-    line-height: 1;
-    color: #FFFFFF;
-    letter-spacing: -0.03em;
+    font-size: clamp(1.15rem, 0.9rem + 0.8vw, 1.6rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--page-text);
   }
 
-  .partner-card__body p {
-    margin: 0;
-    font-size: 0.98rem;
-    line-height: 1.7;
-    color: rgba(246, 247, 250, 0.78);
-  }
-
-  .partner-card__cta {
-    width: fit-content;
+  .service-card__cta {
+    justify-self: start;
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    min-height: 3rem;
-    padding: 0.85rem 1.25rem;
-    border: 2px solid var(--page-accent);
-    color: #FFFFFF;
+    min-height: 2.9rem;
+    padding: 0.7rem 1.1rem;
+    border: var(--page-thick-border);
+    background: transparent;
+    color: var(--page-text);
     font-family: var(--font-tech);
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     font-weight: 700;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
   }
 
-  .partner-card__cta:hover {
+  .service-card__cta:hover {
     background: var(--page-accent);
     color: #0F1112;
+    border-color: var(--page-accent);
+    box-shadow: 0 6px 20px rgba(64, 196, 196, 0.3);
+    transform: translateY(-2px);
   }
 
-  .final-cta-shell {
-    display: grid;
-    place-items: center;
+  /* Swipeable gallery strip */
+  .gallery-strip {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 0;
+    padding-bottom: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--page-accent) rgba(0,0,0,0.08);
   }
+
+  .gallery-strip::-webkit-scrollbar { height: 4px; }
+  .gallery-strip::-webkit-scrollbar-track { background: rgba(0,0,0,0.06); }
+  .gallery-strip::-webkit-scrollbar-thumb { background: var(--page-accent); border-radius: 2px; }
+
+  .gallery-item {
+    flex: 0 0 clamp(220px, 28vw, 360px);
+    scroll-snap-align: start;
+    margin: 0;
+    overflow: hidden;
+    border: var(--page-thick-border);
+    aspect-ratio: 4 / 3;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .gallery-item:hover img { transform: scale(1.04); }
+
+  /* ═══════════════════════════════════════════════════
+     CONTACT (FINAL CTA)
+     ═══════════════════════════════════════════════════ */
+  .final-cta-shell { text-align: center; }
 
   .final-cta-copy {
-    position: relative;
-    z-index: 1;
     display: grid;
-    gap: 1.2rem;
-    max-width: 640px;
-    text-align: center;
+    gap: 1.5rem;
+    justify-items: center;
+    max-width: 52rem;
+    margin: 0 auto;
   }
 
   .final-cta-actions {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
     gap: 1rem;
+    justify-content: center;
   }
 
   .final-cta-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 3.2rem;
-    padding: 0.9rem 1.35rem;
+    min-height: 3.4rem;
+    padding: 0.95rem 1.55rem;
+    border: var(--page-thick-border);
     font-family: var(--font-tech);
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    border: 2px solid transparent;
-    transition:
-      transform 0.25s ease,
-      background-color 0.25s ease,
-      color 0.25s ease,
-      border-color 0.25s ease;
+    transition: all 0.3s ease;
   }
 
-  .final-cta-button:hover {
-    transform: translateY(-2px);
-  }
+  .final-cta-button:hover { transform: translateY(-2px) scale(1.02); }
 
   .final-cta-button--light {
     background: #FFFFFF;
-    color: #111214;
+    color: #1A1A1A;
+    border-color: #1A1A1A;
+  }
+
+  .final-cta-button--light:hover {
+    background: #F6F7FA;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   }
 
   .final-cta-button--ghost {
@@ -1812,441 +906,207 @@ const partners = [
     background: transparent;
   }
 
-  .final-cta-button--ghost:hover {
-    background: rgba(255, 255, 255, 0.12);
-  }
+  .final-cta-button--ghost:hover { background: rgba(255, 255, 255, 0.12); }
 
+  /* ═══════════════════════════════════════════════════
+     DRAWER
+     ═══════════════════════════════════════════════════ */
   .drawer {
     position: fixed;
     inset: 0;
-    z-index: 120;
+    z-index: 100;
+    display: flex;
+    justify-content: flex-end;
+    pointer-events: none;
   }
+
+  .drawer[data-open='true'] { pointer-events: all; }
 
   .drawer__backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(17, 18, 20, 0.58);
+    background: rgba(17, 18, 20, 0.6);
     backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
+
+  .drawer[data-open='true'] .drawer__backdrop { opacity: 1; }
 
   .drawer__panel {
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    width: min(350px, 100vw);
+    position: relative;
+    width: min(420px, 92vw);
     height: 100%;
-    padding: 1.25rem 1.1rem 1.4rem;
     background: var(--page-bg-dark);
-    border-left: 2px solid var(--page-accent);
-    box-shadow: -20px 0 48px rgba(0, 0, 0, 0.3);
+    border-left: 3px solid var(--page-accent);
+    overflow-y: auto;
+    padding: 2rem 1.5rem;
     transform: translateX(100%);
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .drawer[data-open='true'] .drawer__panel {
-    transform: translateX(0);
-  }
+  .drawer[data-open='true'] .drawer__panel { transform: translateX(0); }
 
   .drawer__close {
-    align-self: flex-end;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
     width: 2.5rem;
     height: 2.5rem;
-    border: 1px solid rgba(64, 196, 196, 0.28);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--page-accent);
     background: transparent;
-    color: #FFFFFF;
+    color: #F6F7FA;
     font-size: 1.1rem;
     cursor: pointer;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
   }
 
-  .drawer__content {
-    overflow-y: auto;
-    padding-right: 0.2rem;
-  }
+  .drawer__close:hover { background: var(--page-accent); color: #0F1112; }
 
-  .drawer-copy {
+  :global(.drawer-copy) {
     display: grid;
-    gap: 1rem;
+    gap: 1.2rem;
     color: #F6F7FA;
+    padding-top: 1rem;
   }
 
-  .drawer-copy__eyebrow {
-    margin: 0;
+  :global(.drawer-copy__eyebrow) {
     font-family: var(--font-tech);
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: rgba(246, 247, 250, 0.58);
-  }
-
-  .drawer-copy__title {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: 2rem;
-    line-height: 0.98;
-    letter-spacing: -0.03em;
-    color: #FFFFFF;
-  }
-
-  .drawer-copy__stakes {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.7;
-    color: rgba(246, 247, 250, 0.82);
-  }
-
-  .drawer-copy__gallery {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.5rem;
-  }
-
-  .drawer-copy__gallery figure {
-    margin: 0;
-    overflow: hidden;
-    border-radius: 0.9rem;
-    border: 1px solid rgba(64, 196, 196, 0.18);
-  }
-
-  .drawer-copy__gallery img {
-    display: block;
-    width: 100%;
-    height: 6.6rem;
-    object-fit: cover;
-  }
-
-  .drawer-copy__notes {
-    display: grid;
-    gap: 0.9rem;
-  }
-
-  .drawer-copy__notes div {
-    padding-top: 0.9rem;
-    border-top: 1px solid rgba(64, 196, 196, 0.18);
-  }
-
-  .drawer-copy__notes span {
-    display: inline-block;
-    margin-bottom: 0.45rem;
-    font-family: var(--font-tech);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--page-accent);
   }
 
-  .drawer-copy__notes p {
+  :global(.drawer-copy__title) {
     margin: 0;
-    font-size: 0.96rem;
-    line-height: 1.7;
-    color: rgba(246, 247, 250, 0.82);
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    line-height: 1.05;
+    color: #F6F7FA;
   }
 
-  .drawer-copy__cta {
+  :global(.drawer-copy__stakes) {
+    margin: 0;
+    font-size: 0.94rem;
+    line-height: 1.65;
+    color: rgba(246, 247, 250, 0.78);
+  }
+
+  :global(.drawer-copy__gallery) { display: grid; gap: 0.6rem; }
+
+  :global(.drawer-copy__gallery figure) {
+    margin: 0;
+    overflow: hidden;
+    border: 2px solid #1A1A1A;
+    border-radius: 0.8rem;
+  }
+
+  :global(.drawer-copy__gallery img) {
+    width: 100%;
+    display: block;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+
+  :global(.drawer-copy__notes) {
+    display: grid;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(64, 196, 196, 0.2);
+  }
+
+  :global(.drawer-copy__notes span) {
+    display: block;
+    font-family: var(--font-tech);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--page-accent);
+    margin-bottom: 0.3rem;
+  }
+
+  :global(.drawer-copy__notes p) {
+    margin: 0;
+    font-size: 0.94rem;
+    line-height: 1.6;
+    color: rgba(246, 247, 250, 0.78);
+  }
+
+  :global(.drawer-copy__cta) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 3rem;
-    margin-top: 0.4rem;
-    padding: 0.9rem 1.2rem;
+    padding: 0.8rem 1.2rem;
     background: var(--page-accent);
     color: #0F1112;
+    border: 2px solid #1A1A1A;
     font-family: var(--font-tech);
     font-size: 0.78rem;
     font-weight: 700;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
+    transition: all 0.25s ease;
+    width: 100%;
+    text-align: center;
   }
 
-  .drawer-copy__cta:hover {
-    color: #0F1112;
+  :global(.drawer-copy__cta:hover) {
     background: #53D3D3;
+    transform: translateY(-2px);
   }
 
-  .reveal-fade {
-    opacity: 0;
-    transition: opacity 0.6s ease;
-  }
-
-  .reveal-up {
-    opacity: 0;
-    transform: translateY(32px);
-    transition: opacity 0.65s, transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .reveal-left {
-    opacity: 0;
-    transform: translateX(-40px);
-    transition: opacity 0.65s, transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .reveal-right {
-    opacity: 0;
-    transform: translateX(40px);
-    transition: opacity 0.65s, transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .reveal-scale {
-    opacity: 0;
-    transform: scale(0.96);
-    transition: opacity 0.6s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .revealed {
-    opacity: 1;
-    transform: none;
-  }
-
-  .delay-1 {
-    transition-delay: 0.1s;
-  }
-
-  .delay-2 {
-    transition-delay: 0.2s;
-  }
-
-  .delay-3 {
-    transition-delay: 0.3s;
-  }
-
-  .delay-4 {
-    transition-delay: 0.4s;
-  }
-
-  .delay-5 {
-    transition-delay: 0.5s;
-  }
-
-  .mask-wipe {
-    opacity: 0;
-    transition:
-      opacity 0.8s ease,
-      clip-path 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .mask-wipe-left {
-    clip-path: inset(0 100% 0 0 round 1.4rem);
-  }
-
-  .mask-wipe-right {
-    clip-path: inset(0 0 0 100% round 1.4rem);
-  }
-
-  .mask-wipe.revealed {
-    opacity: 1;
-    clip-path: inset(0 0 0 0 round 1.4rem);
-  }
-
+  /* ═══════════════════════════════════════════════════
+     KEYFRAMES
+     ═══════════════════════════════════════════════════ */
   @keyframes hero-line-in {
-    from {
-      opacity: 0;
-      transform: translateY(48px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(48px); }
+    to   { opacity: 1; transform: none; }
   }
 
   @keyframes hero-proof-in {
-    from {
-      opacity: 0;
-      transform: translateX(-16px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(-16px); }
+    to   { opacity: 1; transform: none; }
   }
 
   @keyframes hero-video-reveal {
-    from {
-      opacity: 0.2;
-      clip-path: inset(0 100% 0 0 round 1.6rem);
-    }
-
-    to {
-      opacity: 1;
-      clip-path: inset(0 0 0 0 round 1.6rem);
-    }
+    from { clip-path: inset(0 100% 0 0 round 1.6rem); }
+    to   { clip-path: inset(0 0% 0 0 round 1.6rem); }
   }
 
-  @keyframes hero-stat-in {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  /* ═══════════════════════════════════════════════════
+     RESPONSIVE
+     ═══════════════════════════════════════════════════ */
+  @media (max-width: 1023px) {
+    .hero-shell { grid-template-columns: 1fr; }
+    .hero-media { max-width: 32rem; }
+    .services-grid { grid-template-columns: 1fr; }
   }
 
-  @keyframes patron-glow {
-    0% {
-      box-shadow: 0 0 0 rgba(64, 196, 196, 0);
-    }
-
-    50% {
-      box-shadow: 0 0 0 6px rgba(64, 196, 196, 0.16);
-    }
-
-    100% {
-      box-shadow: 0 0 0 rgba(64, 196, 196, 0);
-    }
-  }
-
-  @media (max-width: 1120px) {
-    .hero-shell,
-    .origin-grid,
-    .open-build-shell {
-      grid-template-columns: 1fr;
-    }
-
-    .hero-stats,
-    .partner-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .service-module {
-      grid-template-columns: 1fr;
-    }
-
-    .service-module--reverse .service-module__media,
-    .service-module--reverse .service-module__content {
-      order: initial;
-    }
-
-    .service-module__media {
-      min-height: 18rem;
-    }
-
-    .origin-inset {
-      width: min(75%, 34rem);
-    }
-
-    .deployment-strip {
-      grid-template-columns: 1fr;
-    }
-
-    .partner-band {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .home-section {
-      padding-block: 4rem;
-    }
-
-    .services-section {
-      padding-top: 1.25rem;
-    }
-
-    .home-hero {
-      min-height: auto;
-      padding-top: 4.25rem;
-    }
-
-    .hero-shell {
-      gap: 1.6rem;
-    }
-
-    .hero-copy {
-      gap: 1.15rem;
-    }
-
-    .hero-video-frame {
-      min-height: auto;
-      aspect-ratio: 16 / 9;
-      border-radius: 1rem;
-    }
-
-    .hero-stats {
-      grid-template-columns: 1fr;
-    }
-
-    .origin-photo {
-      min-height: 20rem;
-    }
-
-    .origin-inset {
-      width: 100%;
-    }
-
-    .deployment-strip {
-      display: grid;
-      grid-auto-flow: column;
-      grid-auto-columns: minmax(15rem, 82%);
-      overflow-x: auto;
-      padding-bottom: 0.4rem;
-      scroll-snap-type: x proximity;
-    }
-
-    .deployment-card {
-      scroll-snap-align: start;
-    }
-
-    .work-band__image {
-      width: 100%;
-      opacity: 0.14;
-    }
-
-    .resource-card {
-      min-height: 10rem;
-    }
-
-    .drawer__panel {
-      top: auto;
-      bottom: 0;
-      width: 100%;
-      height: min(80vh, 42rem);
-      border-left: none;
-      border-top: 2px solid var(--page-accent);
-      transform: translateY(100%);
-    }
-
-    .drawer[data-open='true'] .drawer__panel {
-      transform: translateY(0);
-    }
-
-    .drawer-copy__gallery {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+  @media (max-width: 640px) {
+    .services-grid { gap: 1rem; }
+    .gallery-item { flex: 0 0 80vw; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-eyebrow,
-    .hero-line,
-    .hero-subhead,
-    .hero-actions,
-    .hero-proof-item,
-    .hero-video-frame,
-    .hero-stat-card {
-      animation: none !important;
+    .reveal-up, .reveal-scale, .reveal-left, .reveal-fade, .reveal-mask {
       opacity: 1 !important;
       transform: none !important;
-      clip-path: inset(0 0 0 0 round 1.4rem) !important;
+      clip-path: none !important;
+      transition: none !important;
     }
 
-    .section-bg,
-    .reveal-fade,
-    .reveal-up,
-    .reveal-left,
-    .reveal-right,
-    .reveal-scale,
-    .mask-wipe,
-    .word-reveal {
-      transition: none !important;
+    .hero-line, .hero-eyebrow, .hero-subhead, .hero-actions, .hero-proof-item, .hero-video-frame {
       opacity: 1 !important;
       transform: none !important;
-      clip-path: inset(0 0 0 0 round 1.4rem) !important;
+      clip-path: none !important;
+      animation: none !important;
     }
   }
 </style>

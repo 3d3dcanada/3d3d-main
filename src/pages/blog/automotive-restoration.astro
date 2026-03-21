@@ -1,0 +1,89 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+---
+
+<BlogLayout
+  title="3D Printing for Classic Car Restoration — 3D3D Blog"
+  description="How 3D printing solves the impossible parts problem in classic car restoration — reproducing discontinued components, custom fabrication, and the process behind it."
+  datePublished="2026-03-08"
+  author="Ken"
+>
+  <h2>The Parts Don't Exist Anymore</h2>
+
+  <p>
+    If you've ever tried to restore a car from the 1960s or 70s, you know the feeling. You need one specific bracket, clip, knob, or trim piece — and nobody makes it. The manufacturer discontinued it thirty years ago. The aftermarket never picked it up because the production volume doesn't justify tooling. The junkyard either doesn't have the car or the part is as deteriorated as yours.
+  </p>
+
+  <p>
+    I'm a mechanic by background. I've spent hours on the phone with parts suppliers, scrolled through forums hoping someone hoarded NOS stock, and fabricated things by hand from sheet metal and bar stock when nothing else worked. 3D printing doesn't replace all of that, but it fills a gap that nothing else can.
+  </p>
+
+  <h2>What 3D Printing Handles Well</h2>
+
+  <p>
+    Not every car part is a candidate for printing. But a surprising number are. The sweet spot is non-structural plastic and light-duty metal-replacement components:
+  </p>
+
+  <ul>
+    <li><strong>Interior trim clips and fasteners</strong> — the little plastic bits that hold door panels, dash covers, and headliners in place. These are always broken, always unavailable, and trivial to print in nylon or ASA</li>
+    <li><strong>Knobs and handles</strong> — HVAC controls, wiper switches, window cranks. Scan or measure the original, print a replacement, paint or dye to match</li>
+    <li><strong>Weatherstrip retainers</strong> — the clips that hold rubber seals in door jambs and trunk lids. Different for every model, impossible to find, easy to print</li>
+    <li><strong>Lens housings and bezels</strong> — gauge cluster bezels, light housings, instrument surrounds. ABS or ASA prints and finishes nicely for these</li>
+    <li><strong>Carburetor and intake components</strong> — spacers, adapters, velocity stacks for test fitting. PPA-CF for heat-adjacent applications</li>
+    <li><strong>Wire routing clips and grommets</strong> — every car has dozens and they're all different. Quick to model, quick to print</li>
+  </ul>
+
+  <h2>The Process: From Broken to Replacement</h2>
+
+  <p>
+    Here's what a typical restoration print job looks like at 3D3D:
+  </p>
+
+  <p>
+    <strong>Step 1: Get the original part.</strong> Even if it's broken, cracked, or missing pieces, having the original gives us geometry to work from. If the original is completely gone, we work from photos, measurements from the car, and cross-referencing parts catalogues.
+  </p>
+
+  <p>
+    <strong>Step 2: Measure and model.</strong> Digital calipers, profile gauges, and sometimes a 3D scanner for complex shapes. The CAD model goes into Fusion 360. For simple parts this takes 30 minutes. For complex shapes with curves and draft angles, it might take a few hours.
+  </p>
+
+  <p>
+    <strong>Step 3: Print a test fit.</strong> First print is always a test fit in cheap PLA. Confirm dimensions, check clearances, verify mounting points. This print gets installed in the car temporarily to check fit and look. Adjustments happen in CAD based on what we learn.
+  </p>
+
+  <p>
+    <strong>Step 4: Print the final part.</strong> Final material depends on the application. Interior parts get ASA or ABS (UV stable, heat tolerant for cabin temperatures). Under-hood parts get PA-CF or PPA-CF. Structural clips get nylon. The final print runs at fine layer heights with optimized infill for the expected loads.
+  </p>
+
+  <p>
+    <strong>Step 5: Finish.</strong> Sand, prime, paint if needed. Some parts work raw — the matte texture of CF-filled filament actually looks good in engine bays. Interior parts usually get a coat of paint or SEM trim paint to match factory colours.
+  </p>
+
+  <h2>How This Compares to HV3DWorks and Similar Services</h2>
+
+  <p>
+    There are other shops doing 3D printing for automotive restoration. HV3DWorks is one of the better-known names. The difference with 3D3D is our focus on engineering-grade materials and functional parts, not just cosmetic reproductions.
+  </p>
+
+  <p>
+    A lot of restoration printing is done in PLA or basic PETG. That works for parts that sit in a climate-controlled garage, but PLA warps in a hot car interior and PETG doesn't hold up well under the hood. We default to ASA minimum for anything that goes on a car, and PA-CF or PPA-CF for anything near heat sources. It costs more per part, but the parts actually last.
+  </p>
+
+  <p>
+    We also keep files on record. Once we've modelled a part for one customer's car, the file exists forever. The next person with the same car and the same broken clip gets their part faster and cheaper because the design work is already done.
+  </p>
+
+  <h2>It's Not About Replacing Metal</h2>
+
+  <p>
+    I want to be clear: 3D printing won't replace a rusted-out shock tower or a cracked engine block. Those are metal fabrication and machine shop jobs. What printing does is fill the gap between "I can't find this part" and "I guess the car stays unfinished."
+  </p>
+
+  <p>
+    For the small, specific, low-volume parts that make a restoration complete — the pieces that nobody manufactures because the market is fifty people worldwide — 3D printing is the answer. It's the only manufacturing process that makes economic sense for a batch size of one.
+  </p>
+
+  <p>
+    If you've got a classic car and a box of broken parts that nobody sells, <a href="/quote">get in touch</a>. That's exactly the problem 3D3D was built to solve.
+  </p>
+</BlogLayout>

@@ -1,0 +1,81 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+---
+
+<BlogLayout
+  title="From Drag Cars to 3D Printers: Why Mechanics Make Better Fabricators"
+  description="Ten years turning wrenches taught me more about 3D printing than any YouTube tutorial ever could. Here's why mechanical experience translates directly to better parts."
+  datePublished="2025-06-25"
+  author="Ken"
+>
+  <h2>Wrenches First, Printers Second</h2>
+
+  <p>
+    Before I ever touched a 3D printer, I spent a decade under cars. Not oil changes and tire rotations — I'm talking drag cars, race builds, engine swaps, custom fabrication with a welder and an angle grinder. The kind of work where a bad weld or a weak bracket doesn't just fail, it fails at 150 mph.
+  </p>
+
+  <p>
+    When I got into 3D printing, I noticed something immediately: most people in this space come from a tech background. Software developers, engineers, hobbyists. They understand CAD and G-code. What a lot of them don't understand is how parts actually behave when they're bolted to something that moves, vibrates, heats up, and takes impact.
+  </p>
+
+  <h2>Understanding Stress</h2>
+
+  <p>
+    When you build a bracket for a drag car, you think about stress paths. Where is the force coming from? Where is it going? What happens when the car launches at 1.5 Gs and everything in the engine bay tries to rearrange itself?
+  </p>
+
+  <p>
+    That same thinking applies directly to 3D printing. Layer orientation is the single most important decision you make in slicing. Print a bracket with the layers running perpendicular to the load and it'll snap like a wafer. Orient it so the layers run parallel to the stress and the same part becomes genuinely strong.
+  </p>
+
+  <p>
+    Most people who haven't worked with their hands don't instinctively understand this. Mechanics do. We've seen bolts shear, welds crack, and castings break. We know what failure looks like, and we design to avoid it.
+  </p>
+
+  <h2>Heat Is Not Theoretical</h2>
+
+  <p>
+    I've watched exhaust manifolds glow cherry red. I've burned myself on brake rotors after a hard stop. I've seen intake manifolds warp because someone torqued the bolts wrong and created a hot spot.
+  </p>
+
+  <p>
+    When I print a part that's going near an engine, I don't need to look up the heat deflection temperature on a data sheet and hope for the best. I know what "hot" means in practice. I know that a part sitting six inches from an exhaust header sees radiant heat that will soften PETG in minutes. I know that underhood temperatures on a summer day can hit 100C without the engine even running.
+  </p>
+
+  <p>
+    That practical knowledge is what separates a fabricator from a printer operator.
+  </p>
+
+  <h2>Vibration Kills Everything</h2>
+
+  <p>
+    Cars vibrate. Boats vibrate. Motorcycles vibrate. Anything with an engine or moving parts vibrates. And vibration is what finds every weakness in a printed part.
+  </p>
+
+  <ul>
+    <li>Layer adhesion gaps become crack initiation points.</li>
+    <li>Sharp internal corners concentrate stress until the part splits.</li>
+    <li>Insufficient infill turns solid-looking parts into hollow shells that rattle apart.</li>
+    <li>Poor wall thickness means the part flexes until it fatigues.</li>
+  </ul>
+
+  <p>
+    A decade of chasing down rattles, tightening loose hardware, and watching vibration destroy inadequate parts gave me a deep respect for cyclic loading. When I design and print parts for automotive or marine applications, I'm designing against vibration first. Everything else is secondary.
+  </p>
+
+  <h2>Fit and Tolerance</h2>
+
+  <p>
+    Mechanics work in thousandths of an inch. Bearing clearances, piston-to-wall gaps, valve lash. We measure, we check, we measure again. That precision mindset carries directly into 3D printing.
+  </p>
+
+  <p>
+    I see printed parts all the time that are "close enough." Close enough doesn't cut it when you're mounting a sensor to a race car or fitting an adapter to a through-hull on a boat. At 3D3D, parts fit. Not approximately. Actually fit. Because I learned a long time ago that "close enough" is just "failed slowly."
+  </p>
+
+  <h2>The Mechanic Advantage</h2>
+
+  <p>
+    I'm not saying you need to be a mechanic to be a good fabricator. But understanding how parts live in the real world — how they flex, heat, vibrate, corrode, and fail — makes you dramatically better at this. 3D printing is a manufacturing tool. The printer doesn't know what it's making. You do. And what you know about the real world determines whether the part works or breaks.
+  </p>
+</BlogLayout>

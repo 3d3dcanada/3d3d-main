@@ -3,68 +3,365 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const posts = [
   {
-    slug: 'why-distributed-3d-printing',
-    title: 'Why Distributed 3D Printing Is the Future of Local Manufacturing',
-    excerpt: 'Distributed manufacturing powered by maker networks is reshaping how communities produce goods. Here\'s how 3D3D is building that future in Atlantic Canada.',
-    date: '2026-03-10',
-    category: '3D Printing',
+    slug: 'why-prusa',
+    title: "Why 3D3D Runs Prusa — And What That Actually Means",
+    excerpt: "Open-source, repairable, documented. Here's why 3D3D chose the Prusa ecosystem from day one and never looked back.",
+    date: '2025-04-15',
+    category: 'Equipment',
+    readTime: '5 min',
+  },
+  {
+    slug: 'rv-origin',
+    title: 'I Started a Fabrication Company in an RV',
+    excerpt: "Three printers, a generator, $30 a day in gas, 35-degree heat. The origin story of 3D3D.",
+    date: '2025-05-02',
+    category: 'Story',
+    readTime: '6 min',
+  },
+  {
+    slug: 'first-sail',
+    title: 'My First Sail Was a Category-One Storm',
+    excerpt: "Halifax to Antigua with CSM. 70-knot sustained winds. What it taught me about fabrication.",
+    date: '2025-05-20',
+    category: 'Sailing',
+    readTime: '7 min',
+  },
+  {
+    slug: 'marine-materials',
+    title: 'What Actually Survives Saltwater: A Material Reality Check',
+    excerpt: "Not all filaments are created equal. ASA, PETG-CF, PPS, PPA — what works 600 miles from shore.",
+    date: '2025-06-08',
+    category: 'Materials',
+    readTime: '6 min',
+  },
+  {
+    slug: 'drag-car-parts',
+    title: 'From Drag Cars to 3D Printers: Why Mechanics Make Better Fabricators',
+    excerpt: "Ten years turning wrenches taught me what breaks, what holds, and what matters in a functional part.",
+    date: '2025-06-25',
+    category: 'Automotive',
+    readTime: '5 min',
+  },
+  {
+    slug: 'discontinued-parts',
+    title: "The Part Doesn't Exist Anymore. We Make It Exist.",
+    excerpt: "Reverse-engineering discontinued components. How 3D3D brings dead parts back to life.",
+    date: '2025-07-14',
+    category: 'Fabrication',
+    readTime: '5 min',
+  },
+  {
+    slug: 'field-deployment',
+    title: 'Fly Me to Your Problem',
+    excerpt: "Field deployment — bringing the entire fabrication operation to your location, your event, your boat.",
+    date: '2025-08-01',
+    category: 'Services',
+    readTime: '4 min',
+  },
+  {
+    slug: 'core-one-l',
+    title: "Prusa Is Sending Their Flagship Machine. Here's Why That Matters.",
+    excerpt: "After a year of daily printing, Prusa Research is shipping a CORE One L. Recognition, not marketing.",
+    date: '2025-08-18',
+    category: 'Equipment',
+    readTime: '5 min',
+  },
+  {
+    slug: 'asa-outdoor',
+    title: 'ASA: The Filament Nobody Talks About (That You Should Be Using)',
+    excerpt: "UV-stable, weather-resistant, outdoor-capable. ASA is the most underappreciated material in 3D printing.",
+    date: '2025-09-05',
+    category: 'Materials',
+    readTime: '5 min',
+  },
+  {
+    slug: 'newport-bermuda-announcement',
+    title: "We're Sailing the 2026 Newport Bermuda Race",
+    excerpt: "3D3D aboard for the 120th running. Live printing, real conditions, no fallback. Here's the plan.",
+    date: '2025-10-01',
+    category: 'Campaign',
+    readTime: '6 min',
+  },
+  {
+    slug: 'rolex-fastnet',
+    title: 'What I Learned at the Rolex Fastnet Race',
+    excerpt: "One of the world's premier offshore races. What breaks, what holds, and how it shapes everything I build.",
+    date: '2025-10-20',
+    category: 'Sailing',
+    readTime: '6 min',
+  },
+  {
+    slug: 'printer-setup-service',
+    title: "We'll Fly to Your Location and Set Up Your Printer",
+    excerpt: "New service: on-site printer setup, training, and configuration. Remote or in person, anywhere.",
+    date: '2025-11-10',
+    category: 'Services',
+    readTime: '4 min',
+  },
+  {
+    slug: 'open-source-why',
+    title: "The Files Are Open. Here's Why.",
+    excerpt: "Open-source philosophy, free downloads, shared knowledge. Why 3D3D gives away the files.",
+    date: '2025-12-01',
+    category: 'Community',
+    readTime: '5 min',
+  },
+  {
+    slug: 'peek-pps-future',
+    title: 'PEEK and PPS: The Materials That Change Everything',
+    excerpt: "Aerospace-grade, chemical-resistant, 250°C+ capable. The high-performance filaments redefining what's possible.",
+    date: '2025-12-18',
+    category: 'Materials',
+    readTime: '6 min',
+  },
+  {
+    slug: 'shipping-printers',
+    title: 'How to Ship a 3D Printer Without Destroying It',
+    excerpt: "Practical guide on packaging, crating, and shipping printers for relocation or deployment.",
+    date: '2026-01-05',
+    category: 'Guides',
+    readTime: '5 min',
+  },
+  {
+    slug: 'carbon-fibre-compounds',
+    title: "Carbon Fibre Filaments: What They Actually Do (And Don't)",
+    excerpt: "PETG-CF, PA-CF, PPA-CF — expectations vs. reality. When CF compounds are worth it and when they're not.",
+    date: '2026-01-20',
+    category: 'Materials',
+    readTime: '6 min',
+  },
+  {
+    slug: 'csm-profile',
+    title: 'Christopher Stanmore-Major: The Captain Behind the Campaign',
+    excerpt: "Who CSM is, the sailing partnership, and why he's the reason 3D3D ever touched a boat.",
+    date: '2026-02-05',
+    category: 'People',
+    readTime: '5 min',
+  },
+  {
+    slug: 'solo-saint-john',
+    title: 'Two Days Solo on the Saint John River',
+    excerpt: "Solo sailing up the Saint John River. What it was like, what it proved, what it taught.",
+    date: '2026-02-15',
+    category: 'Sailing',
+    readTime: '5 min',
+  },
+  {
+    slug: 'ko-fi-support',
+    title: 'Why Ko-fi (And How Your Support Actually Gets Used)',
+    excerpt: "Full transparency on where support money goes. Materials, campaign prep, operational costs.",
+    date: '2026-02-25',
+    category: 'Community',
+    readTime: '4 min',
+  },
+  {
+    slug: 'bambu-vs-prusa',
+    title: "Bambu Lab vs Prusa: The Conversation Nobody's Having Honestly",
+    excerpt: "Speed vs openness. Proprietary vs repairable. An honest comparison from someone who's used both.",
+    date: '2026-03-01',
+    category: 'Equipment',
+    readTime: '7 min',
+  },
+  {
+    slug: 'marine-case-study',
+    title: 'Case Study: Custom Winch Components for Offshore Sailing',
+    excerpt: "The problem, the material selection, the design process, the result. A real marine fabrication job.",
+    date: '2026-03-05',
+    category: 'Case Study',
+    readTime: '6 min',
+  },
+  {
+    slug: 'automotive-restoration',
+    title: '3D Printing for Classic Car Restoration',
+    excerpt: "Bringing back parts that don't exist anymore. Knobs, brackets, trim pieces, functional components.",
+    date: '2026-03-08',
+    category: 'Automotive',
     readTime: '5 min',
   },
   {
     slug: 'material-guide-pla-petg-tpu',
     title: 'Material Guide: PLA vs PETG vs TPU — Choosing the Right Filament',
-    excerpt: 'Each material has trade-offs. PLA for precision, PETG for durability, TPU for flex. We break down when to use each and what it costs.',
-    date: '2026-03-12',
+    excerpt: 'Each material has trade-offs. PLA for precision, PETG for durability, TPU for flex. When to use each.',
+    date: '2026-03-10',
     category: 'Materials',
     readTime: '7 min',
   },
   {
+    slug: 'campaign-update-march',
+    title: 'Newport Bermuda Campaign Update — March 2026',
+    excerpt: "Boat prep, printer integration, gear testing. Where the campaign stands heading into spring.",
+    date: '2026-03-12',
+    category: 'Campaign',
+    readTime: '5 min',
+  },
+  {
     slug: 'atlantic-canada-maker-network',
     title: 'Building a Maker Network Across Atlantic Canada',
-    excerpt: 'From Moncton to Halifax, St. John\'s to Charlottetown — how we recruited and onboarded makers across four provinces.',
-    date: '2026-03-15',
+    excerpt: "From Moncton to Halifax, St. John's to Charlottetown — connecting makers across four provinces.",
+    date: '2026-03-14',
     category: 'Community',
     readTime: '4 min',
   },
-];
+  {
+    slug: 'advances-2026',
+    title: 'The 3D Printing Breakthroughs of Early 2026',
+    excerpt: "New printers, new materials, industry shifts. What's actually changed and what matters.",
+    date: '2026-03-15',
+    category: '3D Printing',
+    readTime: '6 min',
+  },
+  {
+    slug: 'global-impact',
+    title: 'How 3D Printing Helps People Who Have Nothing',
+    excerpt: "Disaster relief, remote communities, open-source designs. The humanitarian side of additive manufacturing.",
+    date: '2026-03-18',
+    category: 'Community',
+    readTime: '5 min',
+  },
+  {
+    slug: 'why-cooperative-3d-printing',
+    title: 'Why Cooperative 3D Printing Works',
+    excerpt: 'Shared resources, distributed production, community-driven manufacturing. The cooperative model.',
+    date: '2026-03-19',
+    category: 'Community',
+    readTime: '4 min',
+  },
+].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 ---
 
-<BaseLayout title="Blog — 3D3D" description="Articles on 3D printing, materials, event projects, and maker stories from Atlantic Canada." activePath="/blog">
+<BaseLayout title="Blog — 3D3D" description="Updates on 3D printing, materials, the Newport Bermuda campaign, sailing stories, and fabrication from Atlantic Canada." activePath="/blog">
 
-  <div class="pt-8 pb-12">
-    <section class="max-w-4xl mx-auto">
-      <p class="font-display text-xs font-semibold uppercase tracking-wider" style="color: var(--color-text-muted);">3D3D Blog</p>
-      <h1 class="font-display text-3xl sm:text-4xl font-bold mt-2 mb-2" style="color: var(--color-text-primary);">Blog</h1>
-      <p class="text-sm mb-12" style="color: var(--color-text-secondary);">3D printing, materials, maker economy, event projects.</p>
-
-      <div class="space-y-6">
-        {posts.map((post) => (
-          <a
-            href={`/blog/${post.slug}`}
-            class="group block p-6 rounded-xl transition-all duration-300"
-            style="background: var(--color-surface-card); border: 1px solid var(--color-border-subtle); box-shadow: var(--shadow-sm);"
-          >
-            <div class="flex items-center gap-3 mb-3">
-              <span class="font-display text-[10px] uppercase tracking-wider" style="color: var(--color-teal-primary);">{post.category}</span>
-              <span style="color: var(--color-text-muted);">·</span>
-              <span class="font-display text-[10px] uppercase tracking-wider" style="color: var(--color-text-muted);">{post.date}</span>
-              <span style="color: var(--color-text-muted);">·</span>
-              <span class="font-display text-[10px] uppercase tracking-wider" style="color: var(--color-text-muted);">{post.readTime}</span>
-            </div>
-            <h2 class="font-display text-lg font-semibold transition-colors mb-2" style="color: var(--color-text-primary);">
-              {post.title}
-            </h2>
-            <p class="text-sm leading-relaxed" style="color: var(--color-text-secondary);">{post.excerpt}</p>
-          </a>
-        ))}
+  <div class="blog-index">
+    <div class="blog-hero">
+      <div class="blog-shell">
+        <p class="blog-eyebrow">3D3D Blog</p>
+        <h1 class="blog-title">Updates & Stories</h1>
+        <p class="blog-intro">Fabrication, sailing, materials, campaign updates, and the things I've learned building 3D3D from nothing.</p>
       </div>
-    </section>
+    </div>
+
+    <div class="blog-shell blog-list">
+      {posts.map((post) => (
+        <a href={`/blog/${post.slug}`} class="blog-card">
+          <div class="blog-card__meta">
+            <span class="blog-card__category">{post.category}</span>
+            <span class="blog-card__dot">·</span>
+            <time datetime={post.date}>{new Date(post.date).toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric' })}</time>
+            <span class="blog-card__dot">·</span>
+            <span>{post.readTime}</span>
+          </div>
+          <h2 class="blog-card__title">{post.title}</h2>
+          <p class="blog-card__excerpt">{post.excerpt}</p>
+        </a>
+      ))}
+    </div>
   </div>
 </BaseLayout>
 
 <style>
-  a[href^="/blog/"]:hover {
-    border-color: var(--color-border-strong) !important;
-    box-shadow: var(--shadow-card-hover) !important;
+  .blog-index {
+    --page-accent: #40C4C4;
+    --page-bg-dark: #111214;
+  }
+
+  .blog-hero {
+    background: var(--page-bg-dark);
+    padding: clamp(4rem, 8vw, 7rem) 0 clamp(3rem, 6vw, 4rem);
+    color: #F6F7FA;
+  }
+
+  .blog-shell {
+    width: min(calc(100% - 3rem), 900px);
+    margin: 0 auto;
+  }
+
+  .blog-eyebrow {
+    margin: 0;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--page-accent);
+  }
+
+  .blog-title {
+    margin: 0.75rem 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 1.5rem + 4vw, 4.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    color: #F6F7FA;
+  }
+
+  .blog-intro {
+    margin: 1rem 0 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(246, 247, 250, 0.72);
+    max-width: 36rem;
+  }
+
+  .blog-list {
+    display: grid;
+    gap: 1rem;
+    padding: clamp(2rem, 4vw, 3rem) 0 clamp(4rem, 6vw, 6rem);
+  }
+
+  .blog-card {
+    display: grid;
+    gap: 0.6rem;
+    padding: clamp(1.25rem, 2.5vw, 1.75rem);
+    border: 3px solid #1A1A1A;
+    border-radius: 1rem;
+    background: #FFFFFF;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .blog-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(26, 26, 26, 0.1);
+  }
+
+  .blog-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    font-family: var(--font-tech);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #666666;
+  }
+
+  .blog-card__category {
+    color: var(--page-accent);
+  }
+
+  .blog-card__dot {
+    color: #CCC;
+  }
+
+  .blog-card__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 0.9rem + 0.5vw, 1.35rem);
+    line-height: 1.15;
+    color: #1A1A1A;
+  }
+
+  .blog-card__excerpt {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: #555;
+  }
+
+  @media (max-width: 640px) {
+    .blog-shell {
+      width: min(calc(100% - 1.5rem), 900px);
+    }
   }
 </style>

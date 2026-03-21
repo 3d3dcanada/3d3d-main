@@ -360,7 +360,7 @@ input::placeholder, textarea::placeholder {
   position: relative;
   z-index: 1;
   min-height: 100vh;
-  margin-left: var(--sidebar-width);
+  /* No margin-left — sidebar is always off-canvas, toggled on all screen sizes */
 }
 
 .site-main {
@@ -412,238 +412,9 @@ input::placeholder, textarea::placeholder {
   flex-shrink: 0;
 }
 
-/* ── Sidebar ─────────────────────────────────────────────────────── */
-.site-sidebar {
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100dvh;
-  width: var(--sidebar-width);
-  z-index: 60;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  padding: 1.5rem 1rem 1rem;
-  background: rgba(255, 255, 255, 0.92);
-  border-right: 1px solid var(--color-border-default);
-  box-shadow: 12px 0 34px rgba(26, 26, 26, 0.05);
-  overflow-y: auto;
-  transition: transform 0.3s ease;
-}
+/* ── Sidebar — styles now in SiteSidebar.astro component ────────── */
 
-.site-sidebar__content {
-  display: flex;
-  flex-direction: column;
-  gap: 1.75rem;
-}
-
-.site-sidebar__brand {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 0.25rem 0.25rem 0.5rem;
-  color: var(--color-text-primary);
-}
-
-.site-sidebar__brand:hover {
-  color: var(--color-magenta-primary);
-}
-
-.site-sidebar__brand-pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  align-self: flex-start;
-  min-width: 4.25rem;
-  min-height: 2.6rem;
-  padding: 0.55rem 1rem;
-  border-radius: var(--radius-md);
-  background: var(--color-teal-primary);
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  font-weight: 400;
-  color: #FFFFFF;
-  letter-spacing: -0.01em;
-}
-
-.site-sidebar__tagline {
-  margin: 0;
-  font-family: var(--font-tech);
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  color: rgba(26, 26, 26, 0.54);
-  line-height: 1.4;
-}
-
-.site-sidebar__nav {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.site-sidebar__group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-
-.site-sidebar__group-links {
-  display: grid;
-  gap: 0.15rem;
-}
-
-.site-sidebar__group-label {
-  margin: 0;
-  padding-inline: 0.75rem;
-  font-family: var(--font-tech);
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(26, 26, 26, 0.42);
-  margin-bottom: 0.2rem;
-}
-
-.site-sidebar__link {
-  display: flex;
-  align-items: center;
-  min-height: 2.5rem;
-  padding: 0.55rem 0.75rem;
-  border-left: 2px solid transparent;
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  background: transparent;
-  color: rgba(26, 26, 26, 0.74);
-  font-family: var(--font-tech);
-  font-size: 0.86rem;
-  font-weight: 500;
-  line-height: 1.2;
-  transition:
-    background-color 0.15s ease,
-    border-color 0.15s ease,
-    color 0.15s ease;
-}
-
-.site-sidebar__link:hover {
-  background: rgba(64, 196, 196, 0.10);
-  color: var(--color-text-primary);
-}
-
-.site-sidebar__link--active {
-  border-left-color: var(--color-teal-primary);
-  background: rgba(64, 196, 196, 0.16);
-  color: var(--color-magenta-primary);
-}
-
-.site-sidebar__bottom {
-  position: sticky;
-  bottom: 0;
-  margin-top: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  padding-top: 1rem;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(246, 247, 250, 0.95) 38%
-    );
-}
-
-.site-sidebar__cta {
-  width: 100%;
-  min-height: 2.8rem;
-  padding-inline: 1rem;
-}
-
-.site-sidebar__socials {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-}
-
-.site-sidebar__social-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 999px;
-  background: var(--color-surface-secondary);
-  color: rgba(26, 26, 26, 0.55);
-  transition: background-color 0.15s ease, color 0.15s ease;
-}
-
-.site-sidebar__social-link:hover {
-  background: var(--color-magenta-surface);
-  color: var(--color-magenta-primary);
-}
-
-.site-sidebar__social-link svg {
-  width: 0.95rem;
-  height: 0.95rem;
-}
-
-/* ── Sidebar Toggle (Mobile) ─────────────────────────────────────── */
-.sidebar-toggle {
-  position: fixed;
-  top: 1rem;
-  left: 1rem;
-  z-index: 70;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 0.28rem;
-  width: 44px;
-  height: 44px;
-  border: 0;
-  border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.96);
-  border: 1px solid var(--color-border-default);
-  box-shadow: var(--shadow-md);
-  cursor: pointer;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
-}
-
-.sidebar-toggle:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-lg);
-}
-
-.sidebar-toggle__bar {
-  display: block;
-  width: 18px;
-  height: 2px;
-  border-radius: 999px;
-  background: var(--color-text-primary);
-  transition: transform 0.3s ease, opacity 0.2s ease;
-}
-
-.sidebar-toggle[data-open='true'] .sidebar-toggle__bar:nth-child(1) {
-  transform: translateY(6px) rotate(45deg);
-}
-
-.sidebar-toggle[data-open='true'] .sidebar-toggle__bar:nth-child(2) {
-  opacity: 0;
-}
-
-.sidebar-toggle[data-open='true'] .sidebar-toggle__bar:nth-child(3) {
-  transform: translateY(-6px) rotate(-45deg);
-}
-
-.sidebar-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(26, 26, 26, 0.35);
-  z-index: 55;
-  backdrop-filter: blur(2px);
-}
-
-.sidebar-backdrop[hidden] {
-  display: none;
-}
+/* ── Sidebar Toggle — styles now in SiteSidebar.astro component ── */
 
 /* ── Section Header ──────────────────────────────────────────────── */
 .section-header {
@@ -717,19 +488,6 @@ body.menu-open {
     margin-left: 0;
     padding-top: 0;
   }
-
-  .site-sidebar {
-    transform: translateX(-100%);
-    box-shadow: var(--shadow-xl);
-  }
-
-  .site-sidebar[data-sidebar-open='true'] {
-    transform: translateX(0);
-  }
-
-  .sidebar-toggle {
-    display: inline-flex;
-  }
 }
 
 @media (max-width: 640px) {
@@ -739,11 +497,7 @@ body.menu-open {
   }
 }
 
-@media (min-width: 1024px) {
-  .sidebar-backdrop {
-    display: none !important;
-  }
-}
+/* sidebar-backdrop visibility now in SiteSidebar.astro */
 
 /* ── Old Girl Brand Overrides ────────────────────────────────────── */
 .old-girl-theme {

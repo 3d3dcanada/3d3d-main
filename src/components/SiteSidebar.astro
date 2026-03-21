@@ -20,7 +20,6 @@ const { navGroups, activePath = '' } = Astro.props;
 const normalizePath = (value?: string) => {
   if (!value) return '';
   if (value === '/') return '/';
-
   return value.replace(/\/+$/, '');
 };
 
@@ -28,7 +27,6 @@ const currentPath = normalizePath(activePath);
 
 const isActiveLink = (item: NavItem) => {
   if (!item.href) return item.id === activePath;
-
   return normalizePath(item.href) === currentPath;
 };
 
@@ -95,12 +93,22 @@ const socialLinks = [
 <div class="sidebar-backdrop" data-sidebar-backdrop hidden></div>
 
 <aside id="site-sidebar" class="site-sidebar" data-sidebar-open="false">
-  <div class="site-sidebar__content">
+  <div class="site-sidebar__header">
     <a href="/" class="site-sidebar__brand" aria-label="3D3D home">
       <span class="site-sidebar__brand-pill">3D3D</span>
-      <span class="site-sidebar__tagline">Precision Fabrication · Marine · Automotive</span>
+      <span class="site-sidebar__tagline">Specialty Fabrication · Marine · Motorsport</span>
     </a>
+    <button
+      type="button"
+      class="site-sidebar__close"
+      data-sidebar-close
+      aria-label="Close navigation menu"
+    >
+      ✕
+    </button>
+  </div>
 
+  <div class="site-sidebar__content">
     <nav class="site-sidebar__nav" aria-label="Primary navigation">
       {navGroups.map((group) => (
         <section class="site-sidebar__group">
@@ -129,7 +137,7 @@ const socialLinks = [
   <div class="site-sidebar__bottom">
     <a
       href="/contact"
-      class="btn btn-primary site-sidebar__cta"
+      class="site-sidebar__cta"
       data-analytics-event="contact_started"
       data-analytics-source="sidebar-cta"
       data-sidebar-link
@@ -156,62 +164,331 @@ const socialLinks = [
   </div>
 </aside>
 
+<style>
+  .site-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100dvh;
+    width: var(--sidebar-width);
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    background: #111214;
+    border-right: 2px solid #1A1A1A;
+    overflow-y: auto;
+    /* Always off-canvas — toggled on all screen sizes */
+    transform: translateX(-100%);
+    box-shadow: 12px 0 48px rgba(0, 0, 0, 0.4);
+    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .site-sidebar[data-sidebar-open='true'] {
+    transform: translateX(0);
+  }
+
+  .site-sidebar__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 1.25rem 1rem 0.75rem;
+    border-bottom: 1px solid rgba(64, 196, 196, 0.15);
+  }
+
+  .site-sidebar__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid #40C4C4;
+    background: transparent;
+    color: #F6F7FA;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 0.4rem;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+  }
+
+  .site-sidebar__close:hover {
+    background: #40C4C4;
+    color: #111214;
+  }
+
+  .site-sidebar__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    color: #F6F7FA;
+  }
+
+  .site-sidebar__brand:hover {
+    color: #40C4C4;
+  }
+
+  .site-sidebar__brand-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+    min-width: 4.25rem;
+    min-height: 2.4rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: 0.5rem;
+    border: 2px solid #40C4C4;
+    background: #40C4C4;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: #111214;
+    letter-spacing: -0.01em;
+  }
+
+  .site-sidebar__tagline {
+    margin: 0;
+    font-family: var(--font-tech);
+    font-size: 0.64rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: rgba(246, 247, 250, 0.5);
+    line-height: 1.4;
+  }
+
+  .site-sidebar__content {
+    flex: 1;
+    padding: 1rem 0.75rem;
+  }
+
+  .site-sidebar__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .site-sidebar__group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .site-sidebar__group-label {
+    margin: 0;
+    padding-inline: 0.75rem;
+    font-family: var(--font-tech);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(246, 247, 250, 0.38);
+    margin-bottom: 0.2rem;
+  }
+
+  .site-sidebar__group-links {
+    display: grid;
+    gap: 0.1rem;
+  }
+
+  .site-sidebar__link {
+    display: flex;
+    align-items: center;
+    min-height: 2.4rem;
+    padding: 0.5rem 0.75rem;
+    border-left: 2px solid transparent;
+    border-radius: 0 0.5rem 0.5rem 0;
+    background: transparent;
+    color: rgba(246, 247, 250, 0.72);
+    font-family: var(--font-tech);
+    font-size: 0.84rem;
+    font-weight: 500;
+    line-height: 1.2;
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .site-sidebar__link:hover {
+    background: rgba(64, 196, 196, 0.1);
+    color: #F6F7FA;
+    border-left-color: rgba(64, 196, 196, 0.4);
+  }
+
+  .site-sidebar__link--active {
+    border-left-color: #40C4C4;
+    background: rgba(64, 196, 196, 0.14);
+    color: #40C4C4;
+  }
+
+  .site-sidebar__bottom {
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1rem 0.75rem;
+    border-top: 1px solid rgba(64, 196, 196, 0.15);
+    background: linear-gradient(180deg, rgba(17, 18, 20, 0) 0%, #111214 30%);
+  }
+
+  .site-sidebar__cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 2.8rem;
+    padding-inline: 1rem;
+    border: 2px solid #40C4C4;
+    background: #40C4C4;
+    color: #111214;
+    font-family: var(--font-tech);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+  }
+
+  .site-sidebar__cta:hover {
+    background: #53D3D3;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(64, 196, 196, 0.3);
+  }
+
+  .site-sidebar__socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .site-sidebar__social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 0.4rem;
+    border: 1px solid rgba(246, 247, 250, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(246, 247, 250, 0.5);
+    transition: all 0.15s ease;
+  }
+
+  .site-sidebar__social-link:hover {
+    border-color: #40C4C4;
+    background: rgba(64, 196, 196, 0.12);
+    color: #40C4C4;
+  }
+
+  .site-sidebar__social-link svg {
+    width: 0.88rem;
+    height: 0.88rem;
+  }
+
+  /* ── Toggle (always visible) ────────────────── */
+  .sidebar-toggle {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 70;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.28rem;
+    width: 44px;
+    height: 44px;
+    border: 2px solid #1A1A1A;
+    border-radius: 0.5rem;
+    background: #111214;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .sidebar-toggle:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  .sidebar-toggle__bar {
+    display: block;
+    width: 18px;
+    height: 2px;
+    border-radius: 999px;
+    background: #F6F7FA;
+    transition: transform 0.3s ease, opacity 0.2s ease;
+  }
+
+  .sidebar-toggle[data-open='true'] .sidebar-toggle__bar:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .sidebar-toggle[data-open='true'] .sidebar-toggle__bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .sidebar-toggle[data-open='true'] .sidebar-toggle__bar:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  .sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(17, 18, 20, 0.5);
+    z-index: 55;
+    backdrop-filter: blur(4px);
+  }
+
+  .sidebar-backdrop[hidden] {
+    display: none;
+  }
+
+  /* Sidebar and toggle are always-on — no breakpoint overrides needed */
+</style>
+
 <script>
   (() => {
     const sidebar = document.querySelector('.site-sidebar');
     const toggle = document.querySelector('[data-sidebar-toggle]');
     const backdrop = document.querySelector('[data-sidebar-backdrop]');
+    const closeBtn = document.querySelector('[data-sidebar-close]');
 
     if (!(sidebar instanceof HTMLElement) || !(toggle instanceof HTMLButtonElement) || !(backdrop instanceof HTMLElement)) {
       return;
     }
 
-    const mobileQuery = window.matchMedia('(max-width: 1023px)');
     const closeTargets = sidebar.querySelectorAll('[data-sidebar-link]');
 
-    const setOpen = (open) => {
-      const nextOpen = mobileQuery.matches ? open : false;
-
-      sidebar.dataset.sidebarOpen = nextOpen ? 'true' : 'false';
-      toggle.dataset.open = nextOpen ? 'true' : 'false';
-      toggle.setAttribute('aria-expanded', String(nextOpen));
-      toggle.setAttribute('aria-label', nextOpen ? 'Close navigation menu' : 'Open navigation menu');
-      backdrop.hidden = !nextOpen;
-      document.body.classList.toggle('menu-open', nextOpen);
+    const setOpen = (open: boolean) => {
+      sidebar.dataset.sidebarOpen = open ? 'true' : 'false';
+      toggle.dataset.open = open ? 'true' : 'false';
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+      backdrop.hidden = !open;
+      document.body.classList.toggle('menu-open', open);
     };
 
     const close = () => setOpen(false);
+    const isOpen = () => sidebar.dataset.sidebarOpen === 'true';
 
-    toggle.addEventListener('click', () => {
-      if (!mobileQuery.matches) return;
-
-      setOpen(sidebar.dataset.sidebarOpen !== 'true');
-    });
-
+    toggle.addEventListener('click', () => setOpen(!isOpen()));
     backdrop.addEventListener('click', close);
 
-    closeTargets.forEach((target) => {
-      target.addEventListener('click', () => {
-        if (mobileQuery.matches) close();
-      });
-    });
-
-    window.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') close();
-    });
-
-    const handleViewportChange = () => {
-      if (!mobileQuery.matches) close();
-    };
-
-    if (typeof mobileQuery.addEventListener === 'function') {
-      mobileQuery.addEventListener('change', handleViewportChange);
-    } else if (typeof mobileQuery.addListener === 'function') {
-      mobileQuery.addListener(handleViewportChange);
+    if (closeBtn) {
+      closeBtn.addEventListener('click', close);
     }
 
-    window.addEventListener('resize', () => {
-      if (window.innerWidth >= 1024) close();
+    // Close on nav link click
+    closeTargets.forEach((target) => {
+      target.addEventListener('click', close);
+    });
+
+    // Close on Escape
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && isOpen()) close();
     });
   })();
 </script>

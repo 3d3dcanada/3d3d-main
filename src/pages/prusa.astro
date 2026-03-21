@@ -1,0 +1,167 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Prusa — 3D3D"
+  description="Thinking about a Prusa? Talk to us first. We've run them from the MK2 forward and know exactly what to get for your setup."
+  activePath="/prusa"
+>
+  <section class="prusa-page">
+    <div class="prusa-shell">
+      <p class="prusa-eyebrow">Prusa Equipment</p>
+      <h1 class="prusa-title">
+        Thinking about<br />a Prusa?
+      </h1>
+      <p class="prusa-body">
+        We've run Prusa from the MK2 forward. We know the lineup, the use cases, and what actually makes sense for your setup. Before you buy, talk to us.
+      </p>
+      <a href="/contact" class="prusa-cta">Talk to us →</a>
+    </div>
+  </section>
+
+  <section class="prusa-story">
+    <div class="prusa-story__shell">
+      <p class="prusa-story__eyebrow">Sponsorship</p>
+      <h2 class="prusa-story__title">Prusa believes in 3D3D.</h2>
+      <p class="prusa-story__body">
+        Prusa is sponsoring 3D3D with a CORE One L — not as a marketing deal, but because they saw the work and backed the mission. A founder-operated fabrication operation taking 3D printing offshore, to events, to communities. They believe in the overall dream, and so do we.
+      </p>
+      <a href="/contact" class="prusa-cta">Talk to us →</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .prusa-page {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    background: #111214;
+    color: #F6F7FA;
+  }
+
+  .prusa-shell {
+    width: min(100% - clamp(1.5rem, 4vw, 4rem), 720px);
+    margin: 0 auto;
+    display: grid;
+    gap: 1.6rem;
+    padding-block: clamp(6rem, 10vw, 10rem);
+  }
+
+  .prusa-eyebrow {
+    margin: 0;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #40C4C4;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .prusa-eyebrow::before {
+    content: '';
+    width: 2.75rem;
+    height: 2px;
+    background: #40C4C4;
+    flex-shrink: 0;
+  }
+
+  .prusa-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 2rem + 4vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: #FFFFFF;
+    text-transform: uppercase;
+  }
+
+  .prusa-body {
+    margin: 0;
+    max-width: 36rem;
+    font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.2rem);
+    line-height: 1.75;
+    color: rgba(246, 247, 250, 0.82);
+  }
+
+  .prusa-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 3.4rem;
+    padding: 0.95rem 1.6rem;
+    background: #40C4C4;
+    color: #0F1112;
+    border: 3px solid #1A1A1A;
+    font-family: var(--font-tech);
+    font-size: 0.84rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    box-shadow: 0 14px 32px rgba(64, 196, 196, 0.22);
+  }
+
+  .prusa-cta:hover {
+    background: #53D3D3;
+    box-shadow: 0 8px 24px rgba(64, 196, 196, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .prusa-story {
+    background: #0F1112;
+    color: #F6F7FA;
+    border-top: 1px solid rgba(64, 196, 196, 0.15);
+    padding-block: clamp(5rem, 8vw, 8rem);
+  }
+
+  .prusa-story__shell {
+    width: min(100% - clamp(1.5rem, 4vw, 4rem), 720px);
+    margin: 0 auto;
+    display: grid;
+    gap: 1.4rem;
+  }
+
+  .prusa-story__eyebrow {
+    margin: 0;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #40C4C4;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .prusa-story__eyebrow::before {
+    content: '';
+    width: 2.75rem;
+    height: 2px;
+    background: #40C4C4;
+    flex-shrink: 0;
+  }
+
+  .prusa-story__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 1.2rem + 2.5vw, 3rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: #FFFFFF;
+  }
+
+  .prusa-story__body {
+    margin: 0;
+    max-width: 36rem;
+    font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.2rem);
+    line-height: 1.75;
+    color: rgba(246, 247, 250, 0.82);
+  }
+</style>

@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Opportunities — 3D3D" description="Work with 3D3D. Real positions, real pay. See what's open." activePath="/opportunities">
+
+  <section class="opp-page">
+    <div class="opp-shell">
+      <p class="opp-eyebrow">Opportunities</p>
+      <h1 class="opp-title">Work with 3D3D</h1>
+      <p class="opp-intro">
+        3D3D is growing. These are real positions — not volunteer calls. If the work fits, reach out.
+      </p>
+
+      <div class="opp-listing">
+        <div class="opp-listing__header">
+          <h2 class="opp-listing__role">Social Media Intern</h2>
+          <div class="opp-listing__meta">
+            <span>Fredericton, NB (partially remote)</span>
+            <span>Part-time, paid</span>
+          </div>
+        </div>
+        <div class="opp-listing__body">
+          <p>Film and produce content — video, photo, social posts. Cover 3D3D operations, builds, and events. Potential travel for events and deployments.</p>
+          <p class="opp-listing__tone">You get what you put into it.</p>
+        </div>
+        <a href="/contact" class="opp-cta">Apply →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .opp-page {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    background: #111214;
+    color: #F6F7FA;
+  }
+
+  .opp-shell {
+    width: min(100% - clamp(1.5rem, 4vw, 4rem), 720px);
+    margin: 0 auto;
+    display: grid;
+    gap: 2rem;
+    padding-block: clamp(6rem, 10vw, 10rem);
+  }
+
+  .opp-eyebrow {
+    margin: 0;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #40C4C4;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .opp-eyebrow::before {
+    content: '';
+    width: 2.75rem;
+    height: 2px;
+    background: #40C4C4;
+    flex-shrink: 0;
+  }
+
+  .opp-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 2rem + 4vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: #FFFFFF;
+    text-transform: uppercase;
+  }
+
+  .opp-intro {
+    margin: 0;
+    max-width: 36rem;
+    font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.2rem);
+    line-height: 1.75;
+    color: rgba(246, 247, 250, 0.82);
+  }
+
+  .opp-listing {
+    display: grid;
+    gap: 1.4rem;
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(64, 196, 196, 0.18);
+    border-radius: 1rem;
+  }
+
+  .opp-listing__header {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .opp-listing__role {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 1rem + 1.5vw, 2rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+  }
+
+  .opp-listing__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.4rem;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #40C4C4;
+  }
+
+  .opp-listing__body {
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .opp-listing__body p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(246, 247, 250, 0.78);
+  }
+
+  .opp-listing__tone {
+    font-style: italic;
+    color: rgba(246, 247, 250, 0.6) !important;
+  }
+
+  .opp-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 3.4rem;
+    padding: 0.95rem 1.6rem;
+    background: #40C4C4;
+    color: #0F1112;
+    border: 3px solid #1A1A1A;
+    font-family: var(--font-tech);
+    font-size: 0.84rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    box-shadow: 0 14px 32px rgba(64, 196, 196, 0.22);
+  }
+
+  .opp-cta:hover {
+    background: #53D3D3;
+    box-shadow: 0 8px 24px rgba(64, 196, 196, 0.4);
+    transform: translateY(-2px);
+  }
+</style>

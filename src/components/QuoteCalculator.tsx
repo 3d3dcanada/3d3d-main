@@ -313,6 +313,8 @@ export default function QuoteCalculator() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const honeypot = event.currentTarget.querySelector<HTMLInputElement>('input[name="_gotcha"]')?.value ?? '';
+    if (honeypot.trim()) return;
     markStarted('form_submit');
 
     if (!projectDetails.trim() && files.length === 0) {
@@ -440,6 +442,14 @@ export default function QuoteCalculator() {
                   <h3>Project intake</h3>
                   <p>The core information we need to qualify and quote the job properly.</p>
                 </div>
+              </div>
+
+              <div
+                aria-hidden="true"
+                style={{ position: 'absolute', left: '-100vw', width: '1px', height: '1px', overflow: 'hidden' }}
+              >
+                <label htmlFor="quote-website">Leave this field blank</label>
+                <input id="quote-website" name="_gotcha" type="text" tabIndex={-1} autoComplete="off" />
               </div>
 
               <div className="quote-form-grid">

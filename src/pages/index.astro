@@ -35,7 +35,7 @@ const homeNavGroups = [
     label: 'On This Page',
     items: [
       { id: 'home', label: 'Home', href: '/' },
-      { id: 'what-we-do', label: 'What We Do', href: '#what-we-do' },
+      { id: 'what-i-do', label: 'What I Do', href: '#what-i-do' },
       { id: 'contact', label: 'Contact', href: '#contact' },
     ],
   },
@@ -56,38 +56,32 @@ const services = [
     drawerId: 'drawer-marine',
     eyebrow: 'Marine & Offshore',
     headline: 'Built for conditions that destroy everything else.',
-    description: 'Custom winch components, deck hardware, and purpose-built parts engineered for saltwater, UV exposure, and open-ocean conditions. If it lives on a vessel, we build it to last.',
-    image: '/media/race/crew-helm-offshore.jpg',
-    alt: 'Crew working the helm offshore during ocean racing',
+    description: 'Custom winch components, deck hardware, and purpose-built parts engineered for saltwater, UV exposure, and open-ocean conditions. If it lives on a vessel, I build it to last.',
     drawer: {
-      materials: 'Prusament ASA above deck — 93°C heat deflection, UV-stable, won\'t yellow or embrittle after seasons in the elements. It\'s the compound ABS should have been. Below deck and in wet lockers: Prusament PETG-CF for structural fittings where dimensional stability matters and UV isn\'t the threat. Constant saltwater contact goes to Prusament PP Glass Fiber or PP Carbon Fiber — polypropylene absorbs essentially zero moisture (0.11% at 7 days, stable), won\'t swell, won\'t delaminate, resists the acids and salt chemistry that destroy other materials over time. Seals, gaskets, and vibration dampening: Prusament TPU 95A, ether-type formulation — stays flexible to -50°C, resists hydrolysis, doesn\'t degrade in standing bilge water. For parts near engines or exhaust where temps exceed what ASA handles: Prusament PA11 CF runs to 192°C at low load and resists motor oils and fuels by spec. Plain PETG softens at 68°C and degrades under UV. PLA softens at 55°C and has no place offshore. We don\'t use them for marine work.',
-      turnaround: 'Start with the broken part or the problem, not a CAD file. Bring the hardware, a photo, or caliper measurements. If you\'re on the hook or already offshore, send dimensions by message — we\'ll work from them. We\'ve built from blurry photos, hand-sketched notes, and measurements taken with a tape measure on a rolling deck. We figure it out. Send what you have.',
+      materials: 'ASA above deck — UV-stable, 93°C heat deflection. PETG-CF below deck for structural fittings. PP Glass Fiber or PP Carbon Fiber for constant saltwater contact. TPU 95A for seals and gaskets. PA11 CF near engines — 192°C, resists oils and fuels.',
+      turnaround: 'Send the broken part, a photo, or caliper measurements. If you\'re offshore, send dimensions by message. I\'ve built from blurry photos and measurements taken on a rolling deck.',
     },
   },
   {
     id: 'automotive',
     drawerId: 'drawer-automotive',
     eyebrow: 'Automotive & Motorsport',
-    headline: "We know performance. We've built it.",
-    description: 'Ten years as a mechanic. Engine builds, drag cars, daily drivers. Discontinued trim pieces, custom brackets, heat-resistant underhood components — if the dealer stopped making it or never made it, we do.',
-    image: '/media/race/helm-racing-wake.jpg',
-    alt: 'Helmsman steering at speed on open water',
+    headline: "I know performance. I've built it.",
+    description: 'Ten years as a mechanic. Engine builds, drag cars, daily drivers. Discontinued trim pieces, custom brackets, heat-resistant underhood components — if the dealer stopped making it or never made it, I do.',
     drawer: {
-      materials: 'PA11 CF is the engine bay material — 192°C heat deflection at 0.45MPa, 152°C under 1.80MPa load, and it resists motor oils, fuels, benzene, and ethanol by spec. It\'s a bio-based compound from castor oil that outperforms most nylons on heat and chemical resistance simultaneously. PETG-CF handles structural brackets and mount systems where you need stiffness without creep — it doesn\'t yield under sustained load the way standard PETG does. ASA covers exterior, underhood, and any UV-cycling environment where ABS would yellow and crack. PC Blend and PC Blend CF step in where you need impact resistance — CF composites trade some toughness for stiffness, so when a part takes real hits, straight PC Blend keeps the impact strength. At the high end: PEI 1010 (Ultem-class) runs to 207°C, carries a UL94 VTM-0 flame rating, and is the compound you reach for when the environment would destroy anything else. Material gets decided by where the part lives and what loads it sees — not by what\'s easiest to print.',
-      turnaround: 'Send photos of where the part lives, the broken piece, and dimensions if you have them. For discontinued OEM parts, bring the original — we measure with calipers, model to fit, and test-fit before committing to a run. One-off is the same process as a batch. Racing teams needing parts between weekends: we understand the schedule. Tell us the date and we\'ll work backwards from it.',
+      materials: 'PA11 CF for engine bay — 192°C heat deflection, resists oils and fuels. PETG-CF for structural brackets. ASA for exterior and underhood UV exposure. PC Blend for impact-critical parts. PEI 1010 when nothing else survives.',
+      turnaround: 'Send photos of where the part lives, the broken piece, and dimensions. For discontinued OEM parts, bring the original — I measure, model, and test-fit before committing. Tell me the date and I work backwards from it.',
     },
   },
   {
     id: 'scan',
     drawerId: 'drawer-scan',
     eyebrow: 'Scan · Measure · Recreate',
-    headline: 'If you can bring the part, we can recreate it.',
-    description: 'We reverse-engineer broken and discontinued components from physical reference — calipers, measurement, and scanning techniques. Vessel hardware, vintage car parts, antique hardware, obsolete fittings. One piece is a real job.',
-    image: '/media/race/fastnet-fleet-horizon.jpg',
-    alt: 'Racing fleet spread across the horizon offshore',
+    headline: 'If you can bring the part, I can recreate it.',
+    description: 'I reverse-engineer broken and discontinued components from physical reference — calipers, measurement, and scanning. Vessel hardware, vintage car parts, antique hardware, obsolete fittings. One piece is a real job.',
     drawer: {
-      materials: 'Material gets matched to what the original had to survive — not to what prints easiest. Seals, O-rings, grommets, and vibration dampening: TPU 95A, ether-type, rated to -50°C impact resistance and high hydrolysis resistance — it won\'t degrade in wet environments the way ester-type TPU does. Structural fittings and load-bearing hardware: PETG-CF for dimensional stability, PA11 CF where the part sees heat or chemical exposure. Chemical-environment parts — fuel system adjacents, lab hardware, marine through-hulls — go to PP Glass Fiber or PP Carbon Fiber, which absorb essentially zero moisture and resist acids, solvents, and oils. Impact-critical parts get PC Blend. High-heat structural metal-replacement: PEI 1010 at 207°C HDT, flame retardant, autoclave-sterilizable if the original was used in a medical or scientific context. Where the original had a known failure mode — a stress riser, a thin wall that cracked repeatedly, a brittle section — we correct it in the model. The reproduction is sometimes stronger than the factory part.',
-      turnaround: 'Bring whatever you have — the broken part, half a part, a mating surface, a photograph. We measure with calipers and reference every accessible surface. If the part is completely gone, tell us the system it belongs to and we\'ll work from documentation, archived drawings, or photos of the same fitting on other vessels or vehicles. We\'ll tell you exactly what we need. Minimum order is one — single parts are not a problem.',
+      materials: 'Material matched to what the original had to survive. TPU 95A for seals and dampening. PETG-CF or PA11 CF for structural and heat-exposed parts. PP Glass Fiber for chemical environments. PEI 1010 for high-heat metal replacement.',
+      turnaround: 'Bring whatever you have — the broken part, half a part, a photo. I measure with calipers and reference every surface. If it\'s completely gone, tell me what system it belongs to. Minimum order is one.',
     },
   },
   {
@@ -95,29 +89,19 @@ const services = [
     drawerId: 'drawer-custom',
     eyebrow: 'Custom & Field Fabrication',
     headline: 'No blueprint required. Bring the problem.',
-    description: 'Custom mounts, jigs, adapters, enclosures, tooling, and one-off solutions. The full material stack — from flexible TPU to PEI 1010 at 207°C. We deploy — fly us to your location, your event, your boat.',
-    image: '/media/race/dragon-sail-racing.jpg',
-    alt: 'Custom race boat with dramatic dragon sail design',
+    description: 'Custom mounts, jigs, adapters, enclosures, tooling, and one-off solutions. The full material stack — from flexible TPU to PEI 1010 at 207°C. I deploy — fly me to your location, your event, your boat.',
     drawer: {
-      materials: 'The full stack, matched to the use case. PETG-CF and ASA handle the majority of structural, outdoor, and mechanical work — stiff, UV-stable, no-creep. TPU 95A for anything that needs to flex: gaskets, dampening mounts, cable boots, protective covers. PP-CF and PP-GF where the environment has chemical exposure — solvents, acids, fuels, constant moisture. PA11 CF for high-heat structural parts — 192°C HDT, bio-based, resists the chemistry of real working environments. PC Blend CF where you need stiffness plus heat and can anneal to 130°C. PETG V0 for enclosures that need a UL94 V0 flame rating — the only UL-certified self-extinguishing PETG on the market. At the ceiling: PEI 1010 (Ultem-class) at 207°C continuous service, inherent UL94 VTM-0 flame retardancy, gamma and autoclave sterilizable — a metal replacement in the truest sense. If an application calls for ESD-safe parts with space-grade outgassing requirements, we run PC Space Grade, ESA-certified. Material gets chosen after the problem is understood — not before.',
-      turnaround: 'Start with what the part has to do — not what it should look like. Tell us the load, the environment, what failed before, and the schedule. We design to the actual conditions and select material last. Field deployment is available: if the job is on a boat, at a race, at a job site, or anywhere that can\'t wait on shipping, we bring the equipment to you. Send the problem first.',
+      materials: 'Full material stack matched to the use case. PETG-CF and ASA for structural and outdoor work. TPU 95A for flex. PP-CF for chemical exposure. PA11 CF for high heat. PEI 1010 for metal replacement. Material chosen after the problem is understood.',
+      turnaround: 'Tell me what the part has to do — the load, the environment, what failed before, and the schedule. Field deployment available: if the job can\'t wait on shipping, I bring the equipment to you.',
     },
   },
 ];
 
-const galleryImages = [
-  { src: '/media/race/crew-sail-handling.jpg', alt: 'Full crew handling sails offshore during ocean racing' },
-  { src: '/media/race/offshore-racing-deck.jpg', alt: 'Racing offshore, deck view with competitors on the horizon' },
-  { src: '/media/race/crew-deck-offshore.jpg', alt: 'Crew on deck, open ocean, overcast sky' },
-  { src: '/media/race/night-watch-offshore.jpg', alt: 'Night passage offshore — sails up, crew on watch' },
-  { src: '/media/race/crew-sunset-offshore.jpg', alt: 'Crew at the helm during a sunset passage offshore' },
-  { src: '/media/race/fleet-solent-racing.jpg', alt: 'Fleet racing in the Solent, multiple boats visible' },
-];
 ---
 
 <BaseLayout
   title="3D3D — Specialty Fabrication for Marine, Motorsport & Field Deployment"
-  description="3D3D builds functional parts for boats, cars, and anything that needs to work under real conditions. We scan, measure, and recreate broken or obsolete components. Founder-operated. Atlantic Canada."
+  description="3D3D builds functional parts for boats, cars, and anything that needs to work under real conditions. I scan, measure, and recreate broken or obsolete components. Founder-operated. Atlantic Canada."
   schema={orgSchema}
   activePath="/"
   navGroups={homeNavGroups}
@@ -140,7 +124,7 @@ const galleryImages = [
             <span class="hero-line hero-line--accent">I am your solution.</span>
           </h1>
           <p class="hero-subhead">
-            If it's broken, discontinued, or doesn't exist yet — we build it. Marine hardware, automotive parts, field fabrication, on-site deployment. Atlantic Canada based, serving Canada and the United States.
+            If it's broken, discontinued, or doesn't exist yet — I build it. Marine hardware, automotive parts, field fabrication, on-site deployment. Atlantic Canada based, serving Canada and the United States.
           </p>
           <div class="hero-actions">
             <a href="/contact" class="hero-button hero-button--primary" data-analytics-event="contact_started" data-analytics-source="hero-cta">Request Service →</a>
@@ -169,56 +153,37 @@ const galleryImages = [
     <!-- ═══════════════════════════════════════════════════
          WHAT WE DO — light
          ═══════════════════════════════════════════════════ -->
-    <section id="what-we-do" class="home-section home-section--light work-section" data-reveal-section aria-labelledby="work-label">
+    <section id="what-i-do" class="home-section home-section--light work-section" data-reveal-section aria-labelledby="work-label">
       <div class="section-shell work-shell">
 
         <header class="work-header">
-          <p class="eyebrow reveal-left" data-reveal>What We Do</p>
-          <h2 class="section-title reveal-up" data-reveal>
-            We scan it.<br />We model it.<br />We build it.
+          <p class="eyebrow reveal-left" data-reveal>What I Do</p>
+          <h2 class="section-title reveal-up" data-reveal aria-label="I scan it. I model it. I build it.">
+            <span class="typewriter-line" data-typewriter>I scan it.</span><br />
+            <span class="typewriter-line" data-typewriter>I model it.</span><br />
+            <span class="typewriter-line" data-typewriter>I build it.</span>
           </h2>
           <p class="section-body reveal-fade delay-1" data-reveal>
-            3D3D fabricates functional parts for boats, cars, machines, and anything that can't afford to fail. We measure and reverse-engineer broken or obsolete components into exact-fit replacements — hull hardware, deck fittings, vintage automotive parts, antique hardware, discontinued fittings. Bring us the part, a photo, or just the problem. We handle the rest.
+            3D3D fabricates functional parts for boats, cars, machines, and anything that can't afford to fail. I measure and reverse-engineer broken or obsolete components into exact-fit replacements — hull hardware, deck fittings, vintage automotive parts, antique hardware, discontinued fittings. Bring me the part, a photo, or just the problem. I handle the rest.
           </p>
         </header>
 
-        <div class="services-grid" aria-label="Service areas">
+        <div class="services-scroll" role="region" aria-label="Service areas" tabindex="0">
           {services.map((service, i) => (
             <article
               class="service-card reveal-up"
               data-reveal
-              style={`transition-delay: ${i * 0.08}s;`}
+              style={`transition-delay: ${i * 0.12}s;`}
+              data-drawer-trigger
+              data-drawer-id={service.drawerId}
+              role="button"
+              tabindex="0"
             >
-              <div class="service-card__media">
-                <img
-                  src={service.image}
-                  alt={service.alt}
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <div class="service-card__body">
-                <p class="service-card__eyebrow">{service.eyebrow}</p>
-                <h3 class="service-card__headline">{service.headline}</h3>
-                <button
-                  type="button"
-                  class="service-card__cta"
-                  data-drawer-trigger
-                  data-drawer-id={service.drawerId}
-                >
-                  Learn more →
-                </button>
-              </div>
+              <p class="service-card__eyebrow">{service.eyebrow}</p>
+              <h3 class="service-card__headline">{service.headline}</h3>
+              <p class="service-card__desc">{service.description}</p>
+              <span class="service-card__cta">Learn more →</span>
             </article>
-          ))}
-        </div>
-
-        <!-- Swipeable gallery -->
-        <div class="gallery-strip" role="region" aria-label="Work gallery" tabindex="0">
-          {galleryImages.map((img) => (
-            <figure class="gallery-item">
-              <img src={img.src} alt={img.alt} loading="lazy" decoding="async" />
-            </figure>
           ))}
         </div>
 
@@ -355,9 +320,13 @@ const galleryImages = [
       };
 
       triggers.forEach((trigger) => {
-        trigger.addEventListener('click', () => {
+        const handler = () => {
           const id = trigger instanceof HTMLElement ? trigger.dataset.drawerId : null;
           if (id) openDrawer(id);
+        };
+        trigger.addEventListener('click', handler);
+        trigger.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handler(); }
         });
       });
 
@@ -370,6 +339,38 @@ const galleryImages = [
       window.addEventListener('keydown', (event) => {
         if (event.key === 'Escape' && drawer.dataset.open === 'true') closeDrawer();
       });
+    })();
+
+    // Typewriter effect for "I scan it. I model it. I build it."
+    (() => {
+      const lines = Array.from(document.querySelectorAll('[data-typewriter]'));
+      if (lines.length === 0) return;
+      let started = false;
+
+      const runTypewriter = () => {
+        if (started) return;
+        started = true;
+        lines.forEach((line, i) => {
+          setTimeout(() => {
+            line.classList.add('typing');
+            line.addEventListener('animationend', () => {
+              line.classList.remove('typing');
+              line.classList.add('typed');
+            }, { once: true });
+          }, i * 700);
+        });
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            runTypewriter();
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+
+      observer.observe(lines[0].closest('.work-header') || lines[0]);
     })();
   </script>
 </BaseLayout>
@@ -684,7 +685,7 @@ const galleryImages = [
   }
 
   /* ═══════════════════════════════════════════════════
-     WHAT WE DO
+     WHAT I DO
      ═══════════════════════════════════════════════════ */
   .work-shell {
     display: grid;
@@ -697,50 +698,72 @@ const galleryImages = [
     max-width: 52rem;
   }
 
-  /* 2×2 service card grid */
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(1.2rem, 2.5vw, 2rem);
+  /* Typewriter animation for section title lines */
+  .typewriter-line {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 0;
+    border-right: 3px solid var(--page-accent);
+    transition: none;
   }
 
+  .typewriter-line.typing {
+    animation: typewriter-expand 0.6s steps(14, end) forwards;
+  }
+
+  .typewriter-line.typed {
+    width: auto;
+    border-right-color: transparent;
+  }
+
+  .typewriter-line.typing:last-of-type {
+    animation: typewriter-expand 0.6s steps(14, end) forwards, blink-cursor 0.6s step-end 3;
+  }
+
+  @keyframes typewriter-expand {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+  @keyframes blink-cursor {
+    50% { border-right-color: transparent; }
+  }
+
+  /* Scrollable service card gallery */
+  .services-scroll {
+    display: flex;
+    gap: clamp(1rem, 2vw, 1.5rem);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline-start: clamp(0.75rem, 2vw, 2rem);
+    padding-bottom: 1rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--page-accent) rgba(0, 0, 0, 0.08);
+  }
+
+  .services-scroll::-webkit-scrollbar { height: 4px; }
+  .services-scroll::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.06); border-radius: 2px; }
+  .services-scroll::-webkit-scrollbar-thumb { background: var(--page-accent); border-radius: 2px; }
+
   .service-card {
+    flex: 0 0 min(85vw, 420px);
+    scroll-snap-align: start;
     display: grid;
-    grid-template-rows: auto 1fr;
+    gap: 1rem;
+    align-content: start;
+    padding: clamp(1.5rem, 3vw, 2rem);
     border: var(--page-thick-border);
+    border-left: 5px solid var(--page-accent);
     background: var(--page-surface);
-    overflow: hidden;
+    cursor: pointer;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
   }
 
   .service-card:hover {
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
     transform: translateY(-3px);
-  }
-
-  .service-card__media {
-    overflow: hidden;
-    aspect-ratio: 16 / 9;
-    border-bottom: var(--page-thick-border);
-  }
-
-  .service-card__media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.4s ease;
-  }
-
-  .service-card:hover .service-card__media img {
-    transform: scale(1.04);
-  }
-
-  .service-card__body {
-    display: grid;
-    gap: 0.9rem;
-    padding: clamp(1.2rem, 2vw, 1.6rem);
-    border-left: 4px solid var(--page-accent);
   }
 
   .service-card__eyebrow {
@@ -756,73 +779,35 @@ const galleryImages = [
   .service-card__headline {
     margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(1.15rem, 0.9rem + 0.8vw, 1.6rem);
+    font-size: clamp(1.3rem, 1rem + 1vw, 1.8rem);
     line-height: 1.08;
     letter-spacing: -0.02em;
     color: var(--page-text);
   }
 
+  .service-card__desc {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: var(--page-text-muted);
+  }
+
   .service-card__cta {
-    justify-self: start;
     display: inline-flex;
     align-items: center;
-    min-height: 2.9rem;
-    padding: 0.7rem 1.1rem;
-    border: var(--page-thick-border);
-    background: transparent;
-    color: var(--page-text);
+    margin-top: 0.5rem;
     font-family: var(--font-tech);
     font-size: 0.76rem;
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    cursor: pointer;
-    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    color: var(--page-accent);
+    transition: color 0.2s ease;
   }
 
-  .service-card__cta:hover {
-    background: var(--page-accent);
-    color: #0F1112;
-    border-color: var(--page-accent);
-    box-shadow: 0 6px 20px rgba(64, 196, 196, 0.3);
-    transform: translateY(-2px);
+  .service-card:hover .service-card__cta {
+    color: var(--page-text);
   }
-
-  /* Swipeable gallery strip */
-  .gallery-strip {
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-padding-inline: 0;
-    padding-bottom: 0.5rem;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    scrollbar-color: var(--page-accent) rgba(0,0,0,0.08);
-  }
-
-  .gallery-strip::-webkit-scrollbar { height: 4px; }
-  .gallery-strip::-webkit-scrollbar-track { background: rgba(0,0,0,0.06); }
-  .gallery-strip::-webkit-scrollbar-thumb { background: var(--page-accent); border-radius: 2px; }
-
-  .gallery-item {
-    flex: 0 0 clamp(220px, 28vw, 360px);
-    scroll-snap-align: start;
-    margin: 0;
-    overflow: hidden;
-    border: var(--page-thick-border);
-    aspect-ratio: 4 / 3;
-  }
-
-  .gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.4s ease;
-  }
-
-  .gallery-item:hover img { transform: scale(1.04); }
 
   /* ═══════════════════════════════════════════════════
      CONTACT (FINAL CTA)

@@ -98,14 +98,6 @@ const socialLinks = [
       <span class="site-sidebar__brand-pill">3D3D</span>
       <span class="site-sidebar__tagline">Specialty Fabrication · Marine · Motorsport</span>
     </a>
-    <button
-      type="button"
-      class="site-sidebar__close"
-      data-sidebar-close
-      aria-label="Close navigation menu"
-    >
-      ✕
-    </button>
   </div>
 
   <div class="site-sidebar__content">
@@ -196,26 +188,6 @@ const socialLinks = [
     border-bottom: 1px solid rgba(64, 196, 196, 0.15);
   }
 
-  .site-sidebar__close {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2rem;
-    height: 2rem;
-    border: 2px solid #40C4C4;
-    background: transparent;
-    color: #F6F7FA;
-    font-size: 0.9rem;
-    cursor: pointer;
-    border-radius: 0.4rem;
-    flex-shrink: 0;
-    transition: all 0.2s ease;
-  }
-
-  .site-sidebar__close:hover {
-    background: #40C4C4;
-    color: #111214;
-  }
 
   .site-sidebar__brand {
     display: flex;
@@ -454,8 +426,6 @@ const socialLinks = [
     const sidebar = document.querySelector('.site-sidebar');
     const toggle = document.querySelector('[data-sidebar-toggle]');
     const backdrop = document.querySelector('[data-sidebar-backdrop]');
-    const closeBtn = document.querySelector('[data-sidebar-close]');
-
     if (!(sidebar instanceof HTMLElement) || !(toggle instanceof HTMLButtonElement) || !(backdrop instanceof HTMLElement)) {
       return;
     }
@@ -476,10 +446,6 @@ const socialLinks = [
 
     toggle.addEventListener('click', () => setOpen(!isOpen()));
     backdrop.addEventListener('click', close);
-
-    if (closeBtn) {
-      closeBtn.addEventListener('click', close);
-    }
 
     // Close on nav link click
     closeTargets.forEach((target) => {

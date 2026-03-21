@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#111214"/>
+
+  <!-- Subtle grid pattern -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(64,196,196,0.06)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- Teal accent bar top -->
+  <rect x="0" y="0" width="1200" height="4" fill="#40C4C4"/>
+
+  <!-- 3D3D Logo text -->
+  <text x="600" y="260" text-anchor="middle" font-family="'Impact', 'Arial Black', sans-serif" font-size="120" font-weight="900" fill="#FF7A33" letter-spacing="0.05em">3D3D</text>
+  <text x="603" y="263" text-anchor="middle" font-family="'Impact', 'Arial Black', sans-serif" font-size="120" font-weight="900" fill="#1A1A1A" letter-spacing="0.05em" opacity="0.3">3D3D</text>
+  <!-- Layered on top -->
+  <text x="600" y="260" text-anchor="middle" font-family="'Impact', 'Arial Black', sans-serif" font-size="120" font-weight="900" fill="#FF7A33" letter-spacing="0.05em">3D3D</text>
+
+  <!-- Tagline -->
+  <text x="600" y="330" text-anchor="middle" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="28" font-weight="300" fill="#F6F7FA" letter-spacing="0.2em">SPECIALTY FABRICATION</text>
+
+  <!-- Divider line -->
+  <rect x="480" y="360" width="240" height="2" rx="1" fill="#40C4C4"/>
+
+  <!-- Descriptor -->
+  <text x="600" y="410" text-anchor="middle" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="20" fill="rgba(246,247,250,0.6)" letter-spacing="0.1em">MARINE · MOTORSPORT · FIELD DEPLOYMENT</text>
+
+  <!-- Website -->
+  <text x="600" y="470" text-anchor="middle" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="22" font-weight="600" fill="#40C4C4" letter-spacing="0.08em">3d3d.ca</text>
+
+  <!-- Bottom accent bar -->
+  <rect x="0" y="626" width="1200" height="4" fill="#40C4C4"/>
+</svg>

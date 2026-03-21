@@ -21,50 +21,138 @@ const schema = {
   activePath="/book"
 >
   <section class="book-page">
-    <div class="book-shell">
 
-      <div class="book-hero">
+    <!-- ═══ HERO ═══ -->
+    <div class="book-hero">
+      <div class="book-shell">
         <p class="book-eyebrow scroll-in-left">Schedule</p>
         <h1 class="book-title scroll-in">Book a Call</h1>
-        <p class="book-intro scroll-in-fade scroll-delay-1">
+        <p class="book-intro scroll-in">
           Fifteen minutes. Tell me the problem. I will tell you whether I can solve it, what material it needs, and what the job takes. That is the whole call.
         </p>
       </div>
+    </div>
 
-      <div class="book-embed scroll-in scroll-delay-2">
-        <BookingEmbed client:idle />
+    <!-- ═══ WHAT TO EXPECT ═══ -->
+    <div class="book-context">
+      <div class="book-shell">
+        <div class="book-grid">
+
+          <div class="book-card scroll-in">
+            <div class="book-card__icon">&#9875;</div>
+            <h2 class="book-card__title">Marine Hardware</h2>
+            <p class="book-card__body">
+              Discontinued deck fittings, winch components, custom brackets, through-hull replacements. If it broke offshore and nobody stocks it, I build it. Bring the part number or a photo of what failed.
+            </p>
+          </div>
+
+          <div class="book-card scroll-in">
+            <div class="book-card__icon">&#9881;</div>
+            <h2 class="book-card__title">Automotive Restoration</h2>
+            <p class="book-card__body">
+              Interior trim, dash overlays, retaining clips, engine-adjacent components. Ten years turning wrenches on heavy iron. I understand what broke and why. Send the VIN and the part, I will match it.
+            </p>
+          </div>
+
+          <div class="book-card scroll-in">
+            <div class="book-card__icon">&#128295;</div>
+            <h2 class="book-card__title">Custom Fabrication</h2>
+            <p class="book-card__body">
+              Mounts, jigs, adapters, enclosures, tooling. No blueprint required. Describe the problem and the environment the part lives in. I spec the material and design the solution.
+            </p>
+          </div>
+
+          <div class="book-card scroll-in">
+            <div class="book-card__icon">&#9992;</div>
+            <h2 class="book-card__title">On-Site Deployment</h2>
+            <p class="book-card__body">
+              Your vessel, your shop, your event. I travel worldwide with the equipment. Tell me where the problem is and what is broken. I will pack the cases and sort the flights.
+            </p>
+          </div>
+
+        </div>
       </div>
+    </div>
 
-      <div class="book-alt scroll-in scroll-delay-3">
+    <!-- ═══ WHO YOU'RE TALKING TO ═══ -->
+    <div class="book-who">
+      <div class="book-shell">
+        <div class="book-who__inner">
+          <div class="book-who__photo-wrap">
+            <img
+              src="/media/real/race-morning-crew.jpg"
+              alt="Ken aboard during offshore racing"
+              class="book-who__photo"
+              loading="lazy"
+            />
+          </div>
+          <div class="book-who__copy">
+            <p class="book-eyebrow" style="padding-top:0; color: #40C4C4;">Who you are talking to</p>
+            <h2 class="book-who__title">Ken — Founder, 3D3D</h2>
+            <p class="book-who__body">
+              Twenty-year mechanical background. Ten years as a mechanic building performance engines and restoring classics. Offshore sailor with transatlantic passages, the Rolex Fastnet Race, and the 2026 Newport-Bermuda Race on the CV. Built 3D3D from an RV running three printers off a generator.
+            </p>
+            <p class="book-who__body">
+              This is not a sales call. I will assess your problem, tell you whether fabrication is the right path, and if it is, I will tell you exactly what material and process I would use. If it is not the right path, I will tell you that too.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ BOOKING EMBED ═══ -->
+    <div class="book-embed-section">
+      <div class="book-shell">
+        <div class="book-embed-header">
+          <h2 class="book-embed-title scroll-in">Pick a time.</h2>
+          <p class="book-embed-sub scroll-in">Discovery calls are 15 minutes. Project discussions are 30 minutes. Both are free.</p>
+        </div>
+        <div class="book-embed scroll-in">
+          <BookingEmbed client:idle />
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ ALTERNATE CONTACT ═══ -->
+    <div class="book-alt-section">
+      <div class="book-shell">
         <h2 class="book-alt__title">Prefer to reach out directly?</h2>
         <div class="book-alt__options">
           <a href="https://wa.me/15069532678" class="book-alt__link" target="_blank" rel="noopener noreferrer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.714-1.323A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.94 9.94 0 01-5.332-1.543l-.372-.224-2.795.784.725-2.69-.246-.39A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
             WhatsApp: +1-506-953-2678
           </a>
           <a href="mailto:info@3d3d.ca" class="book-alt__link">
-            Email: info@3d3d.ca
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+            info@3d3d.ca
           </a>
           <a href="/contact" class="book-alt__link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
             Full contact form
           </a>
         </div>
       </div>
-
     </div>
+
   </section>
 </BaseLayout>
 
 <style>
   .book-page {
-    background: #111214;
-    color: #F6F7FA;
+    background: #F6F7FA;
+    color: #111214;
     min-height: 100svh;
   }
 
   .book-shell {
     width: min(100% - clamp(1.5rem, 4vw, 4rem), 900px);
     margin: 0 auto;
-    padding-block: clamp(4rem, 8vw, 7rem) clamp(4rem, 6vw, 6rem);
+  }
+
+  /* ── Hero (dark) ── */
+  .book-hero {
+    background: #111214;
+    padding-block: clamp(5rem, 8vw, 8rem) clamp(3rem, 5vw, 4rem);
   }
 
   .book-eyebrow {
@@ -84,7 +172,7 @@ const schema = {
     content: '';
     width: 2.75rem;
     height: 2px;
-    background: #40C4C4;
+    background: currentColor;
     flex-shrink: 0;
   }
 
@@ -99,21 +187,154 @@ const schema = {
   }
 
   .book-intro {
-    margin: 1.25rem 0 clamp(2.5rem, 5vw, 4rem);
+    margin: 1.25rem 0 0;
     max-width: 38rem;
     font-size: clamp(1rem, 0.94rem + 0.3vw, 1.12rem);
     line-height: 1.75;
     color: rgba(246, 247, 250, 0.7);
   }
 
-  .book-embed {
-    min-height: 500px;
-    margin-bottom: 3rem;
+  /* ── What to Expect cards ── */
+  .book-context {
+    padding-block: clamp(3rem, 6vw, 5rem);
   }
 
-  .book-alt {
-    border-top: 1px solid rgba(64, 196, 196, 0.15);
-    padding-top: 2.5rem;
+  .book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+    gap: 1.2rem;
+  }
+
+  .book-card {
+    background: #FFFFFF;
+    border: 2px solid #1A1A1A;
+    border-radius: 1rem;
+    padding: clamp(1.2rem, 2.5vw, 1.6rem);
+    display: grid;
+    gap: 0.6rem;
+    align-content: start;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .book-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(17, 18, 20, 0.1);
+  }
+
+  .book-card__icon {
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+
+  .book-card__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #111214;
+  }
+
+  .book-card__body {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: rgba(17, 18, 20, 0.6);
+  }
+
+  /* ── Who you're talking to ── */
+  .book-who {
+    background: #FFFFFF;
+    border-top: 3px solid #1A1A1A;
+    border-bottom: 3px solid #1A1A1A;
+    padding-block: clamp(3rem, 6vw, 5rem);
+  }
+
+  .book-who__inner {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: clamp(1.5rem, 3vw, 3rem);
+    align-items: center;
+  }
+
+  .book-who__photo-wrap {
+    border: 3px solid #1A1A1A;
+    border-radius: 1rem;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+  }
+
+  .book-who__photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .book-who__title {
+    margin: 0.6rem 0 1rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 1.2rem + 1.5vw, 2.2rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: #111214;
+    text-transform: uppercase;
+  }
+
+  .book-who__body {
+    margin: 0 0 1rem;
+    font-size: 0.92rem;
+    line-height: 1.75;
+    color: rgba(17, 18, 20, 0.65);
+  }
+
+  @media (max-width: 640px) {
+    .book-who__inner {
+      grid-template-columns: 1fr;
+    }
+    .book-who__photo-wrap {
+      aspect-ratio: 16/9;
+      max-height: 240px;
+    }
+  }
+
+  /* ── Booking embed ── */
+  .book-embed-section {
+    padding-block: clamp(3rem, 6vw, 5rem);
+  }
+
+  .book-embed-header {
+    margin-bottom: 2rem;
+  }
+
+  .book-embed-title {
+    margin: 0 0 0.5rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 1.2rem + 2vw, 2.8rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: #111214;
+    text-transform: uppercase;
+  }
+
+  .book-embed-sub {
+    margin: 0;
+    font-size: 0.92rem;
+    color: rgba(17, 18, 20, 0.55);
+  }
+
+  .book-embed {
+    min-height: 500px;
+    border: 2px solid #1A1A1A;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: #FFFFFF;
+  }
+
+  /* ── Alternate contact ── */
+  .book-alt-section {
+    background: #111214;
+    padding-block: clamp(3rem, 5vw, 4rem);
   }
 
   .book-alt__title {
@@ -132,10 +353,11 @@ const schema = {
   .book-alt__link {
     display: inline-flex;
     align-items: center;
+    gap: 0.6rem;
     min-height: 44px;
     padding: 0.6rem 1.2rem;
     background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(64, 196, 196, 0.15);
+    border: 2px solid rgba(64, 196, 196, 0.2);
     border-radius: 0.5rem;
     color: #40C4C4;
     font-size: 0.88rem;
@@ -144,6 +366,6 @@ const schema = {
 
   .book-alt__link:hover {
     background: rgba(64, 196, 196, 0.1);
-    border-color: rgba(64, 196, 196, 0.35);
+    border-color: rgba(64, 196, 196, 0.4);
   }
 </style>

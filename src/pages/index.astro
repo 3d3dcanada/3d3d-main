@@ -147,6 +147,106 @@ const services = [
     </section>
 
     <!-- ═══════════════════════════════════════════════════
+         SPONSOR TIMELINE STRIP
+         ═══════════════════════════════════════════════════ -->
+    <section class="timeline-strip" aria-label="Campaign timeline">
+      <div class="section-shell">
+        <div class="timeline">
+          <div class="timeline__line"></div>
+
+          <!-- Milestone: 3D3D Founded -->
+          <button class="timeline__node timeline__node--filled scroll-in" data-timeline-modal="modal-3d3d" aria-label="Learn more about 3D3D">
+            <div class="timeline__dot"></div>
+            <span class="timeline__date">03/2025</span>
+            <span class="timeline__label">3D3D launches</span>
+            <img src="/media/brand/3d3d-logo.svg" alt="3D3D" class="timeline__logo" loading="lazy" />
+          </button>
+
+          <!-- Milestone: Prusa Sponsorship -->
+          <button class="timeline__node timeline__node--filled scroll-in scroll-delay-1" data-timeline-modal="modal-prusa" aria-label="Learn more about Prusa sponsorship">
+            <div class="timeline__dot timeline__dot--prusa"></div>
+            <span class="timeline__date">03/2026</span>
+            <span class="timeline__label">Prusa sponsors 3D3D with CORE One L</span>
+            <img src="/media/brand/prusa-logo.svg" alt="Prusa Research" class="timeline__logo timeline__logo--prusa" loading="lazy" />
+          </button>
+
+          <!-- Milestone: Newport-Bermuda -->
+          <button class="timeline__node timeline__node--filled scroll-in scroll-delay-2" data-timeline-modal="modal-newport" aria-label="Learn more about Newport-Bermuda 2026">
+            <div class="timeline__dot timeline__dot--teal"></div>
+            <span class="timeline__date">06/2026</span>
+            <span class="timeline__label">Newport-Bermuda Race</span>
+            <span class="timeline__sublabel">120th running &middot; Live 3D printing aboard</span>
+          </button>
+
+          <!-- Open slot 1 -->
+          <div class="timeline__node timeline__node--open scroll-in scroll-delay-3">
+            <div class="timeline__dot timeline__dot--ghost"></div>
+            <span class="timeline__date">2026</span>
+            <span class="timeline__label timeline__label--ghost">Your name here</span>
+            <a href="/contact?subject=sponsorship" class="timeline__join">Become a sponsor &rarr;</a>
+          </div>
+
+          <!-- Open slot 2 -->
+          <div class="timeline__node timeline__node--open scroll-in scroll-delay-4">
+            <div class="timeline__dot timeline__dot--ghost"></div>
+            <span class="timeline__date">&nbsp;</span>
+            <span class="timeline__label timeline__label--ghost">Partner with 3D3D</span>
+            <a href="https://ko-fi.com/3d3dca" target="_blank" rel="noopener noreferrer" class="timeline__join">Support on Ko-fi &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline modals -->
+    <div class="timeline-modal" id="modal-3d3d" data-open="false" hidden>
+      <div class="timeline-modal__backdrop" data-timeline-modal-close></div>
+      <div class="timeline-modal__panel">
+        <button class="timeline-modal__close" data-timeline-modal-close aria-label="Close">&times;</button>
+        <img src="/media/brand/3d3d-logo.svg" alt="3D3D" class="timeline-modal__logo" />
+        <h3 class="timeline-modal__title">3D3D</h3>
+        <p class="timeline-modal__body">
+          One-man specialty fabrication operation. Twenty years of mechanical experience, 20,000+ nautical miles offshore, and 17 engineering-grade compounds in the stack. Started in an RV running printers off a generator. Now building parts that cannot fail at sea, on the road, or in the field. Every part is designed for the conditions it has to survive.
+        </p>
+        <div class="timeline-modal__links">
+          <a href="/about" class="timeline-modal__cta">About 3D3D &rarr;</a>
+          <a href="/contact" class="timeline-modal__cta timeline-modal__cta--ghost">Request Service &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-modal" id="modal-prusa" data-open="false" hidden>
+      <div class="timeline-modal__backdrop" data-timeline-modal-close></div>
+      <div class="timeline-modal__panel">
+        <button class="timeline-modal__close" data-timeline-modal-close aria-label="Close">&times;</button>
+        <img src="/media/brand/prusa-logo.svg" alt="Prusa Research" class="timeline-modal__logo timeline-modal__logo--prusa" />
+        <h3 class="timeline-modal__title">Prusa Research</h3>
+        <p class="timeline-modal__body">
+          After a year of daily documented work, Prusa Research recognized 3D3D's commitment to open-source fabrication and is sending the CORE One L -- their flagship enclosed CoreXY machine. This isn't marketing. It's recognition. 3D3D has operated on the Prusa ecosystem from day one. The CORE One L will be deployed live aboard CSM the Mariner during the 2026 Newport-Bermuda Race.
+        </p>
+        <div class="timeline-modal__links">
+          <a href="https://www.prusa3d.com/" target="_blank" rel="noopener noreferrer" class="timeline-modal__cta">Visit Prusa Research &rarr;</a>
+          <a href="/blog/core-one-l" class="timeline-modal__cta timeline-modal__cta--ghost">Read about the CORE One L &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-modal" id="modal-newport" data-open="false" hidden>
+      <div class="timeline-modal__backdrop" data-timeline-modal-close></div>
+      <div class="timeline-modal__panel">
+        <button class="timeline-modal__close" data-timeline-modal-close aria-label="Close">&times;</button>
+        <h3 class="timeline-modal__title">Newport-Bermuda Race 2026</h3>
+        <p class="timeline-modal__subtitle">120th Running &middot; 635nm &middot; Newport RI to Bermuda</p>
+        <p class="timeline-modal__body">
+          Racing aboard CSM the Mariner with a Prusa CORE One L printing live during the crossing. Engineering-grade parts fabricated under real ocean conditions -- 635 nautical miles of open Atlantic. Every fitting, bracket, and replacement will be documented and field-tested at sea. This is proof of deployment, not a demo.
+        </p>
+        <div class="timeline-modal__links">
+          <a href="/events" class="timeline-modal__cta">Follow the campaign &rarr;</a>
+          <a href="https://ko-fi.com/3d3dca" target="_blank" rel="noopener noreferrer" class="timeline-modal__cta timeline-modal__cta--ghost">Support on Ko-fi &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
          WHAT WE DO — light
          ═══════════════════════════════════════════════════ -->
     <section id="what-i-do" class="home-section home-section--light work-section" data-section aria-labelledby="work-label">
@@ -201,35 +301,35 @@ const services = [
         </header>
 
         <div class="workshop-grid">
-          <figure class="workshop-card workshop-card--hero scroll-in">
+          <figure class="workshop-card workshop-card--hero scroll-in" data-lightbox data-lightbox-src="/media/workshop/printer-action-cf.jpg" data-lightbox-label="Live print" data-lightbox-note="PETG-CF structural bracket, 0.2mm layer height. Carbon fiber reinforced compound printed on the Prusa MK4S with a hardened steel nozzle. This bracket replaces a factory aluminium piece that cracked under cyclic loading." role="button" tabindex="0">
             <img src="/media/workshop/printer-action-cf.jpg" alt="Prusa MK4S printing carbon fiber compound" loading="lazy" decoding="async" />
             <figcaption>
               <span class="workshop-card__label">Live print</span>
               <span class="workshop-card__note">PETG-CF structural bracket, 0.2mm layer height</span>
             </figcaption>
           </figure>
-          <figure class="workshop-card scroll-in scroll-delay-1">
+          <figure class="workshop-card scroll-in scroll-delay-1" data-lightbox data-lightbox-src="/media/workshop/printer-frame-shot.jpg" data-lightbox-label="The machine" data-lightbox-note="Prusa MK4S with hardened steel nozzle for abrasive compounds like PETG-CF, PA11-CF, and PP Glass Fiber. Input shaping enabled for high-speed printing without ringing artifacts." role="button" tabindex="0">
             <img src="/media/workshop/printer-frame-shot.jpg" alt="Prusa printer frame close-up" loading="lazy" decoding="async" />
             <figcaption>
               <span class="workshop-card__label">The machine</span>
               <span class="workshop-card__note">Prusa MK4S with hardened nozzle for abrasive compounds</span>
             </figcaption>
           </figure>
-          <figure class="workshop-card scroll-in scroll-delay-2">
+          <figure class="workshop-card scroll-in scroll-delay-2" data-lightbox data-lightbox-src="/media/workshop/machine-parts-flatlay.jpg" data-lightbox-label="Output" data-lightbox-note="Finished parts ready for fitment and deployment. Each component is printed in the compound matched to its failure mode and environment. Nothing leaves the bench until dimensional checks pass." role="button" tabindex="0">
             <img src="/media/workshop/machine-parts-flatlay.jpg" alt="Finished machine parts laid out for inspection" loading="lazy" decoding="async" />
             <figcaption>
               <span class="workshop-card__label">Output</span>
               <span class="workshop-card__note">Finished parts ready for fitment and deployment</span>
             </figcaption>
           </figure>
-          <figure class="workshop-card scroll-in scroll-delay-1">
+          <figure class="workshop-card scroll-in scroll-delay-1" data-lightbox data-lightbox-src="/media/workshop/modular-parts-flatlay.jpg" data-lightbox-label="Modular builds" data-lightbox-note="Replacement components printed in matched compounds. Modular design allows field assembly and individual piece replacement without reprinting the entire assembly." role="button" tabindex="0">
             <img src="/media/workshop/modular-parts-flatlay.jpg" alt="Modular replacement parts array" loading="lazy" decoding="async" />
             <figcaption>
               <span class="workshop-card__label">Modular builds</span>
               <span class="workshop-card__note">Replacement components printed in matched compounds</span>
             </figcaption>
           </figure>
-          <figure class="workshop-card scroll-in scroll-delay-2">
+          <figure class="workshop-card scroll-in scroll-delay-2" data-lightbox data-lightbox-src="/media/workshop/rv-lab-01.jpg" data-lightbox-label="Mobile lab" data-lightbox-note="The whole operation travels. Worldwide deployment ready. Two printers, full tool kit, scanner, and materials library packed for on-site fabrication at marinas, boatyards, and race events." role="button" tabindex="0">
             <img src="/media/workshop/rv-lab-01.jpg" alt="Mobile fabrication lab interior" loading="lazy" decoding="async" />
             <figcaption>
               <span class="workshop-card__label">Mobile lab</span>
@@ -313,6 +413,21 @@ const services = [
   </div>
 
   <!-- ═══════════════════════════════════════════════════
+       IMAGE LIGHTBOX
+       ═══════════════════════════════════════════════════ -->
+  <div class="lightbox" id="image-lightbox" data-open="false" hidden>
+    <div class="lightbox__backdrop" data-lightbox-close></div>
+    <div class="lightbox__container">
+      <button class="lightbox__close" data-lightbox-close aria-label="Close">&times;</button>
+      <img class="lightbox__img" id="lightbox-img" src="" alt="" />
+      <div class="lightbox__info">
+        <span class="lightbox__label" id="lightbox-label"></span>
+        <p class="lightbox__note" id="lightbox-note"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
        SCRIPTS
        ═══════════════════════════════════════════════════ -->
   <script is:inline>
@@ -366,6 +481,81 @@ const services = [
 
       window.addEventListener('keydown', (event) => {
         if (event.key === 'Escape' && drawer.dataset.open === 'true') closeDrawer();
+      });
+    })();
+
+    // Image lightbox for workshop cards
+    (() => {
+      const lightbox = document.getElementById('image-lightbox');
+      const lbImg = document.getElementById('lightbox-img');
+      const lbLabel = document.getElementById('lightbox-label');
+      const lbNote = document.getElementById('lightbox-note');
+      const triggers = Array.from(document.querySelectorAll('[data-lightbox]'));
+
+      if (!lightbox || !lbImg || !lbLabel || !lbNote || triggers.length === 0) return;
+
+      const closeLightbox = () => {
+        lightbox.dataset.open = 'false';
+        document.body.classList.remove('drawer-open');
+        setTimeout(() => { lightbox.hidden = true; }, 280);
+      };
+
+      const openLightbox = (el) => {
+        lbImg.src = el.dataset.lightboxSrc || '';
+        lbImg.alt = el.dataset.lightboxLabel || '';
+        lbLabel.textContent = el.dataset.lightboxLabel || '';
+        lbNote.textContent = el.dataset.lightboxNote || '';
+        lightbox.hidden = false;
+        requestAnimationFrame(() => {
+          lightbox.dataset.open = 'true';
+          document.body.classList.add('drawer-open');
+        });
+      };
+
+      triggers.forEach((t) => {
+        t.addEventListener('click', () => openLightbox(t));
+        t.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(t); }
+        });
+      });
+
+      lightbox.addEventListener('click', (e) => {
+        if (e.target.closest('[data-lightbox-close]')) closeLightbox();
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.dataset.open === 'true') closeLightbox();
+      });
+    })();
+
+    // Timeline modal triggers
+    (() => {
+      const triggers = Array.from(document.querySelectorAll('[data-timeline-modal]'));
+      triggers.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const id = btn.dataset.timelineModal;
+          const modal = id ? document.getElementById(id) : null;
+          if (!modal) return;
+          modal.hidden = false;
+          requestAnimationFrame(() => {
+            modal.dataset.open = 'true';
+            document.body.classList.add('drawer-open');
+          });
+        });
+      });
+
+      document.querySelectorAll('.timeline-modal').forEach((modal) => {
+        const close = () => {
+          modal.dataset.open = 'false';
+          document.body.classList.remove('drawer-open');
+          setTimeout(() => { modal.hidden = true; }, 280);
+        };
+        modal.querySelectorAll('[data-timeline-modal-close]').forEach((el) => {
+          el.addEventListener('click', close);
+        });
+        window.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && modal.dataset.open === 'true') close();
+        });
       });
     })();
 
@@ -1153,6 +1343,389 @@ const services = [
     background: #53D3D3;
     transform: translateY(-2px);
   }
+
+  /* ═══════════════════════════════════════════════════
+     TIMELINE STRIP
+     ═══════════════════════════════════════════════════ */
+  .timeline-strip {
+    background: var(--color-surface-primary, #F6F7FA);
+    border-top: 1px solid var(--color-border-light, #E2E4E8);
+    border-bottom: 1px solid var(--color-border-light, #E2E4E8);
+    padding: 2.4rem 0 2rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .timeline {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    position: relative;
+    min-width: max-content;
+    padding: 0 2rem;
+  }
+
+  .timeline__line {
+    position: absolute;
+    top: 12px;
+    left: 2rem;
+    right: 2rem;
+    height: 2px;
+    background: linear-gradient(90deg, #40C4C4 0%, #40C4C4 60%, rgba(64, 196, 196, 0.15) 100%);
+  }
+
+  .timeline__node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 160px;
+    flex: 1;
+    position: relative;
+    text-align: center;
+    padding: 0 0.8rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 0.2s ease;
+  }
+
+  .timeline__node:hover { transform: translateY(-2px); }
+
+  .timeline__node--open { cursor: default; }
+  .timeline__node--open:hover { transform: none; }
+
+  .timeline__dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #40C4C4;
+    border: 3px solid #F6F7FA;
+    box-shadow: 0 0 0 2px #40C4C4;
+    flex-shrink: 0;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .timeline__node:hover .timeline__dot {
+    box-shadow: 0 0 0 2px #40C4C4, 0 0 12px rgba(64, 196, 196, 0.4);
+  }
+
+  .timeline__dot--prusa {
+    background: #FA6831;
+    box-shadow: 0 0 0 2px #FA6831;
+  }
+
+  .timeline__node:hover .timeline__dot--prusa {
+    box-shadow: 0 0 0 2px #FA6831, 0 0 12px rgba(250, 104, 49, 0.4);
+  }
+
+  .timeline__dot--ghost {
+    background: transparent;
+    border: 2px dashed rgba(64, 196, 196, 0.35);
+    box-shadow: none;
+  }
+
+  .timeline__node:hover .timeline__dot--ghost { box-shadow: none; }
+
+  .timeline__date {
+    font-family: var(--font-tech, 'Archivo', sans-serif);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-muted, #8A8F98);
+    margin-top: 0.2rem;
+  }
+
+  .timeline__label {
+    font-family: var(--font-display, 'Archivo', sans-serif);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--color-text-primary, #111214);
+    line-height: 1.3;
+    max-width: 160px;
+  }
+
+  .timeline__label--ghost {
+    color: rgba(64, 196, 196, 0.5);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .timeline__sublabel {
+    font-size: 0.65rem;
+    color: var(--color-text-muted, #8A8F98);
+    line-height: 1.3;
+  }
+
+  .timeline__logo {
+    height: 22px;
+    width: auto;
+    margin-top: 0.2rem;
+    color: var(--color-text-primary, #111214);
+  }
+
+  .timeline__logo--prusa {
+    height: 20px;
+    color: #333;
+  }
+
+  .timeline__join {
+    font-family: var(--font-tech, 'Archivo', sans-serif);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #40C4C4;
+    text-decoration: none;
+    transition: color 0.2s;
+    margin-top: 0.2rem;
+  }
+
+  .timeline__join:hover { color: #2BB0B0; text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    .timeline { padding: 0 1rem; gap: 0; }
+    .timeline__node { min-width: 130px; }
+    .timeline__label { font-size: 0.7rem; max-width: 120px; }
+  }
+
+  /* ═══════════════════════════════════════════════════
+     TIMELINE MODALS
+     ═══════════════════════════════════════════════════ */
+  .timeline-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  .timeline-modal[data-open='true'] { pointer-events: all; }
+
+  .timeline-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 17, 18, 0.85);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    opacity: 0;
+    transition: opacity 0.28s ease;
+    cursor: pointer;
+  }
+
+  .timeline-modal[data-open='true'] .timeline-modal__backdrop { opacity: 1; }
+
+  .timeline-modal__panel {
+    position: relative;
+    z-index: 1;
+    background: var(--color-surface-primary, #F6F7FA);
+    border: 2px solid var(--color-border-light, #E2E4E8);
+    border-radius: 1.2rem;
+    padding: 2.4rem 2rem;
+    max-width: 480px;
+    width: 90vw;
+    transform: scale(0.92) translateY(20px);
+    opacity: 0;
+    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease;
+  }
+
+  .timeline-modal[data-open='true'] .timeline-modal__panel {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+
+  .timeline-modal__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    color: var(--color-text-muted, #8A8F98);
+    cursor: pointer;
+    padding: 0.3rem;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+
+  .timeline-modal__close:hover { color: var(--color-text-primary, #111214); }
+
+  .timeline-modal__logo {
+    height: 36px;
+    width: auto;
+    margin-bottom: 1rem;
+    color: var(--color-text-primary, #111214);
+  }
+
+  .timeline-modal__logo--prusa {
+    color: #333;
+  }
+
+  .timeline-modal__title {
+    font-family: var(--font-display, 'Archivo', sans-serif);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--color-text-primary, #111214);
+    margin: 0 0 0.3rem;
+  }
+
+  .timeline-modal__subtitle {
+    font-family: var(--font-tech, 'Archivo', sans-serif);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #40C4C4;
+    margin: 0 0 0.8rem;
+  }
+
+  .timeline-modal__body {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary, #555);
+    margin: 0 0 1.4rem;
+  }
+
+  .timeline-modal__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .timeline-modal__cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.6rem 1rem;
+    background: #40C4C4;
+    color: #0F1112;
+    border: 2px solid #111214;
+    border-radius: 0.4rem;
+    font-family: var(--font-tech, 'Archivo', sans-serif);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .timeline-modal__cta:hover {
+    background: #53D3D3;
+    transform: translateY(-1px);
+  }
+
+  .timeline-modal__cta--ghost {
+    background: transparent;
+    color: var(--color-text-primary, #111214);
+    border-color: var(--color-border-light, #D0D3D8);
+  }
+
+  .timeline-modal__cta--ghost:hover {
+    background: rgba(64, 196, 196, 0.08);
+    border-color: #40C4C4;
+  }
+
+  /* ═══════════════════════════════════════════════════
+     LIGHTBOX
+     ═══════════════════════════════════════════════════ */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  .lightbox[data-open='true'] { pointer-events: all; }
+
+  .lightbox__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 17, 18, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0;
+    transition: opacity 0.28s ease;
+    cursor: pointer;
+  }
+
+  .lightbox[data-open='true'] .lightbox__backdrop { opacity: 1; }
+
+  .lightbox__container {
+    position: relative;
+    z-index: 1;
+    max-width: min(90vw, 900px);
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    transform: scale(0.92) translateY(20px);
+    opacity: 0;
+    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease;
+  }
+
+  .lightbox[data-open='true'] .lightbox__container {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+
+  .lightbox__close {
+    position: absolute;
+    top: -2.5rem;
+    right: 0;
+    background: none;
+    border: none;
+    color: #F6F7FA;
+    font-size: 1.6rem;
+    cursor: pointer;
+    padding: 0.4rem;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+
+  .lightbox__close:hover { opacity: 1; }
+
+  .lightbox__img {
+    width: 100%;
+    max-height: 65vh;
+    object-fit: contain;
+    border-radius: 1rem 1rem 0 0;
+    background: #111214;
+  }
+
+  .lightbox__info {
+    background: #1A1C1E;
+    padding: 1.2rem 1.6rem;
+    border-radius: 0 0 1rem 1rem;
+    border-top: 2px solid rgba(64, 196, 196, 0.3);
+  }
+
+  .lightbox__label {
+    display: block;
+    font-family: var(--font-tech);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--page-accent);
+    margin-bottom: 0.4rem;
+  }
+
+  .lightbox__note {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: rgba(246, 247, 250, 0.75);
+  }
+
+  .workshop-card[data-lightbox] { cursor: pointer; }
 
   /* ═══════════════════════════════════════════════════
      KEYFRAMES

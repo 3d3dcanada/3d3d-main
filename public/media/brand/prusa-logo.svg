@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 44" aria-label="Prusa Research">
+  <!-- Prusa orange triangle mark -->
+  <polygon points="0,38 11,2 22,38" fill="#FA6831"/>
+  <!-- PRUSA text -->
+  <text x="30" y="32" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="28" font-weight="800" letter-spacing="0.02em" fill="currentColor">PRUSA</text>
+</svg>

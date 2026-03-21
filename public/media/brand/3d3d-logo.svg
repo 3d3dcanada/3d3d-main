@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 56" aria-label="3D3D">
+  <!-- 3D3D block logo — orange with dark shadow, inspired by actual sticker branding -->
+  <defs>
+    <linearGradient id="g3d" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF7A33"/>
+      <stop offset="100%" stop-color="#E85A1B"/>
+    </linearGradient>
+  </defs>
+  <!-- Shadow layer -->
+  <text x="5" y="44" font-family="'Impact', 'Arial Black', sans-serif" font-size="48" font-weight="900" letter-spacing="0.04em" fill="#1A1A1A">3D3D</text>
+  <!-- Main text -->
+  <text x="2" y="41" font-family="'Impact', 'Arial Black', sans-serif" font-size="48" font-weight="900" letter-spacing="0.04em" fill="url(#g3d)">3D3D</text>
+  <!-- Outline for definition -->
+  <text x="2" y="41" font-family="'Impact', 'Arial Black', sans-serif" font-size="48" font-weight="900" letter-spacing="0.04em" fill="none" stroke="#1A1A1A" stroke-width="1">3D3D</text>
+</svg>

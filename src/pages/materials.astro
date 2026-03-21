@@ -152,6 +152,26 @@ const materials = [
   },
 ];
 
+const getPrusaNote = (m: { id: string }): string | null => {
+  const hardenedNozzleRequired: string[] = [
+    'petg-cf',
+    'pc-blend-cf',
+    'pp-gf',
+    'pp-cf',
+    'pa11-cf',
+    'pc-space',
+    'petg-magnetite',
+    'petg-tungsten'
+  ];
+  if (hardenedNozzleRequired.includes(m.id)) {
+    return 'Requires hardened nozzle. Available from Prusa Research.';
+  }
+  if (m.id === 'pei-1010') {
+    return 'Requires Prusa Pro HT90 or equivalent heated-chamber system.';
+  }
+  return null;
+};
+
 const tiers = ['Elite', 'Engineering', 'Flexible', 'Specialty', 'Standard'];
 const tierDescriptions: Record<string, string> = {
   Elite: 'Metal-replacement performance. Heated chamber required.',
@@ -160,29 +180,42 @@ const tierDescriptions: Record<string, string> = {
   Specialty: 'Functional fill materials for specific electromagnetic, shielding, or magnetic applications.',
   Standard: 'Prototyping and general use. Know the limits.',
 };
+
+const tierColors: Record<string, string> = {
+  Elite: '#E84A8A',
+  Engineering: '#40C4C4',
+  Flexible: '#F5A623',
+  Specialty: '#9B59B6',
+  Standard: '#7F8C8D',
+};
 ---
 
 <BaseLayout
   title="Materials | 3D3D"
-  description="Every material I run. Engineering-grade compounds for marine, automotive, and field fabrication | from ASA to PEI 1010."
+  description="Every material I run. Engineering-grade compounds for marine, automotive, and field fabrication — from ASA to PEI 1010."
   activePath="/materials"
 >
   <section class="mat-page">
-    <div class="mat-shell">
-      <p class="mat-eyebrow">Material Stack</p>
-      <h1 class="mat-title scroll-in">What it takes<br />to survive<br />the salt.</h1>
-      <p class="mat-intro scroll-in">
-        Standard 3D printing plastics belong in a hobby shop. PLA softens at 55 degrees Celsius, absorbs moisture, and shatters under UV load. None of that is acceptable aboard a working vessel.
-      </p>
-      <p class="mat-intro">
-        Every material I run is selected for the conditions it will face, not for ease of printing. Marine hardware sees salt spray, UV cycling, and sustained mechanical load. Automotive parts live near fuel, oil, and heat. Field deployment means no spare parts, no excuses. The material has to be correct on the first print.
-      </p>
+
+    <!-- ═══ HERO ═══ -->
+    <div class="mat-hero">
+      <div class="mat-shell">
+        <p class="mat-eyebrow scroll-in-left">Material Stack</p>
+        <h1 class="mat-title scroll-in">What it takes<br />to survive<br />the salt.</h1>
+        <p class="mat-intro scroll-in">
+          Standard 3D printing plastics belong in a hobby shop. PLA softens at 55 degrees Celsius, absorbs moisture, and shatters under UV load. None of that is acceptable aboard a working vessel.
+        </p>
+        <p class="mat-intro scroll-in">
+          Every material I run is selected for the conditions it will face, not for ease of printing. Marine hardware sees salt spray, UV cycling, and sustained mechanical load. Automotive parts live near fuel, oil, and heat. Field deployment means no spare parts, no excuses. The material has to be correct on the first print.
+        </p>
+      </div>
     </div>
 
+    <!-- ═══ SALT RULE ═══ -->
     <div class="mat-salt-rule">
       <div class="mat-shell">
         <div class="mat-salt-rule__grid">
-          <div class="mat-salt-rule__item">
+          <div class="mat-salt-rule__item mat-salt-rule__item--no">
             <span class="mat-salt-rule__label">PLA at sea</span>
             <span class="mat-salt-rule__verdict mat-salt-rule__verdict--no">Fails</span>
             <p class="mat-salt-rule__note">Softens at 55°C. Absorbs moisture. Degrades under UV. Not for any functional application.</p>
@@ -206,45 +239,65 @@ const tierDescriptions: Record<string, string> = {
       </div>
     </div>
 
+    <!-- ═══ MATERIAL TIERS ═══ -->
     {tiers.map((tier) => {
       const tierMats = materials.filter(m => m.tier === tier);
+      const accentColor = tierColors[tier];
       return (
         <div class="mat-tier">
           <div class="mat-tier__header">
             <div class="mat-shell">
-              <p class="mat-tier__label">{tier}</p>
-              <p class="mat-tier__desc">{tierDescriptions[tier]}</p>
+              <div class="mat-tier__header-inner">
+                <span class="mat-tier__accent" style={`background: ${accentColor};`}></span>
+                <div>
+                  <p class="mat-tier__label" style={`color: ${accentColor};`}>{tier}</p>
+                  <p class="mat-tier__desc">{tierDescriptions[tier]}</p>
+                </div>
+                <span class="mat-tier__count">{tierMats.length} material{tierMats.length !== 1 ? 's' : ''}</span>
+              </div>
             </div>
           </div>
           <div class="mat-shell">
             <div class="mat-grid">
-              {tierMats.map((m) => (
-                <article class="mat-card" id={m.id}>
-                  <div class="mat-card__head">
-                    <h2 class="mat-card__name">{m.name}</h2>
-                    <span class="mat-card__hdt">{m.hdt}</span>
-                  </div>
-                  <p class="mat-card__full">{m.full}</p>
-                  <div class="mat-card__tags">
-                    {m.tags.map(tag => (
-                      <span class="mat-tag">{tag}</span>
-                    ))}
-                  </div>
-                  <p class="mat-card__body">{m.body}</p>
-                </article>
-              ))}
+              {tierMats.map((m) => {
+                const prusaNote = getPrusaNote(m);
+                return (
+                  <article class="mat-card scroll-in" id={m.id}>
+                    <div class="mat-card__head">
+                      <h2 class="mat-card__name">{m.name}</h2>
+                      <span class="mat-card__hdt" style={`color: ${accentColor};`}>{m.hdt}</span>
+                    </div>
+                    <p class="mat-card__full">{m.full}</p>
+                    <div class="mat-card__tags">
+                      {m.tags.map(tag => (
+                        <span class="mat-tag" style={`border-color: ${accentColor}30; color: ${accentColor};`}>{tag}</span>
+                      ))}
+                    </div>
+                    <p class="mat-card__body">{m.body}</p>
+                    {prusaNote && (
+                      <p class="mat-card__prusa-note">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:2px;">
+                          <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                        </svg>
+                        {prusaNote}
+                      </p>
+                    )}
+                    <a href="/contact" class="mat-card__cta" style={`border-color: ${accentColor};`}>Request Quote →</a>
+                  </article>
+                );
+              })}
             </div>
           </div>
         </div>
       );
     })}
 
-    <!-- When To Use What guide -->
+    <!-- ═══ WHEN TO USE WHAT ═══ -->
     <div class="mat-guide">
       <div class="mat-shell">
         <p class="mat-eyebrow" style="padding-top: 0;">When To Use What</p>
         <h2 class="mat-guide__title scroll-in">Start with the environment.<br />The material follows.</h2>
-        <p class="mat-intro scroll-in">
+        <p class="mat-intro scroll-in" style="color: rgba(17,18,20,0.6);">
           Every material decision starts with the same question: what does this part have to survive? Pick the scenario below that matches your application. The recommendation is the compound I would use.
         </p>
 
@@ -332,20 +385,50 @@ const tierDescriptions: Record<string, string> = {
       </div>
     </div>
 
+    <!-- ═══ PRUSA ECOSYSTEM ═══ -->
+    <div class="mat-prusa">
+      <div class="mat-shell">
+        <div class="mat-prusa__inner">
+          <div>
+            <p class="mat-eyebrow" style="padding-top:0; color: #FA6831;">Prusa Ecosystem</p>
+            <h2 class="mat-prusa__title">Built on open-source hardware.</h2>
+            <p class="mat-prusa__body">
+              3D3D runs exclusively on the Prusa ecosystem. Open-source firmware, documented hardware, and a material compatibility library that is public. After a year of daily printing, Prusa Research recognized the work and is sending a CORE One L — their flagship enclosed CoreXY machine. That is recognition, not marketing.
+            </p>
+            <p class="mat-prusa__body">
+              Materials marked with a hardened nozzle requirement work on any Prusa printer with the appropriate nozzle swap. PEI 1010 requires the Prusa Pro HT90 or an equivalent heated-chamber system.
+            </p>
+            <a href="https://www.prusa3d.com/" class="mat-prusa__link" target="_blank" rel="noopener noreferrer">
+              Learn more at Prusa Research →
+            </a>
+          </div>
+          <img src="/media/brand/prusa-logo.svg" alt="Prusa Research" class="mat-prusa__logo" loading="lazy" />
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ CTA ═══ -->
     <div class="mat-cta-block">
       <div class="mat-shell">
         <p class="mat-cta-block__eyebrow">Not sure what you need?</p>
-        <h2 class="mat-cta-block__title">Tell us the problem.<br />We'll spec the material.</h2>
-        <a href="/contact" class="mat-cta">Request Service →</a>
+        <h2 class="mat-cta-block__title">Tell me the problem.<br />I'll spec the material.</h2>
+        <div class="mat-cta-block__actions">
+          <a href="/contact" class="mat-cta">Request Service →</a>
+          <a href="/book" class="mat-cta mat-cta--ghost">Book a Call →</a>
+        </div>
       </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
+  /* ═══════════════════════════════════════════════════
+     LIGHT-FIRST MATERIALS PAGE
+     ═══════════════════════════════════════════════════ */
+
   .mat-page {
-    background: #111214;
-    color: #F6F7FA;
+    background: #F6F7FA;
+    color: #111214;
     min-height: 100svh;
   }
 
@@ -354,7 +437,12 @@ const tierDescriptions: Record<string, string> = {
     margin: 0 auto;
   }
 
-  /* ── Hero ── */
+  /* ── Hero (dark band) ── */
+  .mat-hero {
+    background: #111214;
+    padding-block: clamp(5rem, 8vw, 8rem) clamp(3rem, 5vw, 5rem);
+  }
+
   .mat-eyebrow {
     margin: 0;
     font-family: var(--font-tech);
@@ -366,7 +454,7 @@ const tierDescriptions: Record<string, string> = {
     display: flex;
     align-items: center;
     gap: 0.8rem;
-    padding-top: clamp(5rem, 8vw, 8rem);
+    padding-top: clamp(3rem, 5vw, 5rem);
   }
 
   .mat-eyebrow::before {
@@ -395,12 +483,11 @@ const tierDescriptions: Record<string, string> = {
     color: rgba(246, 247, 250, 0.78);
   }
 
-  /* ── Salt rule comparison ── */
+  /* ── Salt rule comparison (dark band) ── */
   .mat-salt-rule {
-    background: rgba(255,255,255,0.02);
+    background: #111214;
     border-top: 1px solid rgba(64, 196, 196, 0.15);
-    padding-block: clamp(2.5rem, 5vw, 4rem);
-    margin-bottom: clamp(1rem, 3vw, 2rem);
+    padding-block: clamp(2rem, 4vw, 3rem) clamp(3rem, 5vw, 5rem);
   }
 
   .mat-salt-rule__grid {
@@ -413,9 +500,13 @@ const tierDescriptions: Record<string, string> = {
     display: grid;
     gap: 0.5rem;
     padding: 1.2rem 1.4rem;
-    border: 1px solid rgba(64, 196, 196, 0.12);
+    border: 2px solid rgba(64, 196, 196, 0.2);
     border-radius: 0.75rem;
     background: rgba(255,255,255,0.03);
+  }
+
+  .mat-salt-rule__item--no {
+    border-color: rgba(224, 92, 92, 0.3);
   }
 
   .mat-salt-rule__label {
@@ -434,13 +525,8 @@ const tierDescriptions: Record<string, string> = {
     letter-spacing: -0.02em;
   }
 
-  .mat-salt-rule__verdict--yes {
-    color: #40C4C4;
-  }
-
-  .mat-salt-rule__verdict--no {
-    color: #E05C5C;
-  }
+  .mat-salt-rule__verdict--yes { color: #40C4C4; }
+  .mat-salt-rule__verdict--no { color: #E05C5C; }
 
   .mat-salt-rule__note {
     margin: 0;
@@ -449,32 +535,56 @@ const tierDescriptions: Record<string, string> = {
     color: rgba(246, 247, 250, 0.52);
   }
 
-  /* ── Tier sections ── */
+  /* ── Tier sections (light background) ── */
   .mat-tier {
     padding-bottom: clamp(3rem, 5vw, 5rem);
   }
 
   .mat-tier__header {
     padding-block: 1.6rem;
-    border-top: 1px solid rgba(64, 196, 196, 0.2);
+    border-top: 3px solid #1A1A1A;
     margin-bottom: 2rem;
   }
 
+  .mat-tier__header-inner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .mat-tier__accent {
+    display: block;
+    width: 4px;
+    height: 2.4rem;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
   .mat-tier__label {
-    margin: 0 0 0.3rem;
+    margin: 0 0 0.15rem;
     font-family: var(--font-tech);
-    font-size: 0.68rem;
+    font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #40C4C4;
   }
 
   .mat-tier__desc {
     margin: 0;
-    font-size: 0.9rem;
-    color: rgba(246, 247, 250, 0.5);
+    font-size: 0.88rem;
+    color: rgba(17, 18, 20, 0.55);
     font-family: var(--font-tech);
+  }
+
+  .mat-tier__count {
+    margin-left: auto;
+    font-family: var(--font-tech);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(17, 18, 20, 0.35);
+    flex-shrink: 0;
   }
 
   /* ── Grid ── */
@@ -484,20 +594,20 @@ const tierDescriptions: Record<string, string> = {
     gap: 1.2rem;
   }
 
-  /* ── Card ── */
+  /* ── Card (light theme) ── */
   .mat-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(64, 196, 196, 0.12);
+    background: #FFFFFF;
+    border: 2px solid #1A1A1A;
     border-radius: 1rem;
     padding: clamp(1.2rem, 2.5vw, 1.8rem);
     display: grid;
     gap: 0.8rem;
-    transition: border-color 0.2s ease, background 0.2s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
 
   .mat-card:hover {
-    border-color: rgba(64, 196, 196, 0.35);
-    background: rgba(64, 196, 196, 0.04);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(17, 18, 20, 0.1);
   }
 
   .mat-card__head {
@@ -513,7 +623,7 @@ const tierDescriptions: Record<string, string> = {
     font-size: 1.5rem;
     line-height: 1;
     letter-spacing: -0.02em;
-    color: #FFFFFF;
+    color: #111214;
   }
 
   .mat-card__hdt {
@@ -522,7 +632,6 @@ const tierDescriptions: Record<string, string> = {
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #40C4C4;
     white-space: nowrap;
     flex-shrink: 0;
   }
@@ -532,7 +641,7 @@ const tierDescriptions: Record<string, string> = {
     font-family: var(--font-tech);
     font-size: 0.72rem;
     letter-spacing: 0.04em;
-    color: rgba(246, 247, 250, 0.4);
+    color: rgba(17, 18, 20, 0.45);
   }
 
   .mat-card__tags {
@@ -544,27 +653,67 @@ const tierDescriptions: Record<string, string> = {
   .mat-tag {
     display: inline-block;
     padding: 0.25rem 0.6rem;
-    background: rgba(64, 196, 196, 0.1);
-    border: 1px solid rgba(64, 196, 196, 0.2);
+    background: rgba(17, 18, 20, 0.04);
+    border: 1px solid;
     border-radius: 0.3rem;
     font-family: var(--font-tech);
     font-size: 0.64rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #40C4C4;
   }
 
   .mat-card__body {
     margin: 0;
     font-size: 0.9rem;
     line-height: 1.7;
-    color: rgba(246, 247, 250, 0.72);
+    color: rgba(17, 18, 20, 0.7);
+  }
+
+  .mat-card__prusa-note {
+    margin: 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.65rem 0.9rem;
+    background: #FFF3ED;
+    border: 1px solid #FA683140;
+    border-radius: 0.5rem;
+    font-family: var(--font-tech);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: #C0471A;
+  }
+
+  .mat-card__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.6rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 2px solid;
+    border-radius: 0.5rem;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #111214;
+    transition: background 0.2s ease, color 0.2s ease;
+    width: fit-content;
+  }
+
+  .mat-card__cta:hover {
+    background: #111214;
+    color: #F6F7FA;
   }
 
   /* ── When To Use What guide ── */
   .mat-guide {
-    border-top: 1px solid rgba(64, 196, 196, 0.2);
+    background: #FFFFFF;
+    border-top: 3px solid #1A1A1A;
+    border-bottom: 3px solid #1A1A1A;
     padding-block: clamp(4rem, 8vw, 7rem);
   }
 
@@ -574,31 +723,31 @@ const tierDescriptions: Record<string, string> = {
     font-size: clamp(2rem, 1.2rem + 3vw, 3.5rem);
     line-height: 1;
     letter-spacing: -0.03em;
-    color: #FFFFFF;
+    color: #111214;
     text-transform: uppercase;
   }
 
   .mat-guide__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
     gap: 1.2rem;
     margin-top: clamp(2rem, 4vw, 3rem);
   }
 
   .mat-guide__card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(64, 196, 196, 0.12);
+    background: #F6F7FA;
+    border: 2px solid #1A1A1A;
     border-radius: 1rem;
     padding: clamp(1.2rem, 2.5vw, 1.6rem);
     display: grid;
     gap: 0.6rem;
     align-content: start;
-    transition: border-color 0.2s ease, background 0.2s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
 
   .mat-guide__card:hover {
-    border-color: rgba(64, 196, 196, 0.35);
-    background: rgba(64, 196, 196, 0.04);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(17, 18, 20, 0.1);
   }
 
   .mat-guide__icon {
@@ -612,7 +761,7 @@ const tierDescriptions: Record<string, string> = {
     font-size: 1.2rem;
     line-height: 1.1;
     letter-spacing: -0.02em;
-    color: #FFFFFF;
+    color: #111214;
   }
 
   .mat-guide__conditions {
@@ -622,13 +771,13 @@ const tierDescriptions: Record<string, string> = {
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: rgba(246, 247, 250, 0.4);
+    color: rgba(17, 18, 20, 0.4);
   }
 
   .mat-guide__answer {
     margin-top: 0.4rem;
     padding-top: 0.6rem;
-    border-top: 1px solid rgba(64, 196, 196, 0.12);
+    border-top: 2px solid rgba(17, 18, 20, 0.1);
     display: grid;
     gap: 0.4rem;
   }
@@ -644,12 +793,74 @@ const tierDescriptions: Record<string, string> = {
     margin: 0;
     font-size: 0.85rem;
     line-height: 1.65;
-    color: rgba(246, 247, 250, 0.65);
+    color: rgba(17, 18, 20, 0.6);
   }
 
-  /* ── CTA block ── */
+  /* ── Prusa section ── */
+  .mat-prusa {
+    padding-block: clamp(4rem, 7vw, 6rem);
+  }
+
+  .mat-prusa__inner {
+    display: flex;
+    align-items: center;
+    gap: clamp(2rem, 4vw, 4rem);
+  }
+
+  .mat-prusa__title {
+    margin: 0.8rem 0 1rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 1.2rem + 2vw, 2.8rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: #111214;
+    text-transform: uppercase;
+  }
+
+  .mat-prusa__body {
+    margin: 0 0 1rem;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: rgba(17, 18, 20, 0.65);
+    max-width: 38rem;
+  }
+
+  .mat-prusa__link {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-tech);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #FA6831;
+    transition: opacity 0.2s ease;
+  }
+
+  .mat-prusa__link:hover {
+    opacity: 0.7;
+  }
+
+  .mat-prusa__logo {
+    width: clamp(80px, 12vw, 140px);
+    height: auto;
+    flex-shrink: 0;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 640px) {
+    .mat-prusa__inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .mat-prusa__logo {
+      order: -1;
+    }
+  }
+
+  /* ── CTA block (teal) ── */
   .mat-cta-block {
-    border-top: 1px solid rgba(64, 196, 196, 0.2);
+    background: #40C4C4;
     padding-block: clamp(4rem, 8vw, 7rem);
   }
 
@@ -660,7 +871,7 @@ const tierDescriptions: Record<string, string> = {
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(246, 247, 250, 0.4);
+    color: rgba(17, 18, 20, 0.5);
   }
 
   .mat-cta-block__title {
@@ -669,8 +880,14 @@ const tierDescriptions: Record<string, string> = {
     font-size: clamp(2rem, 1.2rem + 3vw, 3.5rem);
     line-height: 1;
     letter-spacing: -0.03em;
-    color: #FFFFFF;
+    color: #111214;
     text-transform: uppercase;
+  }
+
+  .mat-cta-block__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
   }
 
   .mat-cta {
@@ -680,8 +897,8 @@ const tierDescriptions: Record<string, string> = {
     width: fit-content;
     min-height: 3.4rem;
     padding: 0.95rem 1.6rem;
-    background: #40C4C4;
-    color: #0F1112;
+    background: #111214;
+    color: #F6F7FA;
     border: 3px solid #1A1A1A;
     font-family: var(--font-tech);
     font-size: 0.84rem;
@@ -689,12 +906,23 @@ const tierDescriptions: Record<string, string> = {
     letter-spacing: 0.16em;
     text-transform: uppercase;
     transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
-    box-shadow: 0 14px 32px rgba(64, 196, 196, 0.22);
+    box-shadow: 0 14px 32px rgba(17, 18, 20, 0.2);
   }
 
   .mat-cta:hover {
-    background: #53D3D3;
-    box-shadow: 0 8px 24px rgba(64, 196, 196, 0.4);
     transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(17, 18, 20, 0.35);
+  }
+
+  .mat-cta--ghost {
+    background: transparent;
+    color: #111214;
+    border-color: #111214;
+    box-shadow: none;
+  }
+
+  .mat-cta--ghost:hover {
+    background: rgba(17, 18, 20, 0.08);
+    box-shadow: none;
   }
 </style>

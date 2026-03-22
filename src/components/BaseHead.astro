@@ -7,6 +7,11 @@ interface Props {
   ogType?: string;
   schema?: Record<string, unknown> | Record<string, unknown>[];
   noindex?: boolean;
+  keywords?: string;
+  articlePublishedTime?: string;
+  articleModifiedTime?: string;
+  articleAuthor?: string;
+  articleSection?: string;
 }
 
 const {
@@ -17,7 +22,51 @@ const {
   ogType = 'website',
   schema,
   noindex = false,
+  keywords,
+  articlePublishedTime,
+  articleModifiedTime,
+  articleAuthor,
+  articleSection,
 } = Astro.props;
+
+const isArticle = ogType === 'article';
+
+// Global Organization + WebSite schema injected on every page
+const globalSchemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': 'https://3d3d.ca/#organization',
+    name: '3D3D',
+    url: 'https://3d3d.ca',
+    logo: 'https://3d3d.ca/favicon.svg',
+    description: 'Offshore fabrication, marine hardware replacement, discontinued part recovery, and 3D printer sales with professional setup. Founded by Ken. Atlantic Canada.',
+    email: 'info@3d3d.ca',
+    telephone: '+15069532678',
+    areaServed: 'Worldwide',
+    sameAs: [
+      'https://www.youtube.com/@3D3Dcanada',
+      'https://www.instagram.com/3d3dca/',
+      'https://www.tiktok.com/@3d3dcanada',
+      'https://www.facebook.com/profile.php?id=61575548079847',
+      'https://ko-fi.com/3d3dca',
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': 'https://3d3d.ca/#website',
+    url: 'https://3d3d.ca',
+    name: '3D3D',
+    description: 'Custom 3D fabrication, printer sales with setup, marine hardware, discontinued parts. Atlantic Canada.',
+    publisher: { '@id': 'https://3d3d.ca/#organization' },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: { '@type': 'EntryPoint', urlTemplate: 'https://3d3d.ca/blog?q={search_term_string}' },
+      'query-input': 'required name=search_term_string',
+    },
+  },
+];
 ---
 
 <meta charset="utf-8" />
@@ -28,9 +77,13 @@ const {
 
 <title>{title}</title>
 <meta name="description" content={description} />
-<meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
-<meta name="author" content="3D3D" />
+<meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
+<meta name="author" content={articleAuthor ?? '3D3D'} />
+{keywords && <meta name="keywords" content={keywords} />}
 <link rel="canonical" href={canonicalURL} />
+
+<!-- RSS Feed Discovery -->
+<link rel="alternate" type="application/rss+xml" title="3D3D Blog" href="/rss.xml" />
 
 <!-- Open Graph -->
 <meta property="og:title" content={title} />
@@ -38,10 +91,18 @@ const {
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:type" content={ogType} />
 <meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 <meta property="og:site_name" content="3D3D" />
+<meta property="og:locale" content="en_CA" />
+{isArticle && articlePublishedTime && <meta property="article:published_time" content={articlePublishedTime} />}
+{isArticle && articleModifiedTime && <meta property="article:modified_time" content={articleModifiedTime} />}
+{isArticle && articleAuthor && <meta property="article:author" content={articleAuthor} />}
+{isArticle && articleSection && <meta property="article:section" content={articleSection} />}
 
-<!-- Twitter -->
+<!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@3d3dcanada" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImage} />
@@ -52,7 +113,10 @@ const {
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 <link rel="manifest" href="/site.webmanifest" />
 
-<!-- Structured Data -->
+<!-- Global Structured Data: Organization + WebSite -->
+<script type="application/ld+json" set:html={JSON.stringify(globalSchemas)} />
+
+<!-- Page-specific Structured Data -->
 {schema && (
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 )}

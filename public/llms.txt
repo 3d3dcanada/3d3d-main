@@ -12,6 +12,7 @@
 - [Custom Quote](https://3d3d.ca/quote): Upload STL, 3MF, STEP, OBJ, PDF, or describe your idea
 - [Print Shop](https://3d3d.ca/shop): Ready-made products for home, tools, automotive, marine, gifts
 - [Book a Call](https://3d3d.ca/book): Schedule a consultation via Cal.com
+- [3D Printer Sales with Setup](https://3d3d.ca/blog/best-3d-printers-march-2026): Buy a printer through 3D3D. We calibrate, test, update firmware, and ship it ready to print. 90-day extended service warranty included. Printers include Snapmaker U1, Bambu Lab P1S Combo, Bambu Lab A1 Combo, Creality K1C, Prusa Core One, and more. All prices in CAD with setup included.
 
 ## Materials (17 compounds)
 ### Engineering Tier
@@ -64,6 +65,8 @@
 - [Prusa](https://3d3d.ca/prusa): Printer platform details
 
 ## Blog Articles
+- [Best 3D Printers March 2026 — CAD Prices + Setup Service](https://3d3d.ca/blog/best-3d-printers-march-2026)
+- [Buy Local 3D Prints, Not Amazon/Etsy/Temu](https://3d3d.ca/blog/buy-local-not-amazon-etsy-temu)
 - [2026 Advances in 3D Printing](https://3d3d.ca/blog/advances-2026)
 - [ASA for Outdoor Applications](https://3d3d.ca/blog/asa-outdoor)
 - [Atlantic Canada Maker Network](https://3d3d.ca/blog/atlantic-canada-maker-network)

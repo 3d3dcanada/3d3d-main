@@ -197,7 +197,7 @@ const services = [
         </button>
 
         <!-- UPCOMING: Newport-Bermuda — featured, wider -->
-        <button class="cstrip__cell cstrip__cell--upcoming cstrip__cell--featured" data-timeline-modal="modal-newport" aria-label="Newport-Bermuda Race 2026 — click for details">
+        <button class="cstrip__cell cstrip__cell--upcoming cstrip__cell--featured cstrip__cell--scan" data-timeline-modal="modal-newport" aria-label="Newport-Bermuda Race 2026 — click for details">
           <div class="cstrip__cell-accent cstrip__cell-accent--teal"></div>
           <div class="cstrip__cell-inner">
             <div class="cstrip__cell-left">
@@ -214,34 +214,34 @@ const services = [
         </button>
 
         <!-- OPEN: Sponsor slot 1 -->
-        <a href="/contact?subject=sponsorship" class="cstrip__cell cstrip__cell--open">
+        <a href="/contact?subject=sponsorship" class="cstrip__cell cstrip__cell--open" data-cat="CAT-01">
           <div class="cstrip__cell-accent cstrip__cell-accent--ghost"></div>
           <div class="cstrip__cell-inner">
             <div class="cstrip__cell-left">
-              <span class="cstrip__badge cstrip__badge--open">Available</span>
+              <span class="cstrip__badge cstrip__badge--open">[CAT-01 &middot; OPEN]</span>
               <time class="cstrip__date">2026</time>
-              <strong class="cstrip__title cstrip__title--ghost">Your Brand Here</strong>
-              <span class="cstrip__sub cstrip__sub--ghost">Campaign partner slot</span>
+              <strong class="cstrip__title cstrip__title--ghost">Campaign Partner</strong>
+              <span class="cstrip__sub cstrip__sub--ghost">Slot reserved &middot; Enquire</span>
             </div>
             <div class="cstrip__cell-right">
-              <span class="cstrip__open-icon">+</span>
+              <span class="cstrip__slot-code">&#8212;&#8212;</span>
               <span class="cstrip__expand cstrip__expand--ghost">Apply &rarr;</span>
             </div>
           </div>
         </a>
 
         <!-- OPEN: Sponsor slot 2 -->
-        <a href="https://ko-fi.com/3d3dca" target="_blank" rel="noopener noreferrer" class="cstrip__cell cstrip__cell--open">
+        <a href="https://ko-fi.com/3d3dca" target="_blank" rel="noopener noreferrer" class="cstrip__cell cstrip__cell--open" data-cat="CAT-02">
           <div class="cstrip__cell-accent cstrip__cell-accent--ghost"></div>
           <div class="cstrip__cell-inner">
             <div class="cstrip__cell-left">
-              <span class="cstrip__badge cstrip__badge--open">Available</span>
+              <span class="cstrip__badge cstrip__badge--open">[CAT-02 &middot; OPEN]</span>
               <time class="cstrip__date">2026</time>
               <strong class="cstrip__title cstrip__title--ghost">Support the Mission</strong>
               <span class="cstrip__sub cstrip__sub--ghost">Ko-fi &middot; Any amount</span>
             </div>
             <div class="cstrip__cell-right">
-              <span class="cstrip__open-icon">&#9825;</span>
+              <span class="cstrip__slot-code">&#8212;&#8212;</span>
               <span class="cstrip__expand cstrip__expand--ghost">Ko-fi &rarr;</span>
             </div>
           </div>
@@ -688,6 +688,28 @@ const services = [
       window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && lightbox.dataset.open === 'true') closeLightbox();
       });
+    })();
+
+    // Campaign strip — cell reveal + track animation via IntersectionObserver
+    (() => {
+      const strip = document.querySelector('.cstrip');
+      const cells = Array.from(document.querySelectorAll('.cstrip__cell'));
+      if (!strip || cells.length === 0) return;
+
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          if (entry.target === strip) {
+            strip.classList.add('is-visible');
+          } else {
+            entry.target.classList.add('is-visible');
+          }
+          obs.unobserve(entry.target);
+        });
+      }, { threshold: 0.15 });
+
+      obs.observe(strip);
+      cells.forEach((c) => obs.observe(c));
     })();
 
     // Timeline modal triggers
@@ -1510,7 +1532,7 @@ const services = [
      CAMPAIGN STRIP
      ═══════════════════════════════════════════════════ */
 
-  /* Wrapper */
+  /* Wrapper — reveal on scroll via IntersectionObserver */
   .cstrip {
     background: #0A0B0C;
     border-top: 3px solid #40C4C4;
@@ -1518,13 +1540,31 @@ const services = [
     position: relative;
   }
 
-  /* Header bar */
+  /* Header bar with scan-line sweep */
   .cstrip__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0.55rem 1.6rem;
     border-bottom: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Sweep line across header */
+  .cstrip__header::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    left: -100%;
+    width: 40%;
+    background: linear-gradient(90deg, transparent, rgba(64,196,196,0.04), transparent);
+    animation: cstrip-sweep 6s ease-in-out infinite 1.5s;
+  }
+
+  @keyframes cstrip-sweep {
+    0%   { left: -40%; }
+    100% { left: 110%; }
   }
 
   .cstrip__label {
@@ -1553,6 +1593,7 @@ const services = [
     height: 7px;
     border-radius: 50%;
     background: #40C4C4;
+    flex-shrink: 0;
     box-shadow: 0 0 0 0 rgba(64,196,196,0.6);
     animation: cstrip-pulse 2s ease-in-out infinite;
   }
@@ -1578,7 +1619,7 @@ const services = [
     position: relative;
     display: block;
     border: none;
-    border-right: 1px solid rgba(255,255,255,0.05);
+    border-right: 1px solid rgba(255,255,255,0.055);
     background: transparent;
     color: #F6F7FA;
     cursor: pointer;
@@ -1587,18 +1628,62 @@ const services = [
     text-decoration: none;
     transition: background 0.22s ease;
     min-width: 0;
+
+    /* Scroll-driven reveal — initial state */
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s ease, background 0.22s ease;
   }
 
-  .cstrip__cell:hover { background: rgba(255,255,255,0.035); }
+  /* Visible state (added by JS IntersectionObserver) */
+  .cstrip__cell.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
-  /* Colored top accent bar (full-width bar at very top of cell) */
+  /* Stagger delays */
+  .cstrip__cell:nth-child(1) { transition-delay: 0s,    0s,    0s; }
+  .cstrip__cell:nth-child(2) { transition-delay: 0.08s, 0.08s, 0s; }
+  .cstrip__cell:nth-child(3) { transition-delay: 0.16s, 0.16s, 0s; }
+  .cstrip__cell:nth-child(4) { transition-delay: 0.24s, 0.24s, 0s; }
+  .cstrip__cell:nth-child(5) { transition-delay: 0.32s, 0.32s, 0s; }
+
+  /* Hover state — colored bottom border glow per cell type */
+  .cstrip__cell:hover { background: rgba(255,255,255,0.038); }
+  .cstrip__cell--done:hover     { box-shadow: inset 0 -2px 0 #40C4C4; }
+  .cstrip__cell--prusa:hover    { box-shadow: inset 0 -2px 0 #FA6831; }
+  .cstrip__cell--upcoming:hover { box-shadow: inset 0 -2px 0 rgba(64,196,196,0.5); }
+
+  /* F1 livery-inspired diagonal accent bar
+     Skewed pseudo-element creates the angled zone-end effect */
   .cstrip__cell-accent {
     height: 3px;
     width: 100%;
+    position: relative;
+    overflow: visible;
   }
   .cstrip__cell-accent--teal   { background: #40C4C4; }
   .cstrip__cell-accent--orange { background: #FA6831; }
-  .cstrip__cell-accent--ghost  { background: transparent; border-top: 1px dashed rgba(64,196,196,0.25); }
+  .cstrip__cell-accent--ghost  {
+    background: transparent;
+    border-top: 1px dashed rgba(64,196,196,0.22);
+    height: 0;
+    margin-top: 3px;
+  }
+
+  /* Diagonal zone-end notch at right edge of each solid accent */
+  .cstrip__cell-accent--teal::after,
+  .cstrip__cell-accent--orange::after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: 0;
+    width: 12px;
+    height: 3px;
+    background: inherit;
+    clip-path: polygon(0 0, 50% 0, 100% 100%, 50% 100%);
+    z-index: 1;
+  }
 
   /* Two-col inner layout */
   .cstrip__cell-inner {
@@ -1606,10 +1691,10 @@ const services = [
     grid-template-columns: 1fr auto;
     gap: 0.75rem;
     align-items: center;
-    padding: 1.1rem 1.4rem 1.25rem;
+    padding: 1.1rem 1.4rem 1.3rem;
   }
 
-  /* Left column: badge → date → title → sub */
+  /* Left column */
   .cstrip__cell-left {
     display: flex;
     flex-direction: column;
@@ -1623,17 +1708,32 @@ const services = [
     align-items: center;
     gap: 0.3rem;
     font-family: 'Courier New', monospace;
-    font-size: 0.6rem;
+    font-size: 0.58rem;
     font-weight: 700;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    padding: 0.18rem 0.5rem;
-    border-radius: 2px;
+    padding: 0.18rem 0.45rem;
     width: fit-content;
+    line-height: 1.3;
   }
-  .cstrip__badge--done     { background: rgba(64,196,196,0.12);  color: #40C4C4; }
-  .cstrip__badge--upcoming { background: rgba(64,196,196,0.08);  color: rgba(64,196,196,0.8); border: 1px solid rgba(64,196,196,0.25); }
-  .cstrip__badge--open     { background: transparent; color: rgba(246,247,250,0.3); border: 1px dashed rgba(246,247,250,0.15); }
+  .cstrip__badge--done     { background: rgba(64,196,196,0.1); color: #40C4C4; }
+  .cstrip__badge--upcoming { color: rgba(64,196,196,0.75); border: 1px solid rgba(64,196,196,0.22); }
+  .cstrip__badge--open     {
+    color: rgba(246,247,250,0.28);
+    border: 1px dashed rgba(246,247,250,0.12);
+    animation: cstrip-march 12s linear infinite;
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgba(64,196,196,0.08) 0px, rgba(64,196,196,0.08) 4px,
+      transparent 4px, transparent 10px
+    );
+    background-size: 14px 100%;
+  }
+
+  @keyframes cstrip-march {
+    from { background-position: 0 0; }
+    to   { background-position: 56px 0; }
+  }
 
   /* Date */
   .cstrip__date {
@@ -1642,7 +1742,7 @@ const services = [
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgba(246,247,250,0.35);
+    color: rgba(246,247,250,0.3);
   }
 
   /* Title */
@@ -1658,28 +1758,29 @@ const services = [
     text-overflow: ellipsis;
   }
   .cstrip__title--ghost {
-    color: rgba(246,247,250,0.2);
+    color: rgba(246,247,250,0.18);
     font-weight: 700;
-    letter-spacing: 0.04em;
-    font-size: 0.88rem;
+    letter-spacing: 0.05em;
+    font-size: 0.85rem;
+    font-family: 'Courier New', monospace;
   }
-  .cstrip__cell--open:hover .cstrip__title--ghost { color: rgba(246,247,250,0.45); }
+  .cstrip__cell--open:hover .cstrip__title--ghost { color: rgba(246,247,250,0.5); }
 
   /* Sub */
   .cstrip__sub {
     font-family: var(--font-tech, 'Archivo', sans-serif);
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 0.04em;
-    color: rgba(246,247,250,0.32);
+    color: rgba(246,247,250,0.3);
     line-height: 1.35;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .cstrip__sub--ghost { color: rgba(246,247,250,0.15); }
+  .cstrip__sub--ghost { color: rgba(246,247,250,0.12); font-family: 'Courier New', monospace; font-size: 0.62rem; letter-spacing: 0.1em; }
 
-  /* Right column: logo or image + expand arrow */
+  /* Right column */
   .cstrip__cell-right {
     display: flex;
     flex-direction: column;
@@ -1692,76 +1793,139 @@ const services = [
     height: 24px;
     width: auto;
     max-width: 80px;
-    opacity: 0.55;
+    opacity: 0.5;
     filter: brightness(0) invert(1);
     transition: opacity 0.2s ease;
     object-fit: contain;
   }
-  .cstrip__cell:hover .cstrip__logo { opacity: 0.9; }
+  .cstrip__cell:hover .cstrip__logo { opacity: 0.95; }
 
   .cstrip__logo--prusa {
     filter: none;
-    opacity: 0.65;
+    opacity: 0.6;
   }
 
-  /* Fleet image inside featured cell */
+  /* Fleet photo in featured cell */
   .cstrip__img {
-    width: 80px;
-    height: 56px;
+    width: 84px;
+    height: 58px;
     object-fit: cover;
-    border: 2px solid rgba(255,255,255,0.12);
+    border: 2px solid rgba(64,196,196,0.2);
     display: block;
     flex-shrink: 0;
+    transition: border-color 0.2s ease;
   }
+  .cstrip__cell:hover .cstrip__img { border-color: rgba(64,196,196,0.5); }
 
   .cstrip__expand {
-    font-size: 0.75rem;
-    color: rgba(64,196,196,0.45);
+    font-size: 0.72rem;
+    color: rgba(64,196,196,0.4);
     font-family: 'Courier New', monospace;
     transition: color 0.2s ease, transform 0.2s ease;
     display: block;
   }
   .cstrip__cell:hover .cstrip__expand { color: #40C4C4; transform: translate(2px,-2px); }
-  .cstrip__expand--ghost { color: rgba(246,247,250,0.2); }
-  .cstrip__cell--open:hover .cstrip__expand--ghost { color: rgba(64,196,196,0.7); }
+  .cstrip__expand--ghost { color: rgba(246,247,250,0.15); }
+  .cstrip__cell--open:hover .cstrip__expand--ghost { color: rgba(64,196,196,0.65); transform: translate(2px,-2px); }
 
-  .cstrip__open-icon {
-    font-size: 1.6rem;
-    font-weight: 300;
-    color: rgba(64,196,196,0.25);
-    line-height: 1;
+  /* Classification dashes for open slots */
+  .cstrip__slot-code {
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgba(246,247,250,0.1);
+    letter-spacing: 0.2em;
     transition: color 0.2s ease;
   }
-  .cstrip__cell--open:hover .cstrip__open-icon { color: rgba(64,196,196,0.55); }
+  .cstrip__cell--open:hover .cstrip__slot-code { color: rgba(64,196,196,0.35); }
 
   /* Featured cell: wider */
   .cstrip__cell--featured { flex: 2 0 300px; }
 
-  /* Open slot cell */
-  .cstrip__cell--open {
-    border-right: 1px dashed rgba(64,196,196,0.1);
-  }
-  .cstrip__cell--open .cstrip__cell-accent--ghost {
-    border-top: 1px dashed rgba(64,196,196,0.18);
-    height: 0;
+  /* SCAN animation on featured/upcoming cell — radar sweep */
+  .cstrip__cell--scan { overflow: hidden; }
+  .cstrip__cell--scan::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 0%,
+      transparent 40%,
+      rgba(64,196,196,0.06) 50%,
+      transparent 60%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: cstrip-scan 4s ease-in-out infinite 2s;
+    pointer-events: none;
   }
 
-  /* Progress track */
+  @keyframes cstrip-scan {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+  }
+
+  /* Open slot cell */
+  .cstrip__cell--open {
+    border-right: 1px dashed rgba(64,196,196,0.08);
+  }
+
+  /* Progress track — animated shimmer fill */
   .cstrip__track {
-    height: 2px;
-    background: rgba(255,255,255,0.05);
+    height: 3px;
+    background: rgba(255,255,255,0.04);
+    position: relative;
+    overflow: hidden;
   }
   .cstrip__track-fill {
     height: 100%;
     width: 66%;
-    background: linear-gradient(90deg, #40C4C4, rgba(64,196,196,0.4));
+    background: linear-gradient(90deg, #1a7a7a, #40C4C4, rgba(64,196,196,0.35));
+    position: relative;
+    animation: cstrip-track-in 1.4s cubic-bezier(0.16,1,0.3,1) forwards;
+    animation-play-state: paused;
+  }
+
+  /* Track animates in when strip is visible (JS toggles this) */
+  .cstrip.is-visible .cstrip__track-fill {
+    animation-play-state: running;
+  }
+
+  @keyframes cstrip-track-in {
+    from { width: 0; }
+    to   { width: 66%; }
+  }
+
+  /* Shimmer loop on track fill */
+  .cstrip__track-fill::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+    transform: translateX(-100%);
+    animation: cstrip-shimmer 3s ease-in-out infinite 2s;
+  }
+
+  @keyframes cstrip-shimmer {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(400%); }
   }
 
   @media (max-width: 700px) {
-    .cstrip__cell { flex: 0 0 200px; }
+    .cstrip__cell         { flex: 0 0 200px; }
     .cstrip__cell--featured { flex: 0 0 260px; }
-    .cstrip__cell-inner { padding: 0.9rem 1rem 1rem; gap: 0.5rem; }
-    .cstrip__img { width: 60px; height: 42px; }
+    .cstrip__cell-inner   { padding: 0.9rem 1rem 1rem; gap: 0.5rem; }
+    .cstrip__img          { width: 60px; height: 42px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cstrip__pulse          { animation: none; box-shadow: 0 0 0 2px rgba(64,196,196,0.5); }
+    .cstrip__header::after  { animation: none; }
+    .cstrip__cell--scan::after { animation: none; }
+    .cstrip__track-fill     { animation: none; width: 66%; }
+    .cstrip__track-fill::after { animation: none; }
+    .cstrip__badge--open    { animation: none; }
   }
 
   /* ═══════════════════════════════════════════════════

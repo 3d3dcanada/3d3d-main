@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import CampaignStrip from '../components/CampaignStrip';
 
 const orgSchema = {
   '@context': 'https://schema.org',
@@ -147,266 +148,9 @@ const services = [
     </section>
 
     <!-- ═══════════════════════════════════════════════════
-         CAMPAIGN STRIP
+         CAMPAIGN STRIP (React + Motion)
          ═══════════════════════════════════════════════════ -->
-    <section class="cstrip" aria-label="Campaign timeline">
-
-      <!-- Strip label -->
-      <div class="cstrip__header">
-        <span class="cstrip__label">Campaign Timeline</span>
-        <span class="cstrip__status">
-          <span class="cstrip__pulse"></span>
-          Live — Newport-Bermuda 2026
-        </span>
-      </div>
-
-      <div class="cstrip__rail">
-
-        <!-- COMPLETED: 3D3D Founded -->
-        <button class="cstrip__cell cstrip__cell--done" data-timeline-modal="modal-3d3d" aria-label="3D3D Founded — click for details">
-          <div class="cstrip__cell-accent cstrip__cell-accent--teal"></div>
-          <div class="cstrip__cell-inner">
-            <div class="cstrip__cell-left">
-              <span class="cstrip__badge cstrip__badge--done">&#10003; Done</span>
-              <time class="cstrip__date">03 / 2025</time>
-              <strong class="cstrip__title">3D3D Founded</strong>
-              <span class="cstrip__sub">RV. Generator. Three printers.</span>
-            </div>
-            <div class="cstrip__cell-right">
-              <img src="/media/brand/3d3d-logo.svg" alt="3D3D" class="cstrip__logo" loading="lazy" />
-              <span class="cstrip__expand">&#8599;</span>
-            </div>
-          </div>
-        </button>
-
-        <!-- COMPLETED: Prusa Sponsorship -->
-        <button class="cstrip__cell cstrip__cell--done cstrip__cell--prusa" data-timeline-modal="modal-prusa" aria-label="Prusa CORE One L sponsorship — click for details">
-          <div class="cstrip__cell-accent cstrip__cell-accent--orange"></div>
-          <div class="cstrip__cell-inner">
-            <div class="cstrip__cell-left">
-              <span class="cstrip__badge cstrip__badge--done">&#10003; Done</span>
-              <time class="cstrip__date">03 / 2026</time>
-              <strong class="cstrip__title">Prusa CORE One L</strong>
-              <span class="cstrip__sub">Sponsorship acquired</span>
-            </div>
-            <div class="cstrip__cell-right">
-              <img src="/media/brand/prusa-logo.svg" alt="Prusa Research" class="cstrip__logo cstrip__logo--prusa" loading="lazy" />
-              <span class="cstrip__expand">&#8599;</span>
-            </div>
-          </div>
-        </button>
-
-        <!-- UPCOMING: Newport-Bermuda — featured, wider -->
-        <button class="cstrip__cell cstrip__cell--upcoming cstrip__cell--featured cstrip__cell--scan" data-timeline-modal="modal-newport" aria-label="Newport-Bermuda Race 2026 — click for details">
-          <div class="cstrip__cell-accent cstrip__cell-accent--teal"></div>
-          <div class="cstrip__cell-inner">
-            <div class="cstrip__cell-left">
-              <span class="cstrip__badge cstrip__badge--upcoming">&#9654; Upcoming</span>
-              <time class="cstrip__date">06 / 2026</time>
-              <strong class="cstrip__title">Newport &rarr; Bermuda</strong>
-              <span class="cstrip__sub">120th running &middot; 635nm &middot; Live fabrication aboard</span>
-            </div>
-            <div class="cstrip__cell-right">
-              <img src="/media/real/fleet-running.jpg" alt="Fleet at sea" class="cstrip__img" loading="lazy" />
-              <span class="cstrip__expand">&#8599;</span>
-            </div>
-          </div>
-        </button>
-
-        <!-- OPEN: Sponsor slot 1 -->
-        <a href="/contact?subject=sponsorship" class="cstrip__cell cstrip__cell--open" data-cat="CAT-01">
-          <div class="cstrip__cell-accent cstrip__cell-accent--ghost"></div>
-          <div class="cstrip__cell-inner">
-            <div class="cstrip__cell-left">
-              <span class="cstrip__badge cstrip__badge--open">[CAT-01 &middot; OPEN]</span>
-              <time class="cstrip__date">2026</time>
-              <strong class="cstrip__title cstrip__title--ghost">Campaign Partner</strong>
-              <span class="cstrip__sub cstrip__sub--ghost">Slot reserved &middot; Enquire</span>
-            </div>
-            <div class="cstrip__cell-right">
-              <span class="cstrip__slot-code">&#8212;&#8212;</span>
-              <span class="cstrip__expand cstrip__expand--ghost">Apply &rarr;</span>
-            </div>
-          </div>
-        </a>
-
-        <!-- OPEN: Sponsor slot 2 -->
-        <a href="https://ko-fi.com/3d3dca" target="_blank" rel="noopener noreferrer" class="cstrip__cell cstrip__cell--open" data-cat="CAT-02">
-          <div class="cstrip__cell-accent cstrip__cell-accent--ghost"></div>
-          <div class="cstrip__cell-inner">
-            <div class="cstrip__cell-left">
-              <span class="cstrip__badge cstrip__badge--open">[CAT-02 &middot; OPEN]</span>
-              <time class="cstrip__date">2026</time>
-              <strong class="cstrip__title cstrip__title--ghost">Support the Mission</strong>
-              <span class="cstrip__sub cstrip__sub--ghost">Ko-fi &middot; Any amount</span>
-            </div>
-            <div class="cstrip__cell-right">
-              <span class="cstrip__slot-code">&#8212;&#8212;</span>
-              <span class="cstrip__expand cstrip__expand--ghost">Ko-fi &rarr;</span>
-            </div>
-          </div>
-        </a>
-
-      </div>
-
-      <!-- Progress track -->
-      <div class="cstrip__track" aria-hidden="true">
-        <div class="cstrip__track-fill"></div>
-      </div>
-
-    </section>
-
-    <!-- ═══ MODALS ═══ -->
-    <div class="tm" id="modal-3d3d" data-open="false" hidden>
-      <div class="tm__backdrop" data-timeline-modal-close></div>
-      <div class="tm__panel">
-        <button class="tm__close" data-timeline-modal-close aria-label="Close">&times;</button>
-
-        <div class="tm__head tm__head--teal">
-          <span class="tm__head-date">Founded 03 / 2025</span>
-          <img src="/media/brand/3d3d-logo.svg" alt="3D3D" class="tm__head-logo" />
-        </div>
-
-        <div class="tm__body">
-          <h3 class="tm__title">3D3D</h3>
-          <p class="tm__location">Atlantic Canada &middot; Serving worldwide</p>
-
-          <p class="tm__text">
-            One-person specialty fabrication operation. Started in an RV running three printers off a $30/day generator in 35-degree heat. Ten years as a mechanic — built performance engines, worked drag cars, restored classics. 20,000+ nautical miles offshore. Learned sailing on a duo passage from Halifax to Antigua that hit a cat-one storm: 70-knot sustained winds, 90-knot gusts.
-          </p>
-          <p class="tm__text">
-            17 engineering-grade compounds in the stack — ASA, PETG-CF, PA11-CF, PP-GF, PPS, PEI 1010 and more. Every part designed for the conditions it has to survive. Not for display cases.
-          </p>
-
-          <div class="tm__facts">
-            <div class="tm__fact">
-              <span class="tm__fact-val">17</span>
-              <span class="tm__fact-key">Materials</span>
-            </div>
-            <div class="tm__fact">
-              <span class="tm__fact-val">20k+</span>
-              <span class="tm__fact-key">Nautical miles</span>
-            </div>
-            <div class="tm__fact">
-              <span class="tm__fact-val">10yr</span>
-              <span class="tm__fact-key">Mechanical</span>
-            </div>
-            <div class="tm__fact">
-              <span class="tm__fact-val">1</span>
-              <span class="tm__fact-key">Founder</span>
-            </div>
-          </div>
-
-          <div class="tm__links">
-            <a href="/about" class="tm__cta tm__cta--primary">About Ken &rarr;</a>
-            <a href="/materials" class="tm__cta">Material Stack &rarr;</a>
-            <a href="/contact" class="tm__cta">Request Service &rarr;</a>
-            <a href="https://www.printables.com/@KTK3D_3050116" target="_blank" rel="noopener noreferrer" class="tm__cta">Printables &rarr;</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tm" id="modal-prusa" data-open="false" hidden>
-      <div class="tm__backdrop" data-timeline-modal-close></div>
-      <div class="tm__panel">
-        <button class="tm__close" data-timeline-modal-close aria-label="Close">&times;</button>
-
-        <div class="tm__head tm__head--orange">
-          <span class="tm__head-date">Acquired 03 / 2026</span>
-          <img src="/media/brand/prusa-logo.svg" alt="Prusa Research" class="tm__head-logo" />
-        </div>
-
-        <div class="tm__body">
-          <h3 class="tm__title">Prusa CORE One L</h3>
-          <p class="tm__location">Flagship enclosed CoreXY &middot; Open-source</p>
-
-          <p class="tm__text">
-            After a year of daily documented work on the Prusa ecosystem, Prusa Research recognized 3D3D's commitment and is sending the CORE One L — their flagship enclosed CoreXY machine. This isn't marketing. It's recognition. The CORE One L ships with active chamber heating to 90°C, input shaping for high-speed printing without ringing, and tool-changing capability for multi-material runs.
-          </p>
-          <p class="tm__text">
-            The machine will be deployed live aboard CSM the Mariner during the 2026 Newport-Bermuda Race, printing engineering-grade parts 635nm offshore in open-ocean conditions.
-          </p>
-
-          <div class="tm__facts">
-            <div class="tm__fact">
-              <span class="tm__fact-val">360</span>
-              <span class="tm__fact-key">mm³/s flow</span>
-            </div>
-            <div class="tm__fact">
-              <span class="tm__fact-val">90°C</span>
-              <span class="tm__fact-key">Chamber heat</span>
-            </div>
-            <div class="tm__fact">
-              <span class="tm__fact-val">IS</span>
-              <span class="tm__fact-key">Input shaping</span>
-            </div>
-            <div class="tm__fact">
-              <span class="tm__fact-val">AMS</span>
-              <span class="tm__fact-key">Tool changing</span>
-            </div>
-          </div>
-
-          <div class="tm__links">
-            <a href="https://www.prusa3d.com/en/category/original-prusa-core-one/" target="_blank" rel="noopener noreferrer" class="tm__cta tm__cta--primary tm__cta--orange">Prusa CORE One &rarr;</a>
-            <a href="/materials" class="tm__cta">Material Stack &rarr;</a>
-            <a href="/events" class="tm__cta">Campaign Log &rarr;</a>
-            <a href="https://ko-fi.com/3d3dca" target="_blank" rel="noopener noreferrer" class="tm__cta">Support on Ko-fi &rarr;</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tm" id="modal-newport" data-open="false" hidden>
-      <div class="tm__backdrop" data-timeline-modal-close></div>
-      <div class="tm__panel tm__panel--wide">
-        <button class="tm__close" data-timeline-modal-close aria-label="Close">&times;</button>
-
-        <div class="tm__head tm__head--teal">
-          <span class="tm__head-date">June 2026 &middot; 120th Running</span>
-          <span class="tm__head-tag">LIVE FABRICATION</span>
-        </div>
-
-        <div class="tm__photo-strip">
-          <img src="/media/real/fleet-start-press.jpg" alt="Fleet at the start" loading="lazy" />
-        </div>
-
-        <div class="tm__body">
-          <h3 class="tm__title">Newport, RI &rarr; Bermuda</h3>
-          <p class="tm__location">635nm &middot; Open Atlantic &middot; Gulf Stream crossing</p>
-
-          <p class="tm__text">
-            Aboard CSM the Mariner with a Prusa CORE One L printing live during the crossing. Spinnaker pole end fittings crack during night peels. Electronics brackets shatter when the hull slams a Gulf Stream trough. 200 miles offshore you cannot call a rigger — you fabricate the replacement while the boat holds its heading. Every part documented, tested, and published.
-          </p>
-
-          <div class="tm__facts">
-            <div class="tm__fact">
-              <span class="tm__fact-val">635</span>
-              <span class="tm__fact-key">Nautical miles</span>
-            </div>
-            <div class="tm__fact">
-              <span class="tm__fact-val">120</span>
-              <span class="tm__fact-key">Years running</span>
-            </div>
-            <div class="tm__fact">
-              <span class="tm__fact-val">Live</span>
-              <span class="tm__fact-key">3D printing</span>
-            </div>
-            <div class="tm__fact">
-              <span class="tm__fact-val">0</span>
-              <span class="tm__fact-key">Excuses</span>
-            </div>
-          </div>
-
-          <div class="tm__links">
-            <a href="/events" class="tm__cta tm__cta--primary">Campaign details &rarr;</a>
-            <a href="https://ko-fi.com/3d3dca" target="_blank" rel="noopener noreferrer" class="tm__cta">Support on Ko-fi &rarr;</a>
-            <a href="/contact?subject=sponsorship" class="tm__cta">Become a sponsor &rarr;</a>
-            <a href="/book" class="tm__cta">Book a call &rarr;</a>
-          </div>
-        </div>
-      </div>
-    </div>
+    <CampaignStrip client:visible />
 
     <!-- ═══════════════════════════════════════════════════
          WHAT WE DO — light
@@ -690,58 +434,7 @@ const services = [
       });
     })();
 
-    // Campaign strip — cell reveal + track animation via IntersectionObserver
-    (() => {
-      const strip = document.querySelector('.cstrip');
-      const cells = Array.from(document.querySelectorAll('.cstrip__cell'));
-      if (!strip || cells.length === 0) return;
-
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          if (entry.target === strip) {
-            strip.classList.add('is-visible');
-          } else {
-            entry.target.classList.add('is-visible');
-          }
-          obs.unobserve(entry.target);
-        });
-      }, { threshold: 0.15 });
-
-      obs.observe(strip);
-      cells.forEach((c) => obs.observe(c));
-    })();
-
-    // Timeline modal triggers
-    (() => {
-      const triggers = Array.from(document.querySelectorAll('[data-timeline-modal]'));
-      triggers.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const id = btn.dataset.timelineModal;
-          const modal = id ? document.getElementById(id) : null;
-          if (!modal) return;
-          modal.hidden = false;
-          requestAnimationFrame(() => {
-            modal.dataset.open = 'true';
-            document.body.classList.add('drawer-open');
-          });
-        });
-      });
-
-      document.querySelectorAll('.tm').forEach((modal) => {
-        const close = () => {
-          modal.dataset.open = 'false';
-          document.body.classList.remove('drawer-open');
-          setTimeout(() => { modal.hidden = true; }, 300);
-        };
-        modal.querySelectorAll('[data-timeline-modal-close]').forEach((el) => {
-          el.addEventListener('click', close);
-        });
-        window.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape' && modal.dataset.open === 'true') close();
-        });
-      });
-    })();
+    // Campaign strip and modals handled by CampaignStrip React component
 
     // Typewriter effect for "I scan it. I model it. I build it."
     (() => {
@@ -1529,648 +1222,6 @@ const services = [
   }
 
   /* ═══════════════════════════════════════════════════
-     CAMPAIGN STRIP
-     ═══════════════════════════════════════════════════ */
-
-  /* Wrapper — reveal on scroll via IntersectionObserver */
-  .cstrip {
-    background: #0A0B0C;
-    border-top: 3px solid #40C4C4;
-    overflow: hidden;
-    position: relative;
-  }
-
-  /* Header bar with scan-line sweep */
-  .cstrip__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.55rem 1.6rem;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    position: relative;
-    overflow: hidden;
-  }
-
-  /* Sweep line across header */
-  .cstrip__header::after {
-    content: '';
-    position: absolute;
-    top: 0; bottom: 0;
-    left: -100%;
-    width: 40%;
-    background: linear-gradient(90deg, transparent, rgba(64,196,196,0.04), transparent);
-    animation: cstrip-sweep 6s ease-in-out infinite 1.5s;
-  }
-
-  @keyframes cstrip-sweep {
-    0%   { left: -40%; }
-    100% { left: 110%; }
-  }
-
-  .cstrip__label {
-    font-family: 'Courier New', monospace;
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(246,247,250,0.3);
-  }
-
-  .cstrip__status {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: 'Courier New', monospace;
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: #40C4C4;
-  }
-
-  .cstrip__pulse {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #40C4C4;
-    flex-shrink: 0;
-    box-shadow: 0 0 0 0 rgba(64,196,196,0.6);
-    animation: cstrip-pulse 2s ease-in-out infinite;
-  }
-
-  @keyframes cstrip-pulse {
-    0%   { box-shadow: 0 0 0 0 rgba(64,196,196,0.7); }
-    70%  { box-shadow: 0 0 0 8px rgba(64,196,196,0); }
-    100% { box-shadow: 0 0 0 0 rgba(64,196,196,0); }
-  }
-
-  /* Rail — horizontal scroll */
-  .cstrip__rail {
-    display: flex;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-  .cstrip__rail::-webkit-scrollbar { display: none; }
-
-  /* Cell base */
-  .cstrip__cell {
-    flex: 1 0 220px;
-    position: relative;
-    display: block;
-    border: none;
-    border-right: 1px solid rgba(255,255,255,0.055);
-    background: transparent;
-    color: #F6F7FA;
-    cursor: pointer;
-    font-family: inherit;
-    text-align: left;
-    text-decoration: none;
-    transition: background 0.22s ease;
-    min-width: 0;
-
-    /* Scroll-driven reveal — initial state */
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.5s ease, transform 0.5s ease, background 0.22s ease;
-  }
-
-  /* Visible state (added by JS IntersectionObserver) */
-  .cstrip__cell.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Stagger delays */
-  .cstrip__cell:nth-child(1) { transition-delay: 0s,    0s,    0s; }
-  .cstrip__cell:nth-child(2) { transition-delay: 0.08s, 0.08s, 0s; }
-  .cstrip__cell:nth-child(3) { transition-delay: 0.16s, 0.16s, 0s; }
-  .cstrip__cell:nth-child(4) { transition-delay: 0.24s, 0.24s, 0s; }
-  .cstrip__cell:nth-child(5) { transition-delay: 0.32s, 0.32s, 0s; }
-
-  /* Hover state — colored bottom border glow per cell type */
-  .cstrip__cell:hover { background: rgba(255,255,255,0.038); }
-  .cstrip__cell--done:hover     { box-shadow: inset 0 -2px 0 #40C4C4; }
-  .cstrip__cell--prusa:hover    { box-shadow: inset 0 -2px 0 #FA6831; }
-  .cstrip__cell--upcoming:hover { box-shadow: inset 0 -2px 0 rgba(64,196,196,0.5); }
-
-  /* F1 livery-inspired diagonal accent bar
-     Skewed pseudo-element creates the angled zone-end effect */
-  .cstrip__cell-accent {
-    height: 3px;
-    width: 100%;
-    position: relative;
-    overflow: visible;
-  }
-  .cstrip__cell-accent--teal   { background: #40C4C4; }
-  .cstrip__cell-accent--orange { background: #FA6831; }
-  .cstrip__cell-accent--ghost  {
-    background: transparent;
-    border-top: 1px dashed rgba(64,196,196,0.22);
-    height: 0;
-    margin-top: 3px;
-  }
-
-  /* Diagonal zone-end notch at right edge of each solid accent */
-  .cstrip__cell-accent--teal::after,
-  .cstrip__cell-accent--orange::after {
-    content: '';
-    position: absolute;
-    right: -6px;
-    top: 0;
-    width: 12px;
-    height: 3px;
-    background: inherit;
-    clip-path: polygon(0 0, 50% 0, 100% 100%, 50% 100%);
-    z-index: 1;
-  }
-
-  /* Two-col inner layout */
-  .cstrip__cell-inner {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 0.75rem;
-    align-items: center;
-    padding: 1.1rem 1.4rem 1.3rem;
-  }
-
-  /* Left column */
-  .cstrip__cell-left {
-    display: flex;
-    flex-direction: column;
-    gap: 0.28rem;
-    min-width: 0;
-  }
-
-  /* Status badges */
-  .cstrip__badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    font-family: 'Courier New', monospace;
-    font-size: 0.58rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    padding: 0.18rem 0.45rem;
-    width: fit-content;
-    line-height: 1.3;
-  }
-  .cstrip__badge--done     { background: rgba(64,196,196,0.1); color: #40C4C4; }
-  .cstrip__badge--upcoming { color: rgba(64,196,196,0.75); border: 1px solid rgba(64,196,196,0.22); }
-  .cstrip__badge--open     {
-    color: rgba(246,247,250,0.28);
-    border: 1px dashed rgba(246,247,250,0.12);
-    animation: cstrip-march 12s linear infinite;
-    background-image: repeating-linear-gradient(
-      90deg,
-      rgba(64,196,196,0.08) 0px, rgba(64,196,196,0.08) 4px,
-      transparent 4px, transparent 10px
-    );
-    background-size: 14px 100%;
-  }
-
-  @keyframes cstrip-march {
-    from { background-position: 0 0; }
-    to   { background-position: 56px 0; }
-  }
-
-  /* Date */
-  .cstrip__date {
-    font-family: 'Courier New', monospace;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: rgba(246,247,250,0.3);
-  }
-
-  /* Title */
-  .cstrip__title {
-    font-family: var(--font-display, 'Archivo', sans-serif);
-    font-size: 1rem;
-    font-weight: 800;
-    letter-spacing: -0.01em;
-    line-height: 1.15;
-    color: #F6F7FA;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .cstrip__title--ghost {
-    color: rgba(246,247,250,0.18);
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    font-size: 0.85rem;
-    font-family: 'Courier New', monospace;
-  }
-  .cstrip__cell--open:hover .cstrip__title--ghost { color: rgba(246,247,250,0.5); }
-
-  /* Sub */
-  .cstrip__sub {
-    font-family: var(--font-tech, 'Archivo', sans-serif);
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    color: rgba(246,247,250,0.3);
-    line-height: 1.35;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .cstrip__sub--ghost { color: rgba(246,247,250,0.12); font-family: 'Courier New', monospace; font-size: 0.62rem; letter-spacing: 0.1em; }
-
-  /* Right column */
-  .cstrip__cell-right {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.5rem;
-    flex-shrink: 0;
-  }
-
-  .cstrip__logo {
-    height: 24px;
-    width: auto;
-    max-width: 80px;
-    opacity: 0.5;
-    filter: brightness(0) invert(1);
-    transition: opacity 0.2s ease;
-    object-fit: contain;
-  }
-  .cstrip__cell:hover .cstrip__logo { opacity: 0.95; }
-
-  .cstrip__logo--prusa {
-    filter: none;
-    opacity: 0.6;
-  }
-
-  /* Fleet photo in featured cell */
-  .cstrip__img {
-    width: 84px;
-    height: 58px;
-    object-fit: cover;
-    border: 2px solid rgba(64,196,196,0.2);
-    display: block;
-    flex-shrink: 0;
-    transition: border-color 0.2s ease;
-  }
-  .cstrip__cell:hover .cstrip__img { border-color: rgba(64,196,196,0.5); }
-
-  .cstrip__expand {
-    font-size: 0.72rem;
-    color: rgba(64,196,196,0.4);
-    font-family: 'Courier New', monospace;
-    transition: color 0.2s ease, transform 0.2s ease;
-    display: block;
-  }
-  .cstrip__cell:hover .cstrip__expand { color: #40C4C4; transform: translate(2px,-2px); }
-  .cstrip__expand--ghost { color: rgba(246,247,250,0.15); }
-  .cstrip__cell--open:hover .cstrip__expand--ghost { color: rgba(64,196,196,0.65); transform: translate(2px,-2px); }
-
-  /* Classification dashes for open slots */
-  .cstrip__slot-code {
-    font-family: 'Courier New', monospace;
-    font-size: 1rem;
-    font-weight: 400;
-    color: rgba(246,247,250,0.1);
-    letter-spacing: 0.2em;
-    transition: color 0.2s ease;
-  }
-  .cstrip__cell--open:hover .cstrip__slot-code { color: rgba(64,196,196,0.35); }
-
-  /* Featured cell: wider */
-  .cstrip__cell--featured { flex: 2 0 300px; }
-
-  /* SCAN animation on featured/upcoming cell — radar sweep */
-  .cstrip__cell--scan { overflow: hidden; }
-  .cstrip__cell--scan::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      105deg,
-      transparent 0%,
-      transparent 40%,
-      rgba(64,196,196,0.06) 50%,
-      transparent 60%,
-      transparent 100%
-    );
-    transform: translateX(-100%);
-    animation: cstrip-scan 4s ease-in-out infinite 2s;
-    pointer-events: none;
-  }
-
-  @keyframes cstrip-scan {
-    0%   { transform: translateX(-100%); }
-    100% { transform: translateX(200%); }
-  }
-
-  /* Open slot cell */
-  .cstrip__cell--open {
-    border-right: 1px dashed rgba(64,196,196,0.08);
-  }
-
-  /* Progress track — animated shimmer fill */
-  .cstrip__track {
-    height: 3px;
-    background: rgba(255,255,255,0.04);
-    position: relative;
-    overflow: hidden;
-  }
-  .cstrip__track-fill {
-    height: 100%;
-    width: 66%;
-    background: linear-gradient(90deg, #1a7a7a, #40C4C4, rgba(64,196,196,0.35));
-    position: relative;
-    animation: cstrip-track-in 1.4s cubic-bezier(0.16,1,0.3,1) forwards;
-    animation-play-state: paused;
-  }
-
-  /* Track animates in when strip is visible (JS toggles this) */
-  .cstrip.is-visible .cstrip__track-fill {
-    animation-play-state: running;
-  }
-
-  @keyframes cstrip-track-in {
-    from { width: 0; }
-    to   { width: 66%; }
-  }
-
-  /* Shimmer loop on track fill */
-  .cstrip__track-fill::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
-    transform: translateX(-100%);
-    animation: cstrip-shimmer 3s ease-in-out infinite 2s;
-  }
-
-  @keyframes cstrip-shimmer {
-    0%   { transform: translateX(-100%); }
-    100% { transform: translateX(400%); }
-  }
-
-  @media (max-width: 700px) {
-    .cstrip__cell         { flex: 0 0 200px; }
-    .cstrip__cell--featured { flex: 0 0 260px; }
-    .cstrip__cell-inner   { padding: 0.9rem 1rem 1rem; gap: 0.5rem; }
-    .cstrip__img          { width: 60px; height: 42px; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .cstrip__pulse          { animation: none; box-shadow: 0 0 0 2px rgba(64,196,196,0.5); }
-    .cstrip__header::after  { animation: none; }
-    .cstrip__cell--scan::after { animation: none; }
-    .cstrip__track-fill     { animation: none; width: 66%; }
-    .cstrip__track-fill::after { animation: none; }
-    .cstrip__badge--open    { animation: none; }
-  }
-
-  /* ═══════════════════════════════════════════════════
-     TIMELINE MODALS  (.tm)
-     ═══════════════════════════════════════════════════ */
-
-  .tm {
-    position: fixed;
-    inset: 0;
-    z-index: 300;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    pointer-events: none;
-  }
-  .tm[data-open='true'] { pointer-events: all; }
-
-  .tm__backdrop {
-    position: absolute;
-    inset: 0;
-    background: rgba(8,10,11,0.88);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    opacity: 0;
-    transition: opacity 0.28s ease;
-    cursor: pointer;
-  }
-  .tm[data-open='true'] .tm__backdrop { opacity: 1; }
-
-  .tm__panel {
-    position: relative;
-    z-index: 1;
-    background: #FFFFFF;
-    color: #111214;
-    border: 3px solid #111214;
-    border-radius: 0;
-    max-width: 560px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    transform: scale(0.93) translateY(20px);
-    opacity: 0;
-    transition: transform 0.34s cubic-bezier(0.16,1,0.3,1), opacity 0.28s ease;
-    scrollbar-width: thin;
-    scrollbar-color: #111214 transparent;
-  }
-  .tm__panel--wide { max-width: 700px; }
-  .tm[data-open='true'] .tm__panel { transform: scale(1) translateY(0); opacity: 1; }
-
-  /* Close button */
-  .tm__close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 2.6rem;
-    height: 2.6rem;
-    background: #111214;
-    border: none;
-    color: #F6F7FA;
-    font-size: 1.3rem;
-    line-height: 1;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.18s ease;
-    z-index: 2;
-  }
-  .tm__close:hover { background: #40C4C4; color: #111214; }
-
-  /* Colored head band */
-  .tm__head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.1rem 1.4rem;
-    padding-right: 3.5rem;
-  }
-  .tm__head--teal   { background: #111214; border-bottom: 3px solid #40C4C4; }
-  .tm__head--orange { background: #111214; border-bottom: 3px solid #FA6831; }
-
-  .tm__head-date {
-    font-family: 'Courier New', monospace;
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(246,247,250,0.55);
-  }
-
-  .tm__head-tag {
-    font-family: 'Courier New', monospace;
-    font-size: 0.6rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: #40C4C4;
-    border: 1px solid rgba(64,196,196,0.4);
-    padding: 0.2rem 0.5rem;
-  }
-
-  .tm__head-logo {
-    height: 26px;
-    width: auto;
-    max-width: 100px;
-    filter: brightness(0) invert(1);
-    opacity: 0.85;
-    object-fit: contain;
-  }
-
-  /* Photo strip (Newport modal) */
-  .tm__photo-strip {
-    height: 200px;
-    overflow: hidden;
-    border-bottom: 3px solid #111214;
-  }
-  .tm__photo-strip img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  /* Body */
-  .tm__body {
-    padding: 1.6rem 1.8rem 2rem;
-  }
-
-  .tm__title {
-    font-family: var(--font-display, 'Archivo', sans-serif);
-    font-size: 1.8rem;
-    font-weight: 800;
-    letter-spacing: -0.035em;
-    text-transform: uppercase;
-    color: #111214;
-    margin: 0 0 0.3rem;
-    line-height: 1.0;
-  }
-
-  .tm__location {
-    font-family: 'Courier New', monospace;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(17,18,20,0.4);
-    margin: 0 0 1.2rem;
-  }
-
-  .tm__text {
-    font-size: 0.95rem;
-    line-height: 1.78;
-    color: rgba(17,18,20,0.72);
-    margin: 0 0 1rem;
-    border-top: 1px solid rgba(17,18,20,0.08);
-    padding-top: 1.2rem;
-  }
-  .tm__text:first-of-type { border-top: none; padding-top: 0; }
-
-  /* Facts grid */
-  .tm__facts {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    border: 2px solid #111214;
-    margin: 1.4rem 0;
-  }
-
-  .tm__fact {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem 0.6rem 0.8rem;
-    gap: 0.25rem;
-    border-right: 2px solid #111214;
-  }
-  .tm__fact:last-child { border-right: none; }
-
-  .tm__fact-val {
-    font-family: var(--font-display, 'Archivo', sans-serif);
-    font-size: 1.6rem;
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    color: #111214;
-    line-height: 1;
-  }
-
-  .tm__fact-key {
-    font-family: 'Courier New', monospace;
-    font-size: 0.58rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(17,18,20,0.4);
-    text-align: center;
-  }
-
-  /* Links */
-  .tm__links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1.6rem;
-  }
-
-  .tm__cta {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.6rem 1rem;
-    background: transparent;
-    color: #111214;
-    border: 2px solid rgba(17,18,20,0.2);
-    font-family: var(--font-tech, 'Archivo', sans-serif);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-  }
-  .tm__cta:hover { background: rgba(17,18,20,0.05); border-color: #111214; transform: translateY(-1px); }
-
-  .tm__cta--primary {
-    background: #111214;
-    color: #F6F7FA;
-    border-color: #111214;
-  }
-  .tm__cta--primary:hover { background: #2a2b2d; }
-
-  .tm__cta--orange {
-    background: #FA6831;
-    color: #FFFFFF;
-    border-color: #FA6831;
-  }
-  .tm__cta--orange:hover { background: #e85e2a; border-color: #e85e2a; }
-
-  @media (max-width: 520px) {
-    .tm__facts { grid-template-columns: repeat(2, 1fr); }
-    .tm__fact:nth-child(2) { border-right: none; }
-    .tm__fact:nth-child(3) { border-top: 2px solid #111214; }
-    .tm__fact:nth-child(4) { border-top: 2px solid #111214; border-right: none; }
-    .tm__title { font-size: 1.5rem; }
-  }
-
-  /* ═══════════════════════════════════════════════════
      LIGHTBOX
      ═══════════════════════════════════════════════════ */
   .lightbox {
@@ -2314,5 +1365,444 @@ const services = [
       clip-path: none !important;
       animation: none !important;
     }
+  }
+</style>
+
+<style is:global>
+  /* ─── CampaignStrip React component ─── */
+
+  .cstrip-root {
+    background: #0A0B0C;
+    border-top: 3px solid #40C4C4;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .cstrip-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.55rem 1.6rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cstrip-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(246,247,250,0.3);
+  }
+
+  .cstrip-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #40C4C4;
+  }
+
+  .cstrip-pulse {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #40C4C4;
+    flex-shrink: 0;
+    display: inline-block;
+  }
+
+  .cstrip-rail {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    align-items: stretch;
+  }
+  .cstrip-rail::-webkit-scrollbar { display: none; }
+
+  .cstrip-cell-wrap {
+    display: flex;
+    border-right: 1px solid rgba(255,255,255,0.05);
+    position: relative;
+  }
+  .cstrip-cell-wrap--open { border-right: 1px dashed rgba(64,196,196,0.08); }
+  .cstrip-cell-wrap:last-child { border-right: none; }
+
+  .cstrip-motion-cell {
+    width: 100%;
+    position: relative;
+    cursor: pointer;
+  }
+  .cstrip-motion-cell.done:hover    { box-shadow: inset 0 -2px 0 #40C4C4; }
+  .cstrip-motion-cell.prusa:hover   { box-shadow: inset 0 -2px 0 #FA6831; }
+  .cstrip-motion-cell.open          { cursor: default; }
+
+  .cstrip-cell-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+    background: none;
+    border: none;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cstrip-accent { width: 100%; }
+
+  .cstrip-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 1.1rem 1.4rem 1.3rem;
+  }
+
+  .cstrip-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.28rem;
+    min-width: 0;
+  }
+
+  .cstrip-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .cstrip-badge {
+    display: inline-flex;
+    align-items: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.18rem 0.45rem;
+    width: fit-content;
+    line-height: 1.3;
+    border-radius: 2px;
+  }
+  .cstrip-badge--done     { }
+  .cstrip-badge--upcoming { border: 1px solid; }
+  .cstrip-badge--open     { color: rgba(246,247,250,0.28); border: 1px dashed rgba(246,247,250,0.15); }
+
+  .cstrip-date {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(246,247,250,0.3);
+  }
+
+  .cstrip-title {
+    font-family: var(--font-display, 'Archivo', sans-serif);
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    color: #F6F7FA;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .cstrip-title--ghost {
+    color: rgba(246,247,250,0.2);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    font-size: 0.85rem;
+    font-family: 'Courier New', monospace;
+    transition: color 0.2s;
+  }
+  .cstrip-motion-cell.open:hover .cstrip-title--ghost { color: rgba(246,247,250,0.5); }
+
+  .cstrip-sub {
+    font-family: var(--font-tech, 'Archivo', sans-serif);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: rgba(246,247,250,0.3);
+    line-height: 1.35;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .cstrip-sub--ghost {
+    color: rgba(246,247,250,0.12);
+    font-family: 'Courier New', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+  }
+
+  .cstrip-logo {
+    height: 24px;
+    width: auto;
+    max-width: 80px;
+    opacity: 0.5;
+    filter: brightness(0) invert(1);
+    object-fit: contain;
+    transition: opacity 0.2s;
+  }
+  .cstrip-motion-cell:hover .cstrip-logo { opacity: 0.95; }
+  .cstrip-logo--color { filter: none; opacity: 0.65; }
+
+  .cstrip-img {
+    width: 84px;
+    height: 58px;
+    object-fit: cover;
+    border: 2px solid rgba(64,196,196,0.2);
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .cstrip-expand {
+    font-size: 0.72rem;
+    font-family: 'Courier New', monospace;
+    display: block;
+    transition: color 0.2s;
+  }
+  .cstrip-expand--ghost { color: rgba(246,247,250,0.15); transition: color 0.2s; }
+
+  .cstrip-dashes {
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    color: rgba(246,247,250,0.08);
+    letter-spacing: 0.2em;
+    transition: color 0.2s;
+  }
+  .cstrip-motion-cell.open:hover .cstrip-dashes { color: rgba(64,196,196,0.3); }
+
+  .cstrip-scan {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(105deg, transparent 35%, rgba(64,196,196,0.07) 50%, transparent 65%);
+  }
+
+  .cstrip-track {
+    height: 3px;
+    background: rgba(255,255,255,0.04);
+    overflow: hidden;
+  }
+  .cstrip-track-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #1a7a7a, #40C4C4, rgba(64,196,196,0.35));
+    position: relative;
+    overflow: hidden;
+  }
+  .cstrip-shimmer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
+  }
+
+  /* ─── Modal overlay ─── */
+  .tm-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: rgba(8,10,11,0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    cursor: pointer;
+  }
+
+  .tm-panel {
+    position: relative;
+    background: #FFFFFF;
+    color: #111214;
+    border: 3px solid #111214;
+    max-width: 560px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    cursor: default;
+    scrollbar-width: thin;
+    scrollbar-color: #111214 transparent;
+  }
+  .tm-panel--wide { max-width: 700px; }
+
+  .tm-close {
+    position: absolute;
+    top: 0; right: 0;
+    width: 2.8rem;
+    height: 2.8rem;
+    background: #111214;
+    border: none;
+    color: #F6F7FA;
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  .tm-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.4rem;
+    padding-right: 3.8rem;
+    background: #111214;
+    border-bottom: 3px solid;
+  }
+
+  .tm-head-date {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(246,247,250,0.5);
+  }
+
+  .tm-head-tag {
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border: 1px solid;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .tm-head-logo {
+    height: 26px;
+    width: auto;
+    max-width: 100px;
+    filter: brightness(0) invert(1);
+    opacity: 0.85;
+    object-fit: contain;
+  }
+  .tm-head-logo--color { filter: none; }
+
+  .tm-photo { height: 210px; overflow: hidden; border-bottom: 3px solid #111214; }
+  .tm-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .tm-body { padding: 1.6rem 1.8rem 2rem; }
+
+  .tm-title {
+    font-family: var(--font-display, 'Archivo', sans-serif);
+    font-size: 1.85rem;
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+    color: #111214;
+    margin: 0 0 0.3rem;
+    line-height: 1.0;
+  }
+
+  .tm-location {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(17,18,20,0.38);
+    margin: 0 0 1.2rem;
+  }
+
+  .tm-text {
+    font-size: 0.95rem;
+    line-height: 1.78;
+    color: rgba(17,18,20,0.72);
+    margin: 0 0 1rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid rgba(17,18,20,0.07);
+  }
+  .tm-text:first-of-type { border-top: none; padding-top: 0; }
+
+  .tm-facts {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 2px solid #111214;
+    margin: 1.4rem 0;
+  }
+  .tm-fact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0.5rem 0.85rem;
+    gap: 0.25rem;
+    border-right: 2px solid #111214;
+  }
+  .tm-fact:last-child { border-right: none; }
+  .tm-fact-val {
+    font-family: var(--font-display, 'Archivo', sans-serif);
+    font-size: 1.65rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: #111214;
+    line-height: 1;
+    display: block;
+  }
+  .tm-fact-key {
+    font-family: 'Courier New', monospace;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(17,18,20,0.38);
+    text-align: center;
+  }
+
+  .tm-links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+  .tm-cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.6rem 1rem;
+    background: transparent;
+    color: #111214;
+    border: 2px solid rgba(17,18,20,0.18);
+    font-family: var(--font-tech, 'Archivo', sans-serif);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .tm-cta:hover { background: rgba(17,18,20,0.05); border-color: #111214; }
+  .tm-cta--primary { background: #111214; color: #F6F7FA; border-color: #111214; }
+  .tm-cta--primary:hover { background: #2a2b2d; }
+  .tm-cta--orange { background: #FA6831; color: #FFF; border-color: #FA6831; }
+  .tm-cta--orange:hover { background: #e85e2a; border-color: #e85e2a; }
+
+  @media (max-width: 700px) {
+    .cstrip-inner { padding: 0.9rem 1rem 1rem; gap: 0.5rem; }
+    .cstrip-img   { width: 60px; height: 42px; }
+  }
+  @media (max-width: 520px) {
+    .tm-facts { grid-template-columns: repeat(2, 1fr); }
+    .tm-fact:nth-child(2) { border-right: none; }
+    .tm-fact:nth-child(3),
+    .tm-fact:nth-child(4) { border-top: 2px solid #111214; }
+    .tm-fact:nth-child(4) { border-right: none; }
+    .tm-title { font-size: 1.5rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cstrip-pulse { animation: none; box-shadow: 0 0 0 2px rgba(64,196,196,0.5); }
+    .cstrip-scan  { display: none; }
   }
 </style>

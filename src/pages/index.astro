@@ -136,10 +136,14 @@ const services = [
 
         <div class="hero-media">
           <div class="hero-video-frame hero-crossfade">
-            <img src="/media/real/race-morning-crew.jpg" class="crossfade-img crossfade-img--1" alt="3D3D on deck" loading="eager" decoding="async" />
+            <img src="/media/real/race-morning-crew.jpg" class="crossfade-img crossfade-img--1" alt="Race morning crew" loading="eager" decoding="async" />
             <img src="/media/real/offshore-day-01.jpg" class="crossfade-img crossfade-img--2" alt="Offshore sailing" loading="lazy" decoding="async" />
             <img src="/media/real/golden-hour-01.jpg" class="crossfade-img crossfade-img--3" alt="Golden hour passage" loading="lazy" decoding="async" />
-            <img src="/media/real/fleet-aerial.jpg" class="crossfade-img crossfade-img--4" alt="Fleet racing" loading="lazy" decoding="async" />
+            <img src="/media/real/fleet-aerial.jpg" class="crossfade-img crossfade-img--4" alt="Fleet aerial" loading="lazy" decoding="async" />
+            <img src="/media/real/sunrise-offshore.jpg" class="crossfade-img crossfade-img--5" alt="Sunrise offshore" loading="lazy" decoding="async" />
+            <img src="/media/real/afternoon-racing-01.jpg" class="crossfade-img crossfade-img--6" alt="Afternoon racing" loading="lazy" decoding="async" />
+            <img src="/media/real/open-ocean-01.jpg" class="crossfade-img crossfade-img--7" alt="Open ocean" loading="lazy" decoding="async" />
+            <img src="/media/real/evening-passage.jpg" class="crossfade-img crossfade-img--8" alt="Evening passage" loading="lazy" decoding="async" />
           </div>
         </div>
       </div>
@@ -589,6 +593,7 @@ const services = [
     flex-direction: column;
     justify-content: center;
     padding-top: clamp(5rem, 8vw, 7rem);
+    overflow: hidden;
   }
 
   .hero-bg {
@@ -662,12 +667,15 @@ const services = [
     to   { clip-path: inset(0 0 0 0); }
   }
 
-  /* Mobile: equal width, centered as a group */
+  /* Mobile: equal-width racing stripes, centered */
   @media (max-width: 767px) {
     .hero-stripes {
       left: 50%;
-      transform: translateX(-50%);
+      translate: -50% 0; /* use CSS translate so JS transform on children doesn't conflict */
       gap: 14px;
+    }
+    .hero-stripe {
+      width: 16px;
     }
   }
 
@@ -838,17 +846,22 @@ const services = [
     opacity: 0;
   }
 
-  .crossfade-img--1 { animation: xfade 20s ease-in-out 0s infinite; }
-  .crossfade-img--2 { animation: xfade 20s ease-in-out 5s infinite; }
-  .crossfade-img--3 { animation: xfade 20s ease-in-out 10s infinite; }
-  .crossfade-img--4 { animation: xfade 20s ease-in-out 15s infinite; }
+  /* 8 images × 6s each = 48s total cycle */
+  .crossfade-img--1 { animation: xfade 48s ease-in-out 0s infinite; }
+  .crossfade-img--2 { animation: xfade 48s ease-in-out 6s infinite; }
+  .crossfade-img--3 { animation: xfade 48s ease-in-out 12s infinite; }
+  .crossfade-img--4 { animation: xfade 48s ease-in-out 18s infinite; }
+  .crossfade-img--5 { animation: xfade 48s ease-in-out 24s infinite; }
+  .crossfade-img--6 { animation: xfade 48s ease-in-out 30s infinite; }
+  .crossfade-img--7 { animation: xfade 48s ease-in-out 36s infinite; }
+  .crossfade-img--8 { animation: xfade 48s ease-in-out 42s infinite; }
 
   @keyframes xfade {
-    0%   { opacity: 0; }
-    5%   { opacity: 1; }
-    25%  { opacity: 1; }
-    30%  { opacity: 0; }
-    100% { opacity: 0; }
+    0%     { opacity: 0; }
+    2%     { opacity: 1; }
+    10.5%  { opacity: 1; }
+    12.5%  { opacity: 0; }
+    100%   { opacity: 0; }
   }
 
   .hero-video {

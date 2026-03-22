@@ -1,3 +1,3 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 48" aria-label="Prusa">
-  <text x="0" y="40" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="48" font-weight="900" letter-spacing="-0.02em" fill="#FA6831">PRUSA</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 44" aria-label="PRUSA">
+  <text x="0" y="36" textLength="150" lengthAdjust="spacingAndGlyphs" font-family="Arial,Helvetica,sans-serif" font-size="44" font-weight="900" fill="#FA6831">PRUSA</text>
 </svg>

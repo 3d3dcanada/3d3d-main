@@ -117,7 +117,7 @@ const MILESTONES: Milestone[] = [
     modal: {
       headDate: 'June 2026 · 120th Running',
       headTag: 'LIVE FABRICATION',
-      photo: '/media/real/fleet-start-press.jpg',
+      photo: '/media/real/race-morning-crew.jpg',
       title: 'Newport, RI → Bermuda',
       location: '635nm · Open Atlantic · Gulf Stream crossing',
       accent: 'teal',

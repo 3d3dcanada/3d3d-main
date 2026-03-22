@@ -1,0 +1,310 @@
+---
+// Native Astro hero — all animations via WAAPI + CSS, zero React
+// Re-inits on View Transitions via astro:page-load
+---
+
+<section
+  id="home"
+  class="home-section home-section--dark home-hero"
+  data-section
+>
+  <!-- ── Background: parallax + Ken Burns ── -->
+  <div class="hero-bg" aria-hidden="true">
+    <img
+      src="/media/real/fleet-start-press.jpg"
+      alt=""
+      loading="eager"
+      decoding="async"
+      class="hero-bg-img"
+      fetchpriority="high"
+    />
+  </div>
+
+  <!-- ── Grain texture ── -->
+  <svg class="hero-grain" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <filter id="hgrain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch" />
+      <feColorMatrix type="saturate" values="0" />
+    </filter>
+    <rect width="100%" height="100%" filter="url(#hgrain)" opacity="0.045" />
+  </svg>
+
+  <!-- ── Grid overlay ── -->
+  <div class="hero-grid" aria-hidden="true"></div>
+
+  <!-- ── Vignette ── -->
+  <div class="hero-vignette" aria-hidden="true"></div>
+
+  <!-- ── Content ── -->
+  <div class="section-shell hero-shell">
+
+    <!-- Copy -->
+    <div class="hero-copy">
+
+      <!-- Eyebrow scramble -->
+      <p class="eyebrow hero-eyebrow" aria-label="Offshore Fabrication &amp; Mechanical Specialist">
+        <span
+          class="hero-eyebrow-inner"
+          data-scramble="Offshore Fabrication &amp; Mechanical Specialist"
+          aria-hidden="true"
+        >&nbsp;</span>
+      </p>
+
+      <!-- H1 word-split -->
+      <h1
+        class="hero-title"
+        aria-label="You have a problem. I am your solution."
+        data-hero-title
+      >
+        <span class="hero-line" data-words="You have a problem." data-delay="280"></span>
+        <span class="hero-line hero-line--accent" data-words="I am your solution." data-delay="540"></span>
+      </h1>
+
+      <!-- Subhead blur-fade -->
+      <p class="hero-subhead" data-hero-subhead>
+        I am not a 3D printing service. I am an offshore specialist with a twenty-year mechanical
+        background, advanced fabrication tools, and the hard-won knowledge of what keeps a vessel
+        moving. The printer is just the newest tool in a kit built to fix things that cannot fail
+        at sea. Available for on-site work, worldwide. One call.
+      </p>
+
+      <!-- CTAs -->
+      <div class="hero-actions" data-hero-actions>
+        <a
+          href="/contact"
+          class="hero-button hero-button--primary"
+          data-analytics-event="contact_started"
+          data-analytics-source="hero-cta"
+        >
+          One Call. I'll Assess It. →
+        </a>
+        <a
+          href="https://ko-fi.com/3d3dca"
+          class="hero-button hero-button--ghost"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-analytics-event="kofi_clicked"
+          data-analytics-source="hero-cta"
+        >
+          Support the Campaign →
+        </a>
+      </div>
+    </div>
+
+    <!-- Video -->
+    <div class="hero-media" data-hero-media>
+      <div class="hero-video-frame">
+        <video
+          class="hero-video"
+          src="/media/hero-loop.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster="/media/real/race-morning-crew.jpg"
+          aria-label="3D3D deployment video reel"
+        ></video>
+        <div class="hero-video-glow" aria-hidden="true"></div>
+      </div>
+
+      <!-- Stat pills -->
+      <div class="hero-stat-rail" data-hero-stats>
+        <div class="hero-stat">
+          <span class="hero-stat__val">20k+</span>
+          <span class="hero-stat__label">Offshore miles</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat__val">17</span>
+          <span class="hero-stat__label">Materials</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat__val">10yr</span>
+          <span class="hero-stat__label">Mechanical</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll cue -->
+  <div class="hero-scroll-cue" data-hero-scroll aria-hidden="true">
+    <span class="hero-scroll-label">Scroll</span>
+    <span class="hero-scroll-line"></span>
+  </div>
+</section>
+
+<script>
+  const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@!%';
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function buildWordLine(lineEl: HTMLElement) {
+    const text = lineEl.dataset.words ?? '';
+    const baseDelay = parseInt(lineEl.dataset.delay ?? '0', 10);
+    lineEl.setAttribute('aria-label', text);
+    lineEl.innerHTML = '';
+    text.split(' ').forEach((word, i) => {
+      const clip = document.createElement('span');
+      clip.className = 'hero-word-clip';
+      const inner = document.createElement('span');
+      inner.className = 'hero-word';
+      inner.textContent = word;
+      clip.appendChild(inner);
+      lineEl.appendChild(clip);
+      if (i < text.split(' ').length - 1) {
+        const sp = document.createElement('span');
+        sp.className = 'hero-word-space';
+        sp.textContent = ' ';
+        lineEl.appendChild(sp);
+      }
+      if (!reduced) {
+        inner.animate(
+          [{ transform: 'translateY(105%)' }, { transform: 'translateY(0%)' }],
+          {
+            duration: 750,
+            delay: baseDelay + i * 70,
+            easing: 'cubic-bezier(0.16,1,0.3,1)',
+            fill: 'both',
+          }
+        );
+      }
+    });
+  }
+
+  function runScramble(el: HTMLElement) {
+    const finalText = el.dataset.scramble ?? '';
+    if (reduced) { el.textContent = finalText; return; }
+    let frame = 0;
+    const totalFrames = Math.ceil(900 / 22);
+    const interval = setInterval(() => {
+      frame++;
+      const progress = frame / totalFrames;
+      el.textContent = finalText.split('').map((ch, i) => {
+        if (ch === ' ' || ch === '&' || ch === ';') return ch;
+        if (i / finalText.length < progress) return ch;
+        return CHARS[Math.floor(Math.random() * CHARS.length)];
+      }).join('');
+      if (frame >= totalFrames) {
+        clearInterval(interval);
+        el.textContent = finalText;
+      }
+    }, 22);
+    // Fade in eyebrow
+    el.closest('.hero-eyebrow')?.animate(
+      [{ opacity: 0 }, { opacity: 1 }],
+      { duration: 10, delay: 100, fill: 'both' }
+    );
+  }
+
+  function initHero() {
+    // Build H1 word lines
+    document.querySelectorAll<HTMLElement>('[data-words]').forEach(buildWordLine);
+
+    // Scramble eyebrow
+    const eyebrow = document.querySelector<HTMLElement>('[data-scramble]');
+    if (eyebrow) setTimeout(() => runScramble(eyebrow), 120);
+
+    if (reduced) return;
+
+    // Subhead blur-fade
+    const subhead = document.querySelector<HTMLElement>('[data-hero-subhead]');
+    subhead?.animate(
+      [
+        { opacity: 0, transform: 'translateY(18px)', filter: 'blur(5px)' },
+        { opacity: 1, transform: 'translateY(0)',    filter: 'blur(0px)' },
+      ],
+      { duration: 750, delay: 950, easing: 'cubic-bezier(0.16,1,0.3,1)', fill: 'both' }
+    );
+
+    // CTAs
+    const actions = document.querySelector<HTMLElement>('[data-hero-actions]');
+    actions?.animate(
+      [{ opacity: 0, transform: 'translateY(14px)' }, { opacity: 1, transform: 'translateY(0)' }],
+      { duration: 600, delay: 1150, easing: 'cubic-bezier(0.16,1,0.3,1)', fill: 'both' }
+    );
+
+    // Video panel slide-in from right
+    const media = document.querySelector<HTMLElement>('[data-hero-media]');
+    media?.animate(
+      [{ opacity: 0, transform: 'translateX(36px)' }, { opacity: 1, transform: 'translateX(0)' }],
+      { duration: 1000, delay: 350, easing: 'cubic-bezier(0.16,1,0.3,1)', fill: 'both' }
+    );
+
+    // Stats stagger
+    document.querySelectorAll<HTMLElement>('[data-hero-stats] .hero-stat').forEach((stat, i) => {
+      stat.animate(
+        [{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'translateY(0)' }],
+        { duration: 500, delay: 1350 + i * 80, easing: 'cubic-bezier(0.16,1,0.3,1)', fill: 'both' }
+      );
+    });
+
+    // Scroll cue fade in
+    const scrollCue = document.querySelector<HTMLElement>('[data-hero-scroll]');
+    scrollCue?.animate(
+      [{ opacity: 0 }, { opacity: 1 }],
+      { duration: 600, delay: 1800, fill: 'both' }
+    );
+
+    // Parallax on scroll
+    const heroBg = document.querySelector<HTMLElement>('.hero-bg');
+    if (heroBg) {
+      const section = document.querySelector<HTMLElement>('#home');
+      window.addEventListener('scroll', () => {
+        if (!section) return;
+        const rect = section.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+        const progress = -rect.top / rect.height;
+        heroBg.style.transform = `translateY(${progress * 22}%)`;
+      }, { passive: true });
+    }
+  }
+
+  // Run on initial load and after every View Transition
+  document.addEventListener('astro:page-load', initHero);
+</script>
+
+<style>
+  /* ── Scroll cue breathing animation ── */
+  @keyframes scroll-breath {
+    0%, 100% { transform: scaleY(1); }
+    50%       { transform: scaleY(0.3); }
+  }
+
+  .hero-scroll-line {
+    animation: scroll-breath 1.6s ease-in-out infinite;
+    transform-origin: top center;
+  }
+
+  /* ── Button hover lift ── */
+  .hero-button {
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.25s ease,
+                border-color 0.25s ease, color 0.25s ease;
+  }
+  .hero-button:hover { transform: translateY(-3px) scale(1.03); }
+  .hero-button:active { transform: scale(0.97); }
+
+  /* ── Video frame hover ── */
+  .hero-video-frame {
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+  }
+  .hero-video-frame:hover { transform: scale(1.015); }
+
+  /* ── Stat pill hover ── */
+  .hero-stat {
+    transition: background 0.2s ease, transform 0.2s ease;
+    cursor: default;
+  }
+  .hero-stat:hover {
+    background: rgba(64,196,196,0.07);
+    transform: translateY(-2px);
+  }
+
+  /* ── Word spacing fix ── */
+  .hero-word-space { display: inline-block; width: 0.22em; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-bg-img { animation: none; }
+    .hero-scroll-line { animation: none; }
+    .hero-button:hover { transform: none; }
+    .hero-video-frame:hover { transform: none; }
+  }
+</style>

@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CampaignStrip from '../components/CampaignStrip';
-import HeroSection from '../components/HeroSection';
+import HeroSection from '../components/HeroSection.astro';
 
 const orgSchema = {
   '@context': 'https://schema.org',
@@ -110,7 +110,7 @@ const services = [
     <!-- ═══════════════════════════════════════════════════
          HERO (React + Motion)
          ═══════════════════════════════════════════════════ -->
-    <HeroSection client:load />
+    <HeroSection />
 
     <!-- ═══════════════════════════════════════════════════
          CAMPAIGN STRIP (React + Motion)

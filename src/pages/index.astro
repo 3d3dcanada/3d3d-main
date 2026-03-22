@@ -113,15 +113,20 @@ const services = [
       <div class="hero-bg" aria-hidden="true">
         <img src="/media/real/fleet-start-press.jpg" alt="" loading="eager" decoding="async" />
       </div>
+      <div class="hero-accent-lines" aria-hidden="true">
+        <span class="hero-accent-line hero-accent-line--orange"></span>
+        <span class="hero-accent-line hero-accent-line--teal"></span>
+        <span class="hero-accent-line hero-accent-line--magenta"></span>
+      </div>
       <div class="section-shell hero-shell">
         <div class="hero-copy">
-          <p class="eyebrow hero-eyebrow">Offshore Fabrication & Mechanical Specialist</p>
+          <p class="eyebrow hero-eyebrow">3D Printing · Fabrication · Marine Specialist</p>
           <h1 class="hero-title" aria-label="You have a problem. I am your solution.">
             <span class="hero-line">You have a problem.</span>
             <span class="hero-line hero-line--accent">I am your solution.</span>
           </h1>
           <p class="hero-subhead">
-            I am not a 3D printing service. I am an offshore specialist with a twenty-year mechanical background, advanced fabrication tools, and the hard-won knowledge of what keeps a vessel moving. The printer is just the newest tool in a kit built to fix things that cannot fail at sea. Available for on-site work, worldwide. One call.
+            If the part doesn't exist anymore, I build it. If you just need something printed, I print it. Twenty years of mechanical work, a transatlantic sailing record, and a maker community spanning Atlantic Canada and beyond — available to anyone with a problem worth solving. Ship it, send a photo, or just describe what broke. Worldwide.
           </p>
           <div class="hero-actions">
             <a href="/contact" class="hero-button hero-button--primary" data-analytics-event="contact_started" data-analytics-source="hero-cta">One Call. I'll Assess It. →</a>
@@ -130,18 +135,11 @@ const services = [
         </div>
 
         <div class="hero-media">
-          <div class="hero-video-frame">
-            <video
-              class="hero-video"
-              src="/media/hero-loop.mp4"
-              autoplay
-              muted
-              loop
-              playsinline
-              preload="metadata"
-              poster="/media/real/race-morning-crew.jpg"
-              aria-label="3D3D deployment video reel"
-            ></video>
+          <div class="hero-video-frame hero-crossfade">
+            <img src="/media/real/race-morning-crew.jpg" class="crossfade-img crossfade-img--1" alt="3D3D on deck" loading="eager" decoding="async" />
+            <img src="/media/real/offshore-day-01.jpg" class="crossfade-img crossfade-img--2" alt="Offshore sailing" loading="lazy" decoding="async" />
+            <img src="/media/real/golden-hour-01.jpg" class="crossfade-img crossfade-img--3" alt="Golden hour passage" loading="lazy" decoding="async" />
+            <img src="/media/real/fleet-aerial.jpg" class="crossfade-img crossfade-img--4" alt="Fleet racing" loading="lazy" decoding="async" />
           </div>
         </div>
       </div>
@@ -608,6 +606,42 @@ const services = [
     filter: brightness(0.6);
   }
 
+  /* Vertical accent lines */
+  .hero-accent-lines {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .hero-accent-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+  }
+
+  .hero-accent-line--teal {
+    left: 42%;
+    width: 3px;
+    background: #40C4C4;
+    opacity: 0.28;
+  }
+
+  .hero-accent-line--orange {
+    left: 22%;
+    width: 2px;
+    background: #FA6831;
+    opacity: 0.22;
+  }
+
+  .hero-accent-line--magenta {
+    left: 9%;
+    width: 1.5px;
+    background: #E040FB;
+    opacity: 0.18;
+  }
+
   .hero-shell {
     display: grid;
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
@@ -746,7 +780,7 @@ const services = [
     min-height: clamp(24rem, 52vw, 44rem);
     border: var(--page-thick-border);
     border-radius: 1.6rem;
-    box-shadow: 0 30px 72px rgba(0, 0, 0, 0.38);
+    box-shadow: 8px 8px 0 #40C4C4, 16px 16px 0 #FA6831, 0 30px 72px rgba(0, 0, 0, 0.38);
     clip-path: inset(0 100% 0 0 round 1.6rem);
     animation: hero-video-reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
   }
@@ -757,6 +791,35 @@ const services = [
     inset: 0;
     background: linear-gradient(180deg, rgba(17, 18, 20, 0.05), rgba(17, 18, 20, 0.18));
     pointer-events: none;
+    z-index: 2;
+  }
+
+  /* Crossfade image stack */
+  .hero-crossfade {
+    background: #111214;
+  }
+
+  .crossfade-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0;
+  }
+
+  .crossfade-img--1 { animation: xfade 20s ease-in-out 0s infinite; }
+  .crossfade-img--2 { animation: xfade 20s ease-in-out 5s infinite; }
+  .crossfade-img--3 { animation: xfade 20s ease-in-out 10s infinite; }
+  .crossfade-img--4 { animation: xfade 20s ease-in-out 15s infinite; }
+
+  @keyframes xfade {
+    0%   { opacity: 0; }
+    5%   { opacity: 1; }
+    25%  { opacity: 1; }
+    30%  { opacity: 0; }
+    100% { opacity: 0; }
   }
 
   .hero-video {

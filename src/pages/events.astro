@@ -23,12 +23,14 @@ const timeline = [
     title: '3D3D Founded',
     body: 'Operations begin from an RV. Three printers running off a generator — $30 a day in gas, 35-degree heat. Daily printing, daily failing, daily rebuilding.',
     status: 'completed',
+    image: '/media/real/evening-fleet.jpg',
   },
   {
     date: 'March 2025 — March 2026',
     title: 'One Year of Daily Commitment',
     body: 'A full year of daily production. Every material tested. Every failure documented. Marine hardware, automotive restoration, custom fabrication. Building the portfolio one job at a time.',
     status: 'completed',
+    image: '/media/real/offshore-day-02.jpg',
   },
   {
     date: 'March 2026',
@@ -36,6 +38,7 @@ const timeline = [
     body: 'Prusa Research recognized a year of documented daily work and is sending their flagship machine — the CORE One L. An enclosed CoreXY with active chamber heating, automatic tool changing, and input shaping. This is recognition, not marketing.',
     status: 'active',
     highlight: true,
+    image: '/media/real/golden-hour-01.jpg',
   },
   {
     date: 'June 2026',
@@ -43,6 +46,8 @@ const timeline = [
     body: 'Aboard CSM the Mariner for the 120th running of one of offshore sailing\'s most demanding races. A Prusa CORE One L will be printing live — real parts, real problems, real conditions. Newport, Rhode Island to Bermuda. 635 nautical miles.',
     status: 'upcoming',
     highlight: true,
+    image: '/media/real/race-morning-crew.jpg',
+    sailboat: true,
   },
 ];
 
@@ -85,15 +90,26 @@ const credentials = [
 
         <div class="events-timeline">
           {timeline.map((item, i) => (
-            <div class={`tl-item scroll-in ${item.highlight ? 'tl-item--highlight' : ''} ${item.status === 'active' ? 'tl-item--active' : ''}`}>
+            <div class={`tl-item scroll-in ${item.highlight ? 'tl-item--highlight' : ''} ${item.status === 'active' ? 'tl-item--active' : ''} ${item.status === 'upcoming' ? 'tl-item--upcoming' : ''}`}>
               <div class="tl-item__marker">
                 <div class={`tl-item__dot ${item.status === 'completed' ? 'tl-item__dot--done' : item.status === 'active' ? 'tl-item__dot--active' : 'tl-item__dot--upcoming'}`}></div>
                 {i < timeline.length - 1 && <div class="tl-item__line"></div>}
               </div>
-              <div class="tl-item__content">
-                <span class="tl-item__date">{item.date}</span>
-                <h3 class="tl-item__title">{item.title}</h3>
-                <p class="tl-item__body">{item.body}</p>
+              <div
+                class="tl-item__content"
+                style={item.highlight && item.image ? `background-image: linear-gradient(rgba(17,18,20,0.78), rgba(17,18,20,0.78)), url('${item.image}'); background-size: cover; background-position: center;` : ''}
+              >
+                {item.sailboat && (
+                  <svg class="tl-item__sailboat" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <line x1="24" y1="6" x2="24" y2="38" stroke="#40C4C4" stroke-width="2.5" stroke-linecap="round"/>
+                    <polygon points="24,8 24,30 8,30" fill="#40C4C4" opacity="0.85"/>
+                    <polygon points="24,14 24,30 38,30" fill="#40C4C4" opacity="0.5"/>
+                    <path d="M6,38 Q24,34 42,38 L40,43 Q24,40 8,43 Z" fill="#40C4C4" opacity="0.9"/>
+                  </svg>
+                )}
+                <span class={`tl-item__date ${item.highlight ? 'tl-item__date--light' : ''}`}>{item.date}</span>
+                <h3 class={`tl-item__title ${item.highlight ? 'tl-item__title--light' : ''}`}>{item.title}</h3>
+                <p class={`tl-item__body ${item.highlight ? 'tl-item__body--light' : ''}`}>{item.body}</p>
               </div>
             </div>
           ))}
@@ -349,7 +365,11 @@ const credentials = [
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(17, 18, 20, 0.4);
+    color: #40C4C4;
+  }
+
+  .tl-item__date--light {
+    color: rgba(64, 196, 196, 0.9);
   }
 
   .tl-item__title {
@@ -361,6 +381,10 @@ const credentials = [
     color: #111214;
   }
 
+  .tl-item__title--light {
+    color: #FFFFFF;
+  }
+
   .tl-item__body {
     margin: 0;
     font-size: 0.9rem;
@@ -369,15 +393,42 @@ const credentials = [
     max-width: 36rem;
   }
 
+  .tl-item__body--light {
+    color: rgba(246, 247, 250, 0.75);
+    max-width: none;
+  }
+
   .tl-item--highlight .tl-item__content {
-    background: #FFFFFF;
-    border: 2px solid #1A1A1A;
+    border: 2px solid rgba(64, 196, 196, 0.4);
     border-radius: 1rem;
-    padding: clamp(1rem, 2vw, 1.5rem);
+    padding: clamp(1.25rem, 2.5vw, 2rem);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.28);
   }
 
   .tl-item--active .tl-item__title {
     color: #2A9D9D;
+  }
+
+  .tl-item--active .tl-item__title--light {
+    color: #40C4C4;
+  }
+
+  .tl-item--upcoming .tl-item__content {
+    border-style: dashed;
+  }
+
+  /* Sailboat icon */
+  .tl-item__sailboat {
+    display: block;
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 0.75rem;
+  }
+
+  /* Non-highlight: subtle left teal border */
+  .tl-item:not(.tl-item--highlight) .tl-item__content {
+    border-left: 3px solid rgba(64, 196, 196, 0.3);
+    padding-left: 1rem;
   }
 
   /* ── Newport Feature (dark) ── */

@@ -1,6 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 44" aria-label="Prusa Research">
-  <!-- Prusa orange triangle mark -->
-  <polygon points="0,38 11,2 22,38" fill="#FA6831"/>
-  <!-- PRUSA text -->
-  <text x="30" y="32" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="28" font-weight="800" letter-spacing="0.02em" fill="currentColor">PRUSA</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 48" aria-label="Prusa Research">
+  <!-- Prusa P mark — geometric letterform -->
+  <path d="M4,4 L4,44 L12,44 L12,30 L24,30 C34,30 40,25 40,17 C40,9 34,4 24,4 Z M12,11 L24,11 C29,11 32,13.5 32,17 C32,20.5 29,23 24,23 L12,23 Z" fill="#FA6831"/>
+  <!-- PRUSA wordmark -->
+  <text x="50" y="34" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="28" font-weight="800" letter-spacing="0.05em" fill="currentColor">PRUSA</text>
+  <!-- RESEARCH -->
+  <text x="51" y="45" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="10" font-weight="500" letter-spacing="0.2em" fill="currentColor" opacity="0.65">RESEARCH</text>
 </svg>

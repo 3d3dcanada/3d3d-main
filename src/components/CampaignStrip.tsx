@@ -446,6 +446,7 @@ function Modal({
               <div key={i} className="tm-fact">
                 <motion.span
                   className="tm-fact-val"
+                  style={{ color: accent }}
                   initial={shouldReduceMotion ? {} : { opacity: 0, scale: 0.85 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.28 + i * 0.05, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}

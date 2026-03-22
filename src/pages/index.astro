@@ -1830,174 +1830,203 @@ const services = [
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    background: rgba(8,10,11,0.88);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(4,5,6,0.94);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
     cursor: pointer;
   }
 
   .tm-panel {
     position: relative;
-    background: #FFFFFF;
-    color: #111214;
-    border: 3px solid #111214;
+    background: #0D0E10;
+    color: #F6F7FA;
+    border: 1px solid rgba(246,247,250,0.08);
     max-width: 560px;
     width: 100%;
     max-height: 90vh;
     overflow-y: auto;
     cursor: default;
     scrollbar-width: thin;
-    scrollbar-color: #111214 transparent;
+    scrollbar-color: rgba(246,247,250,0.12) transparent;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(246,247,250,0.04);
   }
   .tm-panel--wide { max-width: 700px; }
 
   .tm-close {
     position: absolute;
-    top: 0; right: 0;
-    width: 2.8rem;
-    height: 2.8rem;
-    background: #111214;
-    border: none;
-    color: #F6F7FA;
-    font-size: 1.4rem;
+    top: 0.75rem; right: 0.75rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    background: rgba(246,247,250,0.08);
+    border: 1px solid rgba(246,247,250,0.12);
+    border-radius: 4px;
+    color: rgba(246,247,250,0.6);
+    font-size: 1.3rem;
     line-height: 1;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 2;
+    transition: background 0.15s, color 0.15s;
   }
 
   .tm-head {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 1rem 1.4rem;
-    padding-right: 3.8rem;
-    background: #111214;
-    border-bottom: 3px solid;
+    gap: 0.9rem;
+    padding: 1.2rem 1.6rem;
+    padding-right: 4rem;
+    background: rgba(0,0,0,0.35);
+    border-bottom: 2px solid;
   }
 
   .tm-head-date {
     font-family: 'Courier New', monospace;
-    font-size: 0.68rem;
+    font-size: 0.65rem;
     font-weight: 700;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(246,247,250,0.5);
+    color: rgba(246,247,250,0.4);
+    flex-shrink: 0;
   }
 
   .tm-head-tag {
     font-family: 'Courier New', monospace;
-    font-size: 0.6rem;
+    font-size: 0.58rem;
     font-weight: 700;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     border: 1px solid;
-    padding: 0.2rem 0.5rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 2px;
   }
 
   .tm-head-logo {
-    height: 26px;
+    height: 22px;
     width: auto;
-    max-width: 100px;
+    max-width: 110px;
     filter: brightness(0) invert(1);
-    opacity: 0.85;
+    opacity: 0.7;
     object-fit: contain;
+    margin-left: auto;
   }
-  .tm-head-logo--color { filter: none; }
+  .tm-head-logo--color { filter: none; opacity: 0.9; }
 
-  .tm-photo { height: 210px; overflow: hidden; border-bottom: 3px solid #111214; }
-  .tm-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .tm-photo {
+    position: relative;
+    height: 240px;
+    overflow: hidden;
+  }
+  .tm-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .tm-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(13,14,16,0.05) 30%, rgba(13,14,16,0.8) 100%);
+    pointer-events: none;
+  }
 
-  .tm-body { padding: 1.6rem 1.8rem 2rem; }
+  .tm-body { padding: 1.8rem 1.8rem 2.2rem; }
 
   .tm-title {
     font-family: var(--font-display, 'Archivo', sans-serif);
-    font-size: 1.85rem;
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
     font-weight: 800;
     letter-spacing: -0.035em;
     text-transform: uppercase;
-    color: #111214;
-    margin: 0 0 0.3rem;
+    color: #F6F7FA;
+    margin: 0 0 0.35rem;
     line-height: 1.0;
   }
 
   .tm-location {
     font-family: 'Courier New', monospace;
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     font-weight: 700;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgba(17,18,20,0.38);
-    margin: 0 0 1.2rem;
+    color: rgba(246,247,250,0.35);
+    margin: 0 0 1.4rem;
   }
 
   .tm-text {
-    font-size: 0.95rem;
-    line-height: 1.78;
-    color: rgba(17,18,20,0.72);
-    margin: 0 0 1rem;
-    padding-top: 1.1rem;
-    border-top: 1px solid rgba(17,18,20,0.07);
+    font-size: 0.93rem;
+    line-height: 1.82;
+    color: rgba(246,247,250,0.62);
+    margin: 0;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(246,247,250,0.07);
   }
   .tm-text:first-of-type { border-top: none; padding-top: 0; }
+  .tm-text:last-of-type { padding-bottom: 0; }
 
   .tm-facts {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    border: 2px solid #111214;
-    margin: 1.4rem 0;
+    border: 1px solid rgba(246,247,250,0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 1.6rem 0;
   }
   .tm-fact {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1rem 0.5rem 0.85rem;
-    gap: 0.25rem;
-    border-right: 2px solid #111214;
+    padding: 1.1rem 0.5rem 1rem;
+    gap: 0.3rem;
+    background: rgba(246,247,250,0.03);
+    border-right: 1px solid rgba(246,247,250,0.08);
+    transition: background 0.2s;
   }
+  .tm-fact:hover { background: rgba(246,247,250,0.06); }
   .tm-fact:last-child { border-right: none; }
   .tm-fact-val {
     font-family: var(--font-display, 'Archivo', sans-serif);
-    font-size: 1.65rem;
+    font-size: 1.7rem;
     font-weight: 800;
     letter-spacing: -0.04em;
-    color: #111214;
     line-height: 1;
     display: block;
   }
   .tm-fact-key {
     font-family: 'Courier New', monospace;
-    font-size: 0.58rem;
+    font-size: 0.56rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(17,18,20,0.38);
+    color: rgba(246,247,250,0.3);
     text-align: center;
   }
 
-  .tm-links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+  .tm-links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.8rem; }
   .tm-cta {
     display: inline-flex;
     align-items: center;
-    padding: 0.6rem 1rem;
-    background: transparent;
-    color: #111214;
-    border: 2px solid rgba(17,18,20,0.18);
+    min-height: 38px;
+    padding: 0.45rem 1.1rem;
+    border: 1px solid rgba(246,247,250,0.18);
+    border-radius: 4px;
+    color: rgba(246,247,250,0.75);
+    background: rgba(246,247,250,0.05);
     font-family: var(--font-tech, 'Archivo', sans-serif);
     font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     text-decoration: none;
-    transition: border-color 0.2s, background 0.2s;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
   }
-  .tm-cta:hover { background: rgba(17,18,20,0.05); border-color: #111214; }
-  .tm-cta--primary { background: #111214; color: #F6F7FA; border-color: #111214; }
-  .tm-cta--primary:hover { background: #2a2b2d; }
-  .tm-cta--orange { background: #FA6831; color: #FFF; border-color: #FA6831; }
-  .tm-cta--orange:hover { background: #e85e2a; border-color: #e85e2a; }
+  .tm-cta:hover { background: rgba(246,247,250,0.1); border-color: rgba(246,247,250,0.35); color: #F6F7FA; }
+  .tm-cta--primary { background: #F6F7FA; color: #0D0E10; border-color: #F6F7FA; }
+  .tm-cta--primary:hover { background: #fff; border-color: #fff; color: #0D0E10; }
+  .tm-cta--orange { background: #FA6831; color: #fff; border-color: #FA6831; }
+  .tm-cta--orange:hover { background: #fb7a47; border-color: #fb7a47; }
 
   @media (max-width: 700px) {
     .cstrip-inner { padding: 0.9rem 1rem 1rem; gap: 0.5rem; }
@@ -2007,7 +2036,7 @@ const services = [
     .tm-facts { grid-template-columns: repeat(2, 1fr); }
     .tm-fact:nth-child(2) { border-right: none; }
     .tm-fact:nth-child(3),
-    .tm-fact:nth-child(4) { border-top: 2px solid #111214; }
+    .tm-fact:nth-child(4) { border-top: 1px solid rgba(246,247,250,0.08); }
     .tm-fact:nth-child(4) { border-right: none; }
     .tm-title { font-size: 1.5rem; }
   }

@@ -1451,6 +1451,15 @@ const services = [
     .services-grid { grid-template-columns: 1fr; }
   }
 
+  @media (max-width: 767px) {
+    .hero-copy {
+      position: relative;
+      background: rgba(18, 20, 23, 0.62);
+      padding: clamp(1.2rem, 5vw, 1.8rem);
+      border-radius: 0.75rem;
+    }
+  }
+
   @media (max-width: 640px) {
     .services-grid { gap: 1rem; }
     .gallery-item { flex: 0 0 80vw; }
@@ -1491,6 +1500,7 @@ const services = [
     }
 
     window.addEventListener('scroll', () => {
+      if (window.innerWidth < 768) return; /* no parallax on mobile — keeps stripe bottoms even */
       if (!ticking) {
         requestAnimationFrame(update);
         ticking = true;

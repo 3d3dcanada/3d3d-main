@@ -48,6 +48,7 @@ const MILESTONES: Milestone[] = [
     title: '3D3D Founded',
     sub: 'RV. Generator. Three printers.',
     logo: '/media/brand/3d3d-logo.svg',
+    logoOrange: true,
     modal: {
       headDate: 'Founded 03 / 2025',
       headLogo: '/media/brand/3d3d-logo.svg',

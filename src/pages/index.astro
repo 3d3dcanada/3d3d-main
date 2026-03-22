@@ -113,16 +113,10 @@ const services = [
       <div class="hero-bg" aria-hidden="true">
         <img src="/media/real/fleet-start-press.jpg" alt="" loading="eager" decoding="async" />
       </div>
-      <div class="hero-accent-lines" aria-hidden="true">
-        <div class="hero-al-track" data-speed="0.12">
-          <span class="hero-accent-line hero-accent-line--teal"></span>
-        </div>
-        <div class="hero-al-track" data-speed="0.07">
-          <span class="hero-accent-line hero-accent-line--orange"></span>
-        </div>
-        <div class="hero-al-track" data-speed="0.19">
-          <span class="hero-accent-line hero-accent-line--magenta"></span>
-        </div>
+      <div class="hero-stripes" aria-hidden="true">
+        <div class="hero-stripe hero-stripe--magenta" data-speed="0.19"></div>
+        <div class="hero-stripe hero-stripe--orange" data-speed="0.07"></div>
+        <div class="hero-stripe hero-stripe--teal" data-speed="0.12"></div>
       </div>
       <div class="section-shell hero-shell">
         <div class="hero-copy">
@@ -612,76 +606,69 @@ const services = [
     filter: brightness(0.6);
   }
 
-  /* Vertical accent lines */
-  .hero-accent-lines {
+  /* ── Hero Racing Stripes ── */
+  .hero-stripes {
     position: absolute;
-    inset: 0;
-    z-index: 0;
+    /* Left gutter — between viewport edge and the hero copy */
+    left: clamp(1.2rem, calc(50% - 660px + 1.8rem), 5rem);
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 9px;
+    z-index: 1;
     pointer-events: none;
-    overflow: hidden;
+    overflow: visible;
   }
 
-  /* Track: positioned horizontally, scroll parallax applied via JS translateY */
-  .hero-al-track {
-    position: absolute;
-    top: -20%;
-    bottom: -20%;
+  .hero-stripe {
+    width: 20px;
+    flex-shrink: 0;
     will-change: transform;
   }
 
-  /* Line: sits inside track, handles reveal (scale) + float (translate) independently */
-  .hero-accent-line {
-    position: absolute;
-    inset: 0;
-    transform-origin: bottom center;
-    scale: 1 0; /* initial state — collapses the line */
-  }
-
-  .hero-al-track:has(.hero-accent-line--teal) { left: 42%; }
-  .hero-al-track:has(.hero-accent-line--orange) { left: 22%; }
-  .hero-al-track:has(.hero-accent-line--magenta) { left: 9%; }
-
-  .hero-accent-line--teal {
-    width: 3px;
-    background: #40C4C4;
-    opacity: 0.28;
-    animation:
-      line-reveal 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards,
-      line-float-a 6s ease-in-out 1.4s infinite;
-  }
-
-  .hero-accent-line--orange {
-    width: 2px;
-    background: #FA6831;
-    opacity: 0.22;
-    animation:
-      line-reveal 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards,
-      line-float-b 7.5s ease-in-out 1.6s infinite;
-  }
-
-  .hero-accent-line--magenta {
-    width: 1.5px;
+  /* Magenta — LEFT, slow layer-line build DOWN */
+  .hero-stripe--magenta {
     background: #E040FB;
-    opacity: 0.18;
-    animation:
-      line-reveal 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards,
-      line-float-a 9s ease-in-out 1.8s infinite;
+    clip-path: inset(0 0 100% 0);
+    animation: stripe-build-down 2.8s steps(70, end) 0.6s forwards;
+    box-shadow: 0 0 18px rgba(224, 64, 251, 0.4);
   }
 
-  @keyframes line-reveal {
-    from { scale: 1 0; }
-    to   { scale: 1 1; }
+  /* Orange — MIDDLE, slow layer-line build UP */
+  .hero-stripe--orange {
+    background: #FA6831;
+    clip-path: inset(100% 0 0 0);
+    animation: stripe-build-up 2.8s steps(70, end) 0.6s forwards;
+    box-shadow: 0 0 18px rgba(250, 104, 49, 0.4);
   }
 
-  /* Float uses translate property (composes independently of scale) */
-  @keyframes line-float-a {
-    0%, 100% { translate: 0px 0; }
-    50%       { translate: 4px 0; }
+  /* Teal — RIGHT, slow layer-line build DOWN */
+  .hero-stripe--teal {
+    background: #40C4C4;
+    clip-path: inset(0 0 100% 0);
+    animation: stripe-build-down 2.8s steps(70, end) 0.6s forwards;
+    box-shadow: 0 0 18px rgba(64, 196, 196, 0.4);
   }
 
-  @keyframes line-float-b {
-    0%, 100% { translate: 0px 0; }
-    50%       { translate: -3px 0; }
+  @keyframes stripe-build-down {
+    from { clip-path: inset(0 0 100% 0); }
+    to   { clip-path: inset(0 0 0 0); }
+  }
+
+  @keyframes stripe-build-up {
+    from { clip-path: inset(100% 0 0 0); }
+    to   { clip-path: inset(0 0 0 0); }
+  }
+
+  /* Mobile: equal width, centered as a group */
+  @media (max-width: 767px) {
+    .hero-stripes {
+      left: 50%;
+      transform: translateX(-50%);
+      gap: 14px;
+    }
   }
 
   .hero-shell {
@@ -1474,18 +1461,18 @@ const services = [
 </style>
 
 <script>
-  // Accent line scroll parallax — each track translates at a different speed
+  // Racing stripe scroll parallax — each stripe moves at a different rate
   (function () {
-    const tracks = /** @type {HTMLElement[]} */ ([...document.querySelectorAll('.hero-al-track')]);
-    if (!tracks.length) return;
+    const stripes = /** @type {HTMLElement[]} */ ([...document.querySelectorAll('.hero-stripe[data-speed]')]);
+    if (!stripes.length) return;
 
     let ticking = false;
 
     function update() {
       const y = window.scrollY;
-      tracks.forEach((track) => {
-        const speed = parseFloat(track.dataset.speed ?? '0.1');
-        track.style.transform = `translateY(${-(y * speed)}px)`;
+      stripes.forEach((stripe) => {
+        const speed = parseFloat(stripe.dataset.speed ?? '0.1');
+        stripe.style.transform = `translateY(${-(y * speed)}px)`;
       });
       ticking = false;
     }

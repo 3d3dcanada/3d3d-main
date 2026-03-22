@@ -11,7 +11,7 @@ const orgSchema = {
   telephone: '+1-506-953-2678',
   email: 'info@3d3d.ca',
   areaServed: ['Worldwide', 'Caribbean', 'Coastal United States', 'Europe'],
-  founder: { '@type': 'Person', name: 'Ken' },
+  founder: { '@type': 'Person', name: '3D3D' },
   sameAs: [
     'https://www.youtube.com/@3D3Dcanada',
     'https://www.tiktok.com/@3d3dcanada',
@@ -280,7 +280,7 @@ const services = [
             Tell me the problem. Tell me where the vessel is. I will tell you whether I can solve it, how we will do it, and exactly what it takes. That is the whole process.
           </p>
           <div class="final-cta-actions">
-            <a href="/contact" class="final-cta-button final-cta-button--light scroll-in scroll-delay-2">Contact Ken →</a>
+            <a href="/contact" class="final-cta-button final-cta-button--light scroll-in scroll-delay-2">Get in Touch →</a>
             <a href="/book" class="final-cta-button final-cta-button--ghost scroll-in scroll-delay-3">Book a Call →</a>
           </div>
         </div>
@@ -617,7 +617,7 @@ const services = [
     /* Left gutter — between viewport edge and the hero copy */
     left: clamp(1.2rem, calc(50% - 660px + 1.8rem), 5rem);
     top: 0;
-    bottom: 0;
+    bottom: -80px; /* extend below hero so parallax translateY never exposes a gap — hero clips it */
     display: flex;
     flex-direction: row;
     align-items: stretch;

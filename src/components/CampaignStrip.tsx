@@ -65,7 +65,7 @@ const MILESTONES: Milestone[] = [
         { val: '1', key: 'Founder' },
       ],
       links: [
-        { href: '/about',      label: 'About Ken →',    primary: true },
+        { href: '/about',      label: 'About Me →',    primary: true },
         { href: '/materials',  label: 'Material Stack →' },
         { href: '/contact',    label: 'Request Service →' },
         { href: 'https://www.printables.com/@KTK3D_3050116', label: 'Printables →', external: true },

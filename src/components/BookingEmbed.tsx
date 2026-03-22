@@ -87,7 +87,7 @@ export default function BookingEmbed({ calLink = '3d3d/discovery' }: Props) {
           Open Booking Page
         </a>
         <p style={{ marginTop: '0.75rem', color: '#666', fontSize: '0.85rem' }}>
-          Or WhatsApp Ken at{' '}
+          Or WhatsApp me at{' '}
           <a href="https://wa.me/15069532678" style={{ color: '#40C4C4' }}>
             +1-506-953-2678
           </a>

@@ -12,6 +12,9 @@ const SCROLL_CLASSES = [
   'scroll-in-right',
   'scroll-in-scale',
   'scroll-in-fade',
+  'scroll-in-rotate',
+  'scroll-in-pop',
+  'scroll-in-float',
 ];
 
 const SELECTOR = SCROLL_CLASSES.map((c) => `.${c}`).join(', ');

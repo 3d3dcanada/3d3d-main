@@ -124,6 +124,9 @@ const finalNavGroups = navGroups.length > 0 ? navGroups : defaultNavGroups;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       transition: opacity 0.2s ease, transform 0.2s ease;
       opacity: 0.85;
+      white-space: nowrap;
+      width: fit-content;
+      max-width: calc(100vw - 32px);
     }
     .ai-feedback-blip:hover {
       opacity: 1;

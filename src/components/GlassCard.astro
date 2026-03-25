@@ -2,37 +2,56 @@
 interface Props {
   class?: string;
   tag?: string;
-  variant?: 'default' | 'feature' | 'flat' | 'organic';
-  hover?: boolean;
+  variant?: 'glass' | 'glass-strong' | 'glass-dark' | 'glass-dark-strong' | 'solid';
+  hover?: 'lift' | '3d' | '3d-reverse' | 'none';
+  entrance?: 'scroll-in' | 'scroll-in-rotate' | 'scroll-in-pop' | 'scroll-in-scale' | 'scroll-in-float' | 'scroll-in-fade' | 'none';
+  delay?: 0 | 1 | 2 | 3 | 4;
 }
 
 const {
   class: className = '',
   tag = 'div',
-  variant = 'default',
-  hover = true,
+  variant = 'glass',
+  hover = 'lift',
+  entrance = 'scroll-in',
+  delay = 0,
 } = Astro.props;
 
 const Tag = tag as any;
 
-// Organic border radius variations
-const variantStyles = {
-  default: 'rounded-organic',
-  feature: 'rounded-feature',
-  flat: 'rounded-md',
-  organic: 'rounded-lg rounded-br-sm',
-};
+const variantClass = variant === 'solid' ? 'card' : variant;
+
+const hoverClass = {
+  lift: 'glass-card-hover-lift',
+  '3d': 'card-3d',
+  '3d-reverse': 'card-3d card-3d-reverse',
+  none: '',
+}[hover];
+
+const entranceClass = entrance === 'none' ? '' : entrance;
+const delayClass = delay > 0 ? `scroll-delay-${delay}` : '';
 ---
 
 <Tag
   class:list={[
-    'card',
-    variantStyles[variant],
-    hover && 'hover:scale-[1.02]',
-    'transition-all duration-300',
+    variantClass,
+    'rounded-organic',
     'p-6',
+    hoverClass,
+    entranceClass,
+    delayClass,
     className,
   ]}
 >
   <slot />
 </Tag>
+
+<style>
+  .glass-card-hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .glass-card-hover-lift:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
+  }
+</style>

@@ -33,6 +33,21 @@
   to   { opacity: 1; }
 }
 
+@keyframes scroll-enter-rotate-in {
+  from { opacity: 0; transform: perspective(800px) rotateY(-8deg) translateX(-24px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes scroll-enter-pop {
+  from { opacity: 0; transform: scale(0.85) translateY(20px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes scroll-enter-float-up {
+  from { opacity: 0; transform: translateY(40px) rotate(-1deg); }
+  to   { opacity: 1; transform: none; }
+}
+
 /* -- Utility Classes -------------------------------------------- */
 
 .scroll-in {
@@ -65,6 +80,24 @@
   animation-range: entry 0% entry 30%;
 }
 
+.scroll-in-rotate {
+  animation: scroll-enter-rotate-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 30%;
+}
+
+.scroll-in-pop {
+  animation: scroll-enter-pop 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 30%;
+}
+
+.scroll-in-float {
+  animation: scroll-enter-float-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 30%;
+}
+
 /* -- Stagger Delays --------------------------------------------- */
 
 .scroll-delay-1 { animation-range: entry 5% entry 35%; }
@@ -82,14 +115,18 @@
   .scroll-in-left,
   .scroll-in-right,
   .scroll-in-scale,
-  .scroll-in-fade {
+  .scroll-in-fade,
+  .scroll-in-rotate,
+  .scroll-in-pop,
+  .scroll-in-float {
     animation: none;
   }
 }
 
 html.scroll-fallback .scroll-in,
 html.scroll-fallback .scroll-in-left,
-html.scroll-fallback .scroll-in-right {
+html.scroll-fallback .scroll-in-right,
+html.scroll-fallback .scroll-in-float {
   opacity: 0;
   transform: translateY(32px);
   transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
@@ -104,11 +141,19 @@ html.scroll-fallback .scroll-in-right {
   transform: translateX(32px);
 }
 
-html.scroll-fallback .scroll-in-scale {
+html.scroll-fallback .scroll-in-scale,
+html.scroll-fallback .scroll-in-pop {
   opacity: 0;
   transform: scale(0.94);
   transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html.scroll-fallback .scroll-in-rotate {
+  opacity: 0;
+  transform: translateX(-24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 html.scroll-fallback .scroll-in-fade {
@@ -133,7 +178,10 @@ html.scroll-fallback .scroll-delay-4 { transition-delay: 0.4s; }
   .scroll-in-left,
   .scroll-in-right,
   .scroll-in-scale,
-  .scroll-in-fade {
+  .scroll-in-fade,
+  .scroll-in-rotate,
+  .scroll-in-pop,
+  .scroll-in-float {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;

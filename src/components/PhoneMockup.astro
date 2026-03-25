@@ -1,0 +1,321 @@
+---
+/**
+ * PhoneMockup — Auto-cycling chat scenario display
+ * Pure Astro, no React. Three service scenarios crossfade every 6s.
+ */
+---
+
+<div class="phone-device">
+  <div class="phone-notch" aria-hidden="true"></div>
+  <div class="phone-screen">
+    <div class="phone-header">
+      <div class="phone-avatar">3D</div>
+      <div class="phone-header-text">
+        <span class="phone-header-name">3D3D</span>
+        <span class="phone-header-status"><span class="phone-online-dot"></span> Online</span>
+      </div>
+    </div>
+
+    <div class="chat-container">
+      <!-- Scenario A: Simple print request -->
+      <div class="chat-scenario active" data-scenario="1">
+        <div class="chat-bubble chat-bubble--user chat-delay-1">I want this printed — here's the link</div>
+        <div class="chat-bubble chat-bubble--user chat-delay-2">
+          <span class="chat-link-badge">makerworld.com/model/...</span>
+        </div>
+        <div class="chat-bubble chat-bubble--reply chat-delay-3">
+          <span class="chat-reply-avatar">3D</span>
+          <span class="chat-reply-text">Got it. $23.75, ready in 2 days. Want me to go ahead?</span>
+        </div>
+      </div>
+
+      <!-- Scenario B: Part reproduction -->
+      <div class="chat-scenario" data-scenario="2">
+        <div class="chat-bubble chat-bubble--user chat-delay-1">I need a mast clip for my sailboat reproduced — the original cracked</div>
+        <div class="chat-bubble chat-bubble--reply chat-delay-2">
+          <span class="chat-reply-avatar">3D</span>
+          <span class="chat-reply-text">Send me a few photos and measurements. We can reproduce it from those. If we need to scan the original, it's slightly more.</span>
+        </div>
+        <div class="chat-bubble chat-bubble--reply chat-delay-3">
+          <span class="chat-reply-avatar">3D</span>
+          <span class="chat-reply-text">Quote incoming — check your inbox shortly.</span>
+        </div>
+      </div>
+
+      <!-- Scenario C: Custom design -->
+      <div class="chat-scenario" data-scenario="3">
+        <div class="chat-bubble chat-bubble--user chat-delay-1">Can you help design a custom mounting bracket for my boat?</div>
+        <div class="chat-bubble chat-bubble--reply chat-delay-2">
+          <span class="chat-reply-avatar">3D</span>
+          <span class="chat-reply-text">Absolutely. Send us what you have — drawings, photos, rough dimensions. We'll model it and quote the full job.</span>
+        </div>
+        <div class="chat-bubble chat-bubble--user chat-delay-3">That's exactly what I needed. Sending photos now.</div>
+      </div>
+    </div>
+
+    <div class="phone-input" aria-hidden="true">
+      <span class="phone-input-text">Type a message...</span>
+      <span class="phone-input-send">→</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const scenarios = document.querySelectorAll<HTMLElement>('.chat-scenario');
+    if (!scenarios.length) return;
+
+    let current = 0;
+    const total = scenarios.length;
+
+    function cycle() {
+      scenarios[current].classList.remove('active');
+      current = (current + 1) % total;
+      scenarios[current].classList.add('active');
+    }
+
+    setInterval(cycle, 6000);
+  })();
+</script>
+
+<style>
+  .phone-device {
+    position: relative;
+    width: clamp(260px, 28vw, 320px);
+    aspect-ratio: 9 / 18;
+    background: #1A1B1E;
+    border-radius: 36px;
+    border: 3px solid #2A2B2E;
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.4),
+      0 8px 24px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    animation: phone-float 6s ease-in-out infinite;
+  }
+
+  @keyframes phone-float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(0.5deg); }
+  }
+
+  .phone-notch {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 24px;
+    background: #1A1B1E;
+    border-radius: 0 0 14px 14px;
+    z-index: 2;
+  }
+
+  .phone-screen {
+    position: absolute;
+    inset: 4px;
+    border-radius: 32px;
+    background: #F6F7FA;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .phone-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 2.2rem 1rem 0.6rem;
+    background: #FFFFFF;
+    border-bottom: 1px solid rgba(26, 26, 26, 0.08);
+  }
+
+  .phone-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #40C4C4, #1D9A9A);
+    color: #FFFFFF;
+    font-family: var(--font-display);
+    font-size: 0.55rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .phone-header-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .phone-header-name {
+    font-family: var(--font-tech);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #1A1A1A;
+  }
+
+  .phone-header-status {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-tech);
+    font-size: 0.55rem;
+    color: #666666;
+  }
+
+  .phone-online-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4ADE80;
+    flex-shrink: 0;
+  }
+
+  .chat-container {
+    flex: 1;
+    position: relative;
+    padding: 0.8rem;
+    overflow: hidden;
+  }
+
+  .chat-scenario {
+    position: absolute;
+    inset: 0;
+    padding: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    pointer-events: none;
+  }
+
+  .chat-scenario.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .chat-bubble {
+    max-width: 85%;
+    padding: 0.5rem 0.7rem;
+    border-radius: 12px;
+    font-family: var(--font-body);
+    font-size: 0.62rem;
+    line-height: 1.45;
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  .chat-scenario.active .chat-bubble {
+    animation: chat-appear 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .chat-delay-1 { animation-delay: 0.3s !important; }
+  .chat-delay-2 { animation-delay: 1.2s !important; }
+  .chat-delay-3 { animation-delay: 2.4s !important; }
+
+  @keyframes chat-appear {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .chat-bubble--user {
+    align-self: flex-end;
+    background: #40C4C4;
+    color: #FFFFFF;
+    border-bottom-right-radius: 4px;
+  }
+
+  .chat-bubble--reply {
+    align-self: flex-start;
+    background: #FFFFFF;
+    color: #1A1A1A;
+    border-bottom-left-radius: 4px;
+    display: flex;
+    gap: 0.4rem;
+    align-items: flex-start;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  }
+
+  .chat-reply-avatar {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #40C4C4, #1D9A9A);
+    color: #FFFFFF;
+    font-family: var(--font-display);
+    font-size: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .chat-reply-text {
+    flex: 1;
+  }
+
+  .chat-link-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+  }
+
+  .phone-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.8rem;
+    background: #FFFFFF;
+    border-top: 1px solid rgba(26, 26, 26, 0.08);
+  }
+
+  .phone-input-text {
+    font-family: var(--font-body);
+    font-size: 0.6rem;
+    color: #999999;
+  }
+
+  .phone-input-send {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #40C4C4;
+    color: #FFFFFF;
+    font-size: 0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .phone-device {
+      animation: none;
+    }
+    .chat-bubble {
+      opacity: 1;
+      transform: none;
+    }
+    .chat-scenario.active .chat-bubble {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .phone-device {
+      width: clamp(220px, 65vw, 280px);
+      margin: 0 auto;
+    }
+  }
+</style>

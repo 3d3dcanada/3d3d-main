@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CampaignStrip from '../components/CampaignStrip';
+import PhoneMockup from '../components/PhoneMockup.astro';
 
 const orgSchema = {
   '@context': 'https://schema.org',
@@ -52,11 +53,11 @@ const services = [
     id: 'marine',
     drawerId: 'drawer-marine',
     eyebrow: 'Marine Hardware',
-    headline: 'The part does not exist anymore. So I build it.',
-    description: 'Supply chains do not care about your passage plan. When a stainless pawl wears through a bronze pocket on a discontinued Barient 27 winch, or a Spinlock XA clutch handle snaps under a loaded halyard, you cannot wait three weeks for a mismatched part that may not fit. I reverse-engineer deck fittings, fairleads, winch components, and custom brackets, all built to handle offshore dynamic loads.',
+    headline: 'The part does not exist anymore. So we build it.',
+    description: 'Supply chains do not care about your passage plan. When a stainless pawl wears through a bronze pocket on a discontinued Barient 27 winch, or a Spinlock XA clutch handle snaps under a loaded halyard, you cannot wait three weeks for a mismatched part that may not fit. We reverse-engineer deck fittings, fairleads, winch components, and custom brackets — all built to handle offshore dynamic loads.',
     drawer: {
       materials: 'ASA above deck. UV-stable, 93°C heat deflection. PETG-CF below deck for structural fittings. PP Glass Fiber or PP Carbon Fiber for constant saltwater contact. TPU 95A for seals and gaskets. PA11 CF near engines. 192°C, resists oils and fuels.',
-      turnaround: 'Send the broken component, or provide precise caliper measurements. If you\'re offshore, dimensions by message are enough. I\'ve built from blurry photos and measurements taken on a rolling deck.',
+      turnaround: 'Send the broken component, or provide precise caliper measurements. If you\'re offshore, dimensions by message are enough. We\'ve built from blurry photos and measurements taken on a rolling deck.',
     },
   },
   {
@@ -64,21 +65,21 @@ const services = [
     drawerId: 'drawer-automotive',
     eyebrow: 'Automotive Restoration',
     headline: 'Unobtainium ceases to be a problem.',
-    description: 'I spent ten years turning wrenches on heavy iron. I have personally restored the AMC AMX, Dodge Polara, GTX, and Roadrunner. I know the frustration of halting a multi-year build because an interior trim panel, a dash overlay, or a specific retaining clip was last stamped forty years ago. I fabricate exact geometric replicas of discontinued OEM parts that fit and hold.',
+    description: 'Halting a multi-year build because an interior trim panel, a dash overlay, or a specific retaining clip was last stamped forty years ago — that frustration ends here. We fabricate exact geometric replicas of discontinued OEM parts for AMC, Dodge, Plymouth, and beyond. Parts that fit, hold, and survive the road.',
     drawer: {
       materials: 'PA11 CF for engine bay. 192°C heat deflection, resists oils and fuels. PETG-CF for structural brackets. ASA for exterior and underhood UV exposure. PC Blend for impact-critical parts. PEI 1010 when nothing else survives.',
-      turnaround: 'Ship the shattered original piece or the surrounding housing. I will rebuild the geometry digitally and print the final part. For discontinued OEM parts, bring the original. I measure, model, and test-fit before committing.',
+      turnaround: 'Ship the shattered original piece or the surrounding housing. We rebuild the geometry digitally and print the final part. For discontinued OEM parts, bring the original. We measure, model, and test-fit before committing.',
     },
   },
   {
     id: 'onsite',
     drawerId: 'drawer-onsite',
     eyebrow: 'On-Site Deployment',
-    headline: 'The vessel cannot move. I can.',
-    description: 'Marina fees bleed cruising budgets dry. If your vessel is tied up in Antigua, Newport, or a remote boatyard waiting on a critical refit component, the fastest path to the water is bringing the factory to the dock. I travel worldwide with the necessary equipment, assess the failure, design the fix, and fabricate the hardware on location.',
+    headline: 'The vessel cannot move. We can.',
+    description: 'Marina fees bleed cruising budgets dry. If your vessel is tied up in Antigua, Newport, or a remote boatyard waiting on a critical refit component, the fastest path to the water is bringing the factory to the dock. We travel worldwide with the necessary equipment, assess the failure, design the fix, and fabricate the hardware on location.',
     drawer: {
-      materials: 'Full material stack on location. ASA, PA11 CF, PETG-CF, TPU, PP-CF, matched to the failure mode after I\'ve assessed it in person. No guessing from a product page.',
-      turnaround: 'Call me. Tell me where the boat is and what is broken. I will pack the cases and sort the flights.',
+      materials: 'Full material stack on location. ASA, PA11 CF, PETG-CF, TPU, PP-CF, matched to the failure mode after on-site assessment. No guessing from a product page.',
+      turnaround: 'Call us. Tell us where the boat is and what is broken. We pack the cases and sort the flights.',
     },
   },
   {
@@ -86,10 +87,10 @@ const services = [
     drawerId: 'drawer-remote',
     eyebrow: 'Remote Fabrication',
     headline: 'Engineered here. Deployed anywhere.',
-    description: 'For components that do not require my physical presence on deck. Send high-resolution photos, the load requirements, and exact caliper measurements. I design the replacement and ship the finished hardware to your current coordinates. Your marina, your boatyard, wherever the vessel is sitting.',
+    description: 'For components that do not require a physical presence on deck. Send high-resolution photos, the load requirements, and exact caliper measurements. We design the replacement and ship the finished hardware to your current coordinates. Your marina, your boatyard, wherever the vessel is sitting.',
     drawer: {
-      materials: 'Material matched to the environment after intake. Saltwater, UV, heat, chemical exposure, dynamic load. I specify based on what the part has to survive, not what is easiest to print.',
-      turnaround: 'Send photos of the broken component, the mounting area, and caliper measurements. I will confirm the geometry, quote the job, and ship to your coordinates.',
+      materials: 'Material matched to the environment after intake. Saltwater, UV, heat, chemical exposure, dynamic load. We specify based on what the part has to survive, not what is easiest to print.',
+      turnaround: 'Send photos of the broken component, the mounting area, and caliper measurements. We confirm the geometry, quote the job, and ship to your coordinates.',
     },
   },
 ];
@@ -120,31 +121,32 @@ const services = [
       </div>
       <div class="section-shell hero-shell">
         <div class="hero-copy">
-          <p class="eyebrow hero-eyebrow">3D Printing · Fabrication · Marine Specialist</p>
+          <p class="eyebrow hero-eyebrow" data-scramble>3D Printing · Fabrication · Marine Specialist</p>
           <h1 class="hero-title" aria-label="You have a problem. Let's find your solution.">
-             <span class="hero-line">You have a problem.</span>
-             <span class="hero-line hero-line--accent">Let's find your solution.</span>
+             <span class="hero-line" data-word-reveal>
+               <span class="word-clip"><span class="word">You</span></span>
+               <span class="word-clip"><span class="word">have</span></span>
+               <span class="word-clip"><span class="word">a</span></span>
+               <span class="word-clip"><span class="word">problem.</span></span>
+             </span>
+             <span class="hero-line hero-line--accent" data-word-reveal>
+               <span class="word-clip"><span class="word">Let's</span></span>
+               <span class="word-clip"><span class="word">find</span></span>
+               <span class="word-clip"><span class="word">your</span></span>
+               <span class="word-clip"><span class="word">solution.</span></span>
+             </span>
            </h1>
           <p class="hero-subhead">
-            If the part doesn't exist anymore, I build it. If you just need something printed, I print it. Twenty years of mechanical work, a transatlantic sailing record, and a maker community spanning Atlantic Canada and beyond — available to anyone with a problem worth solving. Ship it, send a photo, or just describe what broke. Worldwide.
+            If the part doesn't exist anymore, we build it. If you just need something printed, we print it. A maker community spanning Atlantic Canada and beyond — available to anyone with a problem worth solving. Ship it, send a photo, or just describe what broke. Worldwide.
           </p>
           <div class="hero-actions">
-            <a href="/contact" class="hero-button hero-button--primary" data-analytics-event="contact_started" data-analytics-source="hero-cta">One Call. I'll Assess It. →</a>
+            <a href="/contact" class="hero-button hero-button--primary" data-analytics-event="contact_started" data-analytics-source="hero-cta">One Call. We'll Assess It. →</a>
             <a href="https://ko-fi.com/3d3dca" class="hero-button hero-button--ghost" target="_blank" rel="noopener noreferrer" data-analytics-event="kofi_clicked" data-analytics-source="hero-cta">Support the Campaign →</a>
           </div>
         </div>
 
         <div class="hero-media">
-          <div class="hero-video-frame hero-crossfade">
-            <img src="/media/real/race-morning-crew.jpg" class="crossfade-img crossfade-img--1" alt="Race morning crew" loading="eager" decoding="async" />
-            <img src="/media/real/offshore-day-01.jpg" class="crossfade-img crossfade-img--2" alt="Offshore sailing" loading="lazy" decoding="async" />
-            <img src="/media/real/golden-hour-01.jpg" class="crossfade-img crossfade-img--3" alt="Golden hour passage" loading="lazy" decoding="async" />
-            <img src="/media/real/fleet-aerial.jpg" class="crossfade-img crossfade-img--4" alt="Fleet aerial" loading="lazy" decoding="async" />
-            <img src="/media/real/sunrise-offshore.jpg" class="crossfade-img crossfade-img--5" alt="Sunrise offshore" loading="lazy" decoding="async" />
-            <img src="/media/real/afternoon-racing-01.jpg" class="crossfade-img crossfade-img--6" alt="Afternoon racing" loading="lazy" decoding="async" />
-            <img src="/media/real/open-ocean-01.jpg" class="crossfade-img crossfade-img--7" alt="Open ocean" loading="lazy" decoding="async" />
-            <img src="/media/real/evening-passage.jpg" class="crossfade-img crossfade-img--8" alt="Evening passage" loading="lazy" decoding="async" />
-          </div>
+          <PhoneMockup />
         </div>
       </div>
     </section>
@@ -168,15 +170,14 @@ const services = [
             <span class="typewriter-line" data-typewriter>I build it.</span>
           </h2>
           <p class="section-body scroll-in-fade scroll-delay-1">
-            My background is not in software. It is in keeping complex machinery alive when failure has severe consequences. I reverse-engineer broken and obsolete components into exact-fit replacements: deck fittings, winch hardware, discontinued OEM parts, vintage automotive pieces, and one-off solutions that no supply chain carries anymore. Bring me the part, a photo, or just the problem.
+            We reverse-engineer broken and obsolete components into exact-fit replacements: deck fittings, winch hardware, discontinued OEM parts, vintage automotive pieces, and one-off solutions that no supply chain carries anymore. Bring us the part, a photo, or just the problem.
           </p>
         </header>
 
         <div class="services-scroll" role="region" aria-label="Service areas" tabindex="0">
           {services.map((service, i) => (
             <article
-              class="service-card scroll-in"
-              style={`transition-delay: ${i * 0.12}s;`}
+              class={`service-card scroll-in-rotate scroll-delay-${Math.min(i + 1, 4)}`}
               data-drawer-trigger
               data-drawer-id={service.drawerId}
               role="button"
@@ -203,13 +204,13 @@ const services = [
           <h2 class="section-title section-title--light scroll-in" id="workshop-label">
             Built to solve problems.<br />Not to look pretty on a shelf.
           </h2>
-          <p class="section-body section-body--inverse scroll-in-fade scroll-delay-1">
-            Two Prusa MK4S printers running engineering compounds. A full mechanical tool kit built over twenty years of turning wrenches. Calipers, micrometers, and a scanner for reverse engineering parts that no longer have drawings. This is not a hobby setup. It is a portable fabrication lab that travels to the job.
+          <p class="section-body section-body--inverse scroll-in-float scroll-delay-1">
+            Two Prusa MK4S printers running engineering compounds. A full mechanical tool kit, calipers, micrometers, and a scanner for reverse engineering parts that no longer have drawings. Not a hobby setup. A portable fabrication lab that travels to the job.
           </p>
         </header>
 
         <div class="workshop-grid">
-          <figure class="workshop-card workshop-card--hero scroll-in" data-lightbox data-lightbox-src="/media/workshop/printer-action-cf.jpg" data-lightbox-label="Live print" data-lightbox-note="PETG-CF structural bracket, 0.2mm layer height. Carbon fiber reinforced compound printed on the Prusa MK4S with a hardened steel nozzle. This bracket replaces a factory aluminium piece that cracked under cyclic loading." role="button" tabindex="0">
+          <figure class="workshop-card workshop-card--hero scroll-in-pop" data-lightbox data-lightbox-src="/media/workshop/printer-action-cf.jpg" data-lightbox-label="Live print" data-lightbox-note="PETG-CF structural bracket, 0.2mm layer height. Carbon fiber reinforced compound printed on the Prusa MK4S with a hardened steel nozzle. This bracket replaces a factory aluminium piece that cracked under cyclic loading." role="button" tabindex="0">
             <img src="/media/workshop/printer-action-cf.jpg" alt="Prusa MK4S printing carbon fiber compound" loading="lazy" decoding="async" />
             <figcaption>
               <span class="workshop-card__label">Live print</span>
@@ -246,22 +247,22 @@ const services = [
           </figure>
         </div>
 
-        <div class="workshop-stats">
-          <div class="workshop-stat scroll-in">
-            <span class="workshop-stat__value">17+</span>
-            <span class="workshop-stat__label">Compounds in the stack</span>
+        <div class="workshop-capabilities">
+          <div class="capability glass-dark scroll-in-rotate">
+            <span class="capability__icon">+</span>
+            <span class="capability__text">Engineering-grade compounds matched to your environment</span>
           </div>
-          <div class="workshop-stat scroll-in scroll-delay-1">
-            <span class="workshop-stat__value">207°C</span>
-            <span class="workshop-stat__label">Max heat deflection (PEI 1010)</span>
+          <div class="capability glass-dark scroll-in-rotate scroll-delay-1">
+            <span class="capability__icon">+</span>
+            <span class="capability__text">Reverse engineering from photos, measurements, or broken originals</span>
           </div>
-          <div class="workshop-stat scroll-in scroll-delay-2">
-            <span class="workshop-stat__value">20,000+</span>
-            <span class="workshop-stat__label">Nautical miles offshore</span>
+          <div class="capability glass-dark scroll-in-rotate scroll-delay-2">
+            <span class="capability__icon">+</span>
+            <span class="capability__text">Worldwide shipping and on-site deployment</span>
           </div>
-          <div class="workshop-stat scroll-in scroll-delay-3">
-            <span class="workshop-stat__value">10 yr</span>
-            <span class="workshop-stat__label">Professional mechanic background</span>
+          <div class="capability glass-dark scroll-in-rotate scroll-delay-3">
+            <span class="capability__icon">+</span>
+            <span class="capability__text">From simple prints to custom fabrication projects</span>
           </div>
         </div>
       </div>
@@ -273,15 +274,15 @@ const services = [
     <section id="contact" class="home-section home-section--teal final-cta-section" data-section>
       <div class="section-shell final-cta-shell">
         <div class="final-cta-copy">
-          <h2 class="section-title section-title--inverse scroll-in">
-            One call. I'll assess it.<br />We'll sort it out.
+          <h2 class="section-title section-title--inverse scroll-in-float">
+            One call. We'll assess it.<br />We'll sort it out.
           </h2>
           <p class="section-body section-body--inverse scroll-in-fade scroll-delay-1">
-            Tell me the problem. Tell me where the vessel is. I will tell you whether I can solve it, how we will do it, and exactly what it takes. That is the whole process.
+            Tell us the problem. Tell us where the vessel is. We'll tell you whether we can solve it, how we'll do it, and exactly what it takes. That is the whole process.
           </p>
           <div class="final-cta-actions">
-            <a href="/contact" class="final-cta-button final-cta-button--light scroll-in scroll-delay-2">Get in Touch →</a>
-            <a href="/book" class="final-cta-button final-cta-button--ghost scroll-in scroll-delay-3">Book a Call →</a>
+            <a href="/contact" class="final-cta-button final-cta-button--light scroll-in-pop scroll-delay-2">Get in Touch →</a>
+            <a href="/book" class="final-cta-button final-cta-button--ghost scroll-in-pop scroll-delay-3">Book a Call →</a>
           </div>
         </div>
       </div>
@@ -438,6 +439,63 @@ const services = [
 
     // Campaign strip and modals handled by CampaignStrip React component
 
+    // Word-split masked reveal for hero title
+    (() => {
+      const lines = Array.from(document.querySelectorAll('[data-word-reveal]'));
+      if (!lines.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        // Immediately reveal all words if reduced motion
+        document.querySelectorAll('.word').forEach(w => w.classList.add('revealed'));
+        return;
+      }
+
+      let wordIndex = 0;
+      lines.forEach((line, lineIdx) => {
+        const words = line.querySelectorAll('.word');
+        words.forEach((word) => {
+          const delay = wordIndex * 70 + lineIdx * 150;
+          setTimeout(() => word.classList.add('revealed'), delay + 200);
+          wordIndex++;
+        });
+      });
+    })();
+
+    // Eyebrow character scramble
+    (() => {
+      const el = document.querySelector('[data-scramble]');
+      if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const finalText = el.textContent || '';
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@!%·';
+      const duration = 900;
+      const start = performance.now();
+
+      function scramble(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const revealedCount = Math.floor(progress * finalText.length);
+
+        let result = '';
+        for (let i = 0; i < finalText.length; i++) {
+          if (i < revealedCount) {
+            result += finalText[i];
+          } else if (finalText[i] === ' ' || finalText[i] === '·') {
+            result += finalText[i];
+          } else {
+            result += chars[Math.floor(Math.random() * chars.length)];
+          }
+        }
+        el.textContent = result;
+
+        if (progress < 1) {
+          requestAnimationFrame(scramble);
+        } else {
+          el.textContent = finalText;
+        }
+      }
+
+      requestAnimationFrame(scramble);
+    })();
+
     // Typewriter effect for "I scan it. I model it. I build it."
     (() => {
       const lines = Array.from(document.querySelectorAll('[data-typewriter]'));
@@ -477,8 +535,26 @@ const services = [
      PAGE TOKENS
      ═══════════════════════════════════════════════════ */
   :global(body.home-editorial) {
-    background: #F6F7FA;
-    background-image: none;
+    background-color: #F6F7FA;
+    background-image:
+      radial-gradient(circle at 88% 8%, rgba(232, 74, 138, 0.07) 0%, transparent 28%),
+      radial-gradient(circle at 10% 92%, rgba(64, 196, 196, 0.06) 0%, transparent 32%),
+      radial-gradient(circle at 50% 50%, rgba(64, 196, 196, 0.03) 0%, transparent 60%),
+      linear-gradient(180deg, rgba(246, 247, 250, 0.95), rgba(238, 242, 243, 1));
+    background-attachment: fixed;
+  }
+
+  :global(body.home-editorial::after) {
+    display: block;
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.025;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(64, 196, 196, 0.15) 0px, transparent 1px, transparent 60px),
+      repeating-linear-gradient(90deg, rgba(64, 196, 196, 0.15) 0px, transparent 1px, transparent 60px);
   }
 
   :global(body.drawer-open) {
@@ -526,7 +602,24 @@ const services = [
     scroll-margin-top: 1rem;
   }
 
-  .home-section--light { background: var(--page-bg-light); }
+  .home-section--light { background: var(--page-bg-light); position: relative; }
+
+  .home-section + .home-section::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(64, 196, 196, 0.3) 30%,
+      rgba(232, 74, 138, 0.2) 70%,
+      transparent 100%
+    );
+    filter: blur(1px);
+    z-index: 2;
+  }
 
   .home-section--dark {
     background:
@@ -690,7 +783,8 @@ const services = [
 
   .hero-eyebrow {
     color: rgba(246, 247, 250, 0.72);
-    animation: hero-line-in 0.72s cubic-bezier(0.16, 1, 0.3, 1) both;
+    opacity: 0;
+    animation: hero-line-in 0.72s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
   }
 
   .hero-title {
@@ -706,16 +800,28 @@ const services = [
   }
 
   .hero-line {
-    display: block;
-    overflow: hidden;
-    opacity: 0;
-    transform: translateY(48px);
-    animation: hero-line-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 0.2em;
   }
 
-  .hero-line:nth-child(1) { animation-delay: 0s; }
-  .hero-line:nth-child(2) { animation-delay: 0.1s; }
   .hero-line--accent { color: var(--page-accent); }
+
+  .word-clip {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+  }
+
+  .word {
+    display: inline-block;
+    transform: translateY(105%);
+  }
+
+  .word.revealed {
+    transform: translateY(0%);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
 
   .hero-subhead {
     margin: 0;
@@ -809,7 +915,12 @@ const services = [
     background: var(--page-accent);
   }
 
-  .hero-media { position: relative; }
+  .hero-media {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   .hero-video-frame {
     position: relative;
@@ -929,6 +1040,7 @@ const services = [
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
     scrollbar-color: var(--page-accent) rgba(0, 0, 0, 0.08);
+    perspective: 1000px;
   }
 
   .services-scroll::-webkit-scrollbar { height: 4px; }
@@ -942,16 +1054,34 @@ const services = [
     gap: 1rem;
     align-content: start;
     padding: clamp(1.5rem, 3vw, 2rem);
-    border: var(--page-thick-border);
-    border-left: 5px solid var(--page-accent);
-    background: var(--page-surface);
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-left: 4px solid var(--page-accent);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--glass-shadow);
     cursor: pointer;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    transform-style: preserve-3d;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .service-card:hover {
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-    transform: translateY(-3px);
+  @media (prefers-reduced-motion: no-preference) {
+    .service-card:hover {
+      transform: rotateY(-4deg) rotateX(2deg) translateZ(16px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    .service-card:nth-child(even):hover {
+      transform: rotateY(4deg) rotateX(-2deg) translateZ(16px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .service-card:hover {
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+    }
   }
 
   .service-card__eyebrow {
@@ -990,11 +1120,12 @@ const services = [
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--page-accent);
-    transition: color 0.2s ease;
+    transition: color 0.2s ease, transform 0.3s ease;
   }
 
   .service-card:hover .service-card__cta {
-    color: var(--page-text);
+    color: var(--page-accent-secondary);
+    transform: translateX(4px);
   }
 
   /* ═══════════════════════════════════════════════════
@@ -1077,34 +1208,47 @@ const services = [
     color: rgba(246, 247, 250, 0.7);
   }
 
-  .workshop-stats {
+  .workshop-capabilities {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1.2rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
     padding-top: 1rem;
-    border-top: 1px solid rgba(64, 196, 196, 0.2);
+    perspective: 1200px;
   }
 
-  .workshop-stat {
-    display: grid;
-    gap: 0.3rem;
+  .capability {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 1.2rem 1.4rem;
+    border-radius: var(--radius-lg);
+    border-left: 3px solid var(--page-accent);
+    transform-style: preserve-3d;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .workshop-stat__value {
+  @media (prefers-reduced-motion: no-preference) {
+    .capability:hover {
+      transform: translateZ(8px) rotateY(-2deg);
+    }
+  }
+
+  .capability__icon {
     font-family: var(--font-display);
-    font-size: clamp(2rem, 1.4rem + 2vw, 3rem);
+    font-size: 1.2rem;
     line-height: 1;
-    letter-spacing: -0.03em;
     color: var(--page-accent);
+    flex-shrink: 0;
   }
 
-  .workshop-stat__label {
+  .capability__text {
     font-family: var(--font-tech);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(246, 247, 250, 0.5);
+    font-size: 0.82rem;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    color: rgba(246, 247, 250, 0.85);
   }
 
   @media (max-width: 640px) {
@@ -1210,6 +1354,15 @@ const services = [
   }
 
   .drawer[data-open='true'] .drawer__panel { transform: translateX(0); }
+
+  .drawer[data-open='true'] .drawer__content > * {
+    animation: fade-in-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .drawer[data-open='true'] .drawer__content > *:nth-child(1) { animation-delay: 0.05s; }
+  .drawer[data-open='true'] .drawer__content > *:nth-child(2) { animation-delay: 0.1s; }
+  .drawer[data-open='true'] .drawer__content > *:nth-child(3) { animation-delay: 0.15s; }
+  .drawer[data-open='true'] .drawer__content > *:nth-child(4) { animation-delay: 0.2s; }
+  .drawer[data-open='true'] .drawer__content > *:nth-child(5) { animation-delay: 0.25s; }
 
   .drawer__close {
     position: absolute;
@@ -1513,7 +1666,10 @@ const services = [
   /* ─── CampaignStrip React component ─── */
 
   .cstrip-root {
-    background: #0A0B0C;
+    background:
+      radial-gradient(ellipse at 30% 50%, rgba(64, 196, 196, 0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 70% 50%, rgba(250, 104, 49, 0.04) 0%, transparent 50%),
+      #0A0B0C;
     border-top: 3px solid #40C4C4;
     overflow: hidden;
     position: relative;
@@ -1565,6 +1721,7 @@ const services = [
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
     align-items: stretch;
+    perspective: 1400px;
   }
   .cstrip-rail::-webkit-scrollbar { display: none; }
 
@@ -1580,9 +1737,15 @@ const services = [
     width: 100%;
     position: relative;
     cursor: pointer;
+    background: var(--glass-bg-dark);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border-dark);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
   }
-  .cstrip-motion-cell.done:hover    { box-shadow: inset 0 -3px 0 #40C4C4; }
+  .cstrip-motion-cell.done:hover    { box-shadow: inset 0 -3px 0 #40C4C4, var(--glass-shadow-dark); }
   .cstrip-motion-cell.open          { cursor: default; }
+  .cstrip-motion-cell.featured      { box-shadow: var(--glass-shadow-dark); }
 
   .cstrip-cell-link {
     display: block;

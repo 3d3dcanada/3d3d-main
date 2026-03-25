@@ -1,0 +1,62 @@
+/* ─────────────────────────────────────────────────────────────────
+   Glassmorphism + 3D Utilities
+   March 2026 — Floating glass cards, 3D perspective transforms
+   ───────────────────────────────────────────────────────────────── */
+
+/* -- Glass Surfaces --------------------------------------------- */
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-strong {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-strong));
+  -webkit-backdrop-filter: blur(var(--glass-blur-strong));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-dark {
+  background: var(--glass-bg-dark);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border-dark);
+  box-shadow: var(--glass-shadow-dark);
+}
+
+.glass-dark-strong {
+  background: var(--glass-bg-dark-strong);
+  backdrop-filter: blur(var(--glass-blur-strong));
+  -webkit-backdrop-filter: blur(var(--glass-blur-strong));
+  border: 1px solid var(--glass-border-dark);
+  box-shadow: var(--glass-shadow-dark);
+}
+
+/* -- 3D Perspective Container ----------------------------------- */
+
+.perspective-container {
+  perspective: 1200px;
+}
+
+/* -- 3D Card Transforms ----------------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .card-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card-3d:hover {
+    transform: rotateY(-3deg) rotateX(2deg) translateZ(12px);
+  }
+
+  .card-3d-reverse:hover {
+    transform: rotateY(3deg) rotateX(-2deg) translateZ(12px);
+  }
+}

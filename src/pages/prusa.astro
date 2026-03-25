@@ -1,869 +1,516 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const prusaModels = [
+/**
+ * Prusa pricing as of March 2026.
+ * Base: Prusa.com CAD prices.
+ * 3D3D markup: ~10-15% for professional setup, calibration, 100 preset prints,
+ * first-print walkthrough, and ongoing WhatsApp support.
+ *
+ * We do NOT drop ship. We support our clients.
+ */
+const printers = [
   {
-    name: 'Original Prusa CORE One',
+    name: 'Prusa CORE One+',
+    slug: 'core-one-plus',
     tag: 'Flagship',
     tagColor: '#40C4C4',
-    description: 'Prusa\'s first CoreXY. Fully enclosed, input shaping, active chamber heating. The machine that changed Prusa from reliable to fast and reliable. Open-source firmware, field-serviceable, built to last a decade.',
-    specs: [
-      'CoreXY motion — 250 mm/s with input shaping',
-      'Fully enclosed with active chamber heating',
-      'Build volume: 250 × 210 × 220 mm',
-      'Open-source firmware (PrusaLink, Buddy)',
-      'Hardened nozzle upgrade available',
+    desc: 'Fully enclosed CoreXY. Input shaping, active chamber heating, open-source firmware. The machine that made Prusa fast and reliable.',
+    specs: ['CoreXY · 250 mm/s', 'Enclosed + active heating', '250 × 210 × 220 mm'],
+    variants: [
+      { label: 'Kit', cad: 1599 },
+      { label: 'Assembled', cad: 2099 },
     ],
-    bestFor: 'Production shops, engineering teams, anyone building a long-term print fleet.',
-    kitCAD: 1536,
-    assembledCAD: 1939,
   },
   {
-    name: 'Original Prusa CORE One L',
-    tag: 'Coming Soon',
+    name: 'Prusa CORE One+ Ultimate',
+    slug: 'core-one-plus-ultimate',
+    tag: 'Ultimate',
     tagColor: '#E84A8A',
-    description: 'Everything the CORE One does, at scale. Larger build volume for monolithic parts that used to require splitting and joining. Full enclosure, active heating, CoreXY speed. This is the machine Prusa is sending to 3D3D.',
-    specs: [
-      'CoreXY motion — same speed platform as CORE One',
-      'Significantly larger build volume',
-      'Active chamber heating for engineering polymers',
-      'Full-size dashboard panels, marine housings, large brackets in one piece',
-      'Prusa\'s flagship — their biggest enclosed printer',
+    desc: 'Everything the CORE One+ offers, with the complete upgrade package pre-installed. Hardened nozzle, filament sensor, and more — ready for engineering materials out of the box.',
+    specs: ['Full upgrade package', 'Hardened nozzle included', 'Engineering-ready'],
+    variants: [
+      { label: 'Kit', cad: 2249 },
+      { label: 'Assembled', cad: 2749 },
     ],
-    bestFor: 'Large-format functional parts, marine brackets, automotive panels, industrial housings.',
-    kitCAD: null,
-    assembledCAD: null,
-    contactForPrice: true,
+  },
+  {
+    name: 'Prusa CORE One L',
+    slug: 'core-one-l',
+    tag: 'Large Format',
+    tagColor: '#FA6831',
+    desc: 'Everything the CORE One+ does, at scale. Full enclosure, active heating, CoreXY speed. Monolithic parts that used to require splitting.',
+    specs: ['Large build volume', 'Active chamber heating', 'CoreXY motion'],
+    variants: [
+      { label: 'Assembled', cad: 2899 },
+    ],
+    note: 'High demand — 4-5 week lead time',
   },
   {
     name: 'Original Prusa MK4S',
+    slug: 'mk4s',
     tag: 'Workhorse',
     tagColor: '#F5A623',
-    description: 'The most proven 3D printer in the world, refined. The MK4S is the latest in a lineage that started with the MK2 and has earned its reputation through millions of print hours across tens of thousands of shops worldwide. Input shaping, Nextruder, and Prusa Connect make it the smartest i3 ever built.',
-    specs: [
-      'Nextruder with quick-swap nozzle system',
-      'Input shaping and pressure advance',
-      'Build volume: 250 × 210 × 220 mm',
-      'Power panic recovery — resume after power loss',
-      'PrusaConnect cloud monitoring',
+    desc: 'The most proven 3D printer in the world. Nextruder, input shaping, PrusaConnect. Millions of print hours across tens of thousands of shops worldwide.',
+    specs: ['Nextruder + quick-swap nozzle', 'Input shaping + pressure advance', '250 × 210 × 220 mm'],
+    variants: [
+      { label: 'Kit', cad: 1149 },
+      { label: 'Assembled', cad: 1599 },
     ],
-    bestFor: 'Beginners who want open-source, small businesses, anyone who values repairability over speed.',
-    kitCAD: 969,
-    assembledCAD: 1291,
-  },
-  {
-    name: 'Original Prusa XL',
-    tag: 'Multi-Tool',
-    tagColor: '#9B59B6',
-    description: 'Up to five independent toolheads on a single machine. The XL is Prusa\'s answer to multi-material printing — no purge tower, no waste, just clean tool changes mid-print. CoreXY, fully enclosed, segmented heatbed. This is the production multi-material platform.',
-    specs: [
-      '1 to 5 independent toolheads',
-      'CoreXY motion system',
-      'Build volume: 360 × 360 × 360 mm',
-      'Segmented heatbed — heats only what you use',
-      'Automatic tool calibration and alignment',
-    ],
-    bestFor: 'Multi-material production, soluble supports, multi-colour functional parts.',
-    kitCAD: null,
-    assembledCAD: null,
-    contactForPrice: true,
   },
   {
     name: 'Original Prusa MINI+',
-    tag: 'Entry Level',
+    slug: 'mini-plus',
+    tag: 'Compact',
     tagColor: '#40C4C4',
-    description: 'The most affordable way into the Prusa ecosystem. Compact, reliable, and fully supported by PrusaSlicer. The MINI+ proves that entry-level doesn\'t have to mean compromised. Same firmware quality, same community, smaller footprint.',
-    specs: [
-      'Build volume: 180 × 180 × 180 mm',
-      'Bowden extruder — lightweight, proven design',
-      'PrusaConnect compatible',
-      'Full PrusaSlicer support',
-      'Compact footprint — desk-friendly',
+    desc: 'The most affordable way into the Prusa ecosystem. Compact, reliable, same firmware quality and community. Desk-friendly.',
+    specs: ['180 × 180 × 180 mm', 'PrusaConnect compatible', 'Full PrusaSlicer support'],
+    variants: [
+      { label: 'Kit', cad: 899 },
+      { label: 'Semi-assembled', cad: 899 },
     ],
-    bestFor: 'First Prusa, education, desktop use, anyone entering the open-source ecosystem.',
-    kitCAD: 693,
-    assembledCAD: null,
   },
   {
-    name: 'Prusa MMU3',
-    tag: 'Upgrade',
-    tagColor: '#F5A623',
-    description: 'Multi-material upgrade for the MK4S. Five filament inputs, automatic switching, and dramatically improved reliability over the MMU2S. Turn your single-material MK4S into a multi-colour machine.',
-    specs: [
-      '5 filament inputs',
-      'Automatic filament switching mid-print',
-      'Compatible with MK4S and MK3.5',
-      'Improved reliability over MMU2S',
-      'Soluble support capability',
-    ],
-    bestFor: 'MK4S owners who want multi-colour or soluble supports without buying a second machine.',
-    kitCAD: 483,
-    assembledCAD: null,
-    isUpgrade: true,
-  },
-];
-
-const setupIncludes = [
-  {
-    title: 'Unboxing & Assembly',
-    desc: 'We receive the printer directly from Prusa, unbox it, and inspect every component. Kits are fully assembled. Nothing is missing, nothing is damaged.',
-  },
-  {
-    title: 'Full Calibration',
-    desc: 'Bed levelling, first-layer calibration, Z-offset, belt tension, flow rate testing. Every axis, every parameter, dialled in and verified.',
-  },
-  {
-    title: 'Firmware Update',
-    desc: 'Updated to the latest stable Prusa firmware before it leaves. No first-boot update loops.',
-  },
-  {
-    title: '100 Preset Prints',
-    desc: 'Your printer arrives with up to 100 ready-to-print models on an SD card. Practical household items, tools, organizers, test objects. Pick one and print — day one.',
-  },
-  {
-    title: 'First Print Walkthrough',
-    desc: 'In person or remote — we walk you through your first print. Loading filament, selecting a model, understanding what the printer is doing and why. No prior knowledge required.',
-  },
-  {
-    title: 'Ongoing Support',
-    desc: 'Questions after setup? WhatsApp us. We\'re here. Clogged nozzle, weird first layer, filament questions — we help you diagnose and fix it. You\'re not alone with a manual in German.',
+    name: 'Original Prusa XL',
+    slug: 'xl',
+    tag: 'Multi-Tool',
+    tagColor: '#9B59B6',
+    desc: 'Up to five independent toolheads. CoreXY, fully enclosed, segmented heatbed. The production multi-material platform.',
+    specs: ['1-5 toolheads', '360 × 360 × 360 mm', 'Segmented heatbed'],
+    variants: [],
+    contactForPrice: true,
   },
 ];
 ---
 
 <BaseLayout
-  title="Prusa 3D Printers — Buy from 3D3D | Setup, Delivery & Support"
-  description="Buy Prusa 3D printers from 3D3D. Sponsored by Prusa Research. Professional setup, 100 preset prints, first print walkthrough, and ongoing support. We deliver it ready to print."
+  title="Prusa 3D Printers — Buy from 3D3D | Setup & Support Included"
+  description="Buy Prusa 3D printers from 3D3D. Professional setup, 100 preset prints, first-print walkthrough, and ongoing support. We deliver it ready to print."
   activePath="/prusa"
 >
-  <!-- Hero -->
+  <!-- Hero — clean, short -->
   <section class="prusa-hero">
-    <div class="prusa-hero__shell">
-      <p class="prusa-eyebrow">Prusa Printers</p>
-      <h1 class="prusa-title">
-        Prusa, Ready<br />
-        <span class="prusa-title__accent">to Print.</span>
-      </h1>
-      <p class="prusa-body">
-        We're sponsored by Prusa Research and we sell their printers. Every machine is professionally assembled, calibrated, loaded with 100 ready-to-print models, and delivered to your door. In person or remote — we walk you through your first print so you're never on your own.
-      </p>
-      <div class="prusa-hero__actions">
-        <a href="/contact" class="prusa-cta">Order a Prusa →</a>
-        <a href="#lineup" class="prusa-cta prusa-cta--ghost">See the lineup ↓</a>
+    <div class="prusa-shell">
+      <div class="prusa-hero__content">
+        <p class="prusa-eyebrow">Prusa Printers</p>
+        <h1 class="prusa-title">
+          Set Up. Calibrated.<br />
+          <span class="prusa-title--accent">Ready to Print.</span>
+        </h1>
+        <p class="prusa-lead">
+          We sell Prusa printers with full service included. Every machine is assembled, calibrated, loaded with 100 ready-to-print models, and supported by us directly. You're never on your own.
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- Why Buy Through 3D3D -->
-  <section class="prusa-value">
-    <div class="prusa-value__shell">
-      <p class="prusa-eyebrow">Why order through us</p>
-      <h2 class="prusa-section-title">You're Not Just Buying a Printer.</h2>
-      <div class="prusa-value__grid">
-        <div class="prusa-value__card">
-          <div class="prusa-value__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
-          </div>
-          <h3>Prusa-Sponsored Partner</h3>
-          <p>Prusa sponsors 3D3D and we sell their printers. Your machine comes through our relationship with Prusa Research — not resold, not grey market. We're a real shop running Prusa machines every day, and we stand behind what we sell.</p>
-        </div>
-        <div class="prusa-value__card">
-          <div class="prusa-value__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-          </div>
-          <h3>Quality Guarantee</h3>
-          <p>Every machine is tested before it reaches you. We run calibration, verification prints, and firmware updates. If something isn't right, we handle it with Prusa directly. You don't troubleshoot — we do.</p>
-        </div>
-        <div class="prusa-value__card">
-          <div class="prusa-value__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-          </div>
-          <h3>100 Ready-to-Print Models</h3>
-          <p>Your printer comes loaded with up to 100 curated models. Practical stuff — cable clips, tool holders, phone stands, calibration objects. Pick one, hit print. You're making parts on day one.</p>
-        </div>
-        <div class="prusa-value__card">
-          <div class="prusa-value__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-          </div>
-          <h3>Setup & First Print</h3>
-          <p>In person if you're local, remote video call if you're not. We walk you through the entire first print — loading filament, choosing a model, understanding what the machine is doing. No experience required.</p>
-        </div>
-        <div class="prusa-value__card">
-          <div class="prusa-value__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-          </div>
-          <h3>Priority Parts & Fast-Track</h3>
-          <p>Our relationship with Prusa means we can sometimes fast-track orders and parts. Replacement nozzles, spare components, upgrade kits — we handle the logistics and get things moving faster.</p>
-        </div>
-        <div class="prusa-value__card">
-          <div class="prusa-value__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
-          </div>
-          <h3>Ongoing WhatsApp Support</h3>
-          <p>Clogged nozzle at 11 PM? Weird first layer? Not sure which filament to buy? Message us on WhatsApp. We're real people who actually use these machines every day. We help you get unstuck.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Printer Lineup -->
-  <section class="prusa-lineup" id="lineup">
-    <div class="prusa-lineup__shell">
-      <p class="prusa-eyebrow">The Prusa Lineup</p>
-      <h2 class="prusa-section-title">Every Current Model. Available Now.</h2>
-      <p class="prusa-body" style="margin-bottom: 2rem;">
-        All prices in Canadian dollars. Includes professional assembly (for kits), calibration, firmware setup, 100 preset prints, and first-print walkthrough. Exchange rate: 1 USD = 1.37 CAD with service markup.
-      </p>
-
-      <div class="prusa-lineup__grid">
-        {prusaModels.map((model) => (
-          <article class={`printer-card ${model.contactForPrice ? 'printer-card--premium' : ''}`}>
-            <div class="printer-card__header">
-              <span class="printer-card__tag" style={`--tag-color: ${model.tagColor};`}>
-                {model.tag}
-              </span>
-              <h3 class="printer-card__name">{model.name}</h3>
+  <!-- Printer Catalog -->
+  <section id="lineup" class="prusa-catalog">
+    <div class="prusa-shell">
+      <div class="prusa-grid">
+        {printers.map((p) => (
+          <article class="printer-card">
+            <div class="printer-card__head">
+              <span class="printer-card__tag" style={`color: ${p.tagColor}; border-color: ${p.tagColor}40`}>{p.tag}</span>
+              <h2 class="printer-card__name">{p.name}</h2>
+              <p class="printer-card__desc">{p.desc}</p>
             </div>
-            <p class="printer-card__desc">{model.description}</p>
+
             <ul class="printer-card__specs">
-              {model.specs.map((spec) => (
-                <li>{spec}</li>
+              {p.specs.map((s) => (
+                <li>{s}</li>
               ))}
             </ul>
-            <p class="printer-card__best">
-              <strong>Best for:</strong> {model.bestFor}
-            </p>
+
             <div class="printer-card__pricing">
-              {model.contactForPrice ? (
-                <div class="printer-card__price-row">
-                  <span class="printer-card__price-label">Contact for current pricing and availability</span>
-                </div>
+              {p.contactForPrice ? (
+                <a href="/contact?subject=prusa-xl" class="printer-card__price-cta">Contact for pricing &rarr;</a>
               ) : (
                 <>
-                  {model.kitCAD && (
-                    <div class="printer-card__price-row">
-                      <span class="printer-card__price-label">{model.isUpgrade ? 'Kit' : 'Kit + Setup'}</span>
-                      <span class="printer-card__price">${model.kitCAD.toLocaleString()} <small>CAD</small></span>
+                  {p.variants.map((v) => (
+                    <div class="printer-card__variant">
+                      <span class="printer-card__variant-label">{v.label}</span>
+                      <span class="printer-card__variant-price">CA${v.cad.toLocaleString()}</span>
                     </div>
-                  )}
-                  {model.assembledCAD && (
-                    <div class="printer-card__price-row">
-                      <span class="printer-card__price-label">Assembled + Setup</span>
-                      <span class="printer-card__price">${model.assembledCAD.toLocaleString()} <small>CAD</small></span>
-                    </div>
-                  )}
+                  ))}
                 </>
               )}
+              {p.note && <span class="printer-card__note">{p.note}</span>}
             </div>
-            <a href="/contact" class="prusa-cta prusa-cta--sm">
-              {model.contactForPrice ? 'Request a Quote →' : 'Order This Printer →'}
-            </a>
+
+            {!p.contactForPrice && (
+              <a href={`/contact?subject=prusa-${p.slug}`} class="printer-card__cta">Order this printer &rarr;</a>
+            )}
           </article>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- The Setup Experience -->
-  <section class="prusa-setup">
-    <div class="prusa-setup__shell">
-      <p class="prusa-eyebrow">The 3D3D Setup</p>
-      <h2 class="prusa-section-title">What Happens Between Order and First Print.</h2>
-      <p class="prusa-body" style="margin-bottom: 2.5rem;">
-        Buying a printer online means getting a box. Buying through 3D3D means getting a ready machine with someone who knows it inside and out standing behind it.
-      </p>
-      <div class="prusa-setup__grid">
-        {setupIncludes.map((step, i) => (
-          <div class="setup-step">
-            <span class="setup-step__num">{String(i + 1).padStart(2, '0')}</span>
-            <h3 class="setup-step__title">{step.title}</h3>
-            <p class="setup-step__desc">{step.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Open Source Philosophy -->
-  <section class="prusa-open">
-    <div class="prusa-open__shell">
-      <div class="prusa-open__content">
-        <p class="prusa-eyebrow">Open Source</p>
-        <h2 class="prusa-section-title">Your Printer. Your Firmware. Your Choice.</h2>
-        <p class="prusa-body">
-          Every Prusa printer runs open-source firmware. The designs are published. The slicer is free. You own the machine completely — not just the hardware, but the entire software stack. No locked filament cartridges. No mandatory cloud accounts. No firmware updates that remove features.
-        </p>
-        <p class="prusa-body">
-          This isn't ideology — it's risk management. When your livelihood or your project depends on a machine, you need to own it. Prusa gives you that. 3D3D believes in that. It's why we chose them as our primary platform.
-        </p>
-        <div class="prusa-open__links">
-          <a href="/blog/why-prusa">Why We Run Prusa →</a>
-          <a href="/blog/open-source-why">The Files Are Open →</a>
-          <a href="/blog/bambu-vs-prusa">Bambu vs Prusa — Honest Take →</a>
+  <!-- Service strip — what's included -->
+  <section class="prusa-service">
+    <div class="prusa-shell">
+      <h2 class="prusa-service__title">Every Printer Includes</h2>
+      <div class="prusa-service__grid">
+        <div class="prusa-service__item">
+          <strong>Assembly & Calibration</strong>
+          <p>Kits are fully assembled. Every axis calibrated, every parameter dialled in.</p>
+        </div>
+        <div class="prusa-service__item">
+          <strong>100 Preset Prints</strong>
+          <p>Ready-to-print models on an SD card. Practical items, tools, test objects. Print on day one.</p>
+        </div>
+        <div class="prusa-service__item">
+          <strong>First Print Walkthrough</strong>
+          <p>In person or remote video call. We walk you through everything. No experience required.</p>
+        </div>
+        <div class="prusa-service__item">
+          <strong>Ongoing Support</strong>
+          <p>WhatsApp us anytime. Clogged nozzle, weird first layer, filament questions — we help.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Prusa Believes in 3D3D -->
-  <section class="prusa-story">
-    <div class="prusa-story__shell">
-      <p class="prusa-eyebrow">The Relationship</p>
-      <h2 class="prusa-section-title">Prusa Believes in 3D3D.</h2>
-      <p class="prusa-body">
-        Prusa Research is sponsoring 3D3D with a CORE One L — their flagship machine. Not as a marketing deal, but because they saw the work and backed the mission. A founder-operated fabrication operation taking 3D printing offshore, to events, to communities that have never seen it before.
+  <!-- Brief note -->
+  <section class="prusa-note">
+    <div class="prusa-shell">
+      <p class="prusa-note__text">
+        Prusa believes in 3D3D. We're sponsored by Prusa Research and we run their machines every single day. Our pricing reflects real service — assembly, calibration, support, and the confidence that your printer works from the moment you unbox it. <strong>We don't race to the bottom. We focus on service.</strong>
       </p>
-      <p class="prusa-body">
-        When you buy a Prusa from us, you're buying from someone who runs these machines every day in marine environments, motorsport, and field deployment. We push them to their limits and we know what works. That's not a sales pitch — it's just how the shop runs.
-      </p>
-    </div>
-  </section>
-
-  <!-- Support the Journey -->
-  <section class="prusa-support">
-    <div class="prusa-support__shell">
-      <p class="prusa-eyebrow">Support the Journey</p>
-      <h2 class="prusa-section-title">This Is an Open-Source Business.</h2>
-      <p class="prusa-body">
-        Prusa built a global company on open-source hardware. 3D3D is building a fabrication business on the same principles — transparent pricing, shared designs, community-first. Your purchase directly funds the mission: taking 3D printing to boats, events, remote communities, and people who didn't know this technology could solve their problem.
-      </p>
-      <p class="prusa-body">
-        If you want to support the journey beyond buying a printer, our Ko-fi is open. Every contribution locks you in as an early supporter — when we grow, you're already on the list. First access to new services, workshop events, and limited runs.
-      </p>
-      <div class="prusa-hero__actions">
-        <a href="https://ko-fi.com/3d3dca" target="_blank" rel="noopener noreferrer" class="prusa-cta prusa-cta--kofi">
-          Support on Ko-fi →
-        </a>
-        <a href="/contact" class="prusa-cta">Order a Printer →</a>
+      <div class="prusa-note__actions">
+        <a href="/contact" class="prusa-cta">Order a Prusa &rarr;</a>
+        <a href="https://wa.me/15069532678" target="_blank" rel="noopener" class="prusa-cta prusa-cta--ghost">WhatsApp us &rarr;</a>
       </div>
-    </div>
-  </section>
-
-  <!-- Channel Order Options -->
-  <section class="prusa-channel">
-    <div class="prusa-channel__shell">
-      <p class="prusa-eyebrow">Flexible Ordering</p>
-      <h2 class="prusa-section-title">Two Ways to Buy.</h2>
-      <div class="prusa-channel__options">
-        <div class="prusa-channel__option">
-          <h3>Full Service</h3>
-          <p>We receive the printer, assemble it (kits), calibrate everything, load 100 models, update firmware, test it, and deliver it to you. We walk you through the first print. Ongoing WhatsApp support included.</p>
-          <span class="prusa-channel__label">Most popular — recommended for first-time owners</span>
-        </div>
-        <div class="prusa-channel__option">
-          <h3>Order Through Us</h3>
-          <p>Just want to buy? We handle the order, it ships to you. You get our pricing and we sort out any issues with Prusa. Setup is on you — but we're a message away if you get stuck.</p>
-          <span class="prusa-channel__label">For experienced users who just want the printer</span>
-        </div>
-      </div>
-      <a href="/contact" class="prusa-cta" style="margin-top: 2rem;">Get Started →</a>
     </div>
   </section>
 </BaseLayout>
 
 <style>
   /* ─── Shared ─── */
+  .prusa-shell {
+    width: min(100% - clamp(1.5rem, 4vw, 4rem), 1200px);
+    margin: 0 auto;
+  }
+
   .prusa-eyebrow {
     margin: 0;
     font-family: var(--font-tech);
     font-size: 0.72rem;
     font-weight: 700;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #40C4C4;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
+    color: #FA6831;
   }
-  .prusa-eyebrow::before {
-    content: '';
-    width: 2.75rem;
-    height: 2px;
-    background: #40C4C4;
-    flex-shrink: 0;
-  }
-  .prusa-section-title {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: clamp(1.8rem, 1.2rem + 2.5vw, 3rem);
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    color: #FFFFFF;
-  }
-  .prusa-body {
-    margin: 0;
-    max-width: 42rem;
-    font-size: clamp(1.02rem, 0.92rem + 0.4vw, 1.15rem);
-    line-height: 1.75;
-    color: rgba(246, 247, 250, 0.82);
-  }
-  .prusa-body + .prusa-body {
-    margin-top: 1rem;
-  }
+
   .prusa-cta {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: fit-content;
-    min-height: 3.4rem;
-    padding: 0.95rem 1.6rem;
-    background: #40C4C4;
-    color: #0F1112;
-    border: 3px solid #1A1A1A;
+    min-height: 3.2rem;
+    padding: 0.85rem 1.5rem;
+    background: #FA6831;
+    color: #FFFFFF;
+    border: 2px solid transparent;
+    border-radius: 4px;
     font-family: var(--font-tech);
-    font-size: 0.84rem;
+    font-size: 0.8rem;
     font-weight: 700;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     text-decoration: none;
-    transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
-    box-shadow: 0 14px 32px rgba(64, 196, 196, 0.22);
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 8px 24px rgba(250, 104, 49, 0.2);
   }
   .prusa-cta:hover {
-    background: #53D3D3;
-    box-shadow: 0 8px 24px rgba(64, 196, 196, 0.4);
+    background: #e85a25;
     transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(250, 104, 49, 0.35);
   }
   .prusa-cta--ghost {
     background: transparent;
-    color: #40C4C4;
-    border-color: rgba(64, 196, 196, 0.3);
+    color: #FA6831;
+    border-color: rgba(250, 104, 49, 0.3);
     box-shadow: none;
   }
   .prusa-cta--ghost:hover {
-    background: rgba(64, 196, 196, 0.08);
-    color: #FFFFFF;
+    background: rgba(250, 104, 49, 0.08);
     box-shadow: none;
-  }
-  .prusa-cta--sm {
-    min-height: 2.8rem;
-    padding: 0.7rem 1.2rem;
-    font-size: 0.76rem;
-  }
-  .prusa-cta--kofi {
-    background: #FF5E5B;
-    border-color: #1A1A1A;
-    box-shadow: 0 14px 32px rgba(255, 94, 91, 0.22);
-  }
-  .prusa-cta--kofi:hover {
-    background: #FF7674;
-    box-shadow: 0 8px 24px rgba(255, 94, 91, 0.4);
   }
 
   /* ─── Hero ─── */
   .prusa-hero {
-    min-height: 80svh;
     display: flex;
     align-items: center;
+    min-height: 50svh;
     background:
-      radial-gradient(ellipse at 20% 50%, rgba(64, 196, 196, 0.12), transparent 50%),
-      radial-gradient(ellipse at 80% 30%, rgba(232, 74, 138, 0.08), transparent 45%),
+      radial-gradient(ellipse at 20% 50%, rgba(250, 104, 49, 0.08), transparent 50%),
       #111214;
     color: #F6F7FA;
+    padding-block: clamp(5rem, 8vw, 8rem);
   }
-  .prusa-hero__shell {
-    width: min(100% - clamp(1.5rem, 4vw, 4rem), 820px);
-    margin: 0 auto;
+
+  .prusa-hero__content {
+    max-width: 700px;
     display: grid;
-    gap: 1.6rem;
-    padding-block: clamp(6rem, 10vw, 10rem);
+    gap: 1.2rem;
   }
+
   .prusa-title {
     margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(2.8rem, 2rem + 4vw, 5.5rem);
+    font-size: clamp(2.5rem, 2rem + 3.5vw, 4.5rem);
     line-height: 0.95;
-    letter-spacing: -0.04em;
-    color: #FFFFFF;
+    letter-spacing: -0.03em;
     text-transform: uppercase;
   }
-  .prusa-title__accent {
-    color: #40C4C4;
-  }
-  .prusa-hero__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 0.5rem;
+
+  .prusa-title--accent {
+    color: #FA6831;
   }
 
-  /* ─── Value Props ─── */
-  .prusa-value {
-    background: #0F1112;
-    color: #F6F7FA;
-    border-top: 1px solid rgba(64, 196, 196, 0.15);
-    padding-block: clamp(5rem, 8vw, 8rem);
-  }
-  .prusa-value__shell {
-    width: min(100% - clamp(1.5rem, 4vw, 4rem), 1200px);
-    margin: 0 auto;
-    display: grid;
-    gap: 1.4rem;
-  }
-  .prusa-value__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-top: 1rem;
-  }
-  .prusa-value__card {
-    padding: 1.6rem;
-    border: 1px solid rgba(64, 196, 196, 0.15);
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.02);
-    display: grid;
-    gap: 0.8rem;
-    align-content: start;
-    transition: border-color 0.3s ease, background 0.3s ease;
-  }
-  .prusa-value__card:hover {
-    border-color: rgba(64, 196, 196, 0.35);
-    background: rgba(255, 255, 255, 0.04);
-  }
-  .prusa-value__icon {
-    width: 2.5rem;
-    height: 2.5rem;
-    color: #40C4C4;
-  }
-  .prusa-value__icon svg {
-    width: 100%;
-    height: 100%;
-  }
-  .prusa-value__card h3 {
+  .prusa-lead {
     margin: 0;
-    font-family: var(--font-display);
-    font-size: 1.15rem;
-    line-height: 1.2;
-    color: #FFFFFF;
-  }
-  .prusa-value__card p {
-    margin: 0;
-    font-size: 0.95rem;
+    font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.1rem);
     line-height: 1.65;
-    color: rgba(246, 247, 250, 0.72);
+    color: rgba(246, 247, 250, 0.7);
+    max-width: 540px;
   }
 
-  /* ─── Printer Lineup ─── */
-  .prusa-lineup {
-    background: #111214;
-    color: #F6F7FA;
-    border-top: 1px solid rgba(64, 196, 196, 0.15);
-    padding-block: clamp(5rem, 8vw, 8rem);
+  /* ─── Catalog Grid ─── */
+  .prusa-catalog {
+    background: #F6F7FA;
+    padding-block: clamp(3rem, 6vw, 5rem);
   }
-  .prusa-lineup__shell {
-    width: min(100% - clamp(1.5rem, 4vw, 4rem), 1200px);
-    margin: 0 auto;
+
+  .prusa-grid {
     display: grid;
-    gap: 1.4rem;
-  }
-  .prusa-lineup__grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 1.5rem;
   }
+
+  /* ─── Printer Card ─── */
   .printer-card {
-    padding: 2rem;
-    border: 1px solid rgba(64, 196, 196, 0.15);
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.02);
-    display: grid;
-    gap: 1rem;
-    align-content: start;
-    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .printer-card:hover {
-    border-color: rgba(64, 196, 196, 0.35);
-    transform: translateY(-4px);
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
-  }
-  .printer-card--premium {
-    border-color: rgba(232, 74, 138, 0.25);
-  }
-  .printer-card--premium:hover {
-    border-color: rgba(232, 74, 138, 0.5);
-  }
-  .printer-card__header {
-    display: grid;
-    gap: 0.5rem;
-  }
-  .printer-card__tag {
-    font-family: var(--font-tech);
-    font-size: 0.66rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--tag-color, #40C4C4);
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    background: #FFFFFF;
+    border: 1px solid rgba(26, 26, 26, 0.06);
+    border-radius: 16px;
+    padding: clamp(1.5rem, 2.5vw, 2rem);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .printer-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  }
+
+  .printer-card__head {
+    display: flex;
+    flex-direction: column;
     gap: 0.5rem;
+    margin-bottom: 1rem;
   }
-  .printer-card__tag::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--tag-color, #40C4C4);
-    box-shadow: 0 0 8px var(--tag-color, #40C4C4);
+
+  .printer-card__tag {
+    display: inline-flex;
+    width: fit-content;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid;
+    border-radius: 3px;
+    font-family: var(--font-tech);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
   }
+
   .printer-card__name {
     margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(1.3rem, 1rem + 0.8vw, 1.6rem);
-    line-height: 1.1;
-    color: #FFFFFF;
+    font-size: clamp(1.2rem, 1rem + 0.6vw, 1.5rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: #1A1A1A;
   }
+
   .printer-card__desc {
     margin: 0;
-    font-size: 0.92rem;
-    line-height: 1.65;
-    color: rgba(246, 247, 250, 0.72);
-  }
-  .printer-card__specs {
-    margin: 0;
-    padding: 0;
-    padding-left: 1.1rem;
-    display: grid;
-    gap: 0.35rem;
-  }
-  .printer-card__specs li {
-    font-size: 0.85rem;
-    line-height: 1.5;
-    color: rgba(246, 247, 250, 0.65);
-  }
-  .printer-card__specs li::marker {
-    color: #40C4C4;
-  }
-  .printer-card__best {
-    margin: 0;
     font-size: 0.88rem;
-    line-height: 1.5;
-    color: rgba(246, 247, 250, 0.6);
-  }
-  .printer-card__best strong {
-    color: rgba(246, 247, 250, 0.85);
-  }
-  .printer-card__pricing {
-    display: grid;
-    gap: 0.5rem;
-    padding-top: 0.5rem;
-    border-top: 1px solid rgba(64, 196, 196, 0.1);
-  }
-  .printer-card__price-row {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-  }
-  .printer-card__price-label {
-    font-family: var(--font-tech);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgba(246, 247, 250, 0.55);
-  }
-  .printer-card__price {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #FFFFFF;
-    letter-spacing: -0.02em;
-  }
-  .printer-card__price small {
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: rgba(246, 247, 250, 0.5);
-    letter-spacing: 0.06em;
+    line-height: 1.55;
+    color: #666666;
   }
 
-  /* ─── Setup Experience ─── */
-  .prusa-setup {
-    background: #0F1112;
-    color: #F6F7FA;
-    border-top: 1px solid rgba(64, 196, 196, 0.15);
-    padding-block: clamp(5rem, 8vw, 8rem);
-  }
-  .prusa-setup__shell {
-    width: min(100% - clamp(1.5rem, 4vw, 4rem), 1200px);
-    margin: 0 auto;
-    display: grid;
-    gap: 1.4rem;
-  }
-  .prusa-setup__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-  .setup-step {
-    display: grid;
-    gap: 0.6rem;
-    align-content: start;
-    padding: 1.4rem;
-    border-left: 2px solid rgba(64, 196, 196, 0.25);
-  }
-  .setup-step__num {
-    font-family: var(--font-mono);
-    font-size: 2rem;
-    font-weight: 700;
-    color: rgba(64, 196, 196, 0.3);
-    line-height: 1;
-  }
-  .setup-step__title {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    color: #FFFFFF;
-  }
-  .setup-step__desc {
-    margin: 0;
-    font-size: 0.9rem;
-    line-height: 1.65;
-    color: rgba(246, 247, 250, 0.72);
-  }
-
-  /* ─── Open Source ─── */
-  .prusa-open {
-    background: #111214;
-    color: #F6F7FA;
-    border-top: 1px solid rgba(64, 196, 196, 0.15);
-    padding-block: clamp(5rem, 8vw, 8rem);
-  }
-  .prusa-open__shell {
-    width: min(100% - clamp(1.5rem, 4vw, 4rem), 820px);
-    margin: 0 auto;
-  }
-  .prusa-open__content {
-    display: grid;
-    gap: 1.4rem;
-  }
-  .prusa-open__links {
+  .printer-card__specs {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.2rem;
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
-    margin-top: 0.5rem;
+    gap: 0.3rem;
+    border-top: 1px solid rgba(26, 26, 26, 0.06);
+    padding-top: 1rem;
   }
-  .prusa-open__links a {
+
+  .printer-card__specs li {
     font-family: var(--font-tech);
-    font-size: 0.84rem;
+    font-size: 0.74rem;
+    color: #444444;
+    letter-spacing: 0.02em;
+  }
+
+  .printer-card__specs li::before {
+    content: '+ ';
+    color: #FA6831;
+    font-weight: 700;
+  }
+
+  .printer-card__pricing {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(26, 26, 26, 0.06);
+  }
+
+  .printer-card__variant {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .printer-card__variant-label {
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    color: #666666;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .printer-card__variant-price {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #1A1A1A;
+  }
+
+  .printer-card__note {
+    font-size: 0.7rem;
+    color: #E84A8A;
+    font-weight: 600;
+  }
+
+  .printer-card__price-cta {
+    font-family: var(--font-tech);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #FA6831;
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    transition: color 0.2s;
+  }
+  .printer-card__price-cta:hover {
+    color: #e85a25;
+  }
+
+  .printer-card__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.2rem;
+    padding: 0.7rem 1.2rem;
+    background: #FA6831;
+    color: #FFFFFF;
+    border-radius: 4px;
+    font-family: var(--font-tech);
+    font-size: 0.74rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #40C4C4;
     text-decoration: none;
-    transition: color 0.2s;
+    transition: background 0.2s, transform 0.2s;
   }
-  .prusa-open__links a:hover {
-    color: #FFFFFF;
-  }
-
-  /* ─── Story / Relationship ─── */
-  .prusa-story {
-    background: #0F1112;
-    color: #F6F7FA;
-    border-top: 1px solid rgba(64, 196, 196, 0.15);
-    padding-block: clamp(5rem, 8vw, 8rem);
-  }
-  .prusa-story__shell {
-    width: min(100% - clamp(1.5rem, 4vw, 4rem), 820px);
-    margin: 0 auto;
-    display: grid;
-    gap: 1.4rem;
+  .printer-card__cta:hover {
+    background: #e85a25;
+    transform: translateY(-1px);
   }
 
-  /* ─── Support / Ko-fi ─── */
-  .prusa-support {
-    background:
-      radial-gradient(ellipse at 50% 80%, rgba(255, 94, 91, 0.08), transparent 50%),
-      #111214;
+  /* ─── Service Strip ─── */
+  .prusa-service {
+    background: #111214;
     color: #F6F7FA;
-    border-top: 1px solid rgba(64, 196, 196, 0.15);
-    padding-block: clamp(5rem, 8vw, 8rem);
-  }
-  .prusa-support__shell {
-    width: min(100% - clamp(1.5rem, 4vw, 4rem), 820px);
-    margin: 0 auto;
-    display: grid;
-    gap: 1.4rem;
+    padding-block: clamp(3rem, 5vw, 4rem);
+    border-top: 2px solid #FA6831;
   }
 
-  /* ─── Channel Options ─── */
-  .prusa-channel {
-    background: #0F1112;
-    color: #F6F7FA;
-    border-top: 1px solid rgba(64, 196, 196, 0.15);
-    padding-block: clamp(5rem, 8vw, 8rem);
-  }
-  .prusa-channel__shell {
-    width: min(100% - clamp(1.5rem, 4vw, 4rem), 1000px);
-    margin: 0 auto;
-    display: grid;
-    gap: 1.4rem;
-  }
-  .prusa-channel__options {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    margin-top: 0.5rem;
-  }
-  .prusa-channel__option {
-    padding: 2rem;
-    border: 1px solid rgba(64, 196, 196, 0.2);
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.02);
-    display: grid;
-    gap: 1rem;
-    align-content: start;
-  }
-  .prusa-channel__option:first-child {
-    border-color: rgba(64, 196, 196, 0.4);
-    background: rgba(64, 196, 196, 0.04);
-  }
-  .prusa-channel__option h3 {
-    margin: 0;
+  .prusa-service__title {
+    margin: 0 0 1.5rem;
     font-family: var(--font-display);
-    font-size: 1.3rem;
-    color: #FFFFFF;
+    font-size: clamp(1.3rem, 1rem + 1vw, 1.8rem);
+    font-weight: 800;
+    color: #F6F7FA;
   }
-  .prusa-channel__option p {
-    margin: 0;
-    font-size: 0.95rem;
-    line-height: 1.65;
-    color: rgba(246, 247, 250, 0.76);
+
+  .prusa-service__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
   }
-  .prusa-channel__label {
+
+  .prusa-service__item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .prusa-service__item strong {
     font-family: var(--font-tech);
-    font-size: 0.68rem;
+    font-size: 0.8rem;
     font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(64, 196, 196, 0.7);
+    letter-spacing: 0.06em;
+    color: #FA6831;
   }
 
-  /* ─── Responsive ─── */
-  @media (max-width: 900px) {
-    .prusa-value__grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .prusa-lineup__grid {
-      grid-template-columns: 1fr;
-    }
-    .prusa-setup__grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .prusa-channel__options {
-      grid-template-columns: 1fr;
-    }
+  .prusa-service__item p {
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: rgba(246, 247, 250, 0.6);
   }
 
-  @media (max-width: 640px) {
-    .prusa-value__grid {
+  /* ─── Note ─── */
+  .prusa-note {
+    background: #0A0B0C;
+    color: #F6F7FA;
+    padding-block: clamp(3rem, 5vw, 4rem);
+    text-align: center;
+  }
+
+  .prusa-note__text {
+    margin: 0 auto 1.5rem;
+    max-width: 640px;
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: rgba(246, 247, 250, 0.6);
+  }
+
+  .prusa-note__text strong {
+    color: #F6F7FA;
+  }
+
+  .prusa-note__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  /* ─── Mobile ─── */
+  @media (max-width: 767px) {
+    .prusa-grid {
       grid-template-columns: 1fr;
-    }
-    .prusa-setup__grid {
-      grid-template-columns: 1fr;
-    }
-    .prusa-title {
-      font-size: clamp(2.2rem, 1.5rem + 4vw, 4rem);
     }
   }
 </style>

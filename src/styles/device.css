@@ -449,6 +449,36 @@
   50% { transform: translateX(5px); }
 }
 
+/* ── Platform separator between conversation fragments ── */
+.chat-platform-sep {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.6rem;
+  margin: 0.15rem 0;
+}
+
+.chat-platform-sep__line {
+  flex: 1;
+  height: 1px;
+  background: rgba(26, 26, 26, 0.08);
+}
+
+.chat-platform-sep__label {
+  font-family: var(--font-tech);
+  font-size: 0.42rem;
+  color: rgba(26, 26, 26, 0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+/* ── Parallax wrapper for scroll-reactive phones ── */
+.device-parallax-wrap {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
 /* ── Accent dividers between phones ── */
 .phone-divider {
   width: 2px;
@@ -590,6 +620,8 @@
   .chat-msg-image { max-width: 70px; }
   .phone-divider { margin-inline: 3px; width: 1.5px; }
   .phone-divider-spacer { margin-inline: 3px; }
+  .chat-platform-sep { padding: 0.2rem 0.3rem; gap: 0.2rem; }
+  .chat-platform-sep__label { font-size: 0.3rem; }
 }
 
 /* ── Reduced motion ── */

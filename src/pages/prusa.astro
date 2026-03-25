@@ -172,6 +172,22 @@ const printers = [
     </div>
   </section>
 
+  <!-- Accessory kit recommendation -->
+  <section class="prusa-accessory">
+    <div class="prusa-shell">
+      <div class="prusa-accessory__card">
+        <div class="prusa-accessory__icon">🔧</div>
+        <div class="prusa-accessory__content">
+          <h3 class="prusa-accessory__title">We Recommend Adding the Accessory & Repair Kit</h3>
+          <p class="prusa-accessory__text">
+            Not because Prusa printers break down — they don't. But having spare nozzles, PTFE tubing, lubricant, and essential tools on hand means you're never waiting for parts when you want to keep printing. It's peace of mind from day one.
+          </p>
+          <a href="/contact?subject=accessory-kit" class="prusa-accessory__link">Ask about the kit &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Brief note -->
   <section class="prusa-note">
     <div class="prusa-shell">
@@ -239,15 +255,30 @@ const printers = [
     box-shadow: none;
   }
 
+  /* ─── Entrance animations ─── */
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes scale-in {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
   /* ─── Hero ─── */
   .prusa-hero {
     display: flex;
     align-items: center;
     min-height: 50svh;
     background:
-      radial-gradient(ellipse at 20% 50%, rgba(250, 104, 49, 0.08), transparent 50%),
-      #111214;
-    color: #F6F7FA;
+      radial-gradient(ellipse at 20% 50%, rgba(250, 104, 49, 0.12), transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(64, 196, 196, 0.06), transparent 50%),
+      #FAFBFC;
+    color: #1A1A1A;
     padding-block: clamp(5rem, 8vw, 8rem);
   }
 
@@ -255,6 +286,7 @@ const printers = [
     max-width: 700px;
     display: grid;
     gap: 1.2rem;
+    animation: slide-up 0.6s ease-out both;
   }
 
   .prusa-title {
@@ -264,6 +296,7 @@ const printers = [
     line-height: 0.95;
     letter-spacing: -0.03em;
     text-transform: uppercase;
+    color: #1A1A1A;
   }
 
   .prusa-title--accent {
@@ -274,13 +307,13 @@ const printers = [
     margin: 0;
     font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.1rem);
     line-height: 1.65;
-    color: rgba(246, 247, 250, 0.7);
+    color: #555555;
     max-width: 540px;
   }
 
   /* ─── Catalog Grid ─── */
   .prusa-catalog {
-    background: #F6F7FA;
+    background: #FFFFFF;
     padding-block: clamp(3rem, 6vw, 5rem);
   }
 
@@ -294,16 +327,25 @@ const printers = [
   .printer-card {
     display: flex;
     flex-direction: column;
-    background: #FFFFFF;
+    background: #FAFBFC;
     border: 1px solid rgba(26, 26, 26, 0.06);
     border-radius: 16px;
     padding: clamp(1.5rem, 2.5vw, 2rem);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    animation: scale-in 0.5s ease-out both;
   }
 
+  .printer-card:nth-child(1) { animation-delay: 0.1s; }
+  .printer-card:nth-child(2) { animation-delay: 0.18s; }
+  .printer-card:nth-child(3) { animation-delay: 0.26s; }
+  .printer-card:nth-child(4) { animation-delay: 0.34s; }
+  .printer-card:nth-child(5) { animation-delay: 0.42s; }
+  .printer-card:nth-child(6) { animation-delay: 0.50s; }
+
   .printer-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(250, 104, 49, 0.1);
+    border-color: rgba(250, 104, 49, 0.2);
   }
 
   .printer-card__head {
@@ -434,15 +476,18 @@ const printers = [
   }
   .printer-card__cta:hover {
     background: #e85a25;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(250, 104, 49, 0.25);
   }
 
   /* ─── Service Strip ─── */
   .prusa-service {
-    background: #111214;
-    color: #F6F7FA;
+    background:
+      radial-gradient(ellipse at 70% 30%, rgba(250, 104, 49, 0.06), transparent 50%),
+      #F6F2EE;
+    color: #1A1A1A;
     padding-block: clamp(3rem, 5vw, 4rem);
-    border-top: 2px solid #FA6831;
+    border-top: 3px solid #FA6831;
   }
 
   .prusa-service__title {
@@ -450,7 +495,8 @@ const printers = [
     font-family: var(--font-display);
     font-size: clamp(1.3rem, 1rem + 1vw, 1.8rem);
     font-weight: 800;
-    color: #F6F7FA;
+    color: #1A1A1A;
+    animation: slide-up 0.5s ease-out both;
   }
 
   .prusa-service__grid {
@@ -463,6 +509,22 @@ const printers = [
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 1.2rem;
+    border: 1px solid rgba(250, 104, 49, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: scale-in 0.5s ease-out both;
+  }
+
+  .prusa-service__item:nth-child(1) { animation-delay: 0.1s; }
+  .prusa-service__item:nth-child(2) { animation-delay: 0.2s; }
+  .prusa-service__item:nth-child(3) { animation-delay: 0.3s; }
+  .prusa-service__item:nth-child(4) { animation-delay: 0.4s; }
+
+  .prusa-service__item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(250, 104, 49, 0.08);
   }
 
   .prusa-service__item strong {
@@ -477,15 +539,84 @@ const printers = [
     margin: 0;
     font-size: 0.85rem;
     line-height: 1.55;
-    color: rgba(246, 247, 250, 0.6);
+    color: #666666;
+  }
+
+  /* ─── Accessory Kit ─── */
+  .prusa-accessory {
+    background: #FFFFFF;
+    padding-block: clamp(2rem, 4vw, 3rem);
+  }
+
+  .prusa-accessory__card {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    background:
+      linear-gradient(135deg, rgba(64, 196, 196, 0.06), rgba(250, 104, 49, 0.04));
+    border: 1px solid rgba(64, 196, 196, 0.15);
+    border-radius: 16px;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    animation: slide-up 0.5s ease-out both;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .prusa-accessory__card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(64, 196, 196, 0.1);
+  }
+
+  .prusa-accessory__icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .prusa-accessory__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .prusa-accessory__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 0.9rem + 0.4vw, 1.2rem);
+    font-weight: 800;
+    color: #1A1A1A;
+  }
+
+  .prusa-accessory__text {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: #555555;
+  }
+
+  .prusa-accessory__link {
+    font-family: var(--font-tech);
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: #40C4C4;
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    transition: color 0.2s, letter-spacing 0.2s;
+  }
+
+  .prusa-accessory__link:hover {
+    color: #2da8a8;
+    letter-spacing: 0.1em;
   }
 
   /* ─── Note ─── */
   .prusa-note {
-    background: #0A0B0C;
-    color: #F6F7FA;
+    background:
+      radial-gradient(ellipse at 50% 50%, rgba(250, 104, 49, 0.05), transparent 60%),
+      #FAFBFC;
+    color: #1A1A1A;
     padding-block: clamp(3rem, 5vw, 4rem);
     text-align: center;
+    animation: fade-in 0.6s ease-out both;
   }
 
   .prusa-note__text {
@@ -493,11 +624,11 @@ const printers = [
     max-width: 640px;
     font-size: 0.92rem;
     line-height: 1.65;
-    color: rgba(246, 247, 250, 0.6);
+    color: #555555;
   }
 
   .prusa-note__text strong {
-    color: #F6F7FA;
+    color: #FA6831;
   }
 
   .prusa-note__actions {
@@ -507,10 +638,26 @@ const printers = [
     justify-content: center;
   }
 
+  /* ─── Reduced motion ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .prusa-hero__content,
+    .printer-card,
+    .prusa-service__title,
+    .prusa-service__item,
+    .prusa-accessory__card,
+    .prusa-note {
+      animation: none;
+    }
+  }
+
   /* ─── Mobile ─── */
   @media (max-width: 767px) {
     .prusa-grid {
       grid-template-columns: 1fr;
+    }
+    .prusa-accessory__card {
+      flex-direction: column;
+      gap: 1rem;
     }
   }
 </style>

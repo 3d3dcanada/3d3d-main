@@ -757,27 +757,53 @@ const services = [
     to   { clip-path: inset(0 0 0 0); }
   }
 
-  /* Stripe glow pulse — activated after build completes */
-  .hero-stripe--teal.built {
-    animation: stripe-glow-teal 3s ease-in-out infinite;
+  /* Stripe continuous animation — never stops after build completes */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-stripe--teal.stripe-alive {
+      animation: stripe-alive-teal 5s ease-in-out infinite;
+    }
+    .hero-stripe--orange.stripe-alive {
+      animation: stripe-alive-orange 6.5s ease-in-out 1.2s infinite;
+    }
+    .hero-stripe--magenta.stripe-alive {
+      animation: stripe-alive-magenta 4.8s ease-in-out 0.6s infinite;
+    }
   }
-  .hero-stripe--orange.built {
-    animation: stripe-glow-orange 3s ease-in-out infinite;
+  @keyframes stripe-alive-teal {
+    0%, 100% {
+      box-shadow: 0 0 18px rgba(64, 196, 196, 0.4);
+      transform: translateY(0);
+      opacity: 0.88;
+    }
+    50% {
+      box-shadow: 0 0 36px rgba(64, 196, 196, 0.8);
+      transform: translateY(-3px);
+      opacity: 1;
+    }
   }
-  .hero-stripe--magenta.built {
-    animation: stripe-glow-magenta 3s ease-in-out infinite;
+  @keyframes stripe-alive-orange {
+    0%, 100% {
+      box-shadow: 0 0 18px rgba(250, 104, 49, 0.4);
+      transform: translateY(0);
+      opacity: 0.85;
+    }
+    50% {
+      box-shadow: 0 0 36px rgba(250, 104, 49, 0.8);
+      transform: translateY(3px);
+      opacity: 1;
+    }
   }
-  @keyframes stripe-glow-teal {
-    0%, 100% { box-shadow: 0 0 18px rgba(64, 196, 196, 0.4); }
-    50% { box-shadow: 0 0 30px rgba(64, 196, 196, 0.75); }
-  }
-  @keyframes stripe-glow-orange {
-    0%, 100% { box-shadow: 0 0 18px rgba(250, 104, 49, 0.4); }
-    50% { box-shadow: 0 0 30px rgba(250, 104, 49, 0.75); }
-  }
-  @keyframes stripe-glow-magenta {
-    0%, 100% { box-shadow: 0 0 18px rgba(224, 64, 251, 0.4); }
-    50% { box-shadow: 0 0 30px rgba(224, 64, 251, 0.75); }
+  @keyframes stripe-alive-magenta {
+    0%, 100% {
+      box-shadow: 0 0 18px rgba(224, 64, 251, 0.4);
+      transform: translateY(0);
+      opacity: 0.86;
+    }
+    50% {
+      box-shadow: 0 0 36px rgba(224, 64, 251, 0.8);
+      transform: translateY(-2px);
+      opacity: 1;
+    }
   }
 
   /* Mobile: equal-width racing stripes, centered */
@@ -812,6 +838,14 @@ const services = [
     color: rgba(246, 247, 250, 0.72);
     opacity: 0;
     animation: hero-line-in 0.72s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+  }
+
+  .hero-eyebrow::after {
+    content: '';
+    width: 2.75rem;
+    height: 2px;
+    background: #40C4C4;
+    flex-shrink: 0;
   }
 
   .hero-title {
@@ -1700,7 +1734,7 @@ const services = [
 
         // Activate stripe glow pulse
         const stripeEl = document.querySelector(stripe);
-        if (stripeEl) stripeEl.classList.add('built');
+        if (stripeEl) stripeEl.classList.add('stripe-alive');
 
         // Create scan line
         const line = document.createElement('div');

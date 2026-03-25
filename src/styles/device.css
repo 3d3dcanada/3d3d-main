@@ -196,11 +196,9 @@
   -webkit-overflow-scrolling: touch;
 }
 
-/* Thin scrollbar — visible so users know they can scroll */
-.screen-chat::-webkit-scrollbar { width: 3px; }
-.screen-chat::-webkit-scrollbar-track { background: transparent; }
-.screen-chat::-webkit-scrollbar-thumb { background: rgba(64, 196, 196, 0.3); border-radius: 999px; }
-.screen-chat { scrollbar-width: thin; scrollbar-color: rgba(64, 196, 196, 0.3) transparent; }
+/* Auto-scroll only — no user interaction with chat */
+.screen-chat { pointer-events: none; touch-action: none; scrollbar-width: none; }
+.screen-chat::-webkit-scrollbar { width: 0; }
 
 .chat-msg {
   max-width: 82%;
@@ -352,20 +350,22 @@
   justify-content: center;
 }
 
-/* ── Phone CTA button — bold, alive ── */
+/* ── Phone CTA button — bold, alive, breathing ── */
 .device-cta {
   position: absolute;
-  bottom: -3rem;
+  bottom: -3.2rem;
   left: 50%;
   transform: translateX(-50%) translateY(8px);
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
   gap: 0.4em;
-  padding: 0.55rem 1rem;
+  min-width: 140px;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
   border-radius: 999px;
   font-family: var(--font-tech);
-  font-size: 0.72rem;
+  font-size: 0.88rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -380,44 +380,62 @@
   transform: translateX(-50%) translateY(0);
 }
 
+/* Breathing animation — CTAs feel alive */
+@media (prefers-reduced-motion: no-preference) {
+  .device-cta.visible {
+    animation: cta-breathe 2.5s ease-in-out infinite;
+  }
+  .device-cta--marine.visible { animation-delay: 0s; }
+  .device-cta--print.visible { animation-delay: 0.8s; }
+  .device-cta--custom.visible { animation-delay: 1.6s; }
+}
+
+@keyframes cta-breathe {
+  0%, 100% { transform: translateX(-50%) translateY(0) scale(1); }
+  50% { transform: translateX(-50%) translateY(-2px) scale(1.03); }
+}
+
 /* Per-phone CTA colors */
 .device-cta--marine {
-  background: rgba(64, 196, 196, 0.15);
+  background: rgba(64, 196, 196, 0.18);
   color: #40C4C4;
-  border: 1.5px solid rgba(64, 196, 196, 0.4);
-  box-shadow: 0 4px 20px rgba(64, 196, 196, 0.15);
+  border: 2px solid rgba(64, 196, 196, 0.45);
+  box-shadow: 0 6px 24px rgba(64, 196, 196, 0.2);
 }
 .device-cta--marine:hover {
   background: #40C4C4;
   color: #0F1112;
-  box-shadow: 0 6px 28px rgba(64, 196, 196, 0.4);
-  transform: translateX(-50%) translateY(-3px);
+  box-shadow: 0 8px 32px rgba(64, 196, 196, 0.45);
+  transform: translateX(-50%) translateY(-3px) scale(1.05);
+  animation: none;
 }
 
 .device-cta--print {
-  background: rgba(250, 104, 49, 0.15);
+  background: rgba(250, 104, 49, 0.18);
   color: #FA6831;
-  border: 1.5px solid rgba(250, 104, 49, 0.4);
-  box-shadow: 0 4px 20px rgba(250, 104, 49, 0.15);
+  border: 2px solid rgba(250, 104, 49, 0.45);
+  box-shadow: 0 6px 24px rgba(250, 104, 49, 0.2);
 }
 .device-cta--print:hover {
   background: #FA6831;
   color: #0F1112;
-  box-shadow: 0 6px 28px rgba(250, 104, 49, 0.4);
-  transform: translateX(-50%) translateY(-3px);
+  box-shadow: 0 8px 32px rgba(250, 104, 49, 0.45);
+  transform: translateX(-50%) translateY(-3px) scale(1.05);
+  animation: none;
 }
 
 .device-cta--custom {
-  background: rgba(232, 74, 138, 0.15);
+  background: rgba(232, 74, 138, 0.18);
   color: #E84A8A;
-  border: 1.5px solid rgba(232, 74, 138, 0.4);
-  box-shadow: 0 4px 20px rgba(232, 74, 138, 0.15);
+  border: 2px solid rgba(232, 74, 138, 0.45);
+  box-shadow: 0 6px 24px rgba(232, 74, 138, 0.2);
 }
 .device-cta--custom:hover {
   background: #E84A8A;
   color: #0F1112;
-  box-shadow: 0 6px 28px rgba(232, 74, 138, 0.4);
-  transform: translateX(-50%) translateY(-3px);
+  box-shadow: 0 8px 32px rgba(232, 74, 138, 0.45);
+  transform: translateX(-50%) translateY(-3px) scale(1.05);
+  animation: none;
 }
 
 /* Arrow pulse */
@@ -428,7 +446,7 @@
 
 @keyframes cta-arrow-pulse {
   0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(3px); }
+  50% { transform: translateX(5px); }
 }
 
 /* ── Accent dividers between phones ── */
@@ -567,7 +585,7 @@
   .screen-input { padding: 0.25rem 0.35rem; }
   .screen-input-text { font-size: 0.32rem; }
   .screen-input-send { width: 14px; height: 14px; font-size: 0.32rem; }
-  .device-cta { font-size: 0.46rem; bottom: -2rem; letter-spacing: 0.06em; padding: 0.35rem 0.7rem; }
+  .device-cta { font-size: 0.62rem; bottom: -2.2rem; letter-spacing: 0.08em; padding: 0.5rem 1rem; min-width: 90px; }
   .chat-msg-avatar { width: 10px; height: 10px; font-size: 0.24rem; }
   .chat-msg-image { max-width: 70px; }
   .phone-divider { margin-inline: 3px; width: 1.5px; }

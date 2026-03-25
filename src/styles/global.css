@@ -2,6 +2,7 @@
 @import "tailwindcss";
 @import "./scroll-reveal.css";
 @import "./glass.css";
+@import "./device.css";
 
 /* ─────────────────────────────────────────────────────────────────
    3D3D — Precision Fabrication Design System

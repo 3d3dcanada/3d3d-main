@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CampaignStrip from '../components/CampaignStrip';
-import PhoneMockup from '../components/PhoneMockup.astro';
+import DeviceShowcase from '../components/DeviceShowcase';
 
 const orgSchema = {
   '@context': 'https://schema.org',
@@ -145,8 +145,8 @@ const services = [
           </div>
         </div>
 
-        <div class="hero-media">
-          <PhoneMockup />
+        <div class="hero-media hero-media--showcase">
+          <DeviceShowcase client:visible />
         </div>
       </div>
     </section>
@@ -726,28 +726,28 @@ const services = [
     will-change: transform;
   }
 
-  /* Magenta — LEFT, slow layer-line build DOWN */
-  .hero-stripe--magenta {
-    background: #E040FB;
-    clip-path: inset(0 0 100% 0);
-    animation: stripe-build-down 2.8s steps(70, end) 0.6s forwards;
-    box-shadow: 0 0 18px rgba(224, 64, 251, 0.4);
-  }
-
-  /* Orange — MIDDLE, slow layer-line build UP */
-  .hero-stripe--orange {
-    background: #FA6831;
-    clip-path: inset(100% 0 0 0);
-    animation: stripe-build-up 2.8s steps(70, end) 0.6s forwards;
-    box-shadow: 0 0 18px rgba(250, 104, 49, 0.4);
-  }
-
-  /* Teal — RIGHT, slow layer-line build DOWN */
+  /* Teal — RIGHT, builds DOWN first → triggers Phone 1 (marine) */
   .hero-stripe--teal {
     background: #40C4C4;
     clip-path: inset(0 0 100% 0);
-    animation: stripe-build-down 2.8s steps(70, end) 0.6s forwards;
+    animation: stripe-build-down 0.8s steps(20, end) 0.6s forwards;
     box-shadow: 0 0 18px rgba(64, 196, 196, 0.4);
+  }
+
+  /* Orange — MIDDLE, builds UP second → triggers Phone 2 (print) */
+  .hero-stripe--orange {
+    background: #FA6831;
+    clip-path: inset(100% 0 0 0);
+    animation: stripe-build-up 0.8s steps(20, end) 1.8s forwards;
+    box-shadow: 0 0 18px rgba(250, 104, 49, 0.4);
+  }
+
+  /* Magenta — LEFT, builds DOWN third → triggers Phone 3 (custom) */
+  .hero-stripe--magenta {
+    background: #E040FB;
+    clip-path: inset(0 0 100% 0);
+    animation: stripe-build-down 0.8s steps(20, end) 2.8s forwards;
+    box-shadow: 0 0 18px rgba(224, 64, 251, 0.4);
   }
 
   @keyframes stripe-build-down {
@@ -774,7 +774,7 @@ const services = [
 
   .hero-shell {
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     align-items: center;
     gap: clamp(2rem, 4vw, 4rem);
   }
@@ -922,6 +922,12 @@ const services = [
     justify-content: center;
   }
 
+  .hero-media--showcase {
+    overflow: visible;
+    min-height: 400px;
+    padding-bottom: 2.5rem; /* space for CTA links below phones */
+  }
+
   .hero-video-frame {
     position: relative;
     overflow: hidden;
@@ -942,38 +948,6 @@ const services = [
     z-index: 2;
   }
 
-  /* Crossfade image stack */
-  .hero-crossfade {
-    background: #111214;
-  }
-
-  .crossfade-img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    opacity: 0;
-  }
-
-  /* 8 images × 6s each = 48s total cycle */
-  .crossfade-img--1 { animation: xfade 48s ease-in-out 0s infinite; }
-  .crossfade-img--2 { animation: xfade 48s ease-in-out 6s infinite; }
-  .crossfade-img--3 { animation: xfade 48s ease-in-out 12s infinite; }
-  .crossfade-img--4 { animation: xfade 48s ease-in-out 18s infinite; }
-  .crossfade-img--5 { animation: xfade 48s ease-in-out 24s infinite; }
-  .crossfade-img--6 { animation: xfade 48s ease-in-out 30s infinite; }
-  .crossfade-img--7 { animation: xfade 48s ease-in-out 36s infinite; }
-  .crossfade-img--8 { animation: xfade 48s ease-in-out 42s infinite; }
-
-  @keyframes xfade {
-    0%     { opacity: 0; }
-    2%     { opacity: 1; }
-    10.5%  { opacity: 1; }
-    12.5%  { opacity: 0; }
-    100%   { opacity: 0; }
-  }
 
   .hero-video {
     width: 100%;
@@ -1601,6 +1575,7 @@ const services = [
   @media (max-width: 1023px) {
     .hero-shell { grid-template-columns: 1fr; }
     .hero-media { max-width: 32rem; }
+    .hero-media--showcase { max-width: none; }
     .services-grid { grid-template-columns: 1fr; }
   }
 
@@ -1626,7 +1601,8 @@ const services = [
       transition: none !important;
     }
 
-    .hero-line, .hero-eyebrow, .hero-subhead, .hero-actions, .hero-proof-item, .hero-video-frame {
+    .hero-line, .hero-eyebrow, .hero-subhead, .hero-actions, .hero-proof-item, .hero-video-frame,
+    .hero-stripe {
       opacity: 1 !important;
       transform: none !important;
       clip-path: none !important;
@@ -1653,12 +1629,54 @@ const services = [
     }
 
     window.addEventListener('scroll', () => {
-      if (window.innerWidth < 768) return; /* no parallax on mobile — keeps stripe bottoms even */
+      if (window.innerWidth < 768) return;
       if (!ticking) {
         requestAnimationFrame(update);
         ticking = true;
       }
     }, { passive: true });
+  })();
+
+  // Stripe → Phone choreography timeline
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const heroMedia = document.querySelector('.hero-media--showcase');
+    if (!heroMedia) return;
+
+    const timeline = [
+      { delay: 1400, phone: 'marine',  scan: 'teal',    dir: 'h' },
+      { delay: 2600, phone: 'print',   scan: 'orange',  dir: 'v' },
+      { delay: 3400, phone: 'custom',  scan: 'magenta', dir: 'h' },
+    ];
+
+    timeline.forEach(({ delay, phone, scan, dir }) => {
+      setTimeout(() => {
+        // Dispatch phone entrance event
+        window.dispatchEvent(new CustomEvent('phone-enter', { detail: { phone } }));
+
+        // Create scan line
+        const line = document.createElement('div');
+        line.className = `hero-scan-line hero-scan-line--${dir} hero-scan-line--${scan}`;
+        line.style.cssText = dir === 'h'
+          ? `top: 50%; left: 0;`
+          : `left: 50%; top: 0;`;
+        heroMedia.appendChild(line);
+
+        // Trigger animation on next frame
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            line.classList.add('active');
+          });
+        });
+
+        // Remove scan line after animation
+        setTimeout(() => {
+          line.classList.remove('active');
+          setTimeout(() => line.remove(), 300);
+        }, 800);
+      }, delay);
+    });
   })();
 </script>
 

@@ -968,7 +968,7 @@ const homeNavGroups = [
   }
   .cstrip-motion-cell.done:hover    { box-shadow: inset 0 -3px 0 #40C4C4, var(--glass-shadow-dark); }
   .cstrip-motion-cell.open          { cursor: default; }
-  .cstrip-motion-cell.featured      { box-shadow: var(--glass-shadow-dark); }
+  .cstrip-motion-cell.featured      { box-shadow: var(--glass-shadow-dark); background: radial-gradient(ellipse at 50% 80%, rgba(64,196,196,0.06) 0%, transparent 60%), var(--glass-bg-dark); }
 
   .cstrip-cell-link {
     display: block;
@@ -1142,6 +1142,7 @@ const homeNavGroups = [
     height: 3px;
     background: rgba(255,255,255,0.04);
     overflow: hidden;
+    box-shadow: 0 0 12px rgba(64,196,196,0.4);
   }
   .cstrip-track-fill {
     height: 100%;
@@ -1155,8 +1156,102 @@ const homeNavGroups = [
     background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
   }
 
+  /* ── Hover preview (desktop) ── */
+  .cstrip-preview {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    z-index: 50;
+    width: min(50vw, 480px);
+    max-height: 40vh;
+    overflow: hidden;
+    background: #111214;
+    border: 1px solid rgba(64,196,196,0.15);
+    border-radius: 16px;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.5), 0 0 24px rgba(64,196,196,0.08);
+    pointer-events: none;
+  }
+
+  .cstrip-preview__photo {
+    width: 100%;
+    height: 140px;
+    overflow: hidden;
+  }
+  .cstrip-preview__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .cstrip-preview__logo-area {
+    padding: 1.2rem;
+    border-bottom: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cstrip-preview__logo-area img {
+    height: 28px;
+    width: auto;
+    opacity: 0.8;
+    filter: brightness(0) invert(1);
+  }
+  .cstrip-preview__logo--color { filter: none !important; }
+
+  .cstrip-preview__body {
+    padding: 1rem 1.2rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .cstrip-preview__date {
+    font-family: 'Courier New', monospace;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .cstrip-preview__title {
+    margin: 0;
+    font-family: var(--font-display, 'Archivo', sans-serif);
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #F6F7FA;
+    line-height: 1.2;
+  }
+
+  .cstrip-preview__location {
+    margin: 0;
+    font-family: var(--font-tech, 'Space Grotesk', sans-serif);
+    font-size: 0.72rem;
+    color: rgba(246,247,250,0.4);
+    letter-spacing: 0.04em;
+  }
+
+  .cstrip-preview__text {
+    margin: 0.3rem 0 0;
+    font-size: 0.78rem;
+    line-height: 1.55;
+    color: rgba(246,247,250,0.6);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+
+  .cstrip-preview__cta {
+    font-family: var(--font-tech, 'Space Grotesk', sans-serif);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-top: 0.3rem;
+  }
+
   /* ── Mobile strip ── */
   @media (max-width: 767px) {
+    .cstrip-preview { display: none; }
     .cstrip-header {
       padding: 0.75rem 1.2rem;
     }

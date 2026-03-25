@@ -173,17 +173,23 @@ function Cell({
   onClick,
   isVisible,
   shouldReduceMotion,
+  onHoverStart,
+  onHoverEnd,
 }: {
   milestone: Milestone;
   index: number;
   onClick: () => void;
   isVisible: boolean;
   shouldReduceMotion: boolean;
+  onHoverStart?: (m: Milestone, rect: DOMRect) => void;
+  onHoverEnd?: () => void;
 }) {
+  const cellRef = useRef<HTMLDivElement>(null);
   const accent = accentHex(milestone.accent);
   const isOpen = milestone.type === 'open';
   const isUpcoming = milestone.type === 'upcoming';
   const isFeatured = isUpcoming;
+  const isPrusa = milestone.id === 'prusa';
 
   const initial = shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30, rotateY: -8, scale: 0.88 };
   const animate = isVisible
@@ -194,6 +200,32 @@ function Cell({
     ? 'rgba(255,255,255,0.025)'
     : 'rgba(255,255,255,0.05)';
 
+  // Enhanced 3D hover — deeper pop-out, spring physics
+  const hoverAnim = shouldReduceMotion ? {} : isPrusa ? {
+    backgroundColor: hoverBg,
+    translateZ: 60,
+    rotateY: -4,
+    rotateX: 2,
+    scale: 1.08,
+    boxShadow: '0 20px 40px rgba(250,104,49,0.25)',
+  } : isOpen ? {} : {
+    backgroundColor: hoverBg,
+    translateZ: 40,
+    rotateY: -4,
+    rotateX: 2,
+    scale: 1.06,
+    boxShadow: '0 20px 40px rgba(0,0,0,0.25)',
+  };
+
+  const hoverTransition = { type: 'spring' as const, stiffness: 300, damping: 20 };
+
+  const handleMouseEnter = () => {
+    if (shouldReduceMotion || !milestone.modal || !onHoverStart) return;
+    if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) return;
+    const rect = cellRef.current?.getBoundingClientRect();
+    if (rect) onHoverStart(milestone, rect);
+  };
+
   const Tag = milestone.modal ? 'button' : 'a' as any;
   const tagProps = milestone.modal
     ? { type: 'button' as const, onClick }
@@ -201,18 +233,21 @@ function Cell({
 
   return (
     <motion.div
+      ref={cellRef}
       initial={initial}
       animate={animate}
       transition={{ duration: 0.45, delay: index * 0.09, ease: [0.16, 1, 0.3, 1] }}
       style={{ flex: isFeatured ? '2 0 300px' : isOpen ? '1 0 190px' : '1 0 210px', perspective: '1400px' }}
       className={`cstrip-cell-wrap${isOpen ? ' cstrip-cell-wrap--open' : ''}`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={onHoverEnd}
     >
       <motion.div
         className={`cstrip-motion-cell${isOpen ? ' open' : ''}${isFeatured ? ' featured' : ''}${milestone.type === 'done' ? ' done' : ''}`}
-        whileHover={shouldReduceMotion ? {} : { backgroundColor: hoverBg, translateZ: 16, rotateY: -2.5, scale: 1.03 }}
-        whileTap={shouldReduceMotion ? {} : { scale: 0.97, translateZ: 4 }}
+        whileHover={hoverAnim}
+        whileTap={shouldReduceMotion ? {} : { scale: 0.95, translateZ: -4 }}
         animate={isFeatured && !shouldReduceMotion ? { y: [0, -5, 0], rotateY: [0, 1, 0] } : {}}
-        transition={isFeatured ? { y: { repeat: Infinity, duration: 3.5, ease: 'easeInOut' }, rotateY: { repeat: Infinity, duration: 3.5, ease: 'easeInOut' }, duration: 0.18 } : { duration: 0.18 }}
+        transition={isFeatured ? { y: { repeat: Infinity, duration: 3.5, ease: 'easeInOut' }, rotateY: { repeat: Infinity, duration: 3.5, ease: 'easeInOut' }, ...hoverTransition } : hoverTransition}
         style={{ height: '100%', transformStyle: 'preserve-3d' as const }}
       >
         <Tag {...tagProps} className="cstrip-cell-link" aria-label={milestone.title}>
@@ -223,7 +258,7 @@ function Cell({
             style={
               isOpen
                 ? { height: 0, borderTop: `1px dashed rgba(64,196,196,0.2)`, marginTop: '3px' }
-                : { height: '3px', background: accent }
+                : { height: '4px', background: accent }
             }
           />
 
@@ -240,8 +275,8 @@ function Cell({
                 <motion.span
                   className="cstrip-badge cstrip-badge--upcoming"
                   style={{ color: accent, borderColor: `${accent}40` }}
-                  animate={shouldReduceMotion ? {} : { opacity: [0.7, 1, 0.7] }}
-                  transition={{ repeat: Infinity, duration: 2.5, ease: 'easeInOut' }}
+                  animate={shouldReduceMotion ? {} : { opacity: [0.6, 1, 0.6], scale: [0.95, 1.05, 0.95] }}
+                  transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
                 >
                   ▶ Upcoming
                 </motion.span>
@@ -511,12 +546,69 @@ function ProgressTrack({ visible, shouldReduceMotion }: { visible: boolean; shou
   );
 }
 
+/* ─── Hover preview (desktop only, half-screen) ─────────────────────── */
+
+function HoverPreview({
+  milestone,
+  cellRect,
+  stripRect,
+  shouldReduceMotion,
+}: {
+  milestone: Milestone;
+  cellRect: DOMRect;
+  stripRect: DOMRect;
+  shouldReduceMotion: boolean;
+}) {
+  if (!milestone.modal) return null;
+  const data = milestone.modal;
+  const accent = accentHex(milestone.accent);
+
+  // Position above the cell, centered on it
+  const left = cellRect.left - stripRect.left + cellRect.width / 2;
+
+  return (
+    <motion.div
+      className="cstrip-preview"
+      initial={{ opacity: 0, scale: 0.96, y: 8 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.96, y: 8 }}
+      transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+      style={{ left, transform: 'translateX(-50%)' }}
+    >
+      {/* Photo */}
+      {(data.photo || milestone.img) && (
+        <div className="cstrip-preview__photo">
+          <img src={data.photo || milestone.img} alt="" loading="lazy" />
+        </div>
+      )}
+      {/* Logo fallback */}
+      {!data.photo && !milestone.img && milestone.logo && (
+        <div className="cstrip-preview__logo-area" style={{ borderBottomColor: `${accent}30` }}>
+          <img src={milestone.logo} alt="" className={milestone.logoOrange ? 'cstrip-preview__logo--color' : ''} />
+        </div>
+      )}
+      <div className="cstrip-preview__body">
+        <span className="cstrip-preview__date" style={{ color: accent }}>{data.headDate}</span>
+        <h4 className="cstrip-preview__title">{data.title}</h4>
+        <p className="cstrip-preview__location">{data.location}</p>
+        {data.paragraphs[0] && (
+          <p className="cstrip-preview__text">{data.paragraphs[0].slice(0, 200)}{data.paragraphs[0].length > 200 ? '...' : ''}</p>
+        )}
+        <span className="cstrip-preview__cta" style={{ color: accent }}>Click to read more &rarr;</span>
+      </div>
+    </motion.div>
+  );
+}
+
 /* ─── Main strip component ───────────────────────────────────────────── */
 
 export default function CampaignStrip() {
   const [activeModal, setActiveModal] = useState<ModalData | null>(null);
+  const [hoveredMilestone, setHoveredMilestone] = useState<Milestone | null>(null);
+  const [hoverCellRect, setHoverCellRect] = useState<DOMRect | null>(null);
   const [stripVisible, setStripVisible] = useState(false);
   const stripRef = useRef<HTMLElement>(null);
+  const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
   const shouldReduceMotion = useReducedMotion() ?? false;
 
   // Observe strip entering view
@@ -532,10 +624,27 @@ export default function CampaignStrip() {
   }, []);
 
   const openModal = useCallback((m: Milestone) => {
-    if (m.modal) setActiveModal(m.modal);
+    if (m.modal) {
+      setHoveredMilestone(null); // dismiss preview when opening modal
+      setActiveModal(m.modal);
+    }
   }, []);
 
   const closeModal = useCallback(() => setActiveModal(null), []);
+
+  // Hover preview handlers (desktop only)
+  const handleHoverStart = useCallback((m: Milestone, rect: DOMRect) => {
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    setHoveredMilestone(m);
+    setHoverCellRect(rect);
+  }, []);
+
+  const handleHoverEnd = useCallback(() => {
+    hoverTimeoutRef.current = setTimeout(() => {
+      setHoveredMilestone(null);
+      setHoverCellRect(null);
+    }, 100);
+  }, []);
 
   return (
     <>
@@ -573,6 +682,8 @@ export default function CampaignStrip() {
                 onClick={() => openModal(m)}
                 isVisible={stripVisible}
                 shouldReduceMotion={shouldReduceMotion}
+                onHoverStart={handleHoverStart}
+                onHoverEnd={handleHoverEnd}
               />
             </div>
           ))}
@@ -580,6 +691,19 @@ export default function CampaignStrip() {
 
         {/* Progress track */}
         <ProgressTrack visible={stripVisible} shouldReduceMotion={shouldReduceMotion} />
+
+        {/* Hover preview (desktop only) */}
+        <AnimatePresence>
+          {hoveredMilestone && hoverCellRect && stripRef.current && !activeModal && (
+            <HoverPreview
+              key={hoveredMilestone.id}
+              milestone={hoveredMilestone}
+              cellRect={hoverCellRect}
+              stripRect={stripRef.current.getBoundingClientRect()}
+              shouldReduceMotion={shouldReduceMotion}
+            />
+          )}
+        </AnimatePresence>
       </section>
 
       {/* Modal portal */}

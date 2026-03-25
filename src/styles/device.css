@@ -8,8 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: -10px;
-  perspective: 1000px;
+  perspective: 1200px;
 }
 
 /* ── Individual phone wrapper for 3D tilt ── */
@@ -28,7 +27,7 @@
 /* ── Layer 1: Metallic bevel ── */
 .device-bevel {
   position: relative;
-  width: clamp(180px, 18vw, 240px);
+  width: clamp(200px, 20vw, 280px);
   aspect-ratio: 9 / 19.5;
   border-radius: 52px;
   background: linear-gradient(145deg, #666, #222, #555);
@@ -306,18 +305,20 @@
 /* ── Phone CTA link ── */
 .device-cta {
   position: absolute;
-  bottom: -2.2rem;
+  bottom: -2.8rem;
   left: 50%;
   transform: translateX(-50%);
   white-space: nowrap;
   font-family: var(--font-tech);
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: #40C4C4;
   text-decoration: none;
   opacity: 0;
-  transition: opacity 0.4s ease 0.5s, color 0.2s ease;
+  transition: opacity 0.4s ease 0.5s, color 0.2s ease, transform 0.2s ease;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
 }
 
 .device-cta.visible {
@@ -326,6 +327,7 @@
 
 .device-cta:hover {
   color: #53D3D3;
+  transform: translateX(-50%) translateY(-2px);
 }
 
 /* ── Scan lines ── */
@@ -379,13 +381,30 @@
 /* ── Responsive ── */
 @media (max-width: 1023px) {
   .device-bevel {
-    width: clamp(150px, 22vw, 200px);
+    width: clamp(160px, 22vw, 210px);
   }
 }
 
 @media (max-width: 767px) {
   .device-bevel {
-    width: clamp(200px, 55vw, 260px);
+    width: clamp(140px, 28vw, 170px);
+    border-radius: 36px;
+  }
+
+  .device-body {
+    border-radius: 34px;
+  }
+
+  .device-screen,
+  .device-inset,
+  .device-shine {
+    border-radius: 32px;
+  }
+
+  .dynamic-island {
+    width: 60px;
+    height: 18px;
+    top: 7px;
   }
 }
 

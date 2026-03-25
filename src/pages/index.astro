@@ -119,6 +119,11 @@ const services = [
         <div class="hero-stripe hero-stripe--orange" data-speed="0.07"></div>
         <div class="hero-stripe hero-stripe--teal" data-speed="0.12"></div>
       </div>
+      <!-- Phones overlay the entire hero -->
+      <div class="hero-devices-layer">
+        <DeviceShowcase client:visible />
+      </div>
+
       <div class="section-shell hero-shell">
         <div class="hero-copy">
           <p class="eyebrow hero-eyebrow" data-scramble>3D Printing · Fabrication · Marine Specialist</p>
@@ -143,10 +148,6 @@ const services = [
             <a href="/contact" class="hero-button hero-button--primary" data-analytics-event="contact_started" data-analytics-source="hero-cta">One Call. We'll Assess It. →</a>
             <a href="https://ko-fi.com/3d3dca" class="hero-button hero-button--ghost" target="_blank" rel="noopener noreferrer" data-analytics-event="kofi_clicked" data-analytics-source="hero-cta">Support the Campaign →</a>
           </div>
-        </div>
-
-        <div class="hero-media hero-media--showcase">
-          <DeviceShowcase client:visible />
         </div>
       </div>
     </section>
@@ -773,13 +774,20 @@ const services = [
   }
 
   .hero-shell {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: clamp(2rem, 4vw, 4rem);
+    text-align: center;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
   }
 
-  .hero-copy { display: grid; gap: 1.5rem; place-items: center; }
+  .hero-copy {
+    display: grid;
+    gap: 1.5rem;
+    place-items: center;
+    position: relative;
+    z-index: 2;
+  }
 
   .hero-eyebrow {
     color: rgba(246, 247, 250, 0.72);
@@ -915,17 +923,20 @@ const services = [
     background: var(--page-accent);
   }
 
-  .hero-media {
-    position: relative;
+  /* Phones layer — overlays entire hero */
+  .hero-devices-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
+    pointer-events: none;
+    padding-top: clamp(8rem, 18vw, 14rem);
   }
 
-  .hero-media--showcase {
-    overflow: visible;
-    min-height: 400px;
-    padding-bottom: 2.5rem; /* space for CTA links below phones */
+  .hero-devices-layer > * {
+    pointer-events: auto;
   }
 
   .hero-video-frame {
@@ -1573,9 +1584,6 @@ const services = [
      RESPONSIVE
      ═══════════════════════════════════════════════════ */
   @media (max-width: 1023px) {
-    .hero-shell { grid-template-columns: 1fr; }
-    .hero-media { max-width: 32rem; }
-    .hero-media--showcase { max-width: none; }
     .services-grid { grid-template-columns: 1fr; }
   }
 
@@ -1641,7 +1649,7 @@ const services = [
   (function () {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    const heroMedia = document.querySelector('.hero-media--showcase');
+    const heroMedia = document.querySelector('.hero-devices-layer');
     if (!heroMedia) return;
 
     const timeline = [

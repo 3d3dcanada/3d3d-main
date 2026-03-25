@@ -185,10 +185,10 @@ function Cell({
   const isUpcoming = milestone.type === 'upcoming';
   const isFeatured = isUpcoming;
 
-  const initial = shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20, rotateY: -5, scale: 0.96 };
+  const initial = shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30, rotateY: -8, scale: 0.88 };
   const animate = isVisible
     ? { opacity: 1, y: 0, rotateY: 0, scale: 1 }
-    : shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20, rotateY: -5, scale: 0.96 };
+    : shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30, rotateY: -8, scale: 0.88 };
 
   const hoverBg = isOpen
     ? 'rgba(255,255,255,0.025)'
@@ -209,10 +209,10 @@ function Cell({
     >
       <motion.div
         className={`cstrip-motion-cell${isOpen ? ' open' : ''}${isFeatured ? ' featured' : ''}${milestone.type === 'done' ? ' done' : ''}`}
-        whileHover={shouldReduceMotion ? {} : { backgroundColor: hoverBg, translateZ: 8, rotateY: -1.5 }}
-        whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
-        animate={isFeatured && !shouldReduceMotion ? { y: [0, -3, 0] } : {}}
-        transition={isFeatured ? { y: { repeat: Infinity, duration: 4, ease: 'easeInOut' }, duration: 0.18 } : { duration: 0.18 }}
+        whileHover={shouldReduceMotion ? {} : { backgroundColor: hoverBg, translateZ: 16, rotateY: -2.5, scale: 1.03 }}
+        whileTap={shouldReduceMotion ? {} : { scale: 0.97, translateZ: 4 }}
+        animate={isFeatured && !shouldReduceMotion ? { y: [0, -5, 0], rotateY: [0, 1, 0] } : {}}
+        transition={isFeatured ? { y: { repeat: Infinity, duration: 3.5, ease: 'easeInOut' }, rotateY: { repeat: Infinity, duration: 3.5, ease: 'easeInOut' }, duration: 0.18 } : { duration: 0.18 }}
         style={{ height: '100%', transformStyle: 'preserve-3d' as const }}
       >
         <Tag {...tagProps} className="cstrip-cell-link" aria-label={milestone.title}>

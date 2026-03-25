@@ -14,8 +14,9 @@ interface Scenario {
   messages: Message[];
   cta: string;
   link: string;
-  entrance: { x: number; y: number; rotateY: number; scale: number; delay: number };
+  entrance: { x: number; y: number; rotateY: number; scale: number };
   rest: { rotateY: number; translateZ: number };
+  idle: { y: number[]; rotateY: number[]; duration: number; delay: number };
   zIndex: number;
 }
 
@@ -31,8 +32,9 @@ const SCENARIOS: Scenario[] = [
     ],
     cta: 'Start a conversation →',
     link: '/contact',
-    entrance: { x: -120, y: 0, rotateY: -25, scale: 1, delay: 0 },
-    rest: { rotateY: -8, translateZ: 0 },
+    entrance: { x: -160, y: 40, rotateY: -30, scale: 0.85 },
+    rest: { rotateY: -12, translateZ: -10 },
+    idle: { y: [0, -6, 0], rotateY: [-12, -10, -12], duration: 5, delay: 0 },
     zIndex: 2,
   },
   {
@@ -44,8 +46,9 @@ const SCENARIOS: Scenario[] = [
     ],
     cta: 'Browse the shop →',
     link: '/shop',
-    entrance: { x: 0, y: 80, rotateY: 0, scale: 0.9, delay: 0 },
-    rest: { rotateY: 0, translateZ: 20 },
+    entrance: { x: 0, y: 100, rotateY: 0, scale: 0.8 },
+    rest: { rotateY: 0, translateZ: 30 },
+    idle: { y: [0, -8, 0], rotateY: [0, 1.5, 0], duration: 6, delay: 0.5 },
     zIndex: 3,
   },
   {
@@ -57,8 +60,9 @@ const SCENARIOS: Scenario[] = [
     ],
     cta: 'Get a quote →',
     link: '/quote',
-    entrance: { x: 120, y: 0, rotateY: 25, scale: 1, delay: 0 },
-    rest: { rotateY: 8, translateZ: 0 },
+    entrance: { x: 160, y: 40, rotateY: 30, scale: 0.85 },
+    rest: { rotateY: 12, translateZ: -10 },
+    idle: { y: [0, -5, 0], rotateY: [12, 14, 12], duration: 5.5, delay: 1 },
     zIndex: 1,
   },
 ];
@@ -138,7 +142,6 @@ function ChatTimeline({ messages, entered, shouldAnimate }: {
   entered: boolean;
   shouldAnimate: boolean;
 }) {
-  // States: 'idle' | 'typing-N' | 'showing-N' | 'done'
   const [phase, setPhase] = useState<string>('idle');
   const [shownMessages, setShownMessages] = useState<number[]>([]);
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
@@ -149,11 +152,9 @@ function ChatTimeline({ messages, entered, shouldAnimate }: {
     setShownMessages([]);
   }, []);
 
-  // Start timeline after entrance
   useEffect(() => {
     if (!entered) return;
     if (!shouldAnimate) {
-      // Reduced motion: show all immediately
       setShownMessages(messages.map((_, i) => i));
       setPhase('done');
       return;
@@ -166,7 +167,6 @@ function ChatTimeline({ messages, entered, shouldAnimate }: {
     return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
   }, [entered, shouldAnimate]);
 
-  // State machine
   useEffect(() => {
     if (!shouldAnimate) return;
     if (phase === 'idle' || phase === 'done') return;
@@ -188,24 +188,20 @@ function ChatTimeline({ messages, entered, shouldAnimate }: {
     return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
   }, [phase, shouldAnimate, messages]);
 
-  // When a bubble finishes revealing, move to next
   const handleBubbleDone = useCallback((idx: number) => {
     if (idx < messages.length - 1) {
       timeoutRef.current = setTimeout(() => {
         setPhase(`typing-${idx + 1}`);
       }, 400);
     } else {
-      // All messages shown — pause then restart
       timeoutRef.current = setTimeout(() => {
         cycleRef.current++;
         reset();
-        // Restart after reset
         setTimeout(() => setPhase('typing-0'), 200);
       }, 4000);
     }
   }, [messages.length, reset]);
 
-  // Determine current typing state
   const typingMatch = phase.match(/^typing-(\d+)$/);
   const typingIdx = typingMatch ? parseInt(typingMatch[1], 10) : -1;
   const typingIsUser = typingIdx >= 0 ? messages[typingIdx].sender === 'user' : false;
@@ -235,8 +231,8 @@ function PhoneDevice({ scenario, entered, shouldAnimate }: {
   shouldAnimate: boolean;
 }) {
   return (
-    <div style={{ position: 'relative' }}>
-      <div className="device-bevel">
+    <div className="device-phone-root">
+      <div className={`device-bevel${scenario.id === 'print' ? ' device-bevel--center' : ''}`}>
         <div className="device-body">
           <div className="device-screen">
             <div className="dynamic-island" aria-hidden="true" />
@@ -284,28 +280,9 @@ export default function DeviceShowcase() {
   const shouldReduceMotion = useReducedMotion();
   const sceneRef = useRef<HTMLDivElement>(null);
   const [enteredPhones, setEnteredPhones] = useState<string[]>([]);
-  const [isVisible, setIsVisible] = useState(false);
+  const [allEntered, setAllEntered] = useState(false);
   const rafRef = useRef<number>();
   const idleTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
-
-  // IntersectionObserver — trigger when showcase scrolls into view
-  useEffect(() => {
-    const el = sceneRef.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
 
   // Listen for phone-enter custom events from the stripe choreography
   useEffect(() => {
@@ -322,6 +299,13 @@ export default function DeviceShowcase() {
     return () => window.removeEventListener('phone-enter', handler);
   }, []);
 
+  // Track when all phones have entered
+  useEffect(() => {
+    if (enteredPhones.length >= SCENARIOS.length) {
+      setAllEntered(true);
+    }
+  }, [enteredPhones]);
+
   // If reduced motion or no choreography events after 5s, show all phones
   useEffect(() => {
     if (shouldReduceMotion) {
@@ -329,7 +313,6 @@ export default function DeviceShowcase() {
       return;
     }
 
-    // Fallback: if choreography script doesn't fire, show phones after 5s
     const fallback = setTimeout(() => {
       setEnteredPhones(prev => {
         if (prev.length < SCENARIOS.length) {
@@ -346,28 +329,23 @@ export default function DeviceShowcase() {
   useEffect(() => {
     const scene = sceneRef.current;
     if (!scene || shouldReduceMotion) return;
-
-    // Only enable on non-coarse pointers
     if (window.matchMedia('(pointer: coarse)').matches) return;
 
     const handleMove = (e: MouseEvent) => {
       if (rafRef.current) return;
       rafRef.current = requestAnimationFrame(() => {
         const rect = scene.getBoundingClientRect();
-        const rx = (e.clientX - rect.left - rect.width / 2) / 20;
-        const ry = -(e.clientY - rect.top - rect.height / 2) / 20;
+        const rx = (e.clientX - rect.left - rect.width / 2) / 25;
+        const ry = -(e.clientY - rect.top - rect.height / 2) / 25;
 
-        // Clamp values
-        const clampedRx = Math.max(-12, Math.min(12, rx));
-        const clampedRy = Math.max(-8, Math.min(8, ry));
+        const clampedRx = Math.max(-10, Math.min(10, rx));
+        const clampedRy = Math.max(-6, Math.min(6, ry));
 
         scene.style.setProperty('--rx', String(clampedRx));
         scene.style.setProperty('--ry', String(clampedRy));
 
-        // Remove idle for snappy tracking
         scene.querySelectorAll('.device-wrapper').forEach(w => w.removeAttribute('data-idle'));
 
-        // Clear previous idle timeout
         if (idleTimeoutRef.current) clearTimeout(idleTimeoutRef.current);
 
         rafRef.current = undefined;
@@ -375,7 +353,6 @@ export default function DeviceShowcase() {
     };
 
     const handleLeave = () => {
-      // Smooth return to neutral
       scene.querySelectorAll('.device-wrapper').forEach(w => w.setAttribute('data-idle', ''));
       scene.style.setProperty('--rx', '0');
       scene.style.setProperty('--ry', '0');
@@ -397,7 +374,6 @@ export default function DeviceShowcase() {
     <div
       ref={sceneRef}
       className="device-scene"
-      style={{ display: 'flex', alignItems: 'flex-start', gap: '0px', position: 'relative' }}
     >
       {SCENARIOS.map((scenario) => {
         const entered = enteredPhones.includes(scenario.id);
@@ -409,7 +385,6 @@ export default function DeviceShowcase() {
               className="device-wrapper"
               style={{
                 zIndex: scenario.zIndex,
-                marginInline: scenario.id === 'print' ? '0' : '-10px',
               }}
             >
               <PhoneDevice
@@ -435,18 +410,26 @@ export default function DeviceShowcase() {
             animate={entered ? {
               opacity: 1,
               x: 0,
-              y: 0,
-              rotateY: scenario.rest.rotateY,
+              y: allEntered ? scenario.idle.y : 0,
+              rotateY: allEntered ? scenario.idle.rotateY : scenario.rest.rotateY,
               scale: 1,
               translateZ: scenario.rest.translateZ,
             } : undefined}
-            transition={{
-              duration: 0.7,
+            transition={allEntered ? {
+              y: { repeat: Infinity, duration: scenario.idle.duration, ease: 'easeInOut', delay: scenario.idle.delay },
+              rotateY: { repeat: Infinity, duration: scenario.idle.duration, ease: 'easeInOut', delay: scenario.idle.delay },
+              default: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+            } : {
+              duration: 0.8,
               ease: [0.16, 1, 0.3, 1],
+            }}
+            whileHover={{
+              scale: 1.04,
+              translateZ: 40,
+              transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] },
             }}
             style={{
               zIndex: scenario.zIndex,
-              marginInline: scenario.id === 'print' ? '0' : '-10px',
             }}
           >
             <PhoneDevice

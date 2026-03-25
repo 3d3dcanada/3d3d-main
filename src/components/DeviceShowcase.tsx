@@ -27,14 +27,14 @@ const SCENARIOS: Scenario[] = [
   {
     id: 'marine',
     messages: [
-      { sender: 'user', text: 'My mast clip cracked mid-passage — I need it reproduced' },
-      { sender: 'user', text: '', image: '/media/workshop/blue-prototype-part.jpg' },
-      { sender: 'reply', text: "Got it. Send measurements or the broken original — we'll reverse-engineer it." },
-      { sender: 'reply', text: 'ASA for UV, PA11-CF if it\'s load-bearing. Which do you need?' },
-      { sender: 'user', text: 'Load-bearing. The halyard runs through it.' },
-      { sender: 'reply', text: 'PA11-CF it is. Quote incoming — $45, ready in 3 days.' },
+      { sender: 'user', text: 'The winch cup holder cracked on our last passage' },
+      { sender: 'user', text: '', image: '/media/workshop/winch-cup-holder.jpg' },
+      { sender: 'reply', text: 'We make those. ASA for UV, fits Barient and Lewmar.' },
+      { sender: 'reply', text: 'Same one in our shop — $28, ships tomorrow.' },
+      { sender: 'user', text: 'Perfect. Can you do two? One for each winch.' },
+      { sender: 'reply', text: 'Done. $52 for the pair. They survive offshore.' },
     ],
-    cta: 'Start a conversation →',
+    cta: 'Contact Us',
     link: '/contact',
     entrance: { x: -140, y: 30, rotateY: -25, scale: 0.85 },
     rest: { rotateY: -10, translateZ: -10 },
@@ -44,14 +44,14 @@ const SCENARIOS: Scenario[] = [
   {
     id: 'print',
     messages: [
-      { sender: 'user', text: "Can you print this? Here's the link" },
-      { sender: 'user', text: 'makerworld.com/model/...', isLink: true },
-      { sender: 'reply', text: 'Nice — the galaxy vase. We have that in stock.' },
-      { sender: 'reply', text: '', image: '/media/workshop/galaxy-vase.jpg' },
-      { sender: 'reply', text: '$23.75, ships tomorrow. Want me to go ahead?' },
-      { sender: 'user', text: 'Yes! In teal if you have it' },
+      { sender: 'user', text: 'Do you have those floating keychains?' },
+      { sender: 'reply', text: 'Yep — they actually float. Great for the boat.' },
+      { sender: 'reply', text: '', image: '/media/workshop/floating-keychains.jpg' },
+      { sender: 'reply', text: '$12.50 each, or 3 for $30. Any colour.' },
+      { sender: 'user', text: 'Three in teal. Can I add the galaxy vase too?' },
+      { sender: 'reply', text: 'Absolutely. $53.75 total, ships tomorrow.' },
     ],
-    cta: 'Browse the shop →',
+    cta: 'Shop Now',
     link: '/shop',
     entrance: { x: 0, y: 80, rotateY: 0, scale: 0.8 },
     rest: { rotateY: 0, translateZ: 30 },
@@ -61,15 +61,15 @@ const SCENARIOS: Scenario[] = [
   {
     id: 'custom',
     messages: [
-      { sender: 'user', text: "I need a custom mounting bracket for my boat's nav system" },
-      { sender: 'user', text: '', image: '/media/real/helm-close.jpg' },
-      { sender: 'reply', text: 'We can model that from photos + rough dimensions.' },
-      { sender: 'reply', text: "Send us what you have — we'll quote the full design + print job." },
-      { sender: 'user', text: "Here's the mounting area. About 120mm × 80mm." },
-      { sender: 'reply', text: 'Perfect. PETG-CF for marine use. Estimate: $65, 4-day turnaround.' },
+      { sender: 'user', text: 'I need a custom TV mount for my RV' },
+      { sender: 'reply', text: 'We do those. Send a photo of the mounting area.' },
+      { sender: 'user', text: '', image: '/media/workshop/custom-tv-mount.jpg' },
+      { sender: 'reply', text: 'Nice. PETG-CF will handle the vibration.' },
+      { sender: 'user', text: 'What does something like that run?' },
+      { sender: 'reply', text: '$65, designed to your specs. 4-day turnaround.' },
     ],
-    cta: 'Get a quote →',
-    link: '/quote',
+    cta: 'Get a Quote',
+    link: '/contact',
     entrance: { x: 140, y: 30, rotateY: 25, scale: 0.85 },
     rest: { rotateY: 10, translateZ: -10 },
     idle: { y: [0, -4, 0], rotateY: [10, 12, 10], duration: 5.5, delay: 1 },
@@ -305,9 +305,10 @@ function PhoneDevice({ scenario, entered, shouldAnimate }: {
 
       <a
         href={scenario.link}
-        className={`device-cta${entered ? ' visible' : ''}`}
+        className={`device-cta${entered ? ' visible' : ''} device-cta--${scenario.id}`}
       >
-        {scenario.cta}
+        <span className="device-cta__text">{scenario.cta}</span>
+        <span className="device-cta__arrow">→</span>
       </a>
     </div>
   );

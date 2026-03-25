@@ -196,9 +196,11 @@
   -webkit-overflow-scrolling: touch;
 }
 
-/* Hide scrollbar but keep functionality */
-.screen-chat::-webkit-scrollbar { width: 0; }
-.screen-chat { scrollbar-width: none; }
+/* Thin scrollbar — visible so users know they can scroll */
+.screen-chat::-webkit-scrollbar { width: 3px; }
+.screen-chat::-webkit-scrollbar-track { background: transparent; }
+.screen-chat::-webkit-scrollbar-thumb { background: rgba(64, 196, 196, 0.3); border-radius: 999px; }
+.screen-chat { scrollbar-width: thin; scrollbar-color: rgba(64, 196, 196, 0.3) transparent; }
 
 .chat-msg {
   max-width: 82%;
@@ -350,32 +352,83 @@
   justify-content: center;
 }
 
-/* ── Phone CTA link ── */
+/* ── Phone CTA button — bold, alive ── */
 .device-cta {
   position: absolute;
-  bottom: -2.5rem;
+  bottom: -3rem;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(8px);
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
   font-family: var(--font-tech);
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #40C4C4;
   text-decoration: none;
   opacity: 0;
-  transition: opacity 0.4s ease 0.5s, color 0.2s ease, transform 0.2s ease;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+  transition: opacity 0.5s ease 0.5s, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.5s,
+              box-shadow 0.25s ease, background 0.25s ease;
 }
 
 .device-cta.visible {
   opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
-.device-cta:hover {
-  color: #7AD9D9;
-  transform: translateX(-50%) translateY(-2px);
+/* Per-phone CTA colors */
+.device-cta--marine {
+  background: rgba(64, 196, 196, 0.15);
+  color: #40C4C4;
+  border: 1.5px solid rgba(64, 196, 196, 0.4);
+  box-shadow: 0 4px 20px rgba(64, 196, 196, 0.15);
+}
+.device-cta--marine:hover {
+  background: #40C4C4;
+  color: #0F1112;
+  box-shadow: 0 6px 28px rgba(64, 196, 196, 0.4);
+  transform: translateX(-50%) translateY(-3px);
+}
+
+.device-cta--print {
+  background: rgba(250, 104, 49, 0.15);
+  color: #FA6831;
+  border: 1.5px solid rgba(250, 104, 49, 0.4);
+  box-shadow: 0 4px 20px rgba(250, 104, 49, 0.15);
+}
+.device-cta--print:hover {
+  background: #FA6831;
+  color: #0F1112;
+  box-shadow: 0 6px 28px rgba(250, 104, 49, 0.4);
+  transform: translateX(-50%) translateY(-3px);
+}
+
+.device-cta--custom {
+  background: rgba(232, 74, 138, 0.15);
+  color: #E84A8A;
+  border: 1.5px solid rgba(232, 74, 138, 0.4);
+  box-shadow: 0 4px 20px rgba(232, 74, 138, 0.15);
+}
+.device-cta--custom:hover {
+  background: #E84A8A;
+  color: #0F1112;
+  box-shadow: 0 6px 28px rgba(232, 74, 138, 0.4);
+  transform: translateX(-50%) translateY(-3px);
+}
+
+/* Arrow pulse */
+.device-cta__arrow {
+  display: inline-block;
+  animation: cta-arrow-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes cta-arrow-pulse {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(3px); }
 }
 
 /* ── Accent dividers between phones ── */
@@ -514,7 +567,7 @@
   .screen-input { padding: 0.25rem 0.35rem; }
   .screen-input-text { font-size: 0.32rem; }
   .screen-input-send { width: 14px; height: 14px; font-size: 0.32rem; }
-  .device-cta { font-size: 0.42rem; bottom: -1.6rem; letter-spacing: 0.06em; }
+  .device-cta { font-size: 0.46rem; bottom: -2rem; letter-spacing: 0.06em; padding: 0.35rem 0.7rem; }
   .chat-msg-avatar { width: 10px; height: 10px; font-size: 0.24rem; }
   .chat-msg-image { max-width: 70px; }
   .phone-divider { margin-inline: 3px; width: 1.5px; }

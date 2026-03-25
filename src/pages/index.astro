@@ -119,11 +119,6 @@ const services = [
         <div class="hero-stripe hero-stripe--orange" data-speed="0.07"></div>
         <div class="hero-stripe hero-stripe--teal" data-speed="0.12"></div>
       </div>
-      <!-- Phones overlay the entire hero -->
-      <div class="hero-devices-layer">
-        <DeviceShowcase client:visible />
-      </div>
-
       <div class="section-shell hero-shell">
         <div class="hero-copy">
           <p class="eyebrow hero-eyebrow" data-scramble>3D Printing · Fabrication · Marine Specialist</p>
@@ -141,13 +136,11 @@ const services = [
                <span class="word-clip"><span class="word">solution.</span></span>
              </span>
            </h1>
-          <p class="hero-subhead">
-            If the part doesn't exist anymore, we build it. If you just need something printed, we print it. A maker community spanning Atlantic Canada and beyond — available to anyone with a problem worth solving. Ship it, send a photo, or just describe what broke. Worldwide.
-          </p>
-          <div class="hero-actions">
-            <a href="/contact" class="hero-button hero-button--primary" data-analytics-event="contact_started" data-analytics-source="hero-cta">One Call. We'll Assess It. →</a>
-            <a href="https://ko-fi.com/3d3dca" class="hero-button hero-button--ghost" target="_blank" rel="noopener noreferrer" data-analytics-event="kofi_clicked" data-analytics-source="hero-cta">Support the Campaign →</a>
-          </div>
+        </div>
+
+        <!-- Phones ARE the hero — the centerpiece -->
+        <div class="hero-phones">
+          <DeviceShowcase client:visible />
         </div>
       </div>
     </section>
@@ -682,11 +675,12 @@ const services = [
      HERO
      ═══════════════════════════════════════════════════ */
   .home-hero {
-    min-height: 100svh;
+    min-height: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     padding-top: clamp(5rem, 8vw, 7rem);
+    padding-bottom: clamp(2rem, 4vw, 4rem);
     overflow: hidden;
   }
 
@@ -763,6 +757,29 @@ const services = [
     to   { clip-path: inset(0 0 0 0); }
   }
 
+  /* Stripe glow pulse — activated after build completes */
+  .hero-stripe--teal.built {
+    animation: stripe-glow-teal 3s ease-in-out infinite;
+  }
+  .hero-stripe--orange.built {
+    animation: stripe-glow-orange 3s ease-in-out infinite;
+  }
+  .hero-stripe--magenta.built {
+    animation: stripe-glow-magenta 3s ease-in-out infinite;
+  }
+  @keyframes stripe-glow-teal {
+    0%, 100% { box-shadow: 0 0 18px rgba(64, 196, 196, 0.4); }
+    50% { box-shadow: 0 0 30px rgba(64, 196, 196, 0.75); }
+  }
+  @keyframes stripe-glow-orange {
+    0%, 100% { box-shadow: 0 0 18px rgba(250, 104, 49, 0.4); }
+    50% { box-shadow: 0 0 30px rgba(250, 104, 49, 0.75); }
+  }
+  @keyframes stripe-glow-magenta {
+    0%, 100% { box-shadow: 0 0 18px rgba(224, 64, 251, 0.4); }
+    50% { box-shadow: 0 0 30px rgba(224, 64, 251, 0.75); }
+  }
+
   /* Mobile: equal-width racing stripes, centered */
   @media (max-width: 767px) {
     .hero-stripes {
@@ -802,7 +819,7 @@ const services = [
     display: grid;
     gap: 0.15em;
     font-family: var(--font-display);
-    font-size: clamp(3rem, 1.8rem + 5vw, 6.6rem);
+    font-size: clamp(1.8rem, 1rem + 4vw, 5.5rem);
     line-height: 0.9;
     letter-spacing: -0.04em;
     color: #FFFFFF;
@@ -925,20 +942,14 @@ const services = [
     background: var(--page-accent);
   }
 
-  /* Phones layer — overlays entire hero */
-  .hero-devices-layer {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
+  /* Phones — in-flow centerpiece */
+  .hero-phones {
+    position: relative;
+    z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
-    pointer-events: none;
-    padding-top: clamp(8rem, 18vw, 14rem);
-  }
-
-  .hero-devices-layer > * {
-    pointer-events: auto;
+    padding-bottom: 3rem;
   }
 
   .hero-video-frame {
@@ -1670,19 +1681,23 @@ const services = [
   (function () {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    const heroMedia = document.querySelector('.hero-devices-layer');
+    const heroMedia = document.querySelector('.hero-phones');
     if (!heroMedia) return;
 
     const timeline = [
-      { delay: 1400, phone: 'marine',  scan: 'teal',    dir: 'h' },
-      { delay: 2600, phone: 'print',   scan: 'orange',  dir: 'v' },
-      { delay: 3400, phone: 'custom',  scan: 'magenta', dir: 'h' },
+      { delay: 1400, phone: 'marine',  scan: 'teal',    dir: 'h', stripe: '.hero-stripe--teal' },
+      { delay: 2600, phone: 'print',   scan: 'orange',  dir: 'v', stripe: '.hero-stripe--orange' },
+      { delay: 3400, phone: 'custom',  scan: 'magenta', dir: 'h', stripe: '.hero-stripe--magenta' },
     ];
 
-    timeline.forEach(({ delay, phone, scan, dir }) => {
+    timeline.forEach(({ delay, phone, scan, dir, stripe }) => {
       setTimeout(() => {
         // Dispatch phone entrance event
         window.dispatchEvent(new CustomEvent('phone-enter', { detail: { phone } }));
+
+        // Activate stripe glow pulse
+        const stripeEl = document.querySelector(stripe);
+        if (stripeEl) stripeEl.classList.add('built');
 
         // Create scan line
         const line = document.createElement('div');

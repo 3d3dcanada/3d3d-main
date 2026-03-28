@@ -182,6 +182,7 @@ export default function SplashOrbit() {
   const orbitItems = useMemo(() => getOrbitItems(SPLASH_SECTIONS, angle), [angle]);
   const focusIndex = useDeferredValue(hoveredIndex ?? activeIndex);
   const focusedItem = orbitItems[focusIndex] ?? orbitItems[activeIndex] ?? orbitItems[0];
+  const hoveredSection = hoveredIndex !== null ? (SPLASH_SECTIONS[hoveredIndex] ?? null) : null;
   const cardAlign = isMobile ? 'bottom' : focusedItem?.x < 0 ? 'right' : 'left';
 
   const handleSceneReady = useCallback(() => {
@@ -462,7 +463,9 @@ export default function SplashOrbit() {
             focusIndex={focusIndex}
             entryProgress={entryProgress}
             reducedMotion={shouldReduceMotion}
+            saveDataMode={saveDataMode}
             theme={theme}
+            hoveredSection={hoveredSection}
             onHoverIndexChange={setHoveredIndex}
             onReady={handleSceneReady}
           />

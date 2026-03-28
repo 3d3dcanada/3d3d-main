@@ -15,8 +15,8 @@ export interface SplashOrbitItem {
 
 export const ORBIT_TILT = Math.PI / 18;
 
-const ORBIT_RADIUS = 3.95;
-const ORBIT_DEPTH = 3.45;
+const ORBIT_RADIUS = 5.4;
+const ORBIT_DEPTH = 4.6;
 
 const SCATTER_MAP: Record<SplashSection['id'], [number, number, number]> = {
   market: [-5.6, 2.8, -4.8],

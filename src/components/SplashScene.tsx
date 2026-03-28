@@ -1,11 +1,13 @@
-import { ContactShadows, PerspectiveCamera } from '@react-three/drei';
+import { ContactShadows, Environment, PerspectiveCamera, Sparkles } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { useEffect } from 'react';
 
 import type { SplashTheme } from '../lib/splash-theme';
 import type { SplashOrbitItem } from '../lib/splash-orbit';
 import { ORBIT_TILT, easeOutCubic } from '../lib/splash-orbit';
+import type { SplashSection } from '../data/splashSections';
 import SplashCenterLogo from './SplashCenterLogo';
+import SplashEffects from './SplashEffects';
 import SplashObject from './SplashObject';
 
 interface SplashSceneProps {
@@ -14,7 +16,9 @@ interface SplashSceneProps {
   focusIndex: number;
   entryProgress: number;
   reducedMotion: boolean;
+  saveDataMode: boolean;
   theme: SplashTheme;
+  hoveredSection: SplashSection | null;
   onHoverIndexChange: (index: number | null) => void;
   onReady: () => void;
 }
@@ -25,7 +29,9 @@ export default function SplashScene({
   focusIndex,
   entryProgress,
   reducedMotion,
+  saveDataMode,
   theme,
+  hoveredSection,
   onHoverIndexChange,
   onReady,
 }: SplashSceneProps) {
@@ -36,6 +42,11 @@ export default function SplashScene({
   const entry = reducedMotion ? 1 : easeOutCubic(entryProgress);
   const isDark = theme === 'dark';
 
+  // Point light intensities reduced ~15% from original
+  const tealIntensity = isDark ? 9.35 : 6.8;
+  const magentaIntensity = isDark ? 8.075 : 5.95;
+  const orangeIntensity = isDark ? 6.8 : 5.1;
+
   return (
     <Canvas
       className="splash-scene__canvas"
@@ -43,11 +54,13 @@ export default function SplashScene({
       gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
       onCreated={({ gl, camera }) => {
         gl.setClearColor(0x000000, 0);
-        camera.position.set(0, 3.2, 12.5);
+        camera.position.set(0, 3.4, 15);
         camera.lookAt(0, 1.8, 0);
       }}
     >
-      <PerspectiveCamera makeDefault position={[0, 3.2, 12.5]} fov={40} />
+      <PerspectiveCamera makeDefault position={[0, 3.4, 15]} fov={40} />
+
+      <Environment preset="city" />
 
       <ambientLight intensity={isDark ? 0.45 : 1.1} />
       <hemisphereLight
@@ -66,27 +79,52 @@ export default function SplashScene({
         intensity={isDark ? 0.72 : 0.55}
         color={isDark ? '#7EAAB0' : '#D8E8E6'}
       />
+
+      {/* Accent point lights (reduced ~15%) */}
       <pointLight
         position={[3.6, 1.8, 5]}
-        intensity={isDark ? 11 : 8}
+        intensity={tealIntensity}
         color="#40C4C4"
         distance={isDark ? 8.5 : 10}
       />
       <pointLight
         position={[-4.2, 1.1, 3.8]}
-        intensity={isDark ? 9.5 : 7}
+        intensity={magentaIntensity}
         color="#E84A8A"
         distance={isDark ? 8.5 : 10}
       />
       <pointLight
         position={[0.2, 2.8, 5.8]}
-        intensity={isDark ? 8 : 6}
+        intensity={orangeIntensity}
         color="#FF6B2B"
         distance={isDark ? 10 : 12}
       />
 
+      {/* Rim light — separates objects from bg */}
+      <directionalLight
+        position={[0, 2, -8]}
+        intensity={isDark ? 0.65 : 0.38}
+        color={isDark ? '#7EB8C8' : '#C8E0E8'}
+      />
+
+      {/* Spot on printer build plate */}
+      <spotLight
+        position={[0, 6, 3]}
+        target-position={[0, 1.7, 0]}
+        angle={0.28}
+        penumbra={0.6}
+        intensity={isDark ? 18 : 12}
+        color="#FFFFFF"
+        distance={14}
+        castShadow={false}
+      />
+
       <group position={[0, 1.9, 0]}>
-        <SplashCenterLogo reducedMotion={reducedMotion} theme={theme} />
+        <SplashCenterLogo
+          reducedMotion={reducedMotion}
+          theme={theme}
+          hoveredSection={hoveredSection}
+        />
 
         <group rotation={[ORBIT_TILT, 0, 0]} position={[0, 0.08, 0]}>
           {items.map((item) => {
@@ -116,6 +154,18 @@ export default function SplashScene({
         </group>
       </group>
 
+      {!saveDataMode && (
+        <Sparkles
+          count={30}
+          scale={[10, 6, 8]}
+          position={[0, 1.9, 0]}
+          size={2.5}
+          speed={0.3}
+          opacity={isDark ? 0.55 : 0.3}
+          color={isDark ? '#40C4C4' : '#E84A8A'}
+        />
+      )}
+
       <ContactShadows
         position={[0, -0.12, 0]}
         opacity={isDark ? 0.3 : 0.18}
@@ -123,6 +173,8 @@ export default function SplashScene({
         blur={2.6}
         far={5}
       />
+
+      <SplashEffects enabled={!saveDataMode} theme={theme} />
     </Canvas>
   );
 }

@@ -2,11 +2,72 @@ import { Clone, Edges, Float, useGLTF } from '@react-three/drei';
 import type { ThreeEvent } from '@react-three/fiber';
 import { useFrame } from '@react-three/fiber';
 import { useMemo, useRef } from 'react';
-import { Box3, Color, Mesh, MeshStandardMaterial, Vector3 } from 'three';
-import type { Group, Object3D } from 'three';
+import {
+  Box3,
+  CanvasTexture,
+  Color,
+  Mesh,
+  MeshStandardMaterial,
+  NearestFilter,
+  RepeatWrapping,
+  Vector2,
+  Vector3,
+} from 'three';
+import type { Group, Object3D, Texture } from 'three';
 
 import { ACCENT_HEX, SPLASH_SECTIONS, type SplashSection } from '../data/splashSections';
 import type { SplashTheme } from '../lib/splash-theme';
+
+// Procedural brushed-metal normal map (64x64 canvas, no file loading)
+let _brushedMetalNormal: Texture | null = null;
+
+function getBrushedMetalNormal(): Texture {
+  if (_brushedMetalNormal) return _brushedMetalNormal;
+
+  const size = 64;
+  const canvas = document.createElement('canvas');
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext('2d')!;
+
+  // Flat normal base: RGB(128, 128, 255) = pointing straight out
+  ctx.fillStyle = 'rgb(128, 128, 255)';
+  ctx.fillRect(0, 0, size, size);
+
+  // Draw horizontal brushed streaks with slight normal variation
+  for (let y = 0; y < size; y++) {
+    const strength = Math.random() * 0.35;
+    const r = Math.round(128 + (Math.random() - 0.5) * 40 * strength);
+    const g = Math.round(128 + (Math.random() - 0.5) * 18 * strength);
+    ctx.strokeStyle = `rgb(${r}, ${g}, 255)`;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(0, y + 0.5);
+    ctx.lineTo(size, y + 0.5);
+    ctx.stroke();
+  }
+
+  // Occasional deeper grooves
+  for (let i = 0; i < 8; i++) {
+    const y = Math.floor(Math.random() * size);
+    const r = Math.round(128 + (Math.random() - 0.5) * 70);
+    const g = Math.round(128 + (Math.random() - 0.5) * 30);
+    ctx.strokeStyle = `rgb(${r}, ${g}, 248)`;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(0, y + 0.5);
+    ctx.lineTo(size, y + 0.5);
+    ctx.stroke();
+  }
+
+  const texture = new CanvasTexture(canvas);
+  texture.wrapS = RepeatWrapping;
+  texture.wrapT = RepeatWrapping;
+  texture.magFilter = NearestFilter;
+  texture.repeat.set(3, 3);
+  _brushedMetalNormal = texture;
+  return texture;
+}
 
 interface SplashObjectProps {
   section: SplashSection;
@@ -23,6 +84,14 @@ function darkenHex(hex: string, amount: number) {
   return `#${color.getHexString()}`;
 }
 
+// Per-mesh metalness/roughness variation patterns (cycles through 4 profiles)
+const MATERIAL_PROFILES = [
+  { metalness: 0.72, roughness: 0.18, envMapIntensity: 1.4 }, // shiny metal
+  { metalness: 0.45, roughness: 0.35, envMapIntensity: 0.9 }, // satin
+  { metalness: 0.62, roughness: 0.24, envMapIntensity: 1.1 }, // semi-shiny
+  { metalness: 0.3,  roughness: 0.48, envMapIntensity: 0.6 }, // matte
+];
+
 function buildModel(scene: Object3D, accentHex: string, theme: SplashTheme) {
   const clone = scene.clone(true);
   const isDark = theme === 'dark';
@@ -32,17 +101,24 @@ function buildModel(scene: Object3D, accentHex: string, theme: SplashTheme) {
   clone.traverse((child) => {
     if (!(child instanceof Mesh)) return;
     const colorHex = meshIndex % 2 === 0 ? accentHex : shadowHex;
+    const profile = MATERIAL_PROFILES[meshIndex % MATERIAL_PROFILES.length];
     meshIndex += 1;
 
     child.castShadow = true;
     child.receiveShadow = true;
-    child.material = new MeshStandardMaterial({
+    const normalMap = getBrushedMetalNormal();
+    const mat = new MeshStandardMaterial({
       color: colorHex,
-      metalness: isDark ? 0.6 : 0.5,
-      roughness: isDark ? 0.22 : 0.28,
+      metalness: isDark ? profile.metalness : profile.metalness * 0.85,
+      roughness: isDark ? profile.roughness : profile.roughness * 1.15,
+      envMapIntensity: profile.envMapIntensity,
       emissive: accentHex,
       emissiveIntensity: isDark ? 0.35 : 0.25,
+      normalMap,
+      normalScale: new Vector2(0.35, 0.35),
     });
+    mat.userData.baseEnvMap = profile.envMapIntensity;
+    child.material = mat;
   });
 
   clone.updateMatrixWorld(true);
@@ -90,11 +166,14 @@ export default function SplashObject({
           ? 0.24
           : 0.2;
 
+    const envMapBoost = focused ? 1.6 : active ? 1.1 : 0.85;
+
     groupRef.current.traverse((child) => {
       if (!(child instanceof Mesh)) return;
       if (!(child.material instanceof MeshStandardMaterial)) return;
 
       child.material.emissiveIntensity = emissiveIntensity;
+      child.material.envMapIntensity = (child.material.userData.baseEnvMap ?? 1.0) * envMapBoost;
       child.material.opacity = opacity;
       child.material.transparent = opacity < 0.999;
       child.material.needsUpdate = true;

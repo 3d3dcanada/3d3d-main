@@ -1,4 +1,4 @@
-import { Bloom, EffectComposer, SSAO } from '@react-three/postprocessing';
+import { Bloom, EffectComposer } from '@react-three/postprocessing';
 
 import type { SplashTheme } from '../lib/splash-theme';
 
@@ -13,16 +13,7 @@ export default function SplashEffects({ enabled, theme }: SplashEffectsProps) {
   const isDark = theme === 'dark';
 
   return (
-    <EffectComposer enableNormalPass>
-      <SSAO
-        samples={10}
-        rings={3}
-        radius={0.042}
-        intensity={isDark ? 0.8 : 0.42}
-        luminanceInfluence={isDark ? 0.62 : 0.5}
-        bias={0.03}
-        fade={0.02}
-      />
+    <EffectComposer>
       <Bloom
         luminanceThreshold={isDark ? 0.38 : 0.55}
         luminanceSmoothing={0.3}

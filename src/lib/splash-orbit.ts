@@ -7,7 +7,6 @@ export interface SplashOrbitItem {
   x: number;
   y: number;
   z: number;
-  normalizedDepth: number;
   scale: number;
   opacity: number;
   rotationY: number;
@@ -16,10 +15,8 @@ export interface SplashOrbitItem {
 
 export const ORBIT_TILT = Math.PI / 18;
 
-const DESKTOP_ORBIT_RADIUS = 5.4;
-const DESKTOP_ORBIT_DEPTH = 4.6;
-const MOBILE_ORBIT_RADIUS = 5.95;
-const MOBILE_ORBIT_DEPTH = 5.2;
+const ORBIT_RADIUS = 5.4;
+const ORBIT_DEPTH = 4.6;
 
 const SCATTER_MAP: Record<SplashSection['id'], [number, number, number]> = {
   market: [-5.6, 2.8, -4.8],
@@ -29,25 +26,16 @@ const SCATTER_MAP: Record<SplashSection['id'], [number, number, number]> = {
   about: [0.1, 3.4, -6.3],
 };
 
-export function getOrbitItems(
-  sections: SplashSection[],
-  angle: number,
-  isMobile = false,
-): SplashOrbitItem[] {
+export function getOrbitItems(sections: SplashSection[], angle: number): SplashOrbitItem[] {
   const total = sections.length;
   const step = (Math.PI * 2) / total;
-  const orbitRadius = isMobile ? MOBILE_ORBIT_RADIUS : DESKTOP_ORBIT_RADIUS;
-  const orbitDepth = isMobile ? MOBILE_ORBIT_DEPTH : DESKTOP_ORBIT_DEPTH;
-  const baseScale = isMobile ? 0.56 : 0.66;
-  const scaleRange = isMobile ? 0.24 : 0.34;
-  const opacityFloor = isMobile ? 0.38 : 0.32;
 
   return sections.map((section, index) => {
     const theta = index * step + angle;
-    const x = Math.sin(theta) * orbitRadius;
-    const z = Math.cos(theta) * orbitDepth;
-    const y = Math.sin(theta * 0.5) * (isMobile ? 0.12 : 0.18);
-    const normalizedDepth = (z + orbitDepth) / (orbitDepth * 2);
+    const x = Math.sin(theta) * ORBIT_RADIUS;
+    const z = Math.cos(theta) * ORBIT_DEPTH;
+    const y = Math.sin(theta * 0.5) * 0.18;
+    const normalizedDepth = (z + ORBIT_DEPTH) / (ORBIT_DEPTH * 2);
 
     return {
       section,
@@ -56,9 +44,8 @@ export function getOrbitItems(
       x,
       y,
       z,
-      normalizedDepth,
-      scale: baseScale + normalizedDepth * scaleRange,
-      opacity: opacityFloor + normalizedDepth * (1 - opacityFloor),
+      scale: 0.66 + normalizedDepth * 0.34,
+      opacity: 0.32 + normalizedDepth * 0.68,
       rotationY: -theta * 0.28,
       scatter: SCATTER_MAP[section.id],
     };

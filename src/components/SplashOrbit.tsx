@@ -22,7 +22,6 @@ import {
   type SplashTheme,
 } from '../lib/splash-theme';
 import {
-  easeOutCubic,
   getNearestIndex,
   getOrbitItems,
   getSnapAngle,
@@ -129,10 +128,8 @@ export default function SplashOrbit() {
   const dragStateRef = useRef({
     active: false,
     pointerId: -1,
-    pointerType: 'mouse',
     lastX: 0,
     lastTime: 0,
-    totalDeltaX: 0,
   });
   const lastInteractionRef = useRef(0);
   const snapTargetRef = useRef<number | null>(null);
@@ -182,13 +179,11 @@ export default function SplashOrbit() {
     return () => mediaQuery.removeEventListener('change', updateTheme);
   }, [hasSavedTheme]);
 
-  const orbitItems = useMemo(() => getOrbitItems(SPLASH_SECTIONS, angle, isMobile), [angle, isMobile]);
+  const orbitItems = useMemo(() => getOrbitItems(SPLASH_SECTIONS, angle), [angle]);
   const focusIndex = useDeferredValue(hoveredIndex ?? activeIndex);
   const focusedItem = orbitItems[focusIndex] ?? orbitItems[activeIndex] ?? orbitItems[0];
   const hoveredSection = hoveredIndex !== null ? (SPLASH_SECTIONS[hoveredIndex] ?? null) : null;
-  const desiredDesktopCardAlign = focusedItem?.x !== undefined && focusedItem.x < 0 ? 'right' : 'left';
-  const [desktopCardAlign, setDesktopCardAlign] = useState<'left' | 'right'>('left');
-  const cardAlign = isMobile ? 'bottom' : desktopCardAlign;
+  const cardAlign = isMobile ? 'bottom' : focusedItem?.x < 0 ? 'right' : 'left';
 
   const handleSceneReady = useCallback(() => {
     setSceneReady(true);
@@ -232,16 +227,6 @@ export default function SplashOrbit() {
     velocityRef.current = 0;
     userHasSelectedRef.current = false;
   }, [updateAngle]);
-
-  useEffect(() => {
-    if (isMobile) return;
-
-    const timeout = window.setTimeout(() => {
-      setDesktopCardAlign(desiredDesktopCardAlign);
-    }, 500);
-
-    return () => window.clearTimeout(timeout);
-  }, [desiredDesktopCardAlign, focusIndex, isMobile]);
 
   const queueSnapToIndex = useCallback((targetIndex: number) => {
     const nextAngle = getSnapAngle(angleRef.current, targetIndex, SPLASH_SECTIONS.length);
@@ -301,7 +286,7 @@ export default function SplashOrbit() {
     let frame = 0;
     let lastTime = performance.now();
     const frictionPerFrame = 0.9;
-    const autoRotateSpeed = -0.00012;
+    const autoRotateSpeed = -0.00015;
 
     const loop = (now: number) => {
       const deltaMs = Math.max(8, Math.min(32, now - lastTime));
@@ -310,8 +295,7 @@ export default function SplashOrbit() {
       lastTime = now;
 
       if (!dragStateRef.current.active) {
-        const idleTime = now - lastInteractionRef.current;
-        const idle = idleTime > 5000;
+        const idle = now - lastInteractionRef.current > 5000;
         let nextAngle = angleRef.current;
 
         if (snapTargetRef.current !== null) {
@@ -333,9 +317,7 @@ export default function SplashOrbit() {
             snapTargetRef.current = getSnapAngle(nextAngle, nearestIndex, SPLASH_SECTIONS.length);
           }
         } else if (idle && !userHasSelectedRef.current) {
-          const rampProgress = Math.min(1, Math.max(0, (idleTime - 5000) / 3000));
-          const ramp = 0.5 + easeOutCubic(rampProgress) * 0.5;
-          nextAngle += autoRotateSpeed * ramp * deltaMs;
+          nextAngle += autoRotateSpeed * deltaMs;
         } else {
           const nearestIndex = getNearestIndex(SPLASH_SECTIONS, nextAngle);
           const targetAngle = getSnapAngle(nextAngle, nearestIndex, SPLASH_SECTIONS.length);
@@ -360,10 +342,8 @@ export default function SplashOrbit() {
       dragStateRef.current = {
         active: true,
         pointerId: event.pointerId,
-        pointerType: event.pointerType,
         lastX: event.clientX,
         lastTime: performance.now(),
-        totalDeltaX: 0,
       };
 
       lastInteractionRef.current = performance.now();
@@ -387,29 +367,19 @@ export default function SplashOrbit() {
       const now = performance.now();
       const deltaX = event.clientX - dragStateRef.current.lastX;
       const deltaTime = Math.max(10, now - dragStateRef.current.lastTime);
-      const sensitivity = dragStateRef.current.pointerType === 'touch'
-        ? isMobile
-          ? 0.92
-          : 1.02
-        : 1.2;
-      const deltaAngle = (deltaX / shellWidth) * Math.PI * sensitivity;
+      const deltaAngle = (deltaX / shellWidth) * Math.PI * 1.4;
 
       dragStateRef.current.lastX = event.clientX;
       dragStateRef.current.lastTime = now;
-      dragStateRef.current.totalDeltaX += deltaX;
       lastInteractionRef.current = now;
       velocityRef.current = deltaAngle / deltaTime;
       updateAngle(angleRef.current + deltaAngle);
     },
-    [isMobile, updateAngle],
+    [updateAngle],
   );
 
   const finishPointer = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
     if (!dragStateRef.current.active || dragStateRef.current.pointerId !== event.pointerId) return;
-
-    const swipeVelocity = velocityRef.current;
-    const isTouchSwipe =
-      dragStateRef.current.pointerType === 'touch' && Math.abs(dragStateRef.current.totalDeltaX) > 18;
 
     dragStateRef.current.active = false;
 
@@ -420,9 +390,6 @@ export default function SplashOrbit() {
     }
 
     lastInteractionRef.current = performance.now();
-    if (isTouchSwipe) {
-      velocityRef.current = Math.max(-0.00145, Math.min(0.00145, swipeVelocity * 1.85));
-    }
     sceneShellRef.current?.classList.remove('splash-orbit__scene-shell--dragging');
   }, []);
 
@@ -495,7 +462,6 @@ export default function SplashOrbit() {
             activeIndex={activeIndex}
             focusIndex={focusIndex}
             entryProgress={entryProgress}
-            isMobile={isMobile}
             reducedMotion={shouldReduceMotion}
             saveDataMode={saveDataMode}
             theme={theme}

@@ -56,7 +56,12 @@ export default function SplashParticles({ enabled }: SplashParticlesProps) {
   return (
     <points ref={pointsRef}>
       <bufferGeometry>
-        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
+        <bufferAttribute
+          attach="attributes-position"
+          array={positions}
+          count={PARTICLE_COUNT}
+          itemSize={3}
+        />
       </bufferGeometry>
       <pointsMaterial
         size={0.015}

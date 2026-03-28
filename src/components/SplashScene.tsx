@@ -15,7 +15,6 @@ interface SplashSceneProps {
   activeIndex: number;
   focusIndex: number;
   entryProgress: number;
-  isMobile: boolean;
   reducedMotion: boolean;
   saveDataMode: boolean;
   theme: SplashTheme;
@@ -29,7 +28,6 @@ export default function SplashScene({
   activeIndex,
   focusIndex,
   entryProgress,
-  isMobile,
   reducedMotion,
   saveDataMode,
   theme,
@@ -43,30 +41,24 @@ export default function SplashScene({
 
   const entry = reducedMotion ? 1 : easeOutCubic(entryProgress);
   const isDark = theme === 'dark';
-  const cameraPosition: [number, number, number] = isMobile ? [0, 4.5, 18.8] : [0, 3.4, 15];
-  const cameraTarget: [number, number, number] = isMobile ? [0, 2.25, 0] : [0, 1.8, 0];
-  const orbitGroupPosition: [number, number, number] = isMobile ? [0, 2.15, 0] : [0, 1.9, 0];
-  const cameraFov = isMobile ? 43 : 40;
 
-  const tealIntensity = isDark ? 9.35 : 5.4;
-  const magentaIntensity = isDark ? 8.075 : 4.75;
-  const orangeIntensity = isDark ? 6.8 : 4.1;
+  // Point light intensities reduced ~15% from original
+  const tealIntensity = isDark ? 9.35 : 6.8;
+  const magentaIntensity = isDark ? 8.075 : 5.95;
+  const orangeIntensity = isDark ? 6.8 : 5.1;
 
   return (
     <Canvas
       className="splash-scene__canvas"
       dpr={[1, 1.5]}
       gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
-      onCreated={({ gl }) => {
+      onCreated={({ gl, camera }) => {
         gl.setClearColor(0x000000, 0);
+        camera.position.set(0, 3.4, 15);
+        camera.lookAt(0, 1.8, 0);
       }}
     >
-      <PerspectiveCamera
-        makeDefault
-        position={cameraPosition}
-        fov={cameraFov}
-        onUpdate={(camera) => camera.lookAt(...cameraTarget)}
-      />
+      <PerspectiveCamera makeDefault position={[0, 3.4, 15]} fov={40} />
 
       <Environment preset="city" />
 
@@ -88,6 +80,7 @@ export default function SplashScene({
         color={isDark ? '#7EAAB0' : '#D8E8E6'}
       />
 
+      {/* Accent point lights (reduced ~15%) */}
       <pointLight
         position={[3.6, 1.8, 5]}
         intensity={tealIntensity}
@@ -121,12 +114,12 @@ export default function SplashScene({
         angle={0.28}
         penumbra={0.6}
         intensity={isDark ? 18 : 12}
-        color="#FFF8F0"
+        color="#FFFFFF"
         distance={14}
         castShadow={false}
       />
 
-      <group position={orbitGroupPosition}>
+      <group position={[0, 1.9, 0]}>
         <SplashCenterLogo
           reducedMotion={reducedMotion}
           theme={theme}
@@ -151,7 +144,6 @@ export default function SplashScene({
                   section={item.section}
                   active={item.index === activeIndex}
                   focused={item.index === focusIndex}
-                  depthRatio={item.normalizedDepth}
                   opacity={item.opacity}
                   theme={theme}
                   onHoverChange={(hovered) => onHoverIndexChange(hovered ? item.index : null)}

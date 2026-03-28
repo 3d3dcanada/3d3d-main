@@ -57,12 +57,9 @@ export default function SplashBentoCard({
         aria-labelledby={`splash-card-title-${section.id}`}
       >
         <motion.div className="splash-card__inner" variants={staggerVariants}>
-          <motion.div className="splash-card__eyebrow-row" variants={itemVariants}>
-            <span className="splash-card__icon" aria-hidden="true">
-              {section.icon ?? '•'}
-            </span>
-            <p className="splash-card__eyebrow">{section.kicker}</p>
-          </motion.div>
+          <motion.p className="splash-card__eyebrow" variants={itemVariants}>
+            {section.kicker}
+          </motion.p>
 
           <motion.h2
             className="splash-card__title"
@@ -71,10 +68,6 @@ export default function SplashBentoCard({
           >
             {section.title}
           </motion.h2>
-
-          <motion.p className="splash-card__tagline" variants={itemVariants}>
-            {section.tagline ?? section.kicker}
-          </motion.p>
 
           <motion.p className="splash-card__copy" variants={itemVariants}>
             {section.description}

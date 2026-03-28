@@ -1,0 +1,993 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const jobPostingSchema = {
+  "@context": "https://schema.org",
+  "@type": "JobPosting",
+  "title": "Content Creator — Social Media & Videography",
+  "description": "3D3D is looking for a content creator to join our open-source cooperative in Fredericton, NB. 3 hours/week in-person, remote editing and production. $100/week to start. Google + Claude subscriptions included. ADHD-friendly, creative-first, flexible structure.",
+  "datePosted": "2026-03-28",
+  "validThrough": "2026-12-31",
+  "employmentType": "CONTRACTOR",
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": "3D3D",
+    "sameAs": "https://3d3d.ca",
+    "logo": "https://3d3d.ca/og-image.png"
+  },
+  "jobLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Fredericton",
+      "addressRegion": "NB",
+      "addressCountry": "CA"
+    }
+  },
+  "baseSalary": {
+    "@type": "MonetaryAmount",
+    "currency": "CAD",
+    "value": {
+      "@type": "QuantitativeValue",
+      "value": 100,
+      "unitText": "WEEK"
+    }
+  },
+  "qualifications": "Must be legally entitled to work in Canada. Creative portfolio or demonstrated interest in content creation an asset.",
+  "skills": "Social media, videography, photography, short-form video editing, TikTok, Instagram Reels",
+  "jobBenefits": "Google Workspace subscription, Claude AI subscription, cooperative membership, flexible schedule, travel expenses covered"
+};
+---
+
+<BaseLayout
+  title="3D3D Media — Content Creation & Social Media | Fredericton, NB"
+  description="3D3D Media creates photos, short-form video, and social content for small businesses in New Brunswick. Community-funded. Starting at $10/photo. Now hiring a content creator in Fredericton."
+  activePath="/media"
+  schema={jobPostingSchema}
+>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     [1] HERO
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="media-hero" data-reveal>
+  <div class="media-hero__inner">
+    <p class="media-hero__eyebrow">3D3D Media / Content Studio</p>
+    <h1 class="media-hero__title">
+      <span class="media-hero__word">We make things</span>
+      <span class="media-hero__word media-hero__word--accent">worth seeing.</span>
+    </h1>
+    <p class="media-hero__sub">
+      Content creation for the makers, fixers, and builders of New Brunswick.<br />
+      Photos. Video. Short-form. Community-funded.
+    </p>
+    <div class="media-hero__ctas">
+      <a href="#work" class="media-cta media-cta--primary">See Our Work</a>
+      <a href="#role" class="media-cta media-cta--outline">The Role</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     [2] THE CHALLENGE
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="media-challenge" id="challenge" data-reveal>
+  <div class="media-challenge__inner">
+    <blockquote class="media-challenge__quote">
+      If you can do better than me,<br />you have the job.
+    </blockquote>
+    <p class="media-challenge__context">
+      3D3D is built and run by one person. Below is every social post I've made.
+      This is the bar. Beat it — and I'll hand you the keys.
+    </p>
+    <div class="media-challenge__arrow" aria-hidden="true">&#8595;</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     [3] THE FEED
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="media-feed" id="work" data-reveal>
+  <div class="media-section-shell">
+    <p class="media-eyebrow">The Feed — Unfiltered</p>
+    <h2 class="media-heading">This is what one person with a phone and some ideas has built.</h2>
+    <p class="media-subhead">Imagine what a team could do.</p>
+
+    <div class="media-feed__grid">
+      <!-- TODO: replace with live embeds when social accounts are active -->
+      <a href="https://www.tiktok.com/@3d3dcanada" target="_blank" rel="noreferrer" class="media-feed__card">
+        <div class="media-feed__icon">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1 0-5.78c.27 0 .54.04.8.1v-3.5a6.37 6.37 0 0 0-.8-.05A6.34 6.34 0 0 0 3.15 15.2a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.5a8.27 8.27 0 0 0 4.76 1.5V6.55a4.82 4.82 0 0 1-1-.14z"/></svg>
+        </div>
+        <span class="media-feed__platform">TikTok</span>
+        <span class="media-feed__handle">@3d3dcanada</span>
+      </a>
+      <a href="https://www.instagram.com/3d3dcanada" target="_blank" rel="noreferrer" class="media-feed__card">
+        <div class="media-feed__icon">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.97.24 2.44.41a4.08 4.08 0 0 1 1.52.99c.46.46.77.95.99 1.52.17.47.36 1.27.41 2.44.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.24 1.97-.41 2.44a4.08 4.08 0 0 1-.99 1.52 4.08 4.08 0 0 1-1.52.99c-.47.17-1.27.36-2.44.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.97-.24-2.44-.41a4.08 4.08 0 0 1-1.52-.99 4.08 4.08 0 0 1-.99-1.52c-.17-.47-.36-1.27-.41-2.44C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.24-1.97.41-2.44a4.08 4.08 0 0 1 .99-1.52 4.08 4.08 0 0 1 1.52-.99c.47-.17 1.27-.36 2.44-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63a6.24 6.24 0 0 0-2.26 1.47A6.24 6.24 0 0 0 .41 4.36C.11 5.12-.09 6 -.15 7.27.09 8.55 0 8.96 0 12.22s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.8.72 1.47 1.39 2.14s1.34 1.08 2.14 1.39c.76.3 1.64.5 2.91.56C8.33 24 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a6.44 6.44 0 0 0 2.14-1.39 6.44 6.44 0 0 0 1.39-2.14c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a6.44 6.44 0 0 0-1.39-2.14A6.44 6.44 0 0 0 19.86.63C19.1.33 18.22.13 16.95.07 15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
+        </div>
+        <span class="media-feed__platform">Instagram</span>
+        <span class="media-feed__handle">@3d3dcanada</span>
+      </a>
+      <a href="https://www.youtube.com/@3d3dcanada" target="_blank" rel="noreferrer" class="media-feed__card">
+        <div class="media-feed__icon">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.54 3.5 12 3.5 12 3.5s-7.54 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.67 31.67 0 0 0 0 12a31.67 31.67 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14c1.84.55 9.38.55 9.38.55s7.54 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.67 31.67 0 0 0 24 12a31.67 31.67 0 0 0-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg>
+        </div>
+        <span class="media-feed__platform">YouTube</span>
+        <span class="media-feed__handle">@3d3dcanada</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     [4] WHAT WE DO — Services
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="media-services" id="services" data-reveal>
+  <div class="media-section-shell">
+    <p class="media-eyebrow">What We Do</p>
+    <h2 class="media-heading">Content for the rest of us.</h2>
+    <p class="media-subhead">Small businesses deserve great content. We build it at prices that actually work.</p>
+
+    <div class="media-services__grid">
+      <div class="media-service-card">
+        <div class="media-service-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        </div>
+        <h3 class="media-service-card__title">Photography</h3>
+        <p class="media-service-card__copy">Product shots. Process shots. Behind-the-scenes. Starting at <strong>$10 per delivered photo.</strong></p>
+        <span class="media-service-card__use">Perfect for: e-commerce, social, print.</span>
+      </div>
+
+      <div class="media-service-card">
+        <div class="media-service-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        </div>
+        <h3 class="media-service-card__title">Short-Form Video</h3>
+        <p class="media-service-card__copy">Reels. TikToks. YouTube Shorts. <strong>$35 per 30 minutes of filming</strong> + a quick edit.</p>
+        <span class="media-service-card__use">Perfect for: launches, tutorials, shop floor content.</span>
+      </div>
+
+      <div class="media-service-card">
+        <div class="media-service-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        </div>
+        <h3 class="media-service-card__title">Social Packages</h3>
+        <p class="media-service-card__copy">Ongoing content: monthly photo + video packages. Community-funded pricing for cooperatives and local businesses.</p>
+        <span class="media-service-card__use">Let's talk.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     [5] PRICING — Rate Card
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="media-pricing" id="pricing" data-reveal>
+  <div class="media-section-shell">
+    <p class="media-eyebrow">The Rate Card</p>
+    <h2 class="media-heading">We price for people who are building something,</h2>
+    <p class="media-subhead">not for people who are already there.</p>
+
+    <div class="media-pricing__grid">
+      <div class="media-pricing__column">
+        <h3 class="media-pricing__category">Photography</h3>
+        <ul class="media-pricing__list">
+          <li><span class="media-pricing__item">Single photo</span><span class="media-pricing__price">$10</span></li>
+          <li><span class="media-pricing__item">10-photo session</span><span class="media-pricing__price">$80</span></li>
+          <li><span class="media-pricing__item">30-photo product shoot</span><span class="media-pricing__price">$200</span></li>
+        </ul>
+      </div>
+      <div class="media-pricing__column">
+        <h3 class="media-pricing__category">Video</h3>
+        <ul class="media-pricing__list">
+          <li><span class="media-pricing__item">30 min filming + quick edit</span><span class="media-pricing__price">$35</span></li>
+          <li><span class="media-pricing__item">Full Reel (concept to final)</span><span class="media-pricing__price">from $75</span></li>
+          <li><span class="media-pricing__item">Monthly (4 Reels + 20 photos)</span><span class="media-pricing__price">from $250</span></li>
+        </ul>
+      </div>
+      <div class="media-pricing__column media-pricing__column--pool">
+        <h3 class="media-pricing__category">Community Pool</h3>
+        <ul class="media-pricing__list">
+          <li><span class="media-pricing__item">1 hour of content work</span><span class="media-pricing__price">$33</span></li>
+          <li class="media-pricing__note">Fund via Ko-fi. Your business gets the output.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="media-pricing__asterisk">Pricing reflects a portfolio-building model. Rates grow as the work does.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     [6] THE POOL — Community Funding
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="media-pool" id="pool" data-reveal>
+  <div class="media-section-shell">
+    <p class="media-eyebrow media-eyebrow--magenta">The Community Pool</p>
+    <h2 class="media-heading">What the community puts in is what the community gets back.</h2>
+
+    <div class="media-pool__explainer">
+      <p>$100 gets 3 hours of content production per week.</p>
+      <p>Pool with others. Split the output. Contribute what you can. Get content in return.</p>
+      <p>Every dollar goes directly into funding the role. No overhead. No agency markup.</p>
+    </div>
+
+    <div class="media-pool__meter">
+      <div class="media-pool__meter-label">
+        <span>Current: <strong>$210</strong></span>
+        <span>Goal: <strong>$850/mo</strong></span>
+      </div>
+      <div class="media-pool__bar">
+        <div class="media-pool__bar-fill" style="--pool-pct: 24.7%"></div>
+      </div>
+    </div>
+
+    <!-- TODO: update with real Ko-fi URL -->
+    <a href="https://ko-fi.com/3d3dcanada" target="_blank" rel="noreferrer" class="media-cta media-cta--magenta">
+      Contribute to the Pool
+    </a>
+
+    <p class="media-pool__note">Contributors receive priority access, updates, and community recognition. The role comes with Google Workspace + Claude subscriptions — fully funded.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     [7] THE ROLE
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="media-role" id="role" data-reveal>
+  <div class="media-section-shell">
+    <p class="media-eyebrow">The Role</p>
+    <h2 class="media-heading">This could be you.</h2>
+    <p class="media-subhead">Not a title. A role. Built for someone who thinks differently.</p>
+
+    <div class="media-role__grid">
+      <div class="media-role__block">
+        <h3 class="media-role__block-title">What the job actually is</h3>
+        <ul class="media-role__list">
+          <li>3 hours per week, in the shop or on location. Fredericton area. Fuel covered.</li>
+          <li>Remote editing, posting, and content work on your own time. You set the rhythm. We set the deliverables.</li>
+          <li>Photography. Video. Social reels. Behind-the-scenes. Raw material is everywhere — we just need someone with the eye to see it.</li>
+        </ul>
+      </div>
+
+      <div class="media-role__block">
+        <h3 class="media-role__block-title">What you get</h3>
+        <ul class="media-role__perks">
+          <li>$100/week guaranteed to start <span class="media-role__perk-note">(a foundation, not a ceiling — as the pool grows, so does your pay)</span></li>
+          <li>Google Workspace subscription — yours to keep</li>
+          <li>Claude AI subscription — yours to keep</li>
+          <li>Portfolio of real work, real clients, real output</li>
+          <li>Cooperative membership — you own what you help build</li>
+          <li>Flexible, creative, no-bullshit structure</li>
+        </ul>
+      </div>
+
+      <div class="media-role__block media-role__block--highlight">
+        <h3 class="media-role__block-title">Who we're looking for</h3>
+        <p>You don't have to have the right resume. You have to have the right eye.</p>
+        <p>If you've ever felt like ADHD was going to keep you from a real career — this is structured for your brain, not against it.</p>
+        <p>If you don't like people telling you how to be creative — nobody will.</p>
+        <p>If you've been waiting for something that makes sense — this might be it.</p>
+      </div>
+
+      <div class="media-role__block">
+        <h3 class="media-role__block-title">The only rules</h3>
+        <ul class="media-role__list">
+          <li>You must be legally entitled to work in Canada</li>
+          <li>You can travel in the Fredericton area (or farther, with support)</li>
+          <li>You produce real work. Consistently.</li>
+          <li>Open source cooperative. What you put in is what you get out.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     [8] APPLY / CTA
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="media-apply" id="apply" data-reveal>
+  <div class="media-section-shell media-apply__inner">
+    <h2 class="media-heading">Let's talk.</h2>
+    <p class="media-apply__copy">
+      Send a message. Show us something you made.<br />
+      No cover letter. No formal application.<br />
+      Just tell us who you are and what you've made.
+    </p>
+    <div class="media-apply__ctas">
+      <a href="/contact" class="media-cta media-cta--primary">Get in Touch</a>
+      <!-- TODO: update with real Ko-fi URL -->
+      <a href="https://ko-fi.com/3d3dcanada" target="_blank" rel="noreferrer" class="media-cta media-cta--outline">Fund the Pool</a>
+    </div>
+    <p class="media-apply__footer">
+      3D3D is an open-source cooperative based in Fredericton, New Brunswick, Canada.<br />
+      We build, repair, and document. We're looking for someone to help share it.
+    </p>
+  </div>
+</section>
+
+</BaseLayout>
+
+<style>
+  /* ── Shared tokens ──────────────────────────────────────────── */
+  .media-section-shell {
+    width: min(100% - clamp(1.5rem, 4vw, 4rem), 960px);
+    margin: 0 auto;
+  }
+
+  .media-eyebrow {
+    margin: 0 0 0.75rem;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-teal-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .media-eyebrow::before {
+    content: '';
+    width: 2.75rem;
+    height: 2px;
+    background: currentColor;
+    flex-shrink: 0;
+  }
+
+  .media-eyebrow--magenta {
+    color: var(--color-magenta-primary);
+  }
+
+  .media-heading {
+    margin: 0 0 0.5rem;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 1.4rem + 2.5vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--color-text-primary);
+    text-transform: uppercase;
+  }
+
+  .media-subhead {
+    margin: 0 0 2.5rem;
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 0.9rem + 0.4vw, 1.15rem);
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    max-width: 40rem;
+  }
+
+  .media-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3.2rem;
+    padding: 0.85rem 1.5rem;
+    font-family: var(--font-tech);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    transition: transform 200ms ease, box-shadow 200ms ease, background 200ms ease;
+  }
+
+  .media-cta:hover {
+    transform: translateY(-2px);
+  }
+
+  .media-cta--primary {
+    background: var(--color-teal-primary);
+    color: #fff;
+    border: 2px solid var(--color-teal-primary);
+    box-shadow: 0 8px 24px rgba(64, 196, 196, 0.22);
+  }
+
+  .media-cta--primary:hover {
+    box-shadow: 0 12px 32px rgba(64, 196, 196, 0.35);
+  }
+
+  .media-cta--outline {
+    background: transparent;
+    color: var(--color-text-primary);
+    border: 2px solid var(--color-border-strong);
+  }
+
+  .media-cta--outline:hover {
+    border-color: var(--color-teal-primary);
+    color: var(--color-teal-primary);
+  }
+
+  .media-cta--magenta {
+    background: var(--color-magenta-primary);
+    color: #fff;
+    border: 2px solid var(--color-magenta-primary);
+    box-shadow: 0 8px 24px rgba(232, 74, 138, 0.22);
+  }
+
+  .media-cta--magenta:hover {
+    box-shadow: 0 12px 32px rgba(232, 74, 138, 0.35);
+  }
+
+  /* ── Section reveal animation ──────────────────────────────── */
+  [data-reveal] {
+    animation: media-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 25%;
+  }
+
+  @keyframes media-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(32px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] {
+      animation: none;
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     [1] HERO
+     ═══════════════════════════════════════════════════════════════ */
+  .media-hero {
+    display: flex;
+    align-items: center;
+    min-height: max(80svh, 480px);
+    padding-block: clamp(6rem, 12vw, 10rem) clamp(4rem, 8vw, 6rem);
+    background: var(--color-surface-primary);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .media-hero__inner {
+    width: min(100% - clamp(1.5rem, 4vw, 4rem), 960px);
+    margin: 0 auto;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .media-hero__eyebrow {
+    margin: 0;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-teal-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .media-hero__eyebrow::before {
+    content: '';
+    width: 3rem;
+    height: 2px;
+    background: var(--color-teal-primary);
+    flex-shrink: 0;
+  }
+
+  .media-hero__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 2rem + 5vw, 6rem);
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+  }
+
+  .media-hero__word {
+    display: block;
+  }
+
+  .media-hero__word--accent {
+    background: linear-gradient(135deg, var(--color-teal-primary), var(--color-magenta-primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .media-hero__sub {
+    margin: 0;
+    max-width: 36rem;
+    font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.2rem);
+    line-height: 1.75;
+    color: var(--color-text-muted);
+  }
+
+  .media-hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  /* Hero entrance animation */
+  .media-hero__eyebrow,
+  .media-hero__word,
+  .media-hero__sub,
+  .media-hero__ctas {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: media-hero-enter 0.7s ease forwards;
+  }
+
+  .media-hero__eyebrow { animation-delay: 0ms; }
+  .media-hero__word:first-child { animation-delay: 80ms; }
+  .media-hero__word:nth-child(2) { animation-delay: 160ms; }
+  .media-hero__sub { animation-delay: 260ms; }
+  .media-hero__ctas { animation-delay: 380ms; }
+
+  @keyframes media-hero-enter {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .media-hero__eyebrow,
+    .media-hero__word,
+    .media-hero__sub,
+    .media-hero__ctas {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     [2] THE CHALLENGE
+     ═══════════════════════════════════════════════════════════════ */
+  .media-challenge {
+    padding-block: clamp(4rem, 8vw, 7rem);
+    background: var(--color-surface-secondary);
+    border-top: 3px solid var(--color-teal-primary);
+  }
+
+  .media-challenge__inner {
+    width: min(100% - clamp(1.5rem, 4vw, 4rem), 960px);
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .media-challenge__quote {
+    margin: 0 0 1.5rem;
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 1.5rem + 3.5vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+    border: none;
+    padding: 0;
+  }
+
+  .media-challenge__context {
+    margin: 0 auto 2rem;
+    max-width: 34rem;
+    font-size: clamp(1rem, 0.9rem + 0.3vw, 1.1rem);
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  .media-challenge__arrow {
+    font-size: 2rem;
+    color: var(--color-teal-primary);
+    animation: media-bounce 2s ease-in-out infinite;
+  }
+
+  @keyframes media-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     [3] THE FEED
+     ═══════════════════════════════════════════════════════════════ */
+  .media-feed {
+    padding-block: clamp(5rem, 10vw, 8rem);
+    background: var(--color-surface-primary);
+  }
+
+  .media-feed__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+
+  .media-feed__card {
+    display: grid;
+    gap: 0.75rem;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    color: var(--color-text-primary);
+    box-shadow: var(--shadow-card);
+    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+  }
+
+  .media-feed__card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: var(--color-teal-primary);
+  }
+
+  .media-feed__card:nth-child(1) { animation-delay: 0ms; }
+  .media-feed__card:nth-child(2) { animation-delay: 100ms; }
+  .media-feed__card:nth-child(3) { animation-delay: 200ms; }
+
+  .media-feed__icon {
+    color: var(--color-teal-primary);
+  }
+
+  .media-feed__platform {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+
+  .media-feed__handle {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     [4] SERVICES
+     ═══════════════════════════════════════════════════════════════ */
+  .media-services {
+    padding-block: clamp(5rem, 10vw, 8rem);
+    background: var(--color-surface-secondary);
+  }
+
+  .media-services__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    gap: 1.25rem;
+  }
+
+  .media-service-card {
+    display: grid;
+    gap: 0.75rem;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+  }
+
+  .media-service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: var(--color-teal-primary);
+  }
+
+  .media-service-card__icon {
+    color: var(--color-teal-primary);
+  }
+
+  .media-service-card__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+  }
+
+  .media-service-card__copy {
+    margin: 0;
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: var(--color-text-muted);
+  }
+
+  .media-service-card__use {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--color-teal-primary);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     [5] PRICING
+     ═══════════════════════════════════════════════════════════════ */
+  .media-pricing {
+    padding-block: clamp(5rem, 10vw, 8rem);
+    background: var(--color-surface-primary);
+  }
+
+  .media-pricing__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+    gap: 1.25rem;
+  }
+
+  .media-pricing__column {
+    padding: clamp(1.5rem, 3vw, 2rem);
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+  }
+
+  .media-pricing__column--pool {
+    border-color: var(--color-magenta-primary);
+    background: var(--color-magenta-surface);
+  }
+
+  .media-pricing__category {
+    margin: 0 0 1.25rem;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+  }
+
+  .media-pricing__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .media-pricing__list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .media-pricing__list li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .media-pricing__item {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+  }
+
+  .media-pricing__price {
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--color-text-primary);
+    white-space: nowrap;
+  }
+
+  .media-pricing__note {
+    display: block !important;
+    font-size: 0.88rem;
+    font-style: italic;
+    color: var(--color-text-muted);
+  }
+
+  .media-pricing__asterisk {
+    margin-top: 1.5rem;
+    font-size: 0.82rem;
+    font-style: italic;
+    color: var(--color-text-muted);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     [6] THE POOL
+     ═══════════════════════════════════════════════════════════════ */
+  .media-pool {
+    padding-block: clamp(5rem, 10vw, 8rem);
+    background: var(--color-surface-secondary);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .media-pool::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-teal-primary), var(--color-magenta-primary));
+  }
+
+  .media-pool__explainer {
+    max-width: 36rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .media-pool__explainer p {
+    margin: 0 0 0.75rem;
+    font-size: clamp(1rem, 0.9rem + 0.3vw, 1.1rem);
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+
+  .media-pool__meter {
+    max-width: 28rem;
+    margin-bottom: 2rem;
+  }
+
+  .media-pool__meter-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted);
+  }
+
+  .media-pool__bar {
+    height: 10px;
+    border-radius: var(--radius-full);
+    background: var(--color-surface-tertiary);
+    overflow: hidden;
+  }
+
+  .media-pool__bar-fill {
+    height: 100%;
+    width: var(--pool-pct, 0%);
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--color-teal-primary), var(--color-magenta-primary));
+    transition: width 1.2s ease;
+  }
+
+  .media-pool__note {
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    max-width: 36rem;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     [7] THE ROLE
+     ═══════════════════════════════════════════════════════════════ */
+  .media-role {
+    padding-block: clamp(5rem, 10vw, 8rem);
+    background: var(--color-surface-primary);
+  }
+
+  .media-role__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+    gap: 1.25rem;
+  }
+
+  .media-role__block {
+    padding: clamp(1.5rem, 3vw, 2rem);
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+  }
+
+  .media-role__block--highlight {
+    border-color: var(--color-teal-primary);
+    background: var(--color-teal-surface);
+  }
+
+  .media-role__block--highlight p {
+    margin: 0 0 1rem;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+
+  .media-role__block--highlight p:last-child {
+    margin-bottom: 0;
+  }
+
+  .media-role__block-title {
+    margin: 0 0 1rem;
+    font-family: var(--font-tech);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-teal-primary);
+  }
+
+  .media-role__list,
+  .media-role__perks {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .media-role__list li,
+  .media-role__perks li {
+    position: relative;
+    padding-left: 1.25rem;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+  }
+
+  .media-role__list li::before {
+    content: '\2192';
+    position: absolute;
+    left: 0;
+    color: var(--color-teal-primary);
+  }
+
+  .media-role__perks li::before {
+    content: '\2713';
+    position: absolute;
+    left: 0;
+    color: var(--color-teal-primary);
+    font-weight: 700;
+  }
+
+  .media-role__perk-note {
+    display: block;
+    font-size: 0.82rem;
+    font-style: italic;
+    color: var(--color-text-muted);
+    margin-top: 0.15rem;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     [8] APPLY
+     ═══════════════════════════════════════════════════════════════ */
+  .media-apply {
+    padding-block: clamp(5rem, 10vw, 8rem);
+    background: var(--color-surface-secondary);
+    text-align: center;
+  }
+
+  .media-apply__inner {
+    display: grid;
+    gap: 1.25rem;
+    justify-items: center;
+  }
+
+  .media-apply__copy {
+    margin: 0;
+    max-width: 30rem;
+    font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.2rem);
+    line-height: 1.75;
+    color: var(--color-text-muted);
+  }
+
+  .media-apply__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+
+  .media-apply__footer {
+    margin: 1.5rem 0 0;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    max-width: 32rem;
+  }
+</style>

@@ -16,6 +16,12 @@ import { useReducedMotion } from 'motion/react';
 
 import { ACCENT_HEX, SPLASH_SECTIONS, type SplashSection } from '../data/splashSections';
 import {
+  getStoredSplashTheme,
+  getSystemSplashTheme,
+  SPLASH_THEME_STORAGE_KEY,
+  type SplashTheme,
+} from '../lib/splash-theme';
+import {
   getNearestIndex,
   getOrbitItems,
   getSnapAngle,
@@ -24,6 +30,7 @@ import {
 import SplashBackground from './SplashBackground';
 import SplashBentoCard from './SplashBentoCard';
 import SplashNavPill from './SplashNavPill';
+import SplashThemeToggle from './SplashThemeToggle';
 
 const LazySplashScene = lazy(() => import('./SplashScene'));
 
@@ -65,6 +72,11 @@ function isActivationKey(key: string) {
   return key === 'Enter' || key === ' ';
 }
 
+function applySplashTheme(theme: SplashTheme) {
+  if (typeof document === 'undefined') return;
+  document.body.dataset.splashTheme = theme;
+}
+
 function FallbackGrid({ sections }: { sections: SplashSection[] }) {
   return (
     <div className="splash-fallback">
@@ -101,6 +113,9 @@ export default function SplashOrbit() {
   const shouldReduceMotion = Boolean(useReducedMotion());
   const isMobile = useMediaQuery('(max-width: 767px)');
   const [supportsThree, setSupportsThree] = useState<boolean | null>(null);
+  const [theme, setTheme] = useState<SplashTheme>('light');
+  const [themeReady, setThemeReady] = useState(false);
+  const [hasSavedTheme, setHasSavedTheme] = useState(false);
   const [saveDataMode, setSaveDataMode] = useState(false);
   const [angle, setAngle] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -136,6 +151,33 @@ export default function SplashOrbit() {
     }
   }, []);
 
+  useEffect(() => {
+    const storedTheme = getStoredSplashTheme();
+    const nextTheme = storedTheme ?? getSystemSplashTheme();
+
+    setTheme(nextTheme);
+    setHasSavedTheme(Boolean(storedTheme));
+    applySplashTheme(nextTheme);
+    setThemeReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (!themeReady) return;
+    applySplashTheme(theme);
+  }, [theme, themeReady]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || hasSavedTheme) return;
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const updateTheme = (event: MediaQueryListEvent) => {
+      setTheme(event.matches ? 'dark' : 'light');
+    };
+
+    mediaQuery.addEventListener('change', updateTheme);
+    return () => mediaQuery.removeEventListener('change', updateTheme);
+  }, [hasSavedTheme]);
+
   const orbitItems = useMemo(() => getOrbitItems(SPLASH_SECTIONS, angle), [angle]);
   const focusIndex = useDeferredValue(hoveredIndex ?? activeIndex);
   const focusedItem = orbitItems[focusIndex] ?? orbitItems[activeIndex] ?? orbitItems[0];
@@ -143,6 +185,23 @@ export default function SplashOrbit() {
 
   const handleSceneReady = useCallback(() => {
     setSceneReady(true);
+  }, []);
+
+  const toggleTheme = useCallback(() => {
+    setTheme((currentTheme) => {
+      const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+      setHasSavedTheme(true);
+      applySplashTheme(nextTheme);
+
+      try {
+        window.localStorage.setItem(SPLASH_THEME_STORAGE_KEY, nextTheme);
+      } catch {
+        // Ignore localStorage write failures and continue with in-memory theme state.
+      }
+
+      return nextTheme;
+    });
   }, []);
 
   const updateAngle = useCallback((nextAngle: number) => {
@@ -167,11 +226,14 @@ export default function SplashOrbit() {
   }, [updateAngle]);
 
   const queueSnapToIndex = useCallback((targetIndex: number) => {
-    snapTargetRef.current = getSnapAngle(angleRef.current, targetIndex, SPLASH_SECTIONS.length);
+    const nextAngle = getSnapAngle(angleRef.current, targetIndex, SPLASH_SECTIONS.length);
+
+    snapTargetRef.current = null;
     lastInteractionRef.current = performance.now();
-    velocityRef.current *= 0.35;
+    velocityRef.current = 0;
     setHoveredIndex(null);
-  }, []);
+    updateAngle(nextAngle);
+  }, [updateAngle]);
 
   useEffect(() => {
     lastInteractionRef.current = performance.now();
@@ -350,16 +412,21 @@ export default function SplashOrbit() {
 
   if (shouldReduceMotion || supportsThree === false) {
     return (
-      <div className="splash-orbit splash-orbit--fallback">
-        <SplashBackground staticMode />
+      <div
+        className="splash-orbit splash-orbit--fallback"
+        data-theme={themeReady ? theme : undefined}
+      >
+        <SplashBackground staticMode theme={theme} />
+        {themeReady && <SplashThemeToggle theme={theme} onToggle={toggleTheme} />}
         <FallbackGrid sections={SPLASH_SECTIONS} />
       </div>
     );
   }
 
   return (
-    <div className="splash-orbit">
-      <SplashBackground staticMode={saveDataMode} />
+    <div className="splash-orbit" data-theme={themeReady ? theme : undefined}>
+      <SplashBackground staticMode={saveDataMode} theme={theme} />
+      {themeReady && <SplashThemeToggle theme={theme} onToggle={toggleTheme} />}
 
       <div
         ref={sceneShellRef}
@@ -390,6 +457,7 @@ export default function SplashOrbit() {
             focusIndex={focusIndex}
             entryProgress={entryProgress}
             reducedMotion={shouldReduceMotion}
+            theme={theme}
             onHoverIndexChange={setHoveredIndex}
             onReady={handleSceneReady}
           />

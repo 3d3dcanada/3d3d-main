@@ -6,17 +6,20 @@ import { Box3, Mesh, MeshStandardMaterial, Vector3 } from 'three';
 import type { Group, Object3D } from 'three';
 
 import { ACCENT_HEX, SPLASH_SECTIONS, type SplashSection } from '../data/splashSections';
+import type { SplashTheme } from '../lib/splash-theme';
 
 interface SplashObjectProps {
   section: SplashSection;
   active: boolean;
   focused: boolean;
   opacity: number;
+  theme: SplashTheme;
   onHoverChange: (hovered: boolean) => void;
 }
 
-function buildModel(scene: Object3D, accentHex: string) {
+function buildModel(scene: Object3D, accentHex: string, theme: SplashTheme) {
   const clone = scene.clone(true);
+  const isDark = theme === 'dark';
 
   clone.traverse((child) => {
     if (!(child instanceof Mesh)) return;
@@ -24,11 +27,11 @@ function buildModel(scene: Object3D, accentHex: string) {
     child.castShadow = true;
     child.receiveShadow = true;
     child.material = new MeshStandardMaterial({
-      color: '#F0EDE8',
-      metalness: 0.15,
-      roughness: 0.4,
+      color: isDark ? '#F2ECE4' : '#F0EDE8',
+      metalness: isDark ? 0.18 : 0.15,
+      roughness: isDark ? 0.34 : 0.4,
       emissive: accentHex,
-      emissiveIntensity: 0.2,
+      emissiveIntensity: isDark ? 0.28 : 0.2,
     });
   });
 
@@ -47,15 +50,17 @@ export default function SplashObject({
   active,
   focused,
   opacity,
+  theme,
   onHoverChange,
 }: SplashObjectProps) {
   const groupRef = useRef<Group>(null);
   const accentHex = ACCENT_HEX[section.accent];
   const { scene } = useGLTF(section.modelPath);
   const preparedModel = useMemo(
-    () => buildModel(scene, accentHex),
-    [scene, accentHex],
+    () => buildModel(scene, accentHex, theme),
+    [scene, accentHex, theme],
   );
+  const isDark = theme === 'dark';
 
   useFrame(({ clock }) => {
     if (!groupRef.current) return;
@@ -65,10 +70,14 @@ export default function SplashObject({
     groupRef.current.rotation.set(rx, ry + sway, rz);
 
     const emissiveIntensity = focused
-      ? 0.6 + ((Math.sin(clock.elapsedTime * Math.PI) + 1) * 0.5) * 0.2
+      ? (isDark ? 0.72 : 0.6) + ((Math.sin(clock.elapsedTime * Math.PI) + 1) * 0.5) * 0.2
       : active
-        ? 0.32
-        : 0.2;
+        ? isDark
+          ? 0.4
+          : 0.32
+        : isDark
+          ? 0.24
+          : 0.2;
 
     groupRef.current.traverse((child) => {
       if (!(child instanceof Mesh)) return;

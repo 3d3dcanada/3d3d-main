@@ -3,21 +3,30 @@ import { useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
 import type { Group, MeshStandardMaterial } from 'three';
 
+import type { SplashTheme } from '../lib/splash-theme';
+
 const FONT_URL = '/fonts/helvetiker_bold.typeface.json';
 
 interface SplashCenterLogoProps {
   reducedMotion: boolean;
+  theme: SplashTheme;
 }
 
-export default function SplashCenterLogo({ reducedMotion }: SplashCenterLogoProps) {
+export default function SplashCenterLogo({
+  reducedMotion,
+  theme,
+}: SplashCenterLogoProps) {
   const rootRef = useRef<Group>(null);
+  const isDark = theme === 'dark';
 
   useFrame(({ clock }, delta) => {
     if (!rootRef.current || reducedMotion) return;
 
     rootRef.current.rotation.y += delta * 0.08;
 
-    const glow = 0.08 + ((Math.sin(clock.elapsedTime * 1.6) + 1) * 0.5) * 0.08;
+    const glowBase = isDark ? 0.12 : 0.08;
+    const glowRange = isDark ? 0.12 : 0.08;
+    const glow = glowBase + ((Math.sin(clock.elapsedTime * 1.6) + 1) * 0.5) * glowRange;
     rootRef.current.traverse((child) => {
       if (!('material' in child)) return;
 
@@ -38,22 +47,22 @@ export default function SplashCenterLogo({ reducedMotion }: SplashCenterLogoProp
         <mesh position={[0, 0, -0.18]} castShadow receiveShadow>
           <cylinderGeometry args={[1.82, 1.66, 0.38, 64]} />
           <meshStandardMaterial
-            color="#D8CEC4"
-            metalness={0.2}
-            roughness={0.34}
+            color={isDark ? '#151B21' : '#D8CEC4'}
+            metalness={isDark ? 0.28 : 0.2}
+            roughness={isDark ? 0.3 : 0.34}
             emissive="#FF6B2B"
-            emissiveIntensity={0.12}
+            emissiveIntensity={isDark ? 0.18 : 0.12}
           />
         </mesh>
 
         <mesh position={[0, -0.02, 0.1]} rotation={[Math.PI / 2, 0, 0]} castShadow receiveShadow>
           <torusGeometry args={[1.56, 0.08, 16, 100]} />
           <meshStandardMaterial
-            color="#F4F1EC"
-            metalness={0.26}
-            roughness={0.28}
+            color={isDark ? '#F5EEE4' : '#F4F1EC'}
+            metalness={isDark ? 0.32 : 0.26}
+            roughness={isDark ? 0.22 : 0.28}
             emissive="#40C4C4"
-            emissiveIntensity={0.18}
+            emissiveIntensity={isDark ? 0.28 : 0.18}
           />
         </mesh>
 
@@ -70,11 +79,11 @@ export default function SplashCenterLogo({ reducedMotion }: SplashCenterLogoProp
           >
             3D3D
             <meshStandardMaterial
-              color="#2A2520"
-              metalness={0.28}
-              roughness={0.22}
+              color={isDark ? '#F6EFE6' : '#2A2520'}
+              metalness={isDark ? 0.34 : 0.28}
+              roughness={isDark ? 0.18 : 0.22}
               emissive="#40C4C4"
-              emissiveIntensity={0.08}
+              emissiveIntensity={isDark ? 0.12 : 0.08}
             />
           </Text3D>
         </Center>

@@ -2,6 +2,7 @@ import { ContactShadows, PerspectiveCamera } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { useEffect } from 'react';
 
+import type { SplashTheme } from '../lib/splash-theme';
 import type { SplashOrbitItem } from '../lib/splash-orbit';
 import { ORBIT_TILT, easeOutCubic } from '../lib/splash-orbit';
 import SplashCenterLogo from './SplashCenterLogo';
@@ -13,6 +14,7 @@ interface SplashSceneProps {
   focusIndex: number;
   entryProgress: number;
   reducedMotion: boolean;
+  theme: SplashTheme;
   onHoverIndexChange: (index: number | null) => void;
   onReady: () => void;
 }
@@ -23,6 +25,7 @@ export default function SplashScene({
   focusIndex,
   entryProgress,
   reducedMotion,
+  theme,
   onHoverIndexChange,
   onReady,
 }: SplashSceneProps) {
@@ -31,6 +34,7 @@ export default function SplashScene({
   }, [onReady]);
 
   const entry = reducedMotion ? 1 : easeOutCubic(entryProgress);
+  const isDark = theme === 'dark';
 
   return (
     <Canvas
@@ -45,21 +49,44 @@ export default function SplashScene({
     >
       <PerspectiveCamera makeDefault position={[0, 3.2, 10]} fov={40} />
 
-      <ambientLight intensity={1.1} />
+      <ambientLight intensity={isDark ? 0.78 : 1.1} />
       <hemisphereLight
-        intensity={1.2}
-        color="#FFF4EA"
-        groundColor="#CEC7BF"
+        intensity={isDark ? 0.92 : 1.2}
+        color={isDark ? '#D7E3F0' : '#FFF4EA'}
+        groundColor={isDark ? '#0E1319' : '#CEC7BF'}
         position={[0, 6, 0]}
       />
-      <directionalLight position={[6, 8, 9]} intensity={1.55} color="#FFF5EC" />
-      <directionalLight position={[-5, 4, -3]} intensity={0.55} color="#D8E8E6" />
-      <pointLight position={[3.6, 1.8, 5]} intensity={8} color="#40C4C4" distance={10} />
-      <pointLight position={[-4.2, 1.1, 3.8]} intensity={7} color="#E84A8A" distance={10} />
-      <pointLight position={[0.2, 2.8, 5.8]} intensity={6} color="#FF6B2B" distance={12} />
+      <directionalLight
+        position={[6, 8, 9]}
+        intensity={isDark ? 1.2 : 1.55}
+        color={isDark ? '#F3EEE8' : '#FFF5EC'}
+      />
+      <directionalLight
+        position={[-5, 4, -3]}
+        intensity={isDark ? 0.72 : 0.55}
+        color={isDark ? '#7EAAB0' : '#D8E8E6'}
+      />
+      <pointLight
+        position={[3.6, 1.8, 5]}
+        intensity={isDark ? 5.5 : 8}
+        color="#40C4C4"
+        distance={isDark ? 8.5 : 10}
+      />
+      <pointLight
+        position={[-4.2, 1.1, 3.8]}
+        intensity={isDark ? 4.8 : 7}
+        color="#E84A8A"
+        distance={isDark ? 8.5 : 10}
+      />
+      <pointLight
+        position={[0.2, 2.8, 5.8]}
+        intensity={isDark ? 3.8 : 6}
+        color="#FF6B2B"
+        distance={isDark ? 10 : 12}
+      />
 
       <group position={[0, 1.28, 0]}>
-        <SplashCenterLogo reducedMotion={reducedMotion} />
+        <SplashCenterLogo reducedMotion={reducedMotion} theme={theme} />
 
         <group rotation={[ORBIT_TILT, 0, 0]} position={[0, 0.08, 0]}>
           {items.map((item) => {
@@ -80,6 +107,7 @@ export default function SplashScene({
                   active={item.index === activeIndex}
                   focused={item.index === focusIndex}
                   opacity={item.opacity}
+                  theme={theme}
                   onHoverChange={(hovered) => onHoverIndexChange(hovered ? item.index : null)}
                 />
               </group>
@@ -90,7 +118,7 @@ export default function SplashScene({
 
       <ContactShadows
         position={[0, -0.24, 0]}
-        opacity={0.18}
+        opacity={isDark ? 0.3 : 0.18}
         scale={8.5}
         blur={2.6}
         far={5}

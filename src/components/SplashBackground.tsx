@@ -11,7 +11,10 @@ export default function SplashBackground({
   return (
     <div className="splash-background" aria-hidden="true">
       <div className="splash-background__static" />
+      <div className="splash-background__mesh" />
+      <div className="splash-background__dots" />
       <div className="splash-background__overlay" />
+      <div className="splash-background__vignette" />
       <div className="splash-background__grain" />
     </div>
   );

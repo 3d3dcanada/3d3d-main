@@ -92,30 +92,31 @@ const MATERIAL_PROFILES = [
   { metalness: 0.3,  roughness: 0.48, envMapIntensity: 0.6 }, // matte
 ];
 
-function buildModel(scene: Object3D, accentHex: string, theme: SplashTheme) {
+function buildModel(scene: Object3D, accentHex: string, naturalColors: string[], theme: SplashTheme) {
   const clone = scene.clone(true);
   const isDark = theme === 'dark';
-  const shadowHex = darkenHex(accentHex, 0.3);
   let meshIndex = 0;
 
   clone.traverse((child) => {
     if (!(child instanceof Mesh)) return;
-    const colorHex = meshIndex % 2 === 0 ? accentHex : shadowHex;
+    const colorHex = naturalColors[meshIndex % naturalColors.length];
     const profile = MATERIAL_PROFILES[meshIndex % MATERIAL_PROFILES.length];
     meshIndex += 1;
 
     child.castShadow = true;
     child.receiveShadow = true;
-    const normalMap = getBrushedMetalNormal();
+
+    const useNormalMap = profile.metalness > 0.5;
     const mat = new MeshStandardMaterial({
       color: colorHex,
       metalness: isDark ? profile.metalness : profile.metalness * 0.85,
       roughness: isDark ? profile.roughness : profile.roughness * 1.15,
       envMapIntensity: profile.envMapIntensity,
       emissive: accentHex,
-      emissiveIntensity: isDark ? 0.35 : 0.25,
-      normalMap,
-      normalScale: new Vector2(0.35, 0.35),
+      emissiveIntensity: isDark ? 0.15 : 0.08,
+      ...(useNormalMap
+        ? { normalMap: getBrushedMetalNormal(), normalScale: new Vector2(0.35, 0.35) }
+        : {}),
     });
     mat.userData.baseEnvMap = profile.envMapIntensity;
     child.material = mat;
@@ -141,10 +142,11 @@ export default function SplashObject({
 }: SplashObjectProps) {
   const groupRef = useRef<Group>(null);
   const accentHex = ACCENT_HEX[section.accent];
+  const { naturalColors } = section;
   const { scene } = useGLTF(section.modelPath);
   const preparedModel = useMemo(
-    () => buildModel(scene, accentHex, theme),
-    [scene, accentHex, theme],
+    () => buildModel(scene, accentHex, naturalColors, theme),
+    [scene, accentHex, naturalColors, theme],
   );
   const isDark = theme === 'dark';
 
@@ -157,14 +159,14 @@ export default function SplashObject({
     groupRef.current.rotation.set(rx, ry + sway + spin, rz);
 
     const emissiveIntensity = focused
-      ? (isDark ? 0.95 : 0.75) + ((Math.sin(clock.elapsedTime * Math.PI) + 1) * 0.5) * 0.3
+      ? (isDark ? 0.25 : 0.15) + ((Math.sin(clock.elapsedTime * Math.PI) + 1) * 0.5) * 0.1
       : active
         ? isDark
-          ? 0.4
-          : 0.32
+          ? 0.12
+          : 0.08
         : isDark
-          ? 0.24
-          : 0.2;
+          ? 0.06
+          : 0.03;
 
     const envMapBoost = focused ? 1.6 : active ? 1.1 : 0.85;
 
@@ -208,7 +210,7 @@ export default function SplashObject({
         >
           {section.id === 'services' ? (
             <>
-              <group rotation={[0, 0, Math.PI / 4]}>
+              <group position={[0, 0, 0.15]} rotation={[0, 0, Math.PI / 4]}>
                 <Clone
                   object={preparedModel.clone}
                   position={[
@@ -221,7 +223,7 @@ export default function SplashObject({
                   }
                 />
               </group>
-              <group rotation={[0, 0, -Math.PI / 4]}>
+              <group position={[0, 0, -0.15]} rotation={[0, Math.PI, -Math.PI / 4]}>
                 <Clone
                   object={preparedModel.clone}
                   position={[

@@ -21,8 +21,8 @@ const staggerVariants = {
   initial: {},
   animate: {
     transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.04,
+      staggerChildren: 0.06,
+      delayChildren: 0.03,
     },
   },
 };
@@ -69,9 +69,21 @@ export default function SplashBentoCard({
             {section.title}
           </motion.h2>
 
-          <motion.p className="splash-card__copy" variants={itemVariants}>
-            {section.description}
+          <motion.p className="splash-card__subtitle" variants={itemVariants}>
+            {section.subtitle}
           </motion.p>
+
+          <motion.p className="splash-card__copy" variants={itemVariants}>
+            {section.longDescription}
+          </motion.p>
+
+          <motion.ul className="splash-card__highlights" variants={itemVariants}>
+            {section.highlights.map((item) => (
+              <li key={item} className="splash-card__highlight">
+                {item}
+              </li>
+            ))}
+          </motion.ul>
 
           <motion.div className="splash-card__tags" variants={itemVariants}>
             {section.tags.map((tag) => (

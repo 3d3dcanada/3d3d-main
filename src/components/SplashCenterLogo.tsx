@@ -24,15 +24,19 @@ function BuildPlateModel({
   const { clone, fitScale, center } = useMemo(() => {
     const c = scene.clone(true);
     const accentHex = ACCENT_HEX[section.accent];
+    const { naturalColors } = section;
+    let meshIdx = 0;
 
     c.traverse((child) => {
       if (!(child instanceof Mesh)) return;
+      const colorHex = naturalColors[meshIdx % naturalColors.length];
+      meshIdx += 1;
       child.material = new MeshStandardMaterial({
-        color: accentHex,
+        color: colorHex,
         metalness: isDark ? 0.55 : 0.45,
         roughness: isDark ? 0.25 : 0.32,
         emissive: accentHex,
-        emissiveIntensity: isDark ? 0.6 : 0.38,
+        emissiveIntensity: isDark ? 0.2 : 0.1,
       });
     });
 

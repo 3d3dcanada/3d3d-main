@@ -42,10 +42,9 @@ export default function SplashScene({
   const entry = reducedMotion ? 1 : easeOutCubic(entryProgress);
   const isDark = theme === 'dark';
 
-  // Point light intensities reduced ~15% from original
-  const tealIntensity = isDark ? 9.35 : 6.8;
-  const magentaIntensity = isDark ? 8.075 : 5.95;
-  const orangeIntensity = isDark ? 6.8 : 5.1;
+  const tealIntensity = isDark ? 9.35 : 4.8;
+  const magentaIntensity = isDark ? 8.075 : 4.2;
+  const orangeIntensity = isDark ? 6.8 : 3.6;
 
   return (
     <Canvas
@@ -114,7 +113,7 @@ export default function SplashScene({
         angle={0.28}
         penumbra={0.6}
         intensity={isDark ? 18 : 12}
-        color="#FFFFFF"
+        color={isDark ? '#FFFFFF' : '#FFF8F0'}
         distance={14}
         castShadow={false}
       />
@@ -162,7 +161,7 @@ export default function SplashScene({
           size={2.5}
           speed={0.3}
           opacity={isDark ? 0.55 : 0.3}
-          color={isDark ? '#40C4C4' : '#E84A8A'}
+          color={isDark ? '#40C4C4' : '#D4C8B8'}
         />
       )}
 

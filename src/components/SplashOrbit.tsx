@@ -134,6 +134,7 @@ export default function SplashOrbit() {
   const lastInteractionRef = useRef(0);
   const snapTargetRef = useRef<number | null>(null);
   const activeIndexRef = useRef(0);
+  const userHasSelectedRef = useRef(false);
 
   useEffect(() => {
     setSupportsThree(supportsWebGL());
@@ -223,11 +224,13 @@ export default function SplashOrbit() {
     setHoveredIndex(null);
     snapTargetRef.current = null;
     velocityRef.current = 0;
+    userHasSelectedRef.current = false;
   }, [updateAngle]);
 
   const queueSnapToIndex = useCallback((targetIndex: number) => {
     const nextAngle = getSnapAngle(angleRef.current, targetIndex, SPLASH_SECTIONS.length);
 
+    userHasSelectedRef.current = true;
     snapTargetRef.current = null;
     lastInteractionRef.current = performance.now();
     velocityRef.current = 0;
@@ -266,6 +269,7 @@ export default function SplashOrbit() {
     const handleWheel = (event: WheelEvent) => {
       event.preventDefault();
       const deltaAngle = (event.deltaY / (shell.clientWidth || 1)) * Math.PI * 0.45;
+      userHasSelectedRef.current = false;
       velocityRef.current += deltaAngle * 0.001;
       lastInteractionRef.current = performance.now();
       snapTargetRef.current = null;
@@ -311,7 +315,7 @@ export default function SplashOrbit() {
             const nearestIndex = getNearestIndex(SPLASH_SECTIONS, nextAngle);
             snapTargetRef.current = getSnapAngle(nextAngle, nearestIndex, SPLASH_SECTIONS.length);
           }
-        } else if (idle) {
+        } else if (idle && !userHasSelectedRef.current) {
           nextAngle += autoRotateSpeed * deltaMs;
         } else {
           const nearestIndex = getNearestIndex(SPLASH_SECTIONS, nextAngle);
@@ -342,6 +346,7 @@ export default function SplashOrbit() {
       };
 
       lastInteractionRef.current = performance.now();
+      userHasSelectedRef.current = false;
       snapTargetRef.current = null;
       velocityRef.current = 0;
       setHoveredIndex(null);

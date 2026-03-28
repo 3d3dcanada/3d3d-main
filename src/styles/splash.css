@@ -8,6 +8,7 @@ body.splash-page {
     radial-gradient(circle at 78% 18%, rgba(232, 74, 138, 0.16), transparent 22%),
     radial-gradient(circle at 58% 82%, rgba(255, 107, 43, 0.14), transparent 26%),
     linear-gradient(145deg, #ebe6df 0%, #d6d0c8 48%, #c9c3bc 100%);
+  --splash-background-overlay: rgba(9, 12, 17, 0.35);
   --splash-wash-bg:
     radial-gradient(circle at 50% 38%, rgba(255, 255, 255, 0.34), transparent 38%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(232, 228, 223, 0.2));
@@ -78,6 +79,7 @@ body.splash-page[data-splash-theme='dark'] {
     radial-gradient(circle at 82% 18%, rgba(232, 74, 138, 0.22), transparent 24%),
     radial-gradient(circle at 54% 84%, rgba(255, 107, 43, 0.18), transparent 28%),
     linear-gradient(160deg, #090c11 0%, #10151c 46%, #1a222a 100%);
+  --splash-background-overlay: rgba(5, 7, 10, 0.55);
   --splash-wash-bg:
     radial-gradient(circle at 50% 36%, rgba(255, 255, 255, 0.06), transparent 34%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(3, 5, 8, 0.26));
@@ -142,6 +144,7 @@ body.splash-page[data-splash-theme='dark'] {
       radial-gradient(circle at 82% 18%, rgba(232, 74, 138, 0.22), transparent 24%),
       radial-gradient(circle at 54% 84%, rgba(255, 107, 43, 0.18), transparent 28%),
       linear-gradient(160deg, #090c11 0%, #10151c 46%, #1a222a 100%);
+    --splash-background-overlay: rgba(5, 7, 10, 0.55);
     --splash-wash-bg:
       radial-gradient(circle at 50% 36%, rgba(255, 255, 255, 0.06), transparent 34%),
       linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(3, 5, 8, 0.26));
@@ -227,34 +230,33 @@ body.splash-page .site-main {
   overflow: hidden;
 }
 
-.splash-background__mesh,
+.splash-background__video,
 .splash-background__static {
-  position: absolute !important;
-  inset: -10%;
-  width: auto !important;
-  height: auto !important;
-  transform: scale(1.06);
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.splash-background__video {
+  object-fit: cover;
+  transform: scale(1.04);
+  transform-origin: center;
+  will-change: transform;
 }
 
 .splash-background__static {
   background: var(--splash-static-bg);
 }
 
-.splash-background__wash,
-.splash-background__spots,
+.splash-background__overlay,
 .splash-background__grain {
   position: absolute;
   inset: 0;
 }
 
-.splash-background__wash {
-  background: var(--splash-wash-bg);
-}
-
-.splash-background__spots {
-  opacity: var(--splash-spots-opacity);
-  background: var(--splash-spots-bg);
-  mix-blend-mode: var(--splash-spots-blend);
+.splash-background__overlay {
+  background: var(--splash-background-overlay);
 }
 
 .splash-background__grain {

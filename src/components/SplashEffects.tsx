@@ -10,10 +10,10 @@ export default function SplashEffects({ enabled }: SplashEffectsProps) {
   return (
     <EffectComposer>
       <Bloom
-        luminanceThreshold={0.6}
+        luminanceThreshold={0.5}
         luminanceSmoothing={0.3}
-        intensity={0.4}
-        radius={0.6}
+        intensity={0.5}
+        radius={0.7}
         mipmapBlur
       />
     </EffectComposer>

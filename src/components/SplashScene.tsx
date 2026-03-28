@@ -43,13 +43,13 @@ export default function SplashScene({
       gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
       onCreated={({ gl, camera }) => {
         gl.setClearColor(0x000000, 0);
-        camera.position.set(0, 3.2, 10);
-        camera.lookAt(0, 1.15, 0);
+        camera.position.set(0, 3.2, 12.5);
+        camera.lookAt(0, 1.8, 0);
       }}
     >
-      <PerspectiveCamera makeDefault position={[0, 3.2, 10]} fov={40} />
+      <PerspectiveCamera makeDefault position={[0, 3.2, 12.5]} fov={40} />
 
-      <ambientLight intensity={isDark ? 0.78 : 1.1} />
+      <ambientLight intensity={isDark ? 0.45 : 1.1} />
       <hemisphereLight
         intensity={isDark ? 0.92 : 1.2}
         color={isDark ? '#D7E3F0' : '#FFF4EA'}
@@ -68,24 +68,24 @@ export default function SplashScene({
       />
       <pointLight
         position={[3.6, 1.8, 5]}
-        intensity={isDark ? 5.5 : 8}
+        intensity={isDark ? 11 : 8}
         color="#40C4C4"
         distance={isDark ? 8.5 : 10}
       />
       <pointLight
         position={[-4.2, 1.1, 3.8]}
-        intensity={isDark ? 4.8 : 7}
+        intensity={isDark ? 9.5 : 7}
         color="#E84A8A"
         distance={isDark ? 8.5 : 10}
       />
       <pointLight
         position={[0.2, 2.8, 5.8]}
-        intensity={isDark ? 3.8 : 6}
+        intensity={isDark ? 8 : 6}
         color="#FF6B2B"
         distance={isDark ? 10 : 12}
       />
 
-      <group position={[0, 1.28, 0]}>
+      <group position={[0, 1.9, 0]}>
         <SplashCenterLogo reducedMotion={reducedMotion} theme={theme} />
 
         <group rotation={[ORBIT_TILT, 0, 0]} position={[0, 0.08, 0]}>
@@ -117,7 +117,7 @@ export default function SplashScene({
       </group>
 
       <ContactShadows
-        position={[0, -0.24, 0]}
+        position={[0, -0.12, 0]}
         opacity={isDark ? 0.3 : 0.18}
         scale={8.5}
         blur={2.6}

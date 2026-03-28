@@ -1,13 +1,14 @@
+import type { CSSProperties } from 'react';
+
 import { AnimatePresence, motion } from 'motion/react';
 
-import type { SplashSection } from '../data/splashSections';
+import { ACCENT_HEX, type SplashSection } from '../data/splashSections';
 
 type SplashCardAlign = 'left' | 'right' | 'bottom';
 
 interface SplashBentoCardProps {
   section: SplashSection;
   align: SplashCardAlign;
-  compact: boolean;
 }
 
 const containerVariants = {
@@ -34,15 +35,17 @@ const itemVariants = {
 export default function SplashBentoCard({
   section,
   align,
-  compact,
 }: SplashBentoCardProps) {
+  const style = {
+    '--accent': ACCENT_HEX[section.accent],
+  } as CSSProperties;
+
   return (
     <AnimatePresence mode="wait">
       <motion.aside
         key={section.id}
-        className={`glass-dark splash-card splash-card--${align} splash-card--${section.accent}${
-          compact ? ' splash-card--compact' : ''
-        }`}
+        className={`splash-card splash-card--${align}`}
+        style={style}
         initial="initial"
         animate="animate"
         exit="exit"

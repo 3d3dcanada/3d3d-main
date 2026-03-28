@@ -2,6 +2,7 @@
 @import "tailwindcss";
 @import "./scroll-reveal.css";
 @import "./glass.css";
+@import "./splash.css";
 @import "./device.css";
 
 /* ─────────────────────────────────────────────────────────────────
@@ -34,6 +35,12 @@
   --color-magenta-light: #F07AA8;
   --color-magenta-dark: #B92B66;
   --color-magenta-surface: #FCE7F1;
+
+  /* ── Tertiary Accent — Neon Orange ──────────────────────────── */
+  --color-orange-primary: #FF6B2B;
+  --color-orange-light: #FF8A57;
+  --color-orange-dark: #D95520;
+  --color-orange-surface: #FFE7DC;
 
   /* ── Text Colors ─────────────────────────────────────────────── */
   --color-text-primary: #1A1A1A;

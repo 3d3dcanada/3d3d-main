@@ -1,8 +1,7 @@
 export type SplashAccent = 'teal' | 'magenta' | 'orange';
-export type SplashObjectKind = 'market' | 'services' | 'network' | 'learn' | 'about';
 
 export interface SplashSection {
-  id: string;
+  id: 'market' | 'services' | 'network' | 'learn' | 'about';
   kicker: string;
   title: string;
   description: string;
@@ -10,10 +9,18 @@ export interface SplashSection {
   ctaLabel: string;
   href: string;
   accent: SplashAccent;
-  objectKind: SplashObjectKind;
   ariaLabel: string;
-  modelPath?: string;
+  modelPath: string;
+  modelScale: number;
+  modelRotation: [number, number, number];
+  modelOffset: [number, number, number];
 }
+
+export const ACCENT_HEX: Record<SplashAccent, string> = {
+  orange: '#FF6B2B',
+  teal: '#40C4C4',
+  magenta: '#E84A8A',
+};
 
 export const SPLASH_SECTIONS: SplashSection[] = [
   {
@@ -21,66 +28,79 @@ export const SPLASH_SECTIONS: SplashSection[] = [
     kicker: 'Shop / Store',
     title: 'The Market',
     description:
-      'Ready-made prints, STL files, community-made goods, and digital products that move from shelf to shipment without friction.',
-    tags: ['Ready-made prints', 'STL files', 'Community crafts', 'Digital goods'],
+      'Ready-made prints, STL files, and cooperative-made goods you can browse, order, and ship without hunting through clutter.',
+    tags: ['Ready-made prints', 'STL files', 'Community goods'],
     ctaLabel: 'Browse the Market',
     href: '/shop',
     accent: 'orange',
-    objectKind: 'market',
-    ariaLabel: 'Market. Browse ready-made prints, STL files, community crafts, and digital goods.',
+    ariaLabel: 'The Market. Browse ready-made prints, STL files, and community-made products.',
+    modelPath: '/models/market.glb',
+    modelScale: 1.08,
+    modelRotation: [0.2, -0.52, 0.08],
+    modelOffset: [0, -0.2, 0.04],
   },
   {
     id: 'services',
     kicker: 'Printing / Consulting',
     title: 'Services',
     description:
-      'Bring the hard problem: custom printing, fabrication, scanning, consulting, and field-ready deployment for one-offs or serious production.',
-    tags: ['Custom printing', 'Fabrication', 'Consulting', 'On-site deployment'],
+      'Custom fabrication, scanning, prototyping, and field-ready problem solving when the job needs a real operator instead of a generic intake form.',
+    tags: ['Custom fabrication', 'Scanning', 'Consulting'],
     ctaLabel: 'Get a Quote',
     href: '/quote',
     accent: 'teal',
-    objectKind: 'services',
-    ariaLabel: 'Services. Get a quote for custom printing, fabrication, consulting, or on-site deployment.',
+    ariaLabel: 'Services. Get a quote for custom fabrication, scanning, consulting, or deployment work.',
+    modelPath: '/models/services.glb',
+    modelScale: 1.34,
+    modelRotation: [0.45, 0.82, -0.18],
+    modelOffset: [0, -0.06, 0],
   },
   {
     id: 'network',
     kicker: 'Collective / Cooperative',
     title: 'The Network',
     description:
-      'A cooperative mesh of makers, designers, builders, and specialists working as an open-source alternative to closed marketplaces.',
-    tags: ['Makers', 'Designers', 'Cooperative', 'Dedicated marketing'],
+      'A cooperative mesh of builders, makers, and specialists working together as an open alternative to closed marketplaces.',
+    tags: ['Makers', 'Cooperative', 'Open network'],
     ctaLabel: 'Join the Network',
     href: '/opportunities',
     accent: 'magenta',
-    objectKind: 'network',
-    ariaLabel: 'Network. Join the 3D3D collective of makers, designers, and cooperative builders.',
+    ariaLabel: 'The Network. Join the 3D3D cooperative of makers, builders, and specialists.',
+    modelPath: '/models/network.glb',
+    modelScale: 1.28,
+    modelRotation: [0.16, 0.35, 0],
+    modelOffset: [0, -0.06, 0],
   },
   {
     id: 'learn',
     kicker: 'Blog / Knowledge',
     title: 'Learn',
     description:
-      'Material guides, tutorials, case studies, and practical field knowledge for people who want sharper instincts, not fluff.',
-    tags: ['Tutorials', 'Material guides', 'Community knowledge', '3D printing tips'],
+      'Material guides, practical tutorials, and field notes for people who want sharper instincts and less fluff.',
+    tags: ['Tutorials', 'Material guides', 'Field notes'],
     ctaLabel: 'Start Learning',
     href: '/blog',
     accent: 'teal',
-    objectKind: 'learn',
-    ariaLabel: 'Learn. Read tutorials, material guides, and practical community knowledge.',
+    ariaLabel: 'Learn. Read tutorials, material guides, and practical field knowledge.',
+    modelPath: '/models/learn.glb',
+    modelScale: 1.18,
+    modelRotation: [0.16, -0.42, 0.1],
+    modelOffset: [0, -0.14, 0.02],
   },
   {
     id: 'about',
     kicker: 'Mission / Story',
     title: 'About 3D3D',
     description:
-      'Founder-operated, cooperative, and open-source at heart. The mission, the philosophy, and the reason this platform exists.',
-    tags: ['Founder-operated', 'Cooperative', 'Open source', 'Worldwide'],
+      'The founder story, the cooperative philosophy, and the reason this platform exists in the first place.',
+    tags: ['Founder-operated', 'Cooperative', 'Open source'],
     ctaLabel: 'Our Story',
     href: '/about',
     accent: 'magenta',
-    objectKind: 'about',
     ariaLabel: 'About 3D3D. Learn the founder story, cooperative mission, and platform philosophy.',
+    modelPath: '/models/about.glb',
+    modelScale: 1.22,
+    modelRotation: [0.06, 0.48, 0],
+    modelOffset: [0, -0.1, 0],
   },
 ];
-
-export const PRIMARY_ORBIT_SECTION_IDS = ['market', 'services', 'network'] as const;

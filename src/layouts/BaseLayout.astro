@@ -22,6 +22,10 @@ interface Props {
   accent?: string;
   showFooter?: boolean;
   showCooperativeInfo?: boolean;
+  noFooter?: boolean;
+  noSidebar?: boolean;
+  noMobileCTA?: boolean;
+  noFeedbackBlip?: boolean;
   bodyClass?: string;
   navGroups?: NavGroup[];
   activePath?: string;
@@ -38,6 +42,10 @@ const {
   accent = '#40C4C4',
   showFooter = true,
   showCooperativeInfo = true,
+  noFooter = false,
+  noSidebar = false,
+  noMobileCTA = false,
+  noFeedbackBlip = false,
   bodyClass = '',
   navGroups = [],
   activePath = '',
@@ -85,27 +93,28 @@ const finalNavGroups = navGroups.length > 0 ? navGroups : defaultNavGroups;
 </head>
 <body class:list={[bodyClass, 'light-theme']}>
   <a href="#main-content" class="skip-to-content">Skip to content</a>
-  <SiteSidebar navGroups={finalNavGroups} activePath={activePath} />
+  {!noSidebar && <SiteSidebar navGroups={finalNavGroups} activePath={activePath} />}
   <div class="content-wrapper">
     <main id="main-content" class="site-main min-h-screen">
       <slot />
     </main>
 
-    {showFooter && (
+    {!noFooter && showFooter && (
       <Footer accent={accent} showCooperativeInfo={showCooperativeInfo} />
     )}
   </div>
 
-  <MobileCTA />
+  {!noMobileCTA && <MobileCTA />}
 
-  <!-- AI bot feedback prompt -->
-  <a
-    href="/contact?subject=ai-bot-feedback"
-    class="ai-feedback-blip"
-    aria-label="Give feedback on AI assistant"
-  >
-    Should we add an AI assistant? <span class="ai-feedback-blip__cta">Give us feedback</span>
-  </a>
+  {!noFeedbackBlip && (
+    <a
+      href="/contact?subject=ai-bot-feedback"
+      class="ai-feedback-blip"
+      aria-label="Give feedback on AI assistant"
+    >
+      Should we add an AI assistant? <span class="ai-feedback-blip__cta">Give us feedback</span>
+    </a>
+  )}
 
   <style>
     .ai-feedback-blip {

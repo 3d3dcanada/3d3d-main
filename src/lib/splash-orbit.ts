@@ -9,36 +9,33 @@ export interface SplashOrbitItem {
   z: number;
   scale: number;
   opacity: number;
+  rotationY: number;
   scatter: [number, number, number];
 }
 
-const SCATTER_MAP: Record<string, [number, number, number]> = {
-  market: [-4.8, 2.5, -4.4],
-  services: [4.7, 2.8, -4.8],
-  network: [-5.1, -1.9, -4.1],
-  learn: [5.2, -2.2, -4.5],
-  about: [0.2, 3.6, -6.2],
+export const ORBIT_TILT = Math.PI / 18;
+
+const ORBIT_RADIUS = 3.95;
+const ORBIT_DEPTH = 3.45;
+
+const SCATTER_MAP: Record<SplashSection['id'], [number, number, number]> = {
+  market: [-5.6, 2.8, -4.8],
+  services: [5.1, 2.1, -4.4],
+  network: [-5.4, -2.4, -4.6],
+  learn: [5.8, -2.1, -4.9],
+  about: [0.1, 3.4, -6.3],
 };
 
-export function getOrbitItems(
-  sections: SplashSection[],
-  angle: number,
-  compact: boolean,
-): SplashOrbitItem[] {
+export function getOrbitItems(sections: SplashSection[], angle: number): SplashOrbitItem[] {
   const total = sections.length;
   const step = (Math.PI * 2) / total;
-  const radius = compact ? 2.45 : 3.8;
-  const depthRadius = compact ? 1.45 : 2.5;
-  const yAmplitude = compact ? 0.2 : 0.32;
 
   return sections.map((section, index) => {
     const theta = index * step + angle;
-    const x = Math.sin(theta) * radius;
-    const z = Math.cos(theta) * depthRadius;
-    const y = Math.sin(theta * 0.55) * yAmplitude;
-    const normalizedDepth = (z + depthRadius) / (depthRadius * 2);
-    const scale = compact ? 0.78 + normalizedDepth * 0.28 : 0.72 + normalizedDepth * 0.4;
-    const opacity = 0.25 + normalizedDepth * 0.75;
+    const x = Math.sin(theta) * ORBIT_RADIUS;
+    const z = Math.cos(theta) * ORBIT_DEPTH;
+    const y = Math.sin(theta * 0.5) * 0.18;
+    const normalizedDepth = (z + ORBIT_DEPTH) / (ORBIT_DEPTH * 2);
 
     return {
       section,
@@ -47,19 +44,20 @@ export function getOrbitItems(
       x,
       y,
       z,
-      scale,
-      opacity,
-      scatter: SCATTER_MAP[section.id] ?? [0, 3.4, -5.6],
+      scale: 0.66 + normalizedDepth * 0.34,
+      opacity: 0.32 + normalizedDepth * 0.68,
+      rotationY: -theta * 0.28,
+      scatter: SCATTER_MAP[section.id],
     };
   });
 }
 
 export function getNearestIndex(sections: SplashSection[], angle: number): number {
-  if (sections.length === 0) return 0;
+  if (!sections.length) return 0;
 
-  const items = getOrbitItems(sections, angle, false);
-  let highestDepth = Number.NEGATIVE_INFINITY;
+  const items = getOrbitItems(sections, angle);
   let nearest = 0;
+  let highestDepth = Number.NEGATIVE_INFINITY;
 
   for (const item of items) {
     if (item.z > highestDepth) {

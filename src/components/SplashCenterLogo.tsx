@@ -292,21 +292,61 @@ interface SplashCenterLogoProps {
   hoveredSection: SplashSection | null;
 }
 
+type SplashCenterMode = 'logo' | 'printer';
+type SplashCenterPhase = 'steady' | 'transition';
+
+function applyGroupVisibility(group: Group | null, opacity: number, scale: number) {
+  if (!group) return;
+
+  group.visible = opacity > 0.001;
+  group.scale.setScalar(scale);
+
+  group.traverse((child) => {
+    if (!(child instanceof Mesh)) return;
+
+    const materials = Array.isArray(child.material) ? child.material : [child.material];
+    materials.forEach((material) => {
+      if (!(material instanceof MeshStandardMaterial)) return;
+      material.opacity = opacity;
+      material.transparent = opacity < 0.999;
+      material.depthWrite = opacity > 0.2;
+    });
+  });
+}
+
 export default function SplashCenterLogo({
   reducedMotion,
   theme,
   hoveredSection,
 }: SplashCenterLogoProps) {
   const rootRef = useRef<Group>(null);
+  const logoGroupRef = useRef<Group>(null);
+  const printerGroupRef = useRef<Group>(null);
+  const transitionStartRef = useRef<number | null>(null);
   const isDark = theme === 'dark';
-  const [showLogo, setShowLogo] = useState(true);
+  const [mode, setMode] = useState<SplashCenterMode>('logo');
+  const [phase, setPhase] = useState<SplashCenterPhase>('steady');
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setShowLogo((s) => !s);
-    }, 6500);
-    return () => clearInterval(interval);
-  }, []);
+    if (reducedMotion) {
+      setMode('logo');
+      setPhase('steady');
+      return;
+    }
+
+    const timeout = window.setTimeout(() => {
+      if (phase === 'steady') {
+        transitionStartRef.current = performance.now();
+        setPhase('transition');
+      } else {
+        setMode((current) => (current === 'logo' ? 'printer' : 'logo'));
+        setPhase('steady');
+        transitionStartRef.current = null;
+      }
+    }, phase === 'steady' ? 6500 : 850);
+
+    return () => window.clearTimeout(timeout);
+  }, [mode, phase, reducedMotion]);
 
   useFrame(({ clock }, _delta) => {
     if (!reducedMotion && rootRef.current) {
@@ -335,6 +375,42 @@ export default function SplashCenterLogo({
         }
       });
     }
+
+    if (reducedMotion) {
+      applyGroupVisibility(logoGroupRef.current, 1, 1);
+      applyGroupVisibility(printerGroupRef.current, 0, 1.08);
+      return;
+    }
+
+    if (phase === 'steady') {
+      applyGroupVisibility(logoGroupRef.current, mode === 'logo' ? 1 : 0, mode === 'logo' ? 1 : 1.08);
+      applyGroupVisibility(
+        printerGroupRef.current,
+        mode === 'printer' ? 1 : 0,
+        mode === 'printer' ? 1 : 1.08,
+      );
+      return;
+    }
+
+    const fromMode = mode;
+    const startedAt = transitionStartRef.current ?? performance.now();
+    const progress = Math.min(1, (performance.now() - startedAt) / 820);
+
+    const outgoingOpacity = 1 - progress;
+    const incomingOpacity = progress;
+    const outgoingScale = 1 - progress * 0.1;
+    const incomingScale = 1.1 - progress * 0.1;
+
+    applyGroupVisibility(
+      logoGroupRef.current,
+      fromMode === 'logo' ? outgoingOpacity : incomingOpacity,
+      fromMode === 'logo' ? outgoingScale : incomingScale,
+    );
+    applyGroupVisibility(
+      printerGroupRef.current,
+      fromMode === 'printer' ? outgoingOpacity : incomingOpacity,
+      fromMode === 'printer' ? outgoingScale : incomingScale,
+    );
   });
 
   return (
@@ -344,7 +420,7 @@ export default function SplashCenterLogo({
       floatIntensity={reducedMotion ? 0 : 0.2}
     >
       <group ref={rootRef} scale={1.22}>
-        {showLogo ? (
+        <group ref={logoGroupRef}>
           <Center position={[0, -0.05, 0.34]}>
             <group>
               <Text3D
@@ -392,9 +468,11 @@ export default function SplashCenterLogo({
               </Text3D>
             </group>
           </Center>
-        ) : (
+        </group>
+
+        <group ref={printerGroupRef}>
           <PrusaPrinter isDark={isDark} hoveredSection={hoveredSection} />
-        )}
+        </group>
       </group>
     </Float>
   );

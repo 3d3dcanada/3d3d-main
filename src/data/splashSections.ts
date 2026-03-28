@@ -2,8 +2,10 @@ export type SplashAccent = 'teal' | 'magenta' | 'orange';
 
 export interface SplashSection {
   id: 'market' | 'services' | 'network' | 'learn' | 'about';
+  icon?: string;
   kicker: string;
   title: string;
+  tagline?: string;
   description: string;
   tags: string[];
   ctaLabel: string;
@@ -25,10 +27,12 @@ export const ACCENT_HEX: Record<SplashAccent, string> = {
 export const SPLASH_SECTIONS: SplashSection[] = [
   {
     id: 'market',
+    icon: '◎',
     kicker: 'Shop / Store',
     title: 'The Market',
+    tagline: 'Useful prints, files, and gear without the junk-drawer sprawl.',
     description:
-      'Ready-made prints, STL files, and cooperative-made goods you can browse, order, and ship without hunting through clutter.',
+      'Browse ready-made prints, STL files, and cooperative-made goods that are already worth your time. It is a tighter, cleaner storefront for people who want practical parts, giftable objects, and digital products without marketplace sludge.',
     tags: ['Ready-made prints', 'STL files', 'Community goods'],
     ctaLabel: 'Browse the Market',
     href: '/shop',
@@ -41,10 +45,12 @@ export const SPLASH_SECTIONS: SplashSection[] = [
   },
   {
     id: 'services',
+    icon: '◧',
     kicker: 'Printing / Consulting',
     title: 'Services',
+    tagline: 'From prototype panic to field deployment, with a real operator attached.',
     description:
-      'Custom fabrication, scanning, prototyping, and field-ready problem solving when the job needs a real operator instead of a generic intake form.',
+      'Bring in custom fabrication, scanning, prototyping, and problem solving when the job cannot be reduced to a generic quote form. We help shape the brief, pressure-test the design, and get physical output moving fast when the stakes are real.',
     tags: ['Custom fabrication', 'Scanning', 'Consulting'],
     ctaLabel: 'Get a Quote',
     href: '/quote',
@@ -57,10 +63,12 @@ export const SPLASH_SECTIONS: SplashSection[] = [
   },
   {
     id: 'network',
+    icon: '◌',
     kicker: 'Collective / Cooperative',
     title: 'The Network',
+    tagline: 'A working mesh of people, tools, and capacity you can actually tap into.',
     description:
-      'A cooperative mesh of builders, makers, and specialists working together as an open alternative to closed marketplaces.',
+      '3D3D is a cooperative mesh of builders, makers, and specialists sharing reach instead of guarding turf. It is designed as an open alternative to closed marketplaces, with room for collaboration, referrals, and regional production capacity.',
     tags: ['Makers', 'Cooperative', 'Open network'],
     ctaLabel: 'Join the Network',
     href: '/opportunities',
@@ -73,10 +81,12 @@ export const SPLASH_SECTIONS: SplashSection[] = [
   },
   {
     id: 'learn',
+    icon: '◇',
     kicker: 'Blog / Knowledge',
     title: 'Learn',
+    tagline: 'Sharper instincts for materials, machines, and making decisions under pressure.',
     description:
-      'Material guides, practical tutorials, and field notes for people who want sharper instincts and less fluff.',
+      'Read material guides, practical tutorials, and field notes built for people who prefer signal over filler. The goal is to make you faster at choosing processes, avoiding waste, and understanding what actually works in the shop.',
     tags: ['Tutorials', 'Material guides', 'Field notes'],
     ctaLabel: 'Start Learning',
     href: '/blog',
@@ -89,10 +99,12 @@ export const SPLASH_SECTIONS: SplashSection[] = [
   },
   {
     id: 'about',
+    icon: '✦',
     kicker: 'Mission / Story',
     title: 'About 3D3D',
+    tagline: 'Why this cooperative exists, and what it is trying to prove in public.',
     description:
-      'The founder story, the cooperative philosophy, and the reason this platform exists in the first place.',
+      'Get the founder story, the cooperative philosophy, and the logic behind building this platform in the open. It is the clearest view into the values, tradeoffs, and long-game that shape every part of 3D3D.',
     tags: ['Founder-operated', 'Cooperative', 'Open source'],
     ctaLabel: 'Our Story',
     href: '/about',

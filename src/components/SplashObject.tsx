@@ -13,7 +13,7 @@ import {
   Vector2,
   Vector3,
 } from 'three';
-import type { Group, Object3D, Texture } from 'three';
+import type { Group, Material, Object3D, Texture } from 'three';
 
 import { ACCENT_HEX, SPLASH_SECTIONS, type SplashSection } from '../data/splashSections';
 import type { SplashTheme } from '../lib/splash-theme';
@@ -73,6 +73,7 @@ interface SplashObjectProps {
   section: SplashSection;
   active: boolean;
   focused: boolean;
+  depthRatio: number;
   opacity: number;
   theme: SplashTheme;
   onHoverChange: (hovered: boolean) => void;
@@ -84,41 +85,115 @@ function darkenHex(hex: string, amount: number) {
   return `#${color.getHexString()}`;
 }
 
-// Per-mesh metalness/roughness variation patterns (cycles through 4 profiles)
 const MATERIAL_PROFILES = [
-  { metalness: 0.72, roughness: 0.18, envMapIntensity: 1.4 }, // shiny metal
-  { metalness: 0.45, roughness: 0.35, envMapIntensity: 0.9 }, // satin
-  { metalness: 0.62, roughness: 0.24, envMapIntensity: 1.1 }, // semi-shiny
-  { metalness: 0.3,  roughness: 0.48, envMapIntensity: 0.6 }, // matte
+  { metalness: 0.78, roughness: 0.18, envMapIntensity: 1.35 },
+  { metalness: 0.48, roughness: 0.32, envMapIntensity: 0.92 },
+  { metalness: 0.22, roughness: 0.68, envMapIntensity: 0.48 },
+  { metalness: 0.08, roughness: 0.84, envMapIntensity: 0.3 },
 ];
 
-function buildModel(scene: Object3D, accentHex: string, theme: SplashTheme) {
+const SECTION_PALETTES: Record<SplashSection['id'], string[]> = {
+  market: ['#FF6B2B', '#F6F2EC', '#40C4C4', '#A4AAB3'],
+  services: ['#40C4C4', '#F5F1EA', '#FF6B2B', '#77828E'],
+  network: ['#E84A8A', '#40C4C4', '#F7F4EF', '#9CA6B2'],
+  learn: ['#40C4C4', '#F4E0B7', '#F8F5EE', '#71808F'],
+  about: ['#E84A8A', '#FF6B2B', '#F5E6D8', '#6F7782'],
+};
+
+function getColorfulness(color: Color) {
+  const hsl = { h: 0, s: 0, l: 0 };
+  color.getHSL(hsl);
+  return hsl.s;
+}
+
+function getMaterialArray(material: Material | Material[] | null | undefined) {
+  if (!material) return [];
+  return Array.isArray(material) ? material : [material];
+}
+
+function isMetallicMesh(meshName: string, materialName: string, material: MeshStandardMaterial) {
+  const needle = `${meshName} ${materialName}`.toLowerCase();
+  return (
+    material.metalness > 0.45 ||
+    /metal|chrome|steel|gear|bolt|chain|spoke|wheel|hinge|frame|rail|bearing/.test(needle)
+  );
+}
+
+function cloneMaterial(
+  material: Material | undefined,
+  fallbackHex: string,
+  theme: SplashTheme,
+  meshName: string,
+  materialName: string,
+  paletteIndex: number,
+) {
+  const profile = MATERIAL_PROFILES[paletteIndex % MATERIAL_PROFILES.length];
+  const targetColor = new Color(fallbackHex);
+  const baseMaterial = material instanceof MeshStandardMaterial ? material.clone() : new MeshStandardMaterial();
+  const sourceColor = baseMaterial.color?.clone() ?? targetColor.clone();
+  const sourceHasColor = getColorfulness(sourceColor) > 0.08;
+  const needsStrongOverride = !material || !baseMaterial.color || getColorfulness(sourceColor) < 0.04;
+  const nextColor = sourceColor.clone();
+
+  nextColor.lerp(targetColor, needsStrongOverride ? 0.78 : sourceHasColor ? 0.18 : 0.48);
+
+  const metallic = isMetallicMesh(meshName, materialName, baseMaterial);
+  const metalness = metallic
+    ? Math.max(baseMaterial.metalness ?? 0, profile.metalness)
+    : Math.min(baseMaterial.metalness ?? profile.metalness, 0.26);
+  const roughness = metallic
+    ? Math.min(baseMaterial.roughness ?? profile.roughness, profile.roughness + 0.06)
+    : Math.max(baseMaterial.roughness ?? profile.roughness, 0.52);
+
+  baseMaterial.color = nextColor;
+  baseMaterial.metalness = theme === 'dark' ? metalness : metalness * 0.88;
+  baseMaterial.roughness = theme === 'dark' ? roughness : Math.min(0.92, roughness + 0.06);
+  baseMaterial.envMapIntensity = profile.envMapIntensity + (metallic ? 0.25 : 0);
+  baseMaterial.emissive = targetColor.clone().multiplyScalar(theme === 'dark' ? 0.18 : 0.1);
+  baseMaterial.emissiveIntensity = theme === 'dark' ? (metallic ? 0.42 : 0.24) : metallic ? 0.18 : 0.12;
+
+  if (metallic) {
+    baseMaterial.normalMap = getBrushedMetalNormal();
+    baseMaterial.normalScale = new Vector2(0.32, 0.32);
+  } else {
+    baseMaterial.normalMap = null;
+  }
+
+  baseMaterial.userData.baseEnvMap = baseMaterial.envMapIntensity;
+  return baseMaterial;
+}
+
+function buildModel(scene: Object3D, section: SplashSection, accentHex: string, theme: SplashTheme) {
   const clone = scene.clone(true);
-  const isDark = theme === 'dark';
-  const shadowHex = darkenHex(accentHex, 0.3);
+  const palette = SECTION_PALETTES[section.id] ?? [accentHex, darkenHex(accentHex, 0.18), '#F5F3EE'];
   let meshIndex = 0;
 
   clone.traverse((child) => {
     if (!(child instanceof Mesh)) return;
-    const colorHex = meshIndex % 2 === 0 ? accentHex : shadowHex;
-    const profile = MATERIAL_PROFILES[meshIndex % MATERIAL_PROFILES.length];
-    meshIndex += 1;
+    const meshName = child.name || section.id;
+    const materialPalette = getMaterialArray(child.material);
 
     child.castShadow = true;
     child.receiveShadow = true;
-    const normalMap = getBrushedMetalNormal();
-    const mat = new MeshStandardMaterial({
-      color: colorHex,
-      metalness: isDark ? profile.metalness : profile.metalness * 0.85,
-      roughness: isDark ? profile.roughness : profile.roughness * 1.15,
-      envMapIntensity: profile.envMapIntensity,
-      emissive: accentHex,
-      emissiveIntensity: isDark ? 0.35 : 0.25,
-      normalMap,
-      normalScale: new Vector2(0.35, 0.35),
+
+    if (!materialPalette.length) {
+      child.material = cloneMaterial(undefined, palette[meshIndex % palette.length], theme, meshName, '', meshIndex);
+      meshIndex += 1;
+      return;
+    }
+
+    child.material = materialPalette.map((material, materialIndex) => {
+      const colorHex = palette[(meshIndex + materialIndex) % palette.length];
+      return cloneMaterial(
+        material,
+        colorHex,
+        theme,
+        meshName,
+        material?.name ?? '',
+        meshIndex + materialIndex,
+      );
     });
-    mat.userData.baseEnvMap = profile.envMapIntensity;
-    child.material = mat;
+    meshIndex += 1;
   });
 
   clone.updateMatrixWorld(true);
@@ -135,6 +210,7 @@ export default function SplashObject({
   section,
   active,
   focused,
+  depthRatio,
   opacity,
   theme,
   onHoverChange,
@@ -143,8 +219,8 @@ export default function SplashObject({
   const accentHex = ACCENT_HEX[section.accent];
   const { scene } = useGLTF(section.modelPath);
   const preparedModel = useMemo(
-    () => buildModel(scene, accentHex, theme),
-    [scene, accentHex, theme],
+    () => buildModel(scene, section, accentHex, theme),
+    [scene, section, accentHex, theme],
   );
   const isDark = theme === 'dark';
 
@@ -152,9 +228,10 @@ export default function SplashObject({
     if (!groupRef.current) return;
 
     const [rx, ry, rz] = section.modelRotation;
-    const sway = Math.sin(clock.elapsedTime * 0.75) * (focused ? 0.22 : 0.04);
-    const spin = focused ? clock.elapsedTime * 1.5 : 0;
-    groupRef.current.rotation.set(rx, ry + sway + spin, rz);
+    const sway = Math.sin(clock.elapsedTime * 0.72) * (0.015 + depthRatio * 0.055);
+    const roll = Math.sin(clock.elapsedTime * 0.58 + depthRatio) * (0.01 + depthRatio * 0.03);
+    const focusRock = focused ? Math.sin(clock.elapsedTime * 0.8) * Math.PI * 0.3 : 0;
+    groupRef.current.rotation.set(rx + sway, ry + sway + focusRock, rz + roll);
 
     const emissiveIntensity = focused
       ? (isDark ? 0.95 : 0.75) + ((Math.sin(clock.elapsedTime * Math.PI) + 1) * 0.5) * 0.3
@@ -170,15 +247,20 @@ export default function SplashObject({
 
     groupRef.current.traverse((child) => {
       if (!(child instanceof Mesh)) return;
-      if (!(child.material instanceof MeshStandardMaterial)) return;
+      const materials = getMaterialArray(child.material);
 
-      child.material.emissiveIntensity = emissiveIntensity;
-      child.material.envMapIntensity = (child.material.userData.baseEnvMap ?? 1.0) * envMapBoost;
-      child.material.opacity = opacity;
-      child.material.transparent = opacity < 0.999;
-      child.material.needsUpdate = true;
+      materials.forEach((material) => {
+        if (!(material instanceof MeshStandardMaterial)) return;
+
+        material.emissiveIntensity = emissiveIntensity;
+        material.envMapIntensity = (material.userData.baseEnvMap ?? 1.0) * envMapBoost;
+        material.opacity = opacity;
+        material.transparent = opacity < 0.999;
+      });
     });
   });
+
+  const floatBoost = focused ? 1.12 : 1;
 
   const handlePointerOver = (event: ThreeEvent<PointerEvent>) => {
     event.stopPropagation();
@@ -197,9 +279,9 @@ export default function SplashObject({
       onPointerOut={handlePointerOut}
     >
       <Float
-        speed={focused ? 1.8 : 1.2}
-        rotationIntensity={focused ? 0.16 : 0.08}
-        floatIntensity={focused ? 0.24 : 0.12}
+        speed={(0.4 + depthRatio * 1.1) * floatBoost}
+        rotationIntensity={(0.02 + depthRatio * 0.08) * floatBoost}
+        floatIntensity={(0.025 + depthRatio * 0.18) * floatBoost}
       >
         <group
           ref={groupRef}

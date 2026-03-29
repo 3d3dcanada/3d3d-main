@@ -1,11 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 ---
 
 <BaseLayout title="Accessibility | 3D3D" description="3D3D Atlantic Cooperative accessibility statement. Our commitment to WCAG 2.1 and the Accessible Canada Act." activePath="/accessibility">
 
   <div class="pt-8 pb-12">
     <section class="max-w-3xl mx-auto">
+      <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Legal'}, {label: 'Accessibility'}]} />
       <p class="font-display text-xs font-semibold uppercase tracking-wider" style="color: var(--color-text-muted);">Legal</p>
       <h1 class="font-display text-3xl font-bold mt-2 mb-2" style="color: var(--color-text-primary);">Accessibility Statement</h1>
       <p class="font-display text-xs mb-8" style="color: var(--color-text-muted);">Last updated: March 2026</p>

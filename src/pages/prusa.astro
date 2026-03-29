@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageNextActions from '../components/PageNextActions.astro';
 
 /**
  * Prusa pricing as of March 2026.
@@ -91,6 +93,7 @@ const printers = [
   <!-- Hero — clean, short -->
   <section class="prusa-hero">
     <div class="prusa-shell">
+      <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Prusa'}]} />
       <div class="prusa-hero__content">
         <p class="prusa-eyebrow">Prusa Printers</p>
         <h1 class="prusa-title">
@@ -200,6 +203,13 @@ const printers = [
       </div>
     </div>
   </section>
+
+  <div class="prusa-shell" style="padding-bottom: clamp(3rem, 5vw, 4rem);">
+    <PageNextActions actions={[
+      {label: 'Materials Guide', href: '/materials', description: 'See all materials compatible with the Prusa ecosystem.', accent: 'teal'},
+      {label: 'Get a Quote', href: '/quote', description: 'Order a custom print on Prusa hardware.', accent: 'orange'},
+    ]} />
+  </div>
 </BaseLayout>
 
 <style>

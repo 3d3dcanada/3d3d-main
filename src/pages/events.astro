@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageNextActions from '../components/PageNextActions.astro';
 
 const schema = {
   '@context': 'https://schema.org',
@@ -73,6 +75,7 @@ const credentials = [
         <img src="/media/real/afternoon-racing-02.jpg" alt="" loading="eager" decoding="async" />
       </div>
       <div class="events-shell">
+        <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Events'}]} />
         <p class="events-eyebrow scroll-in-left">The Logbook</p>
         <h1 class="events-title scroll-in">Races, Deployments<br />&amp; Live Projects</h1>
         <p class="events-intro scroll-in">
@@ -182,6 +185,15 @@ const credentials = [
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- ═══ NEXT ACTIONS ═══ -->
+    <div class="events-shell" style="padding-bottom: clamp(3rem, 5vw, 4rem);">
+      <PageNextActions actions={[
+        {label: 'Get a Quote', href: '/quote', description: 'Custom prints for your event or project.', accent: 'teal'},
+        {label: 'Join the Network', href: '/opportunities', description: 'Collaborate with 3D3D on future events.', accent: 'magenta'},
+        {label: 'Media Gallery', href: '/media', description: 'See past event coverage and build footage.', accent: 'orange'},
+      ]} />
     </div>
 
   </section>

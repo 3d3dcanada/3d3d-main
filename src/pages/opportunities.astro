@@ -1,11 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageNextActions from '../components/PageNextActions.astro';
 ---
 
 <BaseLayout title="Opportunities | 3D3D" description="Work with 3D3D. Real positions, real pay. See what's open." activePath="/opportunities">
 
   <section class="opp-page">
     <div class="opp-shell">
+      <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'The Network', href: '/opportunities'}, {label: 'Opportunities'}]} />
       <p class="opp-eyebrow">Opportunities</p>
       <h1 class="opp-title">Work with 3D3D</h1>
       <p class="opp-intro">
@@ -26,6 +29,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
         <a href="/contact" class="opp-cta">Apply →</a>
       </div>
+
+      <PageNextActions actions={[
+        {label: 'About 3D3D', href: '/about', description: 'Learn the cooperative philosophy behind the network.', accent: 'teal'},
+        {label: 'Contact', href: '/contact', description: 'Get in touch to discuss opportunities.', accent: 'magenta'},
+      ]} />
     </div>
   </section>
 </BaseLayout>
@@ -92,7 +100,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     padding: clamp(1.5rem, 3vw, 2.5rem);
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(64, 196, 196, 0.18);
-    border-radius: 1rem;
+    border-radius: 2px;
   }
 
   .opp-listing__header {

@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BookingEmbed from '../components/BookingEmbed';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageNextActions from '../components/PageNextActions.astro';
 
 const schema = {
   '@context': 'https://schema.org',
@@ -25,6 +27,7 @@ const schema = {
     <!-- ═══ HERO ═══ -->
     <div class="book-hero">
       <div class="book-shell">
+        <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Services', href: '/contact'}, {label: 'Book a Call'}]} />
         <p class="book-eyebrow scroll-in-left">Schedule</p>
         <h1 class="book-title scroll-in">Book a Call</h1>
         <p class="book-intro scroll-in">
@@ -132,6 +135,14 @@ const schema = {
           </a>
         </div>
       </div>
+    </div>
+
+    <!-- ═══ NEXT ACTIONS ═══ -->
+    <div class="book-shell" style="padding-bottom: clamp(3rem, 5vw, 4rem);">
+      <PageNextActions actions={[
+        {label: 'Get a Quote', href: '/quote', description: 'Upload files and get a structured estimate.', accent: 'teal'},
+        {label: 'Materials Guide', href: '/materials', description: 'Understand which compound fits your environment.', accent: 'orange'},
+      ]} />
     </div>
 
   </section>

@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import QuoteCalculator from '../components/QuoteCalculator.tsx';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageNextActions from '../components/PageNextActions.astro';
 
 const schema = {
   '@context': 'https://schema.org',
@@ -13,6 +15,9 @@ const schema = {
 ---
 
 <BaseLayout title="Get a Quote | 3D3D" description="Request a custom 3D print quote. Upload your design or describe what you need." schema={schema} activePath="/quote">
+  <div class="max-w-4xl mx-auto px-4">
+    <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Services', href: '/contact'}, {label: 'Get a Quote'}]} />
+  </div>
   <section class="page-section">
     <div class="surface-panel quote-page-intro">
       <div>
@@ -40,6 +45,14 @@ const schema = {
   <section class="page-section pt-0">
     <QuoteCalculator client:load />
   </section>
+
+  <div class="max-w-4xl mx-auto px-4">
+    <PageNextActions actions={[
+      {label: 'Materials Guide', href: '/materials', description: 'Compare engineering compounds by environment and performance.', accent: 'teal'},
+      {label: 'Browse the Shop', href: '/shop', description: 'Ready-made prints available for immediate order.', accent: 'orange'},
+      {label: 'Book a Call', href: '/book', description: 'Talk through your project directly with Ken.', accent: 'magenta'},
+    ]} />
+  </div>
 </BaseLayout>
 
 <style>
@@ -70,7 +83,7 @@ const schema = {
 
   .quote-page-intro__meta div {
     padding: 1rem;
-    border-radius: 24px;
+    border-radius: 2px;
     background: rgba(255, 255, 255, 0.62);
   }
 

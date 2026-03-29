@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 
 const materials = [
   // ── ENGINEERING TIER ────────────────────────────────────
@@ -200,6 +201,7 @@ const tierColors: Record<string, string> = {
     <!-- ═══ HERO ═══ -->
     <div class="mat-hero">
       <div class="mat-shell">
+        <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Materials'}]} />
         <p class="mat-eyebrow scroll-in-left">Material Stack</p>
         <h1 class="mat-title scroll-in">What it takes<br />to survive<br />the salt.</h1>
         <p class="mat-intro scroll-in">

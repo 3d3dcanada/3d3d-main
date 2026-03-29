@@ -37,6 +37,8 @@ const jobPostingSchema = {
   "skills": "Social media, videography, photography, short-form video editing, TikTok, Instagram Reels",
   "jobBenefits": "Google Workspace subscription, Claude AI subscription, cooperative membership, flexible schedule, travel expenses covered"
 };
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageNextActions from '../components/PageNextActions.astro';
 ---
 
 <BaseLayout
@@ -51,6 +53,7 @@ const jobPostingSchema = {
      ═══════════════════════════════════════════════════════════════ -->
 <section class="media-hero" data-reveal>
   <div class="media-hero__inner">
+    <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Media'}]} />
     <p class="media-hero__eyebrow">3D3D Media / Content Studio</p>
     <h1 class="media-hero__title">
       <span class="media-hero__word">We make things</span>
@@ -305,6 +308,13 @@ const jobPostingSchema = {
     </p>
   </div>
 </section>
+
+<div class="media-section-shell" style="padding-bottom: clamp(3rem, 5vw, 4rem);">
+  <PageNextActions actions={[
+    {label: 'Events', href: '/events', description: 'See where 3D3D has been and where we are going.', accent: 'teal'},
+    {label: 'About 3D3D', href: '/about', description: 'The founder story behind the footage.', accent: 'magenta'},
+  ]} />
+</div>
 
 </BaseLayout>
 

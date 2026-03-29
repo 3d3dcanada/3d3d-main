@@ -1,0 +1,121 @@
+---
+interface ActionItem {
+  label: string;
+  href: string;
+  description: string;
+  accent?: 'teal' | 'magenta' | 'orange';
+}
+
+interface Props {
+  heading?: string;
+  actions: ActionItem[];
+}
+
+const { heading = 'What to do next', actions } = Astro.props;
+
+const accentMap = {
+  teal: 'var(--color-teal-primary)',
+  magenta: 'var(--color-magenta-primary)',
+  orange: 'var(--color-orange-primary)',
+};
+---
+
+<section class="page-next-actions" aria-label="Next actions">
+  <p class="page-next-actions__heading">{heading}</p>
+  <div class="page-next-actions__grid">
+    {actions.map((action) => {
+      const color = accentMap[action.accent ?? 'teal'];
+      return (
+        <a href={action.href} class="page-next-actions__card" style={`--card-accent: ${color};`}>
+          <span class="page-next-actions__label">{action.label}</span>
+          <span class="page-next-actions__desc">{action.description}</span>
+          <span class="page-next-actions__arrow" aria-hidden="true">&rarr;</span>
+        </a>
+      );
+    })}
+  </div>
+</section>
+
+<style>
+  .page-next-actions {
+    margin-top: 3rem;
+    padding: 2rem 0 1rem;
+    border-top: 1px solid var(--color-border-default);
+  }
+
+  .page-next-actions__heading {
+    font-family: var(--font-tech);
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .page-next-actions__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .page-next-actions__card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 1rem 1.2rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border-subtle);
+    background: var(--color-surface-card);
+    text-decoration: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page-next-actions__card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--card-accent);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .page-next-actions__card:hover {
+    border-color: var(--card-accent);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+
+  .page-next-actions__card:hover::before {
+    opacity: 1;
+  }
+
+  .page-next-actions__label {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    color: var(--color-text-primary);
+  }
+
+  .page-next-actions__desc {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+  }
+
+  .page-next-actions__arrow {
+    font-size: 0.9rem;
+    color: var(--card-accent);
+    margin-top: 0.2rem;
+    transition: transform 0.15s ease;
+  }
+
+  .page-next-actions__card:hover .page-next-actions__arrow {
+    transform: translateX(4px);
+  }
+</style>

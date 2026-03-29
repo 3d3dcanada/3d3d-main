@@ -1,11 +1,10 @@
 import { Center, Float, Text3D, useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Box3, Mesh, MeshStandardMaterial, Vector3, type Group } from 'three';
+import { Box3, Color, Mesh, MeshStandardMaterial, Vector3, type Group } from 'three';
 
 import type { SplashSection } from '../data/splashSections';
 import { ACCENT_HEX } from '../data/splashSections';
-import type { SplashTheme } from '../lib/splash-theme';
 
 const FONT_URL = '/fonts/helvetiker_bold.typeface.json';
 
@@ -36,7 +35,7 @@ function BuildPlateModel({
         metalness: isDark ? 0.55 : 0.45,
         roughness: isDark ? 0.25 : 0.32,
         emissive: accentHex,
-        emissiveIntensity: isDark ? 0.2 : 0.1,
+        emissiveIntensity: 0,
       });
     });
 
@@ -75,8 +74,7 @@ function BuildPlatePreview({
           <meshStandardMaterial
             color={accentHex}
             emissive={accentHex}
-            emissiveIntensity={isDark ? 3 : 1.5}
-            userData={{ printerGlow: true }}
+            emissiveIntensity={0}
           />
         </mesh>
       )}
@@ -213,11 +211,10 @@ const PrusaPrinter = ({
           <meshStandardMaterial
             color="#40C4C4"
             emissive="#40C4C4"
-            emissiveIntensity={isDark ? 3.5 : 1.8}
+            emissiveIntensity={0}
             metalness={0.6}
             roughness={0.2}
             envMapIntensity={1.0}
-            userData={{ printerGlow: true }}
           />
         </mesh>
         {/* Nozzle tip */}
@@ -226,36 +223,47 @@ const PrusaPrinter = ({
           <meshStandardMaterial
             color="#FF6B2B"
             emissive="#FF6B2B"
-            emissiveIntensity={isDark ? 5 : 3}
-            userData={{ printerGlow: true }}
+            emissiveIntensity={0}
           />
         </mesh>
       </group>
 
-      {/* Filament spool holder */}
-      <mesh position={[0.48, 1.12, -0.75]} castShadow>
-        <boxGeometry args={[0.08, 0.14, 0.08]} />
+      {/* Filament spool holder — bracket on top-right of frame */}
+      <mesh position={[0.58, 1.12, -0.68]} castShadow>
+        <boxGeometry args={[0.08, 0.16, 0.08]} />
         <meshStandardMaterial {...frameMat} />
       </mesh>
-      <mesh position={[0.62, 1.18, -0.86]} rotation={[0, 0, Math.PI / 2]} castShadow>
-        <cylinderGeometry args={[0.03, 0.03, 0.32, 10]} />
+      {/* Spool axle */}
+      <mesh position={[0.58, 1.24, -0.68]} rotation={[Math.PI / 2, 0, 0]} castShadow>
+        <cylinderGeometry args={[0.025, 0.025, 0.28, 10]} />
         <meshStandardMaterial {...railMat} />
       </mesh>
-      <group position={[0.82, 1.18, -0.86]}>
-        <mesh rotation={[0, Math.PI / 2, 0]} castShadow>
-          <torusGeometry args={[0.17, 0.055, 16, 36]} />
+      {/* Filament spool — torus + hub centered on axle */}
+      <group position={[0.58, 1.24, -0.52]}>
+        {/* Spool flanges (two discs) */}
+        <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, 0, -0.06]} castShadow>
+          <cylinderGeometry args={[0.18, 0.18, 0.015, 20]} />
+          <meshStandardMaterial color="#333" metalness={0.3} roughness={0.5} />
+        </mesh>
+        <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, 0, 0.06]} castShadow>
+          <cylinderGeometry args={[0.18, 0.18, 0.015, 20]} />
+          <meshStandardMaterial color="#333" metalness={0.3} roughness={0.5} />
+        </mesh>
+        {/* Filament wound on spool */}
+        <mesh rotation={[Math.PI / 2, 0, 0]} castShadow>
+          <torusGeometry args={[0.12, 0.05, 16, 36]} />
           <meshStandardMaterial
             color="#40C4C4"
-            metalness={0.5}
-            roughness={0.2}
+            metalness={0.35}
+            roughness={0.45}
             emissive="#40C4C4"
-            emissiveIntensity={isDark ? 1.25 : 0.8}
-            envMapIntensity={1.2}
-            userData={{ printerGlow: true }}
+            emissiveIntensity={0.08}
+            envMapIntensity={0.8}
           />
         </mesh>
-        <mesh rotation={[0, 0, Math.PI / 2]} castShadow>
-          <cylinderGeometry args={[0.055, 0.055, 0.1, 16]} />
+        {/* Hub core */}
+        <mesh rotation={[Math.PI / 2, 0, 0]} castShadow>
+          <cylinderGeometry args={[0.045, 0.045, 0.1, 16]} />
           <meshStandardMaterial {...railMat} />
         </mesh>
       </group>
@@ -266,8 +274,7 @@ const PrusaPrinter = ({
         <meshStandardMaterial
           color="#FF6B2B"
           emissive="#FF6B2B"
-          emissiveIntensity={isDark ? 1.8 : 1.2}
-          userData={{ printerGlow: true }}
+          emissiveIntensity={0}
         />
       </mesh>
       {/* PEI print surface */}
@@ -291,65 +298,85 @@ const PrusaPrinter = ({
 // Main export
 // ------------------------------------------------------------------
 interface SplashCenterLogoProps {
+  isMobile: boolean;
   reducedMotion: boolean;
-  theme: SplashTheme;
   hoveredSection: SplashSection | null;
+  activeSection: SplashSection;
 }
 
 export default function SplashCenterLogo({
+  isMobile,
   reducedMotion,
-  theme,
   hoveredSection,
+  activeSection,
 }: SplashCenterLogoProps) {
   const rootRef = useRef<Group>(null);
-  const isDark = theme === 'dark';
+  const leftMatRef = useRef<MeshStandardMaterial>(null);
+  const rightMatRef = useRef<MeshStandardMaterial>(null);
+  const isDark = true;
   const [showLogo, setShowLogo] = useState(true);
+  const rootScale = isMobile ? 0.96 : 1.22;
+  const logoPosition: [number, number, number] = isMobile ? [0, 0.96, 5.25] : [0, -0.05, 0.34];
+
+  // Determine target accent color from active section
+  const accentHex = ACCENT_HEX[activeSection.accent];
+
+  // Color pairs per accent — left "3D" gets a lighter tint, right gets the full accent
+  const colorPairs: Record<string, { left: string; right: string }> = {
+    '#FF6B2B': { left: '#FFD4B8', right: '#FF6B2B' },  // orange
+    '#40C4C4': { left: '#B8F0F0', right: '#40C4C4' },  // teal
+    '#E84A8A': { left: '#F5B8D4', right: '#E84A8A' },  // magenta
+  };
+  const targetColors = colorPairs[accentHex] ?? { left: '#B8F0F0', right: '#40C4C4' };
 
   useEffect(() => {
+    setShowLogo(true);
+    if (isMobile) return;
+
     const interval = setInterval(() => {
       setShowLogo((s) => !s);
     }, 6500);
+
     return () => clearInterval(interval);
-  }, []);
+  }, [isMobile]);
 
-  useFrame(({ clock }, _delta) => {
+  useFrame(({ clock }, delta) => {
     if (!reducedMotion && rootRef.current) {
-      rootRef.current.rotation.y += _delta * 0.12;
-      rootRef.current.rotation.z = Math.sin(clock.elapsedTime * 0.4) * 0.015;
+      if (isMobile) {
+        rootRef.current.rotation.y = 0;
+      } else {
+        rootRef.current.rotation.y += delta * 0.12;
+      }
+      rootRef.current.rotation.z = Math.sin(clock.elapsedTime * 0.4) * 0.01;
+    }
 
-      const ambientGlowBase = isDark ? 0.22 : 0.12;
-      const ambientGlowRange = isDark ? 0.3 : 0.15;
-      const ambientGlow =
-        ambientGlowBase + ((Math.sin(clock.elapsedTime * 2.5) + 1) * 0.5) * ambientGlowRange;
-      const logoGlowBase = isDark ? 1.8 : 1.2;
-      const logoGlowRange = isDark ? 0.24 : 0.18;
-      const logoGlow =
-        logoGlowBase + ((Math.sin(clock.elapsedTime * 2.1) + 1) * 0.5) * logoGlowRange;
-
-      rootRef.current.traverse((child) => {
-        if (!('material' in child)) return;
-        const material = child.material;
-        if (material && typeof material === 'object' && 'emissiveIntensity' in material) {
-          const m = material as MeshStandardMaterial;
-          if (m.userData?.logoGlow) {
-            m.emissiveIntensity = logoGlow;
-          } else if (!m.userData?.printerGlow) {
-            m.emissiveIntensity = ambientGlow;
-          }
-        }
-      });
+    // Smoothly lerp logo colors toward current accent
+    const lerpSpeed = 3.5 * delta;
+    if (leftMatRef.current) {
+      leftMatRef.current.color.lerp(new Color(targetColors.left), lerpSpeed);
+      leftMatRef.current.emissive.lerp(new Color(accentHex), lerpSpeed);
+      leftMatRef.current.emissiveIntensity += (0.18 - leftMatRef.current.emissiveIntensity) * lerpSpeed;
+    }
+    if (rightMatRef.current) {
+      rightMatRef.current.color.lerp(new Color(targetColors.right), lerpSpeed);
+      rightMatRef.current.emissive.lerp(new Color(accentHex), lerpSpeed);
+      rightMatRef.current.emissiveIntensity += (0.28 - rightMatRef.current.emissiveIntensity) * lerpSpeed;
     }
   });
+
+  const handlePrinterClick = () => {
+    window.location.assign('https://oldgirl.3d3d.ca');
+  };
 
   return (
     <Float
       speed={reducedMotion ? 0 : 1.4}
-      rotationIntensity={reducedMotion ? 0 : 0.12}
+      rotationIntensity={reducedMotion || isMobile ? 0 : 0.12}
       floatIntensity={reducedMotion ? 0 : 0.2}
     >
-      <group ref={rootRef} scale={1.22}>
-        {showLogo ? (
-          <Center position={[0, -0.05, 0.34]}>
+      <group ref={rootRef} scale={rootScale}>
+        {showLogo || isMobile ? (
+          <Center position={logoPosition}>
             <group>
               <Text3D
                 font={FONT_URL}
@@ -363,13 +390,13 @@ export default function SplashCenterLogo({
               >
                 3D
                 <meshStandardMaterial
-                  color="#0A0A0A"
+                  ref={leftMatRef}
+                  color={targetColors.left}
                   metalness={0.55}
                   roughness={0.18}
-                  emissive="#40C4C4"
-                  emissiveIntensity={isDark ? 1.8 : 1.2}
+                  emissive={accentHex}
+                  emissiveIntensity={0.18}
                   envMapIntensity={1.1}
-                  userData={{ logoGlow: true }}
                 />
               </Text3D>
               <Text3D
@@ -385,19 +412,21 @@ export default function SplashCenterLogo({
               >
                 3D
                 <meshStandardMaterial
-                  color="#0A0A0A"
+                  ref={rightMatRef}
+                  color={targetColors.right}
                   metalness={0.55}
                   roughness={0.18}
-                  emissive="#E84A8A"
-                  emissiveIntensity={isDark ? 1.8 : 1.2}
+                  emissive={accentHex}
+                  emissiveIntensity={0.28}
                   envMapIntensity={1.1}
-                  userData={{ logoGlow: true }}
                 />
               </Text3D>
             </group>
           </Center>
         ) : (
-          <PrusaPrinter isDark={isDark} hoveredSection={hoveredSection} />
+          <group onClick={handlePrinterClick} onPointerOver={() => { document.body.style.cursor = 'pointer'; }} onPointerOut={() => { document.body.style.cursor = 'auto'; }}>
+            <PrusaPrinter isDark={isDark} hoveredSection={hoveredSection} />
+          </group>
         )}
       </group>
     </Float>

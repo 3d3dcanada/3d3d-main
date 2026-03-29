@@ -31,25 +31,80 @@ const {
 
 const isArticle = ogType === 'article';
 
-// Global Organization + WebSite schema injected on every page
+// Global Organization + LocalBusiness + WebSite schema injected on every page
 const globalSchemas = [
   {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
+    '@type': ['LocalBusiness', 'Organization'],
     '@id': 'https://3d3d.ca/#organization',
     name: '3D3D',
+    legalName: '3D3D Atlantic Cooperative',
     url: 'https://3d3d.ca',
     logo: 'https://3d3d.ca/favicon.svg',
-    description: 'Offshore fabrication, marine hardware replacement, discontinued part recovery, and 3D printer sales with professional setup. Founded by Ken. Atlantic Canada.',
+    image: 'https://3d3d.ca/og-default.png',
+    description: 'Founder-operated 3D printing and custom fabrication. Marine hardware, automotive restoration parts, prototyping, and engineering-grade FDM printing. Based in Fredericton, New Brunswick. Ships worldwide.',
     email: 'info@3d3d.ca',
     telephone: '+15069532678',
-    areaServed: 'Worldwide',
+    founder: { '@type': 'Person', name: 'Ken' },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Fredericton',
+      addressRegion: 'NB',
+      addressCountry: 'CA',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 45.9636,
+      longitude: -66.6431,
+    },
+    areaServed: [
+      { '@type': 'Country', name: 'Canada' },
+      { '@type': 'Country', name: 'United States' },
+      { '@type': 'AdministrativeArea', name: 'Caribbean' },
+      { '@type': 'AdministrativeArea', name: 'Europe' },
+      { '@type': 'State', name: 'New Brunswick' },
+      { '@type': 'State', name: 'Nova Scotia' },
+      { '@type': 'State', name: 'Prince Edward Island' },
+      { '@type': 'State', name: 'Newfoundland and Labrador' },
+      { '@type': 'State', name: 'Ontario' },
+      { '@type': 'State', name: 'Quebec' },
+      { '@type': 'State', name: 'British Columbia' },
+      { '@type': 'State', name: 'Alberta' },
+    ],
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: '3D3D Services',
+      itemListElement: [
+        { '@type': 'OfferCatalog', name: 'Custom 3D Printing', description: 'FDM printing in PLA, PETG, ASA, TPU, ABS, Nylon CF, PC, PEI. Marine-grade and engineering compounds.' },
+        { '@type': 'OfferCatalog', name: 'Reverse Engineering & Part Recovery', description: 'Discontinued parts fabricated from measurements or 3D scanning. Automotive, marine, industrial.' },
+        { '@type': 'OfferCatalog', name: '3D Printer Sales & Setup', description: 'Prusa ecosystem printers sold with professional installation, calibration, and training.' },
+        { '@type': 'OfferCatalog', name: 'Prototyping & Consulting', description: 'Rapid prototyping, material selection, design-for-manufacturing consulting.' },
+      ],
+    },
+    priceRange: '$$',
+    currenciesAccepted: 'CAD, USD',
+    paymentAccepted: 'Credit Card, E-Transfer, PayPal',
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '09:00',
+      closes: '18:00',
+    },
     sameAs: [
       'https://www.youtube.com/@3D3Dcanada',
       'https://www.instagram.com/3d3dca/',
       'https://www.tiktok.com/@3d3dcanada',
       'https://www.facebook.com/profile.php?id=61575548079847',
       'https://ko-fi.com/3d3dca',
+    ],
+    knowsAbout: [
+      'FDM 3D printing',
+      'Marine hardware fabrication',
+      'Automotive restoration parts',
+      'Engineering-grade polymers',
+      'Prusa 3D printers',
+      'Rapid prototyping',
+      'Additive manufacturing',
     ],
   },
   {
@@ -58,7 +113,7 @@ const globalSchemas = [
     '@id': 'https://3d3d.ca/#website',
     url: 'https://3d3d.ca',
     name: '3D3D',
-    description: 'Custom 3D fabrication, printer sales with setup, marine hardware, discontinued parts. Atlantic Canada.',
+    description: 'Custom 3D printing and fabrication. Marine, automotive, prototyping. Fredericton NB, ships worldwide.',
     publisher: { '@id': 'https://3d3d.ca/#organization' },
     potentialAction: {
       '@type': 'SearchAction',

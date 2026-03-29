@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import PageNextActions from '../../components/PageNextActions.astro';
 import { CATALOG, SHOP_CATEGORIES, SOURCE_LABELS, getCatalogItemStartingPrice, getCatalogItemHasPriceRange } from '../../lib/catalog';
 
 const schema = {
@@ -15,6 +17,9 @@ const schema = {
 
 <BaseLayout title="Shop | 3D3D" description="Custom 3D printed products. PLA, PETG, TPU, ABS, ASA. Tested designs, fast turnaround." schema={schema} activePath="/shop">
   <div class="pt-8">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Shop'}]} />
+    </div>
     {/* Hero strip */}
     <section class="px-6 lg:px-12 py-10 relative overflow-hidden bg-surface-secondary">
       <div class="max-w-7xl mx-auto">
@@ -126,6 +131,14 @@ const schema = {
         })}
       </div>
     </section>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 pb-8">
+      <PageNextActions actions={[
+        {label: 'Get a Quote', href: '/quote', description: 'Need something custom? Upload your files and describe the project.', accent: 'teal'},
+        {label: 'Materials Guide', href: '/materials', description: 'Compare engineering compounds by environment and performance.', accent: 'orange'},
+        {label: 'Contact', href: '/contact', description: 'Questions about a product or custom order? Reach out.', accent: 'magenta'},
+      ]} />
+    </div>
   </div>
 </BaseLayout>
 

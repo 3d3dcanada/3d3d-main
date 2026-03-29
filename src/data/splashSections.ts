@@ -11,6 +11,7 @@ export interface SplashSection {
   tags: string[];
   ctaLabel: string;
   href: string;
+  backgroundImage: string;
   accent: SplashAccent;
   naturalColors: string[];
   ariaLabel: string;
@@ -40,6 +41,7 @@ export const SPLASH_SECTIONS: SplashSection[] = [
     tags: ['Ready-made prints', 'STL files', 'Community goods'],
     ctaLabel: 'Browse the Market',
     href: '/shop',
+    backgroundImage: '',
     accent: 'orange',
     naturalColors: ['#F5E6D3', '#D4A574', '#8B6914'],
     ariaLabel: 'The Market. Browse ready-made prints, STL files, and community-made products.',
@@ -61,6 +63,7 @@ export const SPLASH_SECTIONS: SplashSection[] = [
     tags: ['Custom fabrication', 'Scanning', 'Consulting'],
     ctaLabel: 'Get a Quote',
     href: '/quote',
+    backgroundImage: '',
     accent: 'teal',
     naturalColors: ['#B8B8B8', '#7A7A7A', '#4A4A4A'],
     ariaLabel: 'Services. Get a quote for custom fabrication, scanning, consulting, or deployment work.',
@@ -82,8 +85,9 @@ export const SPLASH_SECTIONS: SplashSection[] = [
     tags: ['Makers', 'Cooperative', 'Open network'],
     ctaLabel: 'Join the Network',
     href: '/opportunities',
+    backgroundImage: '',
     accent: 'magenta',
-    naturalColors: ['#E8E8E8', '#A0A0A0', '#505050'],
+    naturalColors: ['#F2D1E0', '#E84A8A', '#8A2356'],
     ariaLabel: 'The Network. Join the 3D3D cooperative of makers, builders, and specialists.',
     modelPath: '/models/network.glb',
     modelScale: 1.28,
@@ -103,6 +107,7 @@ export const SPLASH_SECTIONS: SplashSection[] = [
     tags: ['Tutorials', 'Material guides', 'Field notes'],
     ctaLabel: 'Start Learning',
     href: '/blog',
+    backgroundImage: '',
     accent: 'teal',
     naturalColors: ['#2C1810', '#8B4513', '#F5E6D3'],
     ariaLabel: 'Learn. Read tutorials, material guides, and practical field knowledge.',
@@ -124,8 +129,9 @@ export const SPLASH_SECTIONS: SplashSection[] = [
     tags: ['Founder-operated', 'Cooperative', 'Open source'],
     ctaLabel: 'Our Story',
     href: '/about',
+    backgroundImage: '',
     accent: 'magenta',
-    naturalColors: ['#1A1A1A', '#333333', '#666666'],
+    naturalColors: ['#C46A92', '#E84A8A', '#F5D0E0'],
     ariaLabel: 'About 3D3D. Learn the founder story, cooperative mission, and platform philosophy.',
     modelPath: '/models/about.glb',
     modelScale: 1.22,

@@ -1,0 +1,556 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageNextActions from '../components/PageNextActions.astro';
+import { SERVICE_AREAS, type ServiceArea } from '../data/serviceAreas';
+
+export function getStaticPaths() {
+  return SERVICE_AREAS.map((area) => ({
+    params: { slug: area.slug },
+    props: { area },
+  }));
+}
+
+interface Props {
+  area: ServiceArea;
+}
+
+const { area } = Astro.props;
+
+const locationLabel = area.provinceShort
+  ? `${area.city}, ${area.provinceShort}`
+  : area.city;
+
+const pageTitle = `3D Printing in ${locationLabel} | Custom Fabrication | 3D3D`;
+const pageDescription = `Custom 3D printing services for ${locationLabel}. Engineering-grade FDM printing in ASA, PETG-CF, Nylon, PC, TPU. ${area.shippingEstimate}. Fredericton NB, ships to ${area.city}.`;
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: `3D Printing Services in ${locationLabel}`,
+    description: pageDescription,
+    url: `https://3d3d.ca/3d-printing-${area.slug}`,
+    provider: { '@id': 'https://3d3d.ca/#organization' },
+    areaServed: {
+      '@type': area.country === 'Canada' ? 'City' : 'Country',
+      name: area.city,
+      ...(area.provinceShort ? { containedInPlace: { '@type': 'State', name: area.province } } : {}),
+    },
+    serviceType: [
+      'Custom 3D Printing',
+      'Rapid Prototyping',
+      'Reverse Engineering',
+      'Part Fabrication',
+    ],
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: `3D Printing for ${area.city}`,
+      itemListElement: area.industries.map((ind) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: ind.name,
+          description: ind.useCase,
+        },
+      })),
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: area.faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  },
+];
+
+const nearbyAreas = SERVICE_AREAS.filter((a) => area.nearby.includes(a.slug));
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  schema={schema}
+  activePath={`/3d-printing-${area.slug}`}
+>
+  <div class="city-page">
+    <!-- Hero -->
+    <div class="city-hero">
+      <div class="city-shell">
+        <Breadcrumbs items={[
+          { label: 'Home', href: '/' },
+          { label: 'Service Areas' },
+          { label: area.city },
+        ]} />
+
+        <p class="city-eyebrow">3D Printing Services</p>
+        <h1 class="city-title">
+          3D Printing in {locationLabel}
+        </h1>
+        <p class="city-intro">{area.regionContext}</p>
+
+        <div class="city-hero__stats">
+          <div class="city-stat">
+            <span class="city-stat__value">{area.shippingEstimate}</span>
+            <span class="city-stat__label">Shipping</span>
+          </div>
+          <div class="city-stat">
+            <span class="city-stat__value">12+</span>
+            <span class="city-stat__label">Materials</span>
+          </div>
+          <div class="city-stat">
+            <span class="city-stat__value">24-48h</span>
+            <span class="city-stat__label">Turnaround</span>
+          </div>
+        </div>
+
+        <div class="city-hero__actions">
+          <a href="/quote?source=city-page" class="city-cta" data-analytics-event="quote_started" data-analytics-source={`city-${area.slug}`}>
+            Get a Quote
+          </a>
+          <a href="/contact" class="city-cta city-cta--ghost">
+            Contact 3D3D
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Industries -->
+    <div class="city-section">
+      <div class="city-shell">
+        <p class="city-eyebrow" style="color: var(--color-teal-primary);">Industries We Serve</p>
+        <h2 class="city-h2">What we build for {area.city}</h2>
+        <div class="city-industries">
+          {area.industries.map((ind) => (
+            <div class="city-industry">
+              <h3 class="city-industry__name">{ind.name}</h3>
+              <p class="city-industry__use">{ind.useCase}</p>
+              <a href="/quote?source=city-industry" class="city-industry__link">
+                Request a quote for this &rarr;
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Why We Serve -->
+    <div class="city-why">
+      <div class="city-shell">
+        <p class="city-eyebrow" style="color: var(--color-magenta-primary);">Why {area.city}</p>
+        <h2 class="city-h2">{area.whyWeServe}</h2>
+      </div>
+    </div>
+
+    <!-- Materials callout -->
+    <div class="city-section">
+      <div class="city-shell">
+        <p class="city-eyebrow" style="color: var(--color-orange-primary);">Materials Available</p>
+        <h2 class="city-h2">Engineering-grade compounds, not hobby filament</h2>
+        <p class="city-body">
+          Every part we print for {area.city} uses the same engineering materials we deploy on offshore sailboats and race cars.
+          ASA for UV and salt. Nylon CF for engine bays. PC Blend for impacts. TPU for flex. PEI for fire compliance.
+          We don't run PLA unless it's a prototype.
+        </p>
+        <div class="city-materials-grid">
+          {['ASA', 'PETG-CF', 'PC Blend', 'Nylon CF', 'TPU 95A', 'PP Glass Fiber', 'PEI 1010', 'PLA'].map((mat) => (
+            <span class="city-material-tag">{mat}</span>
+          ))}
+        </div>
+        <a href="/materials" class="city-inline-link">Full materials guide &rarr;</a>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="city-faq">
+      <div class="city-shell">
+        <p class="city-eyebrow" style="color: var(--color-teal-primary);">Common Questions</p>
+        <h2 class="city-h2">FAQ for {area.city}</h2>
+        <div class="city-faq__list">
+          {area.faqs.map((faq) => (
+            <details class="city-faq__item">
+              <summary class="city-faq__question">{faq.question}</summary>
+              <p class="city-faq__answer">{faq.answer}</p>
+            </details>
+          ))}
+          <!-- Universal FAQs -->
+          <details class="city-faq__item">
+            <summary class="city-faq__question">What file formats do you accept?</summary>
+            <p class="city-faq__answer">STL, 3MF, STEP, STP, OBJ, and PDF. If you have a sketch or photo, we can work from that too.</p>
+          </details>
+          <details class="city-faq__item">
+            <summary class="city-faq__question">What printers do you use?</summary>
+            <p class="city-faq__answer">Exclusively Prusa. Open-source, documented, repairable. MK4S, MK3S+, and the incoming CORE One L. No proprietary black boxes.</p>
+          </details>
+          <details class="city-faq__item">
+            <summary class="city-faq__question">How much does 3D printing cost?</summary>
+            <p class="city-faq__answer">It depends on size, material, and complexity. Simple PLA parts start around $15 CAD. Engineering-grade parts typically run $30-150. Get an exact quote by uploading your file.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nearby service areas -->
+    {nearbyAreas.length > 0 && (
+      <div class="city-section">
+        <div class="city-shell">
+          <p class="city-eyebrow">Also Serving</p>
+          <div class="city-nearby">
+            {nearbyAreas.map((nearby) => (
+              <a href={`/3d-printing-${nearby.slug}`} class="city-nearby__link">
+                3D Printing in {nearby.city} &rarr;
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    )}
+
+    <!-- Bottom CTA -->
+    <div class="city-shell" style="padding-bottom: 3rem;">
+      <PageNextActions
+        heading={`Start a project from ${area.city}`}
+        actions={[
+          { label: 'Get a Quote', href: '/quote', description: `Upload files and get an estimate. Ships to ${area.city}.`, accent: 'teal' },
+          { label: 'Browse the Shop', href: '/shop', description: 'Ready-made prints available for immediate order.', accent: 'orange' },
+          { label: 'Book a Call', href: '/book', description: 'Talk through your project directly with Ken.', accent: 'magenta' },
+        ]}
+      />
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .city-page {
+    --page-bg: #F6F7FA;
+  }
+
+  .city-shell {
+    width: min(100% - clamp(1.5rem, 4vw, 4rem), 900px);
+    margin: 0 auto;
+  }
+
+  /* ── Hero ── */
+  .city-hero {
+    background: #111214;
+    padding: clamp(3rem, 6vw, 5rem) 0 clamp(3rem, 6vw, 5rem);
+    color: #F6F7FA;
+  }
+
+  .city-hero :global(.breadcrumbs a) { color: rgba(246, 247, 250, 0.5); }
+  .city-hero :global(.breadcrumbs span[aria-current]) { color: rgba(246, 247, 250, 0.9); }
+  .city-hero :global(.breadcrumbs__sep) { color: rgba(246, 247, 250, 0.3); }
+
+  .city-eyebrow {
+    margin: 0;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #40C4C4;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .city-eyebrow::before {
+    content: '';
+    width: 2rem;
+    height: 2px;
+    background: currentColor;
+    flex-shrink: 0;
+  }
+
+  .city-title {
+    margin: 1rem 0;
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 1.5rem + 3.5vw, 4.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+  }
+
+  .city-intro {
+    margin: 0 0 2rem;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: rgba(246, 247, 250, 0.72);
+    max-width: 42rem;
+  }
+
+  .city-hero__stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .city-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .city-stat__value {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: #40C4C4;
+  }
+
+  .city-stat__label {
+    font-family: var(--font-tech);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(246, 247, 250, 0.4);
+  }
+
+  .city-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .city-cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.85rem 1.6rem;
+    background: #40C4C4;
+    color: #111214;
+    font-family: var(--font-tech);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid #40C4C4;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+
+  .city-cta:hover {
+    background: #7AD9D9;
+    transform: translateY(-1px);
+  }
+
+  .city-cta--ghost {
+    background: transparent;
+    color: #F6F7FA;
+    border-color: rgba(246, 247, 250, 0.25);
+  }
+
+  .city-cta--ghost:hover {
+    background: rgba(246, 247, 250, 0.08);
+    border-color: rgba(246, 247, 250, 0.4);
+  }
+
+  /* ── Sections ── */
+  .city-section {
+    padding: clamp(3rem, 6vw, 5rem) 0;
+  }
+
+  .city-h2 {
+    margin: 0.75rem 0 1.2rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 1rem + 2vw, 2.8rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: #111214;
+    text-transform: uppercase;
+  }
+
+  .city-body {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    max-width: 40rem;
+    margin: 0 0 1.5rem;
+  }
+
+  /* ── Industries ── */
+  .city-industries {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+    gap: 1rem;
+  }
+
+  .city-industry {
+    padding: 1.4rem;
+    border: 2px solid #1A1A1A;
+    border-radius: 2px;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .city-industry:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(17, 18, 20, 0.08);
+  }
+
+  .city-industry__name {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: #111214;
+  }
+
+  .city-industry__use {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+    flex: 1;
+  }
+
+  .city-industry__link {
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #40C4C4;
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .city-industry__link:hover {
+    opacity: 0.7;
+  }
+
+  /* ── Why section ── */
+  .city-why {
+    background: #FFFFFF;
+    border-top: 3px solid #1A1A1A;
+    border-bottom: 3px solid #1A1A1A;
+    padding: clamp(3rem, 6vw, 5rem) 0;
+  }
+
+  .city-why .city-h2 {
+    font-size: clamp(1.4rem, 1rem + 1.5vw, 2.2rem);
+    max-width: 38rem;
+    line-height: 1.25;
+    text-transform: none;
+    letter-spacing: -0.015em;
+  }
+
+  /* ── Materials ── */
+  .city-materials-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .city-material-tag {
+    padding: 0.35rem 0.7rem;
+    background: rgba(17, 18, 20, 0.04);
+    border: 1px solid var(--color-border-strong);
+    font-family: var(--font-tech);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #111214;
+  }
+
+  .city-inline-link {
+    font-family: var(--font-tech);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-teal-primary);
+    text-decoration: none;
+  }
+
+  .city-inline-link:hover {
+    opacity: 0.7;
+  }
+
+  /* ── FAQ ── */
+  .city-faq {
+    background: #FFFFFF;
+    padding: clamp(3rem, 6vw, 5rem) 0;
+    border-top: 1px solid var(--color-border-default);
+  }
+
+  .city-faq__list {
+    display: grid;
+    gap: 0;
+  }
+
+  .city-faq__item {
+    border-bottom: 1px solid var(--color-border-default);
+    padding: 1.2rem 0;
+  }
+
+  .city-faq__question {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    color: #111214;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .city-faq__question::-webkit-details-marker { display: none; }
+
+  .city-faq__question::after {
+    content: '+';
+    font-family: var(--font-tech);
+    font-size: 1.2rem;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .city-faq__item[open] .city-faq__question::after {
+    transform: rotate(45deg);
+  }
+
+  .city-faq__answer {
+    margin: 0.8rem 0 0;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    max-width: 40rem;
+  }
+
+  /* ── Nearby ── */
+  .city-nearby {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .city-nearby__link {
+    padding: 0.7rem 1.2rem;
+    border: 1px solid var(--color-border-strong);
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #111214;
+    text-decoration: none;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .city-nearby__link:hover {
+    border-color: var(--color-teal-primary);
+    background: var(--color-teal-surface);
+  }
+</style>

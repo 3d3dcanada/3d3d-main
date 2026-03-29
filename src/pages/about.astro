@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { CATALOG } from '../lib/catalog';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageNextActions from '../components/PageNextActions.astro';
 
 const schema = {
 	'@context': 'https://schema.org',
@@ -44,6 +46,7 @@ const aboutGallery = [
 
 <div class="pt-8 pb-12">
 <section class="max-w-4xl mx-auto">
+<Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'About'}]} />
 <div class="about-hero surface-panel">
 <div class="about-hero__background" aria-hidden="true"></div>
 <div class="about-hero__content">
@@ -121,6 +124,12 @@ The 3D printer is not my product. It is the most capable item in a toolkit built
           Visit Old Girl →
         </a>
       </div>
+
+      <PageNextActions actions={[
+        {label: 'Get a Quote', href: '/quote', description: 'Start a project with an operator who shows up.', accent: 'teal'},
+        {label: 'Browse the Shop', href: '/shop', description: 'Ready-made prints and cooperative goods.', accent: 'orange'},
+        {label: 'Join the Network', href: '/opportunities', description: 'Work with us as a maker or specialist.', accent: 'magenta'},
+      ]} />
     </section>
   </div>
 </BaseLayout>

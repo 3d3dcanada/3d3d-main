@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageNextActions from '../components/PageNextActions.astro';
 ---
 
 <BaseLayout title="Contact | 3D3D" description="Offshore fabricator, worldwide. Tell me the problem. I will tell you whether I can solve it, and exactly how. Marine hardware, discontinued parts, on-site deployment." activePath="/contact">
@@ -7,6 +9,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <div class="contact-page">
     <div class="contact-hero">
       <div class="contact-shell">
+        <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Contact'}]} />
         <p class="contact-eyebrow">Direct Line</p>
         <h1 class="contact-title scroll-in">Tell me the problem.</h1>
         <p class="contact-intro">
@@ -69,6 +72,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="contact-form-wrap">
           <h2 class="contact-form__title">Send me the details.</h2>
           <form action="https://formspree.io/f/mldlydbl" method="POST" class="contact-form" data-analytics-submit="contact_submitted" data-analytics-source="contact-page">
+            <input type="hidden" name="_subject" value="Contact Request | 3D3D" />
             <div aria-hidden="true" style="position: absolute; left: -100vw; width: 1px; height: 1px; overflow: hidden;">
               <label for="contact-website">Leave this field blank</label>
               <input type="text" id="contact-website" name="_gotcha" tabindex="-1" autocomplete="off" />
@@ -106,7 +110,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <input type="file" id="file" name="attachment" accept=".jpg,.jpeg,.png,.pdf,.stl,.step,.3mf" />
             </div>
             <div class="contact-form__consent">
-              <input type="checkbox" id="casl-consent" name="casl_consent" value="yes" />
+              <input type="checkbox" id="casl-consent" name="casl_consent" value="yes" required />
               <label for="casl-consent">
                 I consent to receiving commercial electronic messages from 3D3D. You may unsubscribe at any time. See our <a href="/casl">CASL policy</a> and <a href="/privacy">privacy policy</a>.
               </label>
@@ -115,6 +119,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </form>
         </div>
       </div>
+    </div>
+
+    <div class="contact-shell">
+      <PageNextActions actions={[
+        {label: 'Get a Quote', href: '/quote', description: 'Upload files and describe your project for a custom estimate.', accent: 'teal'},
+        {label: 'FAQ', href: '/faq', description: 'Common questions about materials, turnaround, and shipping.', accent: 'magenta'},
+        {label: 'About 3D3D', href: '/about', description: 'The founder story and cooperative philosophy.', accent: 'orange'},
+      ]} />
     </div>
   </div>
 </BaseLayout>
@@ -226,7 +238,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .contact-card {
     padding: clamp(1.25rem, 2.5vw, 2rem);
     border: var(--page-border);
-    border-radius: 1rem;
+    border-radius: 2px;
     background: var(--page-bg-light);
     display: grid;
     gap: 1rem;
@@ -285,7 +297,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .contact-form-wrap {
     padding: clamp(1.5rem, 3vw, 2.5rem);
     border: var(--page-border);
-    border-radius: 1rem;
+    border-radius: 2px;
     background: #FFFFFF;
   }
 
@@ -327,7 +339,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .contact-form__field textarea {
     padding: 0.8rem 1rem;
     border: 2px solid #1A1A1A;
-    border-radius: 0.5rem;
+    border-radius: 2px;
     background: #F6F7FA;
     color: #1A1A1A;
     font-family: var(--font-body);
@@ -405,7 +417,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    border-radius: 0.5rem;
+    border-radius: 2px;
     cursor: pointer;
     transition: all 0.25s ease;
     width: 100%;

@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageNextActions from '../components/PageNextActions.astro';
 
 const faqs = [
   {
@@ -105,6 +107,7 @@ const schema = {
 >
   <section class="faq-page">
     <div class="faq-shell">
+      <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'FAQ'}]} />
       <p class="faq-eyebrow scroll-in-left">Questions</p>
       <h1 class="faq-title scroll-in">Frequently Asked</h1>
       <p class="faq-intro scroll-in-fade scroll-delay-1">
@@ -132,6 +135,12 @@ const schema = {
           <a href="/book" class="faq-cta__btn faq-cta__btn--ghost">Book a Call</a>
         </div>
       </div>
+
+      <PageNextActions actions={[
+        {label: 'Get a Quote', href: '/quote', description: 'Ready to start? Upload your files and get an estimate.', accent: 'teal'},
+        {label: 'Materials Guide', href: '/materials', description: 'Deep technical specs on every compound we print.', accent: 'orange'},
+        {label: 'Contact', href: '/contact', description: 'Question not answered? Reach out directly.', accent: 'magenta'},
+      ]} />
     </div>
   </section>
 </BaseLayout>

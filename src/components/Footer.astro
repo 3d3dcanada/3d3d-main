@@ -24,6 +24,18 @@ const legalLinks = [
   { label: 'Accessibility', href: '/accessibility' },
 ];
 
+const serviceAreaLinks = [
+  { label: 'Fredericton', href: '/3d-printing-fredericton' },
+  { label: 'Moncton', href: '/3d-printing-moncton' },
+  { label: 'Saint John', href: '/3d-printing-saint-john' },
+  { label: 'Halifax', href: '/3d-printing-halifax' },
+  { label: 'Toronto', href: '/3d-printing-toronto' },
+  { label: 'Montreal', href: '/3d-printing-montreal' },
+  { label: 'Vancouver', href: '/3d-printing-vancouver' },
+  { label: 'Ottawa', href: '/3d-printing-ottawa' },
+  { label: 'United States', href: '/3d-printing-united-states' },
+];
+
 const socialLinks = [
   {
     label: 'YouTube',
@@ -114,6 +126,17 @@ const socialLinks = [
         </ul>
       </nav>
 
+      <nav class="site-footer__column" aria-label="Service Areas">
+        <p class="site-footer__heading">Service Areas</p>
+        <ul>
+          {serviceAreaLinks.map((link) => (
+            <li>
+              <a href={link.href}>{link.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
       <nav class="site-footer__column" aria-label="Legal">
         <p class="site-footer__heading">Legal</p>
         <ul>
@@ -150,7 +173,7 @@ const socialLinks = [
 
   .site-footer__grid {
     display: grid;
-    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 0.8fr);
     gap: 2rem;
     align-items: start;
   }
@@ -209,7 +232,7 @@ const socialLinks = [
     min-height: 2.5rem;
     padding: 0.6rem 0.9rem;
     border: 1px solid rgba(64, 196, 196, 0.22);
-    border-radius: 999px;
+    border-radius: 2px;
     background: rgba(255, 255, 255, 0.04);
     color: rgba(246, 247, 250, 0.84);
     font-family: var(--font-tech);

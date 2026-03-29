@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import PageNextActions from '../../components/PageNextActions.astro';
 
 const posts = [
   {
@@ -250,6 +252,7 @@ const posts = [
   <div class="blog-index">
     <div class="blog-hero">
       <div class="blog-shell">
+        <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Blog'}]} />
         <p class="blog-eyebrow">3D3D Blog</p>
         <h1 class="blog-title">Updates & Stories</h1>
         <p class="blog-intro">Fabrication, sailing, materials, campaign updates, and the things I've learned building 3D3D from nothing.</p>
@@ -270,6 +273,14 @@ const posts = [
           <p class="blog-card__excerpt">{post.excerpt}</p>
         </a>
       ))}
+    </div>
+
+    <div class="blog-shell" style="padding-bottom: clamp(2rem, 4vw, 4rem);">
+      <PageNextActions actions={[
+        {label: 'Browse the Shop', href: '/shop', description: 'Ready-made prints and cooperative goods.', accent: 'orange'},
+        {label: 'Get a Quote', href: '/quote', description: 'Need something custom? Upload your design.', accent: 'teal'},
+        {label: 'Materials Guide', href: '/materials', description: 'Deep specs on every compound we print.', accent: 'magenta'},
+      ]} />
     </div>
   </div>
 </BaseLayout>

@@ -4,8 +4,8 @@ import SplashOrbit from '../components/SplashOrbit';
 ---
 
 <BaseLayout
-  title="3D3D"
-  description="3D3D splash orbit. Explore the market, services, network, learning, and the story behind the platform."
+  title="3D3D | Custom 3D Printing, Marine Fabrication & Field Services"
+  description="Custom 3D printing, marine fabrication, reverse engineering, and field-ready fabrication services from 3D3D. Explore the market, services, network, learning, and founder story."
   noFooter
   noSidebar
   noMobileCTA
@@ -14,26 +14,65 @@ import SplashOrbit from '../components/SplashOrbit';
 >
   <script is:inline>
     (() => {
-      const storageKey = '3d3d:splash-theme';
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-      try {
-        const storedTheme = window.localStorage.getItem(storageKey);
-        const theme =
-          storedTheme === 'light' || storedTheme === 'dark'
-            ? storedTheme
-            : prefersDark
-              ? 'dark'
-              : 'light';
-
-        document.body.dataset.splashTheme = theme;
-      } catch {
-        document.body.dataset.splashTheme = prefersDark ? 'dark' : 'light';
-      }
+      document.body.dataset.splashTheme = 'dark';
     })();
   </script>
 
   <section id="home" class="splash-home" data-section>
     <SplashOrbit client:load />
   </section>
+
+  <section class="splash-nav-section surface-panel">
+    <div class="splash-nav-container">
+      <div class="splash-nav-grid">
+        <a href="/shop" class="splash-nav-item">Shop</a>
+        <a href="/quote" class="splash-nav-item">Services</a>
+        <a href="/materials" class="splash-nav-item">Materials</a>
+        <a href="/about" class="splash-nav-item">About</a>
+        <a href="/opportunities" class="splash-nav-item">Network</a>
+        <a href="/media" class="splash-nav-item">Media</a>
+        <a href="/blog" class="splash-nav-item">Blog</a>
+        <a href="/faq" class="splash-nav-item">FAQ</a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  .splash-nav-section {
+    padding-block: 4rem;
+    border-top: 1px solid var(--color-border-subtle);
+  }
+  .splash-nav-container {
+    width: min(100% - 3rem, 1200px);
+    margin: 0 auto;
+  }
+  .splash-nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 1rem;
+  }
+  .splash-nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem 1rem;
+    background: var(--color-surface-secondary);
+    border: 1px solid var(--color-border-default);
+    border-radius: 2px;
+    font-family: var(--font-tech);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-text-primary);
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+  .splash-nav-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+    border-color: var(--color-teal-primary);
+    color: var(--color-teal-primary);
+  }
+</style>

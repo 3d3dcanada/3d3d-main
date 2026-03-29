@@ -147,7 +147,7 @@ function QuoteField({
         {required ? <em>Required</em> : null}
       </span>
       {children}
-      {hint ? <span className="quote-field__hint">{hint}</span> : null}
+      {hint ? <span id={`${htmlFor}-hint`} className="quote-field__hint">{hint}</span> : null}
     </label>
   );
 }
@@ -332,7 +332,7 @@ export default function QuoteCalculator() {
 
     try {
       const formData = new FormData();
-      formData.append('_subject', selectedProduct ? `Quote Request |${selectedProduct.name}` : 'Quote Request |3D3D');
+      formData.append('_subject', selectedProduct ? `Quote Request | ${selectedProduct.name}` : 'Quote Request | 3D3D');
       formData.append('name', name);
       formData.append('email', email);
       formData.append('phone', phone);
@@ -485,6 +485,7 @@ export default function QuoteCalculator() {
                     name="phone"
                     type="tel"
                     autoComplete="tel"
+                    aria-describedby="quote-phone-hint"
                     value={phone}
                     onChange={(event) => setPhone(event.target.value)}
                   />
@@ -496,6 +497,7 @@ export default function QuoteCalculator() {
                     name="company"
                     type="text"
                     autoComplete="organization"
+                    aria-describedby="quote-company-hint"
                     value={company}
                     onChange={(event) => setCompany(event.target.value)}
                   />
@@ -505,6 +507,7 @@ export default function QuoteCalculator() {
                   <select
                     id="quote-product"
                     name="originating_product_id"
+                    aria-describedby="quote-product-hint"
                     value={selectedProductId}
                     onChange={(event) => applyProductSelection(event.target.value)}
                   >
@@ -534,6 +537,7 @@ export default function QuoteCalculator() {
                   <select
                     id="quote-material"
                     name="material_preference"
+                    aria-describedby="quote-material-hint"
                     value={materialPreference}
                     onChange={(event) => setMaterialPreference((event.target.value as Material | '') || '')}
                   >
@@ -551,6 +555,7 @@ export default function QuoteCalculator() {
                     id="quote-deadline"
                     name="target_deadline"
                     type="date"
+                    aria-describedby="quote-deadline-hint"
                     value={deadline}
                     onChange={(event) => setDeadline(event.target.value)}
                   />
@@ -562,6 +567,7 @@ export default function QuoteCalculator() {
                     name="location"
                     type="text"
                     autoComplete="postal-code"
+                    aria-describedby="quote-location-hint"
                     value={location}
                     onChange={(event) => setLocation(event.target.value)}
                     required
@@ -579,6 +585,7 @@ export default function QuoteCalculator() {
                   id="quote-project"
                   name="project_description"
                   rows={6}
+                  aria-describedby="quote-project-hint"
                   value={projectDetails}
                   onChange={(event) => {
                     markStarted('project_details');
@@ -741,6 +748,7 @@ export default function QuoteCalculator() {
                           min={5}
                           max={2000}
                           step={5}
+                          aria-describedby="estimate-grams-hint"
                           value={grams}
                           onChange={(event) => setGrams(Number(event.target.value))}
                         />
@@ -756,6 +764,7 @@ export default function QuoteCalculator() {
                           min={0.5}
                           max={100}
                           step={0.5}
+                          aria-describedby="estimate-hours-hint"
                           value={hours}
                           onChange={(event) => setHours(Number(event.target.value))}
                         />
@@ -865,7 +874,7 @@ export default function QuoteCalculator() {
               </div>
             </div>
 
-            <div className="quote-sidebar__block quote-sidebar__block--estimate">
+            <div className="quote-sidebar__block quote-sidebar__block--estimate" aria-live="polite" aria-atomic="true">
               <span className="eyebrow">Optional planning estimate</span>
               <h3>{formatCurrency(total)}</h3>
               <p>
@@ -932,7 +941,7 @@ const quoteStyles = `
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.72);
-    border-radius: 32px;
+    border-radius: 2px;
     background: rgba(250, 252, 252, 0.86);
     box-shadow: 0 20px 60px rgba(35, 51, 71, 0.08);
     backdrop-filter: blur(18px);
@@ -1037,7 +1046,7 @@ const quoteStyles = `
     place-items: center;
     gap: 0.35rem;
     min-height: 10rem;
-    border-radius: 24px;
+    border-radius: 2px;
     border: 2px dashed rgba(64, 196, 196, 0.34);
     background: linear-gradient(135deg, rgba(212, 240, 240, 0.62), rgba(248, 224, 236, 0.52));
     text-align: center;
@@ -1074,7 +1083,7 @@ const quoteStyles = `
     align-items: center;
     gap: 0.55rem;
     padding: 0.55rem 0.8rem;
-    border-radius: 999px;
+    border-radius: 2px;
     background: rgba(255, 255, 255, 0.76);
     box-shadow: inset 0 0 0 1px rgba(64, 196, 196, 0.18);
   }
@@ -1090,7 +1099,7 @@ const quoteStyles = `
     justify-content: space-between;
     gap: 1rem;
     padding: 1rem 1.1rem;
-    border-radius: 22px;
+    border-radius: 2px;
     border: 1px solid rgba(64, 196, 196, 0.14);
     background: rgba(255, 255, 255, 0.68);
     text-align: left;
@@ -1224,7 +1233,7 @@ const quoteStyles = `
   .quote-sidebar__block--soft {
     background: rgba(255, 255, 255, 0.58);
     padding: 1rem;
-    border-radius: 22px;
+    border-radius: 2px;
     border-top: none;
   }
 
@@ -1258,7 +1267,7 @@ const quoteStyles = `
 
   .quote-success__grid div {
     padding: 1rem;
-    border-radius: 24px;
+    border-radius: 2px;
     background: rgba(255, 255, 255, 0.64);
   }
 

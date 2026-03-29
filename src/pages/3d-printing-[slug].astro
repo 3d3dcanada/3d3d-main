@@ -243,9 +243,9 @@ const nearbyAreas = SERVICE_AREAS.filter((a) => area.nearby.includes(a.slug));
     color: #F6F7FA;
   }
 
-  .city-hero :global(.breadcrumbs a) { color: rgba(246, 247, 250, 0.5); }
+  .city-hero :global(.breadcrumbs a) { color: rgba(246, 247, 250, 0.78); }
   .city-hero :global(.breadcrumbs span[aria-current]) { color: rgba(246, 247, 250, 0.9); }
-  .city-hero :global(.breadcrumbs__sep) { color: rgba(246, 247, 250, 0.3); }
+  .city-hero :global(.breadcrumbs__sep) { color: rgba(246, 247, 250, 0.78); }
 
   .city-eyebrow {
     margin: 0;
@@ -254,7 +254,7 @@ const nearbyAreas = SERVICE_AREAS.filter((a) => area.nearby.includes(a.slug));
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #40C4C4;
+    color: var(--color-teal-primary);
     display: flex;
     align-items: center;
     gap: 0.8rem;
@@ -301,7 +301,7 @@ const nearbyAreas = SERVICE_AREAS.filter((a) => area.nearby.includes(a.slug));
   .city-stat__value {
     font-family: var(--font-display);
     font-size: 1.1rem;
-    color: #40C4C4;
+    color: var(--color-teal-primary);
   }
 
   .city-stat__label {
@@ -310,7 +310,7 @@ const nearbyAreas = SERVICE_AREAS.filter((a) => area.nearby.includes(a.slug));
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(246, 247, 250, 0.4);
+    color: rgba(246, 247, 250, 0.78);
   }
 
   .city-hero__actions {
@@ -323,7 +323,7 @@ const nearbyAreas = SERVICE_AREAS.filter((a) => area.nearby.includes(a.slug));
     display: inline-flex;
     align-items: center;
     padding: 0.85rem 1.6rem;
-    background: #40C4C4;
+    background: var(--color-teal-primary);
     color: #111214;
     font-family: var(--font-tech);
     font-size: 0.78rem;
@@ -331,7 +331,8 @@ const nearbyAreas = SERVICE_AREAS.filter((a) => area.nearby.includes(a.slug));
     letter-spacing: 0.14em;
     text-transform: uppercase;
     text-decoration: none;
-    border: 2px solid #40C4C4;
+    border: 2px solid var(--color-teal-primary);
+    border-radius: 2px;
     transition: background 0.2s ease, transform 0.15s ease;
   }
 
@@ -348,7 +349,7 @@ const nearbyAreas = SERVICE_AREAS.filter((a) => area.nearby.includes(a.slug));
 
   .city-cta--ghost:hover {
     background: rgba(246, 247, 250, 0.08);
-    border-color: rgba(246, 247, 250, 0.4);
+    border-color: rgba(246, 247, 250, 0.78);
   }
 
   /* ── Sections ── */
@@ -418,7 +419,7 @@ const nearbyAreas = SERVICE_AREAS.filter((a) => area.nearby.includes(a.slug));
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #40C4C4;
+    color: var(--color-teal-primary);
     text-decoration: none;
     transition: opacity 0.15s ease;
   }

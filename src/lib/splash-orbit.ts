@@ -15,8 +15,8 @@ export interface SplashOrbitItem {
 
 export const ORBIT_TILT = Math.PI / 18;
 
-const ORBIT_RADIUS = 5.4;
-const ORBIT_DEPTH = 4.6;
+const ORBIT_RADIUS = 4.2;
+const ORBIT_DEPTH = 3.8;
 
 const SCATTER_MAP: Record<SplashSection['id'], [number, number, number]> = {
   market: [-5.6, 2.8, -4.8],
@@ -24,6 +24,9 @@ const SCATTER_MAP: Record<SplashSection['id'], [number, number, number]> = {
   network: [-5.4, -2.4, -4.6],
   learn: [5.8, -2.1, -4.9],
   about: [0.1, 3.4, -6.3],
+  materials: [-4.2, 3.8, -5.2],
+  media: [4.7, -3.2, -5.8],
+  faq: [-0.5, -4.2, -6.0],
 };
 
 export function getOrbitItems(sections: SplashSection[], angle: number): SplashOrbitItem[] {

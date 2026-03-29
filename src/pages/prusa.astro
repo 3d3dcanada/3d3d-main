@@ -40,7 +40,7 @@ const printers = [
     name: 'Prusa CORE One L',
     slug: 'core-one-l',
     tag: 'Large Format',
-    tagColor: '#FA6831',
+    tagColor: 'var(--prusa-accent)',
     desc: 'Everything the CORE One+ does, at scale. Full enclosure, active heating, CoreXY speed. Monolithic parts that used to require splitting.',
     specs: ['Large build volume', 'Active chamber heating', 'CoreXY motion'],
     variants: [
@@ -213,6 +213,11 @@ const printers = [
 </BaseLayout>
 
 <style>
+  :root {
+    --prusa-accent: #FA6831;
+    --prusa-accent-hover: #e85a25;
+  }
+
   /* ─── Shared ─── */
   .prusa-shell {
     width: min(100% - clamp(1.5rem, 4vw, 4rem), 1200px);
@@ -226,7 +231,7 @@ const printers = [
     font-weight: 700;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #FA6831;
+    color: var(--prusa-accent);
   }
 
   .prusa-cta {
@@ -236,10 +241,10 @@ const printers = [
     width: fit-content;
     min-height: 3.2rem;
     padding: 0.85rem 1.5rem;
-    background: #FA6831;
+    background: var(--prusa-accent);
     color: #FFFFFF;
     border: 2px solid transparent;
-    border-radius: 4px;
+    border-radius: 2px;
     font-family: var(--font-tech);
     font-size: 0.8rem;
     font-weight: 700;
@@ -250,13 +255,13 @@ const printers = [
     box-shadow: 0 8px 24px rgba(250, 104, 49, 0.2);
   }
   .prusa-cta:hover {
-    background: #e85a25;
+    background: var(--prusa-accent-hover);
     transform: translateY(-2px);
     box-shadow: 0 12px 32px rgba(250, 104, 49, 0.35);
   }
   .prusa-cta--ghost {
     background: transparent;
-    color: #FA6831;
+    color: var(--prusa-accent);
     border-color: rgba(250, 104, 49, 0.3);
     box-shadow: none;
   }
@@ -310,7 +315,7 @@ const printers = [
   }
 
   .prusa-title--accent {
-    color: #FA6831;
+    color: var(--prusa-accent);
   }
 
   .prusa-lead {
@@ -339,7 +344,7 @@ const printers = [
     flex-direction: column;
     background: #FAFBFC;
     border: 1px solid rgba(26, 26, 26, 0.06);
-    border-radius: 16px;
+    border-radius: 2px;
     padding: clamp(1.5rem, 2.5vw, 2rem);
     transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
     animation: scale-in 0.5s ease-out both;
@@ -370,7 +375,7 @@ const printers = [
     width: fit-content;
     padding: 0.2rem 0.6rem;
     border: 1px solid;
-    border-radius: 3px;
+    border-radius: 2px;
     font-family: var(--font-tech);
     font-size: 0.6rem;
     font-weight: 700;
@@ -414,7 +419,7 @@ const printers = [
 
   .printer-card__specs li::before {
     content: '+ ';
-    color: #FA6831;
+    color: var(--prusa-accent);
     font-weight: 700;
   }
 
@@ -458,13 +463,13 @@ const printers = [
     font-family: var(--font-tech);
     font-size: 0.78rem;
     font-weight: 700;
-    color: #FA6831;
+    color: var(--prusa-accent);
     text-decoration: none;
     letter-spacing: 0.06em;
     transition: color 0.2s;
   }
   .printer-card__price-cta:hover {
-    color: #e85a25;
+    color: var(--prusa-accent-hover);
   }
 
   .printer-card__cta {
@@ -473,9 +478,9 @@ const printers = [
     justify-content: center;
     margin-top: 1.2rem;
     padding: 0.7rem 1.2rem;
-    background: #FA6831;
+    background: var(--prusa-accent);
     color: #FFFFFF;
-    border-radius: 4px;
+    border-radius: 2px;
     font-family: var(--font-tech);
     font-size: 0.74rem;
     font-weight: 700;
@@ -485,7 +490,7 @@ const printers = [
     transition: background 0.2s, transform 0.2s;
   }
   .printer-card__cta:hover {
-    background: #e85a25;
+    background: var(--prusa-accent-hover);
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(250, 104, 49, 0.25);
   }
@@ -497,7 +502,7 @@ const printers = [
       #F6F2EE;
     color: #1A1A1A;
     padding-block: clamp(3rem, 5vw, 4rem);
-    border-top: 3px solid #FA6831;
+    border-top: 3px solid var(--prusa-accent);
   }
 
   .prusa-service__title {
@@ -520,7 +525,7 @@ const printers = [
     flex-direction: column;
     gap: 0.3rem;
     background: #FFFFFF;
-    border-radius: 12px;
+    border-radius: 2px;
     padding: 1.2rem;
     border: 1px solid rgba(250, 104, 49, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -542,7 +547,7 @@ const printers = [
     font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: 0.06em;
-    color: #FA6831;
+    color: var(--prusa-accent);
   }
 
   .prusa-service__item p {
@@ -565,7 +570,7 @@ const printers = [
     background:
       linear-gradient(135deg, rgba(64, 196, 196, 0.06), rgba(250, 104, 49, 0.04));
     border: 1px solid rgba(64, 196, 196, 0.15);
-    border-radius: 16px;
+    border-radius: 2px;
     padding: clamp(1.5rem, 3vw, 2rem);
     animation: slide-up 0.5s ease-out both;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -607,7 +612,7 @@ const printers = [
     font-family: var(--font-tech);
     font-size: 0.76rem;
     font-weight: 700;
-    color: #40C4C4;
+    color: var(--color-teal-primary);
     text-decoration: none;
     letter-spacing: 0.06em;
     transition: color 0.2s, letter-spacing 0.2s;
@@ -638,7 +643,7 @@ const printers = [
   }
 
   .prusa-note__text strong {
-    color: #FA6831;
+    color: var(--prusa-accent);
   }
 
   .prusa-note__actions {

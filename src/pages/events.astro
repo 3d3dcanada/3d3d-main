@@ -71,8 +71,8 @@ const credentials = [
 
     <!-- ═══ HERO ═══ -->
     <div class="events-hero">
-      <div class="events-hero__bg" aria-hidden="true">
-        <img src="/media/real/afternoon-racing-02.jpg" alt="" loading="eager" decoding="async" />
+      <div class="events-hero__bg">
+        <img src="/media/real/afternoon-racing-02.jpg" alt="A sailboat moving fast through ocean swells during a race" loading="eager" decoding="async" />
       </div>
       <div class="events-shell">
         <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Events'}]} />
@@ -103,10 +103,10 @@ const credentials = [
               >
                 {item.sailboat && (
                   <svg class="tl-item__sailboat" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <line x1="24" y1="6" x2="24" y2="38" stroke="#40C4C4" stroke-width="2.5" stroke-linecap="round"/>
-                    <polygon points="24,8 24,30 8,30" fill="#40C4C4" opacity="0.85"/>
-                    <polygon points="24,14 24,30 38,30" fill="#40C4C4" opacity="0.5"/>
-                    <path d="M6,38 Q24,34 42,38 L40,43 Q24,40 8,43 Z" fill="#40C4C4" opacity="0.9"/>
+                    <line x1="24" y1="6" x2="24" y2="38" stroke="var(--color-teal-primary)" stroke-width="2.5" stroke-linecap="round"/>
+                    <polygon points="24,8 24,30 8,30" fill="var(--color-teal-primary)" opacity="0.85"/>
+                    <polygon points="24,14 24,30 38,30" fill="var(--color-teal-primary)" opacity="0.5"/>
+                    <path d="M6,38 Q24,34 42,38 L40,43 Q24,40 8,43 Z" fill="var(--color-teal-primary)" opacity="0.9"/>
                   </svg>
                 )}
                 <span class={`tl-item__date ${item.highlight ? 'tl-item__date--light' : ''}`}>{item.date}</span>
@@ -152,7 +152,7 @@ const credentials = [
     <!-- ═══ SAILING CREDENTIALS ═══ -->
     <div class="events-credentials">
       <div class="events-shell">
-        <p class="events-section-eyebrow scroll-in-left" style="color: #40C4C4;">Offshore Log</p>
+        <p class="events-section-eyebrow scroll-in-left">Offshore Log</p>
         <h2 class="events-credentials__title scroll-in">The ocean taught me everything I build for.</h2>
         <p class="events-credentials__body scroll-in">
           My first time sailing was a duo passage with Christopher Stanmore-Major. Halifax, Nova Scotia to Antigua. No experience. We hit a cat-one storm — 70-knot sustained winds, 90-knot gusts. That trip taught me everything that matters about what breaks, why it breaks, and what you have to accept when there is no option to stop.
@@ -170,7 +170,7 @@ const credentials = [
       <div class="events-shell">
         <div class="events-avail__inner">
           <div>
-            <p class="events-section-eyebrow scroll-in-left" style="color: rgba(246,247,250,0.4);">Availability</p>
+            <p class="events-section-eyebrow scroll-in-left" style="color: rgba(246,247,250,0.78);">Availability</p>
             <h2 class="events-avail__title scroll-in">On-Site for 2026</h2>
             <p class="events-avail__body scroll-in">
               Available for race campaigns, refit support, trans-oceanic passages, and mechanical problems that live on a vessel. I integrate with the crew, stand my watch, and ensure the hardware survives the trip. Worldwide.
@@ -201,8 +201,8 @@ const credentials = [
 
 <style>
   .events-page {
-    background: #F6F7FA;
-    color: #111214;
+    background: var(--color-surface-primary);
+    color: var(--color-text-primary);
     min-height: 100svh;
   }
 
@@ -244,7 +244,7 @@ const credentials = [
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #40C4C4;
+    color: var(--color-teal-primary);
     display: flex;
     align-items: center;
     gap: 0.8rem;
@@ -254,7 +254,7 @@ const credentials = [
     content: '';
     width: 2.75rem;
     height: 2px;
-    background: #40C4C4;
+    background: var(--color-teal-primary);
     flex-shrink: 0;
   }
 
@@ -284,7 +284,7 @@ const credentials = [
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #40C4C4;
+    color: var(--color-teal-primary);
     display: flex;
     align-items: center;
     gap: 0.8rem;
@@ -304,7 +304,7 @@ const credentials = [
     font-size: clamp(1.8rem, 1.2rem + 2vw, 2.8rem);
     line-height: 1.05;
     letter-spacing: -0.03em;
-    color: #111214;
+    color: var(--color-text-primary);
     text-transform: uppercase;
   }
 
@@ -336,25 +336,25 @@ const credentials = [
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    border: 3px solid #1A1A1A;
-    background: #F6F7FA;
+    border: 3px solid var(--color-text-primary);
+    background: var(--color-surface-primary);
     flex-shrink: 0;
     position: relative;
     z-index: 1;
   }
 
   .tl-item__dot--done {
-    background: #111214;
+    background: var(--color-text-primary);
   }
 
   .tl-item__dot--active {
-    background: #40C4C4;
-    border-color: #40C4C4;
+    background: var(--color-teal-primary);
+    border-color: var(--color-teal-primary);
     box-shadow: 0 0 0 4px rgba(64, 196, 196, 0.2);
   }
 
   .tl-item__dot--upcoming {
-    background: #F6F7FA;
+    background: var(--color-surface-primary);
     border-color: rgba(17, 18, 20, 0.25);
     border-style: dashed;
   }
@@ -376,7 +376,7 @@ const credentials = [
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #40C4C4;
+    color: var(--color-teal-primary);
   }
 
   .tl-item__date--light {
@@ -389,7 +389,7 @@ const credentials = [
     font-size: 1.3rem;
     line-height: 1.1;
     letter-spacing: -0.02em;
-    color: #111214;
+    color: var(--color-text-primary);
   }
 
   .tl-item__title--light {
@@ -400,7 +400,7 @@ const credentials = [
     margin: 0;
     font-size: 0.9rem;
     line-height: 1.7;
-    color: rgba(17, 18, 20, 0.6);
+    color: var(--color-text-secondary);
     max-width: 36rem;
   }
 
@@ -411,17 +411,17 @@ const credentials = [
 
   .tl-item--highlight .tl-item__content {
     border: 2px solid rgba(64, 196, 196, 0.4);
-    border-radius: 1rem;
+    border-radius: 2px;
     padding: clamp(1.25rem, 2.5vw, 2rem);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.28);
   }
 
   .tl-item--active .tl-item__title {
-    color: #2A9D9D;
+    color: var(--color-teal-primary);
   }
 
   .tl-item--active .tl-item__title--light {
-    color: #40C4C4;
+    color: var(--color-teal-primary);
   }
 
   .tl-item--upcoming .tl-item__content {
@@ -487,7 +487,7 @@ const credentials = [
 
   .events-feature__img-wrap {
     border: 3px solid rgba(64, 196, 196, 0.25);
-    border-radius: 1rem;
+    border-radius: 2px;
     overflow: hidden;
   }
 
@@ -525,7 +525,7 @@ const credentials = [
     font-size: clamp(1.8rem, 1.2rem + 2vw, 2.8rem);
     line-height: 1.05;
     letter-spacing: -0.03em;
-    color: #111214;
+    color: var(--color-text-primary);
     text-transform: uppercase;
   }
 
@@ -533,7 +533,7 @@ const credentials = [
     margin: 0 0 2rem;
     font-size: 0.95rem;
     line-height: 1.75;
-    color: rgba(17, 18, 20, 0.65);
+    color: var(--color-text-secondary);
     max-width: 38rem;
   }
 
@@ -547,15 +547,15 @@ const credentials = [
     display: inline-flex;
     align-items: center;
     padding: 0.45rem 0.9rem;
-    background: #F6F7FA;
-    border: 2px solid #1A1A1A;
-    border-radius: 2rem;
+    background: var(--color-surface-primary);
+    border: 2px solid var(--color-text-primary);
+    border-radius: 2px;
     font-family: var(--font-tech);
     font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #111214;
+    color: var(--color-text-primary);
   }
 
   /* ── Availability (dark) ── */
@@ -598,7 +598,7 @@ const credentials = [
 
   .events-avail__photo-wrap {
     border: 3px solid rgba(64, 196, 196, 0.25);
-    border-radius: 1rem;
+    border-radius: 2px;
     overflow: hidden;
   }
 
@@ -626,7 +626,8 @@ const credentials = [
     justify-content: center;
     min-height: 3rem;
     padding: 0.8rem 1.4rem;
-    border: 3px solid #1A1A1A;
+    border: 3px solid var(--color-text-primary);
+    border-radius: 2px;
     font-family: var(--font-tech);
     font-size: 0.8rem;
     font-weight: 700;
@@ -640,7 +641,7 @@ const credentials = [
   }
 
   .events-btn--primary {
-    background: #40C4C4;
+    background: var(--color-teal-primary);
     color: #0F1112;
     box-shadow: 0 10px 28px rgba(64, 196, 196, 0.25);
   }
@@ -660,14 +661,14 @@ const credentials = [
   }
 
   .events-btn--teal {
-    background: #40C4C4;
+    background: var(--color-teal-primary);
     color: #0F1112;
     box-shadow: 0 10px 28px rgba(64, 196, 196, 0.25);
   }
 
   .events-btn--ghost-light {
     background: transparent;
-    color: #40C4C4;
+    color: var(--color-teal-primary);
     border-color: rgba(64, 196, 196, 0.3);
   }
 

@@ -15,7 +15,7 @@ import PageNextActions from '../components/PageNextActions.astro';
         3D3D is growing. These are real positions, not volunteer calls. If the work fits, reach out.
       </p>
 
-      <div class="opp-listing">
+      <div class="opp-listing surface-panel">
         <div class="opp-listing__header">
           <h2 class="opp-listing__role">Social Media Intern</h2>
           <div class="opp-listing__meta">
@@ -43,8 +43,8 @@ import PageNextActions from '../components/PageNextActions.astro';
     min-height: 100svh;
     display: flex;
     align-items: center;
-    background: #111214;
-    color: #F6F7FA;
+    background: var(--color-surface-primary);
+    color: var(--color-text-primary);
   }
 
   .opp-shell {
@@ -62,7 +62,7 @@ import PageNextActions from '../components/PageNextActions.astro';
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #40C4C4;
+    color: var(--color-teal-primary);
     display: flex;
     align-items: center;
     gap: 0.8rem;
@@ -72,7 +72,7 @@ import PageNextActions from '../components/PageNextActions.astro';
     content: '';
     width: 2.75rem;
     height: 2px;
-    background: #40C4C4;
+    background: var(--color-teal-primary);
     flex-shrink: 0;
   }
 
@@ -82,7 +82,7 @@ import PageNextActions from '../components/PageNextActions.astro';
     font-size: clamp(3rem, 2rem + 4vw, 5.5rem);
     line-height: 0.95;
     letter-spacing: -0.04em;
-    color: #FFFFFF;
+    color: var(--color-text-primary);
     text-transform: uppercase;
   }
 
@@ -91,16 +91,13 @@ import PageNextActions from '../components/PageNextActions.astro';
     max-width: 36rem;
     font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.2rem);
     line-height: 1.75;
-    color: rgba(246, 247, 250, 0.82);
+    color: var(--color-text-secondary);
   }
 
   .opp-listing {
     display: grid;
     gap: 1.4rem;
     padding: clamp(1.5rem, 3vw, 2.5rem);
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(64, 196, 196, 0.18);
-    border-radius: 2px;
   }
 
   .opp-listing__header {
@@ -114,7 +111,7 @@ import PageNextActions from '../components/PageNextActions.astro';
     font-size: clamp(1.4rem, 1rem + 1.5vw, 2rem);
     line-height: 1.1;
     letter-spacing: -0.02em;
-    color: #FFFFFF;
+    color: var(--color-text-primary);
   }
 
   .opp-listing__meta {
@@ -126,7 +123,7 @@ import PageNextActions from '../components/PageNextActions.astro';
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #40C4C4;
+    color: var(--color-teal-primary);
   }
 
   .opp-listing__body {
@@ -138,12 +135,12 @@ import PageNextActions from '../components/PageNextActions.astro';
     margin: 0;
     font-size: 1rem;
     line-height: 1.7;
-    color: rgba(246, 247, 250, 0.78);
+    color: var(--color-text-secondary);
   }
 
   .opp-listing__tone {
     font-style: italic;
-    color: rgba(246, 247, 250, 0.6) !important;
+    color: var(--color-text-muted) !important;
   }
 
   .opp-cta {
@@ -153,9 +150,10 @@ import PageNextActions from '../components/PageNextActions.astro';
     width: fit-content;
     min-height: 3.4rem;
     padding: 0.95rem 1.6rem;
-    background: #40C4C4;
+    background: var(--color-teal-primary);
     color: #0F1112;
-    border: 3px solid #1A1A1A;
+    border: 3px solid var(--color-text-primary);
+    border-radius: 2px;
     font-family: var(--font-tech);
     font-size: 0.84rem;
     font-weight: 700;
@@ -166,7 +164,7 @@ import PageNextActions from '../components/PageNextActions.astro';
   }
 
   .opp-cta:hover {
-    background: #53D3D3;
+    background: #53D3D3; /* teal hover state */
     box-shadow: 0 8px 24px rgba(64, 196, 196, 0.4);
     transform: translateY(-2px);
   }

@@ -91,11 +91,11 @@
   --color-charcoal-muted: #666666;
 
   /* ── Border Radius — Precise, not organic ───────────────────── */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 20px;
-  --radius-full: 9999px;
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-xl: 2px;
+  --radius-full: 2px;
 
   /* ── Spacing ────────────────────────────────────────────────── */
   --sidebar-width: 240px;

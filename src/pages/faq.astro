@@ -115,7 +115,7 @@ const schema = {
       </p>
 
       {faqs.map((cat) => (
-        <div class="faq-category scroll-in">
+        <div class="faq-category scroll-in surface-panel">
           <h2 class="faq-category__title">{cat.category}</h2>
           <div class="faq-list">
             {cat.items.map((item) => (
@@ -147,8 +147,8 @@ const schema = {
 
 <style>
   .faq-page {
-    background: #111214;
-    color: #F6F7FA;
+    background: var(--color-surface-primary);
+    color: var(--color-text-primary);
     min-height: 100svh;
   }
 
@@ -165,7 +165,7 @@ const schema = {
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #40C4C4;
+    color: var(--color-teal-primary);
     display: flex;
     align-items: center;
     gap: 0.8rem;
@@ -175,7 +175,7 @@ const schema = {
     content: '';
     width: 2.75rem;
     height: 2px;
-    background: #40C4C4;
+    background: var(--color-teal-primary);
     flex-shrink: 0;
   }
 
@@ -185,7 +185,7 @@ const schema = {
     font-size: clamp(2.5rem, 1.5rem + 4vw, 4.5rem);
     line-height: 0.95;
     letter-spacing: -0.035em;
-    color: #FFFFFF;
+    color: var(--color-text-primary);
     text-transform: uppercase;
   }
 
@@ -194,11 +194,12 @@ const schema = {
     max-width: 36rem;
     font-size: clamp(1rem, 0.94rem + 0.3vw, 1.1rem);
     line-height: 1.75;
-    color: rgba(246, 247, 250, 0.65);
+    color: var(--color-text-secondary);
   }
 
   .faq-category {
     margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
+    padding: clamp(1.5rem, 3vw, 2.5rem);
   }
 
   .faq-category__title {
@@ -208,9 +209,9 @@ const schema = {
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #40C4C4;
+    color: var(--color-teal-primary);
     padding-bottom: 0.8rem;
-    border-bottom: 1px solid rgba(64, 196, 196, 0.15);
+    border-bottom: 1px solid var(--color-border-subtle);
   }
 
   .faq-list {
@@ -219,7 +220,7 @@ const schema = {
   }
 
   .faq-item {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid var(--color-border-subtle);
   }
 
   .faq-item__q {
@@ -230,7 +231,7 @@ const schema = {
     font-family: var(--font-body);
     font-size: 0.95rem;
     font-weight: 600;
-    color: #F6F7FA;
+    color: var(--color-text-primary);
     cursor: pointer;
     list-style: none;
     min-height: 44px;
@@ -246,18 +247,18 @@ const schema = {
     content: '+';
     font-family: var(--font-tech);
     font-size: 1.1rem;
-    color: #40C4C4;
+    color: var(--color-teal-primary);
     flex-shrink: 0;
     margin-left: 1rem;
     transition: transform 0.2s ease;
   }
 
   .faq-item[open] .faq-item__q::after {
-    content: '\2212';
+    content: '−';
   }
 
   .faq-item__q:hover {
-    color: #40C4C4;
+    color: var(--color-teal-primary);
   }
 
   .faq-item__a {
@@ -265,21 +266,21 @@ const schema = {
     padding: 0 0 1.2rem;
     font-size: 0.88rem;
     line-height: 1.7;
-    color: rgba(246, 247, 250, 0.6);
+    color: var(--color-text-secondary);
     max-width: 42rem;
   }
 
   .faq-cta {
     margin-top: clamp(3rem, 5vw, 4rem);
     padding-top: 2rem;
-    border-top: 1px solid rgba(64, 196, 196, 0.15);
+    border-top: 1px solid var(--color-border-subtle);
   }
 
   .faq-cta p {
     margin: 0 0 1rem;
     font-family: var(--font-display);
     font-size: 1.1rem;
-    color: #FFFFFF;
+    color: var(--color-text-primary);
   }
 
   .faq-cta__links {
@@ -294,10 +295,10 @@ const schema = {
     justify-content: center;
     min-height: 44px;
     padding: 0.7rem 1.4rem;
-    background: #40C4C4;
+    background: var(--color-teal-primary);
     color: #0F1112;
-    border: 2px solid #40C4C4;
-    border-radius: 0.5rem;
+    border: 2px solid var(--color-teal-primary);
+    border-radius: 2px;
     font-family: var(--font-tech);
     font-size: 0.8rem;
     font-weight: 700;
@@ -313,7 +314,7 @@ const schema = {
 
   .faq-cta__btn--ghost {
     background: transparent;
-    color: #40C4C4;
+    color: var(--color-teal-primary);
   }
 
   .faq-cta__btn--ghost:hover {

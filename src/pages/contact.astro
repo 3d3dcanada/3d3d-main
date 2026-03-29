@@ -133,7 +133,7 @@ import PageNextActions from '../components/PageNextActions.astro';
 
 <style>
   .contact-page {
-    --page-accent: #40C4C4;
+    --page-accent: var(--color-teal-primary);
     --page-bg-dark: #111214;
     --page-bg-light: #F6F7FA;
     --page-border: 3px solid #1A1A1A;
@@ -201,7 +201,7 @@ import PageNextActions from '../components/PageNextActions.astro';
     font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.18em;
-    color: #40C4C4;
+    color: var(--page-accent);
   }
 
   .contact-path__title {
@@ -216,7 +216,7 @@ import PageNextActions from '../components/PageNextActions.astro';
     margin: 0;
     font-size: 0.88rem;
     line-height: 1.7;
-    color: rgba(246, 247, 250, 0.6);
+    color: rgba(246, 247, 250, 0.78);
   }
 
   .contact-body {

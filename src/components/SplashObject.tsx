@@ -1,11 +1,10 @@
-import { Clone, Edges, Float, useGLTF } from '@react-three/drei';
+import { Clone, Float, useGLTF } from '@react-three/drei';
 import type { ThreeEvent } from '@react-three/fiber';
 import { useFrame } from '@react-three/fiber';
 import { useMemo, useRef } from 'react';
 import {
   Box3,
   CanvasTexture,
-  Color,
   Mesh,
   MeshStandardMaterial,
   NearestFilter,
@@ -16,7 +15,6 @@ import {
 import type { Group, Object3D, Texture } from 'three';
 
 import { ACCENT_HEX, SPLASH_SECTIONS, type SplashSection } from '../data/splashSections';
-import type { SplashTheme } from '../lib/splash-theme';
 
 // Procedural brushed-metal normal map (64x64 canvas, no file loading)
 let _brushedMetalNormal: Texture | null = null;
@@ -74,27 +72,19 @@ interface SplashObjectProps {
   active: boolean;
   focused: boolean;
   opacity: number;
-  theme: SplashTheme;
   onHoverChange: (hovered: boolean) => void;
-}
-
-function darkenHex(hex: string, amount: number) {
-  const color = new Color(hex);
-  color.multiplyScalar(1 - amount);
-  return `#${color.getHexString()}`;
 }
 
 // Per-mesh metalness/roughness variation patterns (cycles through 4 profiles)
 const MATERIAL_PROFILES = [
-  { metalness: 0.72, roughness: 0.18, envMapIntensity: 1.4 }, // shiny metal
-  { metalness: 0.45, roughness: 0.35, envMapIntensity: 0.9 }, // satin
-  { metalness: 0.62, roughness: 0.24, envMapIntensity: 1.1 }, // semi-shiny
-  { metalness: 0.3,  roughness: 0.48, envMapIntensity: 0.6 }, // matte
+  { metalness: 0.58, roughness: 0.34, envMapIntensity: 0.7 },
+  { metalness: 0.42, roughness: 0.48, envMapIntensity: 0.55 },
+  { metalness: 0.5, roughness: 0.4, envMapIntensity: 0.62 },
+  { metalness: 0.28, roughness: 0.6, envMapIntensity: 0.4 },
 ];
 
-function buildModel(scene: Object3D, accentHex: string, naturalColors: string[], theme: SplashTheme) {
+function buildModel(scene: Object3D, accentHex: string, naturalColors: string[]) {
   const clone = scene.clone(true);
-  const isDark = theme === 'dark';
   let meshIndex = 0;
 
   clone.traverse((child) => {
@@ -109,11 +99,11 @@ function buildModel(scene: Object3D, accentHex: string, naturalColors: string[],
     const useNormalMap = profile.metalness > 0.5;
     const mat = new MeshStandardMaterial({
       color: colorHex,
-      metalness: isDark ? profile.metalness : profile.metalness * 0.85,
-      roughness: isDark ? profile.roughness : profile.roughness * 1.15,
+      metalness: profile.metalness,
+      roughness: profile.roughness,
       envMapIntensity: profile.envMapIntensity,
       emissive: accentHex,
-      emissiveIntensity: isDark ? 0.15 : 0.08,
+      emissiveIntensity: 0,
       ...(useNormalMap
         ? { normalMap: getBrushedMetalNormal(), normalScale: new Vector2(0.35, 0.35) }
         : {}),
@@ -137,7 +127,6 @@ export default function SplashObject({
   active,
   focused,
   opacity,
-  theme,
   onHoverChange,
 }: SplashObjectProps) {
   const groupRef = useRef<Group>(null);
@@ -145,40 +134,26 @@ export default function SplashObject({
   const { naturalColors } = section;
   const { scene } = useGLTF(section.modelPath);
   const preparedModel = useMemo(
-    () => buildModel(scene, accentHex, naturalColors, theme),
-    [scene, accentHex, naturalColors, theme],
+    () => buildModel(scene, accentHex, naturalColors),
+    [scene, accentHex, naturalColors],
   );
-  const isDark = theme === 'dark';
 
   useFrame(({ clock }) => {
     if (!groupRef.current) return;
 
     const [rx, ry, rz] = section.modelRotation;
-    const sway = Math.sin(clock.elapsedTime * 0.75) * (focused ? 0.22 : 0.04);
-    const spin = focused ? clock.elapsedTime * 1.5 : 0;
-    groupRef.current.rotation.set(rx, ry + sway + spin, rz);
-
-    const emissiveIntensity = focused
-      ? (isDark ? 0.25 : 0.15) + ((Math.sin(clock.elapsedTime * Math.PI) + 1) * 0.5) * 0.1
-      : active
-        ? isDark
-          ? 0.12
-          : 0.08
-        : isDark
-          ? 0.06
-          : 0.03;
-
-    const envMapBoost = focused ? 1.6 : active ? 1.1 : 0.85;
+    const swayX = Math.sin(clock.elapsedTime * 0.42) * (focused ? 0.04 : 0.015);
+    const swayY = Math.sin(clock.elapsedTime * 0.55) * (focused ? 0.08 : 0.03);
+    groupRef.current.rotation.set(rx + swayX, ry + swayY, rz);
 
     groupRef.current.traverse((child) => {
       if (!(child instanceof Mesh)) return;
       if (!(child.material instanceof MeshStandardMaterial)) return;
 
-      child.material.emissiveIntensity = emissiveIntensity;
-      child.material.envMapIntensity = (child.material.userData.baseEnvMap ?? 1.0) * envMapBoost;
+      child.material.emissiveIntensity = 0;
+      child.material.envMapIntensity = child.material.userData.baseEnvMap ?? 1.0;
       child.material.opacity = opacity;
       child.material.transparent = opacity < 0.999;
-      child.material.needsUpdate = true;
     });
   });
 
@@ -199,9 +174,9 @@ export default function SplashObject({
       onPointerOut={handlePointerOut}
     >
       <Float
-        speed={focused ? 1.8 : 1.2}
-        rotationIntensity={focused ? 0.16 : 0.08}
-        floatIntensity={focused ? 0.24 : 0.12}
+        speed={focused ? 1.1 : 0.85}
+        rotationIntensity={focused ? 0.06 : 0.03}
+        floatIntensity={focused ? 0.08 : 0.04}
       >
         <group
           ref={groupRef}
@@ -210,7 +185,7 @@ export default function SplashObject({
         >
           {section.id === 'services' ? (
             <>
-              <group position={[0, 0, 0.15]} rotation={[0, 0, Math.PI / 4]}>
+              <group position={[0, 0, 0.08]} rotation={[0, Math.PI / 2, Math.PI / 5]}>
                 <Clone
                   object={preparedModel.clone}
                   position={[
@@ -218,12 +193,9 @@ export default function SplashObject({
                     -preparedModel.center.y,
                     -preparedModel.center.z,
                   ]}
-                  inject={(object) =>
-                    object instanceof Mesh ? <Edges color={accentHex} threshold={18} /> : null
-                  }
                 />
               </group>
-              <group position={[0, 0, -0.15]} rotation={[0, Math.PI, -Math.PI / 4]}>
+              <group position={[0, 0, -0.08]} rotation={[0, Math.PI / 2, -Math.PI / 5]}>
                 <Clone
                   object={preparedModel.clone}
                   position={[
@@ -231,9 +203,6 @@ export default function SplashObject({
                     -preparedModel.center.y,
                     -preparedModel.center.z,
                   ]}
-                  inject={(object) =>
-                    object instanceof Mesh ? <Edges color={accentHex} threshold={18} /> : null
-                  }
                 />
               </group>
             </>
@@ -245,9 +214,6 @@ export default function SplashObject({
                 -preparedModel.center.y,
                 -preparedModel.center.z,
               ]}
-              inject={(object) =>
-                object instanceof Mesh ? <Edges color={accentHex} threshold={18} /> : null
-              }
             />
           )}
         </group>

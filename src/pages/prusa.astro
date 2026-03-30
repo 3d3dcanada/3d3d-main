@@ -1,554 +1,1392 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
-import PageNextActions from '../components/PageNextActions.astro';
+import { 
+  PRUSA_PRINTERS, 
+  PRUSA_FILAMENTS, 
+  PRUSA_PARTS,
+  PRINTER_CATEGORIES,
+  FILAMENT_CATEGORIES,
+  PART_CATEGORIES,
+  getInStockPrinters,
+  formatPriceCAD,
+  calculateOurPrice,
+  DEFAULT_MARKUP_PERCENT
+} from '../data/prusa';
 
-const prusaSchema = {
-  "@context": "https://schema.org",
-  "@type": "Store",
-  "name": "3D3D Prusa Dealership & Setup Service",
-  "description": "Local Canadian provider of fully assembled, calibrated Prusa 3D printers and bulk Prusament.",
-  "url": "https://3d3d.ca/prusa",
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Prusa 3D Printers",
-    "itemListElement": [
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Product",
-          "name": "Prusa CORE One+"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Product",
-          "name": "Prusa MK4S"
-        }
-      }
-    ]
+const inStockPrinters = getInStockPrinters();
+
+const printerSeries = [
+  { id: 'CORE', name: 'CORE Series', desc: 'Professional enclosed printers', icon: '🔧' },
+  { id: 'XL', name: 'Original XL', desc: 'Large format CoreXY', icon: '📐' },
+  { id: 'MK4S', name: 'MK4S Series', desc: 'Latest MK generation', icon: '⚡' },
+  { id: 'MINI', name: 'MINI+', desc: 'Compact & affordable', icon: '🎯' },
+  { id: 'SL1S', name: 'SL1S', desc: 'High-res resin printing', icon: '✨' },
+];
+
+const valueProps = [
+  {
+    icon: '⚡',
+    title: 'Priority Shipping',
+    body: 'We order directly from Prusa with priority handling. Your printer ships to us first for inspection, then to you with full documentation.'
+  },
+  {
+    icon: '🔧',
+    title: 'Pre-Configuration',
+    body: 'Every machine is unboxed, inspected, and pre-configured for Atlantic Canada humidity conditions. No surprises on first boot.'
+  },
+  {
+    icon: '📋',
+    title: 'Full Documentation',
+    body: 'Complete inspection report with photos, test prints, and calibration data. Know exactly what you are getting from day one.'
+  },
+  {
+    icon: '🏪',
+    title: 'Local Support',
+    body: 'Parts, repairs, and upgrades available locally. No waiting for international shipping when you need a nozzle at 11 PM on a Sunday.'
+  },
+  {
+    icon: '💰',
+    title: 'Bulk Filament Savings',
+    body: 'Prusament at competitive prices. Order 10+ spools for 10% off, 50+ for 20% off. Same quality as direct, better price.'
+  },
+  {
+    icon: '🛡️',
+    title: 'Quality Guarantee',
+    body: 'We check every machine before it reaches you. If something is wrong, we fix it here. No RMAs to Prague required.'
   }
+];
+
+const whyNotOfficial = [
+  'We are not an authorized Prusa reseller.',
+  'We are a point of trust between you and the manufacturer.',
+  'You get Prusa quality with local Canadian support.',
+  'Priority shipping, inspection, and pre-configuration included.',
+  'Parts and service available without international delays.',
+  'Pricing is competitive - we make our margin on volume, not markup.'
+];
+
+const comparisonPoints = [
+  { prusa: 'Steel frame construction', other: 'Plastic frame, warps over time' },
+  { prusa: 'Open-source firmware', other: 'Locked down, no customization' },
+  { prusa: '10+ year track record', other: '2-3 years, disasters documented' },
+  { prusa: 'Repairable for life', other: 'Disposable when it breaks' },
+  { prusa: 'Community support', other: 'Corporate silencing' },
+  { prusa: 'Made in EU', other: 'Made where QA is optional' },
+];
+
+const formatPrice = (price: number) => {
+  if (price === 0) return 'Contact for pricing';
+  return `CA$ ${price.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 };
 
-/**
- * Prusa pricing as of March 2026.
- * Base: Prusa.com CAD prices.
- * 3D3D markup: ~10-15% for professional setup, calibration, 100 preset prints,
- * first-print walkthrough, and ongoing local support.
- */
-const printers = [
-  {
-    name: 'Prusa CORE One+',
-    slug: 'core-one-plus',
-    tag: 'Flagship',
-    tagColor: '#40C4C4',
-    desc: 'Fully enclosed CoreXY. Input shaping, active chamber heating, open-source firmware. The machine that made Prusa fast and reliable.',
-    specs: ['CoreXY · 250 mm/s', 'Enclosed + active heating', '250 × 210 × 220 mm'],
-    variants: [
-      { label: 'Turnkey Setup', cad: 2099 },
-    ],
-  },
-  {
-    name: 'Prusa CORE One+ Ultimate',
-    slug: 'core-one-plus-ultimate',
-    tag: 'Ultimate',
-    tagColor: '#E84A8A',
-    desc: 'Everything the CORE One+ offers, with the complete upgrade package pre-installed. Hardened nozzle, filament sensor, and more — ready for engineering materials out of the box.',
-    specs: ['Full upgrade package', 'Hardened nozzle included', 'Engineering-ready'],
-    variants: [
-      { label: 'Turnkey Setup', cad: 2749 },
-    ],
-  },
-  {
-    name: 'Prusa CORE One L',
-    slug: 'core-one-l',
-    tag: 'Large Format',
-    tagColor: 'var(--prusa-accent)',
-    desc: 'Everything the CORE One+ does, at scale. Full enclosure, active heating, CoreXY speed. Monolithic parts that used to require splitting.',
-    specs: ['Large build volume', 'Active chamber heating', 'CoreXY motion'],
-    variants: [
-      { label: 'Turnkey Setup', cad: 2899 },
-    ],
-    note: 'High demand — 4-5 week lead time',
-  },
-  {
-    name: 'Original Prusa MK4S',
-    slug: 'mk4s',
-    tag: 'Workhorse',
-    tagColor: '#F5A623',
-    desc: 'The most proven 3D printer in the world. Nextruder, input shaping, PrusaConnect. Millions of print hours across tens of thousands of shops worldwide.',
-    specs: ['Nextruder + quick-swap nozzle', 'Input shaping + pressure advance', '250 × 210 × 220 mm'],
-    variants: [
-      { label: 'Turnkey Setup', cad: 1599 },
-    ],
-  },
-];
+const getStockBadge = (status: string) => {
+  switch (status) {
+    case 'in_stock': return { text: 'In Stock', class: 'prusa-badge--stock' };
+    case 'lead_time': return { text: 'Lead Time', class: 'prusa-badge--lead' };
+    case 'high_demand': return { text: 'High Demand', class: 'prusa-badge--demand' };
+    default: return { text: 'Order', class: 'prusa-badge--default' };
+  }
+};
 ---
 
-<BaseLayout
-  title="Buy Prusa 3D Printers & Filament | 3D3D Dealership"
-  description="Buy Prusa 3D printers, Prusament, and engineering materials directly from 3D3D. Professional setup, local service, and ongoing technical support in Canada."
-  schema={prusaSchema}
+<BaseLayout 
+  title="Prusa by 3D3D | 3D Printers, Filament & Parts in Canada"
+  description="Prusa 3D printers, Prusament filament, and genuine parts - available in Canada through 3D3D. Priority shipping, local support, bulk pricing. Not an official reseller. A point of trust."
   activePath="/prusa"
 >
-  <!-- Hero — clean, aggressive -->
-  <section class="prusa-hero">
-    <div class="prusa-shell">
-      <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Prusa Dealership'}]} />
-      <div class="prusa-hero__content">
-        <p class="prusa-eyebrow">Prusa Hardware & Materials</p>
-        <h1 class="prusa-title">
-          We sell them.<br />
-          We set them up.<br />
-          <span class="prusa-title--accent">We support them.</span>
-        </h1>
-        <p class="prusa-lead">
-          3D3D is your local deployment hub for Prusa equipment. We don't drop-ship boxes. We deliver machines that are fully assembled, calibrated, burn-in tested, and backed by a local shop that runs them every single day. <strong>We absolutely believe in Prusa and actively run an MK2</strong> alongside our modern fleet. We know these machines down to the frame.
-        </p>
-        <a href="#lineup" class="prusa-cta" style="margin-top: 1rem;">View the Lineup</a>
+  <section class="prusa-page">
+    
+    <!-- ═══ HERO ═══ -->
+    <div class="prusa-hero">
+      <div class="prusa-hero__bg">
+        <img src="/media/workshop/printer-action-cf.jpg" alt="3D printing workshop" class="prusa-hero__bg-img" />
       </div>
-    </div>
-  </section>
+      <div class="prusa-shell">
+        <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Prusa'}]} />
 
-  <!-- Filament Bulk Order Section -->
-  <section class="prusa-filament" id="filament">
-    <div class="prusa-shell">
-      <div class="prusa-filament__inner">
-        <h2 class="prusa-service__title" style="color: white; margin-bottom: 0.5rem;">Community Bulk Ordering</h2>
-        <p class="prusa-filament__desc">
-          Stop paying individual shipping rates from Europe or grabbing terrible Amazon filament because it's fast. We do bulk pallet orders of Prusament and high-grade engineering compounds directly from the manufacturers. By pooling our orders, we save the community massive shipping and tariff costs.
-        </p>
-        <ul class="prusa-filament__list">
-          <li><strong>Prusament PLA/PETG:</strong> Sourced at scale to beat landed costs.</li>
-          <li><strong>Engineering (ASA/PC/PEEK):</strong> Reliable, trusted batches for professional use.</li>
-          <li><strong>Frequency:</strong> We run community bulk buys every month.</li>
-        </ul>
-        <a href="/quote?subject=bulk-filament-request" class="prusa-cta prusa-cta--ghost prusa-cta--light">Submit Order Request &rarr;</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Printer Catalog -->
-  <section id="lineup" class="prusa-catalog">
-    <div class="prusa-shell">
-      <h2 class="prusa-service__title">Turnkey Printers</h2>
-      <p class="prusa-subhead">Every price includes our complete setup and calibration service.</p>
-      
-      <div class="prusa-grid">
-        {printers.map((p) => (
-          <article class="printer-card">
-            <div class="printer-card__head">
-              <span class="printer-card__tag" style={`color: ${p.tagColor}; border-color: ${p.tagColor}40`}>{p.tag}</span>
-              <h2 class="printer-card__name">{p.name}</h2>
-              <p class="printer-card__desc">{p.desc}</p>
+        <div class="prusa-hero__grid">
+          <div class="prusa-hero__content">
+            <p class="prusa-eyebrow">Prusa in Canada</p>
+            <h1 class="prusa-title">
+              The Right Way.
+              <span class="prusa-title__sub">Without the Wait.</span>
+            </h1>
+            <p class="prusa-intro">
+              Prusa Research builds the Bugatti of 3D printers. We bridge the gap between
+              their EU factory and your Canadian workshop. Priority shipping, full inspection,
+              local support.
+            </p>
+            <p class="prusa-notice">
+              <strong>Not an official reseller.</strong> We are a point of trust.
+              You get Prusa quality with hands-on Canadian support.
+            </p>
+            <div class="prusa-hero__actions">
+              <a href="#printers" class="prusa-cta">Browse Printers</a>
+              <a href="#filaments" class="prusa-cta prusa-cta--ghost">Filament & Parts</a>
             </div>
+          </div>
 
-            <ul class="printer-card__specs">
-              {p.specs.map((s) => (
-                <li>{s}</li>
-              ))}
-            </ul>
+          <div class="prusa-hero__image">
+            <img
+              src="/images/hp_convert_prusa_1774867155451.png"
+              alt="Prusa 3D Printer"
+              class="prusa-hero__printer-img"
+            />
+            <div class="prusa-hero__stats">
+              <div class="prusa-stat">
+                <span class="prusa-stat__num">14</span>
+                <span class="prusa-stat__label">Printer Models</span>
+              </div>
+              <div class="prusa-stat">
+                <span class="prusa-stat__num">{inStockPrinters.length}</span>
+                <span class="prusa-stat__label">In Stock Now</span>
+              </div>
+              <div class="prusa-stat">
+                <span class="prusa-stat__num">17.5%</span>
+                <span class="prusa-stat__label">Our Markup</span>
+              </div>
+              <div class="prusa-stat">
+                <span class="prusa-stat__num">🇨🇦</span>
+                <span class="prusa-stat__label">Local Support</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-            <div class="printer-card__pricing">
-              {p.variants.map((v) => (
-                <div class="printer-card__variant">
-                  <span class="printer-card__variant-label">{v.label}</span>
-                  <span class="printer-card__variant-price">CA${v.cad.toLocaleString()}</span>
+    <!-- ═══ DISCLOSURE BANNER ═══ -->
+    <div class="prusa-disclosure">
+      <div class="prusa-shell">
+        <p>
+          <strong>Important:</strong> 3D3D is not an authorized Prusa reseller. 
+          We purchase Prusa products through standard channels and provide value through 
+          inspection, local support, and faster fulfillment. All products are genuine 
+          Prusa Research equipment with full manufacturer warranty.
+        </p>
+      </div>
+    </div>
+
+    <!-- ═══ WHY 3D3D ═══ -->
+    <div class="prusa-value" id="why-3d3d">
+      <div class="prusa-shell">
+        <p class="prusa-section-eyebrow">Why Buy Through 3D3D</p>
+        <h2 class="prusa-section-title">Prusa quality.<br/>Canadian support.</h2>
+        
+        <div class="prusa-value__grid">
+          {valueProps.map(prop => (
+            <div class="prusa-value__card">
+              <span class="prusa-value__icon">{prop.icon}</span>
+              <h3 class="prusa-value__title">{prop.title}</h3>
+              <p class="prusa-value__body">{prop.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PRINTER SHOWCASE ═══ -->
+    <div class="prusa-printers" id="printers">
+      <div class="prusa-shell">
+        <p class="prusa-section-eyebrow">3D Printers</p>
+        <h2 class="prusa-section-title">Built like a Bugatti.<br/>Not a Bambu Lab.</h2>
+        
+        <!-- Series tabs -->
+        <div class="prusa-series">
+          {printerSeries.map(series => (
+            <a href={`#series-${series.id}`} class="prusa-series__tab">
+              <span class="prusa-series__icon">{series.icon}</span>
+              <span class="prusa-series__name">{series.name}</span>
+              <span class="prusa-series__desc">{series.desc}</span>
+            </a>
+          ))}
+        </div>
+
+        <!-- Printer Cards -->
+        <div class="prusa-printer-grid">
+          {PRUSA_PRINTERS.map(printer => {
+            const stockBadge = getStockBadge(printer.stockStatus);
+            const seriesImages = {
+              CORE: '/media/workshop/printer-frame-shot.jpg',
+              XL: '/media/workshop/printer-action-cf.jpg',
+              MK4S: '/images/hp_convert_prusa_1774867155451.png',
+              MINI: '/media/workshop/printer-bed-benchy.jpg',
+              SL1S: '/media/workshop/printer-frame-shot.jpg',
+            };
+            const cardImage = printer.featuredImage || seriesImages[printer.series] || '/images/hp_convert_prusa_1774867155451.png';
+            return (
+              <article class="prusa-printer-card" id={`series-${printer.series}`}>
+                <div class="prusa-printer-card__header">
+                  <span class={`prusa-badge ${stockBadge.class}`}>{stockBadge.text}</span>
+                  {printer.isSpecialEdition && (
+                    <span class="prusa-badge prusa-badge--special">{printer.specialEditionType}</span>
+                  )}
+                </div>
+
+                <div class="prusa-printer-card__image">
+                  <img
+                    src={cardImage}
+                    alt={printer.name}
+                    class="prusa-printer-card__img"
+                    loading="lazy"
+                  />
+                </div>
+                
+                <h3 class="prusa-printer-card__name">{printer.name}</h3>
+                
+                <p class="prusa-printer-card__desc">{printer.shortDescription}</p>
+                
+                {printer.stockStatus === 'lead_time' && printer.leadTimeWeeks && (
+                  <p class="prusa-printer-card__lead">
+                    ⏱️ Lead time: {printer.leadTimeWeeks} weeks
+                  </p>
+                )}
+                
+                <div class="prusa-printer-card__specs">
+                  <span>📐 {printer.specs.buildVolume.x}×{printer.specs.buildVolume.y}×{printer.specs.buildVolume.z}mm</span>
+                  <span>🔥 {printer.specs.materials.slice(0, 3).join(', ')}{printer.specs.materials.length > 3 ? '...' : ''}</span>
+                </div>
+                
+                <div class="prusa-printer-card__pricing">
+                  <div class="prusa-printer-card__price-row">
+                    <span class="prusa-printer-card__label">Prusa Price:</span>
+                    <span class="prusa-printer-card__base">{formatPrice(printer.basePriceCAD)}</span>
+                  </div>
+                  <div class="prusa-printer-card__price-row prusa-printer-card__price-row--our">
+                    <span class="prusa-printer-card__label">Your Price:</span>
+                    <span class="prusa-printer-card__our">{formatPrice(printer.ourPriceCAD)}</span>
+                  </div>
+                  <span class="prusa-printer-card__markup">+{printer.markupPercent}% includes inspection & support</span>
+                </div>
+                
+                <a 
+                  href={`/quote?product=prusa-printer-${printer.id}`}
+                  class="prusa-printer-card__cta"
+                >
+                  Request Quote →
+                </a>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ FILAMENT STORE ═══ -->
+    <div class="prusa-filaments" id="filaments">
+      <div class="prusa-shell">
+        <p class="prusa-section-eyebrow">Filament</p>
+        <h2 class="prusa-section-title">Prusament.<br/>Competitive pricing.</h2>
+        
+        <div class="prusa-filament__intro">
+          <p>Prusament is Prusa's premium filament. Engineered for their printers, 
+          tested to exacting standards. Now available at prices competitive with 
+          generic Amazon filament - with bulk pricing that makes it cheaper.</p>
+          
+          <div class="prusa-bulk-banner">
+            <span class="prusa-bulk-banner__title">💰 Bulk Pricing Available</span>
+            <span class="prusa-bulk-banner__tier">10+ spools = 10% off</span>
+            <span class="prusa-bulk-banner__tier">50+ spools = 20% off</span>
+            <span class="prusa-bulk-banner__note">Community orders welcome - combine with others to maximize savings</span>
+          </div>
+        </div>
+
+        <!-- Filament Categories -->
+        <div class="prusa-filament-categories">
+          {FILAMENT_CATEGORIES.map(cat => {
+            const catFilaments = PRUSA_FILAMENTS.filter(f => f.material === cat.id);
+            return (
+              <div class="prusa-filament-cat">
+                <div class="prusa-filament-cat__header">
+                  <h3 class="prusa-filament-cat__name">{cat.name}</h3>
+                  <span class={`prusa-filament-cat__difficulty prusa-filament-cat__difficulty--${cat.difficulty}`}>
+                    {cat.difficulty}
+                  </span>
+                </div>
+                <p class="prusa-filament-cat__desc">{cat.description}</p>
+                
+                {catFilaments.length > 0 ? (
+                  <div class="prusa-filament-list">
+                    {catFilaments.map(fil => (
+                      <div class="prusa-filament-item">
+                        <div class="prusa-filament-item__color" style={`background: ${fil.colors[0]?.hex || '#ccc'}`}></div>
+                        <span class="prusa-filament-item__name">{fil.name}</span>
+                        <span class="prusa-filament-item__price">{formatPrice(fil.ourPriceCAD)}</span>
+                        <span class="prusa-filament-item__size">1kg</span>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p class="prusa-filament-cat__empty">Coming soon - inquire for availability</p>
+                )}
+                
+                <div class="prusa-filament-cat__uses">
+                  <strong>Best for:</strong> {cat.typicalUseCases.slice(0, 3).join(', ')}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PARTS & SERVICE ═══ -->
+    <div class="prusa-parts" id="parts">
+      <div class="prusa-shell">
+        <p class="prusa-section-eyebrow">Parts & Support</p>
+        <h2 class="prusa-section-title">Local spares.<br/>No waiting.</h2>
+        
+        <div class="prusa-parts__grid">
+          <div class="prusa-parts__content">
+            <p class="prusa-parts__intro">
+              Why wait 2 weeks for a nozzle from Prague when you can get it tomorrow 
+              from Fredericton? We stock essential Prusa parts and can source anything 
+              in their catalog.
+            </p>
+            
+            <div class="prusa-parts__categories">
+              {PART_CATEGORIES.map(cat => (
+                <div class="prusa-parts__cat">
+                  <h4>{cat.name}</h4>
+                  <p>{cat.description}</p>
                 </div>
               ))}
-              {p.note && <span class="printer-card__note">{p.note}</span>}
             </div>
-
-            <a href={`/quote?subject=order-${p.slug}`} class="printer-card__cta">Order this machine &rarr;</a>
-          </article>
-        ))}
+            
+            <div class="prusa-service__features">
+              <h4>Our Services:</h4>
+              <ul>
+                <li>✓ Emergency part supply (same-day local)</li>
+                <li>✓ Nozzle swapping & hotend maintenance</li>
+                <li>✓ Belt replacement & calibration</li>
+                <li>✓ Board-level repairs</li>
+                <li>✓ MMU3 installation & troubleshooting</li>
+                <li>✓ Full printer refurbishment</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="prusa-parts__featured">
+            <h4>Popular Parts</h4>
+            {PRUSA_PARTS.slice(0, 6).map(part => (
+              <div class="prusa-part-item">
+                <span class="prusa-part-item__name">{part.name}</span>
+                <span class="prusa-part-item__price">{formatPrice(part.ourPriceCAD)}</span>
+              </div>
+            ))}
+            <a href="/contact?subject=prusa-parts" class="prusa-cta--small">
+              Request Part Quote
+            </a>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
 
-  <!-- Service strip — what's included -->
-  <section class="prusa-service">
-    <div class="prusa-shell">
-      <h2 class="prusa-service__title">The 3D3D Advantage</h2>
-      <div class="prusa-service__grid">
-        <div class="prusa-service__item">
-          <strong>Burn-In & Calibration</strong>
-          <p>We don't just assemble it. We run stress tests, dial in the Z-offset, and ensure the CoreXY belts are perfectly tensioned.</p>
+    <!-- ═══ QUALITY COMPARISON ═══ -->
+    <div class="prusa-comparison">
+      <div class="prusa-shell">
+        <p class="prusa-section-eyebrow">Why Prusa</p>
+        <h2 class="prusa-section-title">The Bugatti.<br/>Not the disposable.</h2>
+        
+        <div class="prusa-comparison__grid">
+          <div class="prusa-comparison__prusa">
+            <h3>✅ Prusa Research</h3>
+            <ul>
+              {comparisonPoints.map(pt => (
+                <li>{pt.prusa}</li>
+              ))}
+            </ul>
+          </div>
+          
+          <div class="prusa-comparison__vs">
+            <span>VS</span>
+          </div>
+          
+          <div class="prusa-comparison__other">
+            <h3>❌ Consumer Competition</h3>
+            <ul>
+              {comparisonPoints.map(pt => (
+                <li>{pt.other}</li>
+              ))}
+            </ul>
+          </div>
         </div>
-        <div class="prusa-service__item">
-          <strong>100 Preset Prints</strong>
-          <p>Ready-to-print models on USB. Practical tools, replacement parts, and test objects so you can print on day one.</p>
-        </div>
-        <div class="prusa-service__item">
-          <strong>Local Support Network</strong>
-          <p>When something inevitably clogs or jams, you aren't stuck waiting 48 hours for an email reply. You WhatsApp us, and we solve it.</p>
+        
+        <p class="prusa-comparison__note">
+          We have seen too many "Bambu Labs disasters" - warped frames, failed boards, 
+          customer service nightmares. Prusa machines run for 10+ years. 
+          That is why we only support Prusa.
+        </p>
+      </div>
+    </div>
+
+    <!-- ═══ OUR PROCESS ═══ -->
+    <div class="prusa-process">
+      <div class="prusa-shell">
+        <p class="prusa-section-eyebrow">Our Process</p>
+        <h2 class="prusa-section-title">What you get<br/>when you order.</h2>
+        
+        <div class="prusa-process__steps">
+          <div class="prusa-process__step">
+            <span class="prusa-process__num">1</span>
+            <h3>Priority Order</h3>
+            <p>We place your order with Prusa Research using priority shipping channels. Your printer is reserved.</p>
+          </div>
+          
+          <div class="prusa-process__step">
+            <span class="prusa-process__num">2</span>
+            <h3>Factory to 3D3D</h3>
+            <p>Machine ships to our workshop first. We unbox and begin inspection before it ever touches your hands.</p>
+          </div>
+          
+          <div class="prusa-process__step">
+            <span class="prusa-process__num">3</span>
+            <h3>Full Inspection</h3>
+            <p>Every component checked against factory spec. Photos taken. Test prints run. Calibration verified.</p>
+          </div>
+          
+          <div class="prusa-process__step">
+            <span class="prusa-process__num">4</span>
+            <h3>Canadian Prep</h3>
+            <p>Pre-configured for Atlantic Canada humidity. Settings adjusted. Documentation prepared.</p>
+          </div>
+          
+          <div class="prusa-process__step">
+            <span class="prusa-process__num">5</span>
+            <h3>Delivery & Support</h3>
+            <p>Ships to you with full report. Local support available. Parts in stock. We have your back.</p>
+          </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <div class="prusa-shell" style="padding-bottom: clamp(3rem, 5vw, 4rem); padding-top: 3rem;">
-    <PageNextActions actions={[
-      {label: 'Materials Guide', href: '/materials', description: 'See all materials compatible with the Prusa ecosystem.', accent: 'teal'},
-      {label: 'Get a Quote', href: '/quote', description: 'Request custom fabrication on our fleet.', accent: 'orange'},
-    ]} />
-  </div>
+    <!-- ═══ CTA ═══ -->
+    <div class="prusa-cta-block">
+      <div class="prusa-shell">
+        <p class="prusa-cta-block__eyebrow">Ready to order?</p>
+        <h2 class="prusa-cta-block__title">Get the best printer.<br/>With local support.</h2>
+        
+        <div class="prusa-cta-block__actions">
+          <a href="/quote?category=prusa" class="prusa-cta prusa-cta--large">
+            Request Prusa Quote →
+          </a>
+          <a href="/contact" class="prusa-cta prusa-cta--ghost prusa-cta--large">
+            Ask Questions →
+          </a>
+        </div>
+        
+        <p class="prusa-cta-block__note">
+          Not sure which printer? Tell us your use case and we will spec the right machine. 
+          We have used them all and know exactly what works for what.
+        </p>
+      </div>
+    </div>
+
+  </section>
 </BaseLayout>
 
 <style>
-  :root {
-    --prusa-accent: #FA6831;
-    --prusa-accent-hover: #e85a25;
+  /* Prusa Page Styles */
+  .prusa-page {
+    --prusa-orange: #FA6831;
+    --prusa-dark: #1A1A1A;
+    background: #FFFFFF;
+    color: #1A1A1A;
   }
 
-  /* ─── Shared ─── */
   .prusa-shell {
     width: min(100% - clamp(1.5rem, 4vw, 4rem), 1200px);
     margin: 0 auto;
   }
 
+  /* ── Typography ── */
   .prusa-eyebrow {
-    margin: 0;
+    margin: 0 0 0.8rem;
     font-family: var(--font-tech);
     font-size: 0.72rem;
     font-weight: 700;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--prusa-accent);
+    color: var(--prusa-orange);
   }
 
-  .prusa-subhead {
-    margin: 0 0 2rem;
-    color: #555;
-    font-size: 1.1rem;
-  }
-
-  .prusa-cta {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: fit-content;
-    min-height: 3.2rem;
-    padding: 0.85rem 1.5rem;
-    background: var(--prusa-accent);
-    color: #FFFFFF;
-    border: 2px solid transparent;
-    border-radius: 2px;
+  .prusa-section-eyebrow {
+    margin: 0 0 0.8rem;
     font-family: var(--font-tech);
-    font-size: 0.8rem;
+    font-size: 0.72rem;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    text-decoration: none;
-    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 8px 24px rgba(250, 104, 49, 0.2);
-  }
-  .prusa-cta:hover {
-    background: var(--prusa-accent-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(250, 104, 49, 0.35);
-  }
-  .prusa-cta--ghost {
-    background: transparent;
-    color: var(--prusa-accent);
-    border-color: rgba(250, 104, 49, 0.5);
-    box-shadow: none;
-  }
-  .prusa-cta--ghost:hover {
-    background: rgba(250, 104, 49, 0.1);
-    box-shadow: none;
-  }
-  
-  .prusa-cta--light {
-    border-color: rgba(255, 255, 255, 0.6);
-    color: #fff;
-  }
-  .prusa-cta--light:hover {
-    background: rgba(255,255,255,0.1);
-    border-color: #fff;
+    color: var(--prusa-orange);
   }
 
-  /* ─── Hero ─── */
-  .prusa-hero {
-    display: flex;
-    align-items: center;
-    min-height: 50svh;
-    background:
-      radial-gradient(ellipse at 20% 50%, rgba(250, 104, 49, 0.12), transparent 50%),
-      radial-gradient(ellipse at 80% 80%, rgba(64, 196, 196, 0.06), transparent 50%),
-      #FAFBFC;
-    color: #1A1A1A;
-    padding-block: clamp(5rem, 8vw, 8rem);
-  }
-
-  .prusa-hero__content {
-    max-width: 700px;
-    display: grid;
-    gap: 1.2rem;
-  }
-
-  .prusa-title {
-    margin: 0;
+  .prusa-section-title {
+    margin: 0 0 2rem;
     font-family: var(--font-display);
-    font-size: clamp(3rem, 2.5rem + 3.5vw, 6rem);
-    line-height: 0.95;
-    letter-spacing: -0.05em;
-    text-transform: uppercase;
+    font-size: clamp(2.2rem, 1.5rem + 3vw, 3.8rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
     color: #1A1A1A;
+    text-transform: uppercase;
   }
 
-  .prusa-title--accent {
-    color: var(--prusa-accent);
+  /* ── Hero ── */
+  .prusa-hero {
+    position: relative;
+    padding-block: clamp(5rem, 8vw, 8rem) clamp(3rem, 5vw, 5rem);
+    color: #FFFFFF;
+    overflow: hidden;
   }
 
-  .prusa-lead {
-    margin: 0;
-    font-size: clamp(1.05rem, 0.95rem + 0.3vw, 1.2rem);
-    line-height: 1.7;
-    color: #444;
-    max-width: 600px;
+  .prusa-hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
   }
 
-  /* ─── Filament ─── */
-  .prusa-filament {
-    background: #111214;
-    color: #fff;
-    padding-block: clamp(3rem, 6vw, 4rem);
-    border-top: 3px solid var(--prusa-accent);
+  .prusa-hero__bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(0.25);
   }
 
-  .prusa-filament__inner {
-    max-width: 800px;
+  .prusa-hero .prusa-shell {
+    position: relative;
+    z-index: 1;
+  }
+
+  .prusa-hero__grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .prusa-hero__image {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    align-items: flex-start;
   }
 
-  .prusa-filament__desc {
-    color: #ccc;
+  .prusa-hero__printer-img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 2px solid rgba(250, 104, 49, 0.4);
+  }
+
+  .prusa-title {
+    margin: 1rem 0 1.2rem;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 2rem + 4vw, 6rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: #FFFFFF;
+    text-transform: uppercase;
+  }
+
+  .prusa-title__sub {
+    display: block;
+    font-size: 0.6em;
+    color: var(--prusa-orange);
+    margin-top: 0.3rem;
+  }
+
+  .prusa-intro {
+    margin: 0 0 1.5rem;
+    max-width: 44rem;
     font-size: 1.1rem;
-    line-height: 1.7;
-    margin: 0;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.8);
   }
 
-  .prusa-filament__list {
+  .prusa-notice {
+    margin: 0 0 2rem;
+    padding: 1rem 1.2rem;
+    background: rgba(250, 104, 49, 0.15);
+    border-left: 3px solid var(--prusa-orange);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .prusa-notice strong {
+    color: var(--prusa-orange);
+  }
+
+  .prusa-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .prusa-hero__stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+
+  .prusa-stat {
+    text-align: center;
+  }
+
+  .prusa-stat__num {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--prusa-orange);
+  }
+
+  .prusa-stat__label {
+    font-family: var(--font-tech);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* ── Disclosure ── */
+  .prusa-disclosure {
+    background: #FFF3ED;
+    border-bottom: 1px solid #FA683120;
+    padding: 1rem 0;
+  }
+
+  .prusa-disclosure p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #8B4513;
+    text-align: center;
+  }
+
+  .prusa-disclosure strong {
+    color: var(--prusa-orange);
+  }
+
+  /* ── Value Props ── */
+  .prusa-value {
+    padding-block: clamp(5rem, 8vw, 7rem);
+    background: #F8F8F8;
+  }
+
+  .prusa-value__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .prusa-value__card {
+    background: #FFFFFF;
+    border: 2px solid #1A1A1A;
+    border-radius: 2px;
+    padding: 1.5rem;
+  }
+
+  .prusa-value__icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .prusa-value__title {
+    margin: 0 0 0.5rem;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: #1A1A1A;
+  }
+
+  .prusa-value__body {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #555;
+  }
+
+  /* ── Printers ── */
+  .prusa-printers {
+    padding-block: clamp(5rem, 8vw, 7rem);
+  }
+
+  .prusa-series {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .prusa-series__tab {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    margin: 0 0 1rem 0;
-    padding: 0;
-    list-style: none;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: #F8F8F8;
+    border: 2px solid #E0E0E0;
+    text-decoration: none;
+    color: #1A1A1A;
+    transition: all 0.2s;
   }
 
-  .prusa-filament__list li {
-    font-family: var(--font-tech);
-    color: var(--prusa-accent);
+  .prusa-series__tab:hover {
+    border-color: var(--prusa-orange);
+    background: #FFF3ED;
+  }
+
+  .prusa-series__icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .prusa-series__name {
+    font-family: var(--font-display);
     font-size: 0.9rem;
+    font-weight: 700;
   }
 
-  .prusa-filament__list strong {
-    color: #fff;
-    margin-right: 0.5rem;
+  .prusa-series__desc {
+    font-size: 0.7rem;
+    color: #666;
   }
 
-
-  /* ─── Catalog Grid ─── */
-  .prusa-catalog {
-    background: #FFFFFF;
-    padding-block: clamp(4rem, 8vw, 6rem);
-  }
-
-  .prusa-grid {
+  .prusa-printer-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 1.5rem;
   }
 
-  /* ─── Printer Card ─── */
-  .printer-card {
+  .prusa-printer-card {
+    background: #FFFFFF;
+    border: 2px solid #1A1A1A;
+    border-radius: 2px;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    background: #FAFBFC;
-    border: 1px solid rgba(26, 26, 26, 0.08);
+    gap: 1rem;
+  }
+
+  .prusa-printer-card__header {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .prusa-badge {
+    padding: 0.25rem 0.6rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
     border-radius: 2px;
-    padding: clamp(1.5rem, 2.5vw, 2rem);
-    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
   }
 
-  .printer-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 40px rgba(250, 104, 49, 0.1);
-    border-color: rgba(250, 104, 49, 0.2);
+  .prusa-badge--stock {
+    background: #D4EDDA;
+    color: #155724;
   }
 
-  .printer-card__head {
+  .prusa-badge--lead {
+    background: #FFF3CD;
+    color: #856404;
+  }
+
+  .prusa-badge--demand {
+    background: #F8D7DA;
+    color: #721C24;
+  }
+
+  .prusa-badge--special {
+    background: var(--prusa-orange);
+    color: #FFFFFF;
+  }
+
+  .prusa-badge--default {
+    background: #E0E0E0;
+    color: #555;
+  }
+
+  .prusa-printer-card__img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 2px;
+    display: block;
+  }
+
+  .prusa-printer-card__name {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: #1A1A1A;
+  }
+
+  .prusa-printer-card__desc {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.5;
+  }
+
+  .prusa-printer-card__lead {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #856404;
+  }
+
+  .prusa-printer-card__specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: #666;
+  }
+
+  .prusa-printer-card__pricing {
+    padding-top: 1rem;
+    border-top: 1px solid #E0E0E0;
+    margin-top: auto;
+  }
+
+  .prusa-printer-card__price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.3rem;
+  }
+
+  .prusa-printer-card__price-row--our {
+    font-weight: 700;
+  }
+
+  .prusa-printer-card__label {
+    font-size: 0.8rem;
+    color: #666;
+  }
+
+  .prusa-printer-card__base {
+    font-size: 0.85rem;
+    color: #666;
+    text-decoration: line-through;
+  }
+
+  .prusa-printer-card__our {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--prusa-orange);
+  }
+
+  .prusa-printer-card__markup {
+    font-size: 0.7rem;
+    color: #999;
+    display: block;
+    margin-top: 0.3rem;
+  }
+
+  .prusa-printer-card__cta {
+    display: block;
+    text-align: center;
+    padding: 0.8rem;
+    background: #1A1A1A;
+    color: #FFF;
+    text-decoration: none;
+    font-family: var(--font-tech);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 1rem;
+    transition: background 0.2s;
+  }
+
+  .prusa-printer-card__cta:hover {
+    background: var(--prusa-orange);
+  }
+
+  /* ── CTA Button Variants ── */
+  .prusa-cta {
+    display: inline-block;
+    padding: 0.9rem 1.8rem;
+    background: var(--prusa-orange);
+    color: #FFFFFF;
+    text-decoration: none;
+    font-family: var(--font-tech);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 2px solid var(--prusa-orange);
+    transition: all 0.2s;
+  }
+
+  .prusa-cta:hover {
+    background: #E55A2B;
+    border-color: #E55A2B;
+  }
+
+  .prusa-cta--ghost {
+    background: transparent;
+    color: var(--prusa-orange);
+  }
+
+  .prusa-cta--ghost:hover {
+    background: var(--prusa-orange);
+    color: #FFFFFF;
+  }
+
+  .prusa-cta--large {
+    padding: 1.1rem 2.2rem;
+    font-size: 0.9rem;
+  }
+
+  .prusa-cta--small {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background: #1A1A1A;
+    color: #FFF;
+    text-decoration: none;
+    font-family: var(--font-tech);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 1rem;
+  }
+
+  /* ── Filaments ── */
+  .prusa-filaments {
+    padding-block: clamp(5rem, 8vw, 7rem);
+    background: #F8F8F8;
+  }
+
+  .prusa-filament__intro {
+    margin-bottom: 3rem;
+  }
+
+  .prusa-filament__intro > p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #444;
+    max-width: 700px;
+    margin-bottom: 1.5rem;
+  }
+
+  .prusa-bulk-banner {
+    padding: 1.2rem;
+    background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%);
+    color: #FFFFFF;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .prusa-bulk-banner__title {
+    font-weight: 700;
+    font-size: 1rem;
+  }
+
+  .prusa-bulk-banner__tier {
+    padding: 0.3rem 0.8rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    font-size: 0.85rem;
+  }
+
+  .prusa-bulk-banner__note {
+    margin-left: auto;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .prusa-filament-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .prusa-filament-cat {
+    background: #FFFFFF;
+    border: 2px solid #1A1A1A;
+    padding: 1.5rem;
+  }
+
+  .prusa-filament-cat__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .prusa-filament-cat__name {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+  }
+
+  .prusa-filament-cat__difficulty {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 2px;
+  }
+
+  .prusa-filament-cat__difficulty--beginner {
+    background: #D4EDDA;
+    color: #155724;
+  }
+
+  .prusa-filament-cat__difficulty--intermediate {
+    background: #FFF3CD;
+    color: #856404;
+  }
+
+  .prusa-filament-cat__difficulty--advanced {
+    background: #F8D7DA;
+    color: #721C24;
+  }
+
+  .prusa-filament-cat__desc {
+    margin: 0 0 1rem;
+    font-size: 0.85rem;
+    color: #555;
+  }
+
+  .prusa-filament-list {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     margin-bottom: 1rem;
   }
 
-  .printer-card__tag {
-    display: inline-flex;
-    width: fit-content;
-    padding: 0.2rem 0.6rem;
-    border: 1px solid;
-    border-radius: 2px;
-    font-family: var(--font-tech);
-    font-size: 0.6rem;
+  .prusa-filament-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.5rem;
+    background: #F8F8F8;
+  }
+
+  .prusa-filament-item__color {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid #CCC;
+  }
+
+  .prusa-filament-item__name {
+    flex: 1;
+    font-size: 0.85rem;
+  }
+
+  .prusa-filament-item__price {
     font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+    color: var(--prusa-orange);
   }
 
-  .printer-card__name {
+  .prusa-filament-item__size {
+    font-size: 0.75rem;
+    color: #666;
+  }
+
+  .prusa-filament-cat__empty {
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+  }
+
+  .prusa-filament-cat__uses {
+    font-size: 0.8rem;
+    color: #555;
+  }
+
+  /* ── Parts ── */
+  .prusa-parts {
+    padding-block: clamp(5rem, 8vw, 7rem);
+  }
+
+  .prusa-parts__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+  }
+
+  .prusa-parts__intro {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #444;
+  }
+
+  .prusa-parts__categories {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .prusa-parts__cat {
+    padding: 1rem;
+    background: #F8F8F8;
+    border-left: 3px solid var(--prusa-orange);
+  }
+
+  .prusa-parts__cat h4 {
+    margin: 0 0 0.3rem;
+    font-size: 0.9rem;
+  }
+
+  .prusa-parts__cat p {
     margin: 0;
+    font-size: 0.8rem;
+    color: #555;
+  }
+
+  .prusa-service__features {
+    margin-top: 2rem;
+  }
+
+  .prusa-service__features h4 {
+    margin: 0 0 1rem;
     font-family: var(--font-display);
-    font-size: clamp(1.2rem, 1rem + 0.6vw, 1.5rem);
-    font-weight: 800;
-    line-height: 1.15;
-    color: #1A1A1A;
   }
 
-  .printer-card__desc {
-    margin: 0;
-    font-size: 0.88rem;
-    line-height: 1.55;
-    color: #666666;
-  }
-
-  .printer-card__specs {
+  .prusa-service__features ul {
     list-style: none;
     padding: 0;
-    margin: 0 0 1.2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    border-top: 1px solid rgba(26, 26, 26, 0.06);
-    padding-top: 1rem;
+    margin: 0;
   }
 
-  .printer-card__specs li {
-    font-family: var(--font-tech);
-    font-size: 0.74rem;
-    color: #444444;
-    letter-spacing: 0.02em;
+  .prusa-service__features li {
+    padding: 0.3rem 0;
+    font-size: 0.9rem;
+    color: #444;
   }
 
-  .printer-card__specs li::before {
-    content: '+ ';
-    color: var(--prusa-accent);
-    font-weight: 700;
+  .prusa-parts__featured {
+    padding: 1.5rem;
+    background: #1A1A1A;
+    color: #FFFFFF;
   }
 
-  .printer-card__pricing {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-top: auto;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(26, 26, 26, 0.06);
+  .prusa-parts__featured h4 {
+    margin: 0 0 1rem;
+    color: var(--prusa-orange);
   }
 
-  .printer-card__variant {
+  .prusa-part-item {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #333;
+    font-size: 0.85rem;
   }
 
-  .printer-card__variant-label {
-    font-family: var(--font-tech);
-    font-size: 0.72rem;
-    color: #1a1a1a;
+  .prusa-part-item__name {
+    color: #CCC;
+  }
+
+  .prusa-part-item__price {
+    color: #FFFFFF;
     font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
   }
 
-  .printer-card__variant-price {
+  /* ── Comparison ── */
+  .prusa-comparison {
+    padding-block: clamp(5rem, 8vw, 7rem);
+    background: #1A1A1A;
+    color: #FFFFFF;
+  }
+
+  .prusa-comparison .prusa-section-title {
+    color: #FFFFFF;
+  }
+
+  .prusa-comparison__grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .prusa-comparison__prusa,
+  .prusa-comparison__other {
+    padding: 1.5rem;
+  }
+
+  .prusa-comparison__prusa {
+    background: rgba(212, 237, 218, 0.1);
+    border: 1px solid #4CAF50;
+  }
+
+  .prusa-comparison__other {
+    background: rgba(248, 215, 218, 0.1);
+    border: 1px solid #F44336;
+  }
+
+  .prusa-comparison h3 {
+    margin: 0 0 1rem;
     font-family: var(--font-display);
-    font-size: 1.4rem;
-    font-weight: 800;
-    color: var(--prusa-accent);
+    font-size: 1.2rem;
   }
 
-  .printer-card__note {
-    font-size: 0.7rem;
-    color: #E84A8A;
-    font-weight: 600;
+  .prusa-comparison__prusa h3 {
+    color: #4CAF50;
   }
 
-  .printer-card__cta {
-    display: inline-flex;
+  .prusa-comparison__other h3 {
+    color: #F44336;
+  }
+
+  .prusa-comparison ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .prusa-comparison li {
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .prusa-comparison__vs {
+    display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 1.2rem;
-    padding: 0.7rem 1.2rem;
-    background: #111;
-    color: #FFFFFF;
-    border-radius: 2px;
-    font-family: var(--font-tech);
-    font-size: 0.74rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .printer-card__cta:hover {
-    background: var(--prusa-accent);
-    transform: translateY(-2px);
-  }
-
-  /* ─── Service Strip ─── */
-  .prusa-service {
-    background:
-      radial-gradient(ellipse at 70% 30%, rgba(250, 104, 49, 0.06), transparent 50%),
-      #F6F2EE;
-    color: #1A1A1A;
-    padding-block: clamp(3rem, 5vw, 4rem);
-    border-top: 3px solid var(--prusa-accent);
-  }
-
-  .prusa-service__title {
-    margin: 0 0 1.5rem;
     font-family: var(--font-display);
-    font-size: clamp(1.4rem, 1.2rem + 1vw, 2.2rem);
-    font-weight: 800;
-    color: #1A1A1A;
-    text-transform: uppercase;
-  }
-
-  .prusa-service__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .prusa-service__item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    background: #FFFFFF;
-    border-radius: 2px;
-    padding: 1.2rem;
-    border: 1px solid rgba(250, 104, 49, 0.1);
-  }
-
-  .prusa-service__item strong {
-    font-family: var(--font-tech);
-    font-size: 0.8rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    letter-spacing: 0.06em;
-    color: var(--prusa-accent);
+    color: var(--prusa-orange);
   }
 
-  .prusa-service__item p {
+  .prusa-comparison__note {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: rgba(250, 104, 49, 0.1);
+    border-left: 3px solid var(--prusa-orange);
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  /* ── Process ── */
+  .prusa-process {
+    padding-block: clamp(5rem, 8vw, 7rem);
+    background: #F8F8F8;
+  }
+
+  .prusa-process__steps {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 3rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+  }
+
+  .prusa-process__step {
+    min-width: 220px;
+    flex: 1;
+    padding: 1.5rem;
+    background: #FFFFFF;
+    border: 2px solid #1A1A1A;
+  }
+
+  .prusa-process__num {
+    display: block;
+    width: 40px;
+    height: 40px;
+    background: var(--prusa-orange);
+    color: #FFFFFF;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .prusa-process__step h3 {
+    margin: 0 0 0.5rem;
+    font-family: var(--font-display);
+    font-size: 1rem;
+  }
+
+  .prusa-process__step p {
     margin: 0;
     font-size: 0.85rem;
-    line-height: 1.55;
-    color: #666666;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  /* ── CTA Block ── */
+  .prusa-cta-block {
+    padding-block: clamp(5rem, 8vw, 7rem);
+    text-align: center;
+    background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%);
+    color: #FFFFFF;
+  }
+
+  .prusa-cta-block__eyebrow {
+    color: var(--prusa-orange);
+    margin-bottom: 1rem;
+  }
+
+  .prusa-cta-block__title {
+    margin: 0 0 2rem;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 1.5rem + 3vw, 3.5rem);
+    color: #FFFFFF;
+  }
+
+  .prusa-cta-block__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .prusa-cta-block__note {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .prusa-hero__grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .prusa-hero__stats {
+      order: -1;
+    }
+    
+    .prusa-parts__grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .prusa-comparison__grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .prusa-comparison__vs {
+      display: none;
+    }
+    
+    .prusa-process__steps {
+      flex-direction: column;
+    }
+    
+    .prusa-process__step {
+      min-width: auto;
+    }
   }
 </style>

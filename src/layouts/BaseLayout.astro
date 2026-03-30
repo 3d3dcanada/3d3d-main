@@ -51,30 +51,34 @@ const {
   activePath = '',
 } = Astro.props;
 
-// Default navigation groups for 3D3D main site
 const defaultNavGroups: NavGroup[] = [
   {
-    label: 'Services',
+    label: '3D3D Network',
     items: [
-      { id: 'home', label: 'Home', href: '/' },
-      { id: 'quote', label: 'Get a Quote', href: '/quote' },
-      { id: 'contact', label: 'Request Service', href: '/contact' },
-      { id: 'book', label: 'Book a Call', href: '/book' },
-      { id: 'events', label: 'Events', href: '/events' },
+      { id: 'prusa', label: 'Prusa Dealership', href: '/prusa' },
+      { id: 'media', label: 'Media Agency', href: '/media' },
+      { id: 'shop', label: 'Parts Shop', href: '/shop' },
+      { id: 'blog', label: 'Intel & Updates', href: '/blog' },
     ],
   },
   {
-    label: 'Explore',
+    label: 'Fabrication',
     items: [
-      { id: 'shop', label: 'Shop', href: '/shop' },
-      { id: 'materials', label: 'Materials', href: '/materials' },
+      { id: 'home', label: 'Home', href: '/' },
+      { id: 'quote', label: 'Commission a Build', href: '/quote' },
+      { id: 'materials', label: 'Materials Guide', href: '/materials' },
       { id: 'faq', label: 'FAQ', href: '/faq' },
-      { id: 'about', label: 'About', href: '/about' },
-      { id: 'opportunities', label: 'Opportunities', href: '/opportunities' },
+      { id: 'book', label: 'Book a Call', href: '/book' },
+      { id: 'contact', label: 'Request Service', href: '/contact' },
+    ],
+  },
+  {
+    label: 'The Cooperative',
+    items: [
+      { id: 'about', label: 'About 3D3D', href: '/about' },
+      { id: 'opportunities', label: 'Network Ops', href: '/opportunities' },
       { id: 'community', label: 'Community & Events', href: '/community' },
-      { id: 'sponsors', label: 'Sponsors & Campaigns', href: '/sponsors' },
-      { id: 'blog', label: 'Updates', href: '/blog' },
-      { id: 'media', label: 'Media', href: '/media' },
+      { id: 'sponsors', label: 'Sponsorships', href: '/sponsors' },
     ],
   },
 ];

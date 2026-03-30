@@ -4,65 +4,64 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import PageNextActions from '../components/PageNextActions.astro';
 ---
 
-<BaseLayout title="Opportunities | 3D3D" description="Work with 3D3D. Real positions, real pay. See what's open." activePath="/opportunities">
+<BaseLayout title="Community Workshops & Events | 3D3D" description="Book 3D3D for STEM workshops, library events, and community festivals. We bring the printers to you." activePath="/community">
 
   <section class="opp-page">
     <div class="opp-shell">
-      <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'The Network', href: '/opportunities'}, {label: 'Opportunities'}]} />
-      <p class="opp-eyebrow">Opportunities</p>
-      <h1 class="opp-title">Work with 3D3D</h1>
+      <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Explore', href: '/about'}, {label: 'Community Events'}]} />
+      <p class="opp-eyebrow">Deployments</p>
+      <h1 class="opp-title">Book the Lab</h1>
       <p class="opp-intro">
-        3D3D is growing. These are real positions, not volunteer calls. If the work fits, reach out.
+        We don't just print parts. We teach communities how to build the tools. Book 3D3D for your next STEM event, library workshop, or festival. We show up with the printers, the filament, and the knowledge.
       </p>
 
-      <div class="opp-listing surface-panel">
-        <div class="opp-listing__header">
-          <h2 class="opp-listing__role">Social Media Intern</h2>
-          <div class="opp-listing__meta">
-            <span>Remote / route-based travel</span>
-            <span>Part-time, paid</span>
+      <div class="mt-8 space-y-6">
+        <div class="opp-listing surface-panel">
+          <div class="opp-listing__header">
+            <h2 class="opp-listing__role">Intro to 3D Printing Workshop</h2>
+            <div class="opp-listing__meta">
+              <span>2-4 Hours</span>
+              <span>Libraries & Schools</span>
+            </div>
           </div>
+          <div class="opp-listing__body">
+            <p>A hands-on introduction to the FDM workflow. We cover the history, materials, and CAD basics. Participants get to prepare a file and watch it print live. Built for audiences 14+ with capacity for up to 20 participants.</p>
+          </div>
+          <a href="/contact?subject=book-workshop" class="opp-cta">Request Workshop →</a>
         </div>
-        <div class="opp-listing__body">
-          <p>Film and produce content: video, photo, social posts. Cover 3D3D operations, builds, and events. Potential travel for events and deployments.</p>
-          <p class="opp-listing__tone">You get what you put into it.</p>
-        </div>
-        <a href="/contact?subject=social-media-intern" class="opp-cta">Apply →</a>
-      </div>
 
-      <div class="opp-listing surface-panel">
-        <div class="opp-listing__header">
-          <h2 class="opp-listing__role">Fabrication Node Operator</h2>
-          <div class="opp-listing__meta">
-            <span>Remote / Distributed</span>
-            <span>Contract / Revenue Share</span>
+        <div class="opp-listing surface-panel">
+          <div class="opp-listing__header">
+            <h2 class="opp-listing__role">Youth STEM Discovery Day</h2>
+            <div class="opp-listing__meta">
+              <span>Full Day</span>
+              <span>Ages 8-18</span>
+            </div>
           </div>
+          <div class="opp-listing__body">
+            <p>An immersive day of building and prototyping. Focuses on inspiring the next generation of engineers and problem solvers through active CAD design and rapid prototyping challenges.</p>
+          </div>
+          <a href="/contact?subject=book-stem-day" class="opp-cta">Book Discovery Day →</a>
         </div>
-        <div class="opp-listing__body">
-          <p>Operate as a verified 3D3D fabrication node. Receive over-flow print jobs, localized production requests, and participate in distributed manufacturing. Must run high-uptime engineering-grade FDM (Prusa/Bambu/Custom) and pass material validation tests.</p>
-          <p class="opp-listing__tone">Build your own shop under the cooperative banner.</p>
-        </div>
-        <a href="/contact?subject=node-operator" class="opp-cta">Join the Network →</a>
-      </div>
 
-      <div class="opp-listing surface-panel">
-        <div class="opp-listing__header">
-          <h2 class="opp-listing__role">Open Source Contributor</h2>
-          <div class="opp-listing__meta">
-            <span>Global</span>
-            <span>Community-Driven</span>
+        <div class="opp-listing surface-panel">
+          <div class="opp-listing__header">
+            <h2 class="opp-listing__role">Festival & Public Activations</h2>
+            <div class="opp-listing__meta">
+              <span>Multi-Day</span>
+              <span>High Volume</span>
+            </div>
           </div>
+          <div class="opp-listing__body">
+            <p>From the Cardboard Boat Regatta to local maker faires. We set up an active print farm environment, producing functional parts and engaging with hundreds of attendees in real-time.</p>
+          </div>
+          <a href="/contact?subject=event-activation" class="opp-cta">Discuss Activation →</a>
         </div>
-        <div class="opp-listing__body">
-          <p>Help build the open-source infrastructure. We need Astro/TypeScript developers, 3D modelers (Fusion360/Onshape), and documentation writers to expand the 3D3D codebases and parametric model libraries.</p>
-          <p class="opp-listing__tone">Everything we build is shared. Come build it with us.</p>
-        </div>
-        <a href="https://github.com/3d3dcanada" target="_blank" rel="noopener noreferrer" class="opp-cta">View Repositories →</a>
       </div>
 
       <PageNextActions actions={[
-        {label: 'About 3D3D', href: '/about', description: 'Learn the cooperative philosophy behind the network.', accent: 'teal'},
-        {label: 'Contact', href: '/contact', description: 'Get in touch to discuss opportunities.', accent: 'magenta'},
+        {label: 'Sponsor an Event', href: '/sponsors', description: 'Fund these workshops for your community.', accent: 'teal'},
+        {label: 'Book a Call', href: '/book', description: 'Schedule a discovery call to plan your event.', accent: 'orange'},
       ]} />
     </div>
   </section>
@@ -168,11 +167,6 @@ import PageNextActions from '../components/PageNextActions.astro';
     color: var(--color-text-secondary);
   }
 
-  .opp-listing__tone {
-    font-style: italic;
-    color: var(--color-text-muted) !important;
-  }
-
   .opp-cta {
     display: inline-flex;
     align-items: center;
@@ -194,7 +188,7 @@ import PageNextActions from '../components/PageNextActions.astro';
   }
 
   .opp-cta:hover {
-    background: #53D3D3; /* teal hover state */
+    background: #53D3D3;
     box-shadow: 0 8px 24px rgba(64, 196, 196, 0.4);
     transform: translateY(-2px);
   }

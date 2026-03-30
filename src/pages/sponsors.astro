@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageNextActions from '../components/PageNextActions.astro';
+---
+
+<BaseLayout title="Sponsorships & Campaigns | 3D3D" description="Partner with 3D3D to bring innovation to Atlantic Canada and support our 2026 offshore campaigns." activePath="/sponsors">
+
+  <section class="opp-page">
+    <div class="opp-shell">
+      <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Explore', href: '/about'}, {label: 'Sponsorships'}]} />
+      <p class="opp-eyebrow">Partnerships</p>
+      <h1 class="opp-title">Invest in the Network</h1>
+      <p class="opp-intro">
+        Democratizing access to 3D printing technology across Atlantic Canada. From local STEM workshops to live offshore fabrication during the 2026 Newport Bermuda Race. Align your brand with extreme innovation.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+        <div class="surface-panel p-8" style="background: var(--color-surface-card); border: 2px solid var(--color-border-subtle);">
+          <h3 class="font-display text-xl font-bold mb-4" style="color: var(--color-text-primary);">Community Impact</h3>
+          <ul class="space-y-3 text-sm" style="color: var(--color-text-secondary);">
+            <li><strong style="color: var(--color-teal-primary);">500+ Youth reached annually.</strong> STEM skills and career pathways.</li>
+            <li><strong style="color: var(--color-teal-primary);">1,000+ Community members.</strong> Accessible technology education.</li>
+            <li><strong style="color: var(--color-teal-primary);">Atlantic Reach.</strong> Active across NB, NS, PEI, and NL.</li>
+          </ul>
+        </div>
+        <div class="surface-panel p-8" style="background: var(--color-surface-card); border: 2px solid var(--color-border-subtle);">
+          <h3 class="font-display text-xl font-bold mb-4" style="color: var(--color-text-primary);">The 2026 Campaign</h3>
+          <p class="text-sm mb-4" style="color: var(--color-text-secondary);">
+            For the 120th running of the Newport Bermuda Race, 3D3D is aboard with a Prusa CORE One L printing live. Real parts, real conditions. This is our flagship deployment proof.
+          </p>
+          <a href="/blog" class="font-display text-xs uppercase tracking-wider hover:underline" style="color: var(--color-magenta-primary);">Read the Campaign Logs →</a>
+        </div>
+      </div>
+
+      <h2 class="font-display text-2xl font-bold mt-12 mb-6" style="color: var(--color-text-primary);">Sponsorship Tiers</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {[{
+          title: "Community Partner",
+          price: "$500",
+          benefits: ["Logo on event materials", "Social media mentions", "Website listing"]
+        }, {
+          title: "Event Sponsor",
+          price: "$1,000",
+          benefits: ["Booth space at events", "Email mention to participants", "All Community benefits"]
+        }, {
+          title: "Title Sponsor",
+          price: "$2,500",
+          benefits: ["Naming rights", "Speaking opportunity", "Priority booth placement"]
+        }, {
+          title: "Innovation Champion",
+          price: "$5,000+",
+          benefits: ["Year-long partnership", "Custom activations", "Newport Bermuda alignment"]
+        }].map((tier, index) => (
+          <div class="surface-panel p-6 flex flex-col justify-between" style={`background: var(--color-surface-card); border: 2px solid var(--color-border-subtle); ${index === 3 ? 'border-color: var(--color-teal-primary);' : ''}`}>
+            <div>
+              <p class="font-display text-xs uppercase tracking-wider mb-2" style="color: var(--color-teal-primary);">{tier.price}</p>
+              <h3 class="font-display text-lg font-bold mb-4" style="color: var(--color-text-primary);">{tier.title}</h3>
+              <ul class="space-y-2 text-sm mb-6" style="color: var(--color-text-secondary);">
+                {tier.benefits.map(b => <li>• {b}</li>)}
+              </ul>
+            </div>
+            <a href="/contact?subject=sponsorship" class="text-xs font-bold uppercase tracking-wider hover:underline mt-4 inline-block" style="color: var(--color-text-primary);">Partner With Us →</a>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-8">
+        <PageNextActions actions={[
+          {label: 'Contact Coordinator', href: '/contact?subject=sponsorship', description: 'Discuss custom activations and partnerships.', accent: 'teal'},
+          {label: 'View Events', href: '/community', description: 'See the workshops you are funding.', accent: 'magenta'},
+        ]} />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .opp-page {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    background: var(--color-surface-primary);
+    color: var(--color-text-primary);
+  }
+
+  .opp-shell {
+    width: min(100% - clamp(1.5rem, 4vw, 4rem), 720px);
+    margin: 0 auto;
+    display: grid;
+    gap: 2rem;
+    padding-block: clamp(6rem, 10vw, 10rem);
+  }
+
+  .opp-eyebrow {
+    margin: 0;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-teal-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .opp-eyebrow::before {
+    content: '';
+    width: 2.75rem;
+    height: 2px;
+    background: var(--color-teal-primary);
+    flex-shrink: 0;
+  }
+
+  .opp-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 2rem + 4vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--color-text-primary);
+    text-transform: uppercase;
+  }
+
+  .opp-intro {
+    margin: 0;
+    max-width: 36rem;
+    font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.2rem);
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+  }
+</style>

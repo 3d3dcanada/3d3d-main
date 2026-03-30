@@ -132,7 +132,7 @@ export default function SplashObject({
   const groupRef = useRef<Group>(null);
   const accentHex = ACCENT_HEX[section.accent];
   const { naturalColors } = section;
-  const { scene } = useGLTF(section.modelPath);
+  const { scene } = useGLTF(section.modelPath, undefined, true);
   const preparedModel = useMemo(
     () => buildModel(scene, accentHex, naturalColors),
     [scene, accentHex, naturalColors],
@@ -223,5 +223,5 @@ export default function SplashObject({
 }
 
 SPLASH_SECTIONS.forEach((section) => {
-  useGLTF.preload(section.modelPath);
+  useGLTF.preload(section.modelPath, undefined, true);
 });

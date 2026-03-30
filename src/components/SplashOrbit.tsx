@@ -371,7 +371,7 @@ export default function SplashOrbit() {
   if (shouldReduceMotion || supportsThree === false) {
     return (
       <div className="splash-orbit splash-orbit--fallback">
-        <SplashBackground activeImage={focusedItem?.section.backgroundImage} />
+        <SplashBackground activeIndex={focusIndex} />
         <FallbackGrid sections={SPLASH_SECTIONS} />
         <a
           href="/contact"
@@ -386,7 +386,7 @@ export default function SplashOrbit() {
 
   return (
     <div className="splash-orbit">
-      <SplashBackground activeImage={focusedItem?.section.backgroundImage} />
+      <SplashBackground activeIndex={focusIndex} />
 
       <div
         ref={sceneShellRef}

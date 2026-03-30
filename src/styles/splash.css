@@ -63,6 +63,7 @@ body.splash-page .site-main {
 }
 
 .splash-background {
+  --bg-accent: #40C4C4;
   position: absolute;
   inset: 0;
   z-index: 0;
@@ -71,7 +72,8 @@ body.splash-page .site-main {
 }
 
 .splash-background__static,
-.splash-background__section,
+.splash-background__gallery,
+.splash-background__vignette,
 .splash-background__scrim,
 .splash-background__grain {
   position: absolute;
@@ -79,31 +81,133 @@ body.splash-page .site-main {
 }
 
 .splash-background__static {
-  background: #121820;
+  background: #0a0e13;
+  background-image:
+    radial-gradient(ellipse 120% 80% at 60% 50%, rgba(18, 24, 32, 1) 0%, #060810 100%);
 }
 
-.splash-background__section {
+/* ── Gallery strip ── */
+.splash-background__gallery {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.splash-background__gallery-item {
+  --item-accent: #40C4C4;
+  flex: 0 0 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── The slash viewport ── */
+.splash-background__image-wrapper {
+  position: absolute;
+  left: 8vw;
+  right: -8vw;
+  top: -12vh;
+  bottom: -12vh;
+  clip-path: polygon(32% 0%, 100% 0%, 68% 100%, 0% 100%);
   opacity: 0;
+  transform: scale(0.92) translateX(4vw);
+  transition:
+    opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 900ms cubic-bezier(0.22, 1, 0.36, 1),
+    clip-path 900ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  filter: blur(6px) grayscale(70%) brightness(0.5);
+}
+
+/* Prev neighbor — peek from the left */
+.splash-background__gallery-item--prev .splash-background__image-wrapper {
+  opacity: 0.12;
+  transform: scale(0.94) translateX(-3vw);
+  filter: blur(4px) grayscale(80%) brightness(0.35);
+}
+
+/* Next neighbor — peek from the right */
+.splash-background__gallery-item--next .splash-background__image-wrapper {
+  opacity: 0.12;
+  transform: scale(0.94) translateX(3vw);
+  filter: blur(4px) grayscale(80%) brightness(0.35);
+}
+
+/* ── Active state: full reveal ── */
+.splash-background__gallery-item--active .splash-background__image-wrapper {
+  opacity: 0.5;
+  transform: scale(1) translateX(0);
+  clip-path: polygon(24% 0%, 100% 0%, 76% 100%, 0% 100%);
+  filter: blur(0px) grayscale(0%) brightness(0.7);
+}
+
+/* ── The image itself ── */
+.splash-background__image {
+  position: absolute;
+  inset: 0;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  filter: blur(2px) brightness(0.28);
-  transform: scale(1.02);
-  transition: opacity 400ms ease;
 }
 
-.splash-background__section--active {
-  opacity: 1;
+/* ── Accent edge glow along the leading slash edge ── */
+.splash-background__edge-glow {
+  position: absolute;
+  left: 8vw;
+  right: -8vw;
+  top: -12vh;
+  bottom: -12vh;
+  clip-path: polygon(24% 0%, 26% 0%, 2% 100%, 0% 100%);
+  background: linear-gradient(
+    180deg,
+    transparent 5%,
+    var(--item-accent) 30%,
+    var(--item-accent) 70%,
+    transparent 95%
+  );
+  opacity: 0;
+  transition: opacity 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  mix-blend-mode: screen;
 }
 
+.splash-background__gallery-item--active .splash-background__edge-glow {
+  opacity: 0.35;
+}
+
+.splash-background__gallery-item--prev .splash-background__edge-glow,
+.splash-background__gallery-item--next .splash-background__edge-glow {
+  opacity: 0.08;
+}
+
+/* ── Cinematic vignette ── */
+.splash-background__vignette {
+  background:
+    radial-gradient(ellipse 60% 60% at 50% 50%, transparent 0%, rgba(6, 8, 16, 0.65) 100%);
+  pointer-events: none;
+}
+
+/* ── Dark scrim — cinematic gradient ── */
 .splash-background__scrim {
-  background: rgba(18, 24, 32, 0.6);
+  background:
+    linear-gradient(180deg, rgba(10, 14, 19, 0.45) 0%, rgba(10, 14, 19, 0.2) 35%, rgba(10, 14, 19, 0.55) 100%),
+    linear-gradient(90deg, rgba(10, 14, 19, 0.6) 0%, transparent 30%, transparent 70%, rgba(10, 14, 19, 0.6) 100%);
 }
 
+/* ── Film grain ── */
 .splash-background__grain {
-  opacity: 0.06;
-  mix-blend-mode: soft-light;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  animation: splash-grain-shift 8s steps(4) infinite;
+}
+
+@keyframes splash-grain-shift {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-2px, 1px); }
+  50% { transform: translate(1px, -2px); }
+  75% { transform: translate(-1px, 2px); }
 }
 
 .splash-orbit__scene-shell {
@@ -600,7 +704,10 @@ body.splash-page .site-main {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .splash-background__section,
+  .splash-background__gallery,
+  .splash-background__image-wrapper,
+  .splash-background__edge-glow,
+  .splash-background__grain,
   .splash-card,
   .splash-card__cta,
   .splash-contact-cta,

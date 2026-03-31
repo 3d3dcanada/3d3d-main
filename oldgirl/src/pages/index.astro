@@ -1,5 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import BrandSidebar from '../components/BrandSidebar.tsx';
+
+const sidebarNav = [{
+  label: 'Old Girl',
+  items: [
+    { id: 'home', label: 'Home', href: '/' },
+    { id: 'about', label: 'About', href: '/about' },
+    { id: 'blog', label: 'Blog', href: '/blog' },
+    { id: 'contact', label: 'Contact', href: '/contact' },
+  ],
+}];
 
 const schema = {
   '@context': 'https://schema.org',
@@ -13,527 +24,219 @@ const restorationLog = [
   { date: '2026-02-14', status: 'done', entry: 'Acquired the printer — broken MMU2S, bent frame, dead extruder motor. $0 cost.' },
   { date: '2026-02-28', status: 'done', entry: 'Full teardown. Replaced extruder motor, straightened frame, rebuilt heatblock.' },
   { date: '2026-03-10', status: 'done', entry: 'MMU2S rebuilt with new idler and selector motor. First successful 5-colour test print.' },
-  { date: '2026-03-12', status: 'done', entry: 'Loaded Lime Green Galaxy ABS. Stage One preview launched.' },
-  { date: 'TBD', status: 'pending', entry: 'Stage Two — live queue, realtime monitoring, Ko-fi filament fund, community voting.' },
+  { date: '2026-03-12', status: 'done', entry: 'Loaded Lime Green Galaxy ABS. Stage One preview launched — blog live, queue in standby.' },
+  { date: 'TBD', status: 'pending', entry: 'Stage Two — live queue, Supabase realtime, Ko-fi filament fund, community voting.' },
 ];
 
 const fundingTiers = [
-  { name: 'Filament Backer', amount: '$5+', desc: 'Goes directly to filament. Every $5 buys ~30m of material.', color: '#8B5CF6' },
-  { name: 'Queue Jumper', amount: '$15+', desc: 'Your print moves to the top of the community queue.', color: '#F97316' },
-  { name: 'Patron', amount: '$25+', desc: 'Donor wall, priority queue, and a print of your choice each month.', color: '#84CC16' },
+  { name: 'Filament Backer', amount: '$5+', desc: 'Your donation goes directly to filament. Every $5 buys ~30m of material.' },
+  { name: 'Queue Jumper', amount: '$15+', desc: 'Skip the line. Your print moves to the top of the community queue.' },
+  { name: 'Patron', amount: '$25+', desc: 'Named on the donor wall, priority queue access, and a print of your choice each month.' },
 ];
+
+const suggestions = [
+  { text: 'A launch-day keychain for community backers', votes: 12 },
+  { text: 'Benchy colour test once the MMU channels are stable', votes: 9 },
+  { text: 'A live repair part pack for other aging Prusas', votes: 7 },
+];
+
+// Printer color mapping
+const C = {
+  purple: '#8B5CF6',   // Galaxy purple — frame panels
+  lime: '#84CC16',     // Neon lime — filament
+  orange: '#F97316',   // Prusa orange — brand
+  frame: '#1C1917',    // Black frame — structural
+};
 ---
 
 <BaseLayout
   title="The Old Girl — Community 3D Printer"
-  description="A Prusa i3 MK2.5S with MMU2S, restored and given to the community. Print queue, Ko-fi donations, livestream."
+  description="A Prusa i3 MK2.5S with MMU2S, restored and given to the community. Print queue, Ko-fi donations, livestream. Run by 3D3D Atlantic Cooperative in Moncton, NB."
   schema={schema}
   accent="#8B5CF6"
-  showFooter={false}
-  bodyClass="og-page"
 >
-  {/* ── Dark hero ── */}
-  <section class="og-hero">
-    <div class="og-hero__bg"></div>
-    <div class="og-hero__scrim"></div>
-    <div class="og-hero__content">
-      <a href="https://3d3d.ca" class="og-hero__back" aria-label="Back to 3D3D">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 3L4 7l5 4"/></svg>
-      </a>
-      <div>
-        <p class="og-hero__kicker">Community Printer</p>
-        <h1 class="og-hero__title">The Old <span class="og-hero__accent">Girl</span></h1>
-        <p class="og-hero__sub">A Prusa i3 MK2.5S with MMU2S. Acquired broken, rebuilt from scratch. This printer belongs to the internet.</p>
+  <BrandSidebar slot="sidebar" client:load navGroups={sidebarNav} activePath="/" />
+
+  <div class="pt-16 pl-0 lg:pl-4">
+
+    {/* ── STAGE ONE BANNER ── */}
+    <div class="px-6 lg:px-12 pt-6">
+      <div class="max-w-4xl rounded-lg px-5 py-3 flex items-start gap-3" style={`background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3);`}>
+        <span class="text-[10px] uppercase tracking-[0.18em] mt-0.5 flex-shrink-0" style={`color: ${C.orange}; font-family: var(--font-display);`}>Stage One Preview</span>
+        <p class="text-[12px] leading-relaxed" style="color: var(--color-text-secondary);">
+          The Old Girl is restored and standing by. Live queue, realtime monitoring, and Ko-fi integration are in final hardening. This page is a live preview — the printer is ready, systems are not yet.
+        </p>
       </div>
     </div>
-  </section>
 
-  {/* ── Status strip (dark bridge) ── */}
-  <div class="og-status-strip">
-    <div class="og-status-strip__inner">
-      <div class="og-status-item">
-        <span class="og-status-dot og-status-dot--orange"></span>
-        <span class="og-status-label">Idle — Preview Mode</span>
-      </div>
-      <div class="og-status-meta">
-        <span>Prusa i3 MK2.5S</span>
-        <span>MMU2S</span>
-        <span>Lime Green Galaxy ABS</span>
-        <span>Stage One</span>
-      </div>
-    </div>
-  </div>
+    {/* ── HERO ── */}
+    <section class="relative px-6 lg:px-12 py-14">
+      <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse at 30% 0%, rgba(139,92,246,0.1) 0%, transparent 55%);" aria-hidden="true" />
 
-  {/* ── Light content ── */}
-  <div class="og-shell">
+      <div class="relative max-w-4xl">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="w-3 h-3 rounded-full" style={`background: ${C.purple}; box-shadow: 0 0 12px rgba(139,92,246,0.5);`} />
+          <span class="text-[9px] uppercase tracking-[0.2em]" style="color: var(--color-text-muted); font-family: var(--font-display);">Community Printer · Moncton NB</span>
+        </div>
 
-    {/* ── Print Queue ── */}
-    <section class="og-section">
-      <span class="og-eyebrow">Queue</span>
-      <h2 class="og-heading">Print Queue</h2>
-      <div class="og-queue">
-        {[
-          { name: 'Replacement MMU2S latch prototype', status: 'Preview' },
-          { name: 'First community calibration print', status: 'Waitlist' },
-          { name: 'Filament swatch set for launch day', status: 'Waitlist' },
-        ].map((item, i) => (
-          <div class="og-queue__item">
-            <span class="og-queue__num">#{String(i + 1).padStart(2, '0')}</span>
-            <span class="og-queue__name">{item.name}</span>
-            <span class="og-queue__status">{item.status}</span>
-          </div>
-        ))}
-      </div>
-      <p class="og-note">Queue submissions open in Stage Two. <a href="https://ko-fi.com/3d3dca" target="_blank" rel="noopener noreferrer">Ko-fi queue jump</a> available at launch.</p>
-    </section>
+        <h1 class="font-display font-bold leading-[1.05]" style="font-size: clamp(2.5rem, 6vw, 5rem); color: var(--color-text-primary);">
+          The Old<br />
+          <span style={`color: ${C.purple};`}>Girl</span>
+        </h1>
 
-    {/* ── Restoration Log ── */}
-    <section class="og-section">
-      <span class="og-eyebrow">Build log</span>
-      <h2 class="og-heading">Restoration Log</h2>
-      <div class="og-log">
-        {restorationLog.map((entry) => (
-          <div class="og-log__entry">
-            <span class={`og-log__dot ${entry.status === 'done' ? 'og-log__dot--done' : ''}`}></span>
+        <p class="mt-5 max-w-xl leading-relaxed" style="font-size: 0.9375rem; color: var(--color-text-secondary);">
+          A Prusa i3 MK2.5S with MMU2S. Acquired broken, rebuilt from scratch, loaded with Lime Green Galaxy ABS. This printer belongs to the internet.
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="https://ko-fi.com/3d3dca" target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-md px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.12em] transition-all duration-200"
+            style={`background: ${C.purple}; color: #fff; min-height: 44px; font-family: var(--font-display);`}>
+            Support on Ko-fi
+          </a>
+          <a href="/about"
+            class="inline-flex items-center gap-2 rounded-md px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.12em] transition-all duration-200"
+            style="background: transparent; color: var(--color-text-primary); border: 2px solid var(--color-border-default); min-height: 44px; font-family: var(--font-display);">
+            The Story
+          </a>
+        </div>
+
+        {/* Printer specs strip — each spec uses a different printer color */}
+        <div class="mt-12 flex flex-wrap gap-x-8 gap-y-4 border-t pt-6" style="border-color: var(--color-border-subtle);">
+          {[
+            { val: 'Prusa i3 MK2.5S', label: 'Printer', color: C.orange },
+            { val: 'MMU2S', label: 'Multi-Material', color: C.purple },
+            { val: 'Lime Green Galaxy', label: 'Current Filament', color: C.lime },
+            { val: 'ABS', label: 'Material', color: C.frame },
+            { val: 'Stage One', label: 'Mode', color: C.orange },
+          ].map(s => (
             <div>
-              <span class="og-log__date">{entry.date}</span>
-              <p class="og-log__text">{entry.entry}</p>
+              <span class="block text-sm font-bold" style={`color: ${s.color}; font-family: var(--font-display);`}>{s.val}</span>
+              <span class="block text-[9px] uppercase tracking-[0.18em] mt-0.5" style="color: var(--color-text-muted); font-family: var(--font-display);">{s.label}</span>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
 
-    {/* ── Community Funding ── */}
-    <section class="og-section">
-      <span class="og-eyebrow">Support</span>
-      <h2 class="og-heading">Community Funding</h2>
-      <p class="og-prose">Every donation goes directly to filament, parts, and uptime.</p>
-      <div class="og-tiers">
-        {fundingTiers.map((tier) => (
-          <div class="og-tier">
-            <span class="og-tier__amount" style={`color: ${tier.color};`}>{tier.amount}</span>
-            <span class="og-tier__name">{tier.name}</span>
-            <p class="og-tier__desc">{tier.desc}</p>
+    {/* ── PRINTER STATUS (PREVIEW) ── */}
+    <section class="px-6 lg:px-12 pb-14" aria-labelledby="status-heading">
+      <div class="max-w-4xl">
+        <h2 id="status-heading" class="text-[10px] font-semibold uppercase tracking-[0.25em] mb-4" style="color: var(--color-text-muted); font-family: var(--font-display);">
+          Printer Status
+        </h2>
+        <div class="p-5 rounded-xl" style="background: var(--color-surface-card); border: 1px solid var(--color-border-subtle); box-shadow: var(--shadow-sm);">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="w-2 h-2 rounded-full" style={`background: ${C.orange};`} />
+            <span class="font-display text-xs uppercase tracking-wider" style={`color: ${C.orange};`}>Idle — Preview Mode</span>
           </div>
-        ))}
+          <p class="text-[13px]" style="color: var(--color-text-secondary);">Community queue opens after live systems test. Material: Lime Green Galaxy ABS.</p>
+          <p class="mt-3 text-[11px] uppercase tracking-wider" style="color: var(--color-text-muted); font-family: var(--font-display);">Live monitoring and realtime queue coming in Stage Two.</p>
+        </div>
       </div>
-      <a href="https://ko-fi.com/3d3dca" target="_blank" rel="noopener noreferrer" class="og-cta">
-        Support on Ko-fi
-        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 5h6m-2-2 2 2-2 2"/></svg>
-      </a>
     </section>
+
+    {/* ── COMMUNITY QUEUE (PREVIEW) ── */}
+    <section class="px-6 lg:px-12 pb-14" aria-labelledby="queue-heading">
+      <div class="max-w-4xl">
+        <div class="border-t pt-10" style="border-color: var(--color-border-subtle);">
+          <h2 id="queue-heading" class="text-lg font-bold mb-6" style="color: var(--color-text-primary); font-family: var(--font-display);">Print Queue</h2>
+          <div class="space-y-2">
+            {[
+              { name: 'Replacement MMU2S latch prototype', status: 'Preview', email: 'ken@3d3d.ca' },
+              { name: 'First community calibration print', status: 'Waitlist', email: '—' },
+              { name: 'Filament swatch set for launch day', status: 'Waitlist', email: '—' },
+            ].map((item, i) => (
+              <div class="flex items-center gap-4 px-4 py-3 rounded-lg" style="background: var(--color-surface-card); border: 1px solid var(--color-border-subtle);">
+                <span class="text-[10px]" style="color: var(--color-text-muted); font-family: var(--font-display);">#{String(i+1).padStart(2,'0')}</span>
+                <span class="flex-1 text-[13px]" style="color: var(--color-text-primary);">{item.name}</span>
+                <span class="text-[9px] uppercase tracking-wider" style={`color: ${C.orange}; font-family: var(--font-display);`}>{item.status}</span>
+              </div>
+            ))}
+          </div>
+          <p class="mt-4 text-[11px] uppercase tracking-wider" style="color: var(--color-text-muted); font-family: var(--font-display);">
+            Queue submissions open in Stage Two. <a href="https://ko-fi.com/3d3dca" class="underline" style={`color: ${C.purple};`} target="_blank" rel="noopener noreferrer">Ko-fi queue jump</a> available at launch.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* ── COMMUNITY SUGGESTIONS (PREVIEW) ── */}
+    <section class="px-6 lg:px-12 pb-14" aria-labelledby="suggestions-heading">
+      <div class="max-w-4xl border-t pt-10" style="border-color: var(--color-border-subtle);">
+        <h2 id="suggestions-heading" class="text-lg font-bold mb-6" style="color: var(--color-text-primary); font-family: var(--font-display);">Community Suggestions</h2>
+        <div class="space-y-2">
+          {suggestions.map(s => (
+            <div class="flex items-center gap-4 px-4 py-3 rounded-lg" style="background: var(--color-surface-card); border: 1px solid var(--color-border-subtle);">
+              <div class="flex-shrink-0 w-8 text-center">
+                <span class="text-sm font-bold" style={`color: ${C.lime}; font-family: var(--font-display);`}>{s.votes}</span>
+                <span class="block text-[8px] uppercase tracking-wider" style="color: var(--color-text-muted); font-family: var(--font-display);">votes</span>
+              </div>
+              <span class="flex-1 text-[13px]" style="color: var(--color-text-primary);">{s.text}</span>
+            </div>
+          ))}
+        </div>
+        <p class="mt-4 text-[11px] uppercase tracking-wider" style="color: var(--color-text-muted); font-family: var(--font-display);">
+          Voting and new suggestions open in Stage Two.
+        </p>
+      </div>
+    </section>
+
+    {/* ── RESTORATION LOG ── */}
+    <section class="px-6 lg:px-12 pb-14" aria-labelledby="restoration-heading">
+      <div class="max-w-4xl border-t pt-10" style="border-color: var(--color-border-subtle);">
+        <h2 id="restoration-heading" class="text-lg font-bold mb-6" style="color: var(--color-text-primary); font-family: var(--font-display);">Restoration Log</h2>
+        <div class="space-y-3">
+          {restorationLog.map(entry => (
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 pt-0.5">
+                <span class="w-2 h-2 rounded-full block mt-1.5" style={`background: ${entry.status === 'done' ? C.lime : 'var(--color-text-muted)'};`} />
+              </div>
+              <div>
+                <span class="text-[9px] uppercase tracking-wider" style="color: var(--color-text-muted); font-family: var(--font-display);">{entry.date}</span>
+                <p class="text-[13px] leading-relaxed mt-0.5" style="color: var(--color-text-secondary);">{entry.entry}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ── COMMUNITY FUNDING ── */}
+    <section class="px-6 lg:px-12 pb-14" aria-labelledby="funding-heading">
+      <div class="max-w-4xl border-t pt-10" style="border-color: var(--color-border-subtle);">
+        <h2 id="funding-heading" class="text-lg font-bold mb-2" style="color: var(--color-text-primary); font-family: var(--font-display);">Community Funding</h2>
+        <p class="text-[13px] mb-6" style="color: var(--color-text-secondary);">Every donation goes directly to filament, parts, and uptime. Ko-fi is the primary channel.</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+          {fundingTiers.map((tier, i) => {
+            const colors = [C.purple, C.orange, C.lime];
+            return (
+              <div class="p-5 rounded-xl flex flex-col" style="background: var(--color-surface-card); border: 1px solid var(--color-border-default); box-shadow: var(--shadow-sm);">
+                <span class="text-base font-bold mb-1" style={`color: ${colors[i]}; font-family: var(--font-display);`}>{tier.amount}</span>
+                <span class="text-[10px] uppercase tracking-wider mb-2" style="color: var(--color-text-primary); font-family: var(--font-display);">{tier.name}</span>
+                <p class="text-[12px] leading-relaxed flex-1" style="color: var(--color-text-secondary);">{tier.desc}</p>
+              </div>
+            );
+          })}
+        </div>
+
+        <a href="https://ko-fi.com/3d3dca" target="_blank" rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-md px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.12em]"
+          style={`background: rgba(139,92,246,0.12); color: ${C.purple}; border: 2px solid rgba(139,92,246,0.3); min-height: 44px; font-family: var(--font-display);`}>
+          Support on Ko-fi →
+        </a>
+      </div>
+    </section>
+
+    {/* ── CONTACT STRIP ── */}
+    <section class="px-6 lg:px-12 pb-16">
+      <div class="max-w-4xl border-t pt-8 flex flex-wrap items-center gap-x-8 gap-y-3" style="border-color: var(--color-border-subtle);">
+        <a href="mailto:info@3d3d.ca" class="text-[10px] uppercase tracking-[0.15em] hover:underline" style="color: var(--color-text-muted); font-family: var(--font-display);">info@3d3d.ca</a>
+        <a href="https://3d3d.ca" class="text-[10px] uppercase tracking-[0.15em] hover:underline" style="color: var(--color-text-muted); font-family: var(--font-display);">3d3d.ca</a>
+        <span class="text-[10px] uppercase tracking-[0.15em]" style="color: var(--color-text-muted); font-family: var(--font-display);">Moncton, NB, Canada</span>
+      </div>
+    </section>
+
   </div>
-
-  {/* ── Footer ── */}
-  <footer class="og-footer">
-    <a href="mailto:info@3d3d.ca">info@3d3d.ca</a>
-    <a href="https://3d3d.ca">3d3d.ca</a>
-    <span>Moncton, NB</span>
-  </footer>
 </BaseLayout>
-
-<style>
-  /* ── Page override ── */
-  .og-page {
-    background: var(--color-surface-primary);
-    background-image: none;
-  }
-
-  /* ══════════════════════════════════════════
-     DARK HERO — purple brand
-     ══════════════════════════════════════════ */
-  .og-hero {
-    position: relative;
-    overflow: hidden;
-    min-height: 240px;
-    display: flex;
-    align-items: flex-end;
-  }
-
-  .og-hero__bg {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 30% 20%, rgba(139, 92, 246, 0.25) 0%, transparent 55%),
-      radial-gradient(ellipse at 70% 80%, rgba(132, 204, 22, 0.12) 0%, transparent 50%),
-      #0e0a16;
-  }
-
-  .og-hero__scrim {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, transparent 0%, rgba(14, 10, 22, 0.6) 100%);
-  }
-
-  .og-hero__content {
-    position: relative;
-    z-index: 1;
-    width: min(100%, 760px);
-    margin: 0 auto;
-    padding: 3rem 1.25rem 1.5rem;
-    display: flex;
-    gap: 0.75rem;
-  }
-
-  .og-hero__back {
-    display: grid;
-    place-items: center;
-    width: 2rem;
-    height: 2rem;
-    border-radius: var(--radius-sm);
-    background: rgba(139, 92, 246, 0.12);
-    border: 1px solid rgba(139, 92, 246, 0.2);
-    color: rgba(200, 190, 220, 0.7);
-    flex-shrink: 0;
-    margin-top: 0.15rem;
-    transition: background 150ms ease;
-  }
-
-  .og-hero__back:hover {
-    background: rgba(139, 92, 246, 0.25);
-    color: #f0ebf5;
-  }
-
-  .og-hero__kicker {
-    margin: 0;
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(200, 190, 220, 0.6);
-  }
-
-  .og-hero__title {
-    margin: 0.25rem 0 0;
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
-    line-height: 1;
-    letter-spacing: -0.03em;
-    font-weight: 800;
-    color: #f0ebf5;
-  }
-
-  .og-hero__accent {
-    color: #8B5CF6;
-  }
-
-  .og-hero__sub {
-    margin: 0.4rem 0 0;
-    font-family: var(--font-body);
-    font-size: 0.82rem;
-    color: rgba(200, 190, 220, 0.6);
-    line-height: 1.5;
-    max-width: 28rem;
-  }
-
-  /* ══════════════════════════════════════════
-     STATUS STRIP — dark bridge
-     ══════════════════════════════════════════ */
-  .og-status-strip {
-    background: #0a0712;
-    border-bottom: 1px solid rgba(139, 92, 246, 0.1);
-  }
-
-  .og-status-strip__inner {
-    width: min(100%, 760px);
-    margin: 0 auto;
-    padding: 0.6rem 1.25rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .og-status-item {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-
-  .og-status-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--color-text-muted);
-  }
-
-  .og-status-dot--orange {
-    background: #F97316;
-    box-shadow: 0 0 6px rgba(249, 115, 22, 0.5);
-  }
-
-  .og-status-label {
-    font-family: var(--font-mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #F97316;
-  }
-
-  .og-status-meta {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    margin-left: auto;
-  }
-
-  .og-status-meta span {
-    font-family: var(--font-mono);
-    font-size: 0.52rem;
-    letter-spacing: 0.06em;
-    color: rgba(200, 190, 220, 0.35);
-  }
-
-  /* ══════════════════════════════════════════
-     LIGHT CONTENT
-     ══════════════════════════════════════════ */
-  .og-shell {
-    width: min(100%, 760px);
-    margin: 0 auto;
-    padding: 0 1.25rem;
-  }
-
-  .og-section {
-    padding: 1.25rem 0;
-    border-bottom: 1px solid var(--color-border-subtle);
-  }
-
-  .og-section:last-child { border-bottom: none; }
-
-  .og-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    font-family: var(--font-mono);
-    font-size: 0.52rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-purple-dark);
-  }
-
-  .og-eyebrow::before {
-    content: '';
-    width: 1.25rem;
-    height: 2px;
-    background: var(--color-purple-primary);
-    flex-shrink: 0;
-  }
-
-  .og-heading {
-    font-family: var(--font-display);
-    font-size: clamp(1.1rem, 0.9rem + 0.8vw, 1.5rem);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    font-weight: 700;
-    color: var(--color-text-primary);
-    margin: 0.25rem 0 0.5rem;
-  }
-
-  .og-prose {
-    font-family: var(--font-body);
-    font-size: 0.82rem;
-    line-height: 1.55;
-    color: var(--color-text-secondary);
-    margin: 0 0 0.6rem;
-  }
-
-  .og-note {
-    font-family: var(--font-mono);
-    font-size: 0.55rem;
-    letter-spacing: 0.04em;
-    color: var(--color-text-muted);
-    margin-top: 0.5rem;
-  }
-
-  .og-note a {
-    color: var(--color-purple-primary);
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 2px;
-  }
-
-  /* ── Queue ── */
-  .og-queue {
-    display: grid;
-    gap: 0.3rem;
-  }
-
-  .og-queue__item {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.5rem 0.65rem;
-    border-radius: var(--radius-sm);
-    background: var(--color-surface-card);
-    border: 1px solid var(--color-border-subtle);
-  }
-
-  .og-queue__num {
-    font-family: var(--font-mono);
-    font-size: 0.55rem;
-    color: var(--color-text-muted);
-  }
-
-  .og-queue__name {
-    flex: 1;
-    font-size: 0.78rem;
-    color: var(--color-text-primary);
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .og-queue__status {
-    font-family: var(--font-mono);
-    font-size: 0.5rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #F97316;
-    flex-shrink: 0;
-  }
-
-  /* ── Restoration Log ── */
-  .og-log {
-    display: grid;
-    gap: 0.5rem;
-  }
-
-  .og-log__entry {
-    display: flex;
-    gap: 0.5rem;
-    align-items: flex-start;
-  }
-
-  .og-log__dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--color-text-muted);
-    flex-shrink: 0;
-    margin-top: 0.45rem;
-  }
-
-  .og-log__dot--done {
-    background: #84CC16;
-  }
-
-  .og-log__date {
-    font-family: var(--font-mono);
-    font-size: 0.5rem;
-    letter-spacing: 0.08em;
-    color: var(--color-text-muted);
-  }
-
-  .og-log__text {
-    margin: 0.1rem 0 0;
-    font-size: 0.78rem;
-    line-height: 1.45;
-    color: var(--color-text-secondary);
-  }
-
-  /* ── Funding Tiers ── */
-  .og-tiers {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.4rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .og-tier {
-    padding: 0.65rem 0.75rem;
-    border-radius: var(--radius-sm);
-    background: var(--color-surface-card);
-    border: 1px solid var(--color-border-subtle);
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: auto auto;
-    gap: 0.1rem 0.6rem;
-  }
-
-  .og-tier__amount {
-    grid-row: 1 / 3;
-    align-self: center;
-    font-family: var(--font-display);
-    font-size: 1rem;
-    font-weight: 700;
-  }
-
-  .og-tier__name {
-    font-family: var(--font-display);
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: var(--color-text-primary);
-    letter-spacing: 0.02em;
-  }
-
-  .og-tier__desc {
-    font-size: 0.72rem;
-    line-height: 1.4;
-    color: var(--color-text-secondary);
-    margin: 0;
-  }
-
-  /* ── CTA ── */
-  .og-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    padding: 0.45rem 0.85rem;
-    border-radius: var(--radius-sm);
-    background: var(--color-purple-primary);
-    color: #fff;
-    font-family: var(--font-display);
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: background 150ms ease;
-    box-shadow: 0 3px 10px rgba(139, 92, 246, 0.2);
-  }
-
-  .og-cta:hover {
-    background: var(--color-purple-dark);
-    color: #fff;
-  }
-
-  /* ── Footer ── */
-  .og-footer {
-    width: min(100%, 760px);
-    margin: 0 auto;
-    padding: 0.65rem 1.25rem 1.5rem;
-    display: flex;
-    gap: 1.25rem;
-    flex-wrap: wrap;
-    border-top: 1px solid var(--color-border-subtle);
-    font-family: var(--font-mono);
-    font-size: 0.52rem;
-    letter-spacing: 0.06em;
-    color: var(--color-text-muted);
-  }
-
-  .og-footer a {
-    color: var(--color-purple-primary);
-    text-decoration: none;
-  }
-
-  .og-footer a:hover { color: var(--color-purple-dark); }
-
-  /* ── Responsive ── */
-  @media (min-width: 500px) {
-    .og-tiers { grid-template-columns: 1fr 1fr 1fr; }
-  }
-
-  @media (min-width: 700px) {
-    .og-hero__content,
-    .og-status-strip__inner,
-    .og-shell,
-    .og-footer { padding-inline: 2rem; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .og-hero__back, .og-cta { transition: none !important; }
-  }
-</style>

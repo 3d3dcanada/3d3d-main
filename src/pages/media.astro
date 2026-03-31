@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageNextActions from '../components/PageNextActions.astro';
 
 const agencySchema = {
   "@context": "https://schema.org",
@@ -14,7 +16,7 @@ const jobPostingSchema = {
   "@context": "https://schema.org",
   "@type": "JobPosting",
   "title": "Context Engineer & Content Architect",
-  "description": "3D3D Media is an AI-augmented content agency in Fredericton, NB. We are hiring a Context Engineer to co-build the agency from the ground up. You manage the art direction; the seated Anthropic Claude subscription manages production overhead.",
+  "description": "3D3D Media is an AI-augmented content agency in Fredericton, NB. We are hiring a Context Engineer to manage our orchestrated content workflows. You manage the art direction; the seated Anthropic Claude subscription manages production overhead.",
   "datePosted": "2026-03-29",
   "validThrough": "2026-12-31",
   "employmentType": "CONTRACTOR",
@@ -46,39 +48,6 @@ const jobPostingSchema = {
   "skills": "Prompt Engineering, Context Engineering, AI Agents, Social Media Asset Creation, Video Editing.",
   "jobBenefits": "Seated Anthropic Claude subscription, Google Workspace, cooperative profit sharing, complete process autonomy."
 };
-
-const services = [
-  {
-    title: 'Context Engineering',
-    desc: 'We build your company\'s LLM "Hub." We train models on your brand voice, past successes, and technical logic so they generate assets that actually sound like you.',
-    tag: 'Deployments ready in 14 days',
-  },
-  {
-    title: 'Social Asset Manufacturing',
-    desc: 'High-volume short-form video and macro photography. We shoot the raw b-roll, our AI pipelines handle clipping, transcription, and formatting for TikTok, Reels, and Shorts.',
-    tag: 'Starting at $250/mo',
-  },
-  {
-    title: 'Pipeline Automation',
-    desc: 'We integrate Make and n8n to connect your AI Hub directly to your CMS and scheduling platforms. Write once, distribute everywhere, automatically.',
-    tag: 'Full infrastructure setups',
-  },
-  {
-    title: 'Prompt Engineering',
-    desc: 'Multi-step chains that transform raw thoughts into publishable campaigns. Deep logic tuning for Claude and GPT-4 architectures.',
-    tag: 'Advanced Context Engineering',
-  },
-  {
-    title: 'AI Asset Generation',
-    desc: 'Midjourney, ComfyUI, and Stable Diffusion workflows tailored to your brand identity. Photorealistic backgrounds, concept art, and product contextualization.',
-    tag: 'Zero stock photography',
-  },
-  {
-    title: 'Open Source Audits',
-    desc: 'We help companies open-source their internal tools, publicize their repos, and generate technical documentation perfectly formatted for GitHub.',
-    tag: 'Markdown and docs as scaling',
-  },
-];
 ---
 
 <BaseLayout
@@ -86,343 +55,250 @@ const services = [
   description="3D3D Media is an orchestrated content agency leveraging Context Engineering and Hub-and-Spoke AI workflows to scale local business social media and asset creation."
   activePath="/media"
   schema={[jobPostingSchema, agencySchema]}
-  noFooter
-  noSidebar
-  noMobileCTA
-  noFeedbackBlip
-  bodyClass="market-page"
 >
-  {/* ── Dark hero ── */}
-  <section class="media-hero">
-    <div class="media-hero__bg" style="background-image: url('/images/media_agency_hero.png');"></div>
-    <div class="media-hero__scrim"></div>
-    <div class="media-hero__grain"></div>
-    <div class="media-hero__content">
-      <a href="/" class="media-hero__back" aria-label="Home">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 3L4 7l5 4"/></svg>
-      </a>
-      <div>
-        <p class="media-hero__kicker">3D3D Media Studio</p>
-        <h1 class="media-hero__title">
-          <span class="media-hero__word">Creativity meets</span>
-          <span class="media-hero__word media-hero__word--accent">ruthless efficiency.</span>
-        </h1>
-        <p class="media-hero__sub">
-          We are an orchestrated content agency. Context Engineering and autonomous workflows replace the manual grind with scalable, high-impact asset creation.
-        </p>
-      </div>
-    </div>
-  </section>
 
-  {/* ── Dark bridge strip ── */}
-  <div class="media-strip">
-    <div class="media-strip__inner">
-      <div class="media-strip__item">
-        <strong>Model</strong>
-        <span>Hub-and-Spoke AI Workflows</span>
+<!-- ═══════════════════════════════════════════════════════════════
+     [1] HERO
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="media-hero" style="background-image: linear-gradient(to right, rgba(18,24,32,0.95) 0%, rgba(18,24,32,0.85) 40%, rgba(18,24,32,0.4) 100%), url('/images/media_agency_hero.png'); background-size: cover; background-position: center 30%;" data-reveal>
+  <div class="media-hero__inner">
+    <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Media Studio'}]} />
+    <p class="media-hero__eyebrow">3D3D Media Studio</p>
+    <h1 class="media-hero__title">
+      <span class="media-hero__word">Creativity meets</span>
+      <span class="media-hero__word media-hero__word--accent">ruthless efficiency.</span>
+    </h1>
+    <p class="media-hero__sub">
+      We are an orchestrated content agency. We use Context Engineering and autonomous workflows to replace manual grind with scalable, high-impact asset creation.
+    </p>
+    <div class="media-hero__ctas">
+      <a href="#services" class="media-cta media-cta--primary">Our Services</a>
+      <a href="#role" class="media-cta media-cta--outline">Join the Factory</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     [2] THE PHILOSOPHY
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="media-challenge" id="philosophy" data-reveal>
+  <div class="media-challenge__inner">
+    <blockquote class="media-challenge__quote">
+      Humans for strategy.<br />Machines for execution.
+    </blockquote>
+    <p class="media-challenge__context" style="max-width: 48rem;">
+      In 2026, content generation is solved. The differentiator is orchestration. We don't just write prompts; we build <strong>Hub-and-Spoke AI workflows</strong>. We map your business knowledge into a central hub, deploy AI agents to handle the heavy lifting (outlining, drafting, structuring), and mandate human editorial control for the final 10% — the soul, the tone, and the strategic edge.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     [3] SERVICES
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="media-services" id="services" data-reveal>
+  <div class="media-section-shell">
+    <p class="media-eyebrow">The Agency Stack</p>
+    <h2 class="media-heading">Workflows, not just posts.</h2>
+    <p class="media-subhead">We don't sell hours. We sell systematic content pipelines tailored to your industry.</p>
+
+    <div class="media-services__grid">
+      <div class="media-service-card">
+        <div class="media-service-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <h3 class="media-service-card__title">Context Engineering</h3>
+        <p class="media-service-card__copy">We build your company's LLM "Hub." We train models on your brand voice, past successes, and technical logic so they generate assets that actually sound like you — zero generic fluff.</p>
+        <span class="media-service-card__use">Deployments ready in 14 days.</span>
       </div>
-      <div class="media-strip__item">
-        <strong>Philosophy</strong>
-        <span>Humans for strategy. Machines for execution.</span>
+
+      <div class="media-service-card">
+        <div class="media-service-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <h3 class="media-service-card__title">Social Asset Manufacturing</h3>
+        <p class="media-service-card__copy">High-volume, short-form video and macro photography. We shoot the raw b-roll, our AI pipelines handle the clipping, transcription, and formatting for TikTok, Reels, and Shorts.</p>
+        <span class="media-service-card__use">Starting at $250/mo.</span>
+      </div>
+
+      <div class="media-service-card">
+        <div class="media-service-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </div>
+        <h3 class="media-service-card__title">Pipeline Automation</h3>
+        <p class="media-service-card__copy">We integrate tools like Make and n8n to connect your new AI Hub directly to your CMS and scheduling platforms. Write once, distribute everywhere, automatically.</p>
+        <span class="media-service-card__use">Full infrastructure setups.</span>
+      </div>
+
+      <div class="media-service-card">
+        <div class="media-service-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <h3 class="media-service-card__title">Prompt Engineering</h3>
+        <p class="media-service-card__copy">We don't just write prompts; we build multi-step chains that transform raw thoughts into publishable campaigns. Deep logic tuning for Claude and GPT-4 architectures.</p>
+        <span class="media-service-card__use">Advanced Context Engineering.</span>
+      </div>
+
+      <div class="media-service-card">
+        <div class="media-service-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h3 class="media-service-card__title">AI Asset Generation</h3>
+        <p class="media-service-card__copy">Midjourney, ComfyUI, and Stable Diffusion workflows tailored to your brand identity. We produce photorealistic backgrounds, concept art, and product contextualization.</p>
+        <span class="media-service-card__use">Zero stock photography.</span>
+      </div>
+
+      <div class="media-service-card">
+        <div class="media-service-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        </div>
+        <h3 class="media-service-card__title">Open Source Audits</h3>
+        <p class="media-service-card__copy">We help companies open-source their internal tools, publicize their repos, and generate technical documentation perfectly formatted for GitHub.</p>
+        <span class="media-service-card__use">Markdown and Docs as scaling.</span>
       </div>
     </div>
   </div>
+</section>
 
-  {/* ── Light content ── */}
-  <div class="media-shell">
+<!-- ═══════════════════════════════════════════════════════════════
+     [4] THE RUNWAY (Ko-fi Pool)
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="media-pool" id="pool" data-reveal>
+  <div class="media-section-shell">
+    <p class="media-eyebrow media-eyebrow--magenta">The Community Pool</p>
+    <h2 class="media-heading">Funding the Factory Floor.</h2>
+    
+    <div class="media-pool__explainer">
+      <p>3D3D Media operates as a cooperative. Small businesses pool their resources to fund the agency's production baseline, and in return, they receive priority access to the assets and automated workflows we build.</p>
+      <p>$100 gets 3 hours of content production per week allocated to your specific projects.</p>
+    </div>
 
-    {/* ── Services ── */}
-    <section class="media-section">
-      <span class="media-eyebrow">The agency stack</span>
-      <h2 class="media-heading">Workflows, not just posts.</h2>
-      <p class="media-prose-lead">We don't sell hours. We sell systematic content pipelines tailored to your industry.</p>
-
-      <div class="media-services-grid">
-        {services.map((s) => (
-          <div class="media-svc">
-            <h3 class="media-svc__title">{s.title}</h3>
-            <p class="media-svc__desc">{s.desc}</p>
-            <span class="media-svc__tag">{s.tag}</span>
-          </div>
-        ))}
+    <div class="media-pool__meter">
+      <div class="media-pool__meter-label">
+        <span>Current Funding: <strong>$210/mo</strong></span>
+        <span>Goal: <strong>$850/mo</strong></span>
       </div>
-    </section>
-
-    {/* ── Community Pool ── */}
-    <section class="media-section">
-      <span class="media-eyebrow media-eyebrow--magenta">The community pool</span>
-      <h2 class="media-heading">Funding the Factory Floor</h2>
-      <div class="media-prose">
-        <p>3D3D Media operates as a cooperative. Small businesses pool resources to fund the agency's production baseline, and in return get priority access to assets and automated workflows we build.</p>
-        <p>$100 gets 3 hours of content production per week allocated to your specific projects.</p>
+      <div class="media-pool__bar">
+        <div class="media-pool__bar-fill" style="--pool-pct: 24.7%"></div>
       </div>
+    </div>
 
-      <div class="media-meter">
-        <div class="media-meter__labels">
-          <span>Current: <strong>$210/mo</strong></span>
-          <span>Goal: <strong>$850/mo</strong></span>
-        </div>
-        <div class="media-meter__bar">
-          <div class="media-meter__fill" style="--pool-pct: 24.7%"></div>
-        </div>
-      </div>
+    <a href="https://ko-fi.com/3d3dcanada" target="_blank" rel="noreferrer" class="media-cta media-cta--magenta">
+      Fund the Pool
+    </a>
+  </div>
+</section>
 
-      <a href="https://ko-fi.com/3d3dcanada" target="_blank" rel="noreferrer" class="media-cta media-cta--magenta">
-        Fund the Pool
-        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 5h6m-2-2 2 2-2 2"/></svg>
-      </a>
-    </section>
-
-    {/* ── Sponsorship ── */}
-    <section class="media-section">
-      <span class="media-eyebrow media-eyebrow--orange">Sponsorship &amp; outreach</span>
-      <h2 class="media-heading">Have Us Document Your Build</h2>
-      <div class="media-prose">
-        <p>Brands and companies can sponsor workflows or hire our agency to document community projects, makerspaces, and open-source hardware builds.</p>
-      </div>
-      <ul class="media-list">
-        <li><strong>Open Source Hardware:</strong> We shoot, edit, and document your repository.</li>
+<!-- ═══════════════════════════════════════════════════════════════
+     [4.5] COLLABORATION & SPONSORSHIPS
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="media-sponsors" id="sponsors" style="background-image: linear-gradient(to right, rgba(18,24,32,0.95) 0%, rgba(18,24,32,0.85) 40%, rgba(18,24,32,0.5) 100%), url('/images/media_community_sponsors.png'); background-size: cover; background-position: center;" data-reveal>
+  <div class="media-section-shell">
+    <p class="media-eyebrow media-eyebrow--orange">Sponsorship & Outreach</p>
+    <h2 class="media-heading">Have us document your build.</h2>
+    <div class="media-sponsors__content">
+      <p class="media-subhead" style="color: #fff;">
+        Brands and companies can sponsor workflows or hire our agency to document community projects, makerspaces, and open-source hardware builds.
+      </p>
+      <ul class="media-sponsors__list">
+        <li><strong>Open Source Hardware Projects:</strong> We shoot, edit, and document your repository.</li>
         <li><strong>Community Events:</strong> Professional b-roll and macro-production for local maker events.</li>
         <li><strong>Corporate Sponsorship:</strong> Fund the creation of free AI-automated pipelines for small creators.</li>
       </ul>
-      <a href="/contact?subject=sponsorship" class="media-cta media-cta--orange">
-        Sponsor a Project
-        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 5h6m-2-2 2 2-2 2"/></svg>
-      </a>
-    </section>
-
-    {/* ── The Role ── */}
-    <section class="media-section">
-      <span class="media-eyebrow">Building the agency</span>
-      <h2 class="media-heading">The First Hire Builds the Machine</h2>
-      <div class="media-prose">
-        <p>We're not filling a role. We're looking for someone to build an agency with — from the ground up. You get the tools, the infrastructure, and the autonomy to architect the system that runs everything.</p>
-      </div>
-
-      <div class="media-role-grid">
-        <div class="media-role-card">
-          <h3 class="media-role-card__title">The Setup</h3>
-          <ul class="media-role-card__list">
-            <li>You manage the art direction and the business context.</li>
-            <li>Your seated Anthropic Claude subscription manages the production overhead.</li>
-            <li>You dictate the workflows. You don't write the repetitive code — you build the system that writes it.</li>
-          </ul>
-        </div>
-        <div class="media-role-card">
-          <h3 class="media-role-card__title">What You Get</h3>
-          <ul class="media-role-card__list">
-            <li>$100/week guaranteed baseline <em>(grows as the Ko-fi pool grows)</em></li>
-            <li><strong>Seated Anthropic Claude subscription</strong> — funded and yours</li>
-            <li>Google Workspace subscription</li>
-            <li>Cooperative node ownership — what you build, you own</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="media-role-highlight">
-        <h3 class="media-role-highlight__title">The Person We Need</h3>
-        <p>You have the right eye and an absolute hatred for inefficiency. If you've found that AI orchestration lets your brain skip the boring stuff and live entirely in the ideas phase — this is the role. If you're tired of people telling you how to be creative — build the machine that does it for them.</p>
-      </div>
-
-      <div class="media-apply-block">
-        <p>Send a message. Show us a prompt you engineered or a workflow you automated. No cover letter. No resume padding. Just tell us how you eliminate the grind.</p>
-        <a href="/contact?subject=agency" class="media-cta media-cta--primary">
-          Contact 3D3D Media
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 5h6m-2-2 2 2-2 2"/></svg>
-        </a>
-      </div>
-    </section>
+      <a href="/contact?subject=sponsorship" class="media-cta media-cta--orange" style="margin-top: 2rem;">Sponsor a Project</a>
+    </div>
   </div>
+</section>
 
-  {/* ── Footer ── */}
-  <footer class="media-footer">
-    <a href="/about">About 3D3D</a>
-    <a href="/shop">The Market</a>
-    <a href="/quote">Get a Quote</a>
-    <a href="/contact">Contact</a>
-  </footer>
+<!-- ═══════════════════════════════════════════════════════════════
+     [5] THE ROLE
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="media-role" id="role" style="background-image: linear-gradient(to right, rgba(18,24,32,0.95) 0%, rgba(18,24,32,0.92) 100%), url('/images/media_asset_production.png'); background-size: cover; background-position: center; border-top: 1px solid var(--color-border-default);" data-reveal>
+  <div class="media-section-shell">
+    <p class="media-eyebrow">Hiring the Architect</p>
+    <h2 class="media-heading">The first hire runs the machine.</h2>
+    <p class="media-subhead">We aren't looking for someone to grind out posts. We are looking for someone to architect the system.</p>
+
+    <div class="media-role__grid">
+      <div class="media-role__block">
+        <h3 class="media-role__block-title">The Setup</h3>
+        <ul class="media-role__list">
+          <li>You manage the art direction and the business context.</li>
+          <li>Your seated Anthropic Claude subscription manages the production overhead.</li>
+          <li>You dictate the workflows. You don't have to write the repetitive code; you build the system that writes it.</li>
+        </ul>
+      </div>
+
+      <div class="media-role__block">
+        <h3 class="media-role__block-title">What you get</h3>
+        <ul class="media-role__perks">
+          <li>$100/week guaranteed baseline <span class="media-role__perk-note">(grows entirely as the Ko-fi pool grows)</span></li>
+          <li><strong>Seated Anthropic Claude subscription</strong> — funded and yours to command</li>
+          <li>Google Workspace subscription</li>
+          <li>Cooperative node ownership — what you put into the system, you own</li>
+        </ul>
+      </div>
+
+      <div class="media-role__block media-role__block--highlight" style="grid-column: 1 / -1;">
+        <h3 class="media-role__block-title">The Person We Need</h3>
+        <p>You have to have the right eye and an absolute hatred for inefficiency.</p>
+        <p>If you have ADHD and have found that AI orchestration allows your brain to skip the boring stuff and live entirely in the "ideas phase" — this is the role for you.</p>
+        <p>If you're tired of people telling you how to be creative — build the machine that does it for them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     [6] APPLY / CTA
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="media-apply" id="apply" data-reveal>
+  <div class="media-section-shell media-apply__inner">
+    <h2 class="media-heading">Build the System.</h2>
+    <p class="media-apply__copy">
+      Send a message. Show us a prompt you engineered or a workflow you automated.<br />
+      No cover letter. No resume padding.<br />
+      Just tell us how you eliminate the grind.
+    </p>
+    <div class="media-apply__ctas">
+      <a href="/contact?subject=agency" class="media-cta media-cta--primary">Contact 3D3D Media</a>
+    </div>
+  </div>
+</section>
+
+<div class="media-section-shell" style="padding-bottom: clamp(3rem, 5vw, 4rem);">
+  <PageNextActions actions={[
+    {label: 'About the Cooperative', href: '/about', description: 'Read about our decentralized structure.', accent: 'teal'},
+    {label: 'Get a Quote', href: '/quote', description: 'Commission physical fabrication.', accent: 'orange'},
+  ]} />
+</div>
+
 </BaseLayout>
 
 <style>
-  .market-page {
-    background: var(--color-surface-primary);
-    background-image: none;
-  }
-
-  /* ══════════════════════════════════════════
-     DARK HERO
-     ══════════════════════════════════════════ */
-  .media-hero {
-    position: relative;
-    overflow: hidden;
-    min-height: 240px;
-    display: flex;
-    align-items: flex-end;
-  }
-
-  .media-hero__bg {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center 30%;
-    background-repeat: no-repeat;
-  }
-
-  .media-hero__scrim {
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(180deg, rgba(10, 14, 19, 0.3) 0%, rgba(10, 14, 19, 0.65) 60%, rgba(10, 14, 19, 0.95) 100%),
-      linear-gradient(90deg, rgba(10, 14, 19, 0.5) 0%, transparent 40%, transparent 60%, rgba(10, 14, 19, 0.5) 100%);
-  }
-
-  .media-hero__grain {
-    position: absolute;
-    inset: 0;
-    opacity: 0.035;
-    mix-blend-mode: overlay;
-    pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  }
-
-  .media-hero__content {
-    position: relative;
-    z-index: 1;
-    width: min(100%, 860px);
+  /* ── Shared tokens ──────────────────────────────────────────── */
+  .media-section-shell {
+    width: min(100% - clamp(1.5rem, 4vw, 4rem), 960px);
     margin: 0 auto;
-    padding: 2.5rem 1.25rem 1.5rem;
-    display: flex;
-    gap: 0.75rem;
-  }
-
-  .media-hero__back {
-    display: grid;
-    place-items: center;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 2px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #c8d0dc;
-    flex-shrink: 0;
-    margin-top: 0.15rem;
-    transition: background 150ms ease;
-  }
-
-  .media-hero__back:hover {
-    background: rgba(255, 255, 255, 0.15);
-    color: #f4efe8;
-  }
-
-  .media-hero__kicker {
-    margin: 0;
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(200, 208, 220, 0.7);
-  }
-
-  .media-hero__title {
-    margin: 0.2rem 0 0;
-    font-family: var(--font-display);
-    font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.4rem);
-    line-height: 1;
-    letter-spacing: -0.04em;
-  }
-
-  .media-hero__word {
-    display: block;
-    color: #f4efe8;
-  }
-
-  .media-hero__word--accent {
-    background: linear-gradient(135deg, #40C4C4, #E84A8A);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .media-hero__sub {
-    margin: 0.4rem 0 0;
-    font-family: var(--font-body);
-    font-size: 0.78rem;
-    color: rgba(200, 208, 220, 0.65);
-    line-height: 1.5;
-    max-width: 32rem;
-  }
-
-  /* ══════════════════════════════════════════
-     DARK BRIDGE STRIP
-     ══════════════════════════════════════════ */
-  .media-strip {
-    background: #0f1419;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  }
-
-  .media-strip__inner {
-    width: min(100%, 860px);
-    margin: 0 auto;
-    padding: 0.65rem 1.25rem;
-    display: flex;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-  }
-
-  .media-strip__item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
-  }
-
-  .media-strip__item strong {
-    font-family: var(--font-mono);
-    font-size: 0.55rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #40C4C4;
-  }
-
-  .media-strip__item span {
-    font-family: var(--font-body);
-    font-size: 0.72rem;
-    color: rgba(200, 208, 220, 0.6);
-  }
-
-  /* ══════════════════════════════════════════
-     LIGHT CONTENT
-     ══════════════════════════════════════════ */
-  .media-shell {
-    width: min(100%, 860px);
-    margin: 0 auto;
-    padding: 0 1.25rem;
-  }
-
-  .media-section {
-    padding: 1.5rem 0;
-    border-bottom: 1px solid var(--color-border-default);
-  }
-
-  .media-section:last-child {
-    border-bottom: none;
   }
 
   .media-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.55rem;
-    letter-spacing: 0.12em;
+    margin: 0 0 0.75rem;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--color-teal-dark);
+    color: var(--color-teal-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
   }
 
   .media-eyebrow::before {
     content: '';
-    width: 1.5rem;
+    width: 2.75rem;
     height: 2px;
-    background: var(--color-teal-primary);
+    background: currentColor;
     flex-shrink: 0;
   }
 
@@ -430,318 +306,482 @@ const services = [
     color: var(--color-magenta-primary);
   }
 
-  .media-eyebrow--magenta::before {
+  .media-heading {
+    margin: 0 0 0.5rem;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 1.4rem + 2.5vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--color-text-primary);
+    text-transform: uppercase;
+  }
+
+  .media-subhead {
+    margin: 0 0 2.5rem;
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 0.9rem + 0.4vw, 1.15rem);
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    max-width: 40rem;
+  }
+
+  .media-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3.2rem;
+    padding: 0.85rem 1.5rem;
+    font-family: var(--font-tech);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: transform 200ms ease, box-shadow 200ms ease, background 200ms ease;
+  }
+
+  .media-cta:hover {
+    transform: translateY(-2px);
+  }
+
+  .media-cta--primary {
+    background: var(--color-teal-primary);
+    color: #fff;
+    border: 2px solid var(--color-teal-primary);
+    box-shadow: 0 8px 24px rgba(64, 196, 196, 0.22);
+  }
+
+  .media-cta--primary:hover {
+    box-shadow: 0 12px 32px rgba(64, 196, 196, 0.35);
+  }
+
+  .media-cta--outline {
+    background: transparent;
+    color: var(--color-text-primary);
+    border: 2px solid var(--color-border-strong);
+  }
+
+  .media-cta--outline:hover {
+    border-color: var(--color-teal-primary);
+    color: var(--color-teal-primary);
+  }
+
+  .media-cta--magenta {
     background: var(--color-magenta-primary);
+    color: #fff;
+    border: 2px solid var(--color-magenta-primary);
+    box-shadow: 0 8px 24px rgba(232, 74, 138, 0.22);
+  }
+
+  .media-cta--magenta:hover {
+    box-shadow: 0 12px 32px rgba(232, 74, 138, 0.35);
+  }
+
+  /* ── Section reveal animation ──────────────────────────────── */
+  [data-reveal] {
+    animation: media-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 25%;
+  }
+
+  @keyframes media-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(32px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] {
+      animation: none;
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     [1] HERO
+     ═══════════════════════════════════════════════════════════════ */
+  .media-hero {
+    display: flex;
+    align-items: center;
+    min-height: max(80svh, 480px);
+    padding-block: clamp(6rem, 12vw, 10rem) clamp(4rem, 8vw, 6rem);
+    background: var(--color-surface-primary);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .media-hero__inner {
+    width: min(100% - clamp(1.5rem, 4vw, 4rem), 960px);
+    margin: 0 auto;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .media-hero__eyebrow {
+    margin: 0;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-teal-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .media-hero__eyebrow::before {
+    content: '';
+    width: 3rem;
+    height: 2px;
+    background: var(--color-teal-primary);
+    flex-shrink: 0;
+  }
+
+  .media-hero__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 2rem + 5vw, 6rem);
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+  }
+
+  .media-hero__word {
+    display: block;
+  }
+
+  .media-hero__word--accent {
+    background: linear-gradient(135deg, var(--color-teal-primary), var(--color-magenta-primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .media-hero__sub {
+    margin: 0;
+    max-width: 36rem;
+    font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.2rem);
+    line-height: 1.75;
+    color: var(--color-text-muted);
+  }
+
+  .media-hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  /* Hero entrance animation */
+  .media-hero__eyebrow,
+  .media-hero__word,
+  .media-hero__sub,
+  .media-hero__ctas {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: media-hero-enter 0.7s ease forwards;
+  }
+
+  .media-hero__eyebrow { animation-delay: 0ms; }
+  .media-hero__word:first-child { animation-delay: 80ms; }
+  .media-hero__word:nth-child(2) { animation-delay: 160ms; }
+  .media-hero__sub { animation-delay: 260ms; }
+  .media-hero__ctas { animation-delay: 380ms; }
+
+  @keyframes media-hero-enter {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .media-hero__eyebrow,
+    .media-hero__word,
+    .media-hero__sub,
+    .media-hero__ctas {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     [2] THE PHILOSOPHY
+     ═══════════════════════════════════════════════════════════════ */
+  .media-challenge {
+    padding-block: clamp(4rem, 8vw, 7rem);
+    background: var(--color-surface-secondary);
+    border-top: 3px solid var(--color-teal-primary);
+  }
+
+  .media-challenge__inner {
+    width: min(100% - clamp(1.5rem, 4vw, 4rem), 960px);
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .media-challenge__quote {
+    margin: 0 0 1.5rem;
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 1.5rem + 3.5vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+    border: none;
+    padding: 0;
+  }
+
+  .media-challenge__context {
+    margin: 0 auto 2rem;
+    font-size: clamp(1rem, 0.9rem + 0.3vw, 1.1rem);
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     [3] SERVICES
+     ═══════════════════════════════════════════════════════════════ */
+  .media-services {
+    padding-block: clamp(5rem, 10vw, 8rem);
+    background: var(--color-surface-primary);
+  }
+
+  .media-services__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    gap: 1.25rem;
+  }
+
+  .media-service-card {
+    display: grid;
+    gap: 0.75rem;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-default);
+    border-radius: 2px;
+    box-shadow: var(--shadow-card);
+    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+  }
+
+  .media-service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: var(--color-teal-primary);
+  }
+
+  .media-service-card__icon {
+    color: var(--color-teal-primary);
+  }
+
+  .media-service-card__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+  }
+
+  .media-service-card__copy {
+    margin: 0;
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: var(--color-text-muted);
+  }
+
+  .media-service-card__use {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--color-teal-primary);
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     [4] THE POOL & ROLE
+     ═══════════════════════════════════════════════════════════════ */
+  .media-pool {
+    padding-block: clamp(4rem, 8vw, 6rem);
+    background: var(--color-surface-secondary);
+    border-top: 1px solid var(--color-border-default);
+    border-bottom: 1px solid var(--color-border-default);
+  }
+
+  .media-pool__explainer {
+    max-width: 48rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+  }
+
+  .media-pool__meter {
+    margin-bottom: 2rem;
+    max-width: 32rem;
+  }
+
+  .media-pool__meter-label {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-tech);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.5rem;
+  }
+
+  .media-pool__meter-label strong {
+    color: var(--color-text-primary);
+  }
+
+  .media-pool__bar {
+    height: 8px;
+    background: var(--color-border-default);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .media-pool__bar-fill {
+    height: 100%;
+    width: var(--pool-pct);
+    background: var(--color-magenta-primary);
+    box-shadow: 0 0 10px rgba(232, 74, 138, 0.4);
+  }
+
+  .media-role {
+    padding-block: clamp(5rem, 10vw, 8rem);
+    background: var(--color-surface-primary);
+  }
+
+  .media-role__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .media-role__block {
+    padding: 2rem;
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-default);
+    border-radius: 2px;
+  }
+
+  .media-role__block--highlight {
+    background: linear-gradient(145deg, var(--color-surface-card), rgba(64, 196, 196, 0.05));
+    border-color: rgba(64, 196, 196, 0.3);
+  }
+
+  .media-role__block-title {
+    margin: 0 0 1rem;
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+  }
+
+  .media-role__list, .media-role__perks {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  .media-role__list li, .media-role__perks li {
+    margin-bottom: 0.75rem;
+  }
+
+  .media-role__perks li strong {
+    color: var(--color-teal-primary);
+  }
+
+  .media-role__perk-note {
+    display: block;
+    font-size: 0.85em;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     [6] APPLY
+     ═══════════════════════════════════════════════════════════════ */
+  .media-apply {
+    padding-block: clamp(4rem, 8vw, 6rem);
+    background: var(--color-surface-secondary);
+    text-align: center;
+    border-top: 3px solid var(--color-magenta-primary);
+  }
+
+  .media-apply__copy {
+    margin: 0 auto 2rem;
+    max-width: 36rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+  }
+
+  .media-apply__ctas {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     [4.5] SPONSORSHIPS
+     ═══════════════════════════════════════════════════════════════ */
+  .media-sponsors {
+    padding-block: clamp(5rem, 10vw, 8rem);
+    background-color: var(--color-surface-secondary);
+    border-top: 1px solid var(--color-border-default);
+    border-bottom: 3px solid var(--color-orange-primary);
+    position: relative;
   }
 
   .media-eyebrow--orange {
     color: var(--color-orange-primary);
   }
 
-  .media-eyebrow--orange::before {
-    background: var(--color-orange-primary);
-  }
-
-  .media-heading {
-    font-family: var(--font-display);
-    font-size: clamp(1.3rem, 1rem + 1vw, 1.8rem);
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    color: var(--color-text-primary);
-    margin: 0.3rem 0 0.6rem;
-  }
-
-  .media-prose-lead {
-    margin: 0 0 1rem;
-    font-family: var(--font-body);
-    font-size: 0.82rem;
-    line-height: 1.6;
-    color: var(--color-text-muted);
-  }
-
-  .media-prose {
-    display: grid;
-    gap: 0.65rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .media-prose p {
-    margin: 0;
-    font-family: var(--font-body);
-    font-size: 0.85rem;
-    line-height: 1.65;
-    color: var(--color-text-secondary);
-  }
-
-  /* ── Services grid ── */
-  .media-services-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-  }
-
-  .media-svc {
-    padding: 0.85rem;
-    border-radius: 2px;
-    background: var(--color-surface-card);
-    border: 1px solid var(--color-border-default);
-    box-shadow: var(--shadow-sm);
-    display: grid;
-    gap: 0.35rem;
-  }
-
-  .media-svc__title {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: 1rem;
-    letter-spacing: -0.02em;
-    color: var(--color-text-primary);
-  }
-
-  .media-svc__desc {
-    margin: 0;
-    font-size: 0.78rem;
-    line-height: 1.55;
-    color: var(--color-text-secondary);
-  }
-
-  .media-svc__tag {
-    font-family: var(--font-mono);
-    font-size: 0.55rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-teal-primary);
-  }
-
-  /* ── Funding meter ── */
-  .media-meter {
-    margin-bottom: 0.75rem;
-    max-width: 24rem;
-  }
-
-  .media-meter__labels {
-    display: flex;
-    justify-content: space-between;
-    font-family: var(--font-mono);
-    font-size: 0.55rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
-    margin-bottom: 0.35rem;
-  }
-
-  .media-meter__labels strong {
-    color: var(--color-text-primary);
-  }
-
-  .media-meter__bar {
-    height: 6px;
-    background: var(--color-border-default);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-
-  .media-meter__fill {
-    height: 100%;
-    width: var(--pool-pct);
-    background: var(--color-magenta-primary);
-    border-radius: 3px;
-  }
-
-  /* ── CTAs ── */
-  .media-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    padding: 0.4rem 0.7rem;
-    border-radius: 2px;
-    font-family: var(--font-tech);
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: background 150ms ease;
-  }
-
-  .media-cta--primary {
-    background: var(--color-teal-primary);
-    color: #fff;
-    box-shadow: 0 3px 10px rgba(64, 196, 196, 0.18);
-  }
-
-  .media-cta--primary:hover {
-    background: var(--color-teal-dark);
-    color: #fff;
-  }
-
-  .media-cta--magenta {
-    background: var(--color-magenta-primary);
-    color: #fff;
-    box-shadow: 0 3px 10px rgba(232, 74, 138, 0.18);
-  }
-
-  .media-cta--magenta:hover {
-    background: #c93d75;
-    color: #fff;
-  }
-
   .media-cta--orange {
     background: var(--color-orange-primary);
     color: #fff;
-    box-shadow: 0 3px 10px rgba(255, 107, 43, 0.18);
+    border: 2px solid var(--color-orange-primary);
+    box-shadow: 0 8px 24px rgba(234, 114, 52, 0.22);
   }
 
   .media-cta--orange:hover {
-    background: #e05a1f;
+    box-shadow: 0 12px 32px rgba(234, 114, 52, 0.35);
+  }
+
+  .media-sponsors__content {
+    max-width: 48rem;
+  }
+
+  .media-sponsors__list {
+    margin: 0 0 2rem;
+    padding-left: 1.25rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    font-size: 1.05rem;
+  }
+
+  .media-sponsors__list li {
+    margin-bottom: 0.85rem;
+  }
+
+  .media-sponsors__list li strong {
     color: #fff;
-  }
-
-  /* ── List ── */
-  .media-list {
-    margin: 0 0 0.75rem;
-    padding-left: 1.1rem;
-    font-size: 0.82rem;
-    line-height: 1.6;
-    color: var(--color-text-secondary);
-  }
-
-  .media-list li {
-    margin-bottom: 0.35rem;
-  }
-
-  .media-list li strong {
-    color: var(--color-text-primary);
-  }
-
-  /* ── Role grid ── */
-  .media-role-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-    margin-bottom: 0.65rem;
-  }
-
-  .media-role-card {
-    padding: 0.85rem;
-    border-radius: 2px;
-    background: var(--color-surface-card);
-    border: 1px solid var(--color-border-default);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .media-role-card__title {
-    margin: 0 0 0.5rem;
-    font-family: var(--font-display);
-    font-size: 1rem;
-    letter-spacing: -0.02em;
-    color: var(--color-text-primary);
-  }
-
-  .media-role-card__list {
-    margin: 0;
-    padding-left: 1.1rem;
-    font-size: 0.82rem;
-    line-height: 1.6;
-    color: var(--color-text-secondary);
-  }
-
-  .media-role-card__list li {
-    margin-bottom: 0.3rem;
-  }
-
-  .media-role-card__list li strong {
-    color: var(--color-teal-primary);
-  }
-
-  .media-role-card__list li em {
-    font-size: 0.78rem;
-    color: var(--color-text-muted);
-  }
-
-  .media-role-highlight {
-    padding: 0.85rem;
-    border-radius: 2px;
-    background: linear-gradient(145deg, var(--color-surface-card), rgba(64, 196, 196, 0.04));
-    border: 1px solid rgba(64, 196, 196, 0.2);
-    margin-bottom: 0.65rem;
-  }
-
-  .media-role-highlight__title {
-    margin: 0 0 0.4rem;
-    font-family: var(--font-display);
-    font-size: 1rem;
-    letter-spacing: -0.02em;
-    color: var(--color-text-primary);
-  }
-
-  .media-role-highlight p {
-    margin: 0;
-    font-size: 0.82rem;
-    line-height: 1.6;
-    color: var(--color-text-secondary);
-  }
-
-  .media-apply-block {
-    padding: 0.85rem;
-    border-radius: 2px;
-    background: var(--color-surface-secondary);
-    border: 1px solid var(--color-border-default);
-  }
-
-  .media-apply-block p {
-    margin: 0 0 0.65rem;
-    font-size: 0.82rem;
-    line-height: 1.6;
-    color: var(--color-text-secondary);
-  }
-
-  /* ── Footer ── */
-  .media-footer {
-    width: min(100%, 860px);
-    margin: 0 auto;
-    padding: 0.65rem 1.25rem 1.5rem;
-    display: flex;
-    gap: 1.25rem;
-    flex-wrap: wrap;
-    border-top: 1px solid var(--color-border-default);
-    font-family: var(--font-mono);
-    font-size: 0.55rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  .media-footer a {
-    color: var(--color-teal-primary);
-    text-decoration: none;
-    transition: color 150ms ease;
-  }
-
-  .media-footer a:hover { color: var(--color-teal-dark); }
-
-  /* ── Responsive ── */
-  @media (min-width: 500px) {
-    .media-services-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .media-role-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (min-width: 700px) {
-    .media-hero__content,
-    .media-strip__inner,
-    .media-shell,
-    .media-footer { padding-inline: 2rem; }
-
-    .media-services-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .media-hero__back, .media-cta { transition: none !important; }
   }
 </style>

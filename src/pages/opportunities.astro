@@ -1,201 +1,313 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Breadcrumbs from '../components/Breadcrumbs.astro';
-import PageNextActions from '../components/PageNextActions.astro';
 ---
 
-<BaseLayout title="Opportunities | 3D3D" description="Work with 3D3D. Real positions, real pay. See what's open." activePath="/opportunities">
+<BaseLayout
+  title="Opportunities | 3D3D"
+  description="Work with 3D3D. Real positions, real pay. See what's open."
+  activePath="/opportunities"
+  noFooter
+  noSidebar
+  noMobileCTA
+  noFeedbackBlip
+  bodyClass="market-page"
+>
+  {/* ── Dark hero with workshop background ── */}
+  <section class="opp-hero">
+    <div class="opp-hero__bg" style="background-image: url('/media/backgrounds/makers-neon-workshop.jpg');"></div>
+    <div class="opp-hero__scrim"></div>
+    <div class="opp-hero__grain"></div>
+    <div class="opp-hero__content">
+      <a href="/" class="opp-hero__back" aria-label="Home">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 3L4 7l5 4"/></svg>
+      </a>
+      <div>
+        <p class="opp-hero__kicker">Collective / Cooperative</p>
+        <h1 class="opp-hero__title">Work with 3D3D</h1>
+        <p class="opp-hero__sub">Real positions, not volunteer calls. If the work fits, reach out.</p>
+      </div>
+    </div>
+  </section>
 
-  <section class="opp-page">
+  {/* ── Light listings ── */}
+  <section class="opp-listings">
     <div class="opp-shell">
-      <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'The Network', href: '/opportunities'}, {label: 'Opportunities'}]} />
-      <p class="opp-eyebrow">Opportunities</p>
-      <h1 class="opp-title">Work with 3D3D</h1>
-      <p class="opp-intro">
-        3D3D is growing. These are real positions, not volunteer calls. If the work fits, reach out.
-      </p>
 
-      <div class="opp-listing surface-panel">
-        <div class="opp-listing__header">
-          <h2 class="opp-listing__role">Social Media Intern</h2>
-          <div class="opp-listing__meta">
+      <div class="opp-card">
+        <div class="opp-card__header">
+          <h2 class="opp-card__role">Social Media Intern</h2>
+          <div class="opp-card__meta">
             <span>Remote / route-based travel</span>
             <span>Part-time, paid</span>
           </div>
         </div>
-        <div class="opp-listing__body">
-          <p>Film and produce content: video, photo, social posts. Cover 3D3D operations, builds, and events. Potential travel for events and deployments.</p>
-          <p class="opp-listing__tone">You get what you put into it.</p>
-        </div>
-        <a href="/contact?subject=social-media-intern" class="opp-cta">Apply →</a>
+        <p class="opp-card__desc">Film and produce content: video, photo, social posts. Cover 3D3D operations, builds, and events. Potential travel for events and deployments.</p>
+        <p class="opp-card__tone">You get what you put into it.</p>
+        <a href="/contact?subject=social-media-intern" class="opp-card__cta">
+          Apply
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 5h6m-2-2 2 2-2 2"/></svg>
+        </a>
       </div>
 
-      <div class="opp-listing surface-panel">
-        <div class="opp-listing__header">
-          <h2 class="opp-listing__role">Fabrication Node Operator</h2>
-          <div class="opp-listing__meta">
+      <div class="opp-card">
+        <div class="opp-card__header">
+          <h2 class="opp-card__role">Fabrication Node Operator</h2>
+          <div class="opp-card__meta">
             <span>Remote / Distributed</span>
             <span>Contract / Revenue Share</span>
           </div>
         </div>
-        <div class="opp-listing__body">
-          <p>Operate as a verified 3D3D fabrication node. Receive over-flow print jobs, localized production requests, and participate in distributed manufacturing. Must run high-uptime engineering-grade FDM (Prusa/Bambu/Custom) and pass material validation tests.</p>
-          <p class="opp-listing__tone">Build your own shop under the cooperative banner.</p>
-        </div>
-        <a href="/contact?subject=node-operator" class="opp-cta">Join the Network →</a>
+        <p class="opp-card__desc">Operate as a verified 3D3D fabrication node. Receive overflow print jobs, localized production, distributed manufacturing. Must run engineering-grade FDM (Prusa/Bambu/Custom) and pass material validation.</p>
+        <p class="opp-card__tone">Build your own shop under the cooperative banner.</p>
+        <a href="/contact?subject=node-operator" class="opp-card__cta">
+          Join the Network
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 5h6m-2-2 2 2-2 2"/></svg>
+        </a>
       </div>
 
-      <div class="opp-listing surface-panel">
-        <div class="opp-listing__header">
-          <h2 class="opp-listing__role">Open Source Contributor</h2>
-          <div class="opp-listing__meta">
+      <div class="opp-card">
+        <div class="opp-card__header">
+          <h2 class="opp-card__role">Open Source Contributor</h2>
+          <div class="opp-card__meta">
             <span>Global</span>
             <span>Community-Driven</span>
           </div>
         </div>
-        <div class="opp-listing__body">
-          <p>Help build the open-source infrastructure. We need Astro/TypeScript developers, 3D modelers (Fusion360/Onshape), and documentation writers to expand the 3D3D codebases and parametric model libraries.</p>
-          <p class="opp-listing__tone">Everything we build is shared. Come build it with us.</p>
-        </div>
-        <a href="https://github.com/3d3dcanada" target="_blank" rel="noopener noreferrer" class="opp-cta">View Repositories →</a>
+        <p class="opp-card__desc">Help build the open-source infrastructure. Astro/TypeScript developers, 3D modelers (Fusion360/Onshape), and documentation writers to expand codebases and parametric model libraries.</p>
+        <p class="opp-card__tone">Everything we build is shared. Come build it with us.</p>
+        <a href="https://github.com/3d3dcanada" target="_blank" rel="noopener noreferrer" class="opp-card__cta">
+          View Repos
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 5h6m-2-2 2 2-2 2"/></svg>
+        </a>
       </div>
 
-      <PageNextActions actions={[
-        {label: 'About 3D3D', href: '/about', description: 'Learn the cooperative philosophy behind the network.', accent: 'teal'},
-        {label: 'Contact', href: '/contact', description: 'Get in touch to discuss opportunities.', accent: 'magenta'},
-      ]} />
     </div>
   </section>
+
+  {/* ── Footer links ── */}
+  <footer class="opp-footer">
+    <a href="/about">About 3D3D</a>
+    <a href="/shop">The Market</a>
+    <a href="/contact">Contact</a>
+  </footer>
 </BaseLayout>
 
 <style>
-  .opp-page {
-    min-height: 100svh;
-    display: flex;
-    align-items: center;
+  .market-page {
     background: var(--color-surface-primary);
-    color: var(--color-text-primary);
+    background-image: none;
+  }
+
+  /* ══════════════════════════════════════════
+     DARK HERO
+     ══════════════════════════════════════════ */
+  .opp-hero {
+    position: relative;
+    overflow: hidden;
+    min-height: 200px;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .opp-hero__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center 40%;
+    background-repeat: no-repeat;
+  }
+
+  .opp-hero__scrim {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(10, 14, 19, 0.3) 0%, rgba(10, 14, 19, 0.65) 60%, rgba(10, 14, 19, 0.95) 100%),
+      linear-gradient(90deg, rgba(10, 14, 19, 0.5) 0%, transparent 40%, transparent 60%, rgba(10, 14, 19, 0.5) 100%);
+  }
+
+  .opp-hero__grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  }
+
+  .opp-hero__content {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 760px);
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .opp-hero__back {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #c8d0dc;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+    transition: background 150ms ease;
+  }
+
+  .opp-hero__back:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #f4efe8;
+  }
+
+  .opp-hero__kicker {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(200, 208, 220, 0.7);
+  }
+
+  .opp-hero__title {
+    margin: 0.2rem 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.2rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: #f4efe8;
+  }
+
+  .opp-hero__sub {
+    margin: 0.3rem 0 0;
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    color: rgba(200, 208, 220, 0.65);
+    line-height: 1.4;
+  }
+
+  /* ══════════════════════════════════════════
+     LIGHT LISTINGS
+     ══════════════════════════════════════════ */
+  .opp-listings {
+    background: var(--color-surface-primary);
+    padding: 1.25rem 0;
   }
 
   .opp-shell {
-    width: min(100% - clamp(1.5rem, 4vw, 4rem), 720px);
+    width: min(100%, 760px);
     margin: 0 auto;
+    padding: 0 1.25rem;
     display: grid;
-    gap: 2rem;
-    padding-block: clamp(6rem, 10vw, 10rem);
+    gap: 0.65rem;
   }
 
-  .opp-eyebrow {
-    margin: 0;
-    font-family: var(--font-tech);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--color-teal-primary);
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
+  .opp-card {
+    padding: 1rem;
+    border-radius: 2px;
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-default);
+    box-shadow: var(--shadow-sm);
+    display: grid;
+    gap: 0.5rem;
   }
 
-  .opp-eyebrow::before {
-    content: '';
-    width: 2.75rem;
-    height: 2px;
-    background: var(--color-teal-primary);
-    flex-shrink: 0;
+  .opp-card__header {
+    display: grid;
+    gap: 0.25rem;
   }
 
-  .opp-title {
+  .opp-card__role {
     margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(3rem, 2rem + 4vw, 5.5rem);
-    line-height: 0.95;
-    letter-spacing: -0.04em;
-    color: var(--color-text-primary);
-    text-transform: uppercase;
-  }
-
-  .opp-intro {
-    margin: 0;
-    max-width: 36rem;
-    font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.2rem);
-    line-height: 1.75;
-    color: var(--color-text-secondary);
-  }
-
-  .opp-listing {
-    display: grid;
-    gap: 1.4rem;
-    padding: clamp(1.5rem, 3vw, 2.5rem);
-  }
-
-  .opp-listing__header {
-    display: grid;
-    gap: 0.6rem;
-  }
-
-  .opp-listing__role {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: clamp(1.4rem, 1rem + 1.5vw, 2rem);
+    font-size: clamp(1.1rem, 0.9rem + 0.8vw, 1.4rem);
     line-height: 1.1;
     letter-spacing: -0.02em;
     color: var(--color-text-primary);
   }
 
-  .opp-listing__meta {
+  .opp-card__meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem 1.4rem;
-    font-family: var(--font-tech);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
+    gap: 0.3rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--color-teal-primary);
+    color: var(--color-teal-dark);
   }
 
-  .opp-listing__body {
-    display: grid;
-    gap: 0.8rem;
-  }
-
-  .opp-listing__body p {
+  .opp-card__desc {
     margin: 0;
-    font-size: 1rem;
-    line-height: 1.7;
+    font-size: 0.82rem;
+    line-height: 1.55;
     color: var(--color-text-secondary);
   }
 
-  .opp-listing__tone {
+  .opp-card__tone {
+    margin: 0;
+    font-size: 0.78rem;
     font-style: italic;
-    color: var(--color-text-muted) !important;
+    color: var(--color-text-muted);
   }
 
-  .opp-cta {
+  .opp-card__cta {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
+    gap: 0.35rem;
     width: fit-content;
-    min-height: 3.4rem;
-    padding: 0.95rem 1.6rem;
-    background: var(--color-teal-primary);
-    color: #0F1112;
-    border: 3px solid var(--color-text-primary);
+    padding: 0.45rem 0.85rem;
     border-radius: 2px;
+    background: var(--color-teal-primary);
+    color: #fff;
     font-family: var(--font-tech);
-    font-size: 0.84rem;
+    font-size: 0.68rem;
     font-weight: 700;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
-    box-shadow: 0 14px 32px rgba(64, 196, 196, 0.22);
+    text-decoration: none;
+    transition: background 150ms ease;
+    box-shadow: 0 3px 10px rgba(64, 196, 196, 0.18);
   }
 
-  .opp-cta:hover {
-    background: #53D3D3; /* teal hover state */
-    box-shadow: 0 8px 24px rgba(64, 196, 196, 0.4);
-    transform: translateY(-2px);
+  .opp-card__cta:hover {
+    background: var(--color-teal-dark);
+    color: #fff;
+  }
+
+  /* ── Footer ── */
+  .opp-footer {
+    width: min(100%, 760px);
+    margin: 0 auto;
+    padding: 0.65rem 1.25rem 1.5rem;
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--color-border-default);
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .opp-footer a {
+    color: var(--color-teal-primary);
+    text-decoration: none;
+    transition: color 150ms ease;
+  }
+
+  .opp-footer a:hover { color: var(--color-teal-dark); }
+
+  @media (min-width: 700px) {
+    .opp-hero__content,
+    .opp-shell,
+    .opp-footer { padding-inline: 2rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .opp-hero__back, .opp-card__cta { transition: none !important; }
   }
 </style>

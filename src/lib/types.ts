@@ -63,6 +63,7 @@ export interface CatalogItem {
   source?: CatalogSource;
   sizePresets?: SizePreset[];
   recommendedSettings?: PrintSettings;
+  stripeLink?: string;
 }
 
 export interface QuoteResult {

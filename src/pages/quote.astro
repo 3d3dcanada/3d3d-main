@@ -1,8 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import QuoteCalculator from '../components/QuoteCalculator.tsx';
-import Breadcrumbs from '../components/Breadcrumbs.astro';
-import PageNextActions from '../components/PageNextActions.astro';
 
 const schema = {
   '@context': 'https://schema.org',
@@ -14,94 +12,245 @@ const schema = {
 };
 ---
 
-<BaseLayout title="Get a Quote | 3D3D" description="Request a custom 3D print quote. Upload your design or describe what you need." schema={schema} activePath="/quote">
-  <div class="max-w-4xl mx-auto px-4">
-    <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Services', href: '/contact'}, {label: 'Get a Quote'}]} />
-  </div>
-  <section class="page-section">
-    <div class="surface-panel quote-page-intro">
+<BaseLayout
+  title="Get a Quote | 3D3D"
+  description="Request a custom 3D print quote. Upload your design or describe what you need."
+  schema={schema}
+  activePath="/quote"
+  noFooter
+  noSidebar
+  noMobileCTA
+  noFeedbackBlip
+  bodyClass="market-page"
+>
+  {/* ── Dark hero with workshop background ── */}
+  <section class="quote-hero">
+    <div class="quote-hero__bg" style="background-image: url('/media/backgrounds/home-hero-workbench.jpg');"></div>
+    <div class="quote-hero__scrim"></div>
+    <div class="quote-hero__grain"></div>
+    <div class="quote-hero__content">
+      <a href="/" class="quote-hero__back" aria-label="Home">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 3L4 7l5 4"/></svg>
+      </a>
       <div>
-        <span class="eyebrow">Direct Commission Intake</span>
-        <h1 class="quote-page-intro__title">Get a timeline. Get a price. Get it built.</h1>
-        <p class="quote-page-intro__copy">
-          We don't hide behind confusing calculators. Send us the files, the deadline, and the constraints. We quickly review the geometry, quote the job, and put it into production. You don't need to know the infill percentage unless you want to.
-        </p>
-      </div>
-      <div class="quote-page-intro__meta">
-        <div>
-          <strong>Upload support</strong>
-          <span>STL, 3MF, STEP, STP, OBJ, PDF, and image files.</span>
-        </div>
-        <div>
-          <strong>Better lead capture</strong>
-          <span>Name, email, notes, quantity, timing, and routing context in one submit.</span>
-        </div>
+        <p class="quote-hero__kicker">Direct Commission Intake</p>
+        <h1 class="quote-hero__title">Get a Quote</h1>
+        <p class="quote-hero__sub">Send the files, the deadline, and the constraints. We review geometry, quote the job, and build it.</p>
       </div>
     </div>
   </section>
 
-  <section class="page-section pt-0">
-    <QuoteCalculator client:load />
+  {/* ── Dark info strip ── */}
+  <div class="quote-info-strip">
+    <div class="quote-info-strip__inner">
+      <div class="quote-info-item">
+        <strong>Files accepted</strong>
+        <span>STL, 3MF, STEP, STP, OBJ, PDF, images</span>
+      </div>
+      <div class="quote-info-item">
+        <strong>What we need</strong>
+        <span>Name, email, notes, quantity, timing</span>
+      </div>
+    </div>
+  </div>
+
+  {/* ── Light form section ── */}
+  <section class="quote-form-section">
+    <div class="quote-form-shell">
+      <QuoteCalculator client:load />
+    </div>
   </section>
 
-  <div class="max-w-4xl mx-auto px-4">
-    <PageNextActions actions={[
-      {label: 'Materials Guide', href: '/materials', description: 'Compare engineering compounds by environment and performance.', accent: 'teal'},
-      {label: 'Browse the Shop', href: '/shop', description: 'Ready-made prints available for immediate order.', accent: 'orange'},
-      {label: 'Book a Call', href: '/book', description: 'Talk through your project directly with Ken.', accent: 'magenta'},
-    ]} />
-  </div>
+  {/* ── Footer links ── */}
+  <footer class="quote-footer">
+    <a href="/shop">Browse the shop</a>
+    <a href="/materials">Materials guide</a>
+    <a href="/contact">Contact</a>
+  </footer>
 </BaseLayout>
 
 <style>
-  .quote-page-intro {
+  .market-page {
+    background: var(--color-surface-primary);
+    background-image: none;
+  }
+
+  /* ══════════════════════════════════════════
+     DARK HERO
+     ══════════════════════════════════════════ */
+  .quote-hero {
+    position: relative;
+    overflow: hidden;
+    min-height: 200px;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .quote-hero__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center 60%;
+    background-repeat: no-repeat;
+  }
+
+  .quote-hero__scrim {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(10, 14, 19, 0.3) 0%, rgba(10, 14, 19, 0.7) 60%, rgba(10, 14, 19, 0.95) 100%),
+      linear-gradient(90deg, rgba(10, 14, 19, 0.5) 0%, transparent 40%, transparent 60%, rgba(10, 14, 19, 0.5) 100%);
+  }
+
+  .quote-hero__grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  }
+
+  .quote-hero__content {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 900px);
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .quote-hero__back {
     display: grid;
-    grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.8fr);
-    gap: 1.2rem;
-    padding: 1.4rem;
-  }
-
-  .quote-page-intro__title {
-    margin: 0.9rem 0 0.65rem;
-    font-size: clamp(2rem, 3.5vw, 3.4rem);
-    line-height: 0.98;
-    letter-spacing: -0.04em;
-  }
-
-  .quote-page-intro__copy,
-  .quote-page-intro__meta span {
-    color: var(--color-text-secondary);
-    line-height: 1.75;
-  }
-
-  .quote-page-intro__meta {
-    display: grid;
-    gap: 0.9rem;
-  }
-
-  .quote-page-intro__meta div {
-    padding: 1rem;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
     border-radius: 2px;
-    background: rgba(255, 255, 255, 0.62);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #c8d0dc;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+    transition: background 150ms ease;
   }
 
-  .quote-page-intro__meta strong,
-  .quote-page-intro__meta span {
-    display: block;
+  .quote-hero__back:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #f4efe8;
   }
 
-  .quote-page-intro__meta strong {
+  .quote-hero__kicker {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(200, 208, 220, 0.7);
+  }
+
+  .quote-hero__title {
+    margin: 0.2rem 0 0;
     font-family: var(--font-display);
-    color: var(--color-text-primary);
+    font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.2rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: #f4efe8;
   }
 
-  .quote-page-intro__meta span {
-    margin-top: 0.35rem;
+  .quote-hero__sub {
+    margin: 0.3rem 0 0;
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    color: rgba(200, 208, 220, 0.65);
+    line-height: 1.45;
+    max-width: 34rem;
   }
 
-  @media (max-width: 900px) {
-    .quote-page-intro {
-      grid-template-columns: 1fr;
-    }
+  /* ══════════════════════════════════════════
+     INFO STRIP — dark bridge
+     ══════════════════════════════════════════ */
+  .quote-info-strip {
+    background: #0f1419;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .quote-info-strip__inner {
+    width: min(100%, 900px);
+    margin: 0 auto;
+    padding: 0.65rem 1.25rem;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .quote-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .quote-info-item strong {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #40C4C4;
+  }
+
+  .quote-info-item span {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    color: rgba(200, 208, 220, 0.6);
+  }
+
+  /* ══════════════════════════════════════════
+     LIGHT FORM SECTION
+     ══════════════════════════════════════════ */
+  .quote-form-section {
+    background: var(--color-surface-primary);
+    padding: 1.25rem 0 2rem;
+  }
+
+  .quote-form-shell {
+    width: min(100%, 900px);
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  /* ── Footer links ── */
+  .quote-footer {
+    width: min(100%, 900px);
+    margin: 0 auto;
+    padding: 0.65rem 1.25rem 1.5rem;
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--color-border-default);
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .quote-footer a {
+    color: var(--color-teal-primary);
+    text-decoration: none;
+    transition: color 150ms ease;
+  }
+
+  .quote-footer a:hover {
+    color: var(--color-teal-dark);
+  }
+
+  @media (min-width: 700px) {
+    .quote-hero__content,
+    .quote-info-strip__inner,
+    .quote-form-shell,
+    .quote-footer { padding-inline: 2rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .quote-hero__back { transition: none !important; }
   }
 </style>

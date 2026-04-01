@@ -58,11 +58,21 @@ const gallerySections = [
     ],
   },
 ];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'ImageGallery',
+  name: '3D3D Archive',
+  description: 'A visual archive of sailing, fabrication, events, and the community printer journey behind 3D3D.',
+  url: 'https://3d3d.ca/gallery',
+};
 ---
 
 <BaseLayout
   title="Gallery | 3D3D"
   description="A visual archive of sailing, fabrication, events, and the community printer journey behind 3D3D."
+  ogImage="/media/real/open-ocean-01.jpg"
+  schema={schema}
   noSidebar
   noFooter
   noMobileCTA

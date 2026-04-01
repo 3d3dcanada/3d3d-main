@@ -28,11 +28,20 @@ const policyCards = [
     body: 'Questions about shipping, routing, or destination constraints can be sent to info@3d3d.ca or discussed directly during quote intake.',
   },
 ];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Shipping Policy',
+  description: 'Shipping, packaging, and fulfillment terms for 3D3D catalog orders and custom fabrication.',
+  url: 'https://3d3d.ca/shipping',
+};
 ---
 
 <BaseLayout
   title="Shipping Policy | 3D3D"
   description="Shipping, packaging, and fulfillment terms for 3D3D catalog orders and custom fabrication."
+  schema={schema}
   noSidebar
   noFooter
   noMobileCTA

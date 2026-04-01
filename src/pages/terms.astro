@@ -1,9 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Terms of Service',
+  description: 'Terms and conditions for using the 3D3D platform and ordering custom 3D prints.',
+  url: 'https://3d3d.ca/terms',
+};
 ---
 
-<BaseLayout title="Terms of Service | 3D3D" description="Terms and conditions for using the 3D3D platform and ordering custom 3D prints." activePath="/terms">
+<BaseLayout title="Terms of Service | 3D3D" description="Terms and conditions for using the 3D3D platform and ordering custom 3D prints." activePath="/terms" schema={schema}>
 
   <div class="pt-8 pb-12">
     <section class="max-w-3xl mx-auto">

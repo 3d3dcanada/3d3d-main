@@ -12,253 +12,218 @@ import '../styles/global.css';
     keywords="3D printing Fredericton, custom fabrication Canada, marine parts 3D print, event hire 3D printer, open source cooperative, 3D printing New Brunswick"
   />
 </head>
-<body class="hp">
+<body class="hp-page">
 
-  <!-- ══════════════════════════════════════
-       TOP NAVIGATION
-  ═══════════════════════════════════════════ -->
-  <header class="hp-header" id="hp-header">
-    <nav class="hp-nav" aria-label="Main navigation">
-      <a href="/" class="hp-nav__logo" aria-label="3D3D — Home">
-        <img src="/media/brand/3d3d-logo.svg" alt="3D3D" width="72" height="30" />
-      </a>
-      <div class="hp-nav__links">
-        <a href="/about">About</a>
-        <a href="/materials">Materials</a>
-        <a href="/blog">Blog</a>
-        <a href="/contact">Contact</a>
-        <a href="/quote" class="hp-nav__cta">Get a Quote</a>
-      </div>
-      <button class="hp-nav__menu-btn" id="hp-menu-btn" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </nav>
-  </header>
+  <main>
 
-  <!-- Mobile Nav Drawer -->
-  <dialog id="hp-mobile-nav" class="hp-mobile-nav">
-    <button class="hp-mobile-nav__close" onclick="document.getElementById('hp-mobile-nav').close()" aria-label="Close menu">✕</button>
-    <nav>
-      <a href="/quote">Get a Quote</a>
-      <a href="/about">About</a>
-      <a href="/materials">Materials</a>
-      <a href="/opportunities">Network</a>
-      <a href="/blog">Blog</a>
-      <a href="/faq">FAQ</a>
-      <a href="/contact">Contact</a>
-      <a href="/shop">Shop</a>
-      <a href="https://oldgirl.3d3d.ca" target="_blank" rel="noopener">The Old Girl</a>
-    </nav>
-  </dialog>
+    <!-- ══════════════════════════════════════════
+         01 · HERO
+    ═══════════════════════════════════════════════ -->
+    <section class="hp-section" style="--section-accent: var(--color-teal-primary, #40C4C4);">
+      <div class="hp-section__bg" style="background-image: url('/media/real/open-ocean-01.jpg'); background-position: center 40%;"></div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
 
-  <main id="main-content">
-
-    <!-- ══════════════════════════════════════
-         HERO — Full viewport, dark photo
-    ═══════════════════════════════════════════ -->
-    <section class="hp-hero" aria-label="3D3D — Home">
-      <div class="hp-hero__bg" aria-hidden="true"></div>
-      <div class="hp-hero__grain" aria-hidden="true"></div>
-      <div class="hp-hero__vignette" aria-hidden="true"></div>
-      <div class="hp-hero__content">
-        <p class="hp-hero__eyebrow">FREDERICTON, NB · CANADA · WORLDWIDE</p>
-        <h1 class="hp-hero__h1">
-          FOR THE<br>
-          ONES THAT<br>
-          GIVE A DAMN.
-        </h1>
-        <p class="hp-hero__sub">
-          Custom fabrication. Software. Community.<br>
-          Built from the ground up with nothing but grit.
-        </p>
-        <div class="hp-hero__ctas">
-          <a href="/quote" class="hp-btn hp-btn--primary">GET A QUOTE</a>
-          <button class="hp-btn hp-btn--outline-light" onclick="document.getElementById('dlg-events').showModal()">HIRE FOR EVENTS</button>
-          <a href="/opportunities" class="hp-btn hp-btn--ghost-light">JOIN THE NETWORK</a>
+      <div class="hp-card hp-card--center hp-card--hero">
+        <div class="hp-card__inner">
+          <p class="hp-card__eyebrow">FREDERICTON, NB · CANADA · WORLDWIDE</p>
+          <h1 class="hp-card__hero-title">
+            FOR THE<br>ONES THAT<br>GIVE A DAMN.
+          </h1>
+          <p class="hp-card__copy">
+            Custom fabrication. Software. Community.<br>
+            Built from the ground up with nothing but grit.
+          </p>
+          <div class="hp-card__cta-row">
+            <a href="/quote" class="hp-cta hp-cta--accent">GET A QUOTE</a>
+            <button class="hp-cta hp-cta--glass" onclick="document.getElementById('dlg-events').showModal()">HIRE FOR EVENTS</button>
+            <a href="/opportunities" class="hp-cta hp-cta--ghost">JOIN THE NETWORK</a>
+          </div>
         </div>
       </div>
-      <div class="hp-hero__scroll-hint" aria-hidden="true">
-        <span class="hp-hero__scroll-label">SCROLL</span>
-        <div class="hp-hero__scroll-line"></div>
-      </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         01 — CUSTOM FABRICATION (light)
-         Image left · Content right
-    ═══════════════════════════════════════════ -->
-    <section class="hp-split hp-split--light" aria-labelledby="hp-fab-title">
-      <div class="hp-split__img">
-        <img
-          src="/media/workshop/printer-action-cf.jpg"
-          alt="Carbon fiber filament running on a 3D printer"
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-      <div class="hp-split__content">
-        <p class="hp-eyebrow">CUSTOM FABRICATION</p>
-        <h2 class="hp-h2" id="hp-fab-title">Need a part<br>that doesn't exist?</h2>
-        <p class="hp-text">
-          Marine hardware, automotive restoration, prototypes, replacement components.
-          Six printers. Deployable anywhere. Most jobs turn around same day.
-        </p>
-        <div class="hp-chips">
-          <span>Prusa MK2.5</span>
-          <span>Bambu A1</span>
-          <span>Creality K1</span>
-          <span>BIBO 2</span>
-          <span>Anycubic Kobra 2 Max</span>
+    <!-- ══════════════════════════════════════════
+         02 · CUSTOM FABRICATION
+    ═══════════════════════════════════════════════ -->
+    <section class="hp-section" style="--section-accent: var(--color-teal-primary, #40C4C4);">
+      <div class="hp-section__bg" style="background-image: url('/images/splash-bg-services.png');"></div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-card hp-card--dark hp-card--left">
+        <div class="hp-card__inner">
+          <p class="hp-card__eyebrow">CUSTOM FABRICATION</p>
+          <h2 class="hp-card__title">Need a part that<br>doesn't exist?</h2>
+          <p class="hp-card__subtitle">Six printers. Deployable anywhere. Same-day turnaround.</p>
+          <p class="hp-card__copy">
+            Marine hardware, automotive restoration, prototypes, replacement components.
+            If the part was discontinued in 1979, I'll fabricate it today.
+          </p>
+          <ul class="hp-card__highlights">
+            <li>Marine-grade parts</li>
+            <li>Reverse engineering</li>
+            <li>Automotive restoration</li>
+            <li>Field deployment</li>
+          </ul>
+          <div class="hp-card__tags">
+            <span class="hp-card__tag">Prusa MK2.5</span>
+            <span class="hp-card__tag">Bambu A1</span>
+            <span class="hp-card__tag">Creality K1</span>
+            <span class="hp-card__tag">BIBO 2</span>
+            <span class="hp-card__tag">Kobra 2 Max</span>
+          </div>
+          <a href="/quote" class="hp-cta hp-cta--accent">START A QUOTE →</a>
         </div>
-        <a href="/quote" class="hp-btn hp-btn--teal">START A QUOTE →</a>
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         02 — THE STORY (light, flipped)
-         Content left · Image right
-    ═══════════════════════════════════════════ -->
-    <section class="hp-split hp-split--story hp-split--flip" aria-labelledby="hp-story-title">
-      <div class="hp-split__content">
-        <p class="hp-eyebrow">THE STORY</p>
-        <h2 class="hp-h2" id="hp-story-title">Made from nothing.<br>Built for everyone.</h2>
-        <p class="hp-text">
-          Ankylosing spondylitis ended a decade of trucking. Instead of disability, I chose
-          reinvention — self-teaching fabrication, software, and AI from the ground up.
-          Ten years sober. Still building.
-        </p>
-        <p class="hp-text">
-          If you don't fit a normal job, you're exactly who belongs here.
-          The unheard, the unnamed. People with heart.
-          <em>We give a damn.</em>
-        </p>
-        <a href="/about" class="hp-btn hp-btn--outline-dark">READ THE FULL STORY →</a>
-      </div>
-      <div class="hp-split__img">
-        <img
-          src="/media/real/helm-close.jpg"
-          alt="At the helm offshore during a race"
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-    </section>
+    <!-- ══════════════════════════════════════════
+         03 · THE STORY
+    ═══════════════════════════════════════════════ -->
+    <section class="hp-section" style="--section-accent: var(--color-magenta-primary, #E84A8A);">
+      <div class="hp-section__bg" style="background-image: url('/images/splash-bg-about.png');"></div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim hp-section__scrim--light"></div>
+      <div class="hp-section__grain"></div>
 
-    <!-- ══════════════════════════════════════
-         03 — EVENT HIRE (dark)
-         Image left · Content right
-    ═══════════════════════════════════════════ -->
-    <section class="hp-split hp-split--dark" aria-labelledby="hp-events-title">
-      <div class="hp-split__img">
-        <img
-          src="/media/real/race-morning-crew.jpg"
-          alt="Race morning — crew on deck preparing before the start"
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-      <div class="hp-split__content">
-        <p class="hp-eyebrow hp-eyebrow--teal">EVENTS & DEPLOYMENT</p>
-        <h2 class="hp-h2 hp-h2--light" id="hp-events-title">Bring 3D3D<br>to your event.</h2>
-        <p class="hp-text hp-text--muted">
-          Regattas, car shows, expos, LARP, D&amp;D nights, conventions, marinas —
-          I show up with printers and cameras. Parts built on-site. Video documented.
-          The machines are part of the show.
-        </p>
-        <p class="hp-callout hp-callout--magenta">From $1,500 · Full-day deployments · Video documentation included</p>
-        <button class="hp-btn hp-btn--magenta" onclick="document.getElementById('dlg-events').showModal()">BOOK AN EVENT →</button>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════
-         04 — SOFTWARE & INNOVATION (dark, flipped)
-         Content left · Image right
-    ═══════════════════════════════════════════ -->
-    <section class="hp-split hp-split--dark hp-split--flip" aria-labelledby="hp-software-title">
-      <div class="hp-split__content">
-        <p class="hp-eyebrow hp-eyebrow--teal">SOFTWARE · AI · ROBOTICS</p>
-        <h2 class="hp-h2 hp-h2--light" id="hp-software-title">We build<br>digital too.</h2>
-        <p class="hp-text hp-text--muted">
-          Custom websites, apps, AI integrations, SaaS tools. Robotics, R&amp;D, automation.
-          Built fast for local companies, community makers, anyone that needs it done right.
-          We can ship in a weekend. You keep it forever.
-        </p>
-        <button class="hp-btn hp-btn--outline-light" onclick="document.getElementById('dlg-software').showModal()">VIEW PROJECTS →</button>
-      </div>
-      <div class="hp-split__img">
-        <img
-          src="/media/backgrounds/makers-neon-workshop.jpg"
-          alt="Maker workshop lit with neon and activity"
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════
-         05 — THE NETWORK (light)
-         Image left · Content right
-    ═══════════════════════════════════════════ -->
-    <section class="hp-split hp-split--light" aria-labelledby="hp-network-title">
-      <div class="hp-split__img">
-        <img
-          src="/images/splash-bg-network.png"
-          alt="3D3D cooperative network visualization"
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-      <div class="hp-split__content">
-        <p class="hp-eyebrow">THE NETWORK</p>
-        <h2 class="hp-h2" id="hp-network-title">3D3D connects<br>Canada.</h2>
-        <p class="hp-text">
-          First makers in get a free website at <strong>yourname.3d3d.ca</strong>.
-          Node operator program for distributed printing across the country.
-          Open source everything. Built to share.
-        </p>
-        <p class="hp-text">
-          Makers, coders, artists, photographers, robotics techs, AI specialists —
-          if you create things, there's a place for you here.
-        </p>
-        <a href="/opportunities" class="hp-btn hp-btn--teal">JOIN THE NETWORK →</a>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════
-         06 — THE OLD GIRL (light, flipped)
-         Content left · Image right
-    ═══════════════════════════════════════════ -->
-    <section class="hp-split hp-split--warm hp-split--flip" aria-labelledby="hp-oldgirl-title">
-      <div class="hp-split__content">
-        <p class="hp-eyebrow">COMMUNITY PROJECT</p>
-        <h2 class="hp-h2" id="hp-oldgirl-title">The Old Girl.</h2>
-        <p class="hp-text">
-          A Prusa MK2 rescued for $50 — someone was going to throw it away.
-          It belongs to the community now. Pick a file, we print it.
-          Pay for filament and shipping only. No markup. No admin fee. No nonsense.
-        </p>
-        <div class="hp-chips hp-chips--muted">
-          <span>Running 24/7</span>
-          <span>Community-modded</span>
-          <span>Donations welcome</span>
-          <span>Wishlist open</span>
+      <div class="hp-card hp-card--light hp-card--right">
+        <div class="hp-card__inner">
+          <p class="hp-card__eyebrow hp-card__eyebrow--dark">THE STORY</p>
+          <h2 class="hp-card__title hp-card__title--dark">Made from nothing.<br>Built for everyone.</h2>
+          <p class="hp-card__copy hp-card__copy--dark">
+            Ankylosing spondylitis ended a decade of trucking. Instead of disability, I chose
+            reinvention — self-teaching fabrication, software, and AI from the ground up.
+            Ten years sober. Still building.
+          </p>
+          <p class="hp-card__copy hp-card__copy--dark">
+            If you don't fit a normal job, you're exactly who belongs here.
+            The unheard, the unnamed. People with heart. <em>We give a damn.</em>
+          </p>
+          <a href="/about" class="hp-cta hp-cta--dark">READ THE FULL STORY →</a>
         </div>
-        <a href="https://oldgirl.3d3d.ca" class="hp-btn hp-btn--outline-dark" target="_blank" rel="noopener noreferrer">SEND A PRINT JOB →</a>
-      </div>
-      <div class="hp-split__img">
-        <img
-          src="/media/workshop/printer-bed-benchy.jpg"
-          alt="Printer bed with a benchy print in progress"
-          loading="lazy"
-          decoding="async"
-        />
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         GALLERY STRIP (dark)
-    ═══════════════════════════════════════════ -->
-    <section class="hp-gallery" aria-label="Photo gallery preview">
+    <!-- ══════════════════════════════════════════
+         04 · EVENT HIRE
+    ═══════════════════════════════════════════════ -->
+    <section class="hp-section" style="--section-accent: var(--color-magenta-primary, #E84A8A);">
+      <div class="hp-section__bg" style="background-image: url('/media/real/fleet-start-press.jpg');"></div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-card hp-card--dark hp-card--left">
+        <div class="hp-card__inner">
+          <p class="hp-card__eyebrow">EVENTS & DEPLOYMENT</p>
+          <h2 class="hp-card__title">Bring 3D3D<br>to your event.</h2>
+          <p class="hp-card__subtitle">From $1,500 · Full-day deployments · Video documented</p>
+          <p class="hp-card__copy">
+            Regattas, car shows, expos, LARP, D&amp;D nights, conventions, marinas.
+            I show up with printers and cameras. Parts built on-site before the event ends.
+          </p>
+          <ul class="hp-card__highlights">
+            <li>On-site fabrication</li>
+            <li>Video documentation</li>
+            <li>Convention-ready</li>
+            <li>Full-day coverage</li>
+          </ul>
+          <button class="hp-cta hp-cta--accent" onclick="document.getElementById('dlg-events').showModal()">BOOK AN EVENT →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         05 · SOFTWARE & INNOVATION
+    ═══════════════════════════════════════════════ -->
+    <section class="hp-section" style="--section-accent: var(--color-teal-primary, #40C4C4);">
+      <div class="hp-section__bg" style="background-image: url('/media/backgrounds/makers-neon-workshop.jpg');"></div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-card hp-card--dark hp-card--right">
+        <div class="hp-card__inner">
+          <p class="hp-card__eyebrow">SOFTWARE · AI · ROBOTICS</p>
+          <h2 class="hp-card__title">We build<br>digital too.</h2>
+          <p class="hp-card__subtitle">Built in a weekend. Yours to keep.</p>
+          <p class="hp-card__copy">
+            Custom websites, apps, AI integrations, SaaS tools. Robotics, R&amp;D, automation.
+            Built fast for local companies, community makers, anyone that needs it done right.
+          </p>
+          <ul class="hp-card__highlights">
+            <li>Custom websites &amp; apps</li>
+            <li>AI integrations</li>
+            <li>Robotics &amp; R&amp;D</li>
+            <li>SaaS tools</li>
+          </ul>
+          <button class="hp-cta hp-cta--accent" onclick="document.getElementById('dlg-software').showModal()">VIEW PROJECTS →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         06 · THE NETWORK
+    ═══════════════════════════════════════════════ -->
+    <section class="hp-section" style="--section-accent: var(--color-magenta-primary, #E84A8A);">
+      <div class="hp-section__bg" style="background-image: url('/images/splash-bg-network.png');"></div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim hp-section__scrim--light"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-card hp-card--light hp-card--left">
+        <div class="hp-card__inner">
+          <p class="hp-card__eyebrow hp-card__eyebrow--dark">THE NETWORK</p>
+          <h2 class="hp-card__title hp-card__title--dark">3D3D connects<br>Canada.</h2>
+          <p class="hp-card__copy hp-card__copy--dark">
+            First makers in get a free website at <strong>yourname.3d3d.ca</strong>.
+            Node operator program for distributed printing across the country.
+            Open source everything. Built to share.
+          </p>
+          <p class="hp-card__copy hp-card__copy--dark">
+            Makers, coders, artists, photographers, robotics techs, AI specialists —
+            if you create things, there's a place for you here.
+          </p>
+          <a href="/opportunities" class="hp-cta hp-cta--dark">JOIN THE NETWORK →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         07 · THE OLD GIRL
+    ═══════════════════════════════════════════════ -->
+    <section class="hp-section" style="--section-accent: var(--color-orange-primary, #FF6B2B);">
+      <div class="hp-section__bg" style="background-image: url('/media/workshop/printer-frame-shot.jpg');"></div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim hp-section__scrim--light"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-card hp-card--light hp-card--right">
+        <div class="hp-card__inner">
+          <p class="hp-card__eyebrow hp-card__eyebrow--dark">COMMUNITY PROJECT</p>
+          <h2 class="hp-card__title hp-card__title--dark">The Old Girl.</h2>
+          <p class="hp-card__copy hp-card__copy--dark">
+            A Prusa MK2 rescued for $50 — someone was going to throw it away.
+            It belongs to the community now. Pick a file, we print it.
+            Pay for filament and shipping only. No markup. No admin fee. No nonsense.
+          </p>
+          <div class="hp-card__tags hp-card__tags--dark">
+            <span class="hp-card__tag hp-card__tag--dark">Running 24/7</span>
+            <span class="hp-card__tag hp-card__tag--dark">Community-modded</span>
+            <span class="hp-card__tag hp-card__tag--dark">Donations welcome</span>
+          </div>
+          <a href="https://oldgirl.3d3d.ca" class="hp-cta hp-cta--dark" target="_blank" rel="noopener noreferrer">SEND A PRINT JOB →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         08 · GALLERY
+    ═══════════════════════════════════════════════ -->
+    <section class="hp-gallery">
       <div class="hp-gallery__strip" aria-hidden="true">
         <img src="/media/real/fleet-aerial.jpg" alt="" loading="lazy" />
         <img src="/media/workshop/machine-parts-flatlay.jpg" alt="" loading="lazy" />
@@ -270,656 +235,490 @@ import '../styles/global.css';
         <img src="/media/workshop/winch-cup-holder.jpg" alt="" loading="lazy" />
         <img src="/media/real/dawn-approach.jpg" alt="" loading="lazy" />
         <img src="/media/workshop/custom-tv-mount.jpg" alt="" loading="lazy" />
+        <img src="/media/real/golden-hour-02.jpg" alt="" loading="lazy" />
+        <img src="/media/workshop/floating-keychains.jpg" alt="" loading="lazy" />
+        <img src="/media/real/sunset-sail-01.jpg" alt="" loading="lazy" />
+        <img src="/media/real/afternoon-racing-01.jpg" alt="" loading="lazy" />
+        <img src="/media/workshop/fan-reducers.jpg" alt="" loading="lazy" />
+        <img src="/media/real/morning-dawn-deck.jpg" alt="" loading="lazy" />
+        <img src="/media/real/helm-close.jpg" alt="" loading="lazy" />
+        <img src="/media/workshop/galaxy-vase.jpg" alt="" loading="lazy" />
+        <img src="/media/real/evening-passage.jpg" alt="" loading="lazy" />
+        <img src="/media/workshop/spray-can-adapter.jpg" alt="" loading="lazy" />
       </div>
-      <div class="hp-gallery__cta">
-        <p class="hp-gallery__headline">
-          4,000+ photos. 20,000+ nautical miles.<br>One journey.
-        </p>
+      <div class="hp-gallery__bottom">
+        <p class="hp-gallery__headline">4,000+ photos. 20,000+ nautical miles. One journey.</p>
         <div class="hp-gallery__btns">
-          <a href="/gallery" class="hp-btn hp-btn--outline-light">VIEW GALLERY →</a>
-          <a
-            href="https://ko-fi.com/3d3dca"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hp-btn hp-btn--kofi"
-          >☕ FOLLOW ON KO-FI</a>
+          <a href="https://ko-fi.com/3d3dca" target="_blank" rel="noopener noreferrer" class="hp-cta hp-cta--kofi">FOLLOW ON KO-FI</a>
         </div>
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         SPONSOR THE JOURNEY (light)
-    ═══════════════════════════════════════════ -->
-    <section class="hp-sponsor" aria-labelledby="hp-sponsor-title">
-      <div class="hp-sponsor__header">
-        <p class="hp-eyebrow hp-eyebrow--center">SPONSORSHIPS</p>
-        <h2 class="hp-h2" id="hp-sponsor-title">Sponsor the journey.</h2>
-        <p class="hp-text hp-text--centered">
-          Support the cooperative. Sponsor an event. Become a patron.
-          Every dollar goes back into the machines, the community, and the mission.
-        </p>
-      </div>
-      <div class="hp-tiers">
+    <!-- ══════════════════════════════════════════
+         09 · SPONSOR THE JOURNEY
+    ═══════════════════════════════════════════════ -->
+    <section class="hp-section hp-section--sponsor" style="--section-accent: var(--color-magenta-primary, #E84A8A);">
+      <div class="hp-section__bg" style="background-image: url('/media/real/golden-hour-01.jpg');"></div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim hp-section__scrim--light"></div>
+      <div class="hp-section__grain"></div>
 
-        <div class="hp-tier">
-          <div class="hp-tier__header">
+      <div class="hp-sponsor-layout">
+        <div class="hp-card hp-card--light hp-card--wide">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow hp-card__eyebrow--dark">SPONSORSHIPS</p>
+            <h2 class="hp-card__title hp-card__title--dark">Sponsor the journey.</h2>
+            <p class="hp-card__copy hp-card__copy--dark">
+              Support the cooperative. Sponsor an event. Become a patron.
+              Every dollar goes back into the machines, the community, and the mission.
+            </p>
+          </div>
+        </div>
+
+        <div class="hp-tiers">
+          <div class="hp-tier hp-tier--glass">
             <span class="hp-tier__price">$100</span>
             <span class="hp-tier__name">SUPPORTER</span>
+            <ul class="hp-tier__list">
+              <li>$25 in free prints</li>
+              <li>Name in site credits</li>
+              <li>Ko-fi thank-you post</li>
+            </ul>
+            <button class="hp-cta hp-cta--accent hp-cta--full" onclick="document.getElementById('dlg-sponsor').showModal()">SPONSOR</button>
           </div>
-          <ul class="hp-tier__list">
-            <li>$25 in free prints</li>
-            <li>Name in site credits</li>
-            <li>Ko-fi thank-you post</li>
-          </ul>
-          <button class="hp-btn hp-btn--outline-dark hp-btn--full" onclick="document.getElementById('dlg-sponsor').showModal()">SPONSOR →</button>
-        </div>
 
-        <div class="hp-tier hp-tier--featured">
-          <span class="hp-tier__badge">MOST POPULAR</span>
-          <div class="hp-tier__header">
+          <div class="hp-tier hp-tier--glass hp-tier--featured">
+            <span class="hp-tier__badge">MOST POPULAR</span>
             <span class="hp-tier__price">$500</span>
             <span class="hp-tier__name">PARTNER</span>
+            <ul class="hp-tier__list">
+              <li>$100 in free prints</li>
+              <li>2 t-shirts + 2 hats</li>
+              <li>1-on-1 consultation call</li>
+              <li>Free software build / year</li>
+              <li>Social feature + post</li>
+            </ul>
+            <button class="hp-cta hp-cta--accent hp-cta--full" onclick="document.getElementById('dlg-sponsor').showModal()">SPONSOR</button>
           </div>
-          <ul class="hp-tier__list">
-            <li>$100 in free prints</li>
-            <li>2 t-shirts + 2 hats</li>
-            <li>1-on-1 consultation call</li>
-            <li>One free software build / year</li>
-            <li>Social feature + dedicated post</li>
-          </ul>
-          <button class="hp-btn hp-btn--teal hp-btn--full" onclick="document.getElementById('dlg-sponsor').showModal()">SPONSOR →</button>
-        </div>
 
-        <div class="hp-tier">
-          <div class="hp-tier__header">
+          <div class="hp-tier hp-tier--glass">
             <span class="hp-tier__price">CUSTOM</span>
             <span class="hp-tier__name">INVESTOR</span>
+            <ul class="hp-tier__list">
+              <li>Custom package</li>
+              <li>Event co-branding</li>
+              <li>Equity conversation welcome</li>
+              <li>Dedicated support channel</li>
+            </ul>
+            <button class="hp-cta hp-cta--magenta hp-cta--full" onclick="document.getElementById('dlg-sponsor').showModal()">LET'S TALK</button>
           </div>
-          <ul class="hp-tier__list">
-            <li>Custom package</li>
-            <li>Event co-branding</li>
-            <li>Equity conversation welcome</li>
-            <li>Dedicated support channel</li>
-          </ul>
-          <button class="hp-btn hp-btn--magenta hp-btn--full" onclick="document.getElementById('dlg-sponsor').showModal()">LET'S TALK →</button>
         </div>
-
       </div>
     </section>
 
   </main>
 
-  <!-- ══════════════════════════════════════
+  <!-- ══════════════════════════════════════════
        FOOTER
-  ═══════════════════════════════════════════ -->
+  ═══════════════════════════════════════════════ -->
   <footer class="hp-footer">
-    <div class="hp-footer__inner">
-      <a href="/" aria-label="3D3D Home">
-        <img src="/media/brand/3d3d-logo.svg" alt="3D3D" width="72" height="30" class="hp-footer__logo" />
-      </a>
-      <nav class="hp-footer__nav" aria-label="Footer navigation">
-        <a href="/quote">Quote</a>
-        <a href="/about">About</a>
-        <a href="/materials">Materials</a>
-        <a href="/opportunities">Network</a>
-        <a href="/blog">Blog</a>
-        <a href="/faq">FAQ</a>
-        <a href="/contact">Contact</a>
-        <a href="/shop">Shop</a>
-        <a href="https://oldgirl.3d3d.ca" target="_blank" rel="noopener">Old Girl</a>
-        <a href="https://ko-fi.com/3d3dca" target="_blank" rel="noopener">Ko-fi</a>
-      </nav>
-      <p class="hp-footer__copy">
-        © 2025 3D3D Atlantic Cooperative · Fredericton, NB, Canada · Open Source · Built with grit.
-      </p>
-    </div>
+    <nav class="hp-footer__nav" aria-label="Site navigation">
+      <a href="/quote">Quote</a>
+      <a href="/about">About</a>
+      <a href="/materials">Materials</a>
+      <a href="/opportunities">Network</a>
+      <a href="/blog">Blog</a>
+      <a href="/faq">FAQ</a>
+      <a href="/contact">Contact</a>
+      <a href="/shop">Shop</a>
+      <a href="https://oldgirl.3d3d.ca" target="_blank" rel="noopener">Old Girl</a>
+      <a href="https://ko-fi.com/3d3dca" target="_blank" rel="noopener">Ko-fi</a>
+    </nav>
+    <p class="hp-footer__copy">© 2025 3D3D Atlantic Cooperative · Fredericton, NB · Open Source · Built with grit.</p>
   </footer>
 
-  <!-- ══════════════════════════════════════
+  <!-- ══════════════════════════════════════════
        DIALOGS
-  ═══════════════════════════════════════════ -->
+  ═══════════════════════════════════════════════ -->
 
-  <!-- Events Dialog -->
   <dialog id="dlg-events" class="hp-dialog">
     <button class="hp-dialog__close" onclick="this.closest('dialog').close()" aria-label="Close">✕</button>
-    <p class="hp-eyebrow">BOOK AN EVENT</p>
+    <p class="hp-card__eyebrow">BOOK AN EVENT</p>
     <h3 class="hp-dialog__title">Hire Ken for your event.</h3>
-    <p>Regattas, car shows, expos, conventions, LARP nights, D&D sessions, marinas, community gatherings — I show up with printers, cameras, and the will to build.</p>
-    <p>Fill out a quick inquiry and I'll get back to you within 24 hours.</p>
-    <a href="/book" class="hp-btn hp-btn--teal">BOOKING FORM →</a>
-    <a href="/contact?subject=event-hire" class="hp-btn hp-btn--ghost">OR SEND A MESSAGE →</a>
+    <p class="hp-dialog__copy">Regattas, car shows, expos, conventions, LARP nights, D&amp;D sessions, marinas, community gatherings — I show up with printers, cameras, and the will to build.</p>
+    <a href="/book" class="hp-cta hp-cta--accent">BOOKING FORM →</a>
+    <a href="/contact?subject=event-hire" class="hp-cta hp-cta--ghost">OR SEND A MESSAGE →</a>
   </dialog>
 
-  <!-- Software Dialog -->
   <dialog id="dlg-software" class="hp-dialog">
     <button class="hp-dialog__close" onclick="this.closest('dialog').close()" aria-label="Close">✕</button>
-    <p class="hp-eyebrow">SOFTWARE & PROJECTS</p>
+    <p class="hp-card__eyebrow">SOFTWARE & PROJECTS</p>
     <h3 class="hp-dialog__title">Digital work.</h3>
-    <p>Websites, apps, AI tools, SaaS, automation, robotics. Portfolio page coming soon — in the meantime, reach out to talk about what you need built.</p>
-    <p>We can usually scope, plan, and ship in a single sprint.</p>
-    <a href="/contact?subject=software-project" class="hp-btn hp-btn--teal">START A CONVERSATION →</a>
-    <a href="https://github.com/3d3dcanada" target="_blank" rel="noopener" class="hp-btn hp-btn--outline-dark">VIEW GITHUB →</a>
+    <p class="hp-dialog__copy">Websites, apps, AI tools, SaaS, automation, robotics. Portfolio coming soon — reach out to talk about what you need built. We can usually scope, plan, and ship in a single sprint.</p>
+    <a href="/contact?subject=software-project" class="hp-cta hp-cta--accent">START A CONVERSATION →</a>
+    <a href="https://github.com/3d3dcanada" target="_blank" rel="noopener" class="hp-cta hp-cta--glass">VIEW GITHUB →</a>
   </dialog>
 
-  <!-- Sponsor Dialog -->
   <dialog id="dlg-sponsor" class="hp-dialog">
     <button class="hp-dialog__close" onclick="this.closest('dialog').close()" aria-label="Close">✕</button>
-    <p class="hp-eyebrow">SPONSORSHIPS</p>
+    <p class="hp-card__eyebrow">SPONSORSHIPS</p>
     <h3 class="hp-dialog__title">Sponsor the journey.</h3>
-    <p>Stripe payment links are coming online soon. For now, reach out directly — we'll put together a package that works for your goals and budget.</p>
-    <p>VCs, brands, individual supporters, and community members are all welcome.</p>
-    <a href="/contact?subject=sponsorship" class="hp-btn hp-btn--magenta">REACH OUT →</a>
-    <a href="https://ko-fi.com/3d3dca" target="_blank" rel="noopener" class="hp-btn hp-btn--kofi">☕ SUPPORT ON KO-FI</a>
+    <p class="hp-dialog__copy">Stripe payment links coming online soon. Reach out directly and we'll put together a package that works for you. VCs, brands, individuals — all welcome.</p>
+    <a href="/contact?subject=sponsorship" class="hp-cta hp-cta--accent">REACH OUT →</a>
+    <a href="https://ko-fi.com/3d3dca" target="_blank" rel="noopener" class="hp-cta hp-cta--kofi">SUPPORT ON KO-FI</a>
   </dialog>
 
-  <!-- ══════════════════════════════════════
+  <!-- ══════════════════════════════════════════
        SCRIPTS
-  ═══════════════════════════════════════════ -->
+  ═══════════════════════════════════════════════ -->
   <script is:inline>
-    // Header: transparent over hero → opaque on scroll
-    (function () {
-      var header = document.getElementById('hp-header');
-      var hero = document.querySelector('.hp-hero');
-      if (!header || !hero) return;
-
-      function update() {
-        var heroBottom = hero.getBoundingClientRect().bottom;
-        header.classList.toggle('hp-header--scrolled', heroBottom < 80);
-      }
-      update();
-      window.addEventListener('scroll', update, { passive: true });
-    })();
-
-    // Close dialogs on backdrop click
     document.querySelectorAll('.hp-dialog').forEach(function(dlg) {
       dlg.addEventListener('click', function(e) {
         if (e.target === dlg) dlg.close();
       });
     });
-
-    // Mobile menu
-    var menuBtn = document.getElementById('hp-menu-btn');
-    var mobileNav = document.getElementById('hp-mobile-nav');
-    if (menuBtn && mobileNav) {
-      menuBtn.addEventListener('click', function() {
-        mobileNav.showModal();
-        menuBtn.setAttribute('aria-expanded', 'true');
-      });
-      mobileNav.addEventListener('close', function() {
-        menuBtn.setAttribute('aria-expanded', 'false');
-      });
-      mobileNav.addEventListener('click', function(e) {
-        if (e.target === mobileNav) mobileNav.close();
-      });
-    }
   </script>
 
 </body>
 </html>
 
 <style>
-  /* ══════════════════════════════════════════════
-     3D3D HOMEPAGE STYLES
-     Mixed light/dark · Alternating sections
-  ═════════════════════════════════════════════════ */
+  /* ══════════════════════════════════════════════════════════
+     3D3D HOMEPAGE
+     Splash-hub quality: glass cards over photo backgrounds
+     Grain · Vignette · Scrim · Blur · Mixed light/dark glass
+  ═══════════════════════════════════════════════════════════ */
 
-  /* ── BASE ── */
-  .hp {
+  /* ── PAGE BASE ── */
+  .hp-page {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    background: #F6F7FA;
-    color: #1A1D21;
+    background: #0a0e13;
+    color: #f4efe8;
     font-family: var(--font-body, 'Instrument Sans', system-ui, sans-serif);
   }
 
-  /* ── HEADER ── */
-  .hp-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 200;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    padding: 0 clamp(1.25rem, 4vw, 3rem);
-    background: rgba(10, 14, 19, 0.0);
-    border-bottom: 1px solid transparent;
-    transition: background 0.35s ease, border-color 0.35s ease;
-  }
-  .hp-header--scrolled {
-    background: rgba(246, 247, 250, 0.92);
-    border-bottom-color: rgba(0, 0, 0, 0.07);
-    backdrop-filter: blur(16px);
-  }
-
-  .hp-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-  .hp-nav__logo img { display: block; }
-
-  .hp-nav__links {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    font-family: var(--font-tech, 'Archivo', system-ui, sans-serif);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-  .hp-nav__links a {
-    color: rgba(255, 255, 255, 0.75);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .hp-nav__links a:hover { color: #fff; }
-  .hp-header--scrolled .hp-nav__links a { color: #4A5568; }
-  .hp-header--scrolled .hp-nav__links a:hover { color: var(--color-teal-primary, #40C4C4); }
-
-  .hp-nav__cta {
-    padding: 0.5rem 1.1rem;
-    background: var(--color-teal-primary, #40C4C4);
-    color: #0F1112 !important;
-    border-radius: 2px;
-    transition: background 0.2s, transform 0.2s !important;
-  }
-  .hp-nav__cta:hover { background: #53D3D3 !important; transform: translateY(-1px); }
-
-  .hp-nav__menu-btn {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-  }
-  .hp-nav__menu-btn span {
-    display: block;
-    width: 24px;
-    height: 2px;
-    background: #fff;
-    border-radius: 2px;
-    transition: background 0.2s;
-  }
-  .hp-header--scrolled .hp-nav__menu-btn span { background: #1A1D21; }
-
-  /* ── MOBILE NAV ── */
-  .hp-mobile-nav {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    max-width: 320px;
-    height: 100%;
-    max-height: 100%;
-    margin: 0 0 0 auto;
-    border: none;
-    background: #0F1112;
-    padding: 5rem 2.5rem 3rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    border-left: 1px solid rgba(255,255,255,0.06);
-  }
-  .hp-mobile-nav::backdrop { background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
-  .hp-mobile-nav__close {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    background: none;
-    border: none;
-    color: rgba(255,255,255,0.5);
-    font-size: 1.2rem;
-    cursor: pointer;
-    padding: 0.4rem;
-    transition: color 0.2s;
-  }
-  .hp-mobile-nav__close:hover { color: #fff; }
-  .hp-mobile-nav nav {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-  .hp-mobile-nav nav a {
-    display: block;
-    padding: 1rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.07);
-    font-family: var(--font-tech, 'Archivo', sans-serif);
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.65);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .hp-mobile-nav nav a:hover { color: var(--color-teal-primary, #40C4C4); }
-
-  /* ── HERO ── */
-  .hp-hero {
+  /* ── SECTION (each is a full viewport with photo bg) ── */
+  .hp-section {
     position: relative;
-    height: 100dvh;
-    min-height: 600px;
+    min-height: 100dvh;
     display: flex;
     align-items: center;
-    justify-content: center;
     overflow: hidden;
+    isolation: isolate;
   }
-  .hp-hero__bg {
+
+  /* Background image */
+  .hp-section__bg {
     position: absolute;
     inset: 0;
-    background-image: url('/media/real/open-ocean-01.jpg');
     background-size: cover;
-    background-position: center 40%;
-    animation: hp-drift 28s ease-in-out infinite alternate;
-    will-change: transform;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
   }
-  @keyframes hp-drift {
-    from { transform: scale(1.05) translate(0, 0); }
-    to   { transform: scale(1.05) translate(-1.5%, 0.8%); }
-  }
-  .hp-hero__vignette {
+
+  /* Cinematic vignette */
+  .hp-section__vignette {
     position: absolute;
     inset: 0;
+    z-index: 1;
+    background: radial-gradient(
+      ellipse 60% 60% at 50% 50%,
+      transparent 0%,
+      rgba(6, 8, 16, 0.65) 100%
+    );
+    pointer-events: none;
+  }
+
+  /* Dark scrim (default) */
+  .hp-section__scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
     background:
-      linear-gradient(to bottom, rgba(10,14,19,0.2) 0%, rgba(10,14,19,0.72) 100%),
-      radial-gradient(ellipse at 50% 110%, rgba(10,14,19,0.7), transparent 65%);
+      linear-gradient(180deg, rgba(10,14,19,0.45) 0%, rgba(10,14,19,0.2) 35%, rgba(10,14,19,0.55) 100%),
+      linear-gradient(90deg, rgba(10,14,19,0.6) 0%, transparent 30%, transparent 70%, rgba(10,14,19,0.6) 100%);
+    pointer-events: none;
   }
-  .hp-hero__grain {
+
+  /* Light scrim variant for light-glass sections */
+  .hp-section__scrim--light {
+    background:
+      linear-gradient(180deg, rgba(246,247,250,0.25) 0%, rgba(246,247,250,0.08) 35%, rgba(246,247,250,0.3) 100%),
+      linear-gradient(90deg, rgba(246,247,250,0.35) 0%, transparent 30%, transparent 70%, rgba(246,247,250,0.35) 100%);
+  }
+
+  /* Film grain */
+  .hp-section__grain {
     position: absolute;
     inset: 0;
+    z-index: 3;
     pointer-events: none;
     opacity: 0.04;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 180px;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    animation: hp-grain 8s steps(4) infinite;
   }
-  .hp-hero__content {
+  @keyframes hp-grain {
+    0%, 100% { transform: translate(0, 0); }
+    25%      { transform: translate(-2px, 1px); }
+    50%      { transform: translate(1px, -2px); }
+    75%      { transform: translate(-1px, 2px); }
+  }
+
+  /* ── GLASS CARDS ── */
+
+  /* Dark glass (splash-hub default) */
+  .hp-card--dark {
+    background: rgba(10, 14, 19, 0.62);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 2px solid var(--section-accent, #40C4C4);
+    box-shadow:
+      0 24px 60px rgba(0, 0, 0, 0.34),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  /* Light glass */
+  .hp-card--light {
+    background: rgba(246, 247, 250, 0.74);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-top: 2px solid var(--section-accent, #40C4C4);
+    box-shadow:
+      0 24px 60px rgba(0, 0, 0, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+
+  /* Card positioning */
+  .hp-card {
     position: relative;
-    z-index: 2;
+    z-index: 4;
+    width: min(28rem, calc(100% - 2rem));
+    border-radius: 2px;
+  }
+
+  .hp-card--left {
+    margin-left: clamp(1rem, 5vw, 4rem);
+    margin-right: auto;
+  }
+  .hp-card--right {
+    margin-left: auto;
+    margin-right: clamp(1rem, 5vw, 4rem);
+  }
+  .hp-card--center {
+    margin: 0 auto;
     text-align: center;
-    color: #fff;
-    padding: 0 clamp(1.25rem, 5vw, 4rem);
-    max-width: 860px;
   }
-  .hp-hero__eyebrow {
+  .hp-card--wide {
+    width: min(52rem, calc(100% - 2rem));
+    margin: 0 auto;
+  }
+
+  /* Hero card special sizing */
+  .hp-card--hero {
+    width: min(52rem, calc(100% - 2rem));
+    background: rgba(10, 14, 19, 0.42);
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.3);
+  }
+
+  .hp-card__inner {
+    display: grid;
+    gap: 1rem;
+    padding: clamp(1.2rem, 3vw, 1.8rem);
+  }
+
+  /* ── CARD TYPOGRAPHY (dark glass = light text) ── */
+  .hp-card__eyebrow {
+    margin: 0;
     font-family: var(--font-tech, 'Archivo', sans-serif);
-    font-size: 0.66rem;
-    font-weight: 700;
-    letter-spacing: 0.24em;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.45);
-    margin: 0 0 1.6rem;
+    color: rgba(200, 208, 220, 0.7);
   }
-  .hp-hero__h1 {
+  .hp-card__eyebrow--dark { color: var(--section-accent, #40C4C4); }
+
+  .hp-card__hero-title {
+    margin: 0;
     font-family: var(--font-display, 'Archivo Black', sans-serif);
-    font-size: clamp(3.2rem, 2rem + 8vw, 9.5rem);
+    font-size: clamp(3.5rem, 2rem + 8vw, 10rem);
     font-weight: 900;
     line-height: 0.88;
     letter-spacing: -0.04em;
     text-transform: uppercase;
-    color: #fff;
-    margin: 0 0 2rem;
+    color: #f4efe8;
   }
-  .hp-hero__sub {
-    font-size: clamp(1rem, 0.88rem + 0.4vw, 1.2rem);
-    line-height: 1.65;
-    color: rgba(255,255,255,0.65);
-    margin: 0 0 2.8rem;
+
+  .hp-card__title {
+    margin: 0;
+    font-family: var(--font-display, 'Archivo Black', sans-serif);
+    font-size: clamp(1.9rem, 1.3rem + 2vw, 3rem);
+    line-height: 0.94;
+    letter-spacing: -0.05em;
+    color: #f4efe8;
   }
-  .hp-hero__ctas {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.85rem;
-    justify-content: center;
-  }
-  .hp-hero__scroll-hint {
-    position: absolute;
-    bottom: 2.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .hp-hero__scroll-label {
+  .hp-card__title--dark { color: #1A1D21; }
+
+  .hp-card__subtitle {
+    margin: 0;
     font-family: var(--font-tech, 'Archivo', sans-serif);
-    font-size: 0.58rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.3);
-  }
-  .hp-hero__scroll-line {
-    width: 1px;
-    height: 40px;
-    background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
-    animation: hp-scroll-pulse 2.4s ease-in-out infinite;
-  }
-  @keyframes hp-scroll-pulse {
-    0%, 100% { opacity: 0.4; transform: scaleY(1); }
-    50%       { opacity: 1; transform: scaleY(1.15); }
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    color: #f4efe8;
   }
 
-  /* ── BUTTONS ── */
-  .hp-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.85rem 1.75rem;
-    font-family: var(--font-tech, 'Archivo', sans-serif);
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 2px;
-    border: 2px solid transparent;
-    cursor: pointer;
-    background: none;
-    line-height: 1;
-    white-space: nowrap;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease,
-                color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+  .hp-card__copy {
+    margin: 0;
+    font-family: var(--font-body, 'Instrument Sans', sans-serif);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: #c8d0dc;
   }
-  .hp-btn:hover { transform: translateY(-2px); }
-  .hp-btn:active { transform: translateY(0); }
+  .hp-card__copy--dark { color: #4A5568; }
+  .hp-card__copy--dark strong { color: #1A1D21; font-weight: 700; }
 
-  .hp-btn--primary {
-    background: var(--color-teal-primary, #40C4C4);
-    color: #0F1112;
-    border-color: var(--color-teal-primary, #40C4C4);
-    box-shadow: 0 6px 24px rgba(64,196,196,0.35);
-  }
-  .hp-btn--primary:hover { background: #53D3D3; box-shadow: 0 10px 32px rgba(64,196,196,0.45); }
-
-  .hp-btn--teal {
-    background: var(--color-teal-primary, #40C4C4);
-    color: #0F1112;
-    border-color: var(--color-teal-primary, #40C4C4);
-  }
-  .hp-btn--teal:hover { background: #53D3D3; }
-
-  .hp-btn--magenta {
-    background: var(--color-magenta-primary, #E84A8A);
-    color: #fff;
-    border-color: var(--color-magenta-primary, #E84A8A);
-    box-shadow: 0 6px 20px rgba(232,74,138,0.3);
-  }
-  .hp-btn--magenta:hover { background: #F05A98; box-shadow: 0 10px 28px rgba(232,74,138,0.42); }
-
-  .hp-btn--outline-light {
-    background: transparent;
-    color: #fff;
-    border-color: rgba(255,255,255,0.45);
-  }
-  .hp-btn--outline-light:hover { border-color: #fff; background: rgba(255,255,255,0.07); }
-
-  .hp-btn--ghost-light {
-    background: transparent;
-    color: rgba(255,255,255,0.55);
-    border-color: transparent;
-  }
-  .hp-btn--ghost-light:hover { color: #fff; }
-
-  .hp-btn--outline-dark {
-    background: transparent;
-    color: #1A1D21;
-    border-color: rgba(26,29,33,0.45);
-  }
-  .hp-btn--outline-dark:hover { background: #1A1D21; color: #fff; border-color: #1A1D21; }
-
-  .hp-btn--ghost {
-    background: transparent;
-    color: #6B7280;
-    border-color: transparent;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-  .hp-btn--ghost:hover { color: var(--color-teal-primary, #40C4C4); }
-
-  .hp-btn--kofi {
-    background: #FF5E5B;
-    color: #fff;
-    border-color: #FF5E5B;
-  }
-  .hp-btn--kofi:hover { background: #FF7470; }
-
-  .hp-btn--full { width: 100%; justify-content: center; }
-  .hp-btn--sm   { padding: 0.6rem 1.2rem; font-size: 0.68rem; }
-
-  /* ── SPLIT SECTIONS ── */
-  .hp-split {
+  .hp-card__highlights {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    min-height: clamp(500px, 75vh, 720px);
+    gap: 0.35rem 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
-  .hp-split--flip > :first-child { order: 2; }
-  .hp-split--flip > :last-child  { order: 1; }
-
-  .hp-split--light  { background: #F6F7FA; }
-  .hp-split--story  { background: #F0FAF9; } /* very subtle teal tint for the personal story */
-  .hp-split--warm   { background: #FAF8F5; } /* subtle warm for old girl */
-  .hp-split--dark   { background: #0F1112; }
-
-  .hp-split__img {
-    position: relative;
-    overflow: hidden;
-  }
-  .hp-split__img img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.8s ease;
-  }
-  .hp-split:hover .hp-split__img img { transform: scale(1.04); }
-
-  .hp-split__content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1.5rem;
-    padding: clamp(3rem, 6vw, 6rem) clamp(2.5rem, 5vw, 5rem);
-  }
-
-  /* ── TYPOGRAPHY ── */
-  .hp-eyebrow {
-    font-family: var(--font-tech, 'Archivo', sans-serif);
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--color-teal-primary, #40C4C4);
+  .hp-card__highlights li {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    margin: 0;
-  }
-  .hp-eyebrow::before {
-    content: '';
-    width: 2rem;
-    height: 2px;
-    background: currentColor;
-    flex-shrink: 0;
-    display: inline-block;
-  }
-  .hp-eyebrow--teal  { color: var(--color-teal-primary, #40C4C4); }
-  .hp-eyebrow--dim   { color: rgba(255,255,255,0.35); }
-  .hp-eyebrow--center {
-    justify-content: center;
-  }
-  .hp-eyebrow--center::before { display: none; }
-
-  .hp-h2 {
-    font-family: var(--font-display, 'Archivo Black', sans-serif);
-    font-size: clamp(2rem, 1.4rem + 3vw, 4rem);
-    font-weight: 900;
-    line-height: 0.93;
-    letter-spacing: -0.03em;
-    text-transform: uppercase;
-    color: #1A1D21;
-    margin: 0;
-  }
-  .hp-h2--light { color: #F6F7FA; }
-
-  .hp-text {
-    font-size: clamp(0.9rem, 0.82rem + 0.3vw, 1.05rem);
-    line-height: 1.78;
-    color: #4A5568;
-    margin: 0;
-  }
-  .hp-text--muted    { color: rgba(246, 247, 250, 0.6); }
-  .hp-text--centered { text-align: center; max-width: 52ch; margin: 0 auto; }
-  .hp-text em        { font-style: italic; }
-  .hp-text strong    { color: #1A1D21; font-weight: 700; }
-
-  .hp-callout {
+    gap: 0.45rem;
     font-family: var(--font-tech, 'Archivo', sans-serif);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin: 0;
+    font-size: 0.66rem;
+    letter-spacing: 0.02em;
+    color: #c8d0dc;
   }
-  .hp-callout--magenta { color: var(--color-magenta-primary, #E84A8A); }
+  .hp-card__highlights li::before {
+    content: '';
+    flex-shrink: 0;
+    width: 5px;
+    height: 5px;
+    background: var(--section-accent, #40C4C4);
+  }
 
-  .hp-chips {
+  .hp-card__tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.45rem;
   }
-  .hp-chips span {
-    padding: 0.28rem 0.75rem;
-    background: rgba(64,196,196,0.09);
-    border: 1px solid rgba(64,196,196,0.28);
+  .hp-card__tag {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.95rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #f4efe8;
+    font-family: var(--font-tech, 'Archivo', sans-serif);
+    font-size: 0.66rem;
+    letter-spacing: 0.04em;
+  }
+  .hp-card__tag--dark {
+    background: rgba(0, 0, 0, 0.06);
+    border-color: rgba(0, 0, 0, 0.12);
+    color: #4A5568;
+  }
+
+  /* ── CTAs ── */
+  .hp-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.9rem;
+    width: fit-content;
+    min-height: 3rem;
+    padding: 0.78rem 1.05rem;
     border-radius: 2px;
     font-family: var(--font-tech, 'Archivo', sans-serif);
-    font-size: 0.65rem;
+    font-size: 0.74rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--color-teal-primary, #40C4C4);
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 200ms ease, background 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+    line-height: 1;
+    white-space: nowrap;
   }
-  .hp-chips--muted span {
-    background: rgba(0,0,0,0.04);
-    border-color: rgba(0,0,0,0.12);
-    color: #6B7280;
+  .hp-cta:hover { transform: translateY(-1px); }
+
+  .hp-cta--accent {
+    border: 1px solid var(--section-accent, #40C4C4);
+    background: rgba(255, 255, 255, 0.06);
+    color: #f4efe8;
+  }
+  .hp-cta--accent:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: color-mix(in srgb, var(--section-accent) 80%, white 20%);
+  }
+
+  .hp-cta--glass {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.06);
+    color: #f4efe8;
+  }
+  .hp-cta--glass:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .hp-cta--ghost {
+    border: 1px solid transparent;
+    background: transparent;
+    color: rgba(244, 239, 232, 0.55);
+  }
+  .hp-cta--ghost:hover { color: #f4efe8; }
+
+  .hp-cta--dark {
+    border: 2px solid #1A1D21;
+    background: transparent;
+    color: #1A1D21;
+  }
+  .hp-cta--dark:hover { background: #1A1D21; color: #F6F7FA; }
+
+  .hp-cta--magenta {
+    border: 1px solid var(--color-magenta-primary, #E84A8A);
+    background: rgba(232, 74, 138, 0.12);
+    color: #f4efe8;
+  }
+  .hp-cta--magenta:hover { background: rgba(232, 74, 138, 0.24); }
+
+  .hp-cta--kofi {
+    border: 1px solid #FF5E5B;
+    background: rgba(255, 94, 91, 0.12);
+    color: #f4efe8;
+  }
+  .hp-cta--kofi:hover { background: rgba(255, 94, 91, 0.24); }
+
+  .hp-cta--full { width: 100%; justify-content: center; }
+
+  .hp-card__cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    justify-content: center;
   }
 
   /* ── GALLERY STRIP ── */
   .hp-gallery {
-    background: #0F1112;
+    background: #0a0e13;
     padding-block: clamp(4rem, 7vw, 7rem);
     overflow: hidden;
   }
@@ -927,152 +726,141 @@ import '../styles/global.css';
     display: flex;
     gap: 0.4rem;
     overflow-x: auto;
-    padding-inline: clamp(1.25rem, 4vw, 4rem);
+    padding-inline: clamp(1rem, 3vw, 3rem);
     scrollbar-width: none;
-    margin-bottom: 3.5rem;
+    margin-bottom: 3rem;
     -webkit-overflow-scrolling: touch;
   }
   .hp-gallery__strip::-webkit-scrollbar { display: none; }
   .hp-gallery__strip img {
-    height: clamp(180px, 28vw, 320px);
+    height: clamp(160px, 26vw, 300px);
     width: auto;
     flex-shrink: 0;
     object-fit: cover;
     border-radius: 2px;
-    filter: saturate(0.8) brightness(0.9);
-    transition: filter 0.4s ease, transform 0.4s ease;
+    filter: saturate(0.8) brightness(0.85);
+    transition: filter 0.4s ease;
   }
   .hp-gallery__strip img:hover {
     filter: saturate(1.1) brightness(1);
-    transform: scale(1.02);
-    z-index: 1;
   }
-  .hp-gallery__cta {
+  .hp-gallery__bottom {
     text-align: center;
-    padding-inline: clamp(1.25rem, 4vw, 4rem);
+    padding-inline: clamp(1rem, 3vw, 3rem);
     display: grid;
-    gap: 2rem;
+    gap: 1.5rem;
     justify-items: center;
   }
   .hp-gallery__headline {
     font-family: var(--font-display, 'Archivo Black', sans-serif);
-    font-size: clamp(1.2rem, 0.9rem + 1.5vw, 2.2rem);
+    font-size: clamp(1.1rem, 0.8rem + 1.5vw, 2rem);
     font-weight: 900;
-    line-height: 1.2;
+    line-height: 1.15;
     letter-spacing: -0.02em;
-    color: rgba(255,255,255,0.68);
+    color: rgba(244, 239, 232, 0.55);
     margin: 0;
   }
   .hp-gallery__btns {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 0.75rem;
     justify-content: center;
   }
 
-  /* ── SPONSOR SECTION ── */
-  .hp-sponsor {
-    background: #F6F7FA;
-    padding-block: clamp(5rem, 9vw, 9rem);
-    padding-inline: clamp(1.25rem, 4vw, 4rem);
+  /* ── SPONSOR LAYOUT ── */
+  .hp-section--sponsor {
+    min-height: auto;
+    padding-block: clamp(5rem, 8vw, 8rem);
   }
-  .hp-sponsor__header {
-    text-align: center;
-    max-width: 580px;
-    margin: 0 auto clamp(3rem, 5vw, 5rem);
+  .hp-sponsor-layout {
+    position: relative;
+    z-index: 4;
+    width: min(64rem, calc(100% - 2rem));
+    margin: 0 auto;
     display: grid;
-    gap: 1.25rem;
-    justify-items: center;
+    gap: 2rem;
   }
-  .hp-sponsor__header .hp-h2 { text-align: center; }
 
   .hp-tiers {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    max-width: 980px;
-    margin: 0 auto;
+    gap: 1rem;
   }
-  .hp-tier {
+
+  .hp-tier--glass {
     position: relative;
-    background: #fff;
-    border: 2px solid rgba(0,0,0,0.07);
+    background: rgba(10, 14, 19, 0.58);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 2px;
-    padding: 2.25rem 2rem;
+    padding: clamp(1.2rem, 2.5vw, 2rem);
     display: grid;
-    gap: 1.75rem;
+    gap: 1.2rem;
     align-content: start;
-    transition: box-shadow 0.3s, border-color 0.3s;
-  }
-  .hp-tier:hover {
-    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-    border-color: rgba(0,0,0,0.12);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
   .hp-tier--featured {
-    border-color: var(--color-teal-primary, #40C4C4);
-    box-shadow: 0 8px 32px rgba(64,196,196,0.14);
+    border-color: var(--section-accent, #E84A8A);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   }
-  .hp-tier--featured:hover {
-    box-shadow: 0 14px 48px rgba(64,196,196,0.22);
-    border-color: var(--color-teal-primary, #40C4C4);
-  }
+
   .hp-tier__badge {
     position: absolute;
     top: 0;
-    right: 1.5rem;
+    right: 1.2rem;
     transform: translateY(-50%);
-    background: var(--color-teal-primary, #40C4C4);
-    color: #0F1112;
+    background: var(--section-accent, #E84A8A);
+    color: #0a0e13;
     font-family: var(--font-tech, 'Archivo', sans-serif);
-    font-size: 0.6rem;
+    font-size: 0.58rem;
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    padding: 0.25rem 0.7rem;
+    padding: 0.2rem 0.6rem;
     border-radius: 2px;
   }
-  .hp-tier__header {
-    display: grid;
-    gap: 0.3rem;
-  }
+
   .hp-tier__price {
     font-family: var(--font-display, 'Archivo Black', sans-serif);
-    font-size: clamp(1.8rem, 1.4rem + 1.5vw, 2.8rem);
+    font-size: clamp(1.8rem, 1.4rem + 1.5vw, 2.6rem);
     font-weight: 900;
-    color: #1A1D21;
+    color: #f4efe8;
     line-height: 1;
     letter-spacing: -0.03em;
   }
+
   .hp-tier__name {
     font-family: var(--font-tech, 'Archivo', sans-serif);
-    font-size: 0.64rem;
+    font-size: 0.62rem;
     font-weight: 700;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #9CA3AF;
+    color: rgba(200, 208, 220, 0.5);
+    margin-top: -0.6rem;
   }
+
   .hp-tier__list {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
-    gap: 0.65rem;
+    gap: 0.5rem;
   }
   .hp-tier__list li {
-    font-size: 0.88rem;
-    line-height: 1.5;
-    color: #4A5568;
-    padding-left: 1.3rem;
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: #c8d0dc;
+    padding-left: 1.2rem;
     position: relative;
   }
   .hp-tier__list li::before {
     content: '→';
     position: absolute;
     left: 0;
-    color: var(--color-teal-primary, #40C4C4);
+    color: var(--section-accent, #E84A8A);
     font-weight: 900;
-    font-size: 0.8rem;
-    line-height: 1.5;
+    font-size: 0.78rem;
   }
 
   /* ── DIALOGS ── */
@@ -1080,124 +868,122 @@ import '../styles/global.css';
     position: fixed;
     inset: 0;
     width: min(100% - 2rem, 520px);
-    max-height: min(calc(100% - 4rem), 640px);
+    max-height: min(calc(100% - 4rem), 600px);
     margin: auto;
-    border: 1px solid rgba(0,0,0,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 2px;
-    padding: 3rem;
-    background: #F6F7FA;
-    box-shadow: 0 40px 100px rgba(0,0,0,0.22);
+    padding: clamp(1.5rem, 4vw, 3rem);
+    background: rgba(10, 14, 19, 0.88);
+    backdrop-filter: blur(28px) saturate(160%);
+    -webkit-backdrop-filter: blur(28px) saturate(160%);
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
     display: grid;
-    gap: 1.25rem;
+    gap: 1rem;
     align-content: start;
     overflow-y: auto;
+    color: #f4efe8;
   }
   .hp-dialog::backdrop {
-    background: rgba(10,14,19,0.72);
+    background: rgba(6, 8, 16, 0.75);
     backdrop-filter: blur(6px);
   }
   .hp-dialog__close {
     position: absolute;
-    top: 1.25rem;
-    right: 1.25rem;
+    top: 1rem;
+    right: 1rem;
     background: none;
     border: none;
     cursor: pointer;
     font-size: 1.1rem;
-    color: #9CA3AF;
+    color: rgba(200, 208, 220, 0.5);
     padding: 0.4rem;
     line-height: 1;
     transition: color 0.2s;
   }
-  .hp-dialog__close:hover { color: #1A1D21; }
+  .hp-dialog__close:hover { color: #f4efe8; }
   .hp-dialog__title {
     font-family: var(--font-display, 'Archivo Black', sans-serif);
     font-size: clamp(1.4rem, 1rem + 1.5vw, 2rem);
     font-weight: 900;
-    color: #1A1D21;
+    color: #f4efe8;
     margin: 0;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.04em;
     text-transform: uppercase;
-    line-height: 1.05;
+    line-height: 0.94;
   }
-  .hp-dialog p {
-    font-size: 0.93rem;
-    line-height: 1.75;
-    color: #4A5568;
+  .hp-dialog__copy {
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: #c8d0dc;
     margin: 0;
   }
 
   /* ── FOOTER ── */
   .hp-footer {
-    background: #0F1112;
-    padding-block: clamp(3.5rem, 6vw, 5rem);
-    padding-inline: clamp(1.25rem, 4vw, 4rem);
-  }
-  .hp-footer__inner {
-    max-width: 1400px;
-    margin: 0 auto;
+    background: #060810;
+    padding: clamp(2.5rem, 5vw, 4rem) clamp(1rem, 4vw, 3rem);
     display: grid;
-    gap: 2rem;
+    gap: 1.5rem;
   }
-  .hp-footer__logo { opacity: 0.55; transition: opacity 0.2s; }
-  .hp-footer__logo:hover { opacity: 0.9; }
   .hp-footer__nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem 2rem;
+    gap: 0.6rem 1.8rem;
+    justify-content: center;
   }
   .hp-footer__nav a {
     font-family: var(--font-tech, 'Archivo', sans-serif);
-    font-size: 0.68rem;
+    font-size: 0.66rem;
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.38);
+    color: rgba(200, 208, 220, 0.3);
     text-decoration: none;
     transition: color 0.2s;
   }
   .hp-footer__nav a:hover { color: var(--color-teal-primary, #40C4C4); }
   .hp-footer__copy {
-    font-size: 0.75rem;
-    color: rgba(255,255,255,0.2);
+    font-size: 0.72rem;
+    color: rgba(200, 208, 220, 0.15);
     margin: 0;
-    line-height: 1.6;
+    text-align: center;
   }
 
   /* ══════════════════════════════════════════════
      RESPONSIVE
   ═════════════════════════════════════════════════ */
-  @media (max-width: 900px) {
-    .hp-split {
-      grid-template-columns: 1fr;
-      min-height: auto;
+  @media (max-width: 768px) {
+    .hp-card--left,
+    .hp-card--right {
+      margin-left: auto;
+      margin-right: auto;
     }
-    /* Always: image on top, content below on mobile */
-    .hp-split > .hp-split__img  { order: 1 !important; height: clamp(260px, 45vw, 380px); }
-    .hp-split > .hp-split__content { order: 2 !important; }
-    .hp-split__img img { position: relative; height: 100%; width: 100%; }
+
+    .hp-card__highlights {
+      grid-template-columns: 1fr;
+    }
 
     .hp-tiers {
       grid-template-columns: 1fr;
-      max-width: 480px;
+      max-width: 24rem;
+      margin: 0 auto;
     }
 
-    .hp-nav__links { display: none; }
-    .hp-nav__menu-btn { display: flex; }
+    .hp-card__hero-title {
+      font-size: clamp(2.8rem, 2rem + 6vw, 5rem);
+    }
   }
 
-  @media (max-width: 600px) {
-    .hp-hero__ctas { flex-direction: column; align-items: center; }
-    .hp-hero__ctas .hp-btn { width: 100%; max-width: 320px; justify-content: center; }
-    .hp-split__content { padding: 2.5rem 1.5rem; }
-    .hp-gallery__btns { flex-direction: column; align-items: center; }
-    .hp-dialog { padding: 2rem 1.5rem; }
+  @media (max-width: 480px) {
+    .hp-card__cta-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .hp-card__cta-row .hp-cta { justify-content: center; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hp-hero__bg { animation: none; }
-    .hp-hero__scroll-line { animation: none; }
-    .hp-split:hover .hp-split__img img { transform: none; }
-    .hp-gallery__strip img:hover { transform: none; }
+    .hp-section__grain { animation: none; }
+    .hp-gallery__strip img:hover { filter: saturate(0.8) brightness(0.85); }
   }
 </style>

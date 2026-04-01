@@ -16,7 +16,7 @@ const FORM_ENDPOINT = 'https://formspree.io/f/mldlydbl';
 const featuredProducts = CATALOG.slice(0, 8);
 
 const heroImages = [
-  { src: '/media/generated/hero-01.jpg', position: 'center' },
+  { src: '/media/real/open-ocean-01.jpg', position: 'center 40%' },
   { src: '/media/real/sunrise-offshore.jpg', position: 'center' },
   { src: '/media/real/sunset-sail-01.jpg', position: 'center' },
 ];
@@ -96,6 +96,7 @@ const softwareProjects = [
     name: 'Co-op Shop Catalog',
     stack: ['Astro', 'Catalog data', 'Cloudflare'],
     note: 'Product catalog, pricing ranges, and direct pathways from discovery to purchase.',
+    href: '/shop',
   },
   {
     name: 'Campaign & Race Logs',
@@ -169,10 +170,15 @@ const initialPartnerPrice = formatSponsorPrice(
       <div class="hp-section__shell hp-section__shell--center">
         <article class="hp-card hp-card--hero">
           <div class="hp-card__inner">
-            <h1 class="hp-card__hero-title">3D3D</h1>
-            <p class="hp-card__subtitle">Custom fabrication, software, and community infrastructure.</p>
+            <p class="hp-card__eyebrow">Fredericton, NB · Canada · Deployed Worldwide</p>
+            <h1 class="hp-card__hero-title">FOR THE ONES THAT GIVE A DAMN.</h1>
+            <p class="hp-card__copy hp-card__copy--lead">
+              Custom fabrication. Software. Community. Built from the ground up with grit, field
+              hours, and a willingness to make the weird jobs work.
+            </p>
             <div class="hp-card__cta-row">
-              <button type="button" class="hp-cta hp-cta--accent" data-dialog-open="dlg-quote">Get an Estimate</button>
+              <button type="button" class="hp-cta hp-cta--accent" data-dialog-open="dlg-quote">Open the Quote Desk</button>
+              <button type="button" class="hp-cta hp-cta--glass" data-dialog-open="dlg-events">Hire for Events</button>
               <button type="button" class="hp-cta hp-cta--ghost" data-dialog-open="dlg-network">Join the Network</button>
             </div>
             <div class="hp-card__stats">
@@ -195,7 +201,6 @@ const initialPartnerPrice = formatSponsorPrice(
     </section>
 
     <section
-      aria-label="Custom Fabrication Services"
       id="fabrication"
       data-observe-section
       class="hp-section"
@@ -245,7 +250,6 @@ const initialPartnerPrice = formatSponsorPrice(
     </section>
 
     <section
-      aria-label="The Story and Mission"
       id="story"
       data-observe-section
       class="hp-section"
@@ -285,7 +289,6 @@ const initialPartnerPrice = formatSponsorPrice(
     </section>
 
     <section
-      aria-label="Events and Live Deployment"
       id="events"
       data-observe-section
       class="hp-section"
@@ -329,7 +332,6 @@ const initialPartnerPrice = formatSponsorPrice(
     </section>
 
     <section
-      aria-label="Software and AI Projects"
       id="software"
       data-observe-section
       class="hp-section"
@@ -373,7 +375,6 @@ const initialPartnerPrice = formatSponsorPrice(
     </section>
 
     <section
-      aria-label="The 3D3D Cooperative Network"
       id="network"
       data-observe-section
       class="hp-section"
@@ -414,7 +415,6 @@ const initialPartnerPrice = formatSponsorPrice(
     </section>
 
     <section
-      aria-label="The Old Girl Community Printer"
       id="oldgirl"
       data-observe-section
       class="hp-section"
@@ -461,8 +461,9 @@ const initialPartnerPrice = formatSponsorPrice(
       </div>
     </section>
 
+    
+
     <section
-      aria-label="Sponsorship Packages"
       id="sponsor"
       data-observe-section
       class="hp-section hp-section--sponsor"
@@ -881,7 +882,7 @@ const initialPartnerPrice = formatSponsorPrice(
 
   
 
-
+  
 
   
     <section
@@ -1242,8 +1243,6 @@ const initialPartnerPrice = formatSponsorPrice(
   </script>
 </body>
 </html>
-
-</style>
 
 <style>
   :root {

@@ -1,0 +1,515 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageNextActions from '../components/PageNextActions.astro';
+---
+
+<BaseLayout title="The Maker Network | 3D3D" description="Claim your node. Stop bidding for jobs and keep 75% of the revenue." activePath="/network">
+
+  <section class="net-page">
+    <div class="net-shell">
+      <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'The Network'}]} />
+
+      <div class="mb-4 rounded-xl overflow-hidden shadow-sm aspect-video relative">
+        <img src="/media/generated/network-01.jpg" alt="Dark modern garage cluster of glowing 3D printers and a network dashboard laptop" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a0e13] via-transparent to-transparent"></div>
+      </div>
+
+      <p class="net-eyebrow mt-4">Node Operations</p>
+      <h1 class="net-title">Claim Your Node</h1>
+      <p class="net-intro">
+        Stop fighting for gig-economy scraps and bidding under cost. <strong>We supply the enterprise contracts, we handle the global SEO, and we shield the client relations.</strong> You run the hardware. You keep 75% of the gross.
+      </p>
+
+      <div class="mt-12 surface-panel net-moat">
+        <h2 class="net-section-title">The Platform Shield</h2>
+        <p class="net-section-copy mb-6">Why give up 25%? Because customer acquisition is expensive and client management is a full-time job. We act as your commercial moat.</p>
+        
+        <div class="net-moat-grid">
+          <div class="net-moat-col">
+            <h3 class="net-moat-heading" style="color: var(--color-teal-primary);">The Platform Handles</h3>
+            <ul class="net-checklist">
+              <li>Global & Local Programmatic SEO</li>
+              <li>Enterprise CAD Quoting Engine</li>
+              <li>Invoicing, Billing & Tax Collection</li>
+              <li>Client Complaints & Revisions</li>
+            </ul>
+          </div>
+          <div class="net-moat-col">
+            <h3 class="net-moat-heading" style="color: var(--color-orange-primary);">The Operator Handles</h3>
+            <ul class="net-checklist">
+              <li>Machine Calibration & G-Code</li>
+              <li>Material Loading & Curing</li>
+              <li>Print Validation & QA</li>
+              <li>Boxing & Dispatch</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 surface-panel net-filter">
+        <h2 class="net-section-title" style="color: var(--color-magenta-primary);">Strict Hardware Minimums</h2>
+        <p class="net-section-copy">We do not accept standard PLA/PETG hobbyists into the commercial network. Node operators must prove capability in marine and industrial polymers to handle our contract pipeline.</p>
+        
+        <div class="mt-4 net-spec-grid">
+          <div class="net-spec-card">
+            <strong>Approved Materials</strong>
+            <span>ASA, PA11-CF, PA12-CF, PP-GF</span>
+          </div>
+          <div class="net-spec-card">
+            <strong>Runtime Mandate</strong>
+            <span>90%+ sustained uptime capability</span>
+          </div>
+          <div class="net-spec-card">
+            <strong>Compliance</strong>
+            <span>Rigorous caliper tolerance QA</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="nodeApplication" class="mt-12 surface-panel net-application">
+        <div class="net-app-header">
+          <h2 class="net-section-title">Operator Franchise Application</h2>
+          <div class="net-app-progress">
+            <span class="net-step active" data-step-indicator="1">1. Hardware</span>
+            <span class="net-step" data-step-indicator="2">2. Capability</span>
+            <span class="net-step" data-step-indicator="3">3. Claim Asset</span>
+          </div>
+        </div>
+
+        <form id="frmNetwork" class="net-app-form" action="https://formspree.io/f/mldlydbl" method="POST" data-analytics-submit="node_application">
+          
+          <div class="net-app-step active" data-step="1">
+            <h3 class="net-step-title">What is your primary fabrication stack?</h3>
+            <label class="net-field">
+              <span>List your active hardware (e.g., Bambu X1C, Prusa MK4, Voron 2.4, CNC)</span>
+              <textarea name="hardware" rows="3" required placeholder="Machine list, build volumes, and nozzle capabilities..."></textarea>
+            </label>
+            <div class="net-app-actions">
+              <button type="button" class="net-btn net-btn--accent" data-next="2">Continue →</button>
+            </div>
+          </div>
+
+          <div class="net-app-step" data-step="2" style="display: none;">
+            <h3 class="net-step-title">Verify Engineering Competence</h3>
+            <label class="net-field">
+              <span>Do you have documented experience printing PA-CF or ASA at scale?</span>
+              <textarea name="capability" rows="3" required placeholder="Describe your enclosure setup, filament drying protocols, and standard tolerances..."></textarea>
+            </label>
+            <div class="net-app-actions">
+              <button type="button" class="net-btn net-btn--glass" data-prev="1">← Back</button>
+              <button type="button" class="net-btn net-btn--accent" data-next="3">Continue →</button>
+            </div>
+          </div>
+
+          <div class="net-app-step" data-step="3" style="display: none;">
+            <h3 class="net-step-title">Claim Your Real Estate</h3>
+            <p class="net-step-desc">Secure your geographical or vanity node. If accepted, this subdomain routes directly to your dispatch dashboard and public port.</p>
+            
+            <div class="net-app-grid">
+              <label class="net-field">
+                <span>Legal / Operator Name</span>
+                <input type="text" name="name" required placeholder="Jane Doe" />
+              </label>
+              <label class="net-field">
+                <span>Contact Email</span>
+                <input type="email" name="email" required placeholder="jane@example.com" />
+              </label>
+            </div>
+
+            <label class="net-field mb-6">
+              <span>Requested Node Subdomain</span>
+              <div class="net-subdomain-input">
+                <input type="text" name="subdomain" required placeholder="sydney" pattern="[a-z0-9-]+" title="Lowercase letters, numbers, and hyphens only" />
+                <span class="net-subdomain-suffix">.3d3d.ca</span>
+              </div>
+            </label>
+
+            <div class="net-app-actions">
+              <button type="button" class="net-btn net-btn--glass" data-prev="2">← Back</button>
+              <button type="submit" class="net-btn net-btn--accent">Submit Franchise Application</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+      <PageNextActions actions={[
+        {label: 'Read the Legal Framework', href: '/privacy', description: 'Review the base operator contracts.', accent: 'teal'},
+        {label: 'Contact the Core', href: '/contact', description: 'Bypass the application for strategic mergers.', accent: 'orange'},
+      ]} />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .net-page {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    background: var(--color-surface-primary);
+    color: var(--color-text-primary);
+  }
+
+  .net-shell {
+    width: min(100% - clamp(1.5rem, 4vw, 4rem), 760px);
+    margin: 0 auto;
+    display: grid;
+    gap: 2rem;
+    padding-block: clamp(6rem, 10vw, 10rem);
+  }
+
+  .net-eyebrow {
+    margin: 0;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-orange-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .net-eyebrow::before {
+    content: '';
+    width: 2.75rem;
+    height: 2px;
+    background: var(--color-orange-primary);
+    flex-shrink: 0;
+  }
+
+  .net-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 2rem + 5vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--color-text-primary);
+    text-transform: uppercase;
+  }
+
+  .net-intro {
+    margin: 0;
+    max-width: 40rem;
+    font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem);
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+  }
+
+  .net-intro strong {
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+
+  .net-section-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 1rem + 1.5vw, 2.2rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+  }
+
+  .net-section-copy {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-top: 0.5rem;
+  }
+
+  .surface-panel {
+    background: rgba(15, 18, 22, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+  }
+
+  .net-moat-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  @media (min-width: 640px) {
+    .net-moat-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .net-moat-heading {
+    font-family: var(--font-tech);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .net-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .net-checklist li {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .net-checklist li::before {
+    content: '→';
+    color: var(--color-text-muted);
+  }
+
+  .net-spec-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .net-spec-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .net-spec-card {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 1.2rem;
+    border-radius: 2px;
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .net-spec-card strong {
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-magenta-primary);
+  }
+
+  .net-spec-card span {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+  }
+
+  .net-app-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .net-app-progress {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .net-step {
+    font-family: var(--font-tech);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    transition: color 0.3s ease;
+  }
+
+  .net-step.active {
+    color: var(--color-orange-primary);
+  }
+
+  .net-step-title {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-text-primary);
+  }
+
+  .net-step-desc {
+    color: var(--color-text-secondary);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .net-app-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .net-app-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .net-field {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .net-field span {
+    font-family: var(--font-tech);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+
+  .net-field input,
+  .net-field textarea {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 0.8rem 1rem;
+    border-radius: 2px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease;
+  }
+
+  .net-field input:focus,
+  .net-field textarea:focus {
+    outline: none;
+    border-color: var(--color-orange-primary);
+  }
+
+  .net-subdomain-input {
+    display: flex;
+    align-items: stretch;
+  }
+
+  .net-subdomain-input input {
+    flex: 1;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+  }
+
+  .net-subdomain-suffix {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: none;
+    padding: 0 1rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+  }
+
+  .net-app-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .net-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.6rem;
+    font-family: var(--font-tech);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .net-btn--accent {
+    background: var(--color-orange-primary);
+    color: #0F1112;
+    border: 2px solid var(--color-orange-primary);
+  }
+
+  .net-btn--accent:hover {
+    background: transparent;
+    color: var(--color-orange-primary);
+  }
+
+  .net-btn--glass {
+    background: transparent;
+    color: var(--color-text-secondary);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .net-btn--glass:hover {
+    border-color: var(--color-text-primary);
+    color: var(--color-text-primary);
+  }
+</style>
+
+<script>
+  (() => {
+    const form = document.getElementById('frmNetwork');
+    if (!form) return;
+
+    const steps = Array.from(document.querySelectorAll('.net-app-step'));
+    const indicators = Array.from(document.querySelectorAll('.net-step'));
+    const nextBtns = document.querySelectorAll('[data-next]');
+    const prevBtns = document.querySelectorAll('[data-prev]');
+
+    const showStep = (stepNum) => {
+      steps.forEach(step => {
+        if (step.dataset.step === stepNum) {
+          step.style.display = 'block';
+          step.classList.add('active');
+        } else {
+          step.style.display = 'none';
+          step.classList.remove('active');
+        }
+      });
+
+      indicators.forEach(ind => {
+        if (ind.dataset.stepIndicator === stepNum) {
+          ind.classList.add('active');
+        } else {
+          ind.classList.remove('active');
+        }
+      });
+    };
+
+    nextBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        // Basic validation before going next
+        const currentStep = e.target.closest('.net-app-step');
+        const requireds = Array.from(currentStep.querySelectorAll('[required]'));
+        const allValid = requireds.every(el => el.checkValidity());
+        
+        if (allValid) {
+          showStep(btn.dataset.next);
+        } else {
+          // Trigger native browser tooltips for invalid fields
+          form.reportValidity();
+        }
+      });
+    });
+
+    prevBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        showStep(btn.dataset.prev);
+      });
+    });
+  })();
+</script>

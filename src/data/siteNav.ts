@@ -39,7 +39,7 @@ export const SITE_NAV: NavGroup[] = [
     id: 'community',
     label: 'Community',
     items: [
-      { id: 'opportunities', label: 'Join the Network', href: '/opportunities' },
+      { id: 'opportunities', label: 'Join the Network', href: '/network' },
       { id: 'community', label: 'Community', href: '/community' },
       { id: 'sponsors', label: 'Sponsors', href: '/sponsors' },
       { id: 'oldgirl', label: 'Old Girl', href: 'https://oldgirl.3d3d.ca', external: true },

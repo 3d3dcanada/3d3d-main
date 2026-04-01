@@ -69,22 +69,6 @@ const sponsorImages = [
   { src: '/media/real/golden-hour-03.jpg', position: 'center' },
 ];
 
-const materialsImages = [
-  { src: '/media/workshop/printer-action-cf.jpg', position: 'center' },
-  { src: '/media/workshop/printer-bed-benchy.jpg', position: 'center' }
-];
-
-const mediaImages = [
-  { src: '/media/real/fleet-start-press.jpg', position: 'center' },
-  { src: '/media/real/race-morning-crew.jpg', position: 'center' }
-];
-
-const faqImages = [
-  { src: '/media/workshop/rv-lab-01.jpg', position: 'center' },
-  { src: '/media/real/sunrise-offshore.jpg', position: 'center' }
-];
-
-
 const softwareProjects = [
   {
     name: '3D3D Quote Desk',
@@ -201,6 +185,7 @@ const initialPartnerPrice = formatSponsorPrice(
     </section>
 
     <section
+      aria-label="Custom Fabrication Services"
       id="fabrication"
       data-observe-section
       class="hp-section"
@@ -250,6 +235,7 @@ const initialPartnerPrice = formatSponsorPrice(
     </section>
 
     <section
+      aria-label="The Story and Mission"
       id="story"
       data-observe-section
       class="hp-section"
@@ -289,6 +275,7 @@ const initialPartnerPrice = formatSponsorPrice(
     </section>
 
     <section
+      aria-label="Events and Live Deployment"
       id="events"
       data-observe-section
       class="hp-section"
@@ -332,6 +319,7 @@ const initialPartnerPrice = formatSponsorPrice(
     </section>
 
     <section
+      aria-label="Software and AI Projects"
       id="software"
       data-observe-section
       class="hp-section"
@@ -375,6 +363,7 @@ const initialPartnerPrice = formatSponsorPrice(
     </section>
 
     <section
+      aria-label="The 3D3D Cooperative Network"
       id="network"
       data-observe-section
       class="hp-section"
@@ -415,6 +404,7 @@ const initialPartnerPrice = formatSponsorPrice(
     </section>
 
     <section
+      aria-label="The Old Girl Community Printer"
       id="oldgirl"
       data-observe-section
       class="hp-section"
@@ -464,6 +454,7 @@ const initialPartnerPrice = formatSponsorPrice(
     
 
     <section
+      aria-label="Sponsorship Packages"
       id="sponsor"
       data-observe-section
       class="hp-section hp-section--sponsor"
@@ -520,9 +511,14 @@ const initialPartnerPrice = formatSponsorPrice(
               <li>Hat or t-shirt of their choice</li>
               <li>Ko-fi thank-you post</li>
             </ul>
-            <a href="/sponsors" class="hp-cta hp-cta--accent">
+            <button
+              type="button"
+              class="hp-cta hp-cta--accent hp-cta--full"
+              data-dialog-open="dlg-sponsor"
+              data-sponsor-tier="supporter"
+            >
               Start Supporter
-            </a>
+            </button>
           </article>
 
           <article class="hp-tier hp-tier--featured">
@@ -538,9 +534,14 @@ const initialPartnerPrice = formatSponsorPrice(
               <li>One free software build per year</li>
               <li>Dedicated social feature and sponsor wall logo</li>
             </ul>
-            <a href="/sponsors" class="hp-cta hp-cta--accent">
+            <button
+              type="button"
+              class="hp-cta hp-cta--accent hp-cta--full"
+              data-dialog-open="dlg-sponsor"
+              data-sponsor-tier="partner"
+            >
               Start Partner
-            </a>
+            </button>
           </article>
 
           <article class="hp-tier">
@@ -567,9 +568,14 @@ const initialPartnerPrice = formatSponsorPrice(
               <li>Dedicated support channel</li>
               <li>Custom package negotiated around the work</li>
             </ul>
-            <a href="/sponsors" class="hp-cta hp-cta--accent">
+            <button
+              type="button"
+              class="hp-cta hp-cta--glass hp-cta--full"
+              data-dialog-open="dlg-sponsor"
+              data-sponsor-tier="custom"
+            >
               Let&apos;s Talk
-            </a>
+            </button>
           </article>
         </div>
       </div>
@@ -880,116 +886,75 @@ const initialPartnerPrice = formatSponsorPrice(
     </div>
   </dialog>
 
+  <dialog id="dlg-sponsor" class="hp-dialog">
+    <div class="hp-dialog__shell">
+      <div class="hp-dialog__header">
+        <div>
+          <p class="hp-card__eyebrow">Sponsorships</p>
+          <h3 class="hp-dialog__title" data-sponsor-dialog-title>Start a sponsorship conversation.</h3>
+        </div>
+        <button type="button" class="hp-dialog__close" data-dialog-close aria-label="Close the sponsor drawer">✕</button>
+      </div>
+
+      <form
+        action={FORM_ENDPOINT}
+        method="POST"
+        class="hp-dialog__content hp-form"
+        data-analytics-submit="sponsor_interest_submitted"
+        data-analytics-source="homepage-sponsor-drawer"
+      >
+        <input type="hidden" name="_subject" value="Homepage Sponsorship Interest | 3D3D" />
+        <input type="hidden" name="source" value="homepage-sponsor-drawer" />
+        <input type="hidden" name="selected_tier" data-sponsor-tier-field value="custom" />
+        <input type="hidden" name="selected_currency" data-sponsor-currency-field value={sponsorDefaults.currency} />
+        <input type="hidden" name="selected_billing" data-sponsor-billing-field value={sponsorDefaults.billing} />
+
+        <div class="hp-note-list">
+          <p data-sponsor-dialog-copy>
+            Pick the lane that fits and we will send the matching checkout path once the Stripe links are plugged in.
+          </p>
+        </div>
+
+        <div class="hp-form__grid">
+          <label class="hp-field">
+            <span>Name</span>
+            <input type="text" name="name" required placeholder="Your name" />
+          </label>
+          <label class="hp-field">
+            <span>Email</span>
+            <input type="email" name="email" required placeholder="you@example.com" />
+          </label>
+        </div>
+
+        <div class="hp-form__grid">
+          <label class="hp-field">
+            <span>Company</span>
+            <input type="text" name="company" placeholder="Brand, crew, or organization" />
+          </label>
+          <label class="hp-field">
+            <span>Selected amount</span>
+            <input type="text" name="selected_amount" data-sponsor-amount-field readonly value={initialSupporterPrice} />
+          </label>
+        </div>
+
+        <label class="hp-field">
+          <span>Notes</span>
+          <textarea
+            name="message"
+            rows="4"
+            placeholder="Tell us whether you want event co-branding, software support, production help, or a custom package."
+          ></textarea>
+        </label>
+
+        <div class="hp-dialog__actions">
+          <button type="submit" class="hp-cta hp-cta--accent">Send Sponsorship Request</button>
+          <a href="/contact?subject=sponsorship" class="hp-cta hp-cta--glass">Open the Full Contact Page</a>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
   
-
-  
-
-  
-    <section
-      aria-label="Marine and Industrial Materials"
-      id="materials"
-      data-observe-section
-      class="hp-section"
-      style={`--section-accent: ${ACCENT_HEX.orange};`}
-    >
-      <div class="hp-section__bg" data-rotating-gallery data-rotate-interval="9000">
-        {materialsImages.map((image, index) => (
-          <div
-            class:list={['hp-section__bg-img', index === 0 && 'hp-section__bg-img--active']}
-            style={`background-image: url('${image.src}'); background-position: ${image.position};`}
-          ></div>
-        ))}
-      </div>
-      <div class="hp-section__vignette"></div>
-      <div class="hp-section__scrim"></div>
-      <div class="hp-section__grain"></div>
-
-      <div class="hp-section__shell hp-section__shell--start">
-        <article class="hp-card">
-          <div class="hp-card__inner">
-            <p class="hp-card__eyebrow">Engineering Grade</p>
-            <h2 class="hp-card__title">Materials built for the horizon.</h2>
-            <p class="hp-card__subtitle">PLA belongs in a hobby shop. We build hardware to survive the ocean.</p>
-            <p class="hp-card__copy">
-              ASA above ground, PA11 Carbon Fiber near engines, and PP Glass Fiber for saltwater submersions. Build the part correctly the first time.
-            </p>
-            <div class="hp-card__cta-row hp-card__cta-row--start">
-              <a href="/materials" class="hp-cta hp-cta--accent">View the Material Data</a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section
-      aria-label="Media and Press"
-      id="media"
-      data-observe-section
-      class="hp-section"
-      style={`--section-accent: ${ACCENT_HEX.teal};`}
-    >
-      <div class="hp-section__bg" data-rotating-gallery data-rotate-interval="9000">
-        {mediaImages.map((image, index) => (
-          <div
-            class:list={['hp-section__bg-img', index === 0 && 'hp-section__bg-img--active']}
-            style={`background-image: url('${image.src}'); background-position: ${image.position};`}
-          ></div>
-        ))}
-      </div>
-      <div class="hp-section__vignette"></div>
-      <div class="hp-section__scrim"></div>
-      <div class="hp-section__grain"></div>
-
-      <div class="hp-section__shell hp-section__shell--end">
-        <article class="hp-card">
-          <div class="hp-card__inner">
-            <p class="hp-card__eyebrow">Press Room</p>
-            <h2 class="hp-card__title">The Media Kit.</h2>
-            <p class="hp-card__copy">
-              Access the high-resolution event photography, branding guidelines, and official cooperative press lines for your next editorial piece.
-            </p>
-            <div class="hp-card__cta-row hp-card__cta-row--start">
-              <a href="/media" class="hp-cta hp-cta--accent">Access Press Kits</a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section
-      aria-label="Frequently Asked Questions"
-      id="faq"
-      data-observe-section
-      class="hp-section"
-      style={`--section-accent: ${ACCENT_HEX.magenta};`}
-    >
-      <div class="hp-section__bg" data-rotating-gallery data-rotate-interval="9000">
-        {faqImages.map((image, index) => (
-          <div
-            class:list={['hp-section__bg-img', index === 0 && 'hp-section__bg-img--active']}
-            style={`background-image: url('${image.src}'); background-position: ${image.position};`}
-          ></div>
-        ))}
-      </div>
-      <div class="hp-section__vignette"></div>
-      <div class="hp-section__scrim"></div>
-      <div class="hp-section__grain"></div>
-
-      <div class="hp-section__shell hp-section__shell--start">
-        <article class="hp-card">
-          <div class="hp-card__inner">
-            <p class="hp-card__eyebrow">Logistics</p>
-            <h2 class="hp-card__title">How this actually works.</h2>
-            <p class="hp-card__copy">
-              From global travel tolerances to rush order policies, review the standard protocols that keep the cooperative moving without friction.
-            </p>
-            <div class="hp-card__cta-row hp-card__cta-row--start">
-              <a href="/faq" class="hp-cta hp-cta--accent">Read the F.A.Q.</a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
 
   <SiteFooterFull />
 

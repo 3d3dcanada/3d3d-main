@@ -9,26 +9,31 @@ import PageNextActions from '../components/PageNextActions.astro';
   <section class="opp-page">
     <div class="opp-shell">
       <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'The Network', href: '/opportunities'}, {label: 'Opportunities'}]} />
-      <p class="opp-eyebrow">Opportunities</p>
-      <h1 class="opp-title">Work with 3D3D</h1>
+
+      <div class="mb-4 rounded-xl overflow-hidden shadow-sm aspect-video">
+        <img src="/media/generated/network-01.jpg" alt="Dark modern garage cluster of glowing 3D printers and a network dashboard laptop" class="w-full h-full object-cover" />
+      </div>
+
+      <p class="opp-eyebrow mt-4">Opportunities</p>
+      <h1 class="opp-title">Join the Co-op</h1>
       <p class="opp-intro">
-        3D3D is growing. These are real positions, not volunteer calls. If the work fits, reach out.
+        We are building a distributed manufacturing network. You run the machines, you keep 75% of every order. We handle the clients, the quoting engine, and the dispatch routing.
       </p>
 
-      <div class="opp-listing surface-panel">
-        <div class="opp-listing__header">
-          <h2 class="opp-listing__role">Social Media Intern</h2>
-          <div class="opp-listing__meta">
-            <span>Remote / route-based travel</span>
-            <span>Part-time, paid</span>
+      <div class="mt-8 space-y-6">
+        <div class="opp-listing surface-panel">
+          <div class="opp-listing__header">
+            <h2 class="opp-listing__role">Local Operator Node</h2>
+            <div class="opp-listing__meta">
+              <span>FDM / Resin / CNC</span>
+              <span>Remote</span>
+            </div>
           </div>
+          <div class="opp-listing__body">
+            <p>Operate your own hardware as a certified 3D3D node. Receive routed jobs in your region, get access to bulk material discounts, and get a professional <strong>yourname.3d3d.ca</strong> email and domain routing to sell directly.</p>
+          </div>
+          <a href="/contact?subject=operator-application" class="opp-cta">Apply as Operator →</a>
         </div>
-        <div class="opp-listing__body">
-          <p>Film and produce content: video, photo, social posts. Cover 3D3D operations, builds, and events. Potential travel for events and deployments.</p>
-          <p class="opp-listing__tone">You get what you put into it.</p>
-        </div>
-        <a href="/contact?subject=social-media-intern" class="opp-cta">Apply →</a>
-      </div>
 
       <div class="opp-listing surface-panel">
         <div class="opp-listing__header">

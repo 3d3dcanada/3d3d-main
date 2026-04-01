@@ -2,7 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import SiteSidebar from '../components/SiteSidebar.astro';
-import MobileCTA from '../components/MobileCTA.astro';
+import BottomNav from '../components/BottomNav.astro';
 
 import '../styles/global.css';
 
@@ -24,7 +24,7 @@ interface Props {
   showCooperativeInfo?: boolean;
   noFooter?: boolean;
   noSidebar?: boolean;
-  noMobileCTA?: boolean;
+  noBottomNav?: boolean;
   noFeedbackBlip?: boolean;
   bodyClass?: string;
   navGroups?: NavGroup[];
@@ -44,7 +44,7 @@ const {
   showCooperativeInfo = true,
   noFooter = false,
   noSidebar = false,
-  noMobileCTA = false,
+  noBottomNav = false,
   noFeedbackBlip = false,
   bodyClass = '',
   navGroups = [],
@@ -112,7 +112,7 @@ const finalNavGroups = navGroups.length > 0 ? navGroups : defaultNavGroups;
     )}
   </div>
 
-  {!noMobileCTA && <MobileCTA />}
+  {!noBottomNav && <BottomNav />}
 
   {!noFeedbackBlip && (
     <a

@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageNextActions from '../components/PageNextActions.astro';
+import { RACING_EVENTS, type RacingEvent } from '../data/racingEvents';
+
+export function getStaticPaths() {
+  return RACING_EVENTS.map((event) => ({
+    params: { slug: event.slug },
+    props: { event },
+  }));
+}
+
+interface Props {
+  event: RacingEvent;
+}
+
+const { event } = Astro.props;
+
+const pageTitle = `3D Printed Marine Parts for ${event.name} | 3D3D Offshore Support`;
+const pageDescription = `Emergency 3D printing and custom fabrication for ${event.name} teams. Structural marine hardware in CF-Nylon, ASA, and PC-Blend to survive offshore conditions.`;
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: `Marine 3D Printing Support for ${event.name}`,
+    description: pageDescription,
+    url: `https://3d3d.ca/event-support-${event.slug}`,
+    provider: { '@id': 'https://3d3d.ca/#organization' },
+    areaServed: event.location,
+    serviceType: [
+      'Marine 3D Printing',
+      'Offshore Hardware Prototyping',
+      'Emergency Spare Parts',
+    ]
+  }
+];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  schema={schema}
+  activePath={`/event-support-${event.slug}`}
+>
+  <div class="event-page">
+    <div class="event-hero">
+      <div class="event-shell">
+        <Breadcrumbs items={[
+          { label: 'Home', href: '/' },
+          { label: 'Event Support' },
+          { label: event.name },
+        ]} />
+
+        <p class="event-eyebrow">Offshore Fabrication Support</p>
+        <h1 class="event-title">
+          3D Printing for the {event.name}
+        </h1>
+        <p class="event-intro">{event.description}</p>
+        
+        <div class="event-details">
+          <div class="event-stat">
+            <span class="event-stat__label">Location</span>
+            <span class="event-stat__value">{event.location}</span>
+          </div>
+          <div class="event-stat">
+            <span class="event-stat__label">Timing</span>
+            <span class="event-stat__value">{event.month}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="event-section">
+      <div class="event-shell">
+        <h2 class="event-h2">Hardware capabilities for offshore teams</h2>
+        <p class="event-body">
+          We do not print in hobby-grade plastics. When you are outfitting for {event.name}, you need parts that will survive UV, salt, and impact. We run ASA for permanent above-deck exposure, CF-Nylon for structural loaded fittings, and PC-Blend for massive impact resistance.
+        </p>
+
+        <ul class="event-hardware-list">
+          {event.hardwareNeeds.map(need => (
+            <li>{need}</li>
+          ))}
+          <li>Halyard diverters and custom chafe guards</li>
+          <li>Instrument cowlings</li>
+        </ul>
+
+        <PageNextActions
+          heading={`Request Support for ${event.name}`}
+          actions={[
+            { label: 'Upload CAD for Quote', href: '/quote', description: 'Immediate pricing and structural review.', accent: 'orange' },
+            { label: 'Contact Us', href: '/contact', description: 'Discuss complex reverse engineering.', accent: 'teal' }
+          ]}
+        />
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .event-page { --page-bg: #F6F7FA; background: var(--page-bg); min-height: 100vh;}
+  .event-shell { width: min(100% - clamp(1.5rem, 4vw, 4rem), 900px); margin: 0 auto; }
+  
+  .event-hero { background: #111214; padding: 4rem 0; color: #F6F7FA; }
+  .event-hero :global(.breadcrumbs a) { color: rgba(246, 247, 250, 0.78); }
+  .event-hero :global(.breadcrumbs span[aria-current]) { color: rgba(246, 247, 250, 0.9); }
+  .event-hero :global(.breadcrumbs__sep) { color: rgba(246, 247, 250, 0.78); }
+
+  .event-eyebrow { font-family: var(--font-tech); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-orange-primary); display: flex; align-items: center; gap: 0.8rem; margin:0; }
+  .event-eyebrow::before { content: ''; width: 2rem; height: 2px; background: currentColor; flex-shrink: 0; }
+  .event-title { margin: 1rem 0; font-family: var(--font-display); font-size: clamp(2.2rem, 1.5rem + 3.5vw, 4.5rem); line-height: 0.95; letter-spacing: -0.035em; text-transform: uppercase; }
+  .event-intro { margin: 0 0 2rem; font-size: 1.05rem; line-height: 1.75; color: rgba(246, 247, 250, 0.72); max-width: 42rem; }
+  
+  .event-details { display: flex; gap: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); }
+  .event-stat { display: flex; flex-direction: column; gap: 0.2rem; }
+  .event-stat__label { font-family: var(--font-tech); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(246, 247, 250, 0.6); }
+  .event-stat__value { font-family: var(--font-display); font-size: 1.1rem; color: #F6F7FA; }
+
+  .event-section { padding: 4rem 0; }
+  .event-h2 { margin: 0 0 1rem; font-family: var(--font-display); font-size: 2rem; color: #111214; text-transform: uppercase; }
+  .event-body { font-size: 1rem; line-height: 1.75; color: var(--color-text-secondary); max-width: 40rem; margin-bottom: 2rem; }
+  .event-hardware-list { list-style: square; padding-left: 1.5rem; margin-bottom: 3rem; color: #111214; }
+  .event-hardware-list li { margin-bottom: 0.5rem; font-size: 0.95rem; }
+</style>

@@ -2,9 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import PageNextActions from '../components/PageNextActions.astro';
-import { SERVICE_AREAS, type ServiceArea } from '../data/serviceAreas';
+import Reviews from '../components/Reviews.astro';
+import { type ServiceArea } from '../data/serviceAreas';
+import globalAreasRaw from '../data/globalServiceAreas.json';
 
 export function getStaticPaths() {
+  const SERVICE_AREAS = globalAreasRaw as unknown as ServiceArea[];
   return SERVICE_AREAS.map((area) => ({
     params: { slug: area.slug },
     props: { area },
@@ -14,6 +17,8 @@ export function getStaticPaths() {
 interface Props {
   area: ServiceArea;
 }
+
+const SERVICE_AREAS = globalAreasRaw as unknown as ServiceArea[];
 
 const { area } = Astro.props;
 
@@ -70,7 +75,7 @@ const schema = [
   },
 ];
 
-const nearbyAreas = SERVICE_AREAS.filter((a) => area.nearby.includes(a.slug));
+const nearbyAreas = SERVICE_AREAS.filter((a) => area.nearby && area.nearby.includes(a.slug));
 ---
 
 <BaseLayout
@@ -166,6 +171,9 @@ const nearbyAreas = SERVICE_AREAS.filter((a) => area.nearby.includes(a.slug));
         <a href="/materials" class="city-inline-link">Full materials guide &rarr;</a>
       </div>
     </div>
+
+    <!-- Reviews -->
+    <Reviews />
 
     <!-- FAQ -->
     <div class="city-faq">

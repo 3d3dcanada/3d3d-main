@@ -2,61 +2,96 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import PageNextActions from '../components/PageNextActions.astro';
+
+const stats = [
+  { value: '7', label: 'Active Repos' },
+  { value: '18+', label: 'Local Nodes' },
+  { value: '3', label: 'Events/Yr' },
+];
+
+const repos = [
+  {
+    name: '3d3d-platform',
+    desc: 'The website you are looking at. Built with Astro 6 and React.',
+    url: 'https://github.com/3d3dcanada/3d3d-main',
+    lang: 'Astro',
+  },
+  {
+    name: 'ora-3d3d',
+    desc: 'AI-assisted coding and fabrication agent.',
+    url: 'https://github.com/3d3dcanada/',
+    lang: 'Rust / TS',
+  },
+  {
+    name: 'codequest-3d3d',
+    desc: 'Interactive coding game interface for training.',
+    url: 'https://github.com/3d3dcanada/',
+    lang: 'C#',
+  },
+  {
+    name: '3d3d-crm',
+    desc: 'Client management and job routing backend.',
+    url: 'https://github.com/3d3dcanada/',
+    lang: 'NextJS',
+  },
+  {
+    name: 'sovereign-3d3d',
+    desc: 'Privacy-focused local sync app for offshore environments.',
+    url: 'https://github.com/3d3dcanada/',
+    lang: 'Rust',
+  },
+];
 ---
 
-<BaseLayout title="Community Workshops & Events | 3D3D" description="Book 3D3D for STEM workshops, library events, and community festivals. We bring the printers to you." activePath="/community">
+<BaseLayout title="Community & Open Source | 3D3D" description="3D3D is an open source manufacturing cooperative. Access our code, join the network, or find us at events." activePath="/community">
 
   <section class="opp-page">
     <div class="opp-shell">
-      <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Explore', href: '/about'}, {label: 'Community Events'}]} />
-      <p class="opp-eyebrow">Deployments</p>
-      <h1 class="opp-title">Book the Lab</h1>
-      <p class="opp-intro">
-        We don't just print parts. We teach communities how to build the tools. Book 3D3D for your next STEM event, library workshop, or festival. We show up with the printers, the filament, and the knowledge.
-      </p>
+      <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Community'}]} />
+      
+      <div class="mb-6 rounded-xl overflow-hidden shadow-sm aspect-video">
+        <img src="/media/generated/network-03.jpg" alt="Engineers collaborating over a 3D CAD tablet at a race car garage" class="w-full h-full object-cover" />
+      </div>
 
-      <div class="mt-8 space-y-6">
-        <div class="opp-listing surface-panel">
-          <div class="opp-listing__header">
-            <h2 class="opp-listing__role">Intro to 3D Printing Workshop</h2>
-            <div class="opp-listing__meta">
-              <span>2-4 Hours</span>
-              <span>Libraries & Schools</span>
-            </div>
+      <div class="hero surface-panel">
+        <div class="hero__content">
+          <p class="opp-eyebrow">The Network</p>
+          <h1 class="opp-title">Community & Open Source</h1>
+          <p class="opp-intro">
+            We operate transparently. If we build a tool to make the cooperative run better, we open source it. 
+            If we design a part that can help someone fix a broken machine, we publish the model.
+            The 3D3D network relies on a shared pool of knowledge, hardware, and code.
+          </p>
+          
+          <div class="flex gap-4 mt-6">
+            <a href="https://github.com/3d3dcanada" target="_blank" class="opp-cta">GitHub Organization</a>
+            <a href="https://www.printables.com/@KTK3D_3050116" target="_blank" class="opp-cta" style="background: var(--color-orange-primary);">Printables Catalog</a>
           </div>
-          <div class="opp-listing__body">
-            <p>A hands-on introduction to the FDM workflow. We cover the history, materials, and CAD basics. Participants get to prepare a file and watch it print live. Built for audiences 14+ with capacity for up to 20 participants.</p>
-          </div>
-          <a href="/contact?subject=book-workshop" class="opp-cta">Request Workshop →</a>
         </div>
+      </div>
 
-        <div class="opp-listing surface-panel">
-          <div class="opp-listing__header">
-            <h2 class="opp-listing__role">Youth STEM Discovery Day</h2>
-            <div class="opp-listing__meta">
-              <span>Full Day</span>
-              <span>Ages 8-18</span>
-            </div>
-          </div>
-          <div class="opp-listing__body">
-            <p>An immersive day of building and prototyping. Focuses on inspiring the next generation of engineers and problem solvers through active CAD design and rapid prototyping challenges.</p>
-          </div>
-          <a href="/contact?subject=book-stem-day" class="opp-cta">Book Discovery Day →</a>
+      <div class="mt-8 border-t border-gray-200 pt-8">
+        <h2 class="text-2xl font-bold mb-6" style="color: var(--color-text-primary);">Active Repositories</h2>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {repos.map(repo => (
+            <a href={repo.url} target="_blank" class="block p-4 border border-gray-200 rounded-lg hover:border-teal-400 hover:bg-teal-50/30 transition">
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-mono font-bold text-sm text-teal-700">{repo.name}</span>
+                <span class="text-[10px] uppercase tracking-wider bg-gray-100 px-2 py-1 rounded text-gray-600">{repo.lang}</span>
+              </div>
+              <p class="text-xs text-gray-600 leading-relaxed">{repo.desc}</p>
+            </a>
+          ))}
         </div>
+      </div>
 
-        <div class="opp-listing surface-panel">
-          <div class="opp-listing__header">
-            <h2 class="opp-listing__role">Festival & Public Activations</h2>
-            <div class="opp-listing__meta">
-              <span>Multi-Day</span>
-              <span>High Volume</span>
-            </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-12">
+        {stats.map((stat) => (
+          <div class="text-center p-4 rounded-xl border border-gray-200">
+            <span class="block font-display text-2xl font-bold" style="color: var(--color-teal-primary);">{stat.value}</span>
+            <span class="font-display text-[9px] uppercase tracking-widest">{stat.label}</span>
           </div>
-          <div class="opp-listing__body">
-            <p>From the Cardboard Boat Regatta to local maker faires. We set up an active print farm environment, producing functional parts and engaging with hundreds of attendees in real-time.</p>
-          </div>
-          <a href="/contact?subject=event-activation" class="opp-cta">Discuss Activation →</a>
-        </div>
+        ))}
       </div>
 
       <PageNextActions actions={[

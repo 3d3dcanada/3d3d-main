@@ -1,83 +1,37 @@
 User-agent: *
-Allow: /
+Disallow: /admin
+Disallow: /private
 
-# ── AI SEARCH / RETRIEVAL BOTS ──────────────────────────────
-# These bots fetch pages when a user asks a question.
-# ALLOW: required for AI engines to cite 3D3D in live answers.
+# Block known aggressive scrapers and bandwidth burners
+User-agent: Scrapy
+Disallow: /
+User-agent: Barkrowler
+Disallow: /
+User-agent: AhrefsBot
+Disallow: /
+User-agent: MJ12bot
+Disallow: /
+User-agent: SemrushBot
+Disallow: /
+User-agent: dotbot
+Disallow: /
+User-agent: rogerbot
+Disallow: /
+User-agent: exabot
+Disallow: /
+User-agent: BLEXBot
+Disallow: /
 
-User-agent: ChatGPT-User
-Allow: /
-
+# Allow AI Indexers safely for AI Discoverability
 User-agent: OAI-SearchBot
 Allow: /
-
-User-agent: Claude-User
+User-agent: ChatGPT-User
 Allow: /
-
-User-agent: Claude-SearchBot
+User-agent: ClaudeBot
 Allow: /
-
 User-agent: PerplexityBot
 Allow: /
-
-User-agent: Perplexity-User
-Allow: /
-
-User-agent: Applebot-Extended
-Allow: /
-
-User-agent: YouBot
-Allow: /
-
-User-agent: DuckAssistant
-Allow: /
-
-User-agent: cohere-ai
-Allow: /
-
-User-agent: Amazonbot
-Allow: /
-
-# ── AI TRAINING CRAWLERS ────────────────────────────────────
-# These bots scrape content for model training without attribution.
-# BLOCK: protects content from ingestion without live citation.
-
-User-agent: GPTBot
-Disallow: /
-
-User-agent: ClaudeBot
-Disallow: /
-
-User-agent: anthropic-ai
-Disallow: /
-
 User-agent: Google-Extended
-Disallow: /
+Allow: /
 
-User-agent: CCBot
-Disallow: /
-
-User-agent: Bytespider
-Disallow: /
-
-User-agent: DataForSeoBot
-Disallow: /
-
-User-agent: PetalBot
-Disallow: /
-
-User-agent: Diffbot
-Disallow: /
-
-User-agent: img2dataset
-Disallow: /
-
-User-agent: Omgili
-Disallow: /
-
-User-agent: FacebookBot
-Disallow: /
-
-# ── SITEMAPS ────────────────────────────────────────────────
 Sitemap: https://3d3d.ca/sitemap-index.xml
-Sitemap: https://3d3d.ca/rss.xml

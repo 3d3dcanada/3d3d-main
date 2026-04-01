@@ -20,21 +20,22 @@ const schema = {
   </div>
   <section class="page-section">
     <div class="surface-panel quote-page-intro">
-      <div>
-        <span class="eyebrow">Direct Commission Intake</span>
-        <h1 class="quote-page-intro__title">Get a timeline. Get a price. Get it built.</h1>
-        <p class="quote-page-intro__copy">
-          We don't hide behind confusing calculators. Send us the files, the deadline, and the constraints. We quickly review the geometry, quote the job, and put it into production. You don't need to know the infill percentage unless you want to.
-        </p>
-      </div>
-      <div class="quote-page-intro__meta">
-        <div>
-          <strong>Upload support</strong>
-          <span>STL, 3MF, STEP, STP, OBJ, PDF, and image files.</span>
+      <p class="quote-eyebrow">Project Intake</p>
+      <h1 class="quote-title">Upload a File.<br />Get a Firm Quote.</h1>
+      
+      <div class="quote-intro-grid">
+        <div class="quote-intro-text">
+          <p class="quote-intro">
+            Submit your CAD file or replacement part photos. Tell us what it does and the environment it lives in. We assess the mechanics, select the material, and return a firm quote within 24 hours.
+          </p>
+          <ul class="quote-bullets">
+            <li><svg viewBox="0 0 24 24" fill="currentColor" width="16"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Direct operator contact — no middleman.</li>
+            <li><svg viewBox="0 0 24 24" fill="currentColor" width="16"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Exact pricing based on machine hours + material.</li>
+            <li><svg viewBox="0 0 24 24" fill="currentColor" width="16"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> 100% functional guarantee.</li>
+          </ul>
         </div>
-        <div>
-          <strong>Better lead capture</strong>
-          <span>Name, email, notes, quantity, timing, and routing context in one submit.</span>
+        <div class="quote-hero-img">
+          <img src="/media/workshop/printer-action-cf.jpg" alt="FDM machine printing carbon fiber" />
         </div>
       </div>
     </div>
@@ -54,54 +55,89 @@ const schema = {
 </BaseLayout>
 
 <style>
-  .quote-page-intro {
-    display: grid;
-    grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.8fr);
-    gap: 1.2rem;
-    padding: 1.4rem;
+  .quote-eyebrow {
+    margin: 0;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-teal-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
   }
 
-  .quote-page-intro__title {
-    margin: 0.9rem 0 0.65rem;
-    font-size: clamp(2rem, 3.5vw, 3.4rem);
-    line-height: 0.98;
-    letter-spacing: -0.04em;
+  .quote-eyebrow::before {
+    content: '';
+    width: 2.75rem;
+    height: 2px;
+    background: var(--color-teal-primary);
+    flex-shrink: 0;
   }
 
-  .quote-page-intro__copy,
-  .quote-page-intro__meta span {
-    color: var(--color-text-secondary);
-    line-height: 1.75;
-  }
-
-  .quote-page-intro__meta {
-    display: grid;
-    gap: 0.9rem;
-  }
-
-  .quote-page-intro__meta div {
-    padding: 1rem;
-    border-radius: 2px;
-    background: rgba(255, 255, 255, 0.62);
-  }
-
-  .quote-page-intro__meta strong,
-  .quote-page-intro__meta span {
-    display: block;
-  }
-
-  .quote-page-intro__meta strong {
+  .quote-title {
+    margin: 0 0 1.5rem 0;
     font-family: var(--font-display);
+    font-size: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
     color: var(--color-text-primary);
+    text-transform: uppercase;
   }
 
-  .quote-page-intro__meta span {
-    margin-top: 0.35rem;
+  .quote-intro-grid {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
   }
 
-  @media (max-width: 900px) {
-    .quote-page-intro {
-      grid-template-columns: 1fr;
+  @media (min-width: 768px) {
+    .quote-intro-grid {
+      grid-template-columns: 3fr 2fr;
     }
+  }
+
+  .quote-intro {
+    margin: 0;
+    font-size: clamp(1rem, 0.95rem + 0.4vw, 1.15rem);
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+
+  .quote-bullets {
+    margin-top: 1.5rem;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .quote-bullets li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+  }
+
+  .quote-bullets svg {
+    color: var(--color-teal-primary);
+  }
+
+  .quote-hero-img img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    border: 1px solid var(--color-border-subtle);
+  }
+
+  .quote-calculator-wrapper {
+    margin-top: 1rem;
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 4px;
+    overflow: hidden;
   }
 </style>

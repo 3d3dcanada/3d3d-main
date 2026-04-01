@@ -2,6 +2,47 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import PageNextActions from '../components/PageNextActions.astro';
+const packages = [
+  {
+    name: 'Supporter',
+    price: '$10 / month CAD',
+    desc: 'Support the open-source mission and get early access.',
+    features: [
+      'Name on Supporter Wall',
+      'Early Blog Access',
+      'Community Discord Access',
+    ],
+    actionText: 'Become a Supporter',
+    actionHref: 'https://ko-fi.com/3d3dca',
+  },
+  {
+    name: 'Partner',
+    price: '$50 / month CAD',
+    desc: 'For local businesses and tech companies backing the network.',
+    features: [
+      'Everything in Supporter',
+      'Logo on event banners',
+      'Social media shoutouts',
+      'Voting rights on build priorities',
+    ],
+    actionText: 'Become a Partner',
+    actionHref: 'https://ko-fi.com/3d3dca',
+    isPrimary: true,
+  },
+  {
+    name: 'Champion',
+    price: '$250 / month CAD',
+    desc: 'Directly fund a printer node and major event operations.',
+    features: [
+      'Everything in Partner',
+      'Naming rights on a new printer',
+      'Custom event activation',
+      'Quarterly strategy call',
+    ],
+    actionText: 'Become a Champion',
+    actionHref: 'https://ko-fi.com/3d3dca',
+  },
+];
 ---
 
 <BaseLayout title="Sponsorships & Campaigns | 3D3D" description="Partner with 3D3D to bring innovation to Atlantic Canada and support our 2026 offshore campaigns." activePath="/sponsors">
@@ -9,6 +50,11 @@ import PageNextActions from '../components/PageNextActions.astro';
   <section class="opp-page">
     <div class="opp-shell">
       <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Explore', href: '/about'}, {label: 'Sponsorships'}]} />
+
+      <div class="mb-6 rounded-xl overflow-hidden shadow-sm aspect-video">
+        <img src="/media/generated/story-03.jpg" alt="Sailing yacht anchored in a calm remote bay at dawn" class="w-full h-full object-cover" />
+      </div>
+
       <p class="opp-eyebrow">Partnerships</p>
       <h1 class="opp-title">Invest in the Network</h1>
       <p class="opp-intro">
@@ -29,39 +75,23 @@ import PageNextActions from '../components/PageNextActions.astro';
           <p class="text-sm mb-4" style="color: var(--color-text-secondary);">
             For the 120th running of the Newport Bermuda Race, 3D3D is aboard with an enclosed CoreXY printing live. Real parts, real conditions. This is our flagship deployment proof.
           </p>
-          <a href="/blog" class="font-display text-xs uppercase tracking-wider hover:underline" style="color: var(--color-magenta-primary);">Read the Campaign Logs →</a>
         </div>
       </div>
 
       <h2 class="font-display text-2xl font-bold mt-12 mb-6" style="color: var(--color-text-primary);">Sponsorship Tiers</h2>
       
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {[{
-          title: "Community Partner",
-          price: "$500",
-          benefits: ["Logo on event materials", "Social media mentions", "Website listing"]
-        }, {
-          title: "Event Sponsor",
-          price: "$1,000",
-          benefits: ["Booth space at events", "Email mention to participants", "All Community benefits"]
-        }, {
-          title: "Title Sponsor",
-          price: "$2,500",
-          benefits: ["Naming rights", "Speaking opportunity", "Priority booth placement"]
-        }, {
-          title: "Innovation Champion",
-          price: "$5,000+",
-          benefits: ["Year-long partnership", "Custom activations", "Newport Bermuda alignment"]
-        }].map((tier, index) => (
-          <div class="surface-panel p-6 flex flex-col justify-between" style={`background: var(--color-surface-card); border: 2px solid var(--color-border-subtle); ${index === 3 ? 'border-color: var(--color-teal-primary);' : ''}`}>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {packages.map((pkg) => (
+          <div class={`surface-panel p-6 flex flex-col justify-between ${pkg.isPrimary ? 'border-2 border-teal-500' : 'border-2 border-gray-800'}`} style="background: var(--color-surface-card);">
             <div>
-              <p class="font-display text-xs uppercase tracking-wider mb-2" style="color: var(--color-teal-primary);">{tier.price}</p>
-              <h3 class="font-display text-lg font-bold mb-4" style="color: var(--color-text-primary);">{tier.title}</h3>
+              <h3 class="font-display text-lg font-bold mb-1" style="color: var(--color-text-primary);">{pkg.name}</h3>
+              <p class="font-display text-xs uppercase tracking-wider mb-4" style="color: var(--color-teal-primary);">{pkg.price}</p>
+              <p class="text-sm mb-4" style="color: var(--color-text-secondary);">{pkg.desc}</p>
               <ul class="space-y-2 text-sm mb-6" style="color: var(--color-text-secondary);">
-                {tier.benefits.map(b => <li>• {b}</li>)}
+                {pkg.features.map(f => <li>• {f}</li>)}
               </ul>
             </div>
-            <a href="/contact?subject=sponsorship" class="text-xs font-bold uppercase tracking-wider hover:underline mt-4 inline-block" style="color: var(--color-text-primary);">Partner With Us →</a>
+            <a href={pkg.actionHref} class="text-xs font-bold uppercase tracking-wider hover:underline mt-4 inline-block" style="color: var(--color-text-primary);">{pkg.actionText} →</a>
           </div>
         ))}
       </div>

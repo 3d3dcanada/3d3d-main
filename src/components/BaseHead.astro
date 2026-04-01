@@ -44,7 +44,6 @@ const globalSchemas = [
     image: 'https://3d3d.ca/og-default.png',
     description: 'Founder-operated 3D printing and custom fabrication operating as an open-source cooperative. Marine hardware, automotive restoration parts, prototyping, and engineering-grade FDM printing. Based in Atlantic Canada. Ships worldwide.',
     email: 'info@3d3d.ca',
-    telephone: '+15069532678',
     founder: { '@type': 'Person', name: 'Ken' },
     address: {
       '@type': 'PostalAddress',
@@ -166,8 +165,7 @@ const globalSchemas = [
 <meta name="twitter:image" content={ogImage} />
 
 <!-- Favicons -->
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/favicon.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 <link rel="manifest" href="/site.webmanifest" />
 
@@ -178,3 +176,6 @@ const globalSchemas = [
 {schema && (
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 )}
+
+<!-- Cloudflare Web Analytics -->
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "YOUR_CLOUDFLARE_TOKEN_HERE"}'></script>

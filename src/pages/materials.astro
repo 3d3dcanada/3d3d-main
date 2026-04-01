@@ -92,7 +92,7 @@ const materials = [
     full: 'Polyetherimide (Ultem-class)',
     hdt: '207°C @ 0.45 MPa / 194°C @ 1.80 MPa',
     tags: ['Metal-replacement', 'Extreme-temp', 'Flame-retardant'],
-    body: 'The ceiling. PEI 1010 runs to 207°C under low load and 194°C under 1.80 MPa, beyond anything else in FDM except specialised industrial systems. Inherent UL94 VTM-0 flame retardancy without additives. Autoclave sterilisable, gamma radiation resistant, electron beam sterilisable. 95 MPa tensile yield strength printed. Positioned as a direct metal-alloy replacement for aerospace, medical instruments, and any structural application that has exhausted every other material option. Requires Prusa Pro HT90 or equivalent heated-chamber system at 90°C minimum. Nozzle at 410°C. Must be dried 6–8 hours at 150°C before printing.',
+    body: 'The ceiling. PEI 1010 runs to 207°C under low load and 194°C under 1.80 MPa, beyond anything else in FDM except specialised industrial systems. Inherent UL94 VTM-0 flame retardancy without additives. Autoclave sterilisable, gamma radiation resistant, electron beam sterilisable. 95 MPa tensile yield strength printed. Positioned as a direct metal-alloy replacement for aerospace, medical instruments, and any structural application that has exhausted every other material option. Requires enclosed heated-chamber system at 90°C minimum. Nozzle at 410°C. Must be dried 6–8 hours at 150°C before printing.',
   },
   // ── FLEXIBLE ────────────────────────────────────────────
   {
@@ -153,7 +153,7 @@ const materials = [
   },
 ];
 
-const getPrusaNote = (m: { id: string }): string | null => {
+const getHardwareNote = (m: { id: string }): string | null => {
   const hardenedNozzleRequired: string[] = [
     'petg-cf',
     'pc-blend-cf',
@@ -165,10 +165,10 @@ const getPrusaNote = (m: { id: string }): string | null => {
     'petg-tungsten'
   ];
   if (hardenedNozzleRequired.includes(m.id)) {
-    return 'Requires hardened nozzle. Available from Prusa Research.';
+    return 'Requires hardened nozzle. Contact us for material availability.';
   }
   if (m.id === 'pei-1010') {
-    return 'Requires Prusa Pro HT90 or equivalent heated-chamber system.';
+    return 'Requires enclosed heated-chamber system at 90°C minimum.';
   }
   return null;
 };
@@ -262,7 +262,7 @@ const tierColors: Record<string, string> = {
           <div class="mat-shell">
             <div class="mat-grid">
               {tierMats.map((m) => {
-                const prusaNote = getPrusaNote(m);
+                const hardwareNote = getHardwareNote(m);
                 return (
                   <article class="mat-card scroll-in" id={m.id}>
                     <div class="mat-card__head">
@@ -276,12 +276,12 @@ const tierColors: Record<string, string> = {
                       ))}
                     </div>
                     <p class="mat-card__body">{m.body}</p>
-                    {prusaNote && (
-                      <p class="mat-card__prusa-note">
+                    {hardwareNote && (
+                      <p class="mat-card__hw-note">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:2px;">
                           <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
                         </svg>
-                        {prusaNote}
+                        {hardwareNote}
                       </p>
                     )}
                     <a href="/contact" class="mat-card__cta" style={`border-color: ${accentColor};`}>Request Quote →</a>
@@ -387,24 +387,23 @@ const tierColors: Record<string, string> = {
       </div>
     </div>
 
-    <!-- ═══ PRUSA ECOSYSTEM ═══ -->
+    <!-- ═══ OPEN-SOURCE HARDWARE ═══ -->
     <div class="mat-prusa">
       <div class="mat-shell">
         <div class="mat-prusa__inner">
           <div>
-            <p class="mat-eyebrow" style="padding-top:0; color: #FA6831;">Prusa Ecosystem</p>
+            <p class="mat-eyebrow" style="padding-top:0; color: #FA6831;">Open-Source Hardware</p>
             <h2 class="mat-prusa__title">Built on open-source hardware.</h2>
             <p class="mat-prusa__body">
-              3D3D runs exclusively on the Prusa ecosystem. Open-source firmware, documented hardware, and a material compatibility library that is public. After a year of daily printing, Prusa Research recognized the work and is sending a CORE One L — their flagship enclosed CoreXY machine. That is recognition, not marketing.
+              3D3D runs on open-source firmware and documented hardware. Every machine is repairable, every material profile is shareable, and the compatibility library is public. No proprietary black boxes.
             </p>
             <p class="mat-prusa__body">
-              Materials marked with a hardened nozzle requirement work on any Prusa printer with the appropriate nozzle swap. PEI 1010 requires the Prusa Pro HT90 or an equivalent heated-chamber system.
+              Materials marked with a hardened nozzle requirement need the appropriate nozzle upgrade. PEI 1010 requires an enclosed heated-chamber system at 90°C minimum. Ask us about setup and compatibility.
             </p>
-            <a href="https://www.prusa3d.com/" class="mat-prusa__link" target="_blank" rel="noopener noreferrer">
-              Learn more at Prusa Research →
+            <a href="/contact" class="mat-prusa__link">
+              Ask about hardware requirements →
             </a>
           </div>
-          <img src="/media/brand/prusa-logo.svg" alt="Prusa Research" class="mat-prusa__logo" loading="lazy" />
         </div>
       </div>
     </div>
@@ -672,7 +671,7 @@ const tierColors: Record<string, string> = {
     color: var(--color-text-secondary);
   }
 
-  .mat-card__prusa-note {
+  .mat-card__hw-note {
     margin: 0;
     display: flex;
     align-items: flex-start;

@@ -74,23 +74,19 @@ const MILESTONES: Milestone[] = [
     },
   },
   {
-    id: 'prusa',
+    id: 'equipment',
     type: 'done',
     accent: 'orange',
     date: '03 / 2026',
-    title: 'Prusa CORE One L',
-    sub: 'Sponsorship acquired',
-    logo: '/media/brand/prusa-logo.svg',
-    logoOrange: true,
+    title: 'Flagship Machine Acquired',
+    sub: 'Enclosed CoreXY deployed',
     modal: {
       headDate: 'Acquired 03 / 2026',
-      headLogo: '/media/brand/prusa-logo.svg',
-      headLogoOrange: true,
-      title: 'Prusa CORE One L',
-      location: 'Flagship enclosed CoreXY · Open-source',
+      title: 'Flagship Machine Acquired',
+      location: 'Enclosed CoreXY · High-temp · Open-source firmware',
       accent: 'orange',
       paragraphs: [
-        "After a year of daily documented work on the Prusa ecosystem, Prusa Research recognized 3D3D's commitment and is sending the CORE One L — their flagship enclosed CoreXY machine. This isn't marketing. It's recognition. The CORE One L ships with active chamber heating to 90°C, input shaping for high-speed printing without ringing, and tool-changing capability for multi-material runs.",
+        "3D3D's flagship enclosed CoreXY machine is in production. Active chamber heating to 90°C, input shaping for high-speed printing without ringing, and multi-material capability. Built on open-source firmware and fully documented.",
         'The machine will be deployed live aboard CSM the Mariner during the 2026 Newport-Bermuda Race, printing engineering-grade parts 635nm offshore in open-ocean conditions.',
       ],
       facts: [
@@ -100,7 +96,6 @@ const MILESTONES: Milestone[] = [
         { val: 'AMS',  key: 'Tool changing' },
       ],
       links: [
-        { href: 'https://www.prusa3d.com/en/category/original-prusa-core-one/', label: 'Prusa CORE One →', orange: true, external: true },
         { href: '/materials', label: 'Material Stack →' },
         { href: '/events',    label: 'Campaign Log →' },
         { href: 'https://ko-fi.com/3d3dca', label: 'Support on Ko-fi →', external: true },
@@ -124,7 +119,7 @@ const MILESTONES: Milestone[] = [
       accent: 'teal',
       wide: true,
       paragraphs: [
-        'Aboard CSM the Mariner with a Prusa CORE One L printing live during the crossing. Spinnaker pole end fittings crack during night peels. Electronics brackets shatter when the hull slams a Gulf Stream trough. 200 miles offshore you cannot call a rigger — you fabricate the replacement while the boat holds its heading. Every part documented, tested, and published.',
+        'Aboard CSM the Mariner with an enclosed CoreXY printing live during the crossing. Spinnaker pole end fittings crack during night peels. Electronics brackets shatter when the hull slams a Gulf Stream trough. 200 miles offshore you cannot call a rigger — you fabricate the replacement while the boat holds its heading. Every part documented, tested, and published.',
       ],
       facts: [
         { val: '635',  key: 'Nautical miles' },
@@ -189,7 +184,7 @@ function Cell({
   const isOpen = milestone.type === 'open';
   const isUpcoming = milestone.type === 'upcoming';
   const isFeatured = isUpcoming;
-  const isPrusa = milestone.id === 'prusa';
+  const isEquipment = milestone.id === 'equipment';
 
   const initial = shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30, rotateY: -8, scale: 0.88 };
   const animate = isVisible
@@ -201,7 +196,7 @@ function Cell({
     : 'rgba(255,255,255,0.05)';
 
   // Enhanced 3D hover — deeper pop-out, spring physics
-  const hoverAnim = shouldReduceMotion ? {} : isPrusa ? {
+  const hoverAnim = shouldReduceMotion ? {} : isEquipment ? {
     backgroundColor: hoverBg,
     translateZ: 60,
     rotateY: -4,

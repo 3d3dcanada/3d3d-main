@@ -97,11 +97,11 @@
         <span class="bento-cell__link">WhatsApp &rarr;</span>
       </a>
 
-      <!-- Prusa — 1×1, orange accent -->
-      <a href="/prusa" class="bento-cell bento-cell--dark bento-cell--prusa" data-analytics-event="bento_click" data-analytics-source="prusa">
-        <img src="/media/brand/prusa-logo.svg" alt="" class="bento-cell__prusa-logo" loading="lazy" />
-        <span class="bento-cell__social-text">Prusa printers, set up &amp; supported</span>
-        <span class="bento-cell__link bento-cell__link--orange">See printers &rarr;</span>
+      <!-- Printers — 1×1, orange accent -->
+      <a href="/shop" class="bento-cell bento-cell--dark bento-cell--printers" data-analytics-event="bento_click" data-analytics-source="printers">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#FF6B2B" stroke-width="1.5" class="bento-cell__printer-icon" aria-hidden="true"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 7V4h10v3M7 17v3h10v-3"/><circle cx="17" cy="12" r="1"/></svg>
+        <span class="bento-cell__social-text">Printers, filament &amp; setup service</span>
+        <span class="bento-cell__link bento-cell__link--orange">Shop now &rarr;</span>
       </a>
 
     </div>
@@ -303,8 +303,8 @@
     color: rgba(255, 255, 255, 0.9);
   }
 
-  /* Prusa */
-  .bento-cell--prusa {
+  /* Printers */
+  .bento-cell--printers {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -312,21 +312,21 @@
     gap: 0.5rem;
     padding: clamp(1.2rem, 2vw, 1.8rem);
     background: #111214;
-    border: 1px solid rgba(250, 104, 49, 0.2);
+    border: 1px solid rgba(255, 107, 43, 0.2);
   }
 
-  .bento-cell--prusa:hover {
-    border-color: rgba(250, 104, 49, 0.5);
-    box-shadow: 0 12px 32px rgba(250, 104, 49, 0.1);
+  .bento-cell--printers:hover {
+    border-color: rgba(255, 107, 43, 0.5);
+    box-shadow: 0 12px 32px rgba(255, 107, 43, 0.1);
   }
 
-  .bento-cell__prusa-logo {
+  .bento-cell__printer-icon {
     height: 24px;
     width: auto;
     opacity: 0.9;
   }
 
-  .bento-cell--prusa .bento-cell__social-text {
+  .bento-cell--printers .bento-cell__social-text {
     color: #F6F7FA;
   }
 

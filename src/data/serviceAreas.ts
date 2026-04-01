@@ -172,7 +172,7 @@ export const SERVICE_AREAS: ServiceArea[] = [
       { name: 'Architecture & Construction', useCase: 'Scale models, custom fixtures, and prototype building components.' },
       { name: 'Automotive Aftermarket', useCase: 'Discontinued parts, custom brackets, and interior components for classic and modified vehicles.' },
     ],
-    whyWeServe: 'Toronto has 3D printing services — but most are print farms running PLA on consumer machines. We print in engineering compounds on professional Prusa hardware with operator expertise behind every job.',
+    whyWeServe: 'Toronto has 3D printing services — but most are print farms running PLA on consumer machines. We print in engineering compounds on professional open-source hardware with operator expertise behind every job.',
     faqs: [
       { question: 'Why use 3D3D instead of a Toronto-based service?', answer: 'We print in 12+ engineering materials including ASA, Nylon CF, PC, and PEI. Most Toronto services offer PLA and basic PETG. Our parts are field-tested in marine and motorsport conditions.' },
       { question: 'How fast is shipping to Toronto?', answer: '2-3 business days standard. Express overnight available.' },

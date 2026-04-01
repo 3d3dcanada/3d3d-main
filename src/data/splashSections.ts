@@ -124,8 +124,8 @@ export const SPLASH_SECTIONS: SplashSection[] = [
       'The founder story, the cooperative philosophy, and the reason this platform exists in the first place.',
     subtitle: 'Founder-operated. Route-based. Proof over promises.',
     longDescription:
-      'Started in an RV, proven on transatlantic crossings and the Newport Bermuda Race. A one-operator fabrication company built on the Prusa ecosystem and a cooperative philosophy.',
-    highlights: ['Founder-operated', 'Marine & motorsport focus', 'Prusa ecosystem', 'Open source'],
+      'Started in an RV, proven on transatlantic crossings and the Newport Bermuda Race. A one-operator fabrication company built on open-source hardware and a cooperative philosophy.',
+    highlights: ['Founder-operated', 'Marine & motorsport focus', 'Open-source hardware', 'Open source'],
     tags: ['Founder-operated', 'Cooperative', 'Open source'],
     ctaLabel: 'Read the Story',
     href: '/about',

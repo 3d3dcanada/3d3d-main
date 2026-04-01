@@ -73,13 +73,6 @@ const posts = [
     category: 'Case Study',
   },
   {
-    slug: 'bambu-vs-prusa',
-    title: "Bambu Lab vs Prusa: The Conversation Nobody's Having Honestly",
-    description: 'Speed vs openness. Proprietary vs repairable. An honest comparison from someone who\'s used both.',
-    date: new Date('2026-03-01'),
-    category: 'Equipment',
-  },
-  {
     slug: 'solo-saint-john',
     title: 'Two Days Solo on the Saint John River',
     description: 'Solo sailing up the Saint John River. What it was like, what it proved, what it taught.',

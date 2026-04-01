@@ -85,7 +85,7 @@ function BuildPlatePreview({
 // ------------------------------------------------------------------
 // Printer assembly — extracted so nozzle can be animated separately
 // ------------------------------------------------------------------
-const PrusaPrinter = ({
+const PrinterModel = ({
   isDark,
   hoveredSection,
 }: {
@@ -425,7 +425,7 @@ export default function SplashCenterLogo({
           </Center>
         ) : (
           <group onClick={handlePrinterClick} onPointerOver={() => { document.body.style.cursor = 'pointer'; }} onPointerOut={() => { document.body.style.cursor = 'auto'; }}>
-            <PrusaPrinter isDark={isDark} hoveredSection={hoveredSection} />
+            <PrinterModel isDark={isDark} hoveredSection={hoveredSection} />
           </group>
         )}
       </group>

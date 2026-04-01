@@ -1,78 +1,1203 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import SplashOrbit from '../components/SplashOrbit';
+import BaseHead from '../components/BaseHead.astro';
+import '../styles/global.css';
 ---
 
-<BaseLayout
-  title="3D3D | Custom 3D Printing, Marine Fabrication & Field Services"
-  description="Custom 3D printing, marine fabrication, reverse engineering, and field-ready fabrication services from 3D3D. Explore the market, services, network, learning, and founder story."
-  noFooter
-  noSidebar
-  noMobileCTA
-  noFeedbackBlip
-  bodyClass="splash-page"
->
+<!doctype html>
+<html lang="en">
+<head>
+  <BaseHead
+    title="3D3D | Custom Fabrication, Software & Community — Fredericton, Canada"
+    description="Custom 3D printing, event hire, software development, and community programs. Six printers. Deployable anywhere. Built in Fredericton for the ones that give a damn."
+    keywords="3D printing Fredericton, custom fabrication Canada, marine parts 3D print, event hire 3D printer, open source cooperative, 3D printing New Brunswick"
+  />
+</head>
+<body class="hp">
+
+  <!-- ══════════════════════════════════════
+       TOP NAVIGATION
+  ═══════════════════════════════════════════ -->
+  <header class="hp-header" id="hp-header">
+    <nav class="hp-nav" aria-label="Main navigation">
+      <a href="/" class="hp-nav__logo" aria-label="3D3D — Home">
+        <img src="/media/brand/3d3d-logo.svg" alt="3D3D" width="72" height="30" />
+      </a>
+      <div class="hp-nav__links">
+        <a href="/about">About</a>
+        <a href="/materials">Materials</a>
+        <a href="/blog">Blog</a>
+        <a href="/contact">Contact</a>
+        <a href="/quote" class="hp-nav__cta">Get a Quote</a>
+      </div>
+      <button class="hp-nav__menu-btn" id="hp-menu-btn" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Mobile Nav Drawer -->
+  <dialog id="hp-mobile-nav" class="hp-mobile-nav">
+    <button class="hp-mobile-nav__close" onclick="document.getElementById('hp-mobile-nav').close()" aria-label="Close menu">✕</button>
+    <nav>
+      <a href="/quote">Get a Quote</a>
+      <a href="/about">About</a>
+      <a href="/materials">Materials</a>
+      <a href="/opportunities">Network</a>
+      <a href="/blog">Blog</a>
+      <a href="/faq">FAQ</a>
+      <a href="/contact">Contact</a>
+      <a href="/shop">Shop</a>
+      <a href="https://oldgirl.3d3d.ca" target="_blank" rel="noopener">The Old Girl</a>
+    </nav>
+  </dialog>
+
+  <main id="main-content">
+
+    <!-- ══════════════════════════════════════
+         HERO — Full viewport, dark photo
+    ═══════════════════════════════════════════ -->
+    <section class="hp-hero" aria-label="3D3D — Home">
+      <div class="hp-hero__bg" aria-hidden="true"></div>
+      <div class="hp-hero__grain" aria-hidden="true"></div>
+      <div class="hp-hero__vignette" aria-hidden="true"></div>
+      <div class="hp-hero__content">
+        <p class="hp-hero__eyebrow">FREDERICTON, NB · CANADA · WORLDWIDE</p>
+        <h1 class="hp-hero__h1">
+          FOR THE<br>
+          ONES THAT<br>
+          GIVE A DAMN.
+        </h1>
+        <p class="hp-hero__sub">
+          Custom fabrication. Software. Community.<br>
+          Built from the ground up with nothing but grit.
+        </p>
+        <div class="hp-hero__ctas">
+          <a href="/quote" class="hp-btn hp-btn--primary">GET A QUOTE</a>
+          <button class="hp-btn hp-btn--outline-light" onclick="document.getElementById('dlg-events').showModal()">HIRE FOR EVENTS</button>
+          <a href="/opportunities" class="hp-btn hp-btn--ghost-light">JOIN THE NETWORK</a>
+        </div>
+      </div>
+      <div class="hp-hero__scroll-hint" aria-hidden="true">
+        <span class="hp-hero__scroll-label">SCROLL</span>
+        <div class="hp-hero__scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         01 — CUSTOM FABRICATION (light)
+         Image left · Content right
+    ═══════════════════════════════════════════ -->
+    <section class="hp-split hp-split--light" aria-labelledby="hp-fab-title">
+      <div class="hp-split__img">
+        <img
+          src="/media/workshop/printer-action-cf.jpg"
+          alt="Carbon fiber filament running on a 3D printer"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <div class="hp-split__content">
+        <p class="hp-eyebrow">CUSTOM FABRICATION</p>
+        <h2 class="hp-h2" id="hp-fab-title">Need a part<br>that doesn't exist?</h2>
+        <p class="hp-text">
+          Marine hardware, automotive restoration, prototypes, replacement components.
+          Six printers. Deployable anywhere. Most jobs turn around same day.
+        </p>
+        <div class="hp-chips">
+          <span>Prusa MK2.5</span>
+          <span>Bambu A1</span>
+          <span>Creality K1</span>
+          <span>BIBO 2</span>
+          <span>Anycubic Kobra 2 Max</span>
+        </div>
+        <a href="/quote" class="hp-btn hp-btn--teal">START A QUOTE →</a>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         02 — THE STORY (light, flipped)
+         Content left · Image right
+    ═══════════════════════════════════════════ -->
+    <section class="hp-split hp-split--story hp-split--flip" aria-labelledby="hp-story-title">
+      <div class="hp-split__content">
+        <p class="hp-eyebrow">THE STORY</p>
+        <h2 class="hp-h2" id="hp-story-title">Made from nothing.<br>Built for everyone.</h2>
+        <p class="hp-text">
+          Ankylosing spondylitis ended a decade of trucking. Instead of disability, I chose
+          reinvention — self-teaching fabrication, software, and AI from the ground up.
+          Ten years sober. Still building.
+        </p>
+        <p class="hp-text">
+          If you don't fit a normal job, you're exactly who belongs here.
+          The unheard, the unnamed. People with heart.
+          <em>We give a damn.</em>
+        </p>
+        <a href="/about" class="hp-btn hp-btn--outline-dark">READ THE FULL STORY →</a>
+      </div>
+      <div class="hp-split__img">
+        <img
+          src="/media/real/helm-close.jpg"
+          alt="At the helm offshore during a race"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         03 — EVENT HIRE (dark)
+         Image left · Content right
+    ═══════════════════════════════════════════ -->
+    <section class="hp-split hp-split--dark" aria-labelledby="hp-events-title">
+      <div class="hp-split__img">
+        <img
+          src="/media/real/race-morning-crew.jpg"
+          alt="Race morning — crew on deck preparing before the start"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <div class="hp-split__content">
+        <p class="hp-eyebrow hp-eyebrow--teal">EVENTS & DEPLOYMENT</p>
+        <h2 class="hp-h2 hp-h2--light" id="hp-events-title">Bring 3D3D<br>to your event.</h2>
+        <p class="hp-text hp-text--muted">
+          Regattas, car shows, expos, LARP, D&amp;D nights, conventions, marinas —
+          I show up with printers and cameras. Parts built on-site. Video documented.
+          The machines are part of the show.
+        </p>
+        <p class="hp-callout hp-callout--magenta">From $1,500 · Full-day deployments · Video documentation included</p>
+        <button class="hp-btn hp-btn--magenta" onclick="document.getElementById('dlg-events').showModal()">BOOK AN EVENT →</button>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         04 — SOFTWARE & INNOVATION (dark, flipped)
+         Content left · Image right
+    ═══════════════════════════════════════════ -->
+    <section class="hp-split hp-split--dark hp-split--flip" aria-labelledby="hp-software-title">
+      <div class="hp-split__content">
+        <p class="hp-eyebrow hp-eyebrow--teal">SOFTWARE · AI · ROBOTICS</p>
+        <h2 class="hp-h2 hp-h2--light" id="hp-software-title">We build<br>digital too.</h2>
+        <p class="hp-text hp-text--muted">
+          Custom websites, apps, AI integrations, SaaS tools. Robotics, R&amp;D, automation.
+          Built fast for local companies, community makers, anyone that needs it done right.
+          We can ship in a weekend. You keep it forever.
+        </p>
+        <button class="hp-btn hp-btn--outline-light" onclick="document.getElementById('dlg-software').showModal()">VIEW PROJECTS →</button>
+      </div>
+      <div class="hp-split__img">
+        <img
+          src="/media/backgrounds/makers-neon-workshop.jpg"
+          alt="Maker workshop lit with neon and activity"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         05 — THE NETWORK (light)
+         Image left · Content right
+    ═══════════════════════════════════════════ -->
+    <section class="hp-split hp-split--light" aria-labelledby="hp-network-title">
+      <div class="hp-split__img">
+        <img
+          src="/images/splash-bg-network.png"
+          alt="3D3D cooperative network visualization"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <div class="hp-split__content">
+        <p class="hp-eyebrow">THE NETWORK</p>
+        <h2 class="hp-h2" id="hp-network-title">3D3D connects<br>Canada.</h2>
+        <p class="hp-text">
+          First makers in get a free website at <strong>yourname.3d3d.ca</strong>.
+          Node operator program for distributed printing across the country.
+          Open source everything. Built to share.
+        </p>
+        <p class="hp-text">
+          Makers, coders, artists, photographers, robotics techs, AI specialists —
+          if you create things, there's a place for you here.
+        </p>
+        <a href="/opportunities" class="hp-btn hp-btn--teal">JOIN THE NETWORK →</a>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         06 — THE OLD GIRL (light, flipped)
+         Content left · Image right
+    ═══════════════════════════════════════════ -->
+    <section class="hp-split hp-split--warm hp-split--flip" aria-labelledby="hp-oldgirl-title">
+      <div class="hp-split__content">
+        <p class="hp-eyebrow">COMMUNITY PROJECT</p>
+        <h2 class="hp-h2" id="hp-oldgirl-title">The Old Girl.</h2>
+        <p class="hp-text">
+          A Prusa MK2 rescued for $50 — someone was going to throw it away.
+          It belongs to the community now. Pick a file, we print it.
+          Pay for filament and shipping only. No markup. No admin fee. No nonsense.
+        </p>
+        <div class="hp-chips hp-chips--muted">
+          <span>Running 24/7</span>
+          <span>Community-modded</span>
+          <span>Donations welcome</span>
+          <span>Wishlist open</span>
+        </div>
+        <a href="https://oldgirl.3d3d.ca" class="hp-btn hp-btn--outline-dark" target="_blank" rel="noopener noreferrer">SEND A PRINT JOB →</a>
+      </div>
+      <div class="hp-split__img">
+        <img
+          src="/media/workshop/printer-bed-benchy.jpg"
+          alt="Printer bed with a benchy print in progress"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         GALLERY STRIP (dark)
+    ═══════════════════════════════════════════ -->
+    <section class="hp-gallery" aria-label="Photo gallery preview">
+      <div class="hp-gallery__strip" aria-hidden="true">
+        <img src="/media/real/fleet-aerial.jpg" alt="" loading="lazy" />
+        <img src="/media/workshop/machine-parts-flatlay.jpg" alt="" loading="lazy" />
+        <img src="/media/real/golden-hour-01.jpg" alt="" loading="lazy" />
+        <img src="/media/workshop/blue-prototype-part.jpg" alt="" loading="lazy" />
+        <img src="/media/real/offshore-day-01.jpg" alt="" loading="lazy" />
+        <img src="/media/workshop/modular-parts-flatlay.jpg" alt="" loading="lazy" />
+        <img src="/media/real/race-finish-01.jpg" alt="" loading="lazy" />
+        <img src="/media/workshop/winch-cup-holder.jpg" alt="" loading="lazy" />
+        <img src="/media/real/dawn-approach.jpg" alt="" loading="lazy" />
+        <img src="/media/workshop/custom-tv-mount.jpg" alt="" loading="lazy" />
+      </div>
+      <div class="hp-gallery__cta">
+        <p class="hp-gallery__headline">
+          4,000+ photos. 20,000+ nautical miles.<br>One journey.
+        </p>
+        <div class="hp-gallery__btns">
+          <a href="/gallery" class="hp-btn hp-btn--outline-light">VIEW GALLERY →</a>
+          <a
+            href="https://ko-fi.com/3d3dca"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hp-btn hp-btn--kofi"
+          >☕ FOLLOW ON KO-FI</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SPONSOR THE JOURNEY (light)
+    ═══════════════════════════════════════════ -->
+    <section class="hp-sponsor" aria-labelledby="hp-sponsor-title">
+      <div class="hp-sponsor__header">
+        <p class="hp-eyebrow hp-eyebrow--center">SPONSORSHIPS</p>
+        <h2 class="hp-h2" id="hp-sponsor-title">Sponsor the journey.</h2>
+        <p class="hp-text hp-text--centered">
+          Support the cooperative. Sponsor an event. Become a patron.
+          Every dollar goes back into the machines, the community, and the mission.
+        </p>
+      </div>
+      <div class="hp-tiers">
+
+        <div class="hp-tier">
+          <div class="hp-tier__header">
+            <span class="hp-tier__price">$100</span>
+            <span class="hp-tier__name">SUPPORTER</span>
+          </div>
+          <ul class="hp-tier__list">
+            <li>$25 in free prints</li>
+            <li>Name in site credits</li>
+            <li>Ko-fi thank-you post</li>
+          </ul>
+          <button class="hp-btn hp-btn--outline-dark hp-btn--full" onclick="document.getElementById('dlg-sponsor').showModal()">SPONSOR →</button>
+        </div>
+
+        <div class="hp-tier hp-tier--featured">
+          <span class="hp-tier__badge">MOST POPULAR</span>
+          <div class="hp-tier__header">
+            <span class="hp-tier__price">$500</span>
+            <span class="hp-tier__name">PARTNER</span>
+          </div>
+          <ul class="hp-tier__list">
+            <li>$100 in free prints</li>
+            <li>2 t-shirts + 2 hats</li>
+            <li>1-on-1 consultation call</li>
+            <li>One free software build / year</li>
+            <li>Social feature + dedicated post</li>
+          </ul>
+          <button class="hp-btn hp-btn--teal hp-btn--full" onclick="document.getElementById('dlg-sponsor').showModal()">SPONSOR →</button>
+        </div>
+
+        <div class="hp-tier">
+          <div class="hp-tier__header">
+            <span class="hp-tier__price">CUSTOM</span>
+            <span class="hp-tier__name">INVESTOR</span>
+          </div>
+          <ul class="hp-tier__list">
+            <li>Custom package</li>
+            <li>Event co-branding</li>
+            <li>Equity conversation welcome</li>
+            <li>Dedicated support channel</li>
+          </ul>
+          <button class="hp-btn hp-btn--magenta hp-btn--full" onclick="document.getElementById('dlg-sponsor').showModal()">LET'S TALK →</button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="hp-footer">
+    <div class="hp-footer__inner">
+      <a href="/" aria-label="3D3D Home">
+        <img src="/media/brand/3d3d-logo.svg" alt="3D3D" width="72" height="30" class="hp-footer__logo" />
+      </a>
+      <nav class="hp-footer__nav" aria-label="Footer navigation">
+        <a href="/quote">Quote</a>
+        <a href="/about">About</a>
+        <a href="/materials">Materials</a>
+        <a href="/opportunities">Network</a>
+        <a href="/blog">Blog</a>
+        <a href="/faq">FAQ</a>
+        <a href="/contact">Contact</a>
+        <a href="/shop">Shop</a>
+        <a href="https://oldgirl.3d3d.ca" target="_blank" rel="noopener">Old Girl</a>
+        <a href="https://ko-fi.com/3d3dca" target="_blank" rel="noopener">Ko-fi</a>
+      </nav>
+      <p class="hp-footer__copy">
+        © 2025 3D3D Atlantic Cooperative · Fredericton, NB, Canada · Open Source · Built with grit.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════
+       DIALOGS
+  ═══════════════════════════════════════════ -->
+
+  <!-- Events Dialog -->
+  <dialog id="dlg-events" class="hp-dialog">
+    <button class="hp-dialog__close" onclick="this.closest('dialog').close()" aria-label="Close">✕</button>
+    <p class="hp-eyebrow">BOOK AN EVENT</p>
+    <h3 class="hp-dialog__title">Hire Ken for your event.</h3>
+    <p>Regattas, car shows, expos, conventions, LARP nights, D&D sessions, marinas, community gatherings — I show up with printers, cameras, and the will to build.</p>
+    <p>Fill out a quick inquiry and I'll get back to you within 24 hours.</p>
+    <a href="/book" class="hp-btn hp-btn--teal">BOOKING FORM →</a>
+    <a href="/contact?subject=event-hire" class="hp-btn hp-btn--ghost">OR SEND A MESSAGE →</a>
+  </dialog>
+
+  <!-- Software Dialog -->
+  <dialog id="dlg-software" class="hp-dialog">
+    <button class="hp-dialog__close" onclick="this.closest('dialog').close()" aria-label="Close">✕</button>
+    <p class="hp-eyebrow">SOFTWARE & PROJECTS</p>
+    <h3 class="hp-dialog__title">Digital work.</h3>
+    <p>Websites, apps, AI tools, SaaS, automation, robotics. Portfolio page coming soon — in the meantime, reach out to talk about what you need built.</p>
+    <p>We can usually scope, plan, and ship in a single sprint.</p>
+    <a href="/contact?subject=software-project" class="hp-btn hp-btn--teal">START A CONVERSATION →</a>
+    <a href="https://github.com/3d3dcanada" target="_blank" rel="noopener" class="hp-btn hp-btn--outline-dark">VIEW GITHUB →</a>
+  </dialog>
+
+  <!-- Sponsor Dialog -->
+  <dialog id="dlg-sponsor" class="hp-dialog">
+    <button class="hp-dialog__close" onclick="this.closest('dialog').close()" aria-label="Close">✕</button>
+    <p class="hp-eyebrow">SPONSORSHIPS</p>
+    <h3 class="hp-dialog__title">Sponsor the journey.</h3>
+    <p>Stripe payment links are coming online soon. For now, reach out directly — we'll put together a package that works for your goals and budget.</p>
+    <p>VCs, brands, individual supporters, and community members are all welcome.</p>
+    <a href="/contact?subject=sponsorship" class="hp-btn hp-btn--magenta">REACH OUT →</a>
+    <a href="https://ko-fi.com/3d3dca" target="_blank" rel="noopener" class="hp-btn hp-btn--kofi">☕ SUPPORT ON KO-FI</a>
+  </dialog>
+
+  <!-- ══════════════════════════════════════
+       SCRIPTS
+  ═══════════════════════════════════════════ -->
   <script is:inline>
-    (() => {
-      document.body.dataset.splashTheme = 'dark';
+    // Header: transparent over hero → opaque on scroll
+    (function () {
+      var header = document.getElementById('hp-header');
+      var hero = document.querySelector('.hp-hero');
+      if (!header || !hero) return;
+
+      function update() {
+        var heroBottom = hero.getBoundingClientRect().bottom;
+        header.classList.toggle('hp-header--scrolled', heroBottom < 80);
+      }
+      update();
+      window.addEventListener('scroll', update, { passive: true });
     })();
+
+    // Close dialogs on backdrop click
+    document.querySelectorAll('.hp-dialog').forEach(function(dlg) {
+      dlg.addEventListener('click', function(e) {
+        if (e.target === dlg) dlg.close();
+      });
+    });
+
+    // Mobile menu
+    var menuBtn = document.getElementById('hp-menu-btn');
+    var mobileNav = document.getElementById('hp-mobile-nav');
+    if (menuBtn && mobileNav) {
+      menuBtn.addEventListener('click', function() {
+        mobileNav.showModal();
+        menuBtn.setAttribute('aria-expanded', 'true');
+      });
+      mobileNav.addEventListener('close', function() {
+        menuBtn.setAttribute('aria-expanded', 'false');
+      });
+      mobileNav.addEventListener('click', function(e) {
+        if (e.target === mobileNav) mobileNav.close();
+      });
+    }
   </script>
 
-  <section id="home" class="splash-home" data-section>
-    <SplashOrbit client:load />
-  </section>
-
-  <section class="splash-nav-section surface-panel">
-    <div class="splash-nav-container">
-      <div class="splash-nav-grid">
-        <a href="/shop" class="splash-nav-item">Shop</a>
-        <a href="/quote" class="splash-nav-item">Services</a>
-        <a href="/materials" class="splash-nav-item">Materials</a>
-        <a href="/about" class="splash-nav-item">About</a>
-        <a href="/opportunities" class="splash-nav-item">Network</a>
-        <a href="/media" class="splash-nav-item">Media</a>
-        <a href="/blog" class="splash-nav-item">Blog</a>
-        <a href="/faq" class="splash-nav-item">FAQ</a>
-      </div>
-    </div>
-  </section>
-</BaseLayout>
+</body>
+</html>
 
 <style>
-  .splash-nav-section {
-    padding-block: 4rem;
-    border-top: 1px solid var(--color-border-subtle);
+  /* ══════════════════════════════════════════════
+     3D3D HOMEPAGE STYLES
+     Mixed light/dark · Alternating sections
+  ═════════════════════════════════════════════════ */
+
+  /* ── BASE ── */
+  .hp {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background: #F6F7FA;
+    color: #1A1D21;
+    font-family: var(--font-body, 'Instrument Sans', system-ui, sans-serif);
   }
-  .splash-nav-container {
-    width: min(100% - 3rem, 1200px);
+
+  /* ── HEADER ── */
+  .hp-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0 clamp(1.25rem, 4vw, 3rem);
+    background: rgba(10, 14, 19, 0.0);
+    border-bottom: 1px solid transparent;
+    transition: background 0.35s ease, border-color 0.35s ease;
+  }
+  .hp-header--scrolled {
+    background: rgba(246, 247, 250, 0.92);
+    border-bottom-color: rgba(0, 0, 0, 0.07);
+    backdrop-filter: blur(16px);
+  }
+
+  .hp-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1400px;
     margin: 0 auto;
   }
-  .splash-nav-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 1rem;
+  .hp-nav__logo img { display: block; }
+
+  .hp-nav__links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    font-family: var(--font-tech, 'Archivo', system-ui, sans-serif);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
-  .splash-nav-item {
+  .hp-nav__links a {
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .hp-nav__links a:hover { color: #fff; }
+  .hp-header--scrolled .hp-nav__links a { color: #4A5568; }
+  .hp-header--scrolled .hp-nav__links a:hover { color: var(--color-teal-primary, #40C4C4); }
+
+  .hp-nav__cta {
+    padding: 0.5rem 1.1rem;
+    background: var(--color-teal-primary, #40C4C4);
+    color: #0F1112 !important;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.2s !important;
+  }
+  .hp-nav__cta:hover { background: #53D3D3 !important; transform: translateY(-1px); }
+
+  .hp-nav__menu-btn {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+  .hp-nav__menu-btn span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+  .hp-header--scrolled .hp-nav__menu-btn span { background: #1A1D21; }
+
+  /* ── MOBILE NAV ── */
+  .hp-mobile-nav {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    max-width: 320px;
+    height: 100%;
+    max-height: 100%;
+    margin: 0 0 0 auto;
+    border: none;
+    background: #0F1112;
+    padding: 5rem 2.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-left: 1px solid rgba(255,255,255,0.06);
+  }
+  .hp-mobile-nav::backdrop { background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
+  .hp-mobile-nav__close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.5);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.4rem;
+    transition: color 0.2s;
+  }
+  .hp-mobile-nav__close:hover { color: #fff; }
+  .hp-mobile-nav nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .hp-mobile-nav nav a {
+    display: block;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    font-family: var(--font-tech, 'Archivo', sans-serif);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .hp-mobile-nav nav a:hover { color: var(--color-teal-primary, #40C4C4); }
+
+  /* ── HERO ── */
+  .hp-hero {
+    position: relative;
+    height: 100dvh;
+    min-height: 600px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1.25rem 1rem;
-    background: var(--color-surface-secondary);
-    border: 1px solid var(--color-border-default);
-    border-radius: 2px;
-    font-family: var(--font-tech);
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--color-text-primary);
-    text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    overflow: hidden;
   }
-  .splash-nav-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
-    border-color: var(--color-teal-primary);
-    color: var(--color-teal-primary);
+  .hp-hero__bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('/media/real/open-ocean-01.jpg');
+    background-size: cover;
+    background-position: center 40%;
+    animation: hp-drift 28s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+  @keyframes hp-drift {
+    from { transform: scale(1.05) translate(0, 0); }
+    to   { transform: scale(1.05) translate(-1.5%, 0.8%); }
+  }
+  .hp-hero__vignette {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(10,14,19,0.2) 0%, rgba(10,14,19,0.72) 100%),
+      radial-gradient(ellipse at 50% 110%, rgba(10,14,19,0.7), transparent 65%);
+  }
+  .hp-hero__grain {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 180px;
+  }
+  .hp-hero__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #fff;
+    padding: 0 clamp(1.25rem, 5vw, 4rem);
+    max-width: 860px;
+  }
+  .hp-hero__eyebrow {
+    font-family: var(--font-tech, 'Archivo', sans-serif);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin: 0 0 1.6rem;
+  }
+  .hp-hero__h1 {
+    font-family: var(--font-display, 'Archivo Black', sans-serif);
+    font-size: clamp(3.2rem, 2rem + 8vw, 9.5rem);
+    font-weight: 900;
+    line-height: 0.88;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0 0 2rem;
+  }
+  .hp-hero__sub {
+    font-size: clamp(1rem, 0.88rem + 0.4vw, 1.2rem);
+    line-height: 1.65;
+    color: rgba(255,255,255,0.65);
+    margin: 0 0 2.8rem;
+  }
+  .hp-hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    justify-content: center;
+  }
+  .hp-hero__scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .hp-hero__scroll-label {
+    font-family: var(--font-tech, 'Archivo', sans-serif);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+  }
+  .hp-hero__scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+    animation: hp-scroll-pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes hp-scroll-pulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50%       { opacity: 1; transform: scaleY(1.15); }
+  }
+
+  /* ── BUTTONS ── */
+  .hp-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.75rem;
+    font-family: var(--font-tech, 'Archivo', sans-serif);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    background: none;
+    line-height: 1;
+    white-space: nowrap;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease,
+                color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+  }
+  .hp-btn:hover { transform: translateY(-2px); }
+  .hp-btn:active { transform: translateY(0); }
+
+  .hp-btn--primary {
+    background: var(--color-teal-primary, #40C4C4);
+    color: #0F1112;
+    border-color: var(--color-teal-primary, #40C4C4);
+    box-shadow: 0 6px 24px rgba(64,196,196,0.35);
+  }
+  .hp-btn--primary:hover { background: #53D3D3; box-shadow: 0 10px 32px rgba(64,196,196,0.45); }
+
+  .hp-btn--teal {
+    background: var(--color-teal-primary, #40C4C4);
+    color: #0F1112;
+    border-color: var(--color-teal-primary, #40C4C4);
+  }
+  .hp-btn--teal:hover { background: #53D3D3; }
+
+  .hp-btn--magenta {
+    background: var(--color-magenta-primary, #E84A8A);
+    color: #fff;
+    border-color: var(--color-magenta-primary, #E84A8A);
+    box-shadow: 0 6px 20px rgba(232,74,138,0.3);
+  }
+  .hp-btn--magenta:hover { background: #F05A98; box-shadow: 0 10px 28px rgba(232,74,138,0.42); }
+
+  .hp-btn--outline-light {
+    background: transparent;
+    color: #fff;
+    border-color: rgba(255,255,255,0.45);
+  }
+  .hp-btn--outline-light:hover { border-color: #fff; background: rgba(255,255,255,0.07); }
+
+  .hp-btn--ghost-light {
+    background: transparent;
+    color: rgba(255,255,255,0.55);
+    border-color: transparent;
+  }
+  .hp-btn--ghost-light:hover { color: #fff; }
+
+  .hp-btn--outline-dark {
+    background: transparent;
+    color: #1A1D21;
+    border-color: rgba(26,29,33,0.45);
+  }
+  .hp-btn--outline-dark:hover { background: #1A1D21; color: #fff; border-color: #1A1D21; }
+
+  .hp-btn--ghost {
+    background: transparent;
+    color: #6B7280;
+    border-color: transparent;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .hp-btn--ghost:hover { color: var(--color-teal-primary, #40C4C4); }
+
+  .hp-btn--kofi {
+    background: #FF5E5B;
+    color: #fff;
+    border-color: #FF5E5B;
+  }
+  .hp-btn--kofi:hover { background: #FF7470; }
+
+  .hp-btn--full { width: 100%; justify-content: center; }
+  .hp-btn--sm   { padding: 0.6rem 1.2rem; font-size: 0.68rem; }
+
+  /* ── SPLIT SECTIONS ── */
+  .hp-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: clamp(500px, 75vh, 720px);
+  }
+  .hp-split--flip > :first-child { order: 2; }
+  .hp-split--flip > :last-child  { order: 1; }
+
+  .hp-split--light  { background: #F6F7FA; }
+  .hp-split--story  { background: #F0FAF9; } /* very subtle teal tint for the personal story */
+  .hp-split--warm   { background: #FAF8F5; } /* subtle warm for old girl */
+  .hp-split--dark   { background: #0F1112; }
+
+  .hp-split__img {
+    position: relative;
+    overflow: hidden;
+  }
+  .hp-split__img img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+  }
+  .hp-split:hover .hp-split__img img { transform: scale(1.04); }
+
+  .hp-split__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: clamp(3rem, 6vw, 6rem) clamp(2.5rem, 5vw, 5rem);
+  }
+
+  /* ── TYPOGRAPHY ── */
+  .hp-eyebrow {
+    font-family: var(--font-tech, 'Archivo', sans-serif);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-teal-primary, #40C4C4);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0;
+  }
+  .hp-eyebrow::before {
+    content: '';
+    width: 2rem;
+    height: 2px;
+    background: currentColor;
+    flex-shrink: 0;
+    display: inline-block;
+  }
+  .hp-eyebrow--teal  { color: var(--color-teal-primary, #40C4C4); }
+  .hp-eyebrow--dim   { color: rgba(255,255,255,0.35); }
+  .hp-eyebrow--center {
+    justify-content: center;
+  }
+  .hp-eyebrow--center::before { display: none; }
+
+  .hp-h2 {
+    font-family: var(--font-display, 'Archivo Black', sans-serif);
+    font-size: clamp(2rem, 1.4rem + 3vw, 4rem);
+    font-weight: 900;
+    line-height: 0.93;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: #1A1D21;
+    margin: 0;
+  }
+  .hp-h2--light { color: #F6F7FA; }
+
+  .hp-text {
+    font-size: clamp(0.9rem, 0.82rem + 0.3vw, 1.05rem);
+    line-height: 1.78;
+    color: #4A5568;
+    margin: 0;
+  }
+  .hp-text--muted    { color: rgba(246, 247, 250, 0.6); }
+  .hp-text--centered { text-align: center; max-width: 52ch; margin: 0 auto; }
+  .hp-text em        { font-style: italic; }
+  .hp-text strong    { color: #1A1D21; font-weight: 700; }
+
+  .hp-callout {
+    font-family: var(--font-tech, 'Archivo', sans-serif);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .hp-callout--magenta { color: var(--color-magenta-primary, #E84A8A); }
+
+  .hp-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+  .hp-chips span {
+    padding: 0.28rem 0.75rem;
+    background: rgba(64,196,196,0.09);
+    border: 1px solid rgba(64,196,196,0.28);
+    border-radius: 2px;
+    font-family: var(--font-tech, 'Archivo', sans-serif);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-teal-primary, #40C4C4);
+  }
+  .hp-chips--muted span {
+    background: rgba(0,0,0,0.04);
+    border-color: rgba(0,0,0,0.12);
+    color: #6B7280;
+  }
+
+  /* ── GALLERY STRIP ── */
+  .hp-gallery {
+    background: #0F1112;
+    padding-block: clamp(4rem, 7vw, 7rem);
+    overflow: hidden;
+  }
+  .hp-gallery__strip {
+    display: flex;
+    gap: 0.4rem;
+    overflow-x: auto;
+    padding-inline: clamp(1.25rem, 4vw, 4rem);
+    scrollbar-width: none;
+    margin-bottom: 3.5rem;
+    -webkit-overflow-scrolling: touch;
+  }
+  .hp-gallery__strip::-webkit-scrollbar { display: none; }
+  .hp-gallery__strip img {
+    height: clamp(180px, 28vw, 320px);
+    width: auto;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 2px;
+    filter: saturate(0.8) brightness(0.9);
+    transition: filter 0.4s ease, transform 0.4s ease;
+  }
+  .hp-gallery__strip img:hover {
+    filter: saturate(1.1) brightness(1);
+    transform: scale(1.02);
+    z-index: 1;
+  }
+  .hp-gallery__cta {
+    text-align: center;
+    padding-inline: clamp(1.25rem, 4vw, 4rem);
+    display: grid;
+    gap: 2rem;
+    justify-items: center;
+  }
+  .hp-gallery__headline {
+    font-family: var(--font-display, 'Archivo Black', sans-serif);
+    font-size: clamp(1.2rem, 0.9rem + 1.5vw, 2.2rem);
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: rgba(255,255,255,0.68);
+    margin: 0;
+  }
+  .hp-gallery__btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  /* ── SPONSOR SECTION ── */
+  .hp-sponsor {
+    background: #F6F7FA;
+    padding-block: clamp(5rem, 9vw, 9rem);
+    padding-inline: clamp(1.25rem, 4vw, 4rem);
+  }
+  .hp-sponsor__header {
+    text-align: center;
+    max-width: 580px;
+    margin: 0 auto clamp(3rem, 5vw, 5rem);
+    display: grid;
+    gap: 1.25rem;
+    justify-items: center;
+  }
+  .hp-sponsor__header .hp-h2 { text-align: center; }
+
+  .hp-tiers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .hp-tier {
+    position: relative;
+    background: #fff;
+    border: 2px solid rgba(0,0,0,0.07);
+    border-radius: 2px;
+    padding: 2.25rem 2rem;
+    display: grid;
+    gap: 1.75rem;
+    align-content: start;
+    transition: box-shadow 0.3s, border-color 0.3s;
+  }
+  .hp-tier:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    border-color: rgba(0,0,0,0.12);
+  }
+  .hp-tier--featured {
+    border-color: var(--color-teal-primary, #40C4C4);
+    box-shadow: 0 8px 32px rgba(64,196,196,0.14);
+  }
+  .hp-tier--featured:hover {
+    box-shadow: 0 14px 48px rgba(64,196,196,0.22);
+    border-color: var(--color-teal-primary, #40C4C4);
+  }
+  .hp-tier__badge {
+    position: absolute;
+    top: 0;
+    right: 1.5rem;
+    transform: translateY(-50%);
+    background: var(--color-teal-primary, #40C4C4);
+    color: #0F1112;
+    font-family: var(--font-tech, 'Archivo', sans-serif);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.7rem;
+    border-radius: 2px;
+  }
+  .hp-tier__header {
+    display: grid;
+    gap: 0.3rem;
+  }
+  .hp-tier__price {
+    font-family: var(--font-display, 'Archivo Black', sans-serif);
+    font-size: clamp(1.8rem, 1.4rem + 1.5vw, 2.8rem);
+    font-weight: 900;
+    color: #1A1D21;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .hp-tier__name {
+    font-family: var(--font-tech, 'Archivo', sans-serif);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #9CA3AF;
+  }
+  .hp-tier__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.65rem;
+  }
+  .hp-tier__list li {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: #4A5568;
+    padding-left: 1.3rem;
+    position: relative;
+  }
+  .hp-tier__list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-teal-primary, #40C4C4);
+    font-weight: 900;
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  /* ── DIALOGS ── */
+  .hp-dialog {
+    position: fixed;
+    inset: 0;
+    width: min(100% - 2rem, 520px);
+    max-height: min(calc(100% - 4rem), 640px);
+    margin: auto;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 2px;
+    padding: 3rem;
+    background: #F6F7FA;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.22);
+    display: grid;
+    gap: 1.25rem;
+    align-content: start;
+    overflow-y: auto;
+  }
+  .hp-dialog::backdrop {
+    background: rgba(10,14,19,0.72);
+    backdrop-filter: blur(6px);
+  }
+  .hp-dialog__close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: #9CA3AF;
+    padding: 0.4rem;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+  .hp-dialog__close:hover { color: #1A1D21; }
+  .hp-dialog__title {
+    font-family: var(--font-display, 'Archivo Black', sans-serif);
+    font-size: clamp(1.4rem, 1rem + 1.5vw, 2rem);
+    font-weight: 900;
+    color: #1A1D21;
+    margin: 0;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    line-height: 1.05;
+  }
+  .hp-dialog p {
+    font-size: 0.93rem;
+    line-height: 1.75;
+    color: #4A5568;
+    margin: 0;
+  }
+
+  /* ── FOOTER ── */
+  .hp-footer {
+    background: #0F1112;
+    padding-block: clamp(3.5rem, 6vw, 5rem);
+    padding-inline: clamp(1.25rem, 4vw, 4rem);
+  }
+  .hp-footer__inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    gap: 2rem;
+  }
+  .hp-footer__logo { opacity: 0.55; transition: opacity 0.2s; }
+  .hp-footer__logo:hover { opacity: 0.9; }
+  .hp-footer__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 2rem;
+  }
+  .hp-footer__nav a {
+    font-family: var(--font-tech, 'Archivo', sans-serif);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.38);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .hp-footer__nav a:hover { color: var(--color-teal-primary, #40C4C4); }
+  .hp-footer__copy {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.2);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* ══════════════════════════════════════════════
+     RESPONSIVE
+  ═════════════════════════════════════════════════ */
+  @media (max-width: 900px) {
+    .hp-split {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+    /* Always: image on top, content below on mobile */
+    .hp-split > .hp-split__img  { order: 1 !important; height: clamp(260px, 45vw, 380px); }
+    .hp-split > .hp-split__content { order: 2 !important; }
+    .hp-split__img img { position: relative; height: 100%; width: 100%; }
+
+    .hp-tiers {
+      grid-template-columns: 1fr;
+      max-width: 480px;
+    }
+
+    .hp-nav__links { display: none; }
+    .hp-nav__menu-btn { display: flex; }
+  }
+
+  @media (max-width: 600px) {
+    .hp-hero__ctas { flex-direction: column; align-items: center; }
+    .hp-hero__ctas .hp-btn { width: 100%; max-width: 320px; justify-content: center; }
+    .hp-split__content { padding: 2.5rem 1.5rem; }
+    .hp-gallery__btns { flex-direction: column; align-items: center; }
+    .hp-dialog { padding: 2rem 1.5rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hp-hero__bg { animation: none; }
+    .hp-hero__scroll-line { animation: none; }
+    .hp-split:hover .hp-split__img img { transform: none; }
+    .hp-gallery__strip img:hover { transform: none; }
   }
 </style>

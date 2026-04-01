@@ -25,39 +25,25 @@ const timeline = [
     title: '3D3D Founded',
     body: 'Operations begin from an RV. Three printers running off a generator — $30 a day in gas, 35-degree heat. Daily printing, daily failing, daily rebuilding.',
     status: 'completed',
-    image: '/media/real/evening-fleet.jpg',
   },
   {
     date: 'March 2025 — March 2026',
     title: 'One Year of Daily Commitment',
     body: 'A full year of daily production. Every material tested. Every failure documented. Marine hardware, automotive restoration, custom fabrication. Building the portfolio one job at a time.',
     status: 'completed',
-    image: '/media/real/offshore-day-02.jpg',
   },
   {
     date: 'March 2026',
     title: 'Flagship Machine Acquired',
     body: 'After a year of documented daily fabrication work, 3D3D acquired its flagship enclosed CoreXY machine. Active chamber heating, automatic tool changing, and input shaping. Built for engineering-grade materials and offshore conditions.',
     status: 'active',
-    highlight: true,
-    image: '/media/real/golden-hour-01.jpg',
   },
   {
     date: 'June 2026',
     title: 'Newport-Bermuda Race — 120th Running',
     body: 'Aboard CSM the Mariner for the 120th running of one of offshore sailing\'s most demanding races. An enclosed CoreXY will be printing live — real parts, real problems, real conditions. Newport, Rhode Island to Bermuda. 635 nautical miles.',
     status: 'upcoming',
-    highlight: true,
-    image: '/media/real/race-morning-crew.jpg',
-    sailboat: true,
   },
-];
-
-const credentials = [
-  'Halifax → Antigua (duo passage, cat-one storm)',
-  'Multiple transatlantic passages',
-  'Two-day solo sail — Saint John River',
-  'Newport-Bermuda 2026',
 ];
 ---
 
@@ -67,612 +53,100 @@ const credentials = [
   schema={schema}
   activePath="/events"
 >
-  <section class="events-page">
+  <main class="hp-home">
 
-    <!-- ═══ HERO ═══ -->
-    <div class="events-hero">
-      <div class="events-hero__bg">
-        <img src="/media/real/afternoon-racing-02.jpg" alt="A sailboat moving fast through ocean swells during a race" loading="eager" decoding="async" />
+    <!-- Section 1: Hero -->
+    <section class="hp-section" style="--section-accent: #40c4c4;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/real/afternoon-racing-02.jpg'); background-position: center;"></div>
       </div>
-      <div class="events-shell">
-        <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Events'}]} />
-        <p class="events-eyebrow scroll-in-left">The Logbook</p>
-        <h1 class="events-title scroll-in">Races, Deployments<br />&amp; Live Projects</h1>
-        <p class="events-intro scroll-in">
-          Offshore racing is an exercise in controlled degradation. Things break. Spinnaker pole end fittings crack during night peels. Electronics brackets shatter when the hull slams into a Gulf Stream trough. Having a fabricator aboard changes the tactical outcome.
-        </p>
-      </div>
-    </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
 
-    <!-- ═══ TIMELINE ═══ -->
-    <div class="events-timeline-section">
-      <div class="events-shell">
-        <p class="events-section-eyebrow scroll-in-left">Timeline</p>
-        <h2 class="events-section-title scroll-in">The Campaign So Far</h2>
-
-        <div class="events-timeline">
-          {timeline.map((item, i) => (
-            <div class={`tl-item scroll-in ${item.highlight ? 'tl-item--highlight' : ''} ${item.status === 'active' ? 'tl-item--active' : ''} ${item.status === 'upcoming' ? 'tl-item--upcoming' : ''}`}>
-              <div class="tl-item__marker">
-                <div class={`tl-item__dot ${item.status === 'completed' ? 'tl-item__dot--done' : item.status === 'active' ? 'tl-item__dot--active' : 'tl-item__dot--upcoming'}`}></div>
-                {i < timeline.length - 1 && <div class="tl-item__line"></div>}
-              </div>
-              <div
-                class="tl-item__content"
-                style={item.highlight && item.image ? `background-image: linear-gradient(rgba(17,18,20,0.78), rgba(17,18,20,0.78)), url('${item.image}'); background-size: cover; background-position: center;` : ''}
-              >
-                {item.sailboat && (
-                  <svg class="tl-item__sailboat" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <line x1="24" y1="6" x2="24" y2="38" stroke="var(--color-teal-primary)" stroke-width="2.5" stroke-linecap="round"/>
-                    <polygon points="24,8 24,30 8,30" fill="var(--color-teal-primary)" opacity="0.85"/>
-                    <polygon points="24,14 24,30 38,30" fill="var(--color-teal-primary)" opacity="0.5"/>
-                    <path d="M6,38 Q24,34 42,38 L40,43 Q24,40 8,43 Z" fill="var(--color-teal-primary)" opacity="0.9"/>
-                  </svg>
-                )}
-                <span class={`tl-item__date ${item.highlight ? 'tl-item__date--light' : ''}`}>{item.date}</span>
-                <h3 class={`tl-item__title ${item.highlight ? 'tl-item__title--light' : ''}`}>{item.title}</h3>
-                <p class={`tl-item__body ${item.highlight ? 'tl-item__body--light' : ''}`}>{item.body}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ NEWPORT-BERMUDA FEATURE ═══ -->
-    <div class="events-feature">
-      <div class="events-shell">
-        <div class="events-feature__inner">
-          <div class="events-feature__copy">
-            <p class="events-eyebrow" style="padding-top:0;">Newport-Bermuda 2026</p>
-            <h2 class="events-feature__title">635 nautical miles.<br />One printer aboard.</h2>
-            <p class="events-feature__body">
-              For the 120th running of one of offshore sailing's most demanding races, 3D3D is aboard with an enclosed CoreXY printing live. Real parts. Real problems. Real conditions. Two hundred miles offshore, you cannot call a rigger. You engineer the replacement while the boat holds its heading.
+      <div class="hp-section__shell hp-section__shell--start"> 
+        <article class="hp-card">
+          <div class="hp-card__inner">
+            <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Events'}]} />
+            <p class="hp-card__eyebrow mt-4">The Logbook</p>
+            <h1 class="hp-card__title mt-2 mb-4">Races, Deployments<br />& Live Projects</h1>
+            <p class="hp-card__copy hp-card__copy--lead">
+              Offshore racing is an exercise in controlled degradation. Things break. Spinnaker pole end fittings crack during night peels. Electronics brackets shatter when the hull slams into a Gulf Stream trough. Having a fabricator aboard changes the tactical outcome.
             </p>
-            <p class="events-feature__body">
-              This is not sponsorship. This is proof of deployment.
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Section 2: Timeline -->
+    <section class="hp-section" style="--section-accent: #e84a8a;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/real/evening-fleet.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start"> 
+        <article class="hp-card">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow">Timeline</p>
+            <h2 class="hp-card__title mt-2 mb-6">The Campaign So Far.</h2>
+            
+            <div class="space-y-6">
+              {timeline.map((item, i) => (
+                <div class="border-l-2 pl-4 pb-2" style={`border-color: ${item.status === 'upcoming' ? 'rgba(232, 74, 138, 0.4)' : '#e84a8a'};`}>
+                  <span class="font-tech text-xs font-bold uppercase tracking-widest" style={`color: ${item.status === 'upcoming' ? '#f07aa8' : '#e84a8a'};`}>{item.date}</span>
+                  <h3 class="font-display text-xl text-white mt-1 mb-2">{item.title}</h3>
+                  <p class="hp-card__copy text-sm">{item.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Section 3: Credentials & Actions -->
+    <section class="hp-section" style="--section-accent: #40c4c4;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/real/race-morning-crew.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start"> 
+        <article class="hp-card">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow">Offshore Log</p>
+            <h2 class="hp-card__title mt-2 mb-4">The ocean taught me everything I build for.</h2>
+            <p class="hp-card__copy mb-6">
+              My first time sailing was a duo passage with Christopher Stanmore-Major. Halifax, Nova Scotia to Antigua. No experience. We hit a cat-one storm — 70-knot sustained winds, 90-knot gusts. That trip taught me everything that matters about what breaks, why it breaks, and what you have to accept when there is no option to stop.
             </p>
-            <div class="events-feature__actions">
-              <a href="https://ko-fi.com/3d3dca" class="events-btn events-btn--primary" target="_blank" rel="noopener noreferrer">Support the Campaign →</a>
-              <a href="/contact" class="events-btn events-btn--ghost">Partner with 3D3D →</a>
+
+            <div class="flex flex-col gap-2 mb-8 bg-black/30 border border-white/5 p-4 rounded text-sm text-gray-300">
+              <span class="font-bold text-white mb-1">Credentials:</span>
+              <span>• Halifax → Antigua (duo passage, cat-one storm)</span>
+              <span>• Multiple transatlantic passages</span>
+              <span>• Two-day solo sail — Saint John River</span>
+              <span>• Newport-Bermuda 2026 (Upcoming)</span>
             </div>
+
+            <PageNextActions actions={[
+              {label: 'Get a Quote', href: '/quote', description: 'Custom prints for your event or project.', accent: 'teal'},
+              {label: 'Join the Network', href: '/network', description: 'Collaborate with 3D3D on future events.', accent: 'magenta'},
+            ]} />
           </div>
-          <div class="events-feature__images">
-            <div class="events-feature__img-wrap">
-              <img src="/media/real/sunrise-offshore.jpg" alt="Sunrise offshore during passage" loading="lazy" />
-            </div>
-            <div class="events-feature__img-wrap">
-              <img src="/media/real/golden-hour-01.jpg" alt="Golden hour sailing" loading="lazy" />
-            </div>
-          </div>
-        </div>
+        </article>
       </div>
-    </div>
+    </section>
 
-    <!-- ═══ SAILING CREDENTIALS ═══ -->
-    <div class="events-credentials">
-      <div class="events-shell">
-        <p class="events-section-eyebrow scroll-in-left">Offshore Log</p>
-        <h2 class="events-credentials__title scroll-in">The ocean taught me everything I build for.</h2>
-        <p class="events-credentials__body scroll-in">
-          My first time sailing was a duo passage with Christopher Stanmore-Major. Halifax, Nova Scotia to Antigua. No experience. We hit a cat-one storm — 70-knot sustained winds, 90-knot gusts. That trip taught me everything that matters about what breaks, why it breaks, and what you have to accept when there is no option to stop.
-        </p>
-        <div class="events-credentials__strip scroll-in">
-          {credentials.map(cred => (
-            <span class="events-credentials__item">{cred}</span>
-          ))}
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ AVAILABILITY ═══ -->
-    <div class="events-avail">
-      <div class="events-shell">
-        <div class="events-avail__inner">
-          <div>
-            <p class="events-section-eyebrow scroll-in-left" style="color: rgba(246,247,250,0.78);">Availability</p>
-            <h2 class="events-avail__title scroll-in">On-Site for 2026</h2>
-            <p class="events-avail__body scroll-in">
-              Available for race campaigns, refit support, trans-oceanic passages, and mechanical problems that live on a vessel. I integrate with the crew, stand my watch, and ensure the hardware survives the trip. Worldwide.
-            </p>
-            <div class="events-avail__actions scroll-in">
-              <a href="/contact" class="events-btn events-btn--teal">Contact Ken →</a>
-              <a href="/book" class="events-btn events-btn--ghost-light">Book a Call →</a>
-            </div>
-          </div>
-          <div class="events-avail__photo-wrap">
-            <img src="/media/real/helm-close.jpg" alt="At the helm" loading="lazy" />
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ NEXT ACTIONS ═══ -->
-    <div class="events-shell" style="padding-bottom: clamp(3rem, 5vw, 4rem);">
-      <PageNextActions actions={[
-        {label: 'Get a Quote', href: '/quote', description: 'Custom prints for your event or project.', accent: 'teal'},
-        {label: 'Join the Network', href: '/opportunities', description: 'Collaborate with 3D3D on future events.', accent: 'magenta'},
-        {label: 'Media Gallery', href: '/media', description: 'See past event coverage and build footage.', accent: 'orange'},
-      ]} />
-    </div>
-
-  </section>
+  </main>
 </BaseLayout>
 
 <style>
-  .events-page {
-    background: var(--color-surface-primary);
-    color: var(--color-text-primary);
-    min-height: 100svh;
-  }
-
-  .events-shell {
-    width: min(100% - clamp(1.5rem, 4vw, 4rem), 1000px);
-    margin: 0 auto;
-  }
-
-  /* ── Hero (dark with bg image) ── */
-  .events-hero {
-    position: relative;
-    background: #111214;
-    padding-block: clamp(6rem, 10vw, 10rem) clamp(3rem, 5vw, 5rem);
-    overflow: hidden;
-  }
-
-  .events-hero__bg {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
-
-  .events-hero__bg img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.2;
-  }
-
-  .events-hero .events-shell {
-    position: relative;
-    z-index: 1;
-  }
-
-  .events-eyebrow {
-    margin: 0;
-    font-family: var(--font-tech);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--color-teal-primary);
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
-
-  .events-eyebrow::before {
-    content: '';
-    width: 2.75rem;
-    height: 2px;
-    background: var(--color-teal-primary);
-    flex-shrink: 0;
-  }
-
-  .events-title {
-    margin: 1rem 0 1.2rem;
-    font-family: var(--font-display);
-    font-size: clamp(2.5rem, 1.5rem + 4vw, 5rem);
-    line-height: 0.95;
-    letter-spacing: -0.04em;
-    color: #FFFFFF;
-    text-transform: uppercase;
-  }
-
-  .events-intro {
-    margin: 0;
-    max-width: 40rem;
-    font-size: clamp(1rem, 0.9rem + 0.3vw, 1.1rem);
-    line-height: 1.75;
-    color: rgba(246, 247, 250, 0.7);
-  }
-
-  /* ── Section shared styles ── */
-  .events-section-eyebrow {
-    margin: 0;
-    font-family: var(--font-tech);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--color-teal-primary);
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
-
-  .events-section-eyebrow::before {
-    content: '';
-    width: 2rem;
-    height: 2px;
-    background: currentColor;
-    flex-shrink: 0;
-  }
-
-  .events-section-title {
-    margin: 0.8rem 0 2rem;
-    font-family: var(--font-display);
-    font-size: clamp(1.8rem, 1.2rem + 2vw, 2.8rem);
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    color: var(--color-text-primary);
-    text-transform: uppercase;
-  }
-
-  /* ── Timeline ── */
-  .events-timeline-section {
-    padding-block: clamp(4rem, 7vw, 6rem);
-  }
-
-  .events-timeline {
-    display: grid;
-    gap: 0;
-  }
-
-  .tl-item {
-    display: grid;
-    grid-template-columns: 2.5rem 1fr;
-    gap: 1rem;
-    padding-bottom: 2rem;
-  }
-
-  .tl-item__marker {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-  }
-
-  .tl-item__dot {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    border: 3px solid var(--color-text-primary);
-    background: var(--color-surface-primary);
-    flex-shrink: 0;
-    position: relative;
-    z-index: 1;
-  }
-
-  .tl-item__dot--done {
-    background: var(--color-text-primary);
-  }
-
-  .tl-item__dot--active {
-    background: var(--color-teal-primary);
-    border-color: var(--color-teal-primary);
-    box-shadow: 0 0 0 4px rgba(64, 196, 196, 0.2);
-  }
-
-  .tl-item__dot--upcoming {
-    background: var(--color-surface-primary);
-    border-color: rgba(17, 18, 20, 0.25);
-    border-style: dashed;
-  }
-
-  .tl-item__line {
-    width: 2px;
-    flex: 1;
-    background: rgba(17, 18, 20, 0.15);
-    min-height: 1.5rem;
-  }
-
-  .tl-item__content {
-    padding-bottom: 0.5rem;
-  }
-
-  .tl-item__date {
-    font-family: var(--font-tech);
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-teal-primary);
-  }
-
-  .tl-item__date--light {
-    color: rgba(64, 196, 196, 0.9);
-  }
-
-  .tl-item__title {
-    margin: 0.3rem 0 0.5rem;
-    font-family: var(--font-display);
-    font-size: 1.3rem;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: var(--color-text-primary);
-  }
-
-  .tl-item__title--light {
-    color: #FFFFFF;
-  }
-
-  .tl-item__body {
-    margin: 0;
-    font-size: 0.9rem;
-    line-height: 1.7;
+  .hp-card__copy {
     color: var(--color-text-secondary);
-    max-width: 36rem;
-  }
-
-  .tl-item__body--light {
-    color: rgba(246, 247, 250, 0.75);
-    max-width: none;
-  }
-
-  .tl-item--highlight .tl-item__content {
-    border: 2px solid rgba(64, 196, 196, 0.4);
-    border-radius: 2px;
-    padding: clamp(1.25rem, 2.5vw, 2rem);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.28);
-  }
-
-  .tl-item--active .tl-item__title {
-    color: var(--color-teal-primary);
-  }
-
-  .tl-item--active .tl-item__title--light {
-    color: var(--color-teal-primary);
-  }
-
-  .tl-item--upcoming .tl-item__content {
-    border-style: dashed;
-  }
-
-  /* Sailboat icon */
-  .tl-item__sailboat {
-    display: block;
-    width: 3rem;
-    height: 3rem;
-    margin-bottom: 0.75rem;
-  }
-
-  /* Non-highlight: subtle left teal border */
-  .tl-item:not(.tl-item--highlight) .tl-item__content {
-    border-left: 3px solid rgba(64, 196, 196, 0.3);
-    padding-left: 1rem;
-  }
-
-  /* ── Newport Feature (dark) ── */
-  .events-feature {
-    background: #111214;
-    padding-block: clamp(4rem, 7vw, 6rem);
-  }
-
-  .events-feature__inner {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: clamp(2rem, 4vw, 4rem);
-    align-items: center;
-  }
-
-  .events-feature__title {
-    margin: 0.8rem 0 1.2rem;
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 1.2rem + 3vw, 3.2rem);
-    line-height: 1;
-    letter-spacing: -0.03em;
-    color: #FFFFFF;
-    text-transform: uppercase;
-  }
-
-  .events-feature__body {
-    margin: 0 0 1rem;
-    font-size: 0.95rem;
-    line-height: 1.75;
-    color: rgba(246, 247, 250, 0.7);
-    max-width: 34rem;
-  }
-
-  .events-feature__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 1.5rem;
-  }
-
-  .events-feature__images {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .events-feature__img-wrap {
-    border: 3px solid rgba(64, 196, 196, 0.25);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-
-  .events-feature__img-wrap img {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.4s ease;
-  }
-
-  .events-feature__img-wrap:hover img {
-    transform: scale(1.03);
-  }
-
-  @media (max-width: 700px) {
-    .events-feature__inner {
-      grid-template-columns: 1fr;
-    }
-    .events-feature__images {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  /* ── Credentials ── */
-  .events-credentials {
-    background: #FFFFFF;
-    border-top: 3px solid #1A1A1A;
-    border-bottom: 3px solid #1A1A1A;
-    padding-block: clamp(4rem, 7vw, 6rem);
-  }
-
-  .events-credentials__title {
-    margin: 0.8rem 0 1.2rem;
-    font-family: var(--font-display);
-    font-size: clamp(1.8rem, 1.2rem + 2vw, 2.8rem);
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    color: var(--color-text-primary);
-    text-transform: uppercase;
-  }
-
-  .events-credentials__body {
-    margin: 0 0 2rem;
-    font-size: 0.95rem;
-    line-height: 1.75;
-    color: var(--color-text-secondary);
-    max-width: 38rem;
-  }
-
-  .events-credentials__strip {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-  }
-
-  .events-credentials__item {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.45rem 0.9rem;
-    background: var(--color-surface-primary);
-    border: 2px solid var(--color-text-primary);
-    border-radius: 2px;
-    font-family: var(--font-tech);
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-text-primary);
-  }
-
-  /* ── Availability (dark) ── */
-  .events-avail {
-    background: #111214;
-    padding-block: clamp(4rem, 7vw, 6rem);
-  }
-
-  .events-avail__inner {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap: clamp(2rem, 4vw, 4rem);
-    align-items: center;
-  }
-
-  .events-avail__title {
-    margin: 0.8rem 0 1.2rem;
-    font-family: var(--font-display);
-    font-size: clamp(1.8rem, 1.2rem + 2vw, 2.8rem);
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    color: #FFFFFF;
-    text-transform: uppercase;
-  }
-
-  .events-avail__body {
-    margin: 0;
-    font-size: 0.95rem;
-    line-height: 1.75;
-    color: rgba(246, 247, 250, 0.7);
-    max-width: 34rem;
-  }
-
-  .events-avail__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-
-  .events-avail__photo-wrap {
-    border: 3px solid rgba(64, 196, 196, 0.25);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-
-  .events-avail__photo-wrap img {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.4s ease;
-  }
-
-  .events-avail__photo-wrap:hover img {
-    transform: scale(1.03);
-  }
-
-  @media (max-width: 700px) {
-    .events-avail__inner {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  /* ── Buttons ── */
-  .events-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 3rem;
-    padding: 0.8rem 1.4rem;
-    border: 3px solid var(--color-text-primary);
-    border-radius: 2px;
-    font-family: var(--font-tech);
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-  }
-
-  .events-btn:hover {
-    transform: translateY(-2px);
-  }
-
-  .events-btn--primary {
-    background: var(--color-teal-primary);
-    color: #0F1112;
-    box-shadow: 0 10px 28px rgba(64, 196, 196, 0.25);
-  }
-
-  .events-btn--primary:hover {
-    box-shadow: 0 6px 20px rgba(64, 196, 196, 0.4);
-  }
-
-  .events-btn--ghost {
-    background: transparent;
-    color: #F6F7FA;
-    border-color: rgba(246, 247, 250, 0.25);
-  }
-
-  .events-btn--ghost:hover {
-    background: rgba(246, 247, 250, 0.06);
-  }
-
-  .events-btn--teal {
-    background: var(--color-teal-primary);
-    color: #0F1112;
-    box-shadow: 0 10px 28px rgba(64, 196, 196, 0.25);
-  }
-
-  .events-btn--ghost-light {
-    background: transparent;
-    color: var(--color-teal-primary);
-    border-color: rgba(64, 196, 196, 0.3);
-  }
-
-  .events-btn--ghost-light:hover {
-    background: rgba(64, 196, 196, 0.08);
   }
 </style>

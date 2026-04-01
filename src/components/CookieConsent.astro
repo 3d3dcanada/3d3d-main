@@ -1,0 +1,197 @@
+---
+/**
+ * PIPEDA / Quebec Law 25 compliant cookie consent banner.
+ * No dependencies. Pure HTML/CSS/JS. Blocks non-essential cookies until consent.
+ * Categories: Necessary (always on), Analytics (opt-in).
+ * No advertising cookies used.
+ */
+---
+
+<div id="cookie-consent" class="cc-banner" role="dialog" aria-label="Cookie consent" aria-modal="false" style="display: none;">
+  <div class="cc-inner">
+    <div class="cc-text">
+      <p class="cc-title">We respect your privacy</p>
+      <p class="cc-body">
+        This site uses essential cookies for functionality and optional analytics cookies to improve the experience.
+        No advertising or third-party tracking cookies are used. You can change your preferences at any time.
+        <a href="/privacy" class="cc-link">Privacy Policy</a> ·
+        <a href="/cookies" class="cc-link">Cookie Policy</a>
+      </p>
+    </div>
+    <div class="cc-actions">
+      <button id="cc-accept" class="cc-btn cc-btn--accept">Accept All</button>
+      <button id="cc-necessary" class="cc-btn cc-btn--necessary">Necessary Only</button>
+      <button id="cc-manage" class="cc-btn cc-btn--manage">Manage</button>
+    </div>
+    <div id="cc-details" class="cc-details" style="display: none;">
+      <label class="cc-toggle">
+        <input type="checkbox" checked disabled />
+        <span><strong>Necessary</strong> — Session, preferences, security. Always active.</span>
+      </label>
+      <label class="cc-toggle">
+        <input type="checkbox" id="cc-analytics" />
+        <span><strong>Analytics</strong> — Anonymous usage data to improve site performance. No personal identification.</span>
+      </label>
+      <button id="cc-save" class="cc-btn cc-btn--accept" style="margin-top: 0.75rem;">Save Preferences</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .cc-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: rgba(17, 18, 20, 0.96);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 2px solid rgba(64, 196, 196, 0.3);
+    padding: clamp(1rem, 2vw, 1.5rem);
+    animation: cc-slide-up 0.4s ease;
+  }
+  @keyframes cc-slide-up {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  .cc-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: grid;
+    gap: 1rem;
+  }
+  .cc-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #FFFFFF;
+  }
+  .cc-body {
+    margin: 0.3rem 0 0;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: rgba(246, 247, 250, 0.6);
+  }
+  .cc-link {
+    color: var(--color-teal-primary);
+    text-decoration: underline;
+  }
+  .cc-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .cc-btn {
+    min-height: 38px;
+    padding: 0.5rem 1.2rem;
+    border-radius: 2px;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+  .cc-btn--accept {
+    background: var(--color-teal-primary);
+    color: #0F1112;
+    border-color: var(--color-teal-primary);
+  }
+  .cc-btn--accept:hover { background: #53D3D3; }
+  .cc-btn--necessary {
+    background: transparent;
+    color: rgba(246, 247, 250, 0.7);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+  .cc-btn--necessary:hover { border-color: rgba(255, 255, 255, 0.4); }
+  .cc-btn--manage {
+    background: transparent;
+    color: rgba(246, 247, 250, 0.5);
+    border-color: transparent;
+    text-decoration: underline;
+  }
+  .cc-details {
+    display: grid;
+    gap: 0.5rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .cc-toggle {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    cursor: pointer;
+  }
+  .cc-toggle input {
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    accent-color: var(--color-teal-primary);
+    flex-shrink: 0;
+  }
+  .cc-toggle span {
+    font-size: 0.78rem;
+    color: rgba(246, 247, 250, 0.6);
+    line-height: 1.5;
+  }
+  .cc-toggle strong { color: #FFFFFF; }
+
+  @media (max-width: 640px) {
+    .cc-banner { padding-bottom: calc(1rem + env(safe-area-inset-bottom)); }
+    .cc-actions { flex-direction: column; }
+    .cc-btn { width: 100%; text-align: center; }
+  }
+</style>
+
+<script>
+  (() => {
+    const CONSENT_KEY = '3d3d_cookie_consent';
+    const banner = document.getElementById('cookie-consent');
+    const acceptBtn = document.getElementById('cc-accept');
+    const necessaryBtn = document.getElementById('cc-necessary');
+    const manageBtn = document.getElementById('cc-manage');
+    const saveBtn = document.getElementById('cc-save');
+    const detailsPanel = document.getElementById('cc-details');
+    const analyticsCheck = document.getElementById('cc-analytics') as HTMLInputElement | null;
+
+    if (!banner) return;
+
+    const stored = localStorage.getItem(CONSENT_KEY);
+    if (stored) {
+      try {
+        const prefs = JSON.parse(stored);
+        if (prefs.analytics) enableAnalytics();
+      } catch { /* corrupted — re-prompt */ showBanner(); }
+      return;
+    }
+
+    showBanner();
+
+    function showBanner() { banner!.style.display = 'block'; }
+    function hideBanner() { banner!.style.display = 'none'; }
+
+    function saveConsent(analytics: boolean) {
+      const consent = { necessary: true, analytics, timestamp: new Date().toISOString() };
+      localStorage.setItem(CONSENT_KEY, JSON.stringify(consent));
+      if (analytics) enableAnalytics();
+      hideBanner();
+    }
+
+    function enableAnalytics() {
+      // Future: load analytics script here when added
+      // Currently no analytics — this is the hook point
+      document.documentElement.dataset.analyticsConsent = 'granted';
+    }
+
+    acceptBtn?.addEventListener('click', () => saveConsent(true));
+    necessaryBtn?.addEventListener('click', () => saveConsent(false));
+    manageBtn?.addEventListener('click', () => {
+      if (detailsPanel) detailsPanel.style.display = detailsPanel.style.display === 'none' ? 'grid' : 'none';
+    });
+    saveBtn?.addEventListener('click', () => saveConsent(analyticsCheck?.checked ?? false));
+  })();
+</script>

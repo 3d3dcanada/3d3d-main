@@ -1,0 +1,454 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageNextActions from '../components/PageNextActions.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Join 3D3D — Free Website for Makers',
+  description: 'Join the 3D3D cooperative network. Get a free professional website, subdomain, and access to enterprise contracts.',
+  url: 'https://3d3d.ca/join',
+};
+---
+
+<BaseLayout title="Join the Network — Free Website for Makers | 3D3D" description="Get a free professional website, yourname.3d3d.ca subdomain, and access to enterprise-level contracts. Makers keep 75% of revenue." activePath="/network" schema={schema}>
+
+  <section class="join-page">
+
+    <div class="join-hero">
+      <div class="join-shell">
+        <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Community', href: '/community'}, {label: 'Join'}]} />
+        <p class="join-eyebrow scroll-in-left">Makers & Creators</p>
+        <h1 class="join-title scroll-in">Free Website.<br/>Your Name.<br/>Our Network.</h1>
+        <p class="join-intro scroll-in">
+          You build things. We build the infrastructure so people can find you. Join 3D3D and get a professional website on your own subdomain — <strong>yourname.3d3d.ca</strong> — fully hosted, fully yours, zero cost.
+        </p>
+      </div>
+    </div>
+
+    <div class="join-what">
+      <div class="join-shell">
+        <h2 class="join-section-title">What You Get</h2>
+        <div class="join-grid">
+          <div class="join-card scroll-in">
+            <div class="join-card__icon">&#127760;</div>
+            <h3 class="join-card__title">Your Own Website</h3>
+            <p class="join-card__body">
+              A professional Astro-powered site on <strong>yourname.3d3d.ca</strong>. Portfolio, services, contact form, blog. Hosted on Cloudflare — fast worldwide, SSL included, zero hosting fees.
+            </p>
+          </div>
+
+          <div class="join-card scroll-in">
+            <div class="join-card__icon">&#128176;</div>
+            <h3 class="join-card__title">75% Revenue Share</h3>
+            <p class="join-card__body">
+              Enterprise contracts routed to your node. We handle quoting, invoicing, client management, and global SEO. You print. You keep 75% of the gross.
+            </p>
+          </div>
+
+          <div class="join-card scroll-in">
+            <div class="join-card__icon">&#128101;</div>
+            <h3 class="join-card__title">Network Access</h3>
+            <p class="join-card__body">
+              Bulk material discounts. Cross-referral between nodes. Shared open-source tooling. Community support from operators who run real production hardware.
+            </p>
+          </div>
+
+          <div class="join-card scroll-in">
+            <div class="join-card__icon">&#128640;</div>
+            <h3 class="join-card__title">Marketing & Discovery</h3>
+            <p class="join-card__body">
+              Your work featured on the 3D3D platform. SEO-optimized city landing pages routing local traffic to your node. Social media amplification across all 3D3D channels.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="join-who">
+      <div class="join-shell">
+        <h2 class="join-section-title">Who We Want</h2>
+        <div class="join-roles">
+          <div class="join-role scroll-in">
+            <strong>3D Printer Operators</strong>
+            <span>FDM, SLA, SLS — any production-capable hardware</span>
+          </div>
+          <div class="join-role scroll-in">
+            <strong>CNC Machinists</strong>
+            <span>Metal and wood subtractive manufacturing</span>
+          </div>
+          <div class="join-role scroll-in">
+            <strong>Designers & Modelers</strong>
+            <span>CAD, parametric design, Fusion 360, Onshape, FreeCAD</span>
+          </div>
+          <div class="join-role scroll-in">
+            <strong>Developers</strong>
+            <span>Astro, React, TypeScript, Rust, open-source contributors</span>
+          </div>
+          <div class="join-role scroll-in">
+            <strong>Content Creators</strong>
+            <span>Photography, video, documentation, technical writing</span>
+          </div>
+          <div class="join-role scroll-in">
+            <strong>Artists & Sculptors</strong>
+            <span>Digital sculpting, miniatures, props, cosplay fabrication</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="join-form-section" id="apply">
+      <div class="join-shell">
+        <h2 class="join-section-title" style="color: #FFFFFF;">Apply to Join</h2>
+        <p class="join-form-sub">Fill this out. We review within 48 hours. If accepted, your site goes live within a week.</p>
+
+        <form action="https://formspree.io/f/mldlydbl" method="POST" class="join-form" data-analytics-submit="member_application">
+          <input type="hidden" name="_subject" value="New Member Application — 3D3D Network" />
+
+          <div class="join-form-grid">
+            <div class="join-field">
+              <label for="j-name">Full Name *</label>
+              <input type="text" id="j-name" name="name" required autocomplete="name" placeholder="Jane Doe" />
+            </div>
+            <div class="join-field">
+              <label for="j-email">Email *</label>
+              <input type="email" id="j-email" name="email" required autocomplete="email" placeholder="jane@example.com" />
+            </div>
+          </div>
+
+          <div class="join-form-grid">
+            <div class="join-field">
+              <label for="j-city">City / Region *</label>
+              <input type="text" id="j-city" name="city" required autocomplete="address-level2" placeholder="Halifax, NS" />
+            </div>
+            <div class="join-field">
+              <label for="j-subdomain">Requested Subdomain</label>
+              <div class="join-subdomain-wrap">
+                <input type="text" id="j-subdomain" name="subdomain" placeholder="yourname" pattern="[a-z0-9-]+" title="Lowercase letters, numbers, and hyphens only" />
+                <span class="join-subdomain-suffix">.3d3d.ca</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="join-field">
+            <label for="j-role">What do you make? *</label>
+            <select id="j-role" name="role" required>
+              <option value="">Select your primary skill</option>
+              <option value="3d-printing">3D Printing (FDM/SLA/SLS)</option>
+              <option value="cnc">CNC Machining</option>
+              <option value="design">CAD / 3D Modeling</option>
+              <option value="developer">Software Development</option>
+              <option value="content">Content Creation (Photo/Video)</option>
+              <option value="artist">Digital Art / Sculpting</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="join-field">
+            <label for="j-hardware">Describe your setup</label>
+            <textarea id="j-hardware" name="hardware" rows="4" placeholder="What machines do you run? What materials? What kind of work do you do? Links to portfolio or social media welcome."></textarea>
+          </div>
+
+          <div class="join-field">
+            <label for="j-website">Existing website or portfolio (optional)</label>
+            <input type="url" id="j-website" name="website" placeholder="https://your-portfolio.com" />
+          </div>
+
+          <div class="join-consent">
+            <label class="join-checkbox-wrap">
+              <input type="checkbox" name="consent_tos" required />
+              <span>I agree to the <a href="/terms" target="_blank">Terms of Service</a> and <a href="/privacy" target="_blank">Privacy Policy</a>. *</span>
+            </label>
+            <label class="join-checkbox-wrap">
+              <input type="checkbox" name="consent_casl" />
+              <span>I consent to receiving emails from 3D3D about network opportunities, updates, and community news per <a href="/casl" target="_blank">CASL</a>.</span>
+            </label>
+          </div>
+
+          <button type="submit" class="join-submit">Submit Application</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="join-shell" style="padding-bottom: clamp(3rem, 5vw, 4rem);">
+      <PageNextActions actions={[
+        {label: 'Operator Network', href: '/network', description: 'Already have production hardware? Apply as an operator node.', accent: 'teal'},
+        {label: 'Community', href: '/community', description: 'See our open-source repos and community projects.', accent: 'magenta'},
+      ]} />
+    </div>
+
+  </section>
+</BaseLayout>
+
+<style>
+  .join-page {
+    background: #F6F7FA;
+    color: #111214;
+    min-height: 100svh;
+  }
+  .join-shell {
+    width: min(100% - clamp(1.5rem, 4vw, 4rem), 900px);
+    margin: 0 auto;
+  }
+
+  .join-hero {
+    background: #111214;
+    padding-block: clamp(5rem, 8vw, 8rem) clamp(3rem, 5vw, 4rem);
+  }
+  .join-eyebrow {
+    margin: 0;
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-magenta-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .join-eyebrow::before {
+    content: '';
+    width: 2.75rem;
+    height: 2px;
+    background: currentColor;
+    flex-shrink: 0;
+  }
+  .join-title {
+    margin: 0.75rem 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 1.5rem + 4vw, 4.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    color: #FFFFFF;
+    text-transform: uppercase;
+  }
+  .join-intro {
+    margin: 1.25rem 0 0;
+    max-width: 38rem;
+    font-size: clamp(1rem, 0.94rem + 0.3vw, 1.12rem);
+    line-height: 1.75;
+    color: rgba(246, 247, 250, 0.7);
+  }
+  .join-intro strong {
+    color: var(--color-teal-primary);
+  }
+
+  .join-what {
+    padding-block: clamp(3rem, 6vw, 5rem);
+  }
+  .join-section-title {
+    margin: 0 0 1.5rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 1.2rem + 2vw, 2.8rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: #111214;
+    text-transform: uppercase;
+  }
+  .join-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+    gap: 1.2rem;
+  }
+  .join-card {
+    background: #FFFFFF;
+    border: 2px solid #1A1A1A;
+    border-radius: 2px;
+    padding: clamp(1.2rem, 2.5vw, 1.6rem);
+    display: grid;
+    gap: 0.6rem;
+    align-content: start;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .join-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(17, 18, 20, 0.1);
+  }
+  .join-card__icon { font-size: 1.6rem; line-height: 1; }
+  .join-card__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #111214;
+  }
+  .join-card__body {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: rgba(17, 18, 20, 0.6);
+  }
+  .join-card__body strong {
+    color: var(--color-teal-primary);
+  }
+
+  .join-who {
+    background: #FFFFFF;
+    border-top: 3px solid #1A1A1A;
+    border-bottom: 3px solid #1A1A1A;
+    padding-block: clamp(3rem, 6vw, 5rem);
+  }
+  .join-roles {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    gap: 0.8rem;
+  }
+  .join-role {
+    display: grid;
+    gap: 0.25rem;
+    padding: 1rem 1.2rem;
+    border: 1px solid rgba(26, 26, 26, 0.1);
+    border-radius: 2px;
+  }
+  .join-role strong {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    color: #111214;
+  }
+  .join-role span {
+    font-size: 0.82rem;
+    color: rgba(17, 18, 20, 0.55);
+  }
+
+  .join-form-section {
+    background: #111214;
+    padding-block: clamp(3rem, 6vw, 5rem);
+  }
+  .join-form-sub {
+    margin: 0 0 2rem;
+    font-size: 0.92rem;
+    color: rgba(246, 247, 250, 0.55);
+  }
+  .join-form {
+    display: grid;
+    gap: 1.2rem;
+  }
+  .join-form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+  @media (min-width: 640px) {
+    .join-form-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .join-field {
+    display: grid;
+    gap: 0.4rem;
+  }
+  .join-field label {
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(246, 247, 250, 0.6);
+  }
+  .join-field input,
+  .join-field textarea,
+  .join-field select {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    padding: 0.85rem;
+    border-radius: 2px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease;
+  }
+  .join-field input:focus,
+  .join-field textarea:focus,
+  .join-field select:focus {
+    outline: none;
+    border-color: var(--color-teal-primary);
+  }
+  .join-field select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23999' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.85rem center;
+    padding-right: 2.5rem;
+  }
+  .join-subdomain-wrap {
+    display: flex;
+    align-items: stretch;
+  }
+  .join-subdomain-wrap input {
+    flex: 1;
+    border-radius: 2px 0 0 2px;
+    border-right: 0;
+  }
+  .join-subdomain-suffix {
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-left: 0;
+    border-radius: 0 2px 2px 0;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: rgba(246, 247, 250, 0.5);
+    white-space: nowrap;
+  }
+
+  .join-consent {
+    display: grid;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+  }
+  .join-checkbox-wrap {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    cursor: pointer;
+  }
+  .join-checkbox-wrap input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    accent-color: var(--color-teal-primary);
+    flex-shrink: 0;
+  }
+  .join-checkbox-wrap span {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: rgba(246, 247, 250, 0.55);
+  }
+  .join-checkbox-wrap a {
+    color: var(--color-teal-primary);
+    text-decoration: underline;
+  }
+
+  .join-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 3.4rem;
+    padding: 0.95rem 2.4rem;
+    margin-top: 0.5rem;
+    background: var(--color-magenta-primary);
+    color: #FFFFFF;
+    border: 3px solid var(--color-magenta-primary);
+    border-radius: 2px;
+    font-family: var(--font-tech);
+    font-size: 0.84rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    box-shadow: 0 14px 32px rgba(232, 74, 138, 0.22);
+  }
+  .join-submit:hover {
+    background: #F05A9A;
+    box-shadow: 0 8px 24px rgba(232, 74, 138, 0.4);
+    transform: translateY(-2px);
+  }
+</style>

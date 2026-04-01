@@ -105,219 +105,95 @@ const schema = {
   schema={schema}
   activePath="/faq"
 >
-  <section class="faq-page">
-    <div class="faq-shell">
-      <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'FAQ'}]} />
-      <p class="faq-eyebrow scroll-in-left">Questions</p>
-      <h1 class="faq-title scroll-in">Frequently Asked</h1>
-      <p class="faq-intro scroll-in-fade scroll-delay-1">
-        If the answer is not here, ask the chatbot or contact me directly. I do not charge for assessments.
-      </p>
+  <main class="hp-home">
 
-      {faqs.map((cat) => (
-        <div class="faq-category scroll-in surface-panel">
-          <h2 class="faq-category__title">{cat.category}</h2>
-          <div class="faq-list">
-            {cat.items.map((item) => (
-              <details class="faq-item">
-                <summary class="faq-item__q">{item.q}</summary>
-                <p class="faq-item__a">{item.a}</p>
-              </details>
+    <!-- Section 1: Hero -->
+    <section class="hp-section" style="--section-accent: #e84a8a;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/software-03.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start"> 
+        <article class="hp-card">
+          <div class="hp-card__inner">
+            <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'FAQ'}]} />
+            <p class="hp-card__eyebrow mt-4">Questions</p>
+            <h1 class="hp-card__title mt-2 mb-4">Frequently Asked</h1>
+            <p class="hp-card__copy hp-card__copy--lead">
+              If the answer is not here, ask the chatbot or contact me directly. I do not charge for assessments.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Section 2: Questions -->
+    <section class="hp-section" style="--section-accent: #40c4c4; min-height: 100svh;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/software-01.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim" style="background: rgba(17, 18, 20, 0.9);"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start"> 
+        <div class="w-full max-w-4xl mx-auto py-12 relative z-10">
+          
+          <div class="space-y-12">
+            {faqs.map((cat) => (
+              <div>
+                <h2 class="font-tech text-teal-400 font-bold uppercase tracking-widest text-sm mb-4">{cat.category}</h2>
+                <div class="space-y-4">
+                  {cat.items.map((item) => (
+                    <details class="group bg-black/40 border border-white/10 rounded-sm">
+                      <summary class="font-display text-white text-lg p-4 cursor-pointer hover:bg-white/5 transition-colors marker:content-[''] marker:hidden list-none flex justify-between items-center outline-none">
+                        {item.q}
+                        <span class="text-teal-400 font-tech text-2xl leading-none font-light group-open:rotate-45 transition-transform">+</span>
+                      </summary>
+                      <div class="p-4 pt-0 text-gray-400 text-sm leading-relaxed border-t border-white/5 mt-2">
+                        {item.a}
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
-        </div>
-      ))}
 
-      <div class="faq-cta scroll-in scroll-delay-2">
-        <p>Still have questions?</p>
-        <div class="faq-cta__links">
-          <a href="/contact" class="faq-cta__btn">Get in Touch</a>
-          <a href="/book" class="faq-cta__btn faq-cta__btn--ghost">Book a Call</a>
         </div>
       </div>
+    </section>
 
-      <PageNextActions actions={[
-        {label: 'Get a Quote', href: '/quote', description: 'Ready to start? Upload your files and get an estimate.', accent: 'teal'},
-        {label: 'Materials Guide', href: '/materials', description: 'Deep technical specs on every compound we print.', accent: 'orange'},
-        {label: 'Contact', href: '/contact', description: 'Question not answered? Reach out directly.', accent: 'magenta'},
-      ]} />
-    </div>
-  </section>
+    <!-- Section 3: Next Actions -->
+    <section class="hp-section" style="--section-accent: #e84a8a;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/workshop/printer-action-cf.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start"> 
+        <article class="hp-card">
+          <div class="hp-card__inner">
+            <PageNextActions actions={[
+              {label: 'Get a Quote', href: '/quote', description: 'Ready to start? Upload your files and get an estimate.', accent: 'teal'},
+              {label: 'Materials Guide', href: '/materials', description: 'Deep technical specs on every compound we print.', accent: 'orange'},
+              {label: 'Contact', href: '/contact', description: 'Question not answered? Reach out directly.', accent: 'magenta'},
+            ]} />
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
 </BaseLayout>
 
 <style>
-  .faq-page {
-    background: var(--color-surface-primary);
-    color: var(--color-text-primary);
-    min-height: 100svh;
-  }
-
-  .faq-shell {
-    width: min(100% - clamp(1.5rem, 4vw, 4rem), 800px);
-    margin: 0 auto;
-    padding-block: clamp(4rem, 8vw, 7rem) clamp(4rem, 6vw, 6rem);
-  }
-
-  .faq-eyebrow {
-    margin: 0;
-    font-family: var(--font-tech);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--color-teal-primary);
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
-
-  .faq-eyebrow::before {
-    content: '';
-    width: 2.75rem;
-    height: 2px;
-    background: var(--color-teal-primary);
-    flex-shrink: 0;
-  }
-
-  .faq-title {
-    margin: 0.75rem 0 0;
-    font-family: var(--font-display);
-    font-size: clamp(2.5rem, 1.5rem + 4vw, 4.5rem);
-    line-height: 0.95;
-    letter-spacing: -0.035em;
-    color: var(--color-text-primary);
-    text-transform: uppercase;
-  }
-
-  .faq-intro {
-    margin: 1.25rem 0 clamp(3rem, 6vw, 5rem);
-    max-width: 36rem;
-    font-size: clamp(1rem, 0.94rem + 0.3vw, 1.1rem);
-    line-height: 1.75;
+  .hp-card__copy {
     color: var(--color-text-secondary);
-  }
-
-  .faq-category {
-    margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
-    padding: clamp(1.5rem, 3vw, 2.5rem);
-  }
-
-  .faq-category__title {
-    margin: 0 0 1.2rem;
-    font-family: var(--font-tech);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--color-teal-primary);
-    padding-bottom: 0.8rem;
-    border-bottom: 1px solid var(--color-border-subtle);
-  }
-
-  .faq-list {
-    display: grid;
-    gap: 0;
-  }
-
-  .faq-item {
-    border-bottom: 1px solid var(--color-border-subtle);
-  }
-
-  .faq-item__q {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 0;
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--color-text-primary);
-    cursor: pointer;
-    list-style: none;
-    min-height: 44px;
-    -webkit-tap-highlight-color: transparent;
-    transition: color 0.15s ease;
-  }
-
-  .faq-item__q::-webkit-details-marker {
-    display: none;
-  }
-
-  .faq-item__q::after {
-    content: '+';
-    font-family: var(--font-tech);
-    font-size: 1.1rem;
-    color: var(--color-teal-primary);
-    flex-shrink: 0;
-    margin-left: 1rem;
-    transition: transform 0.2s ease;
-  }
-
-  .faq-item[open] .faq-item__q::after {
-    content: '−';
-  }
-
-  .faq-item__q:hover {
-    color: var(--color-teal-primary);
-  }
-
-  .faq-item__a {
-    margin: 0;
-    padding: 0 0 1.2rem;
-    font-size: 0.88rem;
-    line-height: 1.7;
-    color: var(--color-text-secondary);
-    max-width: 42rem;
-  }
-
-  .faq-cta {
-    margin-top: clamp(3rem, 5vw, 4rem);
-    padding-top: 2rem;
-    border-top: 1px solid var(--color-border-subtle);
-  }
-
-  .faq-cta p {
-    margin: 0 0 1rem;
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    color: var(--color-text-primary);
-  }
-
-  .faq-cta__links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-  }
-
-  .faq-cta__btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 44px;
-    padding: 0.7rem 1.4rem;
-    background: var(--color-teal-primary);
-    color: #0F1112;
-    border: 2px solid var(--color-teal-primary);
-    border-radius: 2px;
-    font-family: var(--font-tech);
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: background 0.2s ease, transform 0.15s ease;
-  }
-
-  .faq-cta__btn:hover {
-    transform: translateY(-2px);
-  }
-
-  .faq-cta__btn--ghost {
-    background: transparent;
-    color: var(--color-teal-primary);
-  }
-
-  .faq-cta__btn--ghost:hover {
-    background: rgba(64, 196, 196, 0.1);
   }
 </style>

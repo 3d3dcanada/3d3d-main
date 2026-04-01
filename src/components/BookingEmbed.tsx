@@ -28,7 +28,7 @@ export default function BookingEmbed({ calLink = '3d3d/discovery' }: Props) {
           elementOrSelector: containerRef.current,
           calLink,
           config: {
-            theme: 'light',
+            theme: 'dark',
             styles: { branding: { brandColor: '#40C4C4' } },
           },
         });

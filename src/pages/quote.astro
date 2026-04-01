@@ -15,128 +15,92 @@ const schema = {
 ---
 
 <BaseLayout title="Get a Quote | 3D3D" description="Request a custom 3D print quote. Upload your design or describe what you need." schema={schema} activePath="/quote">
-  <div class="max-w-4xl mx-auto px-4">
-    <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Services', href: '/contact'}, {label: 'Get a Quote'}]} />
-  </div>
-  <section class="page-section">
-    <div class="surface-panel quote-page-intro">
-      <p class="quote-eyebrow">Project Intake</p>
-      <h1 class="quote-title">Upload a File.<br />Get a Firm Quote.</h1>
-      
-      <div class="quote-intro-grid">
-        <div class="quote-intro-text">
-          <p class="quote-intro">
-            Submit your CAD file or replacement part photos. Tell us what it does and the environment it lives in. We assess the mechanics, select the material, and return a firm quote within 24 hours.
-          </p>
-          <ul class="quote-bullets">
-            <li><svg viewBox="0 0 24 24" fill="currentColor" width="16"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Direct operator contact — no middleman.</li>
-            <li><svg viewBox="0 0 24 24" fill="currentColor" width="16"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Exact pricing based on machine hours + material.</li>
-            <li><svg viewBox="0 0 24 24" fill="currentColor" width="16"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> 100% functional guarantee.</li>
-          </ul>
-        </div>
-        <div class="quote-hero-img">
-          <img src="/media/workshop/printer-action-cf.jpg" alt="FDM machine printing carbon fiber" />
+  <main class="hp-home">
+
+    <!-- Section 1: Hero -->
+    <section class="hp-section" style="--section-accent: #40c4c4;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/workshop/printer-action-cf.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start"> 
+        <article class="hp-card">
+          <div class="hp-card__inner">
+            <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Services', href: '/contact'}, {label: 'Get a Quote'}]} />
+            <p class="hp-card__eyebrow mt-4">Project Intake</p>
+            <h1 class="hp-card__title mt-2 mb-4">Upload a File. Get a Firm Quote.</h1>
+            <p class="hp-card__copy hp-card__copy--lead">
+              Submit your CAD file or replacement part photos. Tell us what it does and the environment it lives in. We assess the mechanics, select the material, and return a firm quote within 24 hours.
+            </p>
+            
+            <div class="flex flex-col gap-2 mt-6">
+              <span class="text-white text-sm flex items-center gap-2">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-teal-400"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Direct operator contact — no middleman.
+              </span>
+              <span class="text-white text-sm flex items-center gap-2">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-teal-400"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Exact pricing based on machine hours + material.
+              </span>
+              <span class="text-white text-sm flex items-center gap-2">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-teal-400"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                100% functional guarantee.
+              </span>
+            </div>
+
+            <div class="hp-card__cta-row hp-card__cta-row--start mt-8">
+              <a href="#quote-engine" class="hp-cta hp-cta--accent">Start Quote Engine</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Section 2: React Engine -->
+    <section id="quote-engine" class="hp-section" style="--section-accent: #e84a8a; min-height: 100svh;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/software-03.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim" style="background: rgba(17, 18, 20, 0.85);"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start"> 
+        <div class="w-full max-w-4xl mx-auto py-12 relative z-10">
+          <QuoteCalculator client:load />  
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="page-section pt-0">
-    <QuoteCalculator client:load />
-  </section>
+    <!-- Section 3: Next Actions -->
+    <section class="hp-section" style="--section-accent: #40c4c4;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/fab-01.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
 
-  <div class="max-w-4xl mx-auto px-4">
-    <PageNextActions actions={[
-      {label: 'Materials Guide', href: '/materials', description: 'Compare engineering compounds by environment and performance.', accent: 'teal'},
-      {label: 'Book a Call', href: '/book', description: 'Talk through your project directly with Ken.', accent: 'magenta'},
-    ]} />
-  </div>
+      <div class="hp-section__shell hp-section__shell--start"> 
+        <article class="hp-card">
+          <div class="hp-card__inner">
+            <PageNextActions actions={[
+              {label: 'Materials Guide', href: '/materials', description: 'Compare engineering compounds by environment and performance.', accent: 'teal'},
+              {label: 'Book a Call', href: '/book', description: 'Talk through your project directly with Ken.', accent: 'magenta'},
+            ]} />
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
 </BaseLayout>
 
 <style>
-  .quote-eyebrow {
-    margin: 0;
-    font-family: var(--font-tech);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--color-teal-primary);
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
-
-  .quote-eyebrow::before {
-    content: '';
-    width: 2.75rem;
-    height: 2px;
-    background: var(--color-teal-primary);
-    flex-shrink: 0;
-  }
-
-  .quote-title {
-    margin: 0 0 1.5rem 0;
-    font-family: var(--font-display);
-    font-size: clamp(2.5rem, 2rem + 3vw, 4.5rem);
-    line-height: 0.95;
-    letter-spacing: -0.04em;
-    color: var(--color-text-primary);
-    text-transform: uppercase;
-  }
-
-  .quote-intro-grid {
-    display: grid;
-    gap: 2rem;
-    align-items: center;
-  }
-
-  @media (min-width: 768px) {
-    .quote-intro-grid {
-      grid-template-columns: 3fr 2fr;
-    }
-  }
-
-  .quote-intro {
-    margin: 0;
-    font-size: clamp(1rem, 0.95rem + 0.4vw, 1.15rem);
-    line-height: 1.7;
+  .hp-card__copy {
     color: var(--color-text-secondary);
-  }
-
-  .quote-bullets {
-    margin-top: 1.5rem;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .quote-bullets li {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
-    color: var(--color-text-secondary);
-  }
-
-  .quote-bullets svg {
-    color: var(--color-teal-primary);
-  }
-
-  .quote-hero-img img {
-    width: 100%;
-    height: auto;
-    border-radius: 4px;
-    border: 1px solid var(--color-border-subtle);
-  }
-
-  .quote-calculator-wrapper {
-    margin-top: 1rem;
-    background: var(--color-surface-card);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: 4px;
-    overflow: hidden;
   }
 </style>

@@ -76,9 +76,15 @@ const defaultNavGroups: NavGroup[] = [
     label: 'The Cooperative',
     items: [
       { id: 'about', label: 'About 3D3D', href: '/about' },
-      { id: 'opportunities', label: 'Network Ops', href: '/opportunities' },
-      { id: 'community', label: 'Community & Events', href: '/community' },
+      { id: 'network', label: 'Node Operations', href: '/network' },
       { id: 'sponsors', label: 'Sponsorships', href: '/sponsors' },
+    ],
+  },
+  {
+    label: 'Open Source',
+    items: [
+      { id: 'github-front', label: 'Frontend Repo', href: 'https://github.com/3d3dcanada' },
+      { id: 'github-core', label: 'Core Contracts', href: 'https://github.com/3d3dcanada' },
     ],
   },
 ];
@@ -101,7 +107,7 @@ const finalNavGroups = navGroups.length > 0 ? navGroups : defaultNavGroups;
 </head>
 <body class:list={[bodyClass, 'light-theme']}>
   <a href="#main-content" class="skip-to-content">Skip to content</a>
-  {!noSidebar && <SiteSidebar navGroups={finalNavGroups} activePath={activePath} />}
+  {!noSidebar && <SiteSidebar activePath={activePath} />}
   <div class="content-wrapper">
     <main id="main-content" class="site-main min-h-screen">
       <slot />

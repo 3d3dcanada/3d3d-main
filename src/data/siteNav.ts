@@ -23,7 +23,6 @@ export const SITE_NAV: NavGroup[] = [
     items: [
       { id: 'quote', label: 'Quote', href: '/quote' },
       { id: 'materials', label: 'Materials', href: '/materials' },
-      { id: 'shop', label: 'Shop', href: '/shop' },
       { id: 'faq', label: 'FAQ', href: '/faq' },
     ],
   },
@@ -32,7 +31,6 @@ export const SITE_NAV: NavGroup[] = [
     label: 'The Story',
     items: [
       { id: 'about', label: 'About', href: '/about' },
-      { id: 'gallery', label: 'Gallery', href: '/gallery' },
       { id: 'events', label: 'Events', href: '/events' },
       { id: 'blog', label: 'Blog', href: '/blog' },
     ],
@@ -126,7 +124,6 @@ export const SOCIAL_LINKS = [
 export const BOTTOM_NAV = [
   { id: 'home', label: 'Home', href: '/', icon: 'home' },
   { id: 'quote', label: 'Quote', href: '/quote', icon: 'quote' },
-  { id: 'shop', label: 'Shop', href: '/shop', icon: 'shop' },
   { id: 'community', label: 'Community', href: '/community', icon: 'community' },
   { id: 'menu', label: 'Menu', href: '#menu', icon: 'menu' },
 ] as const;

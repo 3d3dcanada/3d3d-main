@@ -40,7 +40,6 @@ export const SPLASH_SECTIONS: SplashSection[] = [
     highlights: ['PLA, PETG, ASA, TPU, ABS', 'Worldwide shipping', '24-48h turnaround', 'Material specs included'],
     tags: ['Ready-made prints', 'Cooperative goods', 'Engineering-grade'],
     ctaLabel: 'Shop the Market',
-    href: '/shop',
     backgroundImage: '/images/splash-bg-market.png',
     accent: 'orange',
     naturalColors: ['#F5E6D3', '#D4A574', '#8B6914'],

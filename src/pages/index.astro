@@ -1,6 +1,128 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
+import SiteFooterFull from '../components/SiteFooterFull.astro';
+import SiteRightSidebar from '../components/SiteRightSidebar.astro';
+import { ACCENT_HEX } from '../data/splashSections';
+import {
+  CATALOG,
+  SHOP_CATEGORIES,
+  getCatalogItemHasPriceRange,
+  getCatalogItemStartingPrice,
+  getCatalogItemUrl,
+} from '../lib/catalog';
 import '../styles/global.css';
+
+const FORM_ENDPOINT = 'https://formspree.io/f/mldlydbl';
+const featuredProducts = CATALOG.slice(0, 8);
+
+const heroImages = [
+  { src: '/media/real/open-ocean-01.jpg', position: 'center 40%' },
+  { src: '/media/real/sunrise-offshore.jpg', position: 'center' },
+  { src: '/media/real/sunset-sail-01.jpg', position: 'center' },
+];
+
+const fabricationImages = [
+  { src: '/media/generated/fab-01.jpg', position: 'center' },
+  { src: '/media/generated/fab-02.jpg', position: 'center' },
+  { src: '/media/generated/fab-03.jpg', position: 'center' },
+];
+
+const storyImages = [
+  { src: '/media/generated/story-01.jpg', position: 'center' },
+  { src: '/media/generated/story-02.jpg', position: 'center' },
+  { src: '/media/generated/story-03.jpg', position: 'center' },
+];
+
+const eventImages = [
+  { src: '/media/real/fleet-start-press.jpg', position: 'center' },
+  { src: '/media/real/fleet-aerial.jpg', position: 'center' },
+  { src: '/media/real/race-morning-crew.jpg', position: 'center' },
+];
+
+const softwareImages = [
+  { src: '/media/generated/software-01.jpg', position: 'center' },
+  { src: '/media/generated/software-02.jpg', position: 'center' },
+  { src: '/media/generated/software-03.jpg', position: 'center' },
+];
+
+const networkImages = [
+  { src: '/media/generated/network-01.jpg', position: 'center' },
+  { src: '/media/generated/network-02.jpg', position: 'center' },
+  { src: '/media/generated/network-03.jpg', position: 'center' },
+];
+
+const oldGirlImages = [
+  { src: '/media/workshop/printer-frame-shot.jpg', position: 'center' },
+  { src: '/media/workshop/printer-action-cf.jpg', position: 'center' },
+  { src: '/media/workshop/printer-bed-benchy.jpg', position: 'center' },
+];
+
+const galleryImages = [
+  { src: '/media/real/dawn-approach.jpg', position: 'center' },
+  { src: '/media/real/evening-passage.jpg', position: 'center' },
+  { src: '/media/real/golden-hour-03.jpg', position: 'center' },
+];
+
+const sponsorImages = [
+  { src: '/media/real/golden-hour-01.jpg', position: 'center' },
+  { src: '/media/real/golden-hour-02.jpg', position: 'center' },
+  { src: '/media/real/golden-hour-03.jpg', position: 'center' },
+];
+
+const softwareProjects = [
+  {
+    name: '3D3D Quote Desk',
+    stack: ['Astro', 'React', 'Formspree'],
+    note: 'Structured quote intake with uploads, material routing, and fewer dead-end leads.',
+    href: '/quote',
+  },
+  {
+    name: 'Co-op Shop Catalog',
+    stack: ['Astro', 'Catalog data', 'Cloudflare'],
+    note: 'Product catalog, pricing ranges, and direct pathways from discovery to purchase.',
+    href: '/shop',
+  },
+  {
+    name: 'Campaign & Race Logs',
+    stack: ['Astro', 'Content ops', 'SEO'],
+    note: 'Publishing workflow for offshore updates, build notes, and community documentation.',
+    href: '/blog',
+  },
+  {
+    name: 'Node Ops Toolkit',
+    stack: ['Open source', 'Web apps', 'Automation'],
+    note: 'The maker-first infrastructure layer for distributed production and local operator pages.',
+    href: '/opportunities',
+  },
+];
+
+const sponsorRates = {
+  USD: 1,
+  CAD: 1.37,
+  EUR: 0.92,
+};
+
+const formatSponsorPrice = (amount: number, currency: keyof typeof sponsorRates) =>
+  new Intl.NumberFormat(currency === 'EUR' ? 'de-DE' : 'en-CA', {
+    style: 'currency',
+    currency,
+    maximumFractionDigits: 0,
+  }).format(amount);
+
+const sponsorDefaults = {
+  currency: 'CAD' as const,
+  billing: 'monthly' as const,
+};
+
+const initialSupporterPrice = formatSponsorPrice(
+  Math.round(100 * sponsorRates[sponsorDefaults.currency]),
+  sponsorDefaults.currency,
+);
+
+const initialPartnerPrice = formatSponsorPrice(
+  Math.round(500 * sponsorRates[sponsorDefaults.currency]),
+  sponsorDefaults.currency,
+);
 ---
 
 <!doctype html>
@@ -8,982 +130,1938 @@ import '../styles/global.css';
 <head>
   <BaseHead
     title="3D3D | Custom Fabrication, Software & Community — Fredericton, Canada"
-    description="Custom 3D printing, event hire, software development, and community programs. Six printers. Deployable anywhere. Built in Fredericton for the ones that give a damn."
+    description="Custom fabrication, software builds, event deployment, and a maker-first network built in Fredericton and deployed wherever the job lands."
     keywords="3D printing Fredericton, custom fabrication Canada, marine parts 3D print, event hire 3D printer, open source cooperative, 3D printing New Brunswick"
   />
 </head>
 <body class="hp-page">
+  <main class="hp-home">
+    <SiteRightSidebar />
 
-  <main>
-
-    <!-- ══════════════════════════════════════════
-         01 · HERO
-    ═══════════════════════════════════════════════ -->
-    <section class="hp-section" style="--section-accent: var(--color-teal-primary, #40C4C4);">
-      <div class="hp-section__bg" style="background-image: url('/media/real/open-ocean-01.jpg'); background-position: center 40%;"></div>
+    <section class="hp-section hp-section--hero" style={`--section-accent: ${ACCENT_HEX.teal};`}>
+      <div class="hp-section__bg" data-rotating-gallery data-rotate-interval="9000">
+        {heroImages.map((image, index) => (
+          <div
+            class:list={['hp-section__bg-img', index === 0 && 'hp-section__bg-img--active']}
+            style={`background-image: url('${image.src}'); background-position: ${image.position};`}
+          ></div>
+        ))}
+      </div>
       <div class="hp-section__vignette"></div>
       <div class="hp-section__scrim"></div>
       <div class="hp-section__grain"></div>
 
-      <div class="hp-card hp-card--center hp-card--hero">
-        <div class="hp-card__inner">
-          <p class="hp-card__eyebrow">FREDERICTON, NB · CANADA · WORLDWIDE</p>
-          <h1 class="hp-card__hero-title">
-            FOR THE<br>ONES THAT<br>GIVE A DAMN.
-          </h1>
-          <p class="hp-card__copy">
-            Custom fabrication. Software. Community.<br>
-            Built from the ground up with nothing but grit.
-          </p>
-          <div class="hp-card__cta-row">
-            <a href="/quote" class="hp-cta hp-cta--accent">GET A QUOTE</a>
-            <button class="hp-cta hp-cta--glass" onclick="document.getElementById('dlg-events').showModal()">HIRE FOR EVENTS</button>
-            <a href="/opportunities" class="hp-cta hp-cta--ghost">JOIN THE NETWORK</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         02 · CUSTOM FABRICATION
-    ═══════════════════════════════════════════════ -->
-    <section class="hp-section" style="--section-accent: var(--color-teal-primary, #40C4C4);">
-      <div class="hp-section__bg" style="background-image: url('/images/splash-bg-services.png');"></div>
-      <div class="hp-section__vignette"></div>
-      <div class="hp-section__scrim"></div>
-      <div class="hp-section__grain"></div>
-
-      <div class="hp-card hp-card--dark hp-card--left">
-        <div class="hp-card__inner">
-          <p class="hp-card__eyebrow">CUSTOM FABRICATION</p>
-          <h2 class="hp-card__title">Need a part that<br>doesn't exist?</h2>
-          <p class="hp-card__subtitle">Six printers. Deployable anywhere. Same-day turnaround.</p>
-          <p class="hp-card__copy">
-            Marine hardware, automotive restoration, prototypes, replacement components.
-            If the part was discontinued in 1979, I'll fabricate it today.
-          </p>
-          <ul class="hp-card__highlights">
-            <li>Marine-grade parts</li>
-            <li>Reverse engineering</li>
-            <li>Automotive restoration</li>
-            <li>Field deployment</li>
-          </ul>
-          <div class="hp-card__tags">
-            <span class="hp-card__tag">Prusa MK2.5</span>
-            <span class="hp-card__tag">Bambu A1</span>
-            <span class="hp-card__tag">Creality K1</span>
-            <span class="hp-card__tag">BIBO 2</span>
-            <span class="hp-card__tag">Kobra 2 Max</span>
-          </div>
-          <a href="/quote" class="hp-cta hp-cta--accent">START A QUOTE →</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         03 · THE STORY
-    ═══════════════════════════════════════════════ -->
-    <section class="hp-section" style="--section-accent: var(--color-magenta-primary, #E84A8A);">
-      <div class="hp-section__bg" style="background-image: url('/images/splash-bg-about.png');"></div>
-      <div class="hp-section__vignette"></div>
-      <div class="hp-section__scrim hp-section__scrim--light"></div>
-      <div class="hp-section__grain"></div>
-
-      <div class="hp-card hp-card--light hp-card--right">
-        <div class="hp-card__inner">
-          <p class="hp-card__eyebrow hp-card__eyebrow--dark">THE STORY</p>
-          <h2 class="hp-card__title hp-card__title--dark">Made from nothing.<br>Built for everyone.</h2>
-          <p class="hp-card__copy hp-card__copy--dark">
-            Ankylosing spondylitis ended a decade of trucking. Instead of disability, I chose
-            reinvention — self-teaching fabrication, software, and AI from the ground up.
-            Ten years sober. Still building.
-          </p>
-          <p class="hp-card__copy hp-card__copy--dark">
-            If you don't fit a normal job, you're exactly who belongs here.
-            The unheard, the unnamed. People with heart. <em>We give a damn.</em>
-          </p>
-          <a href="/about" class="hp-cta hp-cta--dark">READ THE FULL STORY →</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         04 · EVENT HIRE
-    ═══════════════════════════════════════════════ -->
-    <section class="hp-section" style="--section-accent: var(--color-magenta-primary, #E84A8A);">
-      <div class="hp-section__bg" style="background-image: url('/media/real/fleet-start-press.jpg');"></div>
-      <div class="hp-section__vignette"></div>
-      <div class="hp-section__scrim"></div>
-      <div class="hp-section__grain"></div>
-
-      <div class="hp-card hp-card--dark hp-card--left">
-        <div class="hp-card__inner">
-          <p class="hp-card__eyebrow">EVENTS & DEPLOYMENT</p>
-          <h2 class="hp-card__title">Bring 3D3D<br>to your event.</h2>
-          <p class="hp-card__subtitle">From $1,500 · Full-day deployments · Video documented</p>
-          <p class="hp-card__copy">
-            Regattas, car shows, expos, LARP, D&amp;D nights, conventions, marinas.
-            I show up with printers and cameras. Parts built on-site before the event ends.
-          </p>
-          <ul class="hp-card__highlights">
-            <li>On-site fabrication</li>
-            <li>Video documentation</li>
-            <li>Convention-ready</li>
-            <li>Full-day coverage</li>
-          </ul>
-          <button class="hp-cta hp-cta--accent" onclick="document.getElementById('dlg-events').showModal()">BOOK AN EVENT →</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         05 · SOFTWARE & INNOVATION
-    ═══════════════════════════════════════════════ -->
-    <section class="hp-section" style="--section-accent: var(--color-teal-primary, #40C4C4);">
-      <div class="hp-section__bg" style="background-image: url('/media/backgrounds/makers-neon-workshop.jpg');"></div>
-      <div class="hp-section__vignette"></div>
-      <div class="hp-section__scrim"></div>
-      <div class="hp-section__grain"></div>
-
-      <div class="hp-card hp-card--dark hp-card--right">
-        <div class="hp-card__inner">
-          <p class="hp-card__eyebrow">SOFTWARE · AI · ROBOTICS</p>
-          <h2 class="hp-card__title">We build<br>digital too.</h2>
-          <p class="hp-card__subtitle">Built in a weekend. Yours to keep.</p>
-          <p class="hp-card__copy">
-            Custom websites, apps, AI integrations, SaaS tools. Robotics, R&amp;D, automation.
-            Built fast for local companies, community makers, anyone that needs it done right.
-          </p>
-          <ul class="hp-card__highlights">
-            <li>Custom websites &amp; apps</li>
-            <li>AI integrations</li>
-            <li>Robotics &amp; R&amp;D</li>
-            <li>SaaS tools</li>
-          </ul>
-          <button class="hp-cta hp-cta--accent" onclick="document.getElementById('dlg-software').showModal()">VIEW PROJECTS →</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         06 · THE NETWORK
-    ═══════════════════════════════════════════════ -->
-    <section class="hp-section" style="--section-accent: var(--color-magenta-primary, #E84A8A);">
-      <div class="hp-section__bg" style="background-image: url('/images/splash-bg-network.png');"></div>
-      <div class="hp-section__vignette"></div>
-      <div class="hp-section__scrim hp-section__scrim--light"></div>
-      <div class="hp-section__grain"></div>
-
-      <div class="hp-card hp-card--light hp-card--left">
-        <div class="hp-card__inner">
-          <p class="hp-card__eyebrow hp-card__eyebrow--dark">THE NETWORK</p>
-          <h2 class="hp-card__title hp-card__title--dark">3D3D connects<br>Canada.</h2>
-          <p class="hp-card__copy hp-card__copy--dark">
-            First makers in get a free website at <strong>yourname.3d3d.ca</strong>.
-            Node operator program for distributed printing across the country.
-            Open source everything. Built to share.
-          </p>
-          <p class="hp-card__copy hp-card__copy--dark">
-            Makers, coders, artists, photographers, robotics techs, AI specialists —
-            if you create things, there's a place for you here.
-          </p>
-          <a href="/opportunities" class="hp-cta hp-cta--dark">JOIN THE NETWORK →</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         07 · THE OLD GIRL
-    ═══════════════════════════════════════════════ -->
-    <section class="hp-section" style="--section-accent: var(--color-orange-primary, #FF6B2B);">
-      <div class="hp-section__bg" style="background-image: url('/media/workshop/printer-frame-shot.jpg');"></div>
-      <div class="hp-section__vignette"></div>
-      <div class="hp-section__scrim hp-section__scrim--light"></div>
-      <div class="hp-section__grain"></div>
-
-      <div class="hp-card hp-card--light hp-card--right">
-        <div class="hp-card__inner">
-          <p class="hp-card__eyebrow hp-card__eyebrow--dark">COMMUNITY PROJECT</p>
-          <h2 class="hp-card__title hp-card__title--dark">The Old Girl.</h2>
-          <p class="hp-card__copy hp-card__copy--dark">
-            A Prusa MK2 rescued for $50 — someone was going to throw it away.
-            It belongs to the community now. Pick a file, we print it.
-            Pay for filament and shipping only. No markup. No admin fee. No nonsense.
-          </p>
-          <div class="hp-card__tags hp-card__tags--dark">
-            <span class="hp-card__tag hp-card__tag--dark">Running 24/7</span>
-            <span class="hp-card__tag hp-card__tag--dark">Community-modded</span>
-            <span class="hp-card__tag hp-card__tag--dark">Donations welcome</span>
-          </div>
-          <a href="https://oldgirl.3d3d.ca" class="hp-cta hp-cta--dark" target="_blank" rel="noopener noreferrer">SEND A PRINT JOB →</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         08 · GALLERY
-    ═══════════════════════════════════════════════ -->
-    <section class="hp-gallery">
-      <div class="hp-gallery__strip" aria-hidden="true">
-        <img src="/media/real/fleet-aerial.jpg" alt="" loading="lazy" />
-        <img src="/media/workshop/machine-parts-flatlay.jpg" alt="" loading="lazy" />
-        <img src="/media/real/golden-hour-01.jpg" alt="" loading="lazy" />
-        <img src="/media/workshop/blue-prototype-part.jpg" alt="" loading="lazy" />
-        <img src="/media/real/offshore-day-01.jpg" alt="" loading="lazy" />
-        <img src="/media/workshop/modular-parts-flatlay.jpg" alt="" loading="lazy" />
-        <img src="/media/real/race-finish-01.jpg" alt="" loading="lazy" />
-        <img src="/media/workshop/winch-cup-holder.jpg" alt="" loading="lazy" />
-        <img src="/media/real/dawn-approach.jpg" alt="" loading="lazy" />
-        <img src="/media/workshop/custom-tv-mount.jpg" alt="" loading="lazy" />
-        <img src="/media/real/golden-hour-02.jpg" alt="" loading="lazy" />
-        <img src="/media/workshop/floating-keychains.jpg" alt="" loading="lazy" />
-        <img src="/media/real/sunset-sail-01.jpg" alt="" loading="lazy" />
-        <img src="/media/real/afternoon-racing-01.jpg" alt="" loading="lazy" />
-        <img src="/media/workshop/fan-reducers.jpg" alt="" loading="lazy" />
-        <img src="/media/real/morning-dawn-deck.jpg" alt="" loading="lazy" />
-        <img src="/media/real/helm-close.jpg" alt="" loading="lazy" />
-        <img src="/media/workshop/galaxy-vase.jpg" alt="" loading="lazy" />
-        <img src="/media/real/evening-passage.jpg" alt="" loading="lazy" />
-        <img src="/media/workshop/spray-can-adapter.jpg" alt="" loading="lazy" />
-      </div>
-      <div class="hp-gallery__bottom">
-        <p class="hp-gallery__headline">4,000+ photos. 20,000+ nautical miles. One journey.</p>
-        <div class="hp-gallery__btns">
-          <a href="https://ko-fi.com/3d3dca" target="_blank" rel="noopener noreferrer" class="hp-cta hp-cta--kofi">FOLLOW ON KO-FI</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         09 · SPONSOR THE JOURNEY
-    ═══════════════════════════════════════════════ -->
-    <section class="hp-section hp-section--sponsor" style="--section-accent: var(--color-magenta-primary, #E84A8A);">
-      <div class="hp-section__bg" style="background-image: url('/media/real/golden-hour-01.jpg');"></div>
-      <div class="hp-section__vignette"></div>
-      <div class="hp-section__scrim hp-section__scrim--light"></div>
-      <div class="hp-section__grain"></div>
-
-      <div class="hp-sponsor-layout">
-        <div class="hp-card hp-card--light hp-card--wide">
+      <div class="hp-section__shell hp-section__shell--center">
+        <article class="hp-card hp-card--hero">
           <div class="hp-card__inner">
-            <p class="hp-card__eyebrow hp-card__eyebrow--dark">SPONSORSHIPS</p>
-            <h2 class="hp-card__title hp-card__title--dark">Sponsor the journey.</h2>
-            <p class="hp-card__copy hp-card__copy--dark">
-              Support the cooperative. Sponsor an event. Become a patron.
-              Every dollar goes back into the machines, the community, and the mission.
+            <p class="hp-card__eyebrow">Fredericton, NB · Canada · Deployed Worldwide</p>
+            <h1 class="hp-card__hero-title">FOR THE ONES THAT GIVE A DAMN.</h1>
+            <p class="hp-card__copy hp-card__copy--lead">
+              Custom fabrication. Software. Community. Built from the ground up with grit, field
+              hours, and a willingness to make the weird jobs work.
             </p>
+            <div class="hp-card__cta-row">
+              <button type="button" class="hp-cta hp-cta--accent" data-dialog-open="dlg-quote">Open the Quote Desk</button>
+              <button type="button" class="hp-cta hp-cta--glass" data-dialog-open="dlg-events">Hire for Events</button>
+              <button type="button" class="hp-cta hp-cta--ghost" data-dialog-open="dlg-network">Join the Network</button>
+            </div>
+            <div class="hp-card__stats">
+              <div>
+                <strong>6 printers</strong>
+                <span>Field-ready fabrication stack</span>
+              </div>
+              <div>
+                <strong>1 operator</strong>
+                <span>Direct contact from intake to delivery</span>
+              </div>
+              <div>
+                <strong>0 fluff</strong>
+                <span>Just real work, routed fast</span>
+              </div>
+            </div>
           </div>
-        </div>
+        </article>
+      </div>
+    </section>
 
-        <div class="hp-tiers">
-          <div class="hp-tier hp-tier--glass">
-            <span class="hp-tier__price">$100</span>
-            <span class="hp-tier__name">SUPPORTER</span>
+    <section
+      id="fabrication"
+      data-observe-section
+      class="hp-section"
+      style={`--section-accent: ${ACCENT_HEX.teal};`}
+    >
+      <div class="hp-section__bg" data-rotating-gallery data-rotate-interval="9000">
+        {fabricationImages.map((image, index) => (
+          <div
+            class:list={['hp-section__bg-img', index === 0 && 'hp-section__bg-img--active']}
+            style={`background-image: url('${image.src}'); background-position: ${image.position};`}
+          ></div>
+        ))}
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow">Custom Fabrication</p>
+            <h2 class="hp-card__title">Need a part that doesn&apos;t exist?</h2>
+            <p class="hp-card__subtitle">Six printers. Deployable anywhere. Same-day triage when the job calls for it.</p>
+            <p class="hp-card__copy">
+              Marine hardware, automotive restoration, prototypes, replacement components, and the
+              ugly one-off problems that never fit a normal intake form.
+            </p>
+            <ul class="hp-card__highlights">
+              <li>Marine-grade replacements</li>
+              <li>Reverse engineering</li>
+              <li>Automotive restoration</li>
+              <li>Field deployment support</li>
+            </ul>
+            <div class="hp-card__tags">
+              <span class="hp-card__tag">Prusa MK2.5</span>
+              <span class="hp-card__tag">Bambu A1</span>
+              <span class="hp-card__tag">Creality K1</span>
+              <span class="hp-card__tag">Kobra 2 Max</span>
+            </div>
+            <div class="hp-card__cta-row hp-card__cta-row--start">
+              <button type="button" class="hp-cta hp-cta--accent" data-dialog-open="dlg-quote">Get an Estimate</button>
+              <a href="/quote" class="hp-cta hp-cta--glass">Open the Full Quote Page</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section
+      id="story"
+      data-observe-section
+      class="hp-section"
+      style={`--section-accent: ${ACCENT_HEX.magenta};`}
+    >
+      <div class="hp-section__bg" data-rotating-gallery data-rotate-interval="9000">
+        {storyImages.map((image, index) => (
+          <div
+            class:list={['hp-section__bg-img', index === 0 && 'hp-section__bg-img--active']}
+            style={`background-image: url('${image.src}'); background-position: ${image.position};`}
+          ></div>
+        ))}
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--end">
+        <article class="hp-card">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow">The Story</p>
+            <h2 class="hp-card__title">Made from nothing. Built for everyone.</h2>
+            <p class="hp-card__copy">
+              Ankylosing spondylitis ended a decade of trucking. Reinvention started in an RV with
+              three printers, a workbench, and a refusal to disappear quietly.
+            </p>
+            <p class="hp-card__copy">
+              Ten years sober. Still building. If you do not fit the normal job market, the maker
+              economy should still have room for you.
+            </p>
+            <div class="hp-card__cta-row hp-card__cta-row--start">
+              <a href="/about" class="hp-cta hp-cta--accent">Read the Full Story</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section
+      id="events"
+      data-observe-section
+      class="hp-section"
+      style={`--section-accent: ${ACCENT_HEX.magenta};`}
+    >
+      <div class="hp-section__bg" data-rotating-gallery data-rotate-interval="9000">
+        {eventImages.map((image, index) => (
+          <div
+            class:list={['hp-section__bg-img', index === 0 && 'hp-section__bg-img--active']}
+            style={`background-image: url('${image.src}'); background-position: ${image.position};`}
+          ></div>
+        ))}
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow">Events & Deployment</p>
+            <h2 class="hp-card__title">Bring 3D3D to your event.</h2>
+            <p class="hp-card__subtitle">Regattas, car shows, expos, conventions, and community days.</p>
+            <p class="hp-card__copy">
+              Live printing, on-site troubleshooting, and video documentation from an operator who
+              knows how to work around crowds, weather, and field constraints.
+            </p>
+            <ul class="hp-card__highlights">
+              <li>Live fabrication on-site</li>
+              <li>Video documentation</li>
+              <li>Booth-ready setup</li>
+              <li>Same-day problem solving</li>
+            </ul>
+            <div class="hp-card__cta-row hp-card__cta-row--start">
+              <button type="button" class="hp-cta hp-cta--accent" data-dialog-open="dlg-events">Book the Deployment Desk</button>
+              <a href="/book" class="hp-cta hp-cta--glass">Book a Call</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section
+      id="software"
+      data-observe-section
+      class="hp-section"
+      style={`--section-accent: ${ACCENT_HEX.teal};`}
+    >
+      <div class="hp-section__bg" data-rotating-gallery data-rotate-interval="9000">
+        {softwareImages.map((image, index) => (
+          <div
+            class:list={['hp-section__bg-img', index === 0 && 'hp-section__bg-img--active']}
+            style={`background-image: url('${image.src}'); background-position: ${image.position};`}
+          ></div>
+        ))}
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--end">
+        <article class="hp-card">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow">Software & AI</p>
+            <h2 class="hp-card__title">We build digital too.</h2>
+            <p class="hp-card__subtitle">Websites, AI workflows, tools, and automations built fast and handed over cleanly.</p>
+            <p class="hp-card__copy">
+              The same mindset that solves a broken hardware workflow also ships better digital
+              systems. Practical scopes. Tight feedback loops. No agency theatre.
+            </p>
+            <ul class="hp-card__highlights">
+              <li>Custom websites & apps</li>
+              <li>AI integrations</li>
+              <li>Automation & tooling</li>
+              <li>Open handoff</li>
+            </ul>
+            <div class="hp-card__cta-row hp-card__cta-row--start">
+              <button type="button" class="hp-cta hp-cta--accent" data-dialog-open="dlg-software">Browse Live Work</button>
+              <a href="/contact?subject=software-project" class="hp-cta hp-cta--glass">Start a Project</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section
+      id="network"
+      data-observe-section
+      class="hp-section"
+      style={`--section-accent: ${ACCENT_HEX.magenta};`}
+    >
+      <div class="hp-section__bg" data-rotating-gallery data-rotate-interval="9000">
+        {networkImages.map((image, index) => (
+          <div
+            class:list={['hp-section__bg-img', index === 0 && 'hp-section__bg-img--active']}
+            style={`background-image: url('${image.src}'); background-position: ${image.position};`}
+          ></div>
+        ))}
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow">The Network</p>
+            <h2 class="hp-card__title">3D3D connects Canada.</h2>
+            <p class="hp-card__copy">
+              First makers in get a free site at <strong>yourname.3d3d.ca</strong>, operator
+              access, and a cooperative model designed to keep more value with the people doing the work.
+            </p>
+            <p class="hp-card__copy">
+              Makers, coders, artists, robotics techs, sailors, and documentarians all belong here
+              if they can carry their weight and share the road.
+            </p>
+            <div class="hp-card__cta-row hp-card__cta-row--start">
+              <button type="button" class="hp-cta hp-cta--accent" data-dialog-open="dlg-network">Apply to Join</button>
+              <a href="/opportunities" class="hp-cta hp-cta--glass">Read the Opportunities</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section
+      id="oldgirl"
+      data-observe-section
+      class="hp-section"
+      style={`--section-accent: ${ACCENT_HEX.orange};`}
+    >
+      <div class="hp-section__bg" data-rotating-gallery data-rotate-interval="9000">
+        {oldGirlImages.map((image, index) => (
+          <div
+            class:list={['hp-section__bg-img', index === 0 && 'hp-section__bg-img--active']}
+            style={`background-image: url('${image.src}'); background-position: ${image.position};`}
+          ></div>
+        ))}
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--end">
+        <article class="hp-card">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow">Community Project</p>
+            <h2 class="hp-card__title">The Old Girl.</h2>
+            <p class="hp-card__copy">
+              A rescued Prusa MK2 turned into the community printer. Pick the file. Pay for
+              filament and shipping. No admin fee. No markup. No nonsense.
+            </p>
+            <div class="hp-card__tags">
+              <span class="hp-card__tag">Running 24/7</span>
+              <span class="hp-card__tag">Community-modded</span>
+              <span class="hp-card__tag">Donations welcome</span>
+            </div>
+            <div class="hp-card__cta-row hp-card__cta-row--start">
+              <a
+                href="https://oldgirl.3d3d.ca"
+                class="hp-cta hp-cta--accent"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Send a Print Job
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section
+      id="gallery"
+      data-observe-section
+      class="hp-section hp-section--gallery-cta"
+      style={`--section-accent: ${ACCENT_HEX.teal};`}
+    >
+      <div class="hp-section__bg" data-rotating-gallery data-rotate-interval="9000">
+        {galleryImages.map((image, index) => (
+          <div
+            class:list={['hp-section__bg-img', index === 0 && 'hp-section__bg-img--active']}
+            style={`background-image: url('${image.src}'); background-position: ${image.position};`}
+          ></div>
+        ))}
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--center">
+        <article class="hp-card hp-card--gallery">
+          <div class="hp-card__inner hp-card__inner--compact">
+            <p class="hp-card__eyebrow">The Archive</p>
+            <h2 class="hp-card__title">View the Journey.</h2>
+            <p class="hp-card__copy">
+              Sailing, workshop builds, race days, community printer runs, and the running log of
+              how 3D3D got here.
+            </p>
+            <div class="hp-card__cta-row">
+              <a href="/gallery" class="hp-cta hp-cta--accent">View the Journey</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section
+      id="sponsor"
+      data-observe-section
+      class="hp-section hp-section--sponsor"
+      style={`--section-accent: ${ACCENT_HEX.magenta};`}
+    >
+      <div class="hp-section__bg" data-rotating-gallery data-rotate-interval="9000">
+        {sponsorImages.map((image, index) => (
+          <div
+            class:list={['hp-section__bg-img', index === 0 && 'hp-section__bg-img--active']}
+            style={`background-image: url('${image.src}'); background-position: ${image.position};`}
+          ></div>
+        ))}
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--stack">
+        <article class="hp-card hp-card--wide">
+          <div class="hp-card__inner">
+            <div class="hp-sponsor-head">
+              <div>
+                <p class="hp-card__eyebrow">Sponsorships</p>
+                <h2 class="hp-card__title">Sponsor the journey.</h2>
+              </div>
+              <p class="hp-card__copy">
+                Monthly or yearly support. USD, CAD, or EUR. Real perks, real production help, and
+                a path for brands or individuals to back the work without the page turning into fluff.
+              </p>
+            </div>
+
+            <div class="hp-sponsor-controls">
+              <div class="hp-switch" role="group" aria-label="Select sponsorship currency">
+                <button type="button" class="hp-switch__button" data-currency-option="USD">USD</button>
+                <button type="button" class="hp-switch__button hp-switch__button--active" data-currency-option="CAD">CAD</button>
+                <button type="button" class="hp-switch__button" data-currency-option="EUR">EUR</button>
+              </div>
+              <div class="hp-switch" role="group" aria-label="Select sponsorship billing period">
+                <button type="button" class="hp-switch__button hp-switch__button--active" data-billing-option="monthly">Monthly</button>
+                <button type="button" class="hp-switch__button" data-billing-option="yearly">Yearly</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <div class="hp-tier-grid">
+          <article class="hp-tier">
+            <p class="hp-tier__eyebrow">Supporter</p>
+            <p class="hp-tier__price" data-tier-price="supporter">{initialSupporterPrice}</p>
+            <p class="hp-tier__meta" data-tier-meta="supporter">per month</p>
             <ul class="hp-tier__list">
-              <li>$25 in free prints</li>
-              <li>Name in site credits</li>
+              <li>Custom high-spec filament keychain with their name or logo</li>
+              <li>Name and site credits as a sponsor</li>
+              <li>Hat or t-shirt of their choice</li>
               <li>Ko-fi thank-you post</li>
             </ul>
-            <button class="hp-cta hp-cta--accent hp-cta--full" onclick="document.getElementById('dlg-sponsor').showModal()">SPONSOR</button>
-          </div>
+            <button
+              type="button"
+              class="hp-cta hp-cta--accent hp-cta--full"
+              data-dialog-open="dlg-sponsor"
+              data-sponsor-tier="supporter"
+            >
+              Start Supporter
+            </button>
+          </article>
 
-          <div class="hp-tier hp-tier--glass hp-tier--featured">
-            <span class="hp-tier__badge">MOST POPULAR</span>
-            <span class="hp-tier__price">$500</span>
-            <span class="hp-tier__name">PARTNER</span>
+          <article class="hp-tier hp-tier--featured">
+            <span class="hp-tier__badge">Enhanced Package</span>
+            <p class="hp-tier__eyebrow">Partner</p>
+            <p class="hp-tier__price" data-tier-price="partner">{initialPartnerPrice}</p>
+            <p class="hp-tier__meta" data-tier-meta="partner">per month</p>
             <ul class="hp-tier__list">
-              <li>$100 in free prints</li>
-              <li>2 t-shirts + 2 hats</li>
-              <li>1-on-1 consultation call</li>
-              <li>Free software build / year</li>
-              <li>Social feature + post</li>
+              <li>Everything in Supporter</li>
+              <li>$100 in free prints per month</li>
+              <li>2 t-shirts and 2 hats</li>
+              <li>1-on-1 monthly consultation call</li>
+              <li>One free software build per year</li>
+              <li>Dedicated social feature and sponsor wall logo</li>
             </ul>
-            <button class="hp-cta hp-cta--accent hp-cta--full" onclick="document.getElementById('dlg-sponsor').showModal()">SPONSOR</button>
-          </div>
+            <button
+              type="button"
+              class="hp-cta hp-cta--accent hp-cta--full"
+              data-dialog-open="dlg-sponsor"
+              data-sponsor-tier="partner"
+            >
+              Start Partner
+            </button>
+          </article>
 
-          <div class="hp-tier hp-tier--glass">
-            <span class="hp-tier__price">CUSTOM</span>
-            <span class="hp-tier__name">INVESTOR</span>
+          <article class="hp-tier">
+            <p class="hp-tier__eyebrow">Investor</p>
+            <div class="hp-tier__custom">
+              <label class="hp-field hp-field--inline">
+                <span>Custom amount</span>
+                <div class="hp-field__inline-wrap">
+                  <span class="hp-field__prefix" data-custom-currency-symbol>{sponsorDefaults.currency}</span>
+                  <input
+                    type="number"
+                    min="250"
+                    step="25"
+                    value="1000"
+                    data-custom-amount
+                    aria-label="Custom sponsorship amount"
+                  />
+                </div>
+              </label>
+            </div>
             <ul class="hp-tier__list">
-              <li>Custom package</li>
-              <li>Event co-branding</li>
+              <li>Event co-branding opportunities</li>
               <li>Equity conversation welcome</li>
               <li>Dedicated support channel</li>
+              <li>Custom package negotiated around the work</li>
             </ul>
-            <button class="hp-cta hp-cta--magenta hp-cta--full" onclick="document.getElementById('dlg-sponsor').showModal()">LET'S TALK</button>
-          </div>
+            <button
+              type="button"
+              class="hp-cta hp-cta--glass hp-cta--full"
+              data-dialog-open="dlg-sponsor"
+              data-sponsor-tier="custom"
+            >
+              Let&apos;s Talk
+            </button>
+          </article>
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- ══════════════════════════════════════════
-       FOOTER
-  ═══════════════════════════════════════════════ -->
-  <footer class="hp-footer">
-    <nav class="hp-footer__nav" aria-label="Site navigation">
-      <a href="/quote">Quote</a>
-      <a href="/about">About</a>
-      <a href="/materials">Materials</a>
-      <a href="/opportunities">Network</a>
-      <a href="/blog">Blog</a>
-      <a href="/faq">FAQ</a>
-      <a href="/contact">Contact</a>
-      <a href="/shop">Shop</a>
-      <a href="https://oldgirl.3d3d.ca" target="_blank" rel="noopener">Old Girl</a>
-      <a href="https://ko-fi.com/3d3dca" target="_blank" rel="noopener">Ko-fi</a>
-    </nav>
-    <p class="hp-footer__copy">© 2025 3D3D Atlantic Cooperative · Fredericton, NB · Open Source · Built with grit.</p>
-  </footer>
+  <dialog id="dlg-quote" class="hp-dialog">
+    <div class="hp-dialog__shell">
+      <div class="hp-dialog__header">
+        <div>
+          <p class="hp-card__eyebrow">Quote Desk</p>
+          <h3 class="hp-dialog__title">Get an estimate without leaving the page.</h3>
+        </div>
+        <button type="button" class="hp-dialog__close" data-dialog-close aria-label="Close the quote drawer">✕</button>
+      </div>
 
-  <!-- ══════════════════════════════════════════
-       DIALOGS
-  ═══════════════════════════════════════════════ -->
+      <form
+        action={FORM_ENDPOINT}
+        method="POST"
+        enctype="multipart/form-data"
+        class="hp-dialog__content hp-form"
+        data-analytics-submit="quote_drawer_submitted"
+        data-analytics-source="homepage-quote-drawer"
+      >
+        <input type="hidden" name="_subject" value="Homepage Quote Desk | 3D3D" />
+        <input type="hidden" name="source" value="homepage-quote-drawer" />
+
+        <div class="hp-form__grid">
+          <label class="hp-field">
+            <span>Name</span>
+            <input type="text" name="name" required placeholder="Your name" />
+          </label>
+          <label class="hp-field">
+            <span>Email</span>
+            <input type="email" name="email" required placeholder="you@example.com" />
+          </label>
+        </div>
+
+        <div class="hp-form__grid">
+          <label class="hp-field">
+            <span>Material</span>
+            <select name="material_preference" required>
+              <option value="">Select a material</option>
+              <option>PLA</option>
+              <option>PETG</option>
+              <option>ASA</option>
+              <option>TPU</option>
+              <option>ABS</option>
+              <option>Nylon CF</option>
+            </select>
+          </label>
+          <label class="hp-field">
+            <span>Urgency</span>
+            <select name="urgency" required>
+              <option>Standard</option>
+              <option>Rush</option>
+              <option>Same-day triage</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="hp-form__grid">
+          <label class="hp-field">
+            <span>Dimensions</span>
+            <input type="text" name="dimensions" placeholder="L x W x H or send a file" />
+          </label>
+          <label class="hp-field">
+            <span>Quantity</span>
+            <input type="number" min="1" step="1" name="quantity" value="1" />
+          </label>
+        </div>
+
+        <label class="hp-field">
+          <span>Files</span>
+          <input type="file" name="attachment" accept=".stl,.3mf,.step,.stp,.obj,.pdf,.png,.jpg,.jpeg,.webp" multiple />
+          <small>STL, 3MF, STEP, PDF, photos, or reference shots.</small>
+        </label>
+
+        <label class="hp-field">
+          <span>What needs to be built?</span>
+          <textarea
+            name="message"
+            rows="5"
+            required
+            placeholder="What broke, what the part does, what environment it lives in, and any deadline that matters."
+          ></textarea>
+        </label>
+
+        <div class="hp-dialog__actions">
+          <button type="submit" class="hp-cta hp-cta--accent">Get an Estimate</button>
+          <a href="/quote" class="hp-cta hp-cta--glass">Open the Full Quote Page</a>
+        </div>
+      </form>
+    </div>
+  </dialog>
 
   <dialog id="dlg-events" class="hp-dialog">
-    <button class="hp-dialog__close" onclick="this.closest('dialog').close()" aria-label="Close">✕</button>
-    <p class="hp-card__eyebrow">BOOK AN EVENT</p>
-    <h3 class="hp-dialog__title">Hire Ken for your event.</h3>
-    <p class="hp-dialog__copy">Regattas, car shows, expos, conventions, LARP nights, D&amp;D sessions, marinas, community gatherings — I show up with printers, cameras, and the will to build.</p>
-    <a href="/book" class="hp-cta hp-cta--accent">BOOKING FORM →</a>
-    <a href="/contact?subject=event-hire" class="hp-cta hp-cta--ghost">OR SEND A MESSAGE →</a>
+    <div class="hp-dialog__shell">
+      <div class="hp-dialog__header">
+        <div>
+          <p class="hp-card__eyebrow">Events & Deployment</p>
+          <h3 class="hp-dialog__title">Book live fabrication for your event.</h3>
+        </div>
+        <button type="button" class="hp-dialog__close" data-dialog-close aria-label="Close the events drawer">✕</button>
+      </div>
+
+      <form
+        action={FORM_ENDPOINT}
+        method="POST"
+        class="hp-dialog__content hp-form"
+        data-analytics-submit="event_booking_submitted"
+        data-analytics-source="homepage-events-drawer"
+      >
+        <input type="hidden" name="_subject" value="Homepage Event Booking | 3D3D" />
+        <input type="hidden" name="source" value="homepage-events-drawer" />
+
+        <div class="hp-form__grid">
+          <label class="hp-field">
+            <span>Event type</span>
+            <select name="event_type" required>
+              <option>Regatta</option>
+              <option>Car show</option>
+              <option>Expo</option>
+              <option>Convention</option>
+              <option>LARP</option>
+              <option>Community event</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label class="hp-field">
+            <span>Date</span>
+            <input type="date" name="event_date" required />
+          </label>
+        </div>
+
+        <div class="hp-form__grid">
+          <label class="hp-field">
+            <span>Location</span>
+            <input type="text" name="location" required placeholder="City, venue, marina, or campus" />
+          </label>
+          <label class="hp-field">
+            <span>Expected attendance</span>
+            <input type="number" min="1" step="1" name="attendance" placeholder="150" />
+          </label>
+        </div>
+
+        <label class="hp-field">
+          <span>What do you need?</span>
+          <textarea
+            name="event_scope"
+            rows="4"
+            required
+            placeholder="Live printing, booth setup, video documentation, classes, racing support, or something custom."
+          ></textarea>
+        </label>
+
+        <div class="hp-form__grid">
+          <label class="hp-field">
+            <span>Budget range</span>
+            <input type="text" name="budget_range" placeholder="$1,500+, sponsorship, or custom" />
+          </label>
+          <label class="hp-field">
+            <span>Contact email</span>
+            <input type="email" name="email" required placeholder="organizer@example.com" />
+          </label>
+        </div>
+
+        <div class="hp-dialog__actions">
+          <button type="submit" class="hp-cta hp-cta--accent">Send the Booking Request</button>
+          <a href="/book" class="hp-cta hp-cta--glass">Book a Call Instead</a>
+        </div>
+      </form>
+    </div>
   </dialog>
 
   <dialog id="dlg-software" class="hp-dialog">
-    <button class="hp-dialog__close" onclick="this.closest('dialog').close()" aria-label="Close">✕</button>
-    <p class="hp-card__eyebrow">SOFTWARE & PROJECTS</p>
-    <h3 class="hp-dialog__title">Digital work.</h3>
-    <p class="hp-dialog__copy">Websites, apps, AI tools, SaaS, automation, robotics. Portfolio coming soon — reach out to talk about what you need built. We can usually scope, plan, and ship in a single sprint.</p>
-    <a href="/contact?subject=software-project" class="hp-cta hp-cta--accent">START A CONVERSATION →</a>
-    <a href="https://github.com/3d3dcanada" target="_blank" rel="noopener" class="hp-cta hp-cta--glass">VIEW GITHUB →</a>
+    <div class="hp-dialog__shell">
+      <div class="hp-dialog__header">
+        <div>
+          <p class="hp-card__eyebrow">Software & AI</p>
+          <h3 class="hp-dialog__title">A few real build lanes already in motion.</h3>
+        </div>
+        <button type="button" class="hp-dialog__close" data-dialog-close aria-label="Close the software drawer">✕</button>
+      </div>
+
+      <div class="hp-dialog__content hp-dialog__content--stack">
+        <div class="hp-project-grid">
+          {softwareProjects.map((project) => (
+            <article class="hp-project-card">
+              <div class="hp-project-card__preview">
+                <span>Workshop preview</span>
+              </div>
+              <div class="hp-project-card__body">
+                <h4>{project.name}</h4>
+                <p>{project.note}</p>
+                <div class="hp-project-card__stack">
+                  {project.stack.map((item) => (
+                    <span>{item}</span>
+                  ))}
+                </div>
+                <a href={project.href} class="hp-cta hp-cta--glass">Open</a>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <form
+          action={FORM_ENDPOINT}
+          method="POST"
+          class="hp-form"
+          data-analytics-submit="software_drawer_submitted"
+          data-analytics-source="homepage-software-drawer"
+        >
+          <input type="hidden" name="_subject" value="Homepage Software Inquiry | 3D3D" />
+          <input type="hidden" name="source" value="homepage-software-drawer" />
+
+          <div class="hp-form__grid">
+            <label class="hp-field">
+              <span>Name</span>
+              <input type="text" name="name" required placeholder="Your name" />
+            </label>
+            <label class="hp-field">
+              <span>Email</span>
+              <input type="email" name="email" required placeholder="you@example.com" />
+            </label>
+          </div>
+
+          <label class="hp-field">
+            <span>Project brief</span>
+            <textarea
+              name="message"
+              rows="4"
+              required
+              placeholder="What needs to be built, what stack you already have, and what outcome matters most."
+            ></textarea>
+          </label>
+
+          <div class="hp-dialog__actions">
+            <button type="submit" class="hp-cta hp-cta--accent">Start a Project</button>
+            <a href="https://github.com/3d3dcanada" target="_blank" rel="noopener noreferrer" class="hp-cta hp-cta--glass">View GitHub</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="dlg-network" class="hp-dialog">
+    <div class="hp-dialog__shell">
+      <div class="hp-dialog__header">
+        <div>
+          <p class="hp-card__eyebrow">The Network</p>
+          <h3 class="hp-dialog__title">Apply to join the maker-first network.</h3>
+        </div>
+        <button type="button" class="hp-dialog__close" data-dialog-close aria-label="Close the network drawer">✕</button>
+      </div>
+
+      <form
+        action={FORM_ENDPOINT}
+        method="POST"
+        class="hp-dialog__content hp-form"
+        data-analytics-submit="network_application_submitted"
+        data-analytics-source="homepage-network-drawer"
+      >
+        <input type="hidden" name="_subject" value="Homepage Network Application | 3D3D" />
+        <input type="hidden" name="source" value="homepage-network-drawer" />
+
+        <div class="hp-note-list">
+          <p>What you get: a free site at <strong>yourname.3d3d.ca</strong>, node operator access, and an open source community that actually shares the work.</p>
+        </div>
+
+        <div class="hp-form__grid">
+          <label class="hp-field">
+            <span>Name</span>
+            <input type="text" name="name" required placeholder="Your name" />
+          </label>
+          <label class="hp-field">
+            <span>Location</span>
+            <input type="text" name="location" required placeholder="City, province, country" />
+          </label>
+        </div>
+
+        <div class="hp-form__grid">
+          <label class="hp-field">
+            <span>Email</span>
+            <input type="email" name="email" required placeholder="you@example.com" />
+          </label>
+          <label class="hp-field">
+            <span>Portfolio link</span>
+            <input type="url" name="portfolio_link" placeholder="https://..." />
+          </label>
+        </div>
+
+        <label class="hp-field">
+          <span>What do you make?</span>
+          <textarea name="what_they_make" rows="4" required placeholder="Tell us what you build, fix, document, or maintain."></textarea>
+        </label>
+
+        <label class="hp-field">
+          <span>Equipment</span>
+          <textarea name="equipment" rows="3" placeholder="Printers, tools, cameras, coding stack, transport, or other useful capacity."></textarea>
+        </label>
+
+        <div class="hp-dialog__actions">
+          <button type="submit" class="hp-cta hp-cta--accent">Submit the Application</button>
+          <a href="/opportunities" class="hp-cta hp-cta--glass">Read the Full Opportunity Page</a>
+        </div>
+      </form>
+    </div>
   </dialog>
 
   <dialog id="dlg-sponsor" class="hp-dialog">
-    <button class="hp-dialog__close" onclick="this.closest('dialog').close()" aria-label="Close">✕</button>
-    <p class="hp-card__eyebrow">SPONSORSHIPS</p>
-    <h3 class="hp-dialog__title">Sponsor the journey.</h3>
-    <p class="hp-dialog__copy">Stripe payment links coming online soon. Reach out directly and we'll put together a package that works for you. VCs, brands, individuals — all welcome.</p>
-    <a href="/contact?subject=sponsorship" class="hp-cta hp-cta--accent">REACH OUT →</a>
-    <a href="https://ko-fi.com/3d3dca" target="_blank" rel="noopener" class="hp-cta hp-cta--kofi">SUPPORT ON KO-FI</a>
+    <div class="hp-dialog__shell">
+      <div class="hp-dialog__header">
+        <div>
+          <p class="hp-card__eyebrow">Sponsorships</p>
+          <h3 class="hp-dialog__title" data-sponsor-dialog-title>Start a sponsorship conversation.</h3>
+        </div>
+        <button type="button" class="hp-dialog__close" data-dialog-close aria-label="Close the sponsor drawer">✕</button>
+      </div>
+
+      <form
+        action={FORM_ENDPOINT}
+        method="POST"
+        class="hp-dialog__content hp-form"
+        data-analytics-submit="sponsor_interest_submitted"
+        data-analytics-source="homepage-sponsor-drawer"
+      >
+        <input type="hidden" name="_subject" value="Homepage Sponsorship Interest | 3D3D" />
+        <input type="hidden" name="source" value="homepage-sponsor-drawer" />
+        <input type="hidden" name="selected_tier" data-sponsor-tier-field value="custom" />
+        <input type="hidden" name="selected_currency" data-sponsor-currency-field value={sponsorDefaults.currency} />
+        <input type="hidden" name="selected_billing" data-sponsor-billing-field value={sponsorDefaults.billing} />
+
+        <div class="hp-note-list">
+          <p data-sponsor-dialog-copy>
+            Pick the lane that fits and we will send the matching checkout path once the Stripe links are plugged in.
+          </p>
+        </div>
+
+        <div class="hp-form__grid">
+          <label class="hp-field">
+            <span>Name</span>
+            <input type="text" name="name" required placeholder="Your name" />
+          </label>
+          <label class="hp-field">
+            <span>Email</span>
+            <input type="email" name="email" required placeholder="you@example.com" />
+          </label>
+        </div>
+
+        <div class="hp-form__grid">
+          <label class="hp-field">
+            <span>Company</span>
+            <input type="text" name="company" placeholder="Brand, crew, or organization" />
+          </label>
+          <label class="hp-field">
+            <span>Selected amount</span>
+            <input type="text" name="selected_amount" data-sponsor-amount-field readonly value={initialSupporterPrice} />
+          </label>
+        </div>
+
+        <label class="hp-field">
+          <span>Notes</span>
+          <textarea
+            name="message"
+            rows="4"
+            placeholder="Tell us whether you want event co-branding, software support, production help, or a custom package."
+          ></textarea>
+        </label>
+
+        <div class="hp-dialog__actions">
+          <button type="submit" class="hp-cta hp-cta--accent">Send Sponsorship Request</button>
+          <a href="/contact?subject=sponsorship" class="hp-cta hp-cta--glass">Open the Full Contact Page</a>
+        </div>
+      </form>
+    </div>
   </dialog>
 
-  <!-- ══════════════════════════════════════════
-       SCRIPTS
-  ═══════════════════════════════════════════════ -->
-  <script is:inline>
-    document.querySelectorAll('.hp-dialog').forEach(function(dlg) {
-      dlg.addEventListener('click', function(e) {
-        if (e.target === dlg) dlg.close();
-      });
-    });
-  </script>
+  <dialog id="dlg-shop" class="hp-dialog">
+    <div class="hp-dialog__shell">
+      <div class="hp-dialog__header">
+        <div>
+          <p class="hp-card__eyebrow">Shop</p>
+          <h3 class="hp-dialog__title">Browse the current catalog without leaving the page.</h3>
+        </div>
+        <button type="button" class="hp-dialog__close" data-dialog-close aria-label="Close the shop drawer">✕</button>
+      </div>
 
+      <div class="hp-dialog__content hp-dialog__content--stack">
+        <div class="hp-shop-filter-row">
+          <button type="button" class="hp-filter-pill hp-filter-pill--active" data-shop-filter="all">All</button>
+          {SHOP_CATEGORIES.map((category) => (
+            <button type="button" class="hp-filter-pill" data-shop-filter={category.id}>
+              {category.label}
+            </button>
+          ))}
+        </div>
+
+        <div class="hp-shop-grid">
+          {featuredProducts.map((item) => (
+            <a
+              href={getCatalogItemUrl(item)}
+              class="hp-shop-card"
+              data-shop-card
+              data-shop-category={item.category}
+            >
+              <div class="hp-shop-card__media">
+                {item.images[0] ? (
+                  <img src={item.images[0]} alt={item.name} loading="lazy" decoding="async" />
+                ) : (
+                  <div class="hp-shop-card__empty">No preview</div>
+                )}
+              </div>
+              <div class="hp-shop-card__body">
+                <p>{item.material}</p>
+                <h4>{item.name}</h4>
+                <strong>
+                  {getCatalogItemHasPriceRange(item) ? 'From ' : ''}
+                  ${getCatalogItemStartingPrice(item).toFixed(2)}
+                </strong>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <div class="hp-dialog__actions">
+          <a href="/shop" class="hp-cta hp-cta--accent">Open the Full Shop</a>
+          <a href="/quote?source=shop-drawer" class="hp-cta hp-cta--glass">Need Something Custom?</a>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <SiteFooterFull />
+
+  <script is:inline>
+    (() => {
+      const html = document.documentElement;
+      const dialogs = Array.from(document.querySelectorAll('.hp-dialog'));
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const sponsorState = {
+        currency: 'CAD',
+        billing: 'monthly',
+      };
+
+      const sponsorRates = {
+        USD: 1,
+        CAD: 1.37,
+        EUR: 0.92,
+      };
+
+      const sponsorBase = {
+        supporter: 100,
+        partner: 500,
+      };
+
+      const getSponsorFormatter = (currency) =>
+        new Intl.NumberFormat(currency === 'EUR' ? 'de-DE' : 'en-CA', {
+          style: 'currency',
+          currency,
+          maximumFractionDigits: 0,
+        });
+
+      const detectCurrency = () => {
+        const locale = navigator.language || '';
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+        const canadaZones = [
+          'America/Halifax',
+          'America/Moncton',
+          'America/St_Johns',
+          'America/Toronto',
+          'America/Winnipeg',
+          'America/Edmonton',
+          'America/Vancouver',
+        ];
+
+        if (locale.includes('-CA') || canadaZones.includes(timeZone)) return 'CAD';
+        if (timeZone.startsWith('Europe/')) return 'EUR';
+        return 'USD';
+      };
+
+      sponsorState.currency = detectCurrency();
+
+      const syncDialogState = () => {
+        const hasOpenDialog = dialogs.some((dialog) => dialog.hasAttribute('open'));
+        html.classList.toggle('hp-has-dialog', hasOpenDialog);
+      };
+
+      const openDialog = (dialog) => {
+        if (!(dialog instanceof HTMLDialogElement)) return;
+        if (typeof dialog.showModal === 'function') {
+          dialog.showModal();
+        } else {
+          dialog.setAttribute('open', 'true');
+        }
+        syncDialogState();
+      };
+
+      const closeDialog = (dialog) => {
+        if (!(dialog instanceof HTMLDialogElement)) return;
+        if (typeof dialog.close === 'function') {
+          dialog.close();
+        } else {
+          dialog.removeAttribute('open');
+        }
+        syncDialogState();
+      };
+
+      const updateSponsorUI = () => {
+        document.querySelectorAll('[data-currency-option]').forEach((button) => {
+          if (!(button instanceof HTMLButtonElement)) return;
+          button.classList.toggle('hp-switch__button--active', button.dataset.currencyOption === sponsorState.currency);
+        });
+
+        document.querySelectorAll('[data-billing-option]').forEach((button) => {
+          if (!(button instanceof HTMLButtonElement)) return;
+          button.classList.toggle('hp-switch__button--active', button.dataset.billingOption === sponsorState.billing);
+        });
+
+        const billingMultiplier = sponsorState.billing === 'yearly' ? 10 : 1;
+        const formatter = getSponsorFormatter(sponsorState.currency);
+
+        Object.entries(sponsorBase).forEach(([tier, amount]) => {
+          const priceNode = document.querySelector(`[data-tier-price="${tier}"]`);
+          const metaNode = document.querySelector(`[data-tier-meta="${tier}"]`);
+          if (!(priceNode instanceof HTMLElement) || !(metaNode instanceof HTMLElement)) return;
+
+          const converted = Math.round(amount * sponsorRates[sponsorState.currency] * billingMultiplier);
+          priceNode.textContent = formatter.format(converted);
+          metaNode.textContent =
+            sponsorState.billing === 'yearly' ? 'per year · 2 months free' : 'per month';
+        });
+
+        const customCurrencySymbol = document.querySelector('[data-custom-currency-symbol]');
+        if (customCurrencySymbol instanceof HTMLElement) {
+          customCurrencySymbol.textContent = sponsorState.currency;
+        }
+
+        const currencyField = document.querySelector('[data-sponsor-currency-field]');
+        const billingField = document.querySelector('[data-sponsor-billing-field]');
+        if (currencyField instanceof HTMLInputElement) currencyField.value = sponsorState.currency;
+        if (billingField instanceof HTMLInputElement) billingField.value = sponsorState.billing;
+      };
+
+      updateSponsorUI();
+
+      document.querySelectorAll('[data-currency-option]').forEach((button) => {
+        if (!(button instanceof HTMLButtonElement)) return;
+        button.addEventListener('click', () => {
+          sponsorState.currency = button.dataset.currencyOption || 'CAD';
+          updateSponsorUI();
+        });
+      });
+
+      document.querySelectorAll('[data-billing-option]').forEach((button) => {
+        if (!(button instanceof HTMLButtonElement)) return;
+        button.addEventListener('click', () => {
+          sponsorState.billing = button.dataset.billingOption || 'monthly';
+          updateSponsorUI();
+        });
+      });
+
+      const populateSponsorDialog = (trigger) => {
+        const sponsorDialog = document.getElementById('dlg-sponsor');
+        if (!(sponsorDialog instanceof HTMLDialogElement) || !(trigger instanceof HTMLElement)) return;
+
+        const tier = trigger.dataset.sponsorTier || 'custom';
+        const tierField = sponsorDialog.querySelector('[data-sponsor-tier-field]');
+        const amountField = sponsorDialog.querySelector('[data-sponsor-amount-field]');
+        const title = sponsorDialog.querySelector('[data-sponsor-dialog-title]');
+        const copy = sponsorDialog.querySelector('[data-sponsor-dialog-copy]');
+        const customInput = document.querySelector('[data-custom-amount]');
+        const formatter = getSponsorFormatter(sponsorState.currency);
+        const multiplier = sponsorState.billing === 'yearly' ? 10 : 1;
+
+        let amountLabel = formatter.format(Math.round(100 * sponsorRates[sponsorState.currency] * multiplier));
+
+        if (tier === 'partner') {
+          amountLabel = formatter.format(Math.round(500 * sponsorRates[sponsorState.currency] * multiplier));
+        }
+
+        if (tier === 'custom') {
+          const amountValue =
+            customInput instanceof HTMLInputElement && customInput.value
+              ? Number(customInput.value)
+              : 1000;
+          amountLabel = formatter.format(Math.round(amountValue));
+        }
+
+        if (tierField instanceof HTMLInputElement) tierField.value = tier;
+        if (amountField instanceof HTMLInputElement) amountField.value = amountLabel;
+
+        if (title instanceof HTMLElement) {
+          if (tier === 'supporter') title.textContent = 'Start a Supporter sponsorship.';
+          if (tier === 'partner') title.textContent = 'Start a Partner sponsorship.';
+          if (tier === 'custom') title.textContent = 'Build a custom investor package.';
+        }
+
+        if (copy instanceof HTMLElement) {
+          if (tier === 'supporter') {
+            copy.textContent = `Supporter is ${amountLabel} ${sponsorState.billing === 'yearly' ? 'per year' : 'per month'} and includes the keychain plus hat or shirt package.`;
+          }
+          if (tier === 'partner') {
+            copy.textContent = `Partner is ${amountLabel} ${sponsorState.billing === 'yearly' ? 'per year' : 'per month'} and includes the full enhanced package, prints, consult time, and software support.`;
+          }
+          if (tier === 'custom') {
+            copy.textContent = `Custom investor support is set to ${amountLabel}. Use the notes field to outline event co-branding, equity, or a negotiated package.`;
+          }
+        }
+      };
+
+      document.querySelectorAll('[data-dialog-open]').forEach((trigger) => {
+        if (!(trigger instanceof HTMLElement)) return;
+        trigger.addEventListener('click', (event) => {
+          event.preventDefault();
+          const dialogId = trigger.dataset.dialogOpen;
+          if (!dialogId) return;
+          if (dialogId === 'dlg-sponsor') populateSponsorDialog(trigger);
+          openDialog(document.getElementById(dialogId));
+        });
+      });
+
+      document.querySelectorAll('[data-dialog-close]').forEach((button) => {
+        if (!(button instanceof HTMLElement)) return;
+        button.addEventListener('click', () => {
+          closeDialog(button.closest('.hp-dialog'));
+        });
+      });
+
+      dialogs.forEach((dialog) => {
+        if (!(dialog instanceof HTMLDialogElement)) return;
+
+        dialog.addEventListener('click', (event) => {
+          if (event.target === dialog) {
+            closeDialog(dialog);
+          }
+        });
+
+        dialog.addEventListener('close', syncDialogState);
+        dialog.addEventListener('cancel', syncDialogState);
+      });
+
+      document.querySelectorAll('[data-rotating-gallery]').forEach((gallery) => {
+        if (!(gallery instanceof HTMLElement) || reducedMotion) return;
+        const slides = Array.from(gallery.querySelectorAll('.hp-section__bg-img'));
+        if (slides.length < 2) return;
+
+        let activeIndex = 0;
+        const interval = Number(gallery.dataset.rotateInterval || 9000);
+
+        window.setInterval(() => {
+          slides[activeIndex]?.classList.remove('hp-section__bg-img--active');
+          activeIndex = (activeIndex + 1) % slides.length;
+          slides[activeIndex]?.classList.add('hp-section__bg-img--active');
+        }, interval);
+      });
+
+      const filterCards = () => {
+        const activeFilter =
+          document.querySelector('.hp-filter-pill--active')?.getAttribute('data-shop-filter') || 'all';
+
+        document.querySelectorAll('[data-shop-card]').forEach((card) => {
+          if (!(card instanceof HTMLElement)) return;
+          const cardCategory = card.dataset.shopCategory || '';
+          card.hidden = activeFilter !== 'all' && cardCategory !== activeFilter;
+        });
+      };
+
+      document.querySelectorAll('[data-shop-filter]').forEach((button) => {
+        if (!(button instanceof HTMLButtonElement)) return;
+        button.addEventListener('click', () => {
+          document.querySelectorAll('[data-shop-filter]').forEach((otherButton) => {
+            otherButton.classList.remove('hp-filter-pill--active');
+          });
+          button.classList.add('hp-filter-pill--active');
+          filterCards();
+        });
+      });
+
+      filterCards();
+    })();
+  </script>
 </body>
 </html>
 
 <style>
-  /* ══════════════════════════════════════════════════════════
-     3D3D HOMEPAGE
-     Splash-hub quality: glass cards over photo backgrounds
-     Grain · Vignette · Scrim · Blur · Mixed light/dark glass
-  ═══════════════════════════════════════════════════════════ */
+  :root {
+    --hp-card-bg: rgba(10, 14, 19, 0.62);
+    --hp-card-border: rgba(255, 255, 255, 0.08);
+    --hp-card-shadow:
+      0 24px 60px rgba(0, 0, 0, 0.34),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    --hp-nav-bg: rgba(10, 14, 19, 0.76);
+    --hp-nav-border: rgba(255, 255, 255, 0.08);
+    --hp-nav-shadow: 0 16px 44px rgba(0, 0, 0, 0.36);
+  }
 
-  /* ── PAGE BASE ── */
+  html.hp-has-dialog,
+  html.hp-has-dialog body {
+    overflow: hidden;
+  }
+
   .hp-page {
     margin: 0;
-    padding: 0;
-    overflow-x: hidden;
     background: #0a0e13;
     color: #f4efe8;
     font-family: var(--font-body, 'Instrument Sans', system-ui, sans-serif);
   }
 
-  /* ── SECTION (each is a full viewport with photo bg) ── */
-  .hp-section {
+  .hp-home {
     position: relative;
-    min-height: 100dvh;
-    display: flex;
-    align-items: center;
+    background: #0a0e13;
+  }
+
+  .hp-section {
+    --section-accent: #40c4c4;
+    position: relative;
     overflow: hidden;
     isolation: isolate;
+    min-height: min(58rem, 92vh);
+    padding: clamp(4rem, 7vw, 6rem) 0;
   }
 
-  /* Background image */
-  .hp-section__bg {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: 0;
+  .hp-section--hero {
+    min-height: min(48rem, 88vh);
+    padding: clamp(6rem, 10vw, 8rem) 0;
   }
 
-  /* Cinematic vignette */
-  .hp-section__vignette {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: radial-gradient(
-      ellipse 60% 60% at 50% 50%,
-      transparent 0%,
-      rgba(6, 8, 16, 0.65) 100%
-    );
-    pointer-events: none;
-  }
-
-  /* Dark scrim (default) */
-  .hp-section__scrim {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    background:
-      linear-gradient(180deg, rgba(10,14,19,0.45) 0%, rgba(10,14,19,0.2) 35%, rgba(10,14,19,0.55) 100%),
-      linear-gradient(90deg, rgba(10,14,19,0.6) 0%, transparent 30%, transparent 70%, rgba(10,14,19,0.6) 100%);
-    pointer-events: none;
-  }
-
-  /* Light scrim variant for light-glass sections */
-  .hp-section__scrim--light {
-    background:
-      linear-gradient(180deg, rgba(246,247,250,0.25) 0%, rgba(246,247,250,0.08) 35%, rgba(246,247,250,0.3) 100%),
-      linear-gradient(90deg, rgba(246,247,250,0.35) 0%, transparent 30%, transparent 70%, rgba(246,247,250,0.35) 100%);
-  }
-
-  /* Film grain */
+  .hp-section__bg,
+  .hp-section__vignette,
+  .hp-section__scrim,
   .hp-section__grain {
     position: absolute;
     inset: 0;
-    z-index: 3;
+  }
+
+  .hp-section__bg-img {
+    position: absolute;
+    inset: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0;
+    transition: opacity 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .hp-section__bg-img--active {
+    opacity: 1;
+  }
+
+  .hp-section__vignette {
+    z-index: 1;
+    background:
+      radial-gradient(ellipse 60% 60% at 50% 50%, transparent 0%, rgba(6, 8, 16, 0.65) 100%);
     pointer-events: none;
+  }
+
+  .hp-section__scrim {
+    z-index: 2;
+    background:
+      linear-gradient(180deg, rgba(10, 14, 19, 0.45) 0%, rgba(10, 14, 19, 0.2) 35%, rgba(10, 14, 19, 0.55) 100%),
+      linear-gradient(90deg, rgba(10, 14, 19, 0.6) 0%, transparent 30%, transparent 70%, rgba(10, 14, 19, 0.6) 100%);
+    pointer-events: none;
+  }
+
+  .hp-section__grain {
+    z-index: 3;
     opacity: 0.04;
     mix-blend-mode: overlay;
+    pointer-events: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-    animation: hp-grain 8s steps(4) infinite;
-  }
-  @keyframes hp-grain {
-    0%, 100% { transform: translate(0, 0); }
-    25%      { transform: translate(-2px, 1px); }
-    50%      { transform: translate(1px, -2px); }
-    75%      { transform: translate(-1px, 2px); }
+    animation: hp-grain-shift 8s steps(4) infinite;
   }
 
-  /* ── GLASS CARDS ── */
-
-  /* Dark glass (splash-hub default) */
-  .hp-card--dark {
-    background: rgba(10, 14, 19, 0.62);
-    backdrop-filter: blur(20px) saturate(150%);
-    -webkit-backdrop-filter: blur(20px) saturate(150%);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-top: 2px solid var(--section-accent, #40C4C4);
-    box-shadow:
-      0 24px 60px rgba(0, 0, 0, 0.34),
-      inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  }
-
-  /* Light glass */
-  .hp-card--light {
-    background: rgba(246, 247, 250, 0.74);
-    backdrop-filter: blur(20px) saturate(150%);
-    -webkit-backdrop-filter: blur(20px) saturate(150%);
-    border: 1px solid rgba(255, 255, 255, 0.45);
-    border-top: 2px solid var(--section-accent, #40C4C4);
-    box-shadow:
-      0 24px 60px rgba(0, 0, 0, 0.18),
-      inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  }
-
-  /* Card positioning */
-  .hp-card {
+  .hp-section__shell {
     position: relative;
     z-index: 4;
-    width: min(28rem, calc(100% - 2rem));
+    width: min(100% - 1.25rem, 74rem);
+    margin: 0 auto;
+    display: grid;
+  }
+
+  .hp-section__shell--start {
+    justify-items: start;
+  }
+
+  .hp-section__shell--end {
+    justify-items: end;
+  }
+
+  .hp-section__shell--center {
+    justify-items: center;
+  }
+
+  .hp-section__shell--stack {
+    gap: 1.2rem;
+  }
+
+  .hp-card {
+    width: min(100%, 33rem);
     border-radius: 2px;
+    background: var(--hp-card-bg);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border: 1px solid var(--hp-card-border);
+    border-top: 2px solid var(--section-accent);
+    box-shadow: var(--hp-card-shadow);
   }
 
-  .hp-card--left {
-    margin-left: clamp(1rem, 5vw, 4rem);
-    margin-right: auto;
-  }
-  .hp-card--right {
-    margin-left: auto;
-    margin-right: clamp(1rem, 5vw, 4rem);
-  }
-  .hp-card--center {
-    margin: 0 auto;
-    text-align: center;
-  }
-  .hp-card--wide {
-    width: min(52rem, calc(100% - 2rem));
-    margin: 0 auto;
-  }
-
-  /* Hero card special sizing */
   .hp-card--hero {
-    width: min(52rem, calc(100% - 2rem));
-    background: rgba(10, 14, 19, 0.42);
-    backdrop-filter: blur(12px) saturate(140%);
-    -webkit-backdrop-filter: blur(12px) saturate(140%);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.3);
+    width: min(100%, 56rem);
+  }
+
+  .hp-card--wide {
+    width: min(100%, 74rem);
+  }
+
+  .hp-card--gallery {
+    width: min(100%, 32rem);
   }
 
   .hp-card__inner {
     display: grid;
-    gap: 1rem;
-    padding: clamp(1.2rem, 3vw, 1.8rem);
+    gap: 0.95rem;
+    padding: clamp(1.1rem, 3vw, 1.7rem);
   }
 
-  /* ── CARD TYPOGRAPHY (dark glass = light text) ── */
+  .hp-card__inner--compact {
+    text-align: center;
+  }
+
   .hp-card__eyebrow {
     margin: 0;
-    font-family: var(--font-tech, 'Archivo', sans-serif);
+    font-family: var(--font-mono);
     font-size: 0.68rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(200, 208, 220, 0.7);
-  }
-  .hp-card__eyebrow--dark { color: var(--section-accent, #40C4C4); }
-
-  .hp-card__hero-title {
-    margin: 0;
-    font-family: var(--font-display, 'Archivo Black', sans-serif);
-    font-size: clamp(3.5rem, 2rem + 8vw, 10rem);
-    font-weight: 900;
-    line-height: 0.88;
-    letter-spacing: -0.04em;
-    text-transform: uppercase;
-    color: #f4efe8;
+    color: #c8d0dc;
   }
 
-  .hp-card__title {
+  .hp-card__hero-title,
+  .hp-card__title,
+  .hp-dialog__title,
+  .hp-shop-card__body h4,
+  .hp-project-card__body h4 {
     margin: 0;
-    font-family: var(--font-display, 'Archivo Black', sans-serif);
-    font-size: clamp(1.9rem, 1.3rem + 2vw, 3rem);
+    font-family: var(--font-display);
     line-height: 0.94;
     letter-spacing: -0.05em;
     color: #f4efe8;
   }
-  .hp-card__title--dark { color: #1A1D21; }
+
+  .hp-card__hero-title {
+    font-size: clamp(3rem, 1.8rem + 7vw, 7.75rem);
+    text-transform: uppercase;
+  }
+
+  .hp-card__title,
+  .hp-dialog__title {
+    font-size: clamp(2rem, 1.35rem + 2vw, 3.15rem);
+  }
 
   .hp-card__subtitle {
     margin: 0;
-    font-family: var(--font-tech, 'Archivo', sans-serif);
-    font-size: 0.95rem;
+    font-family: var(--font-tech);
+    font-size: 0.96rem;
     font-weight: 600;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
+    line-height: 1.4;
     color: #f4efe8;
   }
 
-  .hp-card__copy {
+  .hp-card__copy,
+  .hp-note-list p,
+  .hp-project-card__body p,
+  .hp-tier__meta,
+  .hp-tier__list li {
     margin: 0;
-    font-family: var(--font-body, 'Instrument Sans', sans-serif);
-    font-size: 0.92rem;
-    line-height: 1.6;
     color: #c8d0dc;
+    line-height: 1.65;
   }
-  .hp-card__copy--dark { color: #4A5568; }
-  .hp-card__copy--dark strong { color: #1A1D21; font-weight: 700; }
+
+  .hp-card__copy strong {
+    color: #f4efe8;
+  }
+
+  .hp-card__copy--lead {
+    font-size: 1rem;
+  }
+
+  .hp-card__highlights,
+  .hp-tier__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 
   .hp-card__highlights {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.35rem 0.75rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem 0.75rem;
   }
+
+  .hp-card__highlights li,
+  .hp-tier__eyebrow,
+  .hp-shop-card__body p,
+  .hp-project-card__stack span,
+  .hp-filter-pill,
+  .hp-switch__button,
+  .hp-field > span,
+  .hp-field small {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
   .hp-card__highlights li {
     display: flex;
     align-items: center;
     gap: 0.45rem;
-    font-family: var(--font-tech, 'Archivo', sans-serif);
-    font-size: 0.66rem;
-    letter-spacing: 0.02em;
     color: #c8d0dc;
   }
+
   .hp-card__highlights li::before {
     content: '';
-    flex-shrink: 0;
     width: 5px;
     height: 5px;
-    background: var(--section-accent, #40C4C4);
+    flex-shrink: 0;
+    background: var(--section-accent);
   }
 
-  .hp-card__tags {
+  .hp-card__tags,
+  .hp-card__cta-row,
+  .hp-card__stats,
+  .hp-sponsor-controls,
+  .hp-dialog__actions,
+  .hp-shop-filter-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.45rem;
+    gap: 0.65rem;
   }
-  .hp-card__tag {
+
+  .hp-card__tag,
+  .hp-project-card__stack span,
+  .hp-filter-pill {
     display: inline-flex;
     align-items: center;
-    min-height: 1.95rem;
+    min-height: 2rem;
     padding: 0.35rem 0.7rem;
     border-radius: 2px;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.08);
     color: #f4efe8;
-    font-family: var(--font-tech, 'Archivo', sans-serif);
-    font-size: 0.66rem;
-    letter-spacing: 0.04em;
-  }
-  .hp-card__tag--dark {
-    background: rgba(0, 0, 0, 0.06);
-    border-color: rgba(0, 0, 0, 0.12);
-    color: #4A5568;
   }
 
-  /* ── CTAs ── */
+  .hp-card__cta-row--start {
+    justify-content: flex-start;
+  }
+
+  .hp-card__stats {
+    gap: 0.85rem;
+  }
+
+  .hp-card__stats div {
+    min-width: 9rem;
+    padding: 0.8rem 0.9rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 2px;
+  }
+
+  .hp-card__stats strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: #f4efe8;
+  }
+
+  .hp-card__stats span {
+    display: block;
+    margin-top: 0.3rem;
+    color: #c8d0dc;
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
   .hp-cta {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.9rem;
-    width: fit-content;
     min-height: 3rem;
     padding: 0.78rem 1.05rem;
     border-radius: 2px;
-    font-family: var(--font-tech, 'Archivo', sans-serif);
+    border: 1px solid transparent;
+    background: transparent;
+    color: #f4efe8;
+    cursor: pointer;
+    font-family: var(--font-tech);
     font-size: 0.74rem;
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     text-decoration: none;
-    cursor: pointer;
-    transition: transform 200ms ease, background 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
-    line-height: 1;
-    white-space: nowrap;
+    transition: transform 200ms ease, background 200ms ease, border-color 200ms ease;
   }
-  .hp-cta:hover { transform: translateY(-1px); }
+
+  .hp-cta:hover,
+  .hp-cta:focus-visible {
+    transform: translateY(-1px);
+    outline: none;
+  }
 
   .hp-cta--accent {
-    border: 1px solid var(--section-accent, #40C4C4);
+    border-color: var(--section-accent);
     background: rgba(255, 255, 255, 0.06);
-    color: #f4efe8;
   }
-  .hp-cta--accent:hover {
+
+  .hp-cta--accent:hover,
+  .hp-cta--accent:focus-visible {
     background: rgba(255, 255, 255, 0.12);
     border-color: color-mix(in srgb, var(--section-accent) 80%, white 20%);
   }
 
   .hp-cta--glass {
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.12);
     background: rgba(255, 255, 255, 0.06);
-    color: #f4efe8;
   }
-  .hp-cta--glass:hover {
+
+  .hp-cta--glass:hover,
+  .hp-cta--glass:focus-visible {
     background: rgba(255, 255, 255, 0.12);
     border-color: rgba(255, 255, 255, 0.2);
   }
 
   .hp-cta--ghost {
-    border: 1px solid transparent;
-    background: transparent;
-    color: rgba(244, 239, 232, 0.55);
-  }
-  .hp-cta--ghost:hover { color: #f4efe8; }
-
-  .hp-cta--dark {
-    border: 2px solid #1A1D21;
-    background: transparent;
-    color: #1A1D21;
-  }
-  .hp-cta--dark:hover { background: #1A1D21; color: #F6F7FA; }
-
-  .hp-cta--magenta {
-    border: 1px solid var(--color-magenta-primary, #E84A8A);
-    background: rgba(232, 74, 138, 0.12);
-    color: #f4efe8;
-  }
-  .hp-cta--magenta:hover { background: rgba(232, 74, 138, 0.24); }
-
-  .hp-cta--kofi {
-    border: 1px solid #FF5E5B;
-    background: rgba(255, 94, 91, 0.12);
-    color: #f4efe8;
-  }
-  .hp-cta--kofi:hover { background: rgba(255, 94, 91, 0.24); }
-
-  .hp-cta--full { width: 100%; justify-content: center; }
-
-  .hp-card__cta-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.65rem;
-    justify-content: center;
+    color: rgba(244, 239, 232, 0.7);
   }
 
-  /* ── GALLERY STRIP ── */
-  .hp-gallery {
-    background: #0a0e13;
-    padding-block: clamp(4rem, 7vw, 7rem);
-    overflow: hidden;
+  .hp-cta--ghost:hover,
+  .hp-cta--ghost:focus-visible {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.04);
   }
-  .hp-gallery__strip {
-    display: flex;
-    gap: 0.4rem;
-    overflow-x: auto;
-    padding-inline: clamp(1rem, 3vw, 3rem);
-    scrollbar-width: none;
-    margin-bottom: 3rem;
-    -webkit-overflow-scrolling: touch;
+
+  .hp-cta--full {
+    width: 100%;
   }
-  .hp-gallery__strip::-webkit-scrollbar { display: none; }
-  .hp-gallery__strip img {
-    height: clamp(160px, 26vw, 300px);
-    width: auto;
-    flex-shrink: 0;
-    object-fit: cover;
-    border-radius: 2px;
-    filter: saturate(0.8) brightness(0.85);
-    transition: filter 0.4s ease;
-  }
-  .hp-gallery__strip img:hover {
-    filter: saturate(1.1) brightness(1);
-  }
-  .hp-gallery__bottom {
-    text-align: center;
-    padding-inline: clamp(1rem, 3vw, 3rem);
+
+  .hp-sponsor-head {
     display: grid;
-    gap: 1.5rem;
-    justify-items: center;
-  }
-  .hp-gallery__headline {
-    font-family: var(--font-display, 'Archivo Black', sans-serif);
-    font-size: clamp(1.1rem, 0.8rem + 1.5vw, 2rem);
-    font-weight: 900;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-    color: rgba(244, 239, 232, 0.55);
-    margin: 0;
-  }
-  .hp-gallery__btns {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    justify-content: center;
+    gap: 0.8rem;
   }
 
-  /* ── SPONSOR LAYOUT ── */
-  .hp-section--sponsor {
-    min-height: auto;
-    padding-block: clamp(5rem, 8vw, 8rem);
+  .hp-switch {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
   }
-  .hp-sponsor-layout {
+
+  .hp-switch__button,
+  .hp-filter-pill {
+    min-height: 2.5rem;
+    padding: 0.55rem 0.75rem;
+    border-radius: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.05);
+    color: #c8d0dc;
+    cursor: pointer;
+    transition: background 180ms ease, color 180ms ease, border-color 180ms ease;
+  }
+
+  .hp-switch__button--active,
+  .hp-filter-pill--active {
+    background: rgba(255, 255, 255, 0.09);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.16);
+  }
+
+  .hp-tier-grid {
     position: relative;
     z-index: 4;
-    width: min(64rem, calc(100% - 2rem));
-    margin: 0 auto;
     display: grid;
-    gap: 2rem;
-  }
-
-  .hp-tiers {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
+    width: min(100%, 74rem);
   }
 
-  .hp-tier--glass {
+  .hp-tier {
     position: relative;
-    background: rgba(10, 14, 19, 0.58);
+    display: grid;
+    gap: 1rem;
+    padding: clamp(1.2rem, 3vw, 1.6rem);
+    border-radius: 2px;
+    background: var(--hp-card-bg);
     backdrop-filter: blur(20px) saturate(150%);
     -webkit-backdrop-filter: blur(20px) saturate(150%);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 2px;
-    padding: clamp(1.2rem, 2.5vw, 2rem);
-    display: grid;
-    gap: 1.2rem;
-    align-content: start;
-    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--hp-card-border);
+    border-top: 2px solid var(--section-accent);
+    box-shadow: var(--hp-card-shadow);
   }
+
   .hp-tier--featured {
-    border-color: var(--section-accent, #E84A8A);
-    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    border-color: color-mix(in srgb, var(--section-accent) 70%, white 30%);
   }
 
   .hp-tier__badge {
     position: absolute;
     top: 0;
-    right: 1.2rem;
+    right: 1rem;
     transform: translateY(-50%);
-    background: var(--section-accent, #E84A8A);
+    padding: 0.25rem 0.7rem;
+    border-radius: 2px;
+    background: var(--section-accent);
     color: #0a0e13;
-    font-family: var(--font-tech, 'Archivo', sans-serif);
-    font-size: 0.58rem;
-    font-weight: 700;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    padding: 0.2rem 0.6rem;
-    border-radius: 2px;
   }
 
   .hp-tier__price {
-    font-family: var(--font-display, 'Archivo Black', sans-serif);
-    font-size: clamp(1.8rem, 1.4rem + 1.5vw, 2.6rem);
-    font-weight: 900;
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 1.6rem + 2vw, 3rem);
+    line-height: 0.94;
+    letter-spacing: -0.05em;
     color: #f4efe8;
-    line-height: 1;
-    letter-spacing: -0.03em;
   }
 
-  .hp-tier__name {
-    font-family: var(--font-tech, 'Archivo', sans-serif);
-    font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(200, 208, 220, 0.5);
-    margin-top: -0.6rem;
+  .hp-tier__meta {
+    margin-top: -0.4rem;
   }
 
   .hp-tier__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
     display: grid;
     gap: 0.5rem;
   }
+
   .hp-tier__list li {
-    font-size: 0.85rem;
-    line-height: 1.45;
-    color: #c8d0dc;
-    padding-left: 1.2rem;
     position: relative;
-  }
-  .hp-tier__list li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--section-accent, #E84A8A);
-    font-weight: 900;
-    font-size: 0.78rem;
+    padding-left: 1rem;
   }
 
-  /* ── DIALOGS ── */
+  .hp-tier__list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--section-accent);
+  }
+
+  .hp-tier__custom {
+    display: grid;
+    gap: 0.65rem;
+  }
+
   .hp-dialog {
-    position: fixed;
-    inset: 0;
-    width: min(100% - 2rem, 520px);
-    max-height: min(calc(100% - 4rem), 600px);
-    margin: auto;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 2px;
-    padding: clamp(1.5rem, 4vw, 3rem);
-    background: rgba(10, 14, 19, 0.88);
+    inset: 0 0 0 auto;
+    width: min(100%, 36rem);
+    max-width: 36rem;
+    height: 100dvh;
+    max-height: 100dvh;
+    margin: 0 0 0 auto;
+    padding: 0;
+    border: 1px solid var(--hp-nav-border);
+    border-right: none;
+    border-radius: 2px 0 0 2px;
+    background: var(--hp-nav-bg);
     backdrop-filter: blur(28px) saturate(160%);
     -webkit-backdrop-filter: blur(28px) saturate(160%);
-    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
-    display: grid;
-    gap: 1rem;
-    align-content: start;
-    overflow-y: auto;
-    color: #f4efe8;
+    box-shadow: var(--hp-nav-shadow);
+    overflow: hidden;
   }
+
   .hp-dialog::backdrop {
     background: rgba(6, 8, 16, 0.75);
     backdrop-filter: blur(6px);
   }
-  .hp-dialog__close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.1rem;
-    color: rgba(200, 208, 220, 0.5);
-    padding: 0.4rem;
-    line-height: 1;
-    transition: color 0.2s;
-  }
-  .hp-dialog__close:hover { color: #f4efe8; }
-  .hp-dialog__title {
-    font-family: var(--font-display, 'Archivo Black', sans-serif);
-    font-size: clamp(1.4rem, 1rem + 1.5vw, 2rem);
-    font-weight: 900;
-    color: #f4efe8;
-    margin: 0;
-    letter-spacing: -0.04em;
-    text-transform: uppercase;
-    line-height: 0.94;
-  }
-  .hp-dialog__copy {
-    font-size: 0.92rem;
-    line-height: 1.65;
-    color: #c8d0dc;
-    margin: 0;
+
+  .hp-dialog__shell {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    height: 100%;
   }
 
-  /* ── FOOTER ── */
-  .hp-footer {
-    background: #060810;
-    padding: clamp(2.5rem, 5vw, 4rem) clamp(1rem, 4vw, 3rem);
-    display: grid;
-    gap: 1.5rem;
+  .hp-dialog__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
-  .hp-footer__nav {
+
+  .hp-dialog__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #f4efe8;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  .hp-dialog__content {
+    padding: 1.1rem;
+    overflow-y: auto;
+  }
+
+  .hp-dialog__content--stack {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .hp-dialog__actions {
+    justify-content: flex-start;
+  }
+
+  .hp-form,
+  .hp-project-grid,
+  .hp-shop-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .hp-form__grid {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .hp-field {
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .hp-field > span,
+  .hp-field small {
+    color: #c8d0dc;
+  }
+
+  .hp-field input,
+  .hp-field select,
+  .hp-field textarea {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.8rem 0.9rem;
+    border-radius: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.05);
+    color: #f4efe8;
+    font: inherit;
+  }
+
+  .hp-field input::placeholder,
+  .hp-field textarea::placeholder {
+    color: rgba(200, 208, 220, 0.6);
+  }
+
+  .hp-field input:focus,
+  .hp-field select:focus,
+  .hp-field textarea:focus {
+    outline: 2px solid rgba(64, 196, 196, 0.34);
+    outline-offset: 1px;
+  }
+
+  .hp-field--inline .hp-field__inline-wrap {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    border-radius: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+  }
+
+  .hp-field__prefix {
+    padding: 0 0.9rem;
+    color: #f4efe8;
+    font-family: var(--font-mono);
+    letter-spacing: 0.08em;
+  }
+
+  .hp-field--inline input {
+    border: 0;
+    background: transparent;
+  }
+
+  .hp-note-list {
+    padding: 0.95rem;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .hp-project-grid,
+  .hp-shop-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hp-project-card,
+  .hp-shop-card {
+    display: grid;
+    gap: 0;
+    overflow: hidden;
+    border-radius: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.05);
+    text-decoration: none;
+  }
+
+  .hp-project-card__preview {
+    min-height: 7rem;
+    padding: 1rem;
+    background:
+      radial-gradient(circle at top left, rgba(64, 196, 196, 0.24), transparent 42%),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0));
+  }
+
+  .hp-project-card__preview span {
+    display: inline-flex;
+    padding: 0.4rem 0.6rem;
+    border-radius: 2px;
+    background: rgba(10, 14, 19, 0.62);
+    color: #f4efe8;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .hp-project-card__body,
+  .hp-shop-card__body {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .hp-project-card__stack {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.6rem 1.8rem;
-    justify-content: center;
-  }
-  .hp-footer__nav a {
-    font-family: var(--font-tech, 'Archivo', sans-serif);
-    font-size: 0.66rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(200, 208, 220, 0.3);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .hp-footer__nav a:hover { color: var(--color-teal-primary, #40C4C4); }
-  .hp-footer__copy {
-    font-size: 0.72rem;
-    color: rgba(200, 208, 220, 0.15);
-    margin: 0;
-    text-align: center;
+    gap: 0.45rem;
   }
 
-  /* ══════════════════════════════════════════════
-     RESPONSIVE
-  ═════════════════════════════════════════════════ */
-  @media (max-width: 768px) {
-    .hp-card--left,
-    .hp-card--right {
-      margin-left: auto;
-      margin-right: auto;
+  .hp-shop-card__media {
+    aspect-ratio: 4 / 3;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .hp-shop-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hp-shop-card__empty {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    color: #c8d0dc;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .hp-shop-card__body strong {
+    color: #f4efe8;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+  }
+
+  @keyframes hp-grain-shift {
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate(-2px, 1px);
+    }
+    50% {
+      transform: translate(1px, -2px);
+    }
+    75% {
+      transform: translate(-1px, 2px);
+    }
+  }
+
+  @media (min-width: 760px) {
+    .hp-form__grid,
+    .hp-tier-grid,
+    .hp-project-grid,
+    .hp-shop-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hp-sponsor-head {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      align-items: end;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .hp-tier-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hp-section {
+      min-height: auto;
+      padding: 3.5rem 0;
+    }
+
+    .hp-section--hero {
+      min-height: 80svh;
+      padding: calc(4.5rem + env(safe-area-inset-top, 0px)) 0 3.5rem;
+    }
+
+    .hp-section__shell {
+      width: min(100% - 1rem, 74rem);
+    }
+
+    .hp-card,
+    .hp-card--wide,
+    .hp-card--hero,
+    .hp-card--gallery {
+      width: 100%;
     }
 
     .hp-card__highlights {
       grid-template-columns: 1fr;
     }
 
-    .hp-tiers {
-      grid-template-columns: 1fr;
-      max-width: 24rem;
-      margin: 0 auto;
-    }
-
-    .hp-card__hero-title {
-      font-size: clamp(2.8rem, 2rem + 6vw, 5rem);
-    }
-  }
-
-  @media (max-width: 480px) {
-    .hp-card__cta-row {
+    .hp-card__cta-row,
+    .hp-dialog__actions {
       flex-direction: column;
       align-items: stretch;
     }
-    .hp-card__cta-row .hp-cta { justify-content: center; }
+
+    .hp-card__cta-row .hp-cta,
+    .hp-dialog__actions .hp-cta {
+      width: 100%;
+    }
+
+    .hp-dialog {
+      width: 100%;
+      max-width: 100%;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hp-section__grain { animation: none; }
-    .hp-gallery__strip img:hover { filter: saturate(0.8) brightness(0.85); }
+    .hp-section__bg-img,
+    .hp-section__grain,
+    .hp-cta,
+    .hp-switch__button,
+    .hp-filter-pill {
+      transition: none !important;
+      animation: none !important;
+    }
   }
 </style>

@@ -1,0 +1,308 @@
+---
+import { ACCENT_HEX } from '../data/splashSections';
+
+const items = [
+  { id: 'fabrication', label: 'Fabrication', accent: ACCENT_HEX.teal, href: '#fabrication' },
+  { id: 'story', label: 'The Story', accent: ACCENT_HEX.magenta, href: '#story' },
+  { id: 'events', label: 'Events', accent: ACCENT_HEX.magenta, href: '#events' },
+  { id: 'software', label: 'Software & AI', accent: ACCENT_HEX.teal, href: '#software' },
+  { id: 'network', label: 'The Network', accent: ACCENT_HEX.magenta, href: '#network' },
+  { id: 'oldgirl', label: 'The Old Girl', accent: ACCENT_HEX.orange, href: '#oldgirl' },
+  { id: 'gallery', label: 'Gallery', accent: ACCENT_HEX.teal, href: '/gallery' },
+  { id: 'sponsor', label: 'Sponsor', accent: ACCENT_HEX.magenta, href: '#sponsor' },
+  { id: 'shop', label: 'Shop', accent: ACCENT_HEX.orange, dialogId: 'dlg-shop' },
+];
+---
+
+<aside class="site-right-sidebar" data-site-right-sidebar data-expanded="false">
+  <button
+    type="button"
+    class="site-right-sidebar__toggle"
+    data-sidebar-toggle
+    aria-expanded="false"
+    aria-label="Toggle section navigation"
+  >
+    <span class="site-right-sidebar__toggle-bars" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+    <span class="site-right-sidebar__toggle-copy">Explore</span>
+  </button>
+
+  <nav class="site-right-sidebar__nav" aria-label="Homepage sections">
+    {items.map((item) =>
+      item.dialogId ? (
+        <button
+          type="button"
+          class="site-right-sidebar__pill"
+          data-dialog-open={item.dialogId}
+          style={`--pill-accent: ${item.accent};`}
+        >
+          <span class="site-right-sidebar__dot" aria-hidden="true"></span>
+          <span class="site-right-sidebar__label">{item.label}</span>
+        </button>
+      ) : (
+        <a
+          href={item.href}
+          class="site-right-sidebar__pill"
+          data-sidebar-target={item.href.startsWith('#') ? item.id : undefined}
+          style={`--pill-accent: ${item.accent};`}
+        >
+          <span class="site-right-sidebar__dot" aria-hidden="true"></span>
+          <span class="site-right-sidebar__label">{item.label}</span>
+        </a>
+      ),
+    )}
+  </nav>
+</aside>
+
+<script is:inline>
+  (() => {
+    const sidebar = document.querySelector('[data-site-right-sidebar]');
+    if (!(sidebar instanceof HTMLElement)) return;
+
+    const toggle = sidebar.querySelector('[data-sidebar-toggle]');
+    const pills = Array.from(sidebar.querySelectorAll('.site-right-sidebar__pill'));
+    const mobileQuery = window.matchMedia('(max-width: 1023px)');
+
+    const setExpanded = (expanded) => {
+      sidebar.dataset.expanded = expanded ? 'true' : 'false';
+      if (toggle instanceof HTMLButtonElement) {
+        toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      }
+    };
+
+    const closeOnMobile = () => {
+      if (mobileQuery.matches) setExpanded(false);
+    };
+
+    if (toggle instanceof HTMLButtonElement) {
+      toggle.addEventListener('click', () => {
+        setExpanded(sidebar.dataset.expanded !== 'true');
+      });
+    }
+
+    document.addEventListener('click', (event) => {
+      if (!mobileQuery.matches || sidebar.dataset.expanded !== 'true') return;
+      if (!(event.target instanceof Node)) return;
+      if (!sidebar.contains(event.target)) {
+        setExpanded(false);
+      }
+    });
+
+    pills.forEach((pill) => {
+      pill.addEventListener('click', closeOnMobile);
+    });
+
+    const sectionTargets = Array.from(document.querySelectorAll('[data-observe-section]'));
+    const sectionLinks = new Map(
+      Array.from(sidebar.querySelectorAll('[data-sidebar-target]')).map((link) => [
+        link.getAttribute('data-sidebar-target'),
+        link,
+      ]),
+    );
+
+    const setActive = (id) => {
+      sectionLinks.forEach((link, key) => {
+        if (!(link instanceof HTMLElement)) return;
+        const isActive = key === id;
+        link.classList.toggle('site-right-sidebar__pill--active', isActive);
+        if (isActive) {
+          link.setAttribute('aria-current', 'true');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+    };
+
+    if (sectionTargets.length) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const visibleEntries = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+          if (!visibleEntries.length) return;
+
+          const activeId = visibleEntries[0].target.getAttribute('id');
+          if (activeId) setActive(activeId);
+        },
+        {
+          rootMargin: '-30% 0px -42% 0px',
+          threshold: [0.2, 0.45, 0.7],
+        },
+      );
+
+      sectionTargets.forEach((section) => observer.observe(section));
+    }
+  })();
+</script>
+
+<style>
+  .site-right-sidebar {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    z-index: 100;
+    display: grid;
+    gap: 0.65rem;
+    width: min(18rem, calc(100vw - 0.75rem));
+    padding: 0.75rem 0.5rem 0.75rem 0.65rem;
+    transform: translateY(-50%);
+    background: rgba(10, 14, 19, 0.76);
+    backdrop-filter: blur(28px) saturate(160%);
+    -webkit-backdrop-filter: blur(28px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-right: none;
+    border-radius: 2px 0 0 2px;
+    box-shadow: 0 16px 44px rgba(0, 0, 0, 0.36);
+    transition: width 220ms ease, transform 220ms ease;
+  }
+
+  .site-right-sidebar__toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 2.8rem;
+    padding: 0.55rem 0.7rem;
+    border: 0;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #f4efe8;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .site-right-sidebar__toggle-bars {
+    display: grid;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .site-right-sidebar__toggle-bars span {
+    display: block;
+    width: 1rem;
+    height: 2px;
+    border-radius: 999px;
+    background: rgba(244, 239, 232, 0.88);
+    transition: transform 200ms ease, opacity 200ms ease;
+  }
+
+  .site-right-sidebar[data-expanded='true'] .site-right-sidebar__toggle-bars span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .site-right-sidebar[data-expanded='true'] .site-right-sidebar__toggle-bars span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .site-right-sidebar[data-expanded='true'] .site-right-sidebar__toggle-bars span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  .site-right-sidebar__nav {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .site-right-sidebar__pill {
+    --pill-accent: #40c4c4;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    min-height: 2.9rem;
+    padding: 0.65rem 0.75rem;
+    border: 0;
+    border-radius: 2px;
+    background: transparent;
+    color: #c8d0dc;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: left;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+  }
+
+  .site-right-sidebar__pill:hover,
+  .site-right-sidebar__pill:focus-visible {
+    background: rgba(255, 255, 255, 0.06);
+    color: #f4efe8;
+    outline: none;
+  }
+
+  .site-right-sidebar__pill--active {
+    background: rgba(255, 255, 255, 0.09);
+    color: #ffffff;
+  }
+
+  .site-right-sidebar__dot {
+    flex-shrink: 0;
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: 999px;
+    background: var(--pill-accent);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--pill-accent) 18%, transparent);
+  }
+
+  .site-right-sidebar__label,
+  .site-right-sidebar__toggle-copy {
+    white-space: nowrap;
+  }
+
+  @media (min-width: 1024px) {
+    .site-right-sidebar {
+      width: 4rem;
+    }
+
+    .site-right-sidebar:hover,
+    .site-right-sidebar[data-expanded='true'] {
+      width: 15rem;
+    }
+
+    .site-right-sidebar__label,
+    .site-right-sidebar__toggle-copy {
+      opacity: 0;
+      max-width: 0;
+      overflow: hidden;
+      transition: opacity 180ms ease, max-width 180ms ease;
+    }
+
+    .site-right-sidebar:hover .site-right-sidebar__label,
+    .site-right-sidebar[data-expanded='true'] .site-right-sidebar__label,
+    .site-right-sidebar:hover .site-right-sidebar__toggle-copy,
+    .site-right-sidebar[data-expanded='true'] .site-right-sidebar__toggle-copy {
+      opacity: 1;
+      max-width: 12rem;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .site-right-sidebar {
+      top: auto;
+      bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+      transform: translateX(calc(100% - 2.8rem));
+    }
+
+    .site-right-sidebar[data-expanded='true'] {
+      transform: translateX(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-right-sidebar,
+    .site-right-sidebar__pill,
+    .site-right-sidebar__toggle-bars span,
+    .site-right-sidebar__label,
+    .site-right-sidebar__toggle-copy {
+      transition: none !important;
+    }
+  }
+</style>

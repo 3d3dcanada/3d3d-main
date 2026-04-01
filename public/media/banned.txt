@@ -1,0 +1,10 @@
+Images that must NEVER be used on the 3D3D website.
+Check this file before assigning any image to a page.
+
+DELETED (no longer on disk):
+- /media/backgrounds/makers-neon-workshop.jpg
+- /images/splash-bg-network.png
+
+BANNED (still on disk, never reference on any page):
+- /images/splash-bg-services.png
+- /images/splash-bg-about.png

@@ -1,0 +1,137 @@
+---
+import SiteFooterFull from '../components/SiteFooterFull.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const policyCards = [
+  {
+    title: 'Production Time',
+    body: 'Most catalog orders ship in 3 to 5 business days. Custom fabrication depends on geometry, material, and whether reverse engineering is required. Rush work is possible, but it needs to be scoped first.',
+  },
+  {
+    title: 'Shipping Regions',
+    body: '3D3D ships across Canada, to the United States, and internationally where carrier service is available. Customs duties, brokerage, and import taxes are the buyer’s responsibility unless stated otherwise in writing.',
+  },
+  {
+    title: 'Packaging',
+    body: 'Parts are packed for the route they are taking. Fragile prototypes, marine hardware, and event-bound shipments do not leave the shop in minimal packaging just to save a few dollars.',
+  },
+  {
+    title: 'Damage & Delays',
+    body: 'If a shipment arrives damaged, send photos of the box and the part within 48 hours. Carrier delays happen, especially on remote routes or during severe weather. We will help with the claim trail where we can.',
+  },
+  {
+    title: 'Tracking',
+    body: 'Tracking details are sent as soon as the carrier produces a usable scan. If your project is urgent, include that in the original request so we can choose the right service level up front.',
+  },
+  {
+    title: 'Contact',
+    body: 'Questions about shipping, routing, or destination constraints can be sent to info@3d3d.ca or discussed directly during quote intake.',
+  },
+];
+---
+
+<BaseLayout
+  title="Shipping Policy | 3D3D"
+  description="Shipping, packaging, and fulfillment terms for 3D3D catalog orders and custom fabrication."
+  noSidebar
+  noFooter
+  noMobileCTA
+  noFeedbackBlip
+>
+  <section class="shipping-hero">
+    <div class="shipping-shell">
+      <p class="shipping-eyebrow">Shipping Policy</p>
+      <h1 class="shipping-title">Built here. Routed carefully.</h1>
+      <p class="shipping-copy">
+        This page covers the practical side of getting a part from the bench to your door. If a job
+        needs something unusual, we spell it out during the quote.
+      </p>
+    </div>
+  </section>
+
+  <section class="shipping-grid-section">
+    <div class="shipping-shell shipping-grid">
+      {policyCards.map((card) => (
+        <article class="shipping-card">
+          <h2>{card.title}</h2>
+          <p>{card.body}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <SiteFooterFull />
+</BaseLayout>
+
+<style>
+  .shipping-hero,
+  .shipping-grid-section {
+    background: #0a0e13;
+    color: #f4efe8;
+  }
+
+  .shipping-hero {
+    padding: clamp(5rem, 9vw, 8rem) 0 2rem;
+  }
+
+  .shipping-grid-section {
+    padding: 0 0 clamp(3rem, 6vw, 4.5rem);
+  }
+
+  .shipping-shell {
+    width: min(100% - 1.25rem, 76rem);
+    margin: 0 auto;
+  }
+
+  .shipping-eyebrow {
+    margin: 0;
+    color: #40c4c4;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .shipping-title {
+    margin: 0.7rem 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 1.5rem + 4vw, 5rem);
+    line-height: 0.94;
+    letter-spacing: -0.05em;
+  }
+
+  .shipping-copy,
+  .shipping-card p {
+    margin: 0;
+    color: #c8d0dc;
+    line-height: 1.7;
+  }
+
+  .shipping-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .shipping-card {
+    padding: 1.1rem;
+    border-radius: 2px;
+    background: rgba(10, 14, 19, 0.76);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 16px 44px rgba(0, 0, 0, 0.36);
+  }
+
+  .shipping-card h2 {
+    margin: 0 0 0.65rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 1rem + 1vw, 1.9rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: #f4efe8;
+  }
+
+  @media (min-width: 760px) {
+    .shipping-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

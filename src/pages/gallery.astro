@@ -1,0 +1,197 @@
+---
+import SiteFooterFull from '../components/SiteFooterFull.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const gallerySections = [
+  {
+    id: 'sailing',
+    title: 'Sailing & Ocean',
+    copy: 'Atlantic crossings, offshore mornings, and the water that shaped how 3D3D works.',
+    items: [
+      { type: 'image', src: '/media/real/open-ocean-01.jpg', alt: 'Open ocean under daylight from the deck of a sailing vessel.' },
+      { type: 'image', src: '/media/real/sunrise-offshore.jpg', alt: 'Sunrise offshore with sea and horizon stretching into the distance.' },
+      { type: 'image', src: '/media/real/sunset-sail-01.jpg', alt: 'Warm sunset light over sails and water at sea.' },
+      { type: 'video', src: '/media/race-day.mp4', poster: '/media/real/fleet-aerial.jpg', alt: 'Race day video showing offshore sailing action.' },
+    ],
+  },
+  {
+    id: 'workshop',
+    title: 'Workshop & Fabrication',
+    copy: 'Printer benches, production runs, and the kind of build surfaces that actually get used.',
+    items: [
+      { type: 'image', src: '/media/workshop/printer-action-cf.jpg', alt: '3D printer running a carbon-fiber style fabrication job in the workshop.' },
+      { type: 'image', src: '/media/workshop/machine-parts-flatlay.jpg', alt: 'Assorted fabricated parts laid out on a workshop surface.' },
+      { type: 'image', src: '/media/workshop/printer-bed-benchy.jpg', alt: 'Printer bed with a test print and workshop tools nearby.' },
+      { type: 'video', src: '/media/hero-loop.mp4', poster: '/media/workshop/printer-frame-shot.jpg', alt: 'Looped workshop footage of 3D printing in progress.' },
+    ],
+  },
+  {
+    id: 'events',
+    title: 'Events',
+    copy: 'Deployments, crowds, booth setups, and the moments when the machines become part of the show.',
+    items: [
+      { type: 'image', src: '/media/real/fleet-start-press.jpg', alt: 'Event-side image with sailing crowd and media coverage.' },
+      { type: 'image', src: '/media/real/fleet-aerial.jpg', alt: 'Aerial view of boats and event activity on the water.' },
+      { type: 'image', src: '/media/real/race-morning-crew.jpg', alt: 'Crew preparing for a race day event.' },
+      { type: 'video', src: '/media/onboard-crew.mp4', poster: '/media/real/onboard-crew.jpg', alt: 'Onboard video footage capturing event and race-day atmosphere.' },
+    ],
+  },
+  {
+    id: 'oldgirl',
+    title: 'The Old Girl',
+    copy: 'The rescued community printer and the trail of prints, fixes, and bench photos around it.',
+    items: [
+      { type: 'image', src: '/media/workshop/printer-frame-shot.jpg', alt: 'The Old Girl printer frame in the workshop.' },
+      { type: 'image', src: '/media/workshop/printer-bed-benchy.jpg', alt: 'A test print on the Old Girl printer bed.' },
+      { type: 'image', src: '/media/workshop/floating-keychains.jpg', alt: 'Printed keychains made through the community printer workflow.' },
+    ],
+  },
+  {
+    id: 'community',
+    title: 'Community',
+    copy: 'The travel lab, the shared workbench energy, and the parts that get passed from one pair of hands to another.',
+    items: [
+      { type: 'image', src: '/media/workshop/rv-lab-01.jpg', alt: 'Compact mobile workshop setup inside the RV lab.' },
+      { type: 'image', src: '/media/workshop/rv-lab-02.jpg', alt: 'Mobile fabrication workspace inside the RV lab.' },
+      { type: 'image', src: '/media/workshop/nomad-joe-holder.jpg', alt: 'Utility print from the workshop shown as part of the community build archive.' },
+      { type: 'image', src: '/media/workshop/radio-button-replacement.jpg', alt: 'Replacement part from a repair-focused fabrication job.' },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Gallery | 3D3D"
+  description="A visual archive of sailing, fabrication, events, and the community printer journey behind 3D3D."
+  noSidebar
+  noFooter
+  noMobileCTA
+  noFeedbackBlip
+>
+  <section class="gallery-hero">
+    <div class="gallery-shell">
+      <p class="gallery-eyebrow">3D3D Archive</p>
+      <h1 class="gallery-title">The Journey, in public.</h1>
+      <p class="gallery-copy">
+        A first pass through the photos and video already on disk. More will keep landing here as
+        the archive gets sorted.
+      </p>
+    </div>
+  </section>
+
+  {gallerySections.map((section) => (
+    <section id={section.id} class="gallery-section">
+      <div class="gallery-shell">
+        <div class="gallery-section__intro">
+          <p class="gallery-eyebrow">{section.title}</p>
+          <p class="gallery-copy">{section.copy}</p>
+        </div>
+
+        <div class="gallery-grid">
+          {section.items.map((item) => (
+            item.type === 'video' ? (
+              <figure class="gallery-card gallery-card--video">
+                <video controls preload="metadata" playsinline poster={item.poster}>
+                  <source src={item.src} />
+                </video>
+                <figcaption>{item.alt}</figcaption>
+              </figure>
+            ) : (
+              <figure class="gallery-card">
+                <img src={item.src} alt={item.alt} loading="lazy" decoding="async" />
+                <figcaption>{item.alt}</figcaption>
+              </figure>
+            )
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <SiteFooterFull />
+</BaseLayout>
+
+<style>
+  .gallery-hero,
+  .gallery-section {
+    background: #0a0e13;
+    color: #f4efe8;
+  }
+
+  .gallery-hero {
+    padding: clamp(5rem, 9vw, 8rem) 0 2rem;
+  }
+
+  .gallery-section {
+    padding: 0 0 clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .gallery-shell {
+    width: min(100% - 1.25rem, 76rem);
+    margin: 0 auto;
+  }
+
+  .gallery-section__intro {
+    display: grid;
+    gap: 0.7rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .gallery-eyebrow {
+    margin: 0;
+    color: #40c4c4;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .gallery-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 1.5rem + 4vw, 5rem);
+    line-height: 0.94;
+    letter-spacing: -0.05em;
+  }
+
+  .gallery-copy,
+  .gallery-card figcaption {
+    margin: 0;
+    color: #c8d0dc;
+    line-height: 1.7;
+  }
+
+  .gallery-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .gallery-card {
+    overflow: hidden;
+    border-radius: 2px;
+    background: rgba(10, 14, 19, 0.76);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 16px 44px rgba(0, 0, 0, 0.36);
+  }
+
+  .gallery-card img,
+  .gallery-card video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    background: #111214;
+  }
+
+  .gallery-card figcaption {
+    padding: 0.9rem 1rem 1rem;
+    font-size: 0.92rem;
+  }
+
+  @media (min-width: 760px) {
+    .gallery-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

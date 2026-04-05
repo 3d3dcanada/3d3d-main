@@ -2,9 +2,17 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import PageNextActions from '../components/PageNextActions.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Contact 3D3D',
+  description: 'Request service, send a file, or start a conversation about custom fabrication.',
+  url: 'https://3d3d.ca/contact',
+};
 ---
 
-<BaseLayout title="Contact | 3D3D" description="Offshore fabricator, worldwide. Tell me the problem. I will tell you whether I can solve it, and exactly how. Marine hardware, discontinued parts, on-site deployment." activePath="/contact">
+<BaseLayout title="Contact | 3D3D" description="Custom fabrication, worldwide. Tell us the problem and we will assess whether we can solve it, and exactly how. Marine hardware, discontinued parts, on-site deployment." activePath="/contact" schema={schema}>
 
   <main class="hp-home">
     
@@ -18,16 +26,16 @@ import PageNextActions from '../components/PageNextActions.astro';
       <div class="hp-section__grain"></div>
 
       <div class="hp-section__shell hp-section__shell--start"> 
-        <article class="hp-card">
+        <article class="hp-card scroll-in">
           <div class="hp-card__inner">
             <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Contact'}]} />
             <p class="hp-card__eyebrow mt-4">Direct Line</p>
-            <h1 class="hp-card__title mt-2 mb-4">Tell me the problem.</h1>
+            <h1 class="hp-card__title mt-2 mb-4">Tell us the problem.</h1>
             <p class="hp-card__copy">
-              I will tell you whether I can solve it, and exactly how we will do it. That is the whole process. Marine hardware, discontinued parts, on-site deployment.
+              We will assess whether we can solve it, and tell you exactly how we will do it. Marine hardware, discontinued parts, on-site deployment.
             </p>
             <div class="hp-card__cta-row hp-card__cta-row--start mt-6">
-              <a href="#form" class="hp-cta hp-cta--accent">Jump to Direct Form</a>
+              <a href="#form" class="hp-cta hp-cta--accent">Send Us a Message</a>
               <a href="https://wa.me/15069532678" target="_blank" class="hp-cta hp-cta--glass">WhatsApp</a>
             </div>
           </div>
@@ -45,23 +53,23 @@ import PageNextActions from '../components/PageNextActions.astro';
       <div class="hp-section__grain"></div>
 
       <div class="hp-section__shell hp-section__shell--start"> 
-        <article class="hp-card">
+        <article class="hp-card scroll-in">
           <div class="hp-card__inner">
             <p class="hp-card__eyebrow">The Process</p>
-            <h2 class="hp-card__title mt-2 mb-6">How to engage.</h2>
-            
+            <h2 class="hp-card__title mt-2 mb-6">How It Works</h2>
+
             <div class="flex flex-col gap-6">
               <div>
                 <strong class="text-pink-400 font-tech tracking-wider uppercase text-sm">01 / Remote Assessment</strong>
-                <p class="hp-card__copy mt-1">Send high-resolution photos of the broken hardware, the surrounding mounting area, and a brief description of the failure. Include caliper measurements if you have them. I will assess what can be rebuilt, what material it requires, and what it will cost.</p>
+                <p class="hp-card__copy mt-1">Send high-resolution photos of the broken hardware, the surrounding mounting area, and a brief description of the failure. Include caliper measurements if you have them. We assess what can be rebuilt, what material it requires, and what it will cost.</p>
               </div>
               <div>
                 <strong class="text-pink-400 font-tech tracking-wider uppercase text-sm">02 / Reverse Engineering</strong>
-                <p class="hp-card__copy mt-1">Box up the shattered part, the worn-out gear, or the broken bracket. Ship it to my workshop. I will measure, model, and rebuild it in the correct material, with the correct tolerances. Then ship it back or bring it aboard.</p>
+                <p class="hp-card__copy mt-1">Box up the shattered part, the worn-out gear, or the broken bracket. Ship it to our workshop. We measure, model, and rebuild it in the correct material with the correct tolerances, then ship it back or bring it aboard.</p>
               </div>
               <div>
                 <strong class="text-pink-400 font-tech tracking-wider uppercase text-sm">03 / Direct Engagement</strong>
-                <p class="hp-card__copy mt-1">For on-site deployment, extended refit support, race campaigns, or complex structural problems aboard the vessel, contact me directly. Tell me where the vessel is, what the job is, and when you need it done.</p>
+                <p class="hp-card__copy mt-1">For on-site deployment, extended refit support, race campaigns, or complex structural problems aboard a vessel, contact us directly. Tell us where the vessel is, what the job is, and when you need it done.</p>
               </div>
             </div>
           </div>
@@ -70,7 +78,7 @@ import PageNextActions from '../components/PageNextActions.astro';
     </section>
 
     <!-- Section 3: The Form -->
-    <section id="form" class="hp-section" style="--section-accent: #40c4c4;">
+    <section id="form" class="hp-section" style="--section-accent: #FF6B2B;">
       <div class="hp-section__bg">
         <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/fab-03.jpg'); background-position: center;"></div>
       </div>
@@ -79,10 +87,10 @@ import PageNextActions from '../components/PageNextActions.astro';
       <div class="hp-section__grain"></div>
 
       <div class="hp-section__shell hp-section__shell--start"> 
-        <article class="hp-card">
+        <article class="hp-card scroll-in">
           <div class="hp-card__inner">
             <p class="hp-card__eyebrow">Intake</p>
-            <h2 class="hp-card__title mt-2 mb-6">Send me the details.</h2>
+            <h2 class="hp-card__title mt-2 mb-6">Send Us the Details</h2>
             
             <form action="https://formspree.io/f/mldlydbl" method="POST" class="contact-page-form" data-analytics-submit="contact_submitted" data-analytics-source="contact-page">
               <input type="hidden" name="_subject" value="Contact Request | 3D3D" />
@@ -116,7 +124,7 @@ import PageNextActions from '../components/PageNextActions.astro';
               
               <div class="form-field mt-4">
                 <label for="message">Describe your project or problem</label>
-                <textarea id="message" name="message" rows="4" required placeholder="Where is the vessel? What broke? What do you need? I'll take it from there."></textarea>
+                <textarea id="message" name="message" rows="4" required placeholder="Where is the vessel? What broke? What do you need? We will take it from there."></textarea>
               </div>
               
               <div class="form-field mt-4">

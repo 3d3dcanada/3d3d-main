@@ -2,14 +2,22 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import PageNextActions from '../components/PageNextActions.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: '3D3D Maker Network',
+  description: 'A cooperative network of makers, fabricators, and operators. Join the network and keep 75% of the gross.',
+  url: 'https://3d3d.ca/network',
+};
 ---
 
-<BaseLayout title="The Maker Network | 3D3D" description="Claim your node. Stop bidding for jobs and keep 75% of the revenue." activePath="/network">
+<BaseLayout title="The Maker Network | 3D3D" description="Join the 3D3D maker network. We route jobs to your machines. You keep 75% of the revenue." activePath="/network" schema={schema}>
 
   <main class="hp-home">
     
     <!-- Section 1: Hero -->
-    <section class="hp-section" style="--section-accent: #e84a8a;">
+    <section class="hp-section" style="--section-accent: #40C4C4;">
       <div class="hp-section__bg">
         <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/network-01.jpg'); background-position: center;"></div>
       </div>
@@ -24,7 +32,7 @@ import PageNextActions from '../components/PageNextActions.astro';
             <p class="hp-card__eyebrow mt-4">Node Operations</p>
             <h1 class="hp-card__title mt-2 mb-4">Claim Your Node.</h1>
             <p class="hp-card__copy hp-card__copy--lead">
-              Stop fighting for gig-economy scraps and bidding under cost. <strong>We supply the enterprise contracts, we handle the global SEO, and we shield the client relations.</strong> You run the hardware. You keep 75% of the gross.
+              <strong>We route work to your machines, handle SEO and client relations, and get out of your way.</strong> You run the hardware, you manage quality, and you keep 75% of the gross.
             </p>
             <div class="hp-card__cta-row hp-card__cta-row--start mt-6">
               <a href="#apply" class="hp-cta hp-cta--accent">Start Operator Application</a>
@@ -35,7 +43,7 @@ import PageNextActions from '../components/PageNextActions.astro';
     </section>
 
     <!-- Section 2: The Moat & Minimums -->
-    <section class="hp-section" style="--section-accent: #40c4c4;">
+    <section class="hp-section" style="--section-accent: #E84A8A;">
       <div class="hp-section__bg">
         <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/network-02.jpg'); background-position: center;"></div>
       </div>
@@ -47,22 +55,22 @@ import PageNextActions from '../components/PageNextActions.astro';
         <article class="hp-card">
           <div class="hp-card__inner">
             <p class="hp-card__eyebrow">The Business Model</p>
-            <h2 class="hp-card__title mt-2 mb-4">The Platform Shield</h2>
-            <p class="hp-card__copy mb-6">Why give up 25%? Because customer acquisition is expensive and client management is a full-time job. We act as your commercial moat.</p>
+            <h2 class="hp-card__title mt-2 mb-4">Why 75/25?</h2>
+            <p class="hp-card__copy mb-6">Finding customers costs time and money. Managing revisions and invoicing is a second job. We handle that side so you can stay at the printer.</p>
             
             <div class="flex flex-col gap-6 mb-8">
               <div>
                 <strong class="text-teal-400 font-tech tracking-wider uppercase text-sm">The Platform Handles</strong>
-                <p class="hp-card__copy mt-1">Global SEO, Enterprise Quoting Engine, Invoicing & Billing, Client Revisions.</p>
+                <p class="hp-card__copy mt-1">SEO and inbound traffic, quoting, invoicing, billing, and client revision management.</p>
               </div>
               <div>
                 <strong class="text-pink-400 font-tech tracking-wider uppercase text-sm">The Operator Handles</strong>
-                <p class="hp-card__copy mt-1">Machine Calibration, Filament Tuning, Print Validation & QA, Final Dispatch Box.</p>
+                <p class="hp-card__copy mt-1">Machine calibration, filament tuning, print QA, and shipping the final part.</p>
               </div>
             </div>
 
-            <h3 class="font-display text-xl text-white mb-2">Strict Hardware Minimums</h3>
-            <p class="hp-card__copy mb-4">We do not accept standard PLA/PETG hobbyists into the commercial network. Node operators must prove capability in marine and industrial polymers to handle our contract pipeline.</p>
+            <h3 class="font-display text-xl text-white mb-2">What We Need From You</h3>
+            <p class="hp-card__copy mb-4">Our contracts involve engineering materials -- ASA, nylon, polycarbonate. You need to be comfortable printing them reliably. PLA-only setups will not cut it for the work that comes through.</p>
             
             <div class="hp-card__stats bg-black/20 p-4 rounded border border-white/5">
               <div>
@@ -70,12 +78,12 @@ import PageNextActions from '../components/PageNextActions.astro';
                 <span>ASA, PA11-CF, PA12-CF, PP-GF</span>
               </div>
               <div>
-                <strong>Runtime Mandate</strong>
-                <span>90%+ sustained uptime</span>
+                <strong>Availability</strong>
+                <span>Reliable turnaround on accepted jobs</span>
               </div>
               <div>
-                <strong>Compliance</strong>
-                <span>Rigorous caliper tolerance QA</span>
+                <strong>Quality</strong>
+                <span>Caliper-checked tolerances before dispatch</span>
               </div>
             </div>
           </div>
@@ -84,7 +92,7 @@ import PageNextActions from '../components/PageNextActions.astro';
     </section>
 
     <!-- Section 3: The Application -->
-    <section id="apply" class="hp-section" style="--section-accent: #e84a8a;">
+    <section id="apply" class="hp-section" style="--section-accent: #FF6B2B;">
       <div class="hp-section__bg">
         <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/network-03.jpg'); background-position: center;"></div>
       </div>
@@ -96,12 +104,12 @@ import PageNextActions from '../components/PageNextActions.astro';
         <article class="hp-card">
           <div class="hp-card__inner">
             <p class="hp-card__eyebrow">Progression</p>
-            <h2 class="hp-card__title mt-2 mb-6">Operator Franchise Application</h2>
+            <h2 class="hp-card__title mt-2 mb-6">Operator Application</h2>
 
             <div class="net-app-progress mb-6">
               <span class="net-step active" data-step-indicator="1">1. Hardware</span>
               <span class="net-step" data-step-indicator="2">2. Capability</span>
-              <span class="net-step" data-step-indicator="3">3. Claim Asset</span>
+              <span class="net-step" data-step-indicator="3">3. Your Info</span>
             </div>
 
             <form id="frmNetwork" action="https://formspree.io/f/mldlydbl" method="POST" data-analytics-submit="node_application">
@@ -121,9 +129,9 @@ import PageNextActions from '../components/PageNextActions.astro';
               <!-- Step 2 -->
               <div class="net-app-step" data-step="2" style="display: none;">
                 <div class="form-field">
-                  <label for="capability" class="text-white font-display text-xl mb-4 block">Verify Engineering Competence</label>
-                  <p class="text-sm text-gray-400 mb-2">Do you have documented experience printing PA-CF or ASA at scale?</p>
-                  <textarea id="capability" name="capability" rows="4" required placeholder="Describe your enclosure setup, filament drying protocols, and standard tolerances..."></textarea>
+                  <label for="capability" class="text-white font-display text-xl mb-4 block">Your Experience With Engineering Materials</label>
+                  <p class="text-sm text-gray-400 mb-2">Have you printed PA-CF, ASA, or similar? Tell us about your setup.</p>
+                  <textarea id="capability" name="capability" rows="4" required placeholder="Enclosure type, filament drying setup, materials you print regularly, and typical tolerances you hold..."></textarea>
                 </div>
                 <div class="mt-6 flex gap-4">
                   <button type="button" class="hp-cta hp-cta--glass" data-prev="1">← Back</button>
@@ -133,8 +141,8 @@ import PageNextActions from '../components/PageNextActions.astro';
 
               <!-- Step 3 -->
               <div class="net-app-step" data-step="3" style="display: none;">
-                <h3 class="text-white font-display text-xl mb-2">Claim Your Real Estate</h3>
-                <p class="text-sm text-gray-400 mb-6">Secure your geographical or vanity node. If accepted, this subdomain routes directly to your dispatch dashboard and public port.</p>
+                <h3 class="text-white font-display text-xl mb-2">Pick Your Subdomain</h3>
+                <p class="text-sm text-gray-400 mb-6">If accepted, you get a page at yourname.3d3d.ca with your own dispatch dashboard and public profile.</p>
                 
                 <div class="form-grid mb-4">
                   <div class="form-field">
@@ -157,7 +165,7 @@ import PageNextActions from '../components/PageNextActions.astro';
 
                 <div class="mt-8 flex gap-4">
                   <button type="button" class="hp-cta hp-cta--glass" data-prev="2">← Back</button>
-                  <button type="submit" class="hp-cta hp-cta--accent">Submit Franchise Application</button>
+                  <button type="submit" class="hp-cta hp-cta--accent">Submit Application</button>
                 </div>
               </div>
 

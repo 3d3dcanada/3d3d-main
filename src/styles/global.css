@@ -4,6 +4,7 @@
 @import "./glass.css";
 @import "./splash.css";
 @import "./device.css";
+@import "./pages.css";
 
 /* ─────────────────────────────────────────────────────────────────
    3D3D — Precision Fabrication Design System
@@ -41,6 +42,12 @@
   --color-orange-light: #FF8A57;
   --color-orange-dark: #D95520;
   --color-orange-surface: #FFE7DC;
+
+  /* ── Quaternary Accent — Neon Lime ───────────────────────────── */
+  --color-lime-primary: #AAFF2A;
+  --color-lime-light: #C8FF6A;
+  --color-lime-dark: #7ACC00;
+  --color-lime-surface: #EFFFCC;
 
   /* ── Text Colors ─────────────────────────────────────────────── */
   --color-text-primary: #1A1A1A;

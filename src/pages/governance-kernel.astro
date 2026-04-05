@@ -1,0 +1,540 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageNextActions from '../components/PageNextActions.astro';
+
+const systems = [
+  { name: 'Evidence System', desc: 'Every decision backed by evidence items with source provenance, confidence weights (0-1), and verification status. Three tiers: uncorroborated → multi-source → verified with traceable provenance.' },
+  { name: 'Confidence Rubric', desc: '0-49: blocked. 50-89: approval required, reversible only. 90-100: automation eligible IF explicitly enabled. canExecuteWithoutApproval() always returns false. The kernel categorically refuses unsupervised execution.' },
+  { name: 'Decision Frame', desc: 'Full state machine: draft → pending_review → approved/rejected → revoked. Each frame carries objective, recommendation, evidence, confidence, risk level, action class, and approver chain. No silent execution possible.' },
+  { name: 'Audit Chain', desc: 'Blockchain-style append-only log. Every event hashed. Each event\'s before_hash must match the previous after_hash. verifyChain() detects any tampering. Deterministic hashing ensures reproducibility.' },
+  { name: 'Learning System', desc: 'Incident log with root cause analysis and prevention gates. Records what failed, how it was detected, what was changed. The kernel learns from its own deployment failures.' },
+];
+
+const actionClasses = [
+  { cls: 'A', route: 'Log + Learn', when: 'Low confidence, tier 1 evidence, low impact, reversible', color: '#22C55E' },
+  { cls: 'B', route: 'Single Approval', when: 'Moderate impact, tier 2+ evidence, reversible', color: '#EAB308' },
+  { cls: 'C', route: 'Multi-Gate', when: 'High impact, irreversible, or tier 3 evidence required', color: '#EF4444' },
+];
+
+const benchmarks = [
+  { metric: 'Decision Throughput', target: '>10,000 decisions/sec', note: 'Pure TypeScript, no I/O' },
+  { metric: 'Audit Chain Verification', target: 'O(n) linear scan', note: 'Hash chain integrity check' },
+  { metric: 'Evidence Validation', target: '<1ms per item', note: 'Structural + semantic validation' },
+  { metric: 'State Machine Correctness', target: '100% illegal transitions rejected', note: 'Property-testable' },
+  { metric: 'Tamper Detection', target: '100% modification detected', note: 'Hash chain catches any edit' },
+  { metric: 'Bundle Size', target: '47KB source, ~12KB minified', note: 'Zero dependencies' },
+];
+
+const comparisons = [
+  { name: 'Guardrails AI', what: 'Input/output validators', gap: 'No decision lifecycle, no state machine, no audit chain' },
+  { name: 'NeMo Guardrails', what: 'Dialog flow control (Colang)', gap: 'Controls conversation, not action authorization' },
+  { name: 'LangGraph Checkpoints', what: 'Agent state save/restore', gap: 'Resumability, not tamper-proof accountability' },
+  { name: 'Semantic Kernel Filters', what: 'Pre/post execution hooks', gap: 'Hooks, not governance — no evidence, no confidence, no approval' },
+  { name: 'Constitutional AI', what: 'Training-time alignment', gap: 'Training methodology, not runtime enforcement' },
+];
+
+const useCases = [
+  'AI agent governance — gate every action through evidence and approval',
+  'Governed web crawling — tamper-proof audit trail for every extraction',
+  'Coding environments — ensure AI output passes governance before execution',
+  'EU AI Act compliance — Article 14 (human oversight) + Article 12 (record-keeping)',
+  'WebView MCP — governed browser agent with domain scoping',
+  'Multi-agent systems — each agent gets its own verified audit chain',
+  'Enterprise AI deployments — confidence-gated automation with full accountability',
+  'Financial AI — evidence-backed recommendations with approval workflows',
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'PulZ Governance Kernel',
+  description: 'Deterministic AI governance engine. Evidence-backed decisions, confidence-gated actions, tamper-proof audit chains. 47KB TypeScript, zero dependencies.',
+  url: 'https://3d3d.ca/governance-kernel',
+  applicationCategory: 'DeveloperApplication',
+  programmingLanguage: 'TypeScript',
+  author: { '@type': 'Organization', name: '3D3D Atlantic Cooperative', url: 'https://3d3d.ca' },
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'CAD', description: 'Free and open source (AGPL-3.0)' },
+  keywords: 'AI governance, AI safety, evidence-based AI, decision engine, audit trail, confidence scoring, TypeScript, EU AI Act compliance',
+};
+---
+
+<BaseLayout title="PulZ Governance Kernel — AI Decision Engine | 3D3D" description="Deterministic AI governance engine. Evidence-backed decisions, confidence-gated actions, tamper-proof audit chains. 47KB TypeScript, zero dependencies. The conscience your AI agent needs." activePath="/governance-kernel" schema={schema}>
+
+  <main class="hp-home">
+
+    <!-- S1: Hero -->
+    <section class="hp-section" style="--section-accent: #40C4C4;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/software-03.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim" style="background: linear-gradient(135deg, rgba(15,12,41,0.9), rgba(30,10,30,0.7));"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
+          <div class="hp-card__inner">
+            <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Software', href: '/software'}, {label: 'Governance Kernel'}]} />
+            <p class="hp-card__eyebrow mt-4" style="color: #E84A8A;">AI Governance Engine</p>
+            <h1 class="hp-card__title mt-2 mb-4" style="font-size: clamp(2.4rem, 1.8rem + 3vw, 4.5rem);">The PulZ Kernel</h1>
+            <p class="gk-subtitle">Stops your AI from acting without permission.</p>
+            <p class="hp-card__copy hp-card__copy--lead mt-4" style="max-width: 40rem;">
+              47KB of TypeScript. Zero dependencies. A governance engine that decides whether your AI is allowed to act — based on evidence, confidence scores, and human approval. Not a guardrail you bolt on. A decision system baked in.
+            </p>
+
+            <div class="gk-hero-stats mt-6">
+              <div class="gk-hero-stat"><span class="gk-hero-stat__val">1,517</span><span class="gk-hero-stat__label">Lines</span></div>
+              <div class="gk-hero-stat"><span class="gk-hero-stat__val">47KB</span><span class="gk-hero-stat__label">Source</span></div>
+              <div class="gk-hero-stat"><span class="gk-hero-stat__val">0</span><span class="gk-hero-stat__label">Dependencies</span></div>
+              <div class="gk-hero-stat"><span class="gk-hero-stat__val">5</span><span class="gk-hero-stat__label">Systems</span></div>
+            </div>
+
+            <div class="hp-card__cta-row hp-card__cta-row--start mt-6">
+              <a href="https://github.com/3d3dcanada/pulz-kernel" target="_blank" rel="noopener noreferrer" class="hp-cta hp-cta--accent" style="background: #E84A8A; border-color: #E84A8A;">View on GitHub</a>
+              <a href="/ora" class="hp-cta hp-cta--glass">See ORA (the runtime)</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- S2: The 5 Systems -->
+    <section class="hp-section" style="--section-accent: #E84A8A;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/software-01.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow" style="color: #8B5CF6;">Architecture</p>
+            <h2 class="hp-card__title mt-2 mb-6">5 Interconnected Systems</h2>
+
+            <div class="gk-systems">
+              {systems.map((s, i) => (
+                <div class="gk-system">
+                  <span class="gk-system__num">{String(i + 1).padStart(2, '0')}</span>
+                  <h3 class="gk-system__name">{s.name}</h3>
+                  <p class="gk-system__desc">{s.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            <p class="hp-card__copy mt-6" style="font-style: italic; color: rgba(139,92,246,0.6);">
+              "The kernel has no network access, no filesystem access, no execution capability. It is a pure decision engine — it decides IF something should happen, not HOW."
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- S3: Action Classification -->
+    <section class="hp-section" style="--section-accent: #FF6B2B;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/fab-03.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow" style="color: #EAB308;">Governance Tiers</p>
+            <h2 class="hp-card__title mt-2 mb-6">Three Action Classes</h2>
+
+            <div class="gk-classes">
+              {actionClasses.map((a) => (
+                <div class="gk-class" style={`border-left-color: ${a.color};`}>
+                  <div class="gk-class__header">
+                    <span class="gk-class__badge" style={`background: ${a.color}; color: #0F0D24;`}>Class {a.cls}</span>
+                    <span class="gk-class__route">{a.route}</span>
+                  </div>
+                  <p class="gk-class__when">{a.when}</p>
+                </div>
+              ))}
+            </div>
+
+            <pre class="gk-code mt-6"><code><span class="gk-comment">// The decision flow:</span>
+Evidence gathered  →  Confidence scored  →  Action classified
+      ↓                     ↓                     ↓
+   tier_1/2/3           0-100              A / B / C
+      ↓                     ↓                     ↓
+   Validated         Risk assessed      Approval routed
+      ↓                     ↓                     ↓
+              Decision Frame created
+                      ↓
+              Governance checks run
+                      ↓
+              Human approves/rejects
+                      ↓
+              Audit chain updated</code></pre>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- S4: Benchmarks -->
+    <section class="hp-section" style="--section-accent: #AAFF2A;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/software-02.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow" style="color: #E84A8A;">Performance</p>
+            <h2 class="hp-card__title mt-2 mb-6">Benchmarks</h2>
+
+            <div class="gk-benchmarks">
+              {benchmarks.map((b) => (
+                <div class="gk-benchmark">
+                  <span class="gk-benchmark__metric">{b.metric}</span>
+                  <span class="gk-benchmark__target">{b.target}</span>
+                  <span class="gk-benchmark__note">{b.note}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- S5: Comparison -->
+    <section class="hp-section" style="--section-accent: #40C4C4;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/network-01.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow" style="color: #4F46E5;">Landscape</p>
+            <h2 class="hp-card__title mt-2 mb-6">What Exists Today</h2>
+
+            <div class="gk-comparisons">
+              {comparisons.map((c) => (
+                <div class="gk-comparison">
+                  <h3 class="gk-comparison__name">{c.name}</h3>
+                  <p class="gk-comparison__what">{c.what}</p>
+                  <p class="gk-comparison__gap"><strong>Gap:</strong> {c.gap}</p>
+                </div>
+              ))}
+            </div>
+
+            <p class="hp-card__copy mt-6">
+              Individual pieces exist across the industry. But the full stack — evidence collection, confidence scoring, approval state machine, tamper-proof audit log, and incident learning — in one package, zero dependencies, does not. That is what PulZ is.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- S6: Use Cases -->
+    <section class="hp-section" style="--section-accent: #E84A8A;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/network-02.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow" style="color: #10B981;">Applications</p>
+            <h2 class="hp-card__title mt-2 mb-6">Use Cases</h2>
+
+            <div class="gk-usecases">
+              {useCases.map((u) => (
+                <div class="gk-usecase">
+                  <span style="color: #10B981;">→</span> {u}
+                </div>
+              ))}
+            </div>
+
+            <div class="gk-compliance mt-6">
+              <h3 class="gk-compliance__title">Compliance Mapping</h3>
+              <div class="gk-compliance__items">
+                <span class="gk-compliance__item"><strong>EU AI Act Art. 14</strong> — Human oversight (approval_required = true always)</span>
+                <span class="gk-compliance__item"><strong>EU AI Act Art. 12</strong> — Record-keeping (append-only audit log with hash chain)</span>
+                <span class="gk-compliance__item"><strong>OECD AI Principles</strong> — Human agency by design</span>
+                <span class="gk-compliance__item"><strong>PIPEDA</strong> — Audit trail for all data access decisions</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- S7: How It Connects -->
+    <section class="hp-section" style="--section-accent: #FF6B2B;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/software-01.jpg'); background-position: center 60%;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow" style="color: #4F46E5;">Stack</p>
+            <h2 class="hp-card__title mt-2 mb-4">Three Layers. One Stack.</h2>
+            <p class="hp-card__copy mb-6">The kernel is the middle layer. It doesn't see the web. It doesn't call LLMs. It governs the thing that does.</p>
+
+            <div class="gk-stack-diagram">
+              <div class="gk-stack-layer" style="border-color: #0EA5E9;">
+                <span class="gk-stack-label" style="color: #0EA5E9;">Execution Surface</span>
+                <span class="gk-stack-desc">ORA Browser · WebView · Agent · MCP Tool</span>
+              </div>
+              <span class="gk-stack-arrow">↕</span>
+              <div class="gk-stack-layer" style="border-color: #E84A8A;">
+                <span class="gk-stack-label" style="color: #E84A8A;">PulZ Governance Kernel</span>
+                <span class="gk-stack-desc">Evidence · Confidence · Approval · Audit</span>
+              </div>
+              <span class="gk-stack-arrow">↕</span>
+              <div class="gk-stack-layer" style="border-color: #4F46E5;">
+                <span class="gk-stack-label" style="color: #4F46E5;">ORA Runtime</span>
+                <span class="gk-stack-desc">MCP · LLM Routing · Memory · Odin Protocol</span>
+              </div>
+            </div>
+
+            <div class="hp-card__cta-row hp-card__cta-row--start mt-8">
+              <a href="https://github.com/3d3dcanada/pulz-kernel" target="_blank" rel="noopener noreferrer" class="hp-cta hp-cta--accent" style="background: #E84A8A; border-color: #E84A8A;">Get the Kernel</a>
+              <a href="/ora" class="hp-cta hp-cta--glass">ORA Runtime</a>
+              <a href="/openkernel" class="hp-cta hp-cta--glass">OpenKernel</a>
+            </div>
+
+            <div class="mt-8">
+              <PageNextActions actions={[
+                {label: 'ORA Runtime', href: '/ora', description: 'The sovereign runtime the kernel governs.', accent: 'teal'},
+                {label: 'All Software', href: '/software', description: 'Everything built by 3D3D.', accent: 'magenta'},
+              ]} />
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>
+
+<style>
+  .gk-subtitle {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 0.9rem + 1vw, 1.6rem);
+    font-style: italic;
+    color: rgba(232, 74, 138, 0.65);
+    margin: 0;
+  }
+  .gk-hero-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.6rem;
+  }
+  @media (max-width: 480px) { .gk-hero-stats { grid-template-columns: repeat(2, 1fr); } }
+  .gk-hero-stat {
+    text-align: center;
+    padding: 0.8rem 0.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(232, 74, 138, 0.15);
+    border-radius: 2px;
+  }
+  .gk-hero-stat__val {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #E84A8A;
+  }
+  .gk-hero-stat__label {
+    font-family: var(--font-tech);
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(246, 247, 250, 0.35);
+  }
+
+  .gk-systems { display: grid; gap: 0.7rem; }
+  .gk-system {
+    padding: 1.2rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(139, 92, 246, 0.12);
+    border-radius: 2px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.5rem 1rem;
+  }
+  .gk-system__num {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #8B5CF6;
+    grid-row: 1 / 3;
+    align-self: start;
+    padding-top: 0.1rem;
+  }
+  .gk-system__name {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    color: rgba(246, 247, 250, 0.9);
+  }
+  .gk-system__desc { margin: 0; font-size: 0.78rem; line-height: 1.6; color: rgba(246, 247, 250, 0.42); }
+
+  .gk-classes { display: grid; gap: 0.6rem; }
+  .gk-class {
+    padding: 1rem 1.2rem;
+    background: rgba(0, 0, 0, 0.25);
+    border-left: 3px solid;
+    border-radius: 0 2px 2px 0;
+  }
+  .gk-class__header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.4rem; }
+  .gk-class__badge {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+  }
+  .gk-class__route {
+    font-family: var(--font-tech);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(246, 247, 250, 0.5);
+  }
+  .gk-class__when { margin: 0; font-size: 0.78rem; line-height: 1.5; color: rgba(246, 247, 250, 0.4); }
+
+  .gk-code {
+    margin: 0;
+    padding: 1rem 1.2rem;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(234, 179, 8, 0.15);
+    border-radius: 2px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.7;
+    color: #FEF3C7;
+    overflow-x: auto;
+  }
+  .gk-comment { color: rgba(234, 179, 8, 0.4); }
+
+  .gk-benchmarks { display: grid; gap: 0.4rem; }
+  .gk-benchmark {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: baseline;
+    gap: 0.8rem;
+    padding: 0.6rem 0.8rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 2px;
+  }
+  .gk-benchmark__metric { font-size: 0.82rem; color: rgba(246, 247, 250, 0.7); }
+  .gk-benchmark__target {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #E84A8A;
+    white-space: nowrap;
+  }
+  .gk-benchmark__note { font-size: 0.65rem; color: rgba(246, 247, 250, 0.3); white-space: nowrap; }
+  @media (max-width: 560px) {
+    .gk-benchmark { grid-template-columns: 1fr; }
+  }
+
+  .gk-comparisons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+    gap: 0.7rem;
+  }
+  .gk-comparison {
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(79, 70, 229, 0.12);
+    border-radius: 2px;
+  }
+  .gk-comparison__name {
+    margin: 0 0 0.3rem;
+    font-family: var(--font-display);
+    font-size: 0.88rem;
+    text-transform: uppercase;
+    color: rgba(246, 247, 250, 0.8);
+  }
+  .gk-comparison__what { margin: 0 0 0.3rem; font-size: 0.75rem; color: rgba(246, 247, 250, 0.5); }
+  .gk-comparison__gap { margin: 0; font-size: 0.72rem; color: rgba(246, 247, 250, 0.35); }
+  .gk-comparison__gap strong { color: #EF4444; }
+
+  .gk-usecases { display: grid; gap: 0.3rem; }
+  .gk-usecase {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: rgba(246, 247, 250, 0.5);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.4rem 0;
+  }
+
+  .gk-compliance {
+    padding: 1.2rem;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(16, 185, 129, 0.15);
+    border-radius: 2px;
+  }
+  .gk-compliance__title {
+    margin: 0 0 0.6rem;
+    font-family: var(--font-tech);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #10B981;
+  }
+  .gk-compliance__items { display: grid; gap: 0.35rem; }
+  .gk-compliance__item { font-size: 0.75rem; color: rgba(246, 247, 250, 0.4); line-height: 1.5; }
+  .gk-compliance__item strong { color: rgba(246, 247, 250, 0.7); }
+
+  .gk-stack-diagram {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    max-width: 28rem;
+  }
+  .gk-stack-layer {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    border: 1.5px solid;
+    border-radius: 2px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.2);
+  }
+  .gk-stack-label {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 0.88rem;
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+  }
+  .gk-stack-desc {
+    font-size: 0.72rem;
+    color: rgba(246, 247, 250, 0.4);
+  }
+  .gk-stack-arrow { color: rgba(246, 247, 250, 0.2); font-size: 1rem; }
+</style>

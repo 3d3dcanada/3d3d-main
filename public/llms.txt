@@ -1,12 +1,10 @@
-# 3D3D — Custom 3D Printing & Fabrication
+# 3D3D — Custom 3D Printing, Fabrication & Open Source Software
 
-> Founder-operated 3D printing and custom fabrication based in Fredericton, New Brunswick, Canada. Engineering-grade FDM printing for marine, automotive restoration, prototyping, and field deployment. Ships worldwide. 12+ engineering compounds. 24-48 hour turnaround.
+> 3D3D is a maker cooperative based in Fredericton, New Brunswick, Canada. We 3D print custom parts for any application — from flexis and phone cases to marine hardware and carbon fiber nylon brackets. We also build free, open source AI tools and software. Ships worldwide. 17 material compounds. 24-hour quotes. No minimums.
 
 ## Identity
 
-3D3D is a cooperative fabrication company founded by Ken, a professional mechanic turned offshore sailor turned additive manufacturing operator. Based in Fredericton, NB, 3D3D prints in 12+ engineering-grade materials on Prusa open-source hardware.
-
-Ken has sailed over 20,000 nautical miles including transatlantic crossings, competed in the Newport Bermuda Race, and spent 10 years as a professional mechanic restoring classic American cars (AMC AMX, Roadrunner, Dodge Polara, GTO). This background informs every material selection and fabrication decision — parts are built to survive real conditions, not lab tests.
+3D3D is a cooperative of makers, not a storefront. Based in Fredericton, NB, we print in 17 engineering-grade materials and build open source software tools including AI runtimes, governance engines, and marine IoT platforms. The cooperative model means operators keep 75% of revenue and customers work directly with the people building their parts.
 
 - Founded: 2025
 - Location: Fredericton, New Brunswick, Canada
@@ -107,6 +105,46 @@ Ken has sailed over 20,000 nautical miles including transatlantic crossings, com
 | ESD-sensitive electronics | PC Space Grade |
 | Fire compliance required | PETG V0 or PEI 1010 |
 | Prototype or fit check only | PLA |
+
+## Software & AI Tools (Free / Open Source)
+
+### ORA — Governed AI Runtime
+- Rust-based AI runtime with 8 MCP tools, evidence-based reasoning, durable memory
+- Constitutional governance via the Odin Protocol
+- Self-hosted, works with any LLM provider
+- URL: https://3d3d.ca/ora
+
+### Local AI Setup Service
+- We install and configure local AI stacks on your hardware
+- Ollama + OpenWebUI + MCP + ComfyUI
+- Private, no cloud dependency, trained on your workflow
+- Industry-specific AI models in development for specialized trades
+- URL: https://3d3d.ca/software
+
+### PulZ Governance Kernel
+- 47KB TypeScript governance engine for AI agents
+- Evidence-backed decisions, confidence scoring, audit trails
+- License: AGPL-3.0
+- URL: https://3d3d.ca/governance-kernel
+
+### HarbourMesh — Marine IoT
+- Offline-first marine navigation and vessel monitoring
+- NMEA 0183/2000, weather routing, AIS tracking
+- URL: https://3d3d.ca/harbourmesh
+
+### Aro — Pitch Deck Builder
+- One HTML file, 227 KB, zero backend
+- Build presentations offline, no account needed
+- URL: https://3d3d.ca/aro
+
+### OpenKernel — CS Education with Emoji
+- 23 opcodes, 6 languages, runs in browser
+- URL: https://3d3d.ca/openkernel
+
+### Sovereign AI Stack
+- Ollama + OpenWebUI + MCP + ComfyUI
+- Complete local AI operating environment
+- URL: https://github.com/3d3dcanada/sovereign-ai
 
 ## Key Pages
 

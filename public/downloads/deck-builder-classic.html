@@ -1,0 +1,3053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DECK FORGE 2026 — Ultimate Presentation Builder</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  /* Light Theme Palette 2026 */
+  --bg: #f8fafc;
+  --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  --panel: #ffffff;
+  --panel-alt: #f1f5f9;
+  --card: #ffffff;
+  --card-hover: #f8fafc;
+  --border: #e2e8f0;
+  --border-hover: #cbd5e1;
+  
+  /* Accent Colors */
+  --accent: #6366f1;
+  --accent-hover: #4f46e5;
+  --accent-light: #e0e7ff;
+  --accent2: #ec4899;
+  --accent2-hover: #db2777;
+  --accent3: #8b5cf6;
+  --accent4: #06b6d4;
+  
+  /* Text Colors */
+  --text: #000000;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  
+  /* Status Colors */
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  
+  /* Glassmorphism */
+  --glass: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+  
+  /* Border Radius - Bubble Design */
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+  
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  background: var(--bg-gradient);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* LAYOUT */
+#app {
+  display: grid;
+  grid-template-columns: 280px 1fr 320px;
+  grid-template-rows: 64px 1fr;
+  height: 100vh;
+  gap: 0;
+  overflow: hidden;
+}
+
+#topbar {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 24px;
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 2px solid var(--border);
+  position: relative;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+
+#sidebar {
+  background: var(--panel);
+  border-right: 2px solid var(--border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 64px);
+  box-shadow: var(--shadow-sm);
+}
+
+#canvas-area {
+  background: var(--bg-gradient);
+  overflow: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px;
+  gap: 20px;
+  flex-direction: column;
+  height: calc(100vh - 64px);
+}
+
+#props {
+  background: var(--panel);
+  border-left: 2px solid var(--border);
+  overflow-y: auto;
+  padding: 0;
+  height: calc(100vh - 64px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* TOPBAR */
+.logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  color: var(--accent);
+  letter-spacing: 2px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.logo span {
+  color: var(--accent2);
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  box-shadow: var(--shadow-md);
+}
+
+#deck-title-input {
+  background: var(--panel-alt);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  width: 220px;
+  outline: none;
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  transition: var(--transition-fast);
+}
+
+#deck-title-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+  background: var(--panel);
+}
+
+#slide-size-select {
+  background: var(--panel-alt);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 8px 14px;
+  font-size: 12px;
+  border-radius: var(--radius-full);
+  font-family: 'Space Mono', monospace;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  outline: none;
+}
+
+#slide-size-select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+.top-actions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+
+/* BUTTONS - Pill Design */
+.btn {
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 12px;
+  font-family: 'Space Mono', monospace;
+  font-weight: 500;
+  transition: var(--transition);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn:hover {
+  border-color: var(--border-hover);
+  color: var(--text);
+  background: var(--card-hover);
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  color: white;
+  border-color: transparent;
+  font-weight: 600;
+  box-shadow: var(--shadow-md), 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--accent-hover), var(--accent));
+  color: white;
+  box-shadow: var(--shadow-lg), 0 0 30px rgba(99, 102, 241, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  border-color: var(--error);
+  color: var(--error);
+  background: white;
+}
+
+.btn-danger:hover {
+  background: var(--error);
+  color: white;
+  box-shadow: var(--shadow-md), 0 0 20px rgba(239, 68, 68, 0.3);
+}
+
+.btn-icon {
+  padding: 8px;
+  min-width: 36px;
+  justify-content: center;
+}
+
+/* SIDEBAR */
+.sidebar-section {
+  padding: 16px;
+  border-bottom: 2px solid var(--border);
+  max-height: 45%;
+  overflow-y: auto;
+}
+
+.sidebar-section:last-child {
+  border-bottom: none;
+  flex: 1;
+  max-height: none;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.slides-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 0;
+}
+
+.slides-section .sidebar-label {
+  padding: 16px 16px 12px 16px;
+  flex-shrink: 0;
+  margin-bottom: 0;
+  border-bottom: 2px solid var(--border);
+}
+
+.slides-section .slide-list {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+  border: none;
+}
+
+.slides-section .add-slide-btn {
+  flex-shrink: 0;
+  margin: 12px;
+  border-radius: var(--radius);
+}
+
+.sidebar-section-header {
+  position: sticky;
+  top: 0;
+  background: var(--panel);
+  padding: 12px 16px;
+  border-bottom: 2px solid var(--border);
+  margin: -16px -16px 12px -16px;
+  z-index: 10;
+}
+
+.sidebar-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--text);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sidebar-label::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.template-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  padding-bottom: 8px;
+}
+
+.tpl-card {
+  border: 2px solid #1e293b;
+  padding: 14px 10px;
+  cursor: pointer;
+  border-radius: var(--radius-lg);
+  transition: var(--transition);
+  background: var(--card);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.tpl-card:hover {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.tpl-card .tpl-icon {
+  font-size: 24px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.tpl-card .tpl-name {
+  font-size: 10px;
+  font-family: 'Space Mono', monospace;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.slide-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  min-height: 0;
+}
+
+.slides-header {
+  padding: 12px 16px;
+  border-bottom: 2px solid var(--border);
+  background: var(--panel);
+  flex-shrink: 0;
+}
+
+.slides-footer {
+  padding: 12px;
+  border-top: 2px solid var(--border);
+  background: var(--panel);
+  flex-shrink: 0;
+}
+
+.slide-thumb {
+  border: 1px solid var(--border);
+  padding: 12px 14px;
+  cursor: pointer;
+  border-radius: var(--radius-lg);
+  transition: var(--transition);
+  background: var(--card);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  box-shadow: var(--shadow-sm);
+}
+
+.slide-thumb:hover {
+  border-color: var(--accent);
+  background: var(--card-hover);
+  box-shadow: var(--shadow-md);
+  transform: translateX(4px);
+}
+
+.slide-thumb.active {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  box-shadow: var(--shadow-md);
+}
+
+.slide-thumb .slide-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  min-width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--panel-alt);
+  border-radius: var(--radius-full);
+  font-weight: 600;
+}
+
+.slide-thumb.active .slide-num {
+  background: var(--accent);
+  color: white;
+}
+
+.slide-thumb .slide-name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.slide-thumb .del-slide {
+  opacity: 0;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 16px;
+  padding: 4px;
+  background: none;
+  border: none;
+  border-radius: var(--radius-full);
+  transition: var(--transition-fast);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide-thumb .del-slide:hover {
+  background: var(--error);
+  color: white;
+}
+
+.slide-thumb:hover .del-slide {
+  opacity: 1;
+}
+
+.add-slide-btn {
+  margin: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border: 2px dashed var(--border);
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: var(--radius-lg);
+  font-size: 13px;
+  font-weight: 500;
+  transition: var(--transition);
+  background: transparent;
+  font-family: 'Inter', sans-serif;
+}
+
+.add-slide-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-light);
+}
+
+/* CANVAS */
+#slide-canvas {
+  width: 960px;
+  min-height: 540px;
+  position: relative;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-xl);
+  border-radius: var(--radius-lg);
+  background: white;
+  transition: transform var(--transition-slow);
+}
+
+.canvas-element {
+  position: absolute;
+  cursor: move;
+  user-select: none;
+  min-width: 40px;
+  min-height: 20px;
+  border-radius: var(--radius-sm);
+  transition: box-shadow var(--transition-fast);
+}
+
+.canvas-element:hover {
+  box-shadow: 0 0 0 2px var(--accent-light);
+}
+
+.canvas-element.selected {
+  box-shadow: 0 0 0 2px var(--accent), 0 8px 25px rgba(99, 102, 241, 0.2);
+}
+
+.canvas-element.selected .el-toolbar {
+  display: flex;
+}
+
+.el-toolbar {
+  display: none;
+  position: absolute;
+  top: -44px;
+  left: 50%;
+  transform: translateX(-50%);
+  gap: 4px;
+  z-index: 100;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  padding: 6px;
+  box-shadow: var(--shadow-lg);
+  white-space: nowrap;
+}
+
+.el-toolbar.show {
+  display: flex;
+}
+
+.el-btn {
+  background: var(--panel-alt);
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: var(--radius-full);
+  transition: var(--transition-fast);
+  font-family: 'Space Mono', monospace;
+  font-weight: 500;
+}
+
+.el-btn:hover {
+  color: var(--accent);
+  background: var(--accent-light);
+}
+
+.el-btn.danger:hover {
+  color: var(--error);
+  background: #fee2e2;
+}
+
+.resize-handle {
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  background: var(--accent);
+  border: 2px solid white;
+  cursor: se-resize;
+  opacity: 0;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-fast);
+}
+
+.canvas-element:hover .resize-handle,
+.canvas-element.selected .resize-handle {
+  opacity: 1;
+}
+
+.resize-handle:hover {
+  transform: scale(1.2);
+}
+
+/* Canvas Navigation */
+.canvas-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  align-self: center;
+  background: #ffffff;
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md);
+  border: 2px solid #1e293b;
+}
+
+.canvas-nav button {
+  background: #ffffff;
+  border: 2px solid #1e293b;
+  color: #000000;
+  padding: 10px 18px;
+  cursor: pointer;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  border-radius: var(--radius-full);
+  transition: var(--transition);
+  font-weight: 700;
+}
+
+.canvas-nav button:hover {
+  border-color: var(--accent);
+  color: #000000;
+  background: var(--accent-light);
+}
+
+.canvas-nav button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  color: #000000;
+}
+
+#slide-counter {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  color: var(--text);
+  font-weight: 700;
+  min-width: 70px;
+  text-align: center;
+}
+
+.zoom-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  align-self: center;
+  background: var(--panel);
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+}
+
+.zoom-bar span {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  color: var(--text);
+  font-weight: 600;
+}
+
+#zoom-range {
+  width: 120px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+/* PROPS PANEL */
+.props-header {
+  padding: 20px;
+  border-bottom: 1px solid var(--border);
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--text);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 600;
+  background: var(--panel-alt);
+}
+
+.prop-group {
+  padding: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.prop-label {
+  font-size: 11px;
+  color: var(--text);
+  margin-bottom: 10px;
+  font-family: 'Space Mono', monospace;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.prop-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+  align-items: center;
+}
+
+.prop-row label {
+  font-size: 12px;
+  color: var(--text);
+  min-width: 60px;
+  font-weight: 500;
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+  background: var(--panel-alt);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 10px 14px;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  border-radius: var(--radius);
+  width: 100%;
+  outline: none;
+  transition: var(--transition-fast);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+  background: var(--panel);
+}
+
+input[type="color"] {
+  width: 42px;
+  height: 36px;
+  padding: 2px;
+  cursor: pointer;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--panel);
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.6;
+}
+
+.color-swatch-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.swatch {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  border: 2px solid var(--border);
+  transition: var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.swatch:hover {
+  border-color: var(--accent);
+  transform: scale(1.1);
+  box-shadow: var(--shadow-md);
+}
+
+.swatch.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+.theme-selector {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.theme-card {
+  border: 2px solid var(--border);
+  padding: 14px;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 11px;
+  font-family: 'Space Mono', monospace;
+  font-weight: 600;
+  text-align: center;
+  background: var(--card);
+}
+
+.theme-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.theme-card.active {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+.theme-card .tc-preview {
+  height: 32px;
+  border-radius: var(--radius);
+  margin-bottom: 8px;
+  box-shadow: var(--shadow-sm);
+}
+
+/* MODALS */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+
+.modal-overlay.show {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  max-width: 700px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-xl);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: var(--text);
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.modal-close {
+  float: right;
+  background: var(--panel-alt);
+  border: none;
+  color: var(--text-secondary);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 8px;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  transition: var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close:hover {
+  background: var(--error);
+  color: white;
+}
+
+/* PRESENTATION MODE */
+#present-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 2000;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#present-overlay.show {
+  display: flex;
+}
+
+#present-slide {
+  position: relative;
+  box-shadow: 0 0 100px rgba(0, 0, 0, 0.9);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+#present-controls {
+  position: fixed;
+  bottom: 30px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#present-controls button {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: var(--radius-full);
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+#present-controls button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+/* ELEMENT STYLES */
+.el-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  color: var(--text);
+  line-height: 1.6;
+  padding: 4px;
+}
+
+.el-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 48px;
+  color: var(--text);
+  letter-spacing: 2px;
+  line-height: 1.1;
+  padding: 4px;
+}
+
+.el-subheading {
+  font-family: 'Inter', sans-serif;
+  font-size: 24px;
+  color: var(--text-secondary);
+  font-weight: 300;
+  padding: 4px;
+}
+
+.el-stat {
+  text-align: center;
+  padding: 8px;
+}
+
+.el-stat .stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 64px;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.el-stat .stat-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: 'Space Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+.el-bullet li {
+  margin-bottom: 8px;
+  font-size: 15px;
+  padding-left: 4px;
+  color: var(--text);
+}
+
+.el-bullet ul {
+  list-style: none;
+  padding: 0;
+}
+
+.el-bullet ul li::before {
+  content: '▸ ';
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.el-divider {
+  border: none;
+  border-top: 2px solid var(--border);
+  width: 100%;
+}
+
+.el-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.el-progress {
+  background: var(--panel-alt);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  height: 12px;
+}
+
+.el-progress .progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent4));
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease;
+}
+
+.el-box {
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  background: var(--panel-alt);
+  border: 1px solid var(--border);
+}
+
+.el-chart-bar {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 100%;
+  padding: 12px;
+}
+
+.el-chart-bar .bar-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.el-chart-bar .bar-fill {
+  width: 100%;
+  border-radius: var(--radius) var(--radius) 0 0;
+  background: linear-gradient(180deg, var(--accent), var(--accent-hover));
+  transition: height 0.3s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.el-chart-bar .bar-lbl {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-family: 'Space Mono', monospace;
+  font-weight: 500;
+}
+
+.el-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  border: 2px dashed var(--border);
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  color: var(--text-muted);
+  border-radius: var(--radius-lg);
+  background: var(--panel-alt);
+  transition: var(--transition);
+}
+
+.el-image-placeholder:hover {
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
+
+.el-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.el-table th {
+  background: var(--accent-light);
+  padding: 10px 12px;
+  text-align: left;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent);
+}
+
+.el-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+
+.el-table tr:last-child td {
+  border-bottom: none;
+}
+
+.el-table tr:hover td {
+  background: var(--panel-alt);
+}
+
+.el-timeline {
+  padding: 12px;
+}
+
+.el-timeline .tl-item {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  align-items: flex-start;
+  position: relative;
+}
+
+.el-timeline .tl-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  margin-top: 4px;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.el-timeline .tl-line {
+  position: absolute;
+  left: 17px;
+  top: 20px;
+  bottom: -10px;
+  width: 2px;
+  background: var(--border);
+}
+
+.el-timeline .tl-item:last-child .tl-line {
+  display: none;
+}
+
+.el-code {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  overflow: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.el-quote {
+  font-style: italic;
+  padding: 20px;
+  border-left: 4px solid var(--accent);
+  background: var(--panel-alt);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.el-quote-author {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: right;
+  font-style: normal;
+}
+
+/* SCROLLBARS */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--panel-alt);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-hover);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* TOAST */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--text);
+  color: white;
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  z-index: 9000;
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast-icon {
+  font-size: 16px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  #app {
+    grid-template-columns: 240px 1fr;
+  }
+  #props {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  #app {
+    grid-template-columns: 1fr;
+    grid-template-rows: 56px auto 1fr;
+  }
+  #sidebar {
+    order: 2;
+    max-height: 200px;
+  }
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <!-- TOPBAR -->
+  <div id="topbar">
+    <div class="logo">
+      <div class="logo-icon">◈</div>
+      DECK<span>FORGE</span>
+    </div>
+    <input type="text" id="deck-title-input" value="My Presentation" placeholder="Deck Title">
+    <select id="slide-size-select">
+      <option value="960x540">16:9 (960×540)</option>
+      <option value="1280x720">HD (1280×720)</option>
+      <option value="1024x768">4:3 (1024×768)</option>
+      <option value="800x600">Classic 4:3</option>
+    </select>
+    <div class="top-actions">
+      <button class="btn" onclick="showDeckTemplates()">
+        <span>📦</span> Templates
+      </button>
+      <button class="btn" onclick="addSlide()">
+        <span>+</span> Slide
+      </button>
+      <button class="btn" onclick="duplicateSlide()">
+        <span>⎘</span> Dupe
+      </button>
+      <button class="btn" onclick="presentMode()">
+        <span>▶</span> Present
+      </button>
+      <button class="btn" onclick="exportJSON()">
+        <span>↓</span> JSON
+      </button>
+      <button class="btn" onclick="importJSON()">
+        <span>↑</span> Import
+      </button>
+      <button class="btn btn-primary" onclick="exportHTML()">
+        <span>⬆</span> Export HTML
+      </button>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div id="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Add Element</div>
+      <div class="template-grid">
+        <div class="tpl-card" onclick="addElement('heading')">
+          <span class="tpl-icon">H</span>
+          <span class="tpl-name">Heading</span>
+        </div>
+        <div class="tpl-card" onclick="addElement('subheading')">
+          <span class="tpl-icon">h</span>
+          <span class="tpl-name">Subheading</span>
+        </div>
+        <div class="tpl-card" onclick="addElement('text')">
+          <span class="tpl-icon">¶</span>
+          <span class="tpl-name">Text</span>
+        </div>
+        <div class="tpl-card" onclick="addElement('bullet')">
+          <span class="tpl-icon">☰</span>
+          <span class="tpl-name">Bullets</span>
+        </div>
+        <div class="tpl-card" onclick="addElement('stat')">
+          <span class="tpl-icon">42</span>
+          <span class="tpl-name">Big Stat</span>
+        </div>
+        <div class="tpl-card" onclick="addElement('badge')">
+          <span class="tpl-icon">◈</span>
+          <span class="tpl-name">Badge</span>
+        </div>
+        <div class="tpl-card" onclick="addElement('box')">
+          <span class="tpl-icon">□</span>
+          <span class="tpl-name">Box</span>
+        </div>
+        <div class="tpl-card" onclick="addElement('divider')">
+          <span class="tpl-icon">─</span>
+          <span class="tpl-name">Divider</span>
+        </div>
+        <div class="tpl-card" onclick="addElement('progress')">
+          <span class="tpl-icon">▬</span>
+          <span class="tpl-name">Progress</span>
+        </div>
+        <div class="tpl-card" onclick="addElement('chart')">
+          <span class="tpl-icon">▨</span>
+          <span class="tpl-name">Bar Chart</span>
+        </div>
+        <div class="tpl-card" onclick="addElement('table')">
+          <span class="tpl-icon">⊞</span>
+          <span class="tpl-name">Table</span>
+        </div>
+        <div class="tpl-card" onclick="addElement('timeline')">
+          <span class="tpl-icon">→</span>
+          <span class="tpl-name">Timeline</span>
+        </div>
+        <div class="tpl-card" onclick="addElement('image')">
+          <span class="tpl-icon">🖼</span>
+          <span class="tpl-name">Image</span>
+        </div>
+        <div class="tpl-card" onclick="addElement('logo')">
+          <span class="tpl-icon">◉</span>
+          <span class="tpl-name">Logo</span>
+        </div>
+        <div class="tpl-card" onclick="addCodeBlock()">
+          <span class="tpl-icon"></></span>
+          <span class="tpl-name">Code</span>
+        </div>
+        <div class="tpl-card" onclick="addQuote()">
+          <span class="tpl-icon">❝</span>
+          <span class="tpl-name">Quote</span>
+        </div>
+        <div class="tpl-card" onclick="addQRCode()">
+          <span class="tpl-icon">◼</span>
+          <span class="tpl-name">QR Code</span>
+        </div>
+        <div class="tpl-card" onclick="addLiveCounter()">
+          <span class="tpl-icon">🔢</span>
+          <span class="tpl-name">Counter</span>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar-section slides-section">
+      <div class="sidebar-label">Slides</div>
+      <div id="slide-list" class="slide-list"></div>
+      <button class="add-slide-btn" onclick="addSlide()">
+        <span>+</span> Add Slide
+      </button>
+    </div>
+  </div>
+
+  <!-- CANVAS AREA -->
+  <div id="canvas-area">
+    <div id="slide-canvas" onclick="deselectAll(event)"></div>
+    <div class="canvas-nav">
+      <button onclick="prevSlide()" id="btn-prev">◀ Prev</button>
+      <span id="slide-counter">1 / 1</span>
+      <button onclick="nextSlide()" id="btn-next">Next ▶</button>
+      <button onclick="moveSlideUp()" id="btn-up">↑ Move Up</button>
+      <button onclick="moveSlideDown()" id="btn-down">↓ Move Down</button>
+    </div>
+    <div class="zoom-bar">
+      <span>Zoom</span>
+      <input type="range" id="zoom-range" min="40" max="150" value="100" oninput="setZoom(this.value)">
+      <span id="zoom-val">100%</span>
+    </div>
+  </div>
+
+  <!-- PROPS PANEL -->
+  <div id="props">
+    <div class="props-header">Properties</div>
+    <div id="props-content">
+      <div class="prop-group">
+        <div class="sidebar-label">Slide Background</div>
+        <div class="prop-row">
+          <label>Type</label>
+          <select id="bg-type" onchange="updateSlideBg()">
+            <option value="solid">Solid</option>
+            <option value="gradient">Gradient</option>
+            <option value="mesh">Mesh</option>
+            <option value="pattern">Pattern</option>
+          </select>
+        </div>
+        <div class="prop-row" id="bg-color-row">
+          <label>Color</label>
+          <input type="color" id="bg-color" value="#ffffff" oninput="updateSlideBg()">
+          <input type="color" id="bg-color2" value="#f0f4ff" oninput="updateSlideBg()">
+        </div>
+        <div class="color-swatch-row" id="bg-swatches">
+          <div class="swatch" style="background: linear-gradient(135deg, #ffffff, #f0f4ff)" onclick="setPresetBg('#ffffff', '#f0f4ff', 'gradient')"></div>
+          <div class="swatch" style="background: linear-gradient(135deg, #fef3c7, #fde68a)" onclick="setPresetBg('#fef3c7', '#fde68a', 'gradient')"></div>
+          <div class="swatch" style="background: linear-gradient(135deg, #dbeafe, #bfdbfe)" onclick="setPresetBg('#dbeafe', '#bfdbfe', 'gradient')"></div>
+          <div class="swatch" style="background: linear-gradient(135deg, #fce7f3, #fbcfe8)" onclick="setPresetBg('#fce7f3', '#fbcfe8', 'gradient')"></div>
+          <div class="swatch" style="background: linear-gradient(135deg, #e0e7ff, #c7d2fe)" onclick="setPresetBg('#e0e7ff', '#c7d2fe', 'gradient')"></div>
+          <div class="swatch" style="background: linear-gradient(135deg, #d1fae5, #a7f3d0)" onclick="setPresetBg('#d1fae5', '#a7f3d0', 'gradient')"></div>
+          <div class="swatch" style="background: #ffffff" onclick="setPresetBg('#ffffff', '#ffffff', 'solid')"></div>
+          <div class="swatch" style="background: #f8fafc" onclick="setPresetBg('#f8fafc', '#f8fafc', 'solid')"></div>
+          <div class="swatch" style="background: #1e293b" onclick="setPresetBg('#1e293b', '#1e293b', 'solid')"></div>
+        </div>
+      </div>
+      <div class="prop-group">
+        <div class="sidebar-label">Theme</div>
+        <div class="theme-selector">
+          <div class="theme-card active" onclick="applyTheme('light')" id="theme-light">
+            <div class="tc-preview" style="background: linear-gradient(135deg, #ffffff, #f0f4ff)"></div>
+            <span>☀️ Light</span>
+          </div>
+          <div class="theme-card" onclick="applyTheme('dark')" id="theme-dark">
+            <div class="tc-preview" style="background: linear-gradient(135deg, #1e293b, #0f172a)"></div>
+            <span>🌙 Dark</span>
+          </div>
+          <div class="theme-card" onclick="applyTheme('pitch')" id="theme-pitch">
+            <div class="tc-preview" style="background: linear-gradient(135deg, #0f172a, #312e81)"></div>
+            <span>🎯 Pitch</span>
+          </div>
+          <div class="theme-card" onclick="applyTheme('corp')" id="theme-corp">
+            <div class="tc-preview" style="background: linear-gradient(135deg, #1e40af, #1d4ed8)"></div>
+            <span>💼 Corp</span>
+          </div>
+        </div>
+      </div>
+      <div class="prop-group" id="el-props" style="display: none;">
+        <div class="sidebar-label">Selected Element</div>
+        <div class="prop-row">
+          <label>Content</label>
+        </div>
+        <textarea id="el-content" oninput="updateElContent()" rows="3" placeholder="Enter content..."></textarea>
+        <div class="prop-row" style="margin-top: 12px;">
+          <label>Color</label>
+          <input type="color" id="el-color" value="#1e293b" oninput="updateElStyle('color', this.value)" style="width: 50px;">
+        </div>
+        <div class="prop-row">
+          <label>Bg</label>
+          <input type="color" id="el-bg" value="#ffffff" oninput="updateElStyle('background', this.value)" style="width: 50px;">
+        </div>
+        <div class="prop-row">
+          <label>Size</label>
+          <input type="number" id="el-fontsize" value="16" min="6" max="200" oninput="updateElStyle('fontSize', this.value + 'px')" style="width: 80px;">
+          <span style="font-size: 12px; color: var(--text-muted);">px</span>
+        </div>
+        <div class="prop-row">
+          <label>Bold</label>
+          <input type="checkbox" id="el-bold" onchange="updateElStyle('fontWeight', this.checked ? '700' : '400')">
+          <label style="margin-left: 12px;">Italic</label>
+          <input type="checkbox" id="el-italic" onchange="updateElStyle('fontStyle', this.checked ? 'italic' : 'normal')">
+        </div>
+        <div class="prop-row">
+          <label>Align</label>
+          <select id="el-align" onchange="updateElStyle('textAlign', this.value)">
+            <option value="left">Left</option>
+            <option value="center">Center</option>
+            <option value="right">Right</option>
+          </select>
+        </div>
+        <div class="prop-row">
+          <label>Opacity</label>
+          <input type="range" id="el-opacity" min="0" max="100" value="100" oninput="updateElStyle('opacity', this.value / 100)" style="flex: 1;">
+          <span id="el-opacity-val" style="font-size: 12px; color: var(--text-muted); min-width: 40px;">100%</span>
+        </div>
+        <div class="prop-row">
+          <label>Radius</label>
+          <input type="number" id="el-radius" value="0" min="0" max="50" oninput="updateElStyle('borderRadius', this.value + 'px')" style="width: 70px;">
+          <span style="font-size: 12px; color: var(--text-muted);">px</span>
+        </div>
+        <div class="prop-row">
+          <label>Z-Index</label>
+          <input type="number" id="el-z" value="1" min="0" max="100" oninput="updateElZ(this.value)" style="width: 70px;">
+        </div>
+        <div class="prop-row">
+          <label>Border</label>
+          <input type="color" id="el-border-color" value="#6366f1" oninput="updateElBorder()" style="width: 40px;">
+          <input type="number" id="el-border-w" value="0" min="0" max="10" oninput="updateElBorder()" style="width: 60px;">
+          <span style="font-size: 12px; color: var(--text-muted);">px</span>
+        </div>
+        <div class="prop-row" style="margin-top: 16px;">
+          <button class="btn btn-danger" onclick="delEl(selectedEl)" style="width: 100%; justify-content: center;">
+            <span>🗑</span> Delete Element
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TEMPLATES MODAL -->
+<div class="modal-overlay" id="templates-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('templates-modal')">✕</button>
+    <h2><span>📦</span> Deck Templates</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px;" id="deck-tpl-grid"></div>
+  </div>
+</div>
+
+<!-- PRESENT MODE -->
+<div id="present-overlay">
+  <div id="present-slide"></div>
+  <div id="present-controls">
+    <button onclick="presentPrev()">◀ Prev</button>
+    <span id="present-counter" style="font-family: 'Space Mono'; font-size: 13px; color: rgba(255,255,255,0.7); min-width: 80px; text-align: center;">1 / 1</span>
+    <button onclick="presentNext()">Next ▶</button>
+    <button onclick="exitPresent()" style="background: rgba(239, 68, 68, 0.3); border-color: rgba(239, 68, 68, 0.5);">✕ Exit</button>
+  </div>
+</div>
+
+<div class="toast" id="toast">
+  <span class="toast-icon">✓</span>
+  <span class="toast-msg"></span>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+// STATE MANAGEMENT
+// ═══════════════════════════════════════════════
+let deck = {
+  title: 'My Presentation',
+  slides: [],
+  currentSlide: 0,
+  size: { w: 960, h: 540 }
+};
+
+let selectedEl = null;
+let presentIdx = 0;
+let zoom = 1;
+
+// History for undo/redo
+let historyStack = [];
+let historyIndex = -1;
+const MAX_HISTORY = 50;
+
+// Auto-save
+let autoSaveTimer = null;
+
+// Image state
+let imageEditorState = { rotation: 0, flipX: 1, flipY: 1, quality: 0.85 };
+
+// Themes
+const THEMES = {
+  light: {
+    bg: 'linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%)',
+    textColor: '#1e293b',
+    accentColor: '#6366f1'
+  },
+  dark: {
+    bg: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
+    textColor: '#f1f5f9',
+    accentColor: '#6366f1'
+  },
+  pitch: {
+    bg: 'linear-gradient(135deg, #0f172a 0%, #312e81 100%)',
+    textColor: '#f1f5f9',
+    accentColor: '#ec4899'
+  },
+  corp: {
+    bg: 'linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%)',
+    textColor: '#f1f5f9',
+    accentColor: '#f59e0b'
+  }
+};
+
+// Element defaults
+const EL_DEFAULTS = {
+  heading: {
+    content: 'HEADING',
+    x: 80, y: 80, w: 800, h: 100,
+    style: { fontSize: '56px', color: '#1e293b', fontFamily: "'Bebas Neue'", letterSpacing: '2px' }
+  },
+  subheading: {
+    content: 'Your subheading here',
+    x: 80, y: 180, w: 700, h: 60,
+    style: { fontSize: '22px', color: '#64748b', fontFamily: "'Inter'", fontWeight: '300' }
+  },
+  text: {
+    content: 'Your text content here. Click to edit in the properties panel.',
+    x: 80, y: 160, w: 400, h: 100,
+    style: { fontSize: '15px', color: '#334155', lineHeight: '1.7' }
+  },
+  bullet: {
+    content: 'First key point\nSecond important thing\nThird item here',
+    x: 80, y: 150, w: 400, h: 180,
+    style: { fontSize: '15px', color: '#334155' }
+  },
+  stat: {
+    content: '$2.4M|Revenue',
+    x: 200, y: 180, w: 200, h: 140,
+    style: { color: '#6366f1', textAlign: 'center' }
+  },
+  badge: {
+    content: 'NEW',
+    x: 80, y: 60, w: 100, h: 36,
+    style: {
+      background: '#6366f1',
+      color: '#ffffff',
+      fontSize: '11px',
+      fontFamily: "'Space Mono'",
+      fontWeight: '700',
+      padding: '6px 14px',
+      borderRadius: '9999px',
+      display: 'inline-block'
+    }
+  },
+  box: {
+    content: 'Content here',
+    x: 80, y: 150, w: 280, h: 180,
+    style: {
+      background: '#f1f5f9',
+      border: '1px solid #e2e8f0',
+      borderRadius: '12px',
+      padding: '20px',
+      fontSize: '14px',
+      color: '#334155'
+    }
+  },
+  divider: {
+    content: '',
+    x: 80, y: 280, w: 800, h: 4,
+    style: { borderTop: '2px solid #e2e8f0' }
+  },
+  progress: {
+    content: '75|Completion',
+    x: 80, y: 250, w: 400, h: 60,
+    style: { color: '#6366f1' }
+  },
+  chart: {
+    content: 'A:30|B:55|C:80|D:65|E:90',
+    x: 80, y: 150, w: 800, h: 300,
+    style: { color: '#6366f1' }
+  },
+  table: {
+    content: 'Feature|Status|Owner\nItem 1|✓ Done|Team A\nItem 2|In Progress|Team B\nItem 3|Planned|Team C',
+    x: 60, y: 120, w: 840, h: 320,
+    style: { fontSize: '13px', color: '#334155' }
+  },
+  timeline: {
+    content: 'Phase 1|Foundation & launch\nPhase 2|Growth & expansion\nPhase 3|Scale & dominate',
+    x: 80, y: 120, w: 800, h: 340,
+    style: { color: '#6366f1', fontSize: '15px' }
+  },
+  image: {
+    content: 'Click to upload image',
+    x: 200, y: 120, w: 560, h: 320,
+    style: {}
+  },
+  logo: {
+    content: 'BRAND',
+    x: 40, y: 480, w: 200, h: 50,
+    style: { fontSize: '28px', color: '#94a3b8', letterSpacing: '4px', fontFamily: "'Bebas Neue'" }
+  },
+  btn: {
+    content: 'Click Me',
+    x: 200, y: 250, w: 160, h: 48,
+    style: {
+      background: 'linear-gradient(135deg, #6366f1, #4f46e5)',
+      color: '#ffffff',
+      fontSize: '14px',
+      fontFamily: "'Space Mono'",
+      fontWeight: '600',
+      padding: '12px 24px',
+      borderRadius: '9999px',
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      border: 'none',
+      cursor: 'pointer'
+    }
+  },
+  code: {
+    content: '// Your code here\nfunction hello() {\n  console.log("Hello World");\n}',
+    x: 80, y: 100, w: 800, h: 300,
+    style: {
+      fontFamily: "'Space Mono'",
+      fontSize: '14px',
+      color: '#e2e8f0',
+      background: '#1e293b',
+      padding: '20px',
+      borderRadius: '12px'
+    }
+  },
+  quote: {
+    content: 'Inspirational quote here|— Author',
+    x: 80, y: 150, w: 800, h: 160,
+    style: { fontSize: '22px', color: '#64748b', fontStyle: 'italic' }
+  },
+  counter: {
+    content: '1000|2000',
+    x: 200, y: 180, w: 560, h: 160,
+    style: { fontSize: '72px', color: '#6366f1', fontFamily: "'Bebas Neue'", textAlign: 'center' }
+  }
+};
+
+// Deck templates
+const DECK_TEMPLATES = [
+  {
+    name: 'Investor Pitch',
+    icon: '💰',
+    slides: [
+      {
+        name: 'Cover',
+        bg: 'linear-gradient(135deg, #ffffff, #f0f4ff)',
+        els: [
+          { t: 'heading', x: 80, y: 180, w: 800, h: 100, content: 'COMPANY NAME', style: { fontSize: '64px', color: '#1e293b', fontFamily: "'Bebas Neue'", letterSpacing: '4px' } },
+          { t: 'subheading', x: 80, y: 290, w: 600, h: 50, content: 'The future of [industry]. Seed Round 2026.', style: { fontSize: '20px', color: '#64748b' } },
+          { t: 'badge', x: 80, y: 360, w: 140, h: 36, content: 'SERIES A', style: { background: '#6366f1', color: '#fff', fontSize: '11px', fontFamily: "'Space Mono'", fontWeight: '700', padding: '6px 14px', borderRadius: '9999px' } }
+        ]
+      },
+      {
+        name: 'Problem',
+        bg: 'linear-gradient(135deg, #fef3c7, #fde68a)',
+        els: [
+          { t: 'heading', x: 60, y: 50, w: 500, h: 70, content: 'THE PROBLEM', style: { fontSize: '48px', color: '#1e293b', fontFamily: "'Bebas Neue'" } },
+          { t: 'stat', x: 60, y: 140, w: 200, h: 120, content: '$2.4T|Market inefficiency', style: { color: '#ec4899' } },
+          { t: 'stat', x: 300, y: 140, w: 200, h: 120, content: '68%|Abandonment rate', style: { color: '#f59e0b' } },
+          { t: 'stat', x: 540, y: 140, w: 200, h: 120, content: '3.2x|Higher costs', style: { color: '#6366f1' } },
+          { t: 'bullet', x: 60, y: 290, w: 840, h: 180, content: 'Current solutions are fragmented\nNo end-to-end platform\nEnterprises overspend 40%\n45% annual churn rate', style: { fontSize: '15px', color: '#334155', lineHeight: '1.8' } }
+        ]
+      },
+      {
+        name: 'Solution',
+        bg: 'linear-gradient(135deg, #d1fae5, #a7f3d0)',
+        els: [
+          { t: 'heading', x: 60, y: 50, w: 600, h: 70, content: 'OUR SOLUTION', style: { fontSize: '48px', color: '#1e293b', fontFamily: "'Bebas Neue'" } },
+          { t: 'subheading', x: 60, y: 130, w: 700, h: 50, content: 'One platform. Zero friction. 10x faster.', style: { fontSize: '20px', color: '#059669' } },
+          { t: 'bullet', x: 60, y: 200, w: 380, h: 220, content: 'Unified dashboard\nAI-powered automation\nReal-time collaboration\nEnterprise security', style: { fontSize: '15px', color: '#334155', lineHeight: '2' } },
+          { t: 'box', x: 480, y: 130, w: 420, h: 300, content: '[Product Screenshot]', style: { background: 'rgba(255,255,255,0.6)', border: '2px dashed #059669', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px', color: '#64748b' } }
+        ]
+      },
+      {
+        name: 'Traction',
+        bg: 'linear-gradient(135deg, #dbeafe, #bfdbfe)',
+        els: [
+          { t: 'heading', x: 60, y: 50, w: 600, h: 70, content: 'TRACTION', style: { fontSize: '48px', color: '#1e293b', fontFamily: "'Bebas Neue'" } },
+          { t: 'stat', x: 60, y: 140, w: 190, h: 120, content: '$1.2M|ARR', style: { color: '#1d4ed8' } },
+          { t: 'stat', x: 280, y: 140, w: 190, h: 120, content: '340|Customers', style: { color: '#059669' } },
+          { t: 'stat', x: 500, y: 140, w: 190, h: 120, content: '127%|NRR', style: { color: '#dc2626' } },
+          { t: 'stat', x: 720, y: 140, w: 180, h: 120, content: '4.9★|Rating', style: { color: '#f59e0b' } },
+          { t: 'chart', x: 60, y: 290, w: 840, h: 200, content: 'Jan:20|Feb:35|Mar:55|Apr:80|May:120|Jun:180', style: { color: '#1d4ed8' } }
+        ]
+      },
+      {
+        name: 'The Ask',
+        bg: 'linear-gradient(135deg, #e0e7ff, #c7d2fe)',
+        els: [
+          { t: 'heading', x: 60, y: 100, w: 840, h: 100, content: 'JOIN US', style: { fontSize: '72px', color: '#1e293b', fontFamily: "'Bebas Neue'", textAlign: 'center', letterSpacing: '8px' } },
+          { t: 'stat', x: 280, y: 220, w: 400, h: 120, content: '$3M|Seed Round', style: { color: '#6366f1', textAlign: 'center' } },
+          { t: 'bullet', x: 200, y: 360, w: 560, h: 140, content: '18-month runway\n3 enterprise contracts\nPath to $10M ARR by Q4 2027', style: { fontSize: '15px', color: '#334155', lineHeight: '2', textAlign: 'center' } },
+          { t: 'text', x: 300, y: 510, w: 360, h: 30, content: 'contact@company.com', style: { fontSize: '13px', color: '#64748b', textAlign: 'center', fontFamily: "'Space Mono'" } }
+        ]
+      }
+    ]
+  },
+  {
+    name: 'Product Launch',
+    icon: '🚀',
+    slides: [
+      {
+        name: 'Hero',
+        bg: 'linear-gradient(135deg, #0f172a, #1e293b)',
+        els: [
+          { t: 'badge', x: 80, y: 120, w: 100, h: 34, content: 'NEW', style: { background: '#ec4899', color: '#fff', fontSize: '10px', fontFamily: "'Space Mono'", fontWeight: '700', padding: '5px 12px', borderRadius: '9999px' } },
+          { t: 'heading', x: 80, y: 180, w: 800, h: 160, content: 'PRODUCT\nNAME', style: { fontSize: '80px', color: '#f1f5f9', fontFamily: "'Bebas Neue'", letterSpacing: '4px', lineHeight: '0.9' } },
+          { t: 'subheading', x: 80, y: 360, w: 580, h: 50, content: 'The tagline that explains your value.', style: { fontSize: '20px', color: '#94a3b8' } },
+          { t: 'btn', x: 80, y: 440, w: 160, h: 48, content: 'Get Started →', style: { background: 'linear-gradient(135deg, #ec4899, #db2777)', color: '#fff', fontSize: '13px', fontFamily: "'Space Mono'", fontWeight: '700', padding: '12px 24px', borderRadius: '9999px' } }
+        ]
+      }
+    ]
+  },
+  {
+    name: 'Company Update',
+    icon: '📊',
+    slides: [
+      {
+        name: 'Q Results',
+        bg: 'linear-gradient(135deg, #1e40af, #1d4ed8)',
+        els: [
+          { t: 'heading', x: 60, y: 40, w: 700, h: 70, content: 'Q4 2025 RESULTS', style: { fontSize: '48px', color: '#f1f5f9', fontFamily: "'Bebas Neue'" } },
+          { t: 'stat', x: 60, y: 130, w: 200, h: 120, content: '↑142%|Growth', style: { color: '#fbbf24' } },
+          { t: 'stat', x: 290, y: 130, w: 200, h: 120, content: '$8.4M|ARR', style: { color: '#f1f5f9' } },
+          { t: 'stat', x: 520, y: 130, w: 200, h: 120, content: '2,100|Customers', style: { color: '#6ee7b7' } },
+          { t: 'stat', x: 750, y: 130, w: 170, h: 120, content: '91%|Retention', style: { color: '#fbbf24' } }
+        ]
+      }
+    ]
+  },
+  {
+    name: 'Blank',
+    icon: '⬜',
+    slides: [
+      {
+        name: 'Slide 1',
+        bg: 'linear-gradient(135deg, #ffffff, #f8fafc)',
+        els: [
+          { t: 'heading', x: 80, y: 220, w: 800, h: 100, content: 'YOUR TITLE HERE', style: { fontSize: '56px', color: '#1e293b', fontFamily: "'Bebas Neue'", textAlign: 'center' } },
+          { t: 'subheading', x: 80, y: 340, w: 800, h: 50, content: 'Your subtitle or tagline goes here', style: { fontSize: '20px', color: '#64748b', textAlign: 'center' } }
+        ]
+      }
+    ]
+  }
+];
+
+// ═══════════════════════════════════════════════
+// INITIALIZATION
+// ═══════════════════════════════════════════════
+function initDeck() {
+  deck.slides = [{
+    name: 'Cover Slide',
+    bg: 'linear-gradient(135deg, #ffffff, #f0f4ff)',
+    els: []
+  }];
+  renderSlideList();
+  loadSlide(0);
+  saveHistory();
+}
+
+// ═══════════════════════════════════════════════
+// DECK OPERATIONS
+// ═══════════════════════════════════════════════
+function addSlide() {
+  deck.slides.push({
+    name: 'New Slide',
+    bg: 'linear-gradient(135deg, #ffffff, #f0f4ff)',
+    els: []
+  });
+  renderSlideList();
+  loadSlide(deck.slides.length - 1);
+  saveHistory();
+  toast('Slide added', '➕');
+}
+
+function duplicateSlide() {
+  const s = JSON.parse(JSON.stringify(deck.slides[deck.currentSlide]));
+  s.name += ' (copy)';
+  deck.slides.splice(deck.currentSlide + 1, 0, s);
+  renderSlideList();
+  loadSlide(deck.currentSlide + 1);
+  saveHistory();
+  toast('Slide duplicated', '⎘');
+}
+
+function deleteSlide(i, e) {
+  e.stopPropagation();
+  if (deck.slides.length <= 1) {
+    toast('Need at least 1 slide', '⚠️');
+    return;
+  }
+  deck.slides.splice(i, 1);
+  if (deck.currentSlide >= deck.slides.length) {
+    deck.currentSlide = deck.slides.length - 1;
+  }
+  renderSlideList();
+  loadSlide(deck.currentSlide);
+  saveHistory();
+  toast('Slide deleted', '🗑');
+}
+
+function prevSlide() {
+  if (deck.currentSlide > 0) {
+    loadSlide(deck.currentSlide - 1);
+  }
+}
+
+function nextSlide() {
+  if (deck.currentSlide < deck.slides.length - 1) {
+    loadSlide(deck.currentSlide + 1);
+  }
+}
+
+function moveSlideUp() {
+  const i = deck.currentSlide;
+  if (i === 0) return;
+  [deck.slides[i], deck.slides[i - 1]] = [deck.slides[i - 1], deck.slides[i]];
+  renderSlideList();
+  loadSlide(i - 1);
+  saveHistory();
+}
+
+function moveSlideDown() {
+  const i = deck.currentSlide;
+  if (i === deck.slides.length - 1) return;
+  [deck.slides[i], deck.slides[i + 1]] = [deck.slides[i + 1], deck.slides[i]];
+  renderSlideList();
+  loadSlide(i + 1);
+  saveHistory();
+}
+
+function loadSlide(idx) {
+  deck.currentSlide = idx;
+  selectedEl = null;
+  renderCanvas();
+  renderSlideList();
+  updateSlideCounter();
+  document.getElementById('el-props').style.display = 'none';
+  document.getElementById('bg-color').value = '#ffffff';
+  updateNavButtons();
+}
+
+function updateSlideCounter() {
+  document.getElementById('slide-counter').textContent = `${deck.currentSlide + 1} / ${deck.slides.length}`;
+}
+
+function updateNavButtons() {
+  document.getElementById('btn-prev').disabled = deck.currentSlide === 0;
+  document.getElementById('btn-next').disabled = deck.currentSlide === deck.slides.length - 1;
+  document.getElementById('btn-up').disabled = deck.currentSlide === 0;
+  document.getElementById('btn-down').disabled = deck.currentSlide === deck.slides.length - 1;
+}
+
+function renderSlideList() {
+  const list = document.getElementById('slide-list');
+  list.innerHTML = '';
+  deck.slides.forEach((s, i) => {
+    const d = document.createElement('div');
+    d.className = 'slide-thumb' + (i === deck.currentSlide ? ' active' : '');
+    d.innerHTML = `
+      <span class="slide-num">${i + 1}</span>
+      <span class="slide-name" contenteditable="true" onblur="renameSlide(${i}, this.textContent)">${escapeHTML(s.name)}</span>
+      <button class="del-slide" onclick="deleteSlide(${i}, event)">✕</button>
+    `;
+    d.onclick = (e) => {
+      if (e.target.contentEditable !== 'true' && e.target.className !== 'del-slide') {
+        loadSlide(i);
+      }
+    };
+    list.appendChild(d);
+  });
+}
+
+function renameSlide(i, name) {
+  deck.slides[i].name = name.trim() || 'Slide ' + (i + 1);
+}
+
+// ═══════════════════════════════════════════════
+// CANVAS RENDERING
+// ═══════════════════════════════════════════════
+function renderCanvas() {
+  const canvas = document.getElementById('slide-canvas');
+  const s = deck.slides[deck.currentSlide];
+  canvas.style.background = s.bg || '#ffffff';
+  canvas.style.width = deck.size.w + 'px';
+  canvas.style.height = deck.size.h + 'px';
+  canvas.innerHTML = '';
+  (s.els || []).forEach((el, i) => {
+    el._idx = i; // Ensure index is set
+    canvas.appendChild(buildEl(el, i));
+  });
+}
+
+function buildEl(el, idx) {
+  const wrap = document.createElement('div');
+  wrap.className = 'canvas-element';
+  wrap.dataset.idx = idx;
+  wrap.style.left = el.x + 'px';
+  wrap.style.top = el.y + 'px';
+  wrap.style.width = el.w + 'px';
+  wrap.style.height = el.h + 'px';
+  wrap.style.zIndex = el.style?.zIndex || 1;
+
+  // Toolbar
+  const tb = document.createElement('div');
+  tb.className = 'el-toolbar';
+  tb.innerHTML = `
+    <button class="el-btn" onclick="dupEl(${idx})" title="Duplicate">⎘</button>
+    <button class="el-btn danger" onclick="delEl(${idx})" title="Delete">✕</button>
+    <button class="el-btn" onclick="bringFront(${idx})" title="Bring Forward">↑</button>
+    <button class="el-btn" onclick="sendBack(${idx})" title="Send Backward">↓</button>
+  `;
+  wrap.appendChild(tb);
+
+  // Inner content
+  const inner = document.createElement('div');
+  inner.style.cssText = styleObjToStr(el.style || {});
+  inner.style.width = '100%';
+  inner.style.height = '100%';
+  inner.style.overflow = 'hidden';
+  inner.innerHTML = renderElContent(el);
+  wrap.appendChild(inner);
+
+  // Resize handle
+  const rh = document.createElement('div');
+  rh.className = 'resize-handle';
+  wrap.appendChild(rh);
+
+  // Drag functionality - Using Pointer Events (2026 best practice)
+  wrap.addEventListener('pointerdown', (e) => {
+    // Don't drag if clicking on resize handle or toolbar
+    if (e.target === rh || e.target.closest('.el-toolbar')) return;
+    e.preventDefault();
+    
+    // Capture pointer for reliable tracking (prevents losing drag on fast movements)
+    wrap.setPointerCapture(e.pointerId);
+    
+    // Direct DOM updates - DO NOT call selectEl() or renderCanvas() here
+    // as that would rebuild the DOM and break the drag
+    document.querySelectorAll('.canvas-element').forEach(el => el.classList.remove('selected'));
+    document.querySelectorAll('.el-toolbar').forEach(t => t.classList.remove('show'));
+    wrap.classList.add('selected');
+    tb.classList.add('show');
+    selectedEl = idx;
+    updatePropsPanel(idx);
+
+    const canvas = document.getElementById('slide-canvas');
+    const rect = canvas.getBoundingClientRect();
+    const startX = e.clientX;
+    const startY = e.clientY;
+    const ox = el.x;
+    const oy = el.y;
+
+    const move = (ev) => {
+      ev.preventDefault();
+      // Calculate position relative to canvas, accounting for zoom
+      const dx = (ev.clientX - startX) / zoom;
+      const dy = (ev.clientY - startY) / zoom;
+      // Constrain to canvas bounds
+      el.x = Math.max(0, Math.min(deck.size.w - el.w, Math.round(ox + dx)));
+      el.y = Math.max(0, Math.min(deck.size.h - el.h, Math.round(oy + dy)));
+      wrap.style.left = el.x + 'px';
+      wrap.style.top = el.y + 'px';
+    };
+
+    const up = (ev) => {
+      wrap.releasePointerCapture(e.pointerId);
+      wrap.removeEventListener('pointermove', move);
+      wrap.removeEventListener('pointerup', up);
+      saveHistory();
+    };
+
+    wrap.addEventListener('pointermove', move);
+    wrap.addEventListener('pointerup', up);
+  });
+
+  // Resize functionality - Using Pointer Events
+  rh.addEventListener('pointerdown', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    rh.setPointerCapture(e.pointerId);
+    
+    // Select the element without re-rendering
+    document.querySelectorAll('.canvas-element').forEach(el => el.classList.remove('selected'));
+    document.querySelectorAll('.el-toolbar').forEach(t => t.classList.remove('show'));
+    wrap.classList.add('selected');
+    tb.classList.add('show');
+    selectedEl = idx;
+    updatePropsPanel(idx);
+
+    const startX = e.clientX;
+    const startY = e.clientY;
+    const ow = el.w;
+    const oh = el.h;
+
+    const move = (ev) => {
+      ev.preventDefault();
+      el.w = Math.max(40, Math.round(ow + (ev.clientX - startX) / zoom));
+      el.h = Math.max(20, Math.round(oh + (ev.clientY - startY) / zoom));
+      wrap.style.width = el.w + 'px';
+      wrap.style.height = el.h + 'px';
+      inner.innerHTML = renderElContent(el);
+    };
+
+    const up = (ev) => {
+      rh.releasePointerCapture(e.pointerId);
+      rh.removeEventListener('pointermove', move);
+      rh.removeEventListener('pointerup', up);
+      saveHistory();
+    };
+
+    rh.addEventListener('pointermove', move);
+    rh.addEventListener('pointerup', up);
+  });
+
+  if (selectedEl === idx) {
+    wrap.classList.add('selected');
+    tb.classList.add('show');
+  }
+
+  return wrap;
+}
+
+function renderElContent(el) {
+  const c = el.content || '';
+  const idx = el._idx; // Use element's stored index
+  switch (el.t) {
+    case 'heading':
+      return `<div class="el-heading" style="font-size:inherit;color:inherit;font-family:inherit;text-align:inherit;white-space:pre-line">${escapeHTML(c)}</div>`;
+    case 'subheading':
+      return `<div class="el-subheading" style="font-size:inherit;color:inherit;font-family:inherit;text-align:inherit">${escapeHTML(c)}</div>`;
+    case 'text':
+      return `<div class="el-text" style="font-size:inherit;color:inherit;text-align:inherit;white-space:pre-wrap">${escapeHTML(c)}</div>`;
+    case 'bullet': {
+      const items = c.split('\n').filter(Boolean);
+      return `<ul class="el-bullet" style="color:inherit;font-size:inherit;list-style:none;padding:0">${items.map(i => `<li style="margin-bottom:6px">▸ ${escapeHTML(i)}</li>`).join('')}</ul>`;
+    }
+    case 'stat': {
+      const [num, lbl] = (c + '|').split('|');
+      return `<div class="el-stat"><div class="stat-num" style="color:inherit;font-size:${el.style?.fontSize || '64px'}">${escapeHTML(num)}</div><div class="stat-label">${escapeHTML(lbl || '')}</div></div>`;
+    }
+    case 'badge':
+      return `<span class="el-badge" style="background:inherit;color:inherit;font-size:inherit;padding:inherit">${escapeHTML(c)}</span>`;
+    case 'divider':
+      return `<hr class="el-divider">`;
+    case 'box':
+      return `<div class="el-box" style="width:100%;height:100%;font-size:inherit;color:inherit;white-space:pre-line;overflow:auto">${escapeHTML(c)}</div>`;
+    case 'progress': {
+      const [pct, lbl] = (c + '|').split('|');
+      const p = parseInt(pct) || 50;
+      return `<div style="padding:4px"><div style="font-size:11px;color:inherit;margin-bottom:6px;font-family:'Space Mono'">${escapeHTML(lbl || 'Progress')} ${p}%</div><div class="el-progress" style="height:${el.h > 60 ? '20px' : '10px'}"><div class="progress-bar" style="width:${p}%;background:${el.style?.color || 'var(--accent)'}"></div></div></div>`;
+    }
+    case 'chart': {
+      const pairs = c.split('|').map(p => p.split(':'));
+      const max = Math.max(...pairs.map(p => +p[1] || 0), 1);
+      return `<div class="el-chart-bar">${pairs.map(([l, v]) => `<div class="bar-col"><div class="bar-fill" style="height:${Math.round((+v / max) * 100)}%;background:${el.style?.color || 'var(--accent)'}"></div><div class="bar-lbl" style="color:inherit">${escapeHTML(l)}</div></div>`).join('')}</div>`;
+    }
+    case 'table': {
+      const rows = c.split('\n').filter(Boolean);
+      if (!rows.length) return '<table class="el-table"></table>';
+      const headers = rows[0].split('|');
+      const body = rows.slice(1);
+      return `<table class="el-table"><thead><tr>${headers.map(h => `<th>${escapeHTML(h)}</th>`).join('')}</tr></thead><tbody>${body.map(r => `<tr>${r.split('|').map(cell => `<td>${escapeHTML(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+    }
+    case 'timeline': {
+      const items = c.split('\n').filter(Boolean);
+      return `<div class="el-timeline">${items.map((item, i, arr) => {
+        const parts = item.split('|');
+        const hasLine = i < arr.length - 1 ? '<div class="tl-line"></div>' : '';
+        return `<div class="tl-item">${hasLine}<div class="tl-dot" style="background:${el.style?.color || 'var(--accent)'}"></div><div><div style="font-weight:600;font-size:${el.style?.fontSize || '15px'};color:${el.style?.color || '#1e293b'};font-family:'Space Mono'">${escapeHTML(parts[0] || '')}</div><div style="font-size:13px;color:#64748b;margin-top:2px">${escapeHTML(parts[1] || '')}</div></div></div>`;
+      }).join('')}</div>`;
+    }
+    case 'image': {
+      if (el.imageData) {
+        return `<img src="${el.imageData}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit" alt="${escapeHTML(c || 'Image')}">`;
+      }
+      const slideIdx = deck.currentSlide;
+      const elemIdx = el._idx !== undefined ? el._idx : idx;
+      return `<div class="el-image-placeholder">
+        <span style="font-size:36px">🖼</span>
+        <span>${escapeHTML(c || 'Click to add image')}</span>
+        <input type="file" accept="image/*" style="display:none" onchange="loadImg(event, ${slideIdx}, ${elemIdx})" id="img-upload-${elemIdx}">
+        <button onclick="document.getElementById('img-upload-${elemIdx}').click()" class="btn btn-primary">Upload Image</button>
+      </div>`;
+    }
+    case 'code': {
+      return `<pre class="el-code" style="width:100%;height:100%;overflow:auto;font-family:'Space Mono';font-size:inherit;color:inherit;background:inherit;padding:inherit;border-radius:inherit;white-space:pre-wrap;word-wrap:break-word"><code>${escapeHTML(c || '')}</code></pre>`;
+    }
+    case 'quote': {
+      const [quoteText, quoteAuthor] = (c + '|').split('|');
+      return `<div class="el-quote">"${escapeHTML(quoteText || 'Quote text here')}"<div class="el-quote-author">${escapeHTML(quoteAuthor || '— Author')}</div></div>`;
+    }
+    case 'counter': {
+      const [targetVal, dur] = (c + '|').split('|');
+      return `<div class="el-counter" data-target="${targetVal || 1000}" data-duration="${dur || 2000}" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:inherit;color:inherit;font-family:inherit">${targetVal || 1000}</div>`;
+    }
+    case 'btn': {
+      return `<button style="width:100%;height:100%;border:none;cursor:pointer;font-size:inherit;color:inherit;background:inherit;font-family:inherit;font-weight:inherit;padding:inherit;border-radius:inherit;display:flex;align-items:center;justify-content:center">${escapeHTML(c)}</button>`;
+    }
+    case 'logo':
+      return `<div style="font-family:'Bebas Neue';font-size:inherit;color:inherit;letter-spacing:3px;text-align:inherit">${escapeHTML(c)}</div>`;
+    default:
+      return `<div style="color:inherit;font-size:inherit">${escapeHTML(c)}</div>`;
+  }
+}
+
+function styleObjToStr(s) {
+  return Object.entries(s)
+    .map(([k, v]) => `${k.replace(/([A-Z])/g, '-$1').toLowerCase()}:${v}`)
+    .join(';');
+}
+
+// ═══════════════════════════════════════════════
+// ELEMENT OPERATIONS
+// ═══════════════════════════════════════════════
+function addElement(type) {
+  const def = JSON.parse(JSON.stringify(EL_DEFAULTS[type] || { content: '', x: 100, y: 100, w: 200, h: 80, style: {} }));
+  def.t = type;
+  const s = deck.slides[deck.currentSlide];
+  def._idx = s.els.length;
+  s.els.push(def);
+  renderCanvas();
+  selectEl(s.els.length - 1);
+  saveHistory();
+  toast(type + ' added', '➕');
+}
+
+function dupEl(idx) {
+  const s = deck.slides[deck.currentSlide];
+  const copy = JSON.parse(JSON.stringify(s.els[idx]));
+  copy.x += 20;
+  copy.y += 20;
+  copy._idx = s.els.length;
+  s.els.push(copy);
+  renderCanvas();
+  selectEl(s.els.length - 1);
+  saveHistory();
+  toast('Element duplicated', '⎘');
+}
+
+function delEl(idx) {
+  if (idx === null) return;
+  const s = deck.slides[deck.currentSlide];
+  s.els.splice(idx, 1);
+  selectedEl = null;
+  renderCanvas();
+  document.getElementById('el-props').style.display = 'none';
+  saveHistory();
+  toast('Element deleted', '🗑');
+}
+
+function bringFront(idx) {
+  const s = deck.slides[deck.currentSlide];
+  const el = s.els[idx];
+  el.style = el.style || {};
+  const maxZ = Math.max(...s.els.map(e => parseInt(e.style?.zIndex || 1)));
+  el.style.zIndex = maxZ + 1;
+  renderCanvas();
+  selectEl(idx);
+}
+
+function sendBack(idx) {
+  const s = deck.slides[deck.currentSlide];
+  const el = s.els[idx];
+  el.style = el.style || {};
+  el.style.zIndex = Math.max(0, (parseInt(el.style.zIndex || 1)) - 1);
+  renderCanvas();
+  selectEl(idx);
+}
+
+// Update props panel without re-rendering canvas (called during drag)
+function updatePropsPanel(idx) {
+  const s = deck.slides[deck.currentSlide];
+  const el = s.els[idx];
+  if (!el) return;
+
+  const ep = document.getElementById('el-props');
+  ep.style.display = 'block';
+  document.getElementById('el-content').value = el.content || '';
+  document.getElementById('el-color').value = rgbToHex(el.style?.color) || '#1e293b';
+  document.getElementById('el-fontsize').value = parseInt(el.style?.fontSize) || 16;
+  document.getElementById('el-align').value = el.style?.textAlign || 'left';
+  document.getElementById('el-opacity').value = Math.round((parseFloat(el.style?.opacity) || 1) * 100);
+  document.getElementById('el-opacity-val').textContent = document.getElementById('el-opacity').value + '%';
+  document.getElementById('el-radius').value = parseInt(el.style?.borderRadius) || 0;
+  document.getElementById('el-z').value = parseInt(el.style?.zIndex) || 1;
+
+  // Parse border
+  const border = el.style?.border || '';
+  const borderMatch = border.match(/(\d+)px\s+solid\s+(.+)/);
+  if (borderMatch) {
+    document.getElementById('el-border-w').value = borderMatch[1];
+    document.getElementById('el-border-color').value = borderMatch[2];
+  }
+  
+  // Update bold/italic checkboxes
+  document.getElementById('el-bold').checked = el.style?.fontWeight === '700' || el.style?.fontWeight === 'bold';
+  document.getElementById('el-italic').checked = el.style?.fontStyle === 'italic';
+}
+
+function selectEl(idx) {
+  selectedEl = idx;
+  renderCanvas();
+  updatePropsPanel(idx);
+}
+
+function deselectAll(e) {
+  if (e.target === document.getElementById('slide-canvas')) {
+    selectedEl = null;
+    renderCanvas();
+    document.getElementById('el-props').style.display = 'none';
+  }
+}
+
+function updateElContent() {
+  if (selectedEl === null) return;
+  const el = deck.slides[deck.currentSlide].els[selectedEl];
+  el.content = document.getElementById('el-content').value;
+  const wrap = document.querySelector(`[data-idx="${selectedEl}"]`);
+  if (wrap) {
+    const inner = wrap.children[1];
+    if (inner) inner.innerHTML = renderElContent(el);
+  }
+}
+
+function updateElStyle(prop, val) {
+  if (selectedEl === null) return;
+  const el = deck.slides[deck.currentSlide].els[selectedEl];
+  el.style = el.style || {};
+  el.style[prop] = val;
+  const wrap = document.querySelector(`[data-idx="${selectedEl}"]`);
+  if (wrap) {
+    const inner = wrap.children[1];
+    if (inner) {
+      inner.style[prop] = val;
+      if (prop === 'opacity') {
+        document.getElementById('el-opacity-val').textContent = Math.round(parseFloat(val) * 100) + '%';
+      }
+    }
+  }
+}
+
+function updateElBorder() {
+  const color = document.getElementById('el-border-color').value;
+  const w = document.getElementById('el-border-w').value;
+  updateElStyle('border', `${w}px solid ${color}`);
+}
+
+function updateElZ(val) {
+  if (selectedEl === null) return;
+  const el = deck.slides[deck.currentSlide].els[selectedEl];
+  el.style = el.style || {};
+  el.style.zIndex = parseInt(val) || 1;
+  const wrap = document.querySelector(`[data-idx="${selectedEl}"]`);
+  if (wrap) wrap.style.zIndex = el.style.zIndex;
+}
+
+// ═══════════════════════════════════════════════
+// SLIDE BACKGROUND
+// ═══════════════════════════════════════════════
+function updateSlideBg() {
+  const type = document.getElementById('bg-type').value;
+  const c1 = document.getElementById('bg-color').value;
+  const c2 = document.getElementById('bg-color2').value;
+  let bg = '';
+  if (type === 'solid') bg = c1;
+  else if (type === 'gradient') bg = `linear-gradient(135deg,${c1},${c2})`;
+  else if (type === 'mesh') bg = `radial-gradient(at 20% 30%,${c1} 0px,transparent 50%),radial-gradient(at 80% 80%,${c2} 0px,transparent 50%),#f8fafc`;
+  else if (type === 'pattern') bg = `repeating-linear-gradient(45deg,${c1} 0,${c1} 1px,transparent 0,transparent 50%)`;
+  deck.slides[deck.currentSlide].bg = bg;
+  document.getElementById('slide-canvas').style.background = bg;
+}
+
+function setPresetBg(c1, c2, type) {
+  document.getElementById('bg-color').value = c1;
+  document.getElementById('bg-color2').value = c2 || c1;
+  document.getElementById('bg-type').value = type;
+  updateSlideBg();
+}
+
+// ═══════════════════════════════════════════════
+// THEMES
+// ═══════════════════════════════════════════════
+function applyTheme(name) {
+  document.querySelectorAll('.theme-card').forEach(c => c.classList.remove('active'));
+  document.getElementById('theme-' + name)?.classList.add('active');
+  const t = THEMES[name];
+  if (!t) return;
+  deck.slides[deck.currentSlide].bg = t.bg;
+  document.getElementById('slide-canvas').style.background = t.bg;
+  deck.slides[deck.currentSlide].els.forEach(el => {
+    if (['heading', 'subheading', 'text', 'bullet'].includes(el.t)) {
+      el.style = el.style || {};
+      if (!el.style.color || el.style.color === '#ffffff' || el.style.color === '#1e293b') {
+        el.style.color = t.textColor;
+      }
+    }
+  });
+  renderCanvas();
+  saveHistory();
+  toast('Theme applied: ' + name, '🎨');
+}
+
+// ═══════════════════════════════════════════════
+// SLIDE SIZE
+// ═══════════════════════════════════════════════
+document.getElementById('slide-size-select').onchange = function() {
+  const [w, h] = this.value.split('x').map(Number);
+  deck.size = { w, h };
+  document.getElementById('slide-canvas').style.width = w + 'px';
+  document.getElementById('slide-canvas').style.height = h + 'px';
+};
+
+// ═══════════════════════════════════════════════
+// ZOOM
+// ═══════════════════════════════════════════════
+function setZoom(val) {
+  zoom = val / 100;
+  const canvas = document.getElementById('slide-canvas');
+  canvas.style.transform = `scale(${zoom})`;
+  canvas.style.transformOrigin = 'top center';
+  document.getElementById('zoom-val').textContent = val + '%';
+}
+
+// ═══════════════════════════════════════════════
+// TEMPLATES
+// ═══════════════════════════════════════════════
+function showDeckTemplates() {
+  const grid = document.getElementById('deck-tpl-grid');
+  grid.innerHTML = '';
+  DECK_TEMPLATES.forEach((t, i) => {
+    const card = document.createElement('div');
+    card.style.cssText = 'border:2px solid var(--border);padding:20px;border-radius:16px;cursor:pointer;background:var(--card);transition:var(--transition);text-align:center;box-shadow:var(--shadow-sm);';
+    card.innerHTML = `
+      <div style="font-size:40px;margin-bottom:10px">${t.icon}</div>
+      <div style="font-family:'Bebas Neue';font-size:18px;letter-spacing:1px;margin-bottom:6px;color:var(--text)">${t.name}</div>
+      <div style="font-size:11px;color:var(--text-muted);font-family:'Space Mono'">${t.slides.length} slides</div>
+    `;
+    card.onmouseenter = () => {
+      card.style.borderColor = 'var(--accent)';
+      card.style.transform = 'translateY(-4px)';
+      card.style.boxShadow = 'var(--shadow-lg)';
+    };
+    card.onmouseleave = () => {
+      card.style.borderColor = 'var(--border)';
+      card.style.transform = 'translateY(0)';
+      card.style.boxShadow = 'var(--shadow-sm)';
+    };
+    card.onclick = () => {
+      loadTemplate(i);
+      closeModal('templates-modal');
+    };
+    grid.appendChild(card);
+  });
+  document.getElementById('templates-modal').classList.add('show');
+}
+
+function loadTemplate(i) {
+  const tpl = DECK_TEMPLATES[i];
+  deck.slides = JSON.parse(JSON.stringify(tpl.slides));
+  deck.currentSlide = 0;
+  renderSlideList();
+  loadSlide(0);
+  document.getElementById('deck-title-input').value = tpl.name.toUpperCase();
+  saveHistory();
+  toast('Template loaded: ' + tpl.name, '📦');
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('show');
+}
+
+// ═══════════════════════════════════════════════
+// PRESENTATION MODE
+// ═══════════════════════════════════════════════
+function presentMode() {
+  presentIdx = deck.currentSlide;
+  renderPresentSlide();
+  document.getElementById('present-overlay').classList.add('show');
+}
+
+function renderPresentSlide() {
+  const s = deck.slides[presentIdx];
+  const ps = document.getElementById('present-slide');
+  const vw = window.innerWidth, vh = window.innerHeight;
+  const scale = Math.min((vw - 40) / deck.size.w, (vh - 80) / deck.size.h);
+  ps.style.width = deck.size.w + 'px';
+  ps.style.height = deck.size.h + 'px';
+  ps.style.transform = `scale(${scale})`;
+  ps.style.transformOrigin = 'center center';
+  ps.style.background = s.bg || '#ffffff';
+  ps.style.position = 'relative';
+  ps.style.overflow = 'hidden';
+  ps.innerHTML = '';
+  (s.els || []).forEach(el => {
+    const div = document.createElement('div');
+    div.style.position = 'absolute';
+    div.style.left = el.x + 'px';
+    div.style.top = el.y + 'px';
+    div.style.width = el.w + 'px';
+    div.style.height = el.h + 'px';
+    div.style.zIndex = el.style?.zIndex || 1;
+    div.style.cssText += styleObjToStr(el.style || {});
+    div.innerHTML = renderElContent(el);
+    ps.appendChild(div);
+  });
+  document.getElementById('present-counter').textContent = `${presentIdx + 1} / ${deck.slides.length}`;
+}
+
+function presentPrev() {
+  if (presentIdx > 0) {
+    presentIdx--;
+    renderPresentSlide();
+  }
+}
+
+function presentNext() {
+  if (presentIdx < deck.slides.length - 1) {
+    presentIdx++;
+    renderPresentSlide();
+  }
+}
+
+function exitPresent() {
+  document.getElementById('present-overlay').classList.remove('show');
+}
+
+document.addEventListener('keydown', (e) => {
+  if (!document.getElementById('present-overlay').classList.contains('show')) return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') presentNext();
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') presentPrev();
+  if (e.key === 'Escape') exitPresent();
+});
+
+// ═══════════════════════════════════════════════
+// IMAGE HANDLING - FIXED
+// ═══════════════════════════════════════════════
+function loadImg(event, slideIdx, elIdx) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const img = new Image();
+    img.onload = function() {
+      processImage(img, file.type, slideIdx, elIdx);
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function processImage(img, originalType, slideIdx, elIdx) {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+
+  // Calculate dimensions (max 1920px for performance)
+  const maxW = 1920;
+  let w = img.width, h = img.height;
+  if (w > maxW) {
+    h = Math.round(h * maxW / w);
+    w = maxW;
+  }
+  canvas.width = w;
+  canvas.height = h;
+
+  // Apply transforms
+  ctx.save();
+  ctx.translate(w / 2, h / 2);
+  ctx.rotate((imageEditorState.rotation || 0) * Math.PI / 180);
+  ctx.scale(imageEditorState.flipX || 1, imageEditorState.flipY || 1);
+  ctx.translate(-w / 2, -h / 2);
+  ctx.drawImage(img, 0, 0, w, h);
+  ctx.restore();
+
+  // Convert to WebP with quality setting
+  const quality = imageEditorState.quality || 0.85;
+  const dataUrl = canvas.toDataURL('image/webp', quality);
+
+  // Store in element - using stored indices
+  if (deck.slides[slideIdx] && deck.slides[slideIdx].els[elIdx]) {
+    const el = deck.slides[slideIdx].els[elIdx];
+    el.imageData = dataUrl;
+    el.imageMeta = {
+      originalWidth: img.width,
+      originalHeight: img.height,
+      processedWidth: w,
+      processedHeight: h,
+      quality: quality
+    };
+    renderCanvas();
+    toast('Image loaded & optimized!', '🖼️');
+  }
+}
+
+// Drag and drop image support - FIXED
+function setupDragDrop() {
+  const canvas = document.getElementById('slide-canvas');
+
+  canvas.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'copy';
+    canvas.style.outline = '3px dashed var(--accent)';
+    canvas.style.outlineOffset = '4px';
+  });
+
+  canvas.addEventListener('dragleave', (e) => {
+    if (e.target === canvas) {
+      canvas.style.outline = '';
+    }
+  });
+
+  canvas.addEventListener('drop', (e) => {
+    e.preventDefault();
+    canvas.style.outline = '';
+
+    const files = e.dataTransfer.files;
+    if (files.length && files[0].type.startsWith('image/')) {
+      const file = files[0];
+      const rect = canvas.getBoundingClientRect();
+      const x = Math.round((e.clientX - rect.left) / zoom);
+      const y = Math.round((e.clientY - rect.top) / zoom);
+
+      // Create new image element
+      const def = JSON.parse(JSON.stringify(EL_DEFAULTS.image));
+      def.t = 'image';
+      def.x = x;
+      def.y = y;
+      const s = deck.slides[deck.currentSlide];
+      const newIdx = s.els.length;
+      def._idx = newIdx;
+      s.els.push(def);
+
+      // Load image
+      const reader = new FileReader();
+      reader.onload = function(ev) {
+        const img = new Image();
+        img.onload = function() {
+          const procCanvas = document.createElement('canvas');
+          const ctx = procCanvas.getContext('2d');
+          let w = img.width, h = img.height;
+          const maxW = 1920;
+          if (w > maxW) {
+            h = Math.round(h * maxW / w);
+            w = maxW;
+          }
+          procCanvas.width = w;
+          procCanvas.height = h;
+          ctx.drawImage(img, 0, 0, w, h);
+          const dataUrl = procCanvas.toDataURL('image/webp', 0.85);
+          def.imageData = dataUrl;
+          def.w = Math.min(w, deck.size.w - x - 40);
+          def.h = Math.round(def.w * (h / w));
+          def.imageMeta = {
+            originalWidth: img.width,
+            originalHeight: img.height,
+            processedWidth: w,
+            processedHeight: h
+          };
+          renderCanvas();
+          selectEl(newIdx);
+          saveHistory();
+          toast('Image dropped & added!', '🖼️');
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+}
+
+// ═══════════════════════════════════════════════
+// UNDO/REDO
+// ═══════════════════════════════════════════════
+function saveHistory() {
+  if (historyIndex < historyStack.length - 1) {
+    historyStack = historyStack.slice(0, historyIndex + 1);
+  }
+  const state = JSON.stringify(deck);
+  historyStack.push(state);
+  if (historyStack.length > MAX_HISTORY) {
+    historyStack.shift();
+  } else {
+    historyIndex++;
+  }
+  triggerAutoSave();
+}
+
+function undo() {
+  if (historyIndex > 0) {
+    historyIndex--;
+    deck = JSON.parse(historyStack[historyIndex]);
+    renderSlideList();
+    loadSlide(Math.min(deck.currentSlide, deck.slides.length - 1));
+    toast('Undo', '↩️');
+  }
+}
+
+function redo() {
+  if (historyIndex < historyStack.length - 1) {
+    historyIndex++;
+    deck = JSON.parse(historyStack[historyIndex]);
+    renderSlideList();
+    loadSlide(deck.currentSlide);
+    toast('Redo', '↪️');
+  }
+}
+
+// ═══════════════════════════════════════════════
+// AUTO-SAVE
+// ═══════════════════════════════════════════════
+function triggerAutoSave() {
+  clearTimeout(autoSaveTimer);
+  autoSaveTimer = setTimeout(() => {
+    saveToLocalStorage();
+  }, 2000);
+}
+
+function saveToLocalStorage() {
+  try {
+    const data = JSON.stringify(deck);
+    localStorage.setItem('deckforge_autosave', data);
+    localStorage.setItem('deckforge_autosave_time', Date.now().toString());
+  } catch (e) {
+    console.warn('Auto-save failed:', e);
+  }
+}
+
+function loadFromLocalStorage() {
+  try {
+    const data = localStorage.getItem('deckforge_autosave');
+    if (data) {
+      deck = JSON.parse(data);
+      renderSlideList();
+      loadSlide(0);
+      toast('Auto-saved deck restored!', '💾');
+      return true;
+    }
+  } catch (e) {
+    console.warn('Failed to load auto-save:', e);
+  }
+  return false;
+}
+
+// ═══════════════════════════════════════════════
+// KEYBOARD SHORTCUTS
+// ═══════════════════════════════════════════════
+document.addEventListener('keydown', (e) => {
+  // Skip if in input/textarea
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.contentEditable === 'true') return;
+
+  // Undo: Ctrl+Z
+  if (e.ctrlKey && e.key === 'z' && !e.shiftKey) {
+    e.preventDefault();
+    undo();
+  }
+  // Redo: Ctrl+Shift+Z or Ctrl+Y
+  if ((e.ctrlKey && e.shiftKey && e.key === 'z') || (e.ctrlKey && e.key === 'y')) {
+    e.preventDefault();
+    redo();
+  }
+  // Delete selected element
+  if ((e.key === 'Delete' || e.key === 'Backspace') && selectedEl !== null) {
+    e.preventDefault();
+    delEl(selectedEl);
+  }
+  // Duplicate: Ctrl+D
+  if (e.ctrlKey && e.key === 'd' && selectedEl !== null) {
+    e.preventDefault();
+    dupEl(selectedEl);
+  }
+  // New slide: Ctrl+N
+  if (e.ctrlKey && e.key === 'n') {
+    e.preventDefault();
+    addSlide();
+  }
+  // Present: F5
+  if (e.key === 'F5') {
+    e.preventDefault();
+    presentMode();
+  }
+  // Save: Ctrl+S
+  if (e.ctrlKey && e.key === 's') {
+    e.preventDefault();
+    exportJSON();
+  }
+});
+
+// ═══════════════════════════════════════════════
+// EXPORT/IMPORT
+// ═══════════════════════════════════════════════
+function exportJSON() {
+  const data = JSON.stringify({ title: deck.title, size: deck.size, slides: deck.slides }, null, 2);
+  download(data, 'deck.json', 'application/json');
+  toast('JSON exported', '📥');
+}
+
+function importJSON() {
+  const inp = document.createElement('input');
+  inp.type = 'file';
+  inp.accept = '.json';
+  inp.onchange = (e) => {
+    const fr = new FileReader();
+    fr.onload = (ev) => {
+      try {
+        const d = JSON.parse(ev.target.result);
+        deck.slides = d.slides || [];
+        deck.size = d.size || { w: 960, h: 540 };
+        deck.title = d.title || 'Imported';
+        document.getElementById('deck-title-input').value = deck.title;
+        deck.currentSlide = 0;
+        renderSlideList();
+        loadSlide(0);
+        saveHistory();
+        toast('Deck imported!', '📤');
+      } catch (err) {
+        toast('Invalid JSON file', '⚠️');
+      }
+    };
+    fr.readAsText(e.target.files[0]);
+  };
+  inp.click();
+}
+
+function exportHTML() {
+  let slidesHTML = '';
+  deck.slides.forEach((s, si) => {
+    let elsHTML = '';
+    (s.els || []).forEach(el => {
+      const st = styleObjToStr(el.style || {});
+      elsHTML += `<div style="position:absolute;left:${el.x}px;top:${el.y}px;width:${el.w}px;height:${el.h}px;${st}">${renderElContent(el)}</div>`;
+    });
+    slidesHTML += `<div class="slide" id="slide-${si}" style="display:${si === 0 ? 'flex' : 'none'};position:relative;width:${deck.size.w}px;height:${deck.size.h}px;background:${s.bg || '#ffffff'};overflow:hidden;border-radius:12px">${elsHTML}</div>`;
+  });
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>${escapeHTML(deck.title || 'Presentation')}</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400,700&family=Inter:wght@300,400,500,600,700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#f8fafc;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;font-family:'Inter',sans-serif}
+.slide-wrap{position:relative}
+.slide{border-radius:16px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25)}
+.controls{display:flex;gap:12px;margin-top:24px;align-items:center;background:white;padding:12px 24px;border-radius:9999px;box-shadow:0 10px 15px -3px rgba(0,0,0,0.1)}
+.controls button{background:#f1f5f9;border:1px solid #e2e8f0;color:#334155;padding:10px 20px;cursor:pointer;border-radius:9999px;font-family:'Space Mono';font-size:13px;font-weight:500;transition:0.2s}
+.controls button:hover{background:#6366f1;border-color:#6366f1;color:white;transform:translateY(-2px)}
+#counter{font-family:'Space Mono';font-size:13px;color:#64748b;font-weight:600}
+.el-stat .stat-num{font-family:'Bebas Neue';font-size:64px;line-height:1;display:block;background:linear-gradient(135deg,#6366f1,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.el-stat .stat-label{font-size:12px;color:#64748b;font-family:'Space Mono';text-transform:uppercase;letter-spacing:2px}
+.el-bullet ul{list-style:none;padding:0}
+.el-bullet li{margin-bottom:8px;color:#334155}
+.el-bullet li::before{content:'▸ ';color:#6366f1;font-weight:600}
+.el-chart-bar{display:flex;align-items:flex-end;gap:8px;height:100%;padding:12px}
+.el-chart-bar .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px}
+.el-chart-bar .bar-fill{width:100%;border-radius:8px 8px 0 0;background:linear-gradient(180deg,#6366f1,#4f46e5)}
+.el-chart-bar .bar-lbl{font-size:10px;color:#64748b;font-family:'Space Mono';font-weight:500}
+.el-table{width:100%;border-collapse:collapse;font-size:13px}
+.el-table th{background:#e0e7ff;padding:10px 12px;text-align:left;font-family:'Space Mono';font-size:11px;font-weight:600;color:#6366f1;border-bottom:2px solid #6366f1}
+.el-table td{padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#334155}
+.el-progress{background:#e2e8f0;border-radius:9999px;overflow:hidden;height:12px}
+.el-progress .progress-bar{height:100%;border-radius:9999px;background:linear-gradient(90deg,#6366f1,#06b6d4)}
+.el-timeline .tl-item{display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;position:relative}
+.el-timeline .tl-dot{width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#ec4899);margin-top:4px;flex-shrink:0}
+.el-box{padding:20px;border-radius:12px;background:#f1f5f9;border:1px solid #e2e8f0}
+.el-badge{display:inline-block;padding:6px 14px;border-radius:9999px;font-family:'Space Mono';font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.el-code{font-family:'Space Mono';font-size:13px;background:#1e293b;color:#e2e8f0;padding:20px;border-radius:12px;white-space:pre-wrap}
+.el-quote{font-style:italic;padding:20px;border-left:4px solid #6366f1;background:#f1f5f9;border-radius:0 12px 12px 0;color:#64748b;line-height:1.8}
+</style>
+</head>
+<body>
+<div class="slide-wrap">${slidesHTML}</div>
+<div class="controls">
+<button onclick="prev()">◀ Prev</button>
+<span id="counter">1 / ${deck.slides.length}</span>
+<button onclick="next()">Next ▶</button>
+<button onclick="toggleFS()">⛶ Fullscreen</button>
+</div>
+<script>
+let cur=0,total=${deck.slides.length};
+function show(i){document.querySelectorAll('.slide').forEach((s,j)=>s.style.display=j===i?'flex':'none');document.getElementById('counter').textContent=(i+1)+' / '+total;cur=i}
+function next(){if(cur<total-1)show(cur+1)}
+function prev(){if(cur>0)show(cur-1)}
+function toggleFS(){!document.fullscreenElement?document.documentElement.requestFullscreen():document.exitFullscreen()}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowDown')next();if(e.key==='ArrowLeft'||e.key==='ArrowUp')prev();if(e.key==='f')toggleFS()});
+<\/script>
+</body></html>`;
+
+  download(html, 'presentation.html', 'text/html');
+  toast('HTML exported — standalone presentation!', '📤');
+}
+
+function download(data, filename, mime) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([data], { type: mime }));
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+// ═══════════════════════════════════════════════
+// TOAST NOTIFICATIONS
+// ═══════════════════════════════════════════════
+function toast(msg, icon = '✓') {
+  const t = document.getElementById('toast');
+  t.querySelector('.toast-icon').textContent = icon;
+  t.querySelector('.toast-msg').textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._t);
+  t._t = setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ═══════════════════════════════════════════════
+// UTILITY FUNCTIONS
+// ═══════════════════════════════════════════════
+function escapeHTML(str) {
+  if (!str) return '';
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function rgbToHex(rgb) {
+  if (!rgb || rgb.startsWith('#')) return rgb || '#1e293b';
+  if (rgb.startsWith('rgb')) {
+    const match = rgb.match(/\d+/g);
+    if (match) {
+      return '#' + match.map(x => parseInt(x).toString(16).padStart(2, '0')).join('');
+    }
+  }
+  return rgb;
+}
+
+// ═══════════════════════════════════════════════
+// NEW ELEMENT TYPES
+// ═══════════════════════════════════════════════
+function addCodeBlock() {
+  const def = JSON.parse(JSON.stringify(EL_DEFAULTS.code));
+  def._idx = deck.slides[deck.currentSlide].els.length;
+  deck.slides[deck.currentSlide].els.push(def);
+  renderCanvas();
+  selectEl(def._idx);
+  saveHistory();
+  toast('Code block added!', '💻');
+}
+
+function addQuote() {
+  const def = JSON.parse(JSON.stringify(EL_DEFAULTS.quote));
+  def._idx = deck.slides[deck.currentSlide].els.length;
+  deck.slides[deck.currentSlide].els.push(def);
+  renderCanvas();
+  selectEl(def._idx);
+  saveHistory();
+  toast('Quote added!', '❝');
+}
+
+function addQRCode() {
+  const url = prompt('Enter URL for QR code:', 'https://example.com');
+  if (!url) return;
+  const qrUrl = `https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=${encodeURIComponent(url)}&choe=UTF-8`;
+  const def = JSON.parse(JSON.stringify(EL_DEFAULTS.image));
+  def.t = 'image';
+  def.x = 330;
+  def.y = 120;
+  def.w = 300;
+  def.h = 300;
+  def.imageData = qrUrl;
+  def.content = url;
+  def._idx = deck.slides[deck.currentSlide].els.length;
+  deck.slides[deck.currentSlide].els.push(def);
+  renderCanvas();
+  selectEl(def._idx);
+  saveHistory();
+  toast('QR Code added!', '◼');
+}
+
+function addLiveCounter() {
+  const target = prompt('Enter target number:', '1000');
+  if (!target) return;
+  const def = JSON.parse(JSON.stringify(EL_DEFAULTS.counter));
+  def.content = `${target}|2000`;
+  def._idx = deck.slides[deck.currentSlide].els.length;
+  deck.slides[deck.currentSlide].els.push(def);
+  renderCanvas();
+  selectEl(def._idx);
+  saveHistory();
+  toast('Counter added!', '🔢');
+}
+
+// ═══════════════════════════════════════════════
+// DECK TITLE SYNC
+// ═══════════════════════════════════════════════
+document.getElementById('deck-title-input').oninput = function() {
+  deck.title = this.value;
+};
+
+// ═══════════════════════════════════════════════
+// BOOT
+// ═══════════════════════════════════════════════
+initDeck();
+setupDragDrop();
+
+// Try to restore auto-saved deck
+const savedTime = localStorage.getItem('deckforge_autosave_time');
+if (savedTime && (Date.now() - parseInt(savedTime)) < 86400000) {
+  // Within 24 hours - optionally restore
+  // loadFromLocalStorage();
+}
+</script>
+</body>
+</html>

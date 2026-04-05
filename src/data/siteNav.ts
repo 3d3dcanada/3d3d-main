@@ -13,6 +13,7 @@ export interface NavLink {
 export interface NavGroup {
   id: string;
   label: string;
+  accent: string;
   items: NavLink[];
 }
 
@@ -20,35 +21,60 @@ export const SITE_NAV: NavGroup[] = [
   {
     id: 'fabrication',
     label: 'Fabrication',
+    accent: '#40C4C4',
     items: [
       { id: 'quote', label: 'Quote', href: '/quote' },
       { id: 'materials', label: 'Materials', href: '/materials' },
+      { id: 'fleet', label: 'Fleet', href: '/fleet' },
       { id: 'faq', label: 'FAQ', href: '/faq' },
     ],
   },
   {
     id: 'story',
     label: 'The Story',
+    accent: '#E84A8A',
     items: [
       { id: 'about', label: 'About', href: '/about' },
-      { id: 'events', label: 'Events', href: '/events' },
+      { id: 'workshops', label: 'Workshops & Events', href: '/workshops' },
+      { id: 'media', label: 'Media Studio', href: '/media' },
       { id: 'blog', label: 'Blog', href: '/blog' },
+    ],
+  },
+  {
+    id: 'shop',
+    label: 'Shop',
+    accent: '#FF6B2B',
+    items: [
+      { id: 'catalog', label: 'Catalog', href: '/shop' },
+      { id: 'merch', label: 'Merch', href: '/merch' },
     ],
   },
   {
     id: 'community',
     label: 'Community',
+    accent: '#AAFF2A',
     items: [
-      { id: 'opportunities', label: 'Join the Network', href: '/network' },
+      { id: 'network', label: 'Join the Network', href: '/network' },
+      { id: 'join', label: 'Get a Free Website', href: '/join' },
+      { id: 'projects', label: 'Projects', href: '/projects' },
       { id: 'community', label: 'Community', href: '/community' },
       { id: 'sponsors', label: 'Sponsors', href: '/sponsors' },
       { id: 'oldgirl', label: 'Old Girl', href: 'https://oldgirl.3d3d.ca', external: true },
     ],
   },
   {
-    id: 'open-source',
-    label: 'Open Source',
+    id: 'software',
+    label: 'Software',
+    accent: '#40C4C4',
     items: [
+      { id: 'portfolio', label: 'All Software', href: '/software' },
+      { id: 'ora', label: 'ORA Runtime', href: '/ora' },
+      { id: 'governance', label: 'Governance Kernel', href: '/governance-kernel' },
+      { id: 'openkernel', label: 'OpenKernel (5 Kernels)', href: '/openkernel' },
+      { id: 'harbourmesh', label: 'HarbourMesh', href: '/harbourmesh' },
+      { id: 'aro', label: 'Aro (Pitch Engine)', href: '/aro' },
+      { id: 'sovereign', label: 'Sovereign AI', href: 'https://github.com/3d3dcanada/sovereign-ai', external: true },
+      { id: 'thegothub', label: 'The GoT Hub', href: 'https://github.com/3d3dcanada/thegothub', external: true },
       { id: 'github', label: 'GitHub', href: 'https://github.com/3d3dcanada', external: true },
       { id: 'printables', label: 'Printables', href: 'https://www.printables.com/@KTK3D_3050116', external: true },
     ],
@@ -56,7 +82,9 @@ export const SITE_NAV: NavGroup[] = [
   {
     id: 'contact',
     label: 'Contact',
+    accent: '#E84A8A',
     items: [
+      { id: 'pricing', label: 'Pricing', href: '/pricing' },
       { id: 'contact', label: 'Contact', href: '/contact' },
       { id: 'book', label: 'Book a Call', href: '/book' },
       { id: 'whatsapp', label: 'WhatsApp', href: 'https://wa.me/15069532678', external: true },
@@ -65,9 +93,12 @@ export const SITE_NAV: NavGroup[] = [
   {
     id: 'legal',
     label: 'Legal',
+    accent: '#666666',
     items: [
       { id: 'privacy', label: 'Privacy', href: '/privacy' },
       { id: 'terms', label: 'Terms', href: '/terms' },
+      { id: 'disclaimer', label: 'Disclaimer', href: '/disclaimer' },
+      { id: 'cookies', label: 'Cookies', href: '/cookies' },
       { id: 'shipping', label: 'Shipping', href: '/shipping' },
       { id: 'casl', label: 'CASL', href: '/casl' },
       { id: 'accessibility', label: 'Accessibility', href: '/accessibility' },
@@ -124,6 +155,6 @@ export const SOCIAL_LINKS = [
 export const BOTTOM_NAV = [
   { id: 'home', label: 'Home', href: '/', icon: 'home' },
   { id: 'quote', label: 'Quote', href: '/quote', icon: 'quote' },
-  { id: 'community', label: 'Community', href: '/community', icon: 'community' },
+  { id: 'workshops', label: 'Workshops', href: '/workshops', icon: 'community' },
   { id: 'menu', label: 'Menu', href: '#menu', icon: 'menu' },
 ] as const;

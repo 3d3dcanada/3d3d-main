@@ -101,12 +101,21 @@ const materials = [
 ];
 
 const tiers = ['Engineering', 'Elite', 'Flexible', 'Specialty', 'Standard'];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Materials | 3D3D',
+  description: 'Every material I run. Engineering-grade compounds for marine, automotive, and field fabrication — from ASA to PEI 1010.',
+  url: 'https://3d3d.ca/materials',
+};
 ---
 
 <BaseLayout
   title="Materials | 3D3D"
   description="Every material I run. Engineering-grade compounds for marine, automotive, and field fabrication — from ASA to PEI 1010."
   activePath="/materials"
+  schema={schema}
 >
   <main class="hp-home">
 
@@ -120,7 +129,7 @@ const tiers = ['Engineering', 'Elite', 'Flexible', 'Specialty', 'Standard'];
       <div class="hp-section__grain"></div>
 
       <div class="hp-section__shell hp-section__shell--start"> 
-        <article class="hp-card">
+        <article class="hp-card scroll-in">
           <div class="hp-card__inner">
             <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Materials'}]} />
             <p class="hp-card__eyebrow mt-4">Material Stack</p>
@@ -192,7 +201,7 @@ const tiers = ['Engineering', 'Elite', 'Flexible', 'Specialty', 'Standard'];
     </section>
 
     <!-- Section 3: When to Use What -->
-    <section class="hp-section" style="--section-accent: #40c4c4;">
+    <section class="hp-section" style="--section-accent: #FF6B2B;">
       <div class="hp-section__bg">
         <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/fab-03.jpg'); background-position: center;"></div>
       </div>
@@ -201,12 +210,12 @@ const tiers = ['Engineering', 'Elite', 'Flexible', 'Specialty', 'Standard'];
       <div class="hp-section__grain"></div>
 
       <div class="hp-section__shell hp-section__shell--start"> 
-        <article class="hp-card">
+        <article class="hp-card scroll-in">
           <div class="hp-card__inner">
             <p class="hp-card__eyebrow">Selection Guide</p>
             <h2 class="hp-card__title mt-2 mb-4">Start with the environment. The material follows.</h2>
             <p class="hp-card__copy mb-6">
-              Every material decision starts with the same question: what does this part have to survive? Pick the scenario below that matches your application. The recommendation is the compound I would use.
+              Every material decision starts with the same question: what does this part have to survive? Pick the scenario below that matches your application. The recommendation is the compound we would use.
             </p>
 
             <div class="space-y-4">

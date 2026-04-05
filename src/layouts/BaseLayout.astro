@@ -3,6 +3,8 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import SiteSidebar from '../components/SiteSidebar.astro';
 import BottomNav from '../components/BottomNav.astro';
+import CookieConsent from '../components/CookieConsent.astro';
+import SubscribeModal from '../components/SubscribeModal.astro';
 
 import '../styles/global.css';
 
@@ -77,6 +79,8 @@ const defaultNavGroups: NavGroup[] = [
     items: [
       { id: 'about', label: 'About 3D3D', href: '/about' },
       { id: 'network', label: 'Node Operations', href: '/network' },
+      { id: 'join', label: 'Get a Free Website', href: '/join' },
+      { id: 'projects', label: 'Community Projects', href: '/projects' },
       { id: 'sponsors', label: 'Sponsorships', href: '/sponsors' },
     ],
   },
@@ -119,6 +123,8 @@ const finalNavGroups = navGroups.length > 0 ? navGroups : defaultNavGroups;
   </div>
 
   {!noBottomNav && <BottomNav />}
+  <CookieConsent />
+  <SubscribeModal />
 
   {!noFeedbackBlip && (
     <a

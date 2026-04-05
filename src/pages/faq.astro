@@ -9,19 +9,19 @@ const faqs = [
     items: [
       {
         q: 'How do I get a quote?',
-        a: 'Send me photos of the broken or missing part, the mounting area, and caliper measurements if you have them. Email, WhatsApp, or the contact form. I will assess the job and quote it within 24 hours.',
+        a: 'Send us photos of the broken or missing part, the mounting area, and caliper measurements if you have them. Email, WhatsApp, or the contact form. We will assess the job and quote it within 24 hours.',
       },
       {
         q: 'Do I need a CAD file?',
-        a: 'No. Most of my clients do not have CAD files. I reverse-engineer from the physical part, from photos, or from measurements taken on a rolling deck. If you have a file, great. If not, I handle it.',
+        a: 'No. Most of our clients do not have CAD files. We reverse-engineer from the physical part, from photos, or from measurements. If you have a file, great. If not, we handle it.',
       },
       {
         q: 'What is the turnaround time?',
-        a: 'Most parts ship within 24 to 48 hours of design approval. Complex multi-part assemblies or on-site deployments are scoped individually. I will give you an exact timeline before I start.',
+        a: 'Most parts ship within 24 to 48 hours of design approval. Complex multi-part assemblies or on-site deployments are scoped individually. We will give you an exact timeline before we start.',
       },
       {
         q: 'Do you ship internationally?',
-        a: 'Yes. Worldwide. I have shipped parts to the Caribbean, Europe, Southeast Asia, and the Pacific. If your vessel is somewhere, I can get the part there.',
+        a: 'Yes. Worldwide. We have shipped parts to the Caribbean, Europe, Southeast Asia, and the Pacific. If your vessel is somewhere, we can get the part there.',
       },
     ],
   },
@@ -30,7 +30,7 @@ const faqs = [
     items: [
       {
         q: 'Can I use PLA on a boat?',
-        a: 'No. PLA softens at 55 degrees Celsius, absorbs moisture, and degrades under UV. It belongs in a hobby shop. For marine applications, I use ASA above deck, PP Glass Fiber for saltwater contact, and PA11 CF near engines.',
+        a: 'No. PLA softens at 55 degrees Celsius, absorbs moisture, and degrades under UV. For marine applications, we use ASA above deck, PP Glass Fiber for saltwater contact, and PA11 CF near engines.',
       },
       {
         q: 'What material goes above deck?',
@@ -55,15 +55,15 @@ const faqs = [
     items: [
       {
         q: 'Will you come to my boat?',
-        a: 'Yes. I travel worldwide with the equipment. Tell me where the vessel is and what the problem is. I will assess whether on-site work is the right approach and sort the logistics from there.',
+        a: 'Yes. We travel worldwide with the equipment. Tell us where the vessel is and what the problem is. We will assess whether on-site work is the right approach and handle the logistics from there.',
       },
       {
         q: 'What do you bring on-site?',
-        a: 'Full material stack, printer, measurement tools, and everything needed to assess, design, and fabricate on location. I am self-contained.',
+        a: 'Full material stack, printer, measurement tools, and everything needed to assess, design, and fabricate on location. We arrive self-contained.',
       },
       {
         q: 'Can you join a race crew?',
-        a: 'Yes. I stand my watch and bring the fabrication equipment. Newport-Bermuda 2026 aboard CSM the Mariner. When hardware fails at sea, I am below deck engineering the replacement while the boat holds heading.',
+        a: 'Yes. Our team stands watch and brings the fabrication equipment. Newport-Bermuda 2026 aboard CSM the Mariner is the next deployment. When hardware fails at sea, we are below deck engineering the replacement while the boat holds heading.',
       },
     ],
   },
@@ -72,15 +72,15 @@ const faqs = [
     items: [
       {
         q: 'How much does a part cost?',
-        a: 'Depends on the part. Simple brackets and fittings start around $30 to $50 CAD. Complex multi-component assemblies or high-temperature engineering compounds cost more. I quote every job individually after assessment.',
+        a: 'Depends on the part. Simple brackets and fittings start around $30 to $50 CAD. Complex multi-component assemblies or high-temperature engineering compounds cost more. We quote every job individually after assessment.',
       },
       {
         q: 'Is it cheaper than OEM?',
-        a: 'Almost always. And faster. A discontinued marine fitting from a dealer, if they even have it, can cost hundreds and take weeks. I can rebuild it in days for a fraction. The real savings are in dockage fees you are not paying while waiting.',
+        a: 'Almost always. And faster. A discontinued marine fitting from a dealer, if they even have it, can cost hundreds and take weeks. We can rebuild it in days for a fraction. The real savings are in dockage fees you are not paying while waiting.',
       },
       {
         q: 'Do you charge for assessment?',
-        a: 'No. Send me the photos and measurements. I will tell you what it takes, what it costs, and whether I can do it. No obligation.',
+        a: 'No. Send us the photos and measurements. We will tell you what it takes, what it costs, and whether we can do it. No obligation.',
       },
     ],
   },
@@ -108,7 +108,7 @@ const schema = {
   <main class="hp-home">
 
     <!-- Section 1: Hero -->
-    <section class="hp-section" style="--section-accent: #e84a8a;">
+    <section class="hp-section" style="--section-accent: #40C4C4;">
       <div class="hp-section__bg">
         <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/software-03.jpg'); background-position: center;"></div>
       </div>
@@ -117,13 +117,13 @@ const schema = {
       <div class="hp-section__grain"></div>
 
       <div class="hp-section__shell hp-section__shell--start"> 
-        <article class="hp-card">
+        <article class="hp-card scroll-in">
           <div class="hp-card__inner">
             <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'FAQ'}]} />
             <p class="hp-card__eyebrow mt-4">Questions</p>
             <h1 class="hp-card__title mt-2 mb-4">Frequently Asked</h1>
             <p class="hp-card__copy hp-card__copy--lead">
-              If the answer is not here, ask the chatbot or contact me directly. I do not charge for assessments.
+              If the answer is not here, use the chatbot or contact us directly. We do not charge for assessments.
             </p>
           </div>
         </article>
@@ -131,7 +131,7 @@ const schema = {
     </section>
 
     <!-- Section 2: Questions -->
-    <section class="hp-section" style="--section-accent: #40c4c4; min-height: 100svh;">
+    <section class="hp-section" style="--section-accent: #E84A8A; min-height: 100svh;">
       <div class="hp-section__bg">
         <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/software-01.jpg'); background-position: center;"></div>
       </div>
@@ -139,36 +139,25 @@ const schema = {
       <div class="hp-section__scrim" style="background: rgba(17, 18, 20, 0.9);"></div>
       <div class="hp-section__grain"></div>
 
-      <div class="hp-section__shell hp-section__shell--start"> 
-        <div class="w-full max-w-4xl mx-auto py-12 relative z-10">
-          
-          <div class="space-y-12">
-            {faqs.map((cat) => (
-              <div>
-                <h2 class="font-tech text-teal-400 font-bold uppercase tracking-widest text-sm mb-4">{cat.category}</h2>
-                <div class="space-y-4">
-                  {cat.items.map((item) => (
-                    <details class="group bg-black/40 border border-white/10 rounded-sm">
-                      <summary class="font-display text-white text-lg p-4 cursor-pointer hover:bg-white/5 transition-colors marker:content-[''] marker:hidden list-none flex justify-between items-center outline-none">
-                        {item.q}
-                        <span class="text-teal-400 font-tech text-2xl leading-none font-light group-open:rotate-45 transition-transform">+</span>
-                      </summary>
-                      <div class="p-4 pt-0 text-gray-400 text-sm leading-relaxed border-t border-white/5 mt-2">
-                        {item.a}
-                      </div>
-                    </details>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-
-        </div>
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="pg-card scroll-in" style="max-width: 52rem;">
+          {faqs.map((cat) => (
+            <div class="pg-faq-group">
+              <h2 class="pg-faq-group__title">{cat.category}</h2>
+              {cat.items.map((item) => (
+                <details class="pg-faq">
+                  <summary>{item.q}</summary>
+                  <div class="pg-faq__answer">{item.a}</div>
+                </details>
+              ))}
+            </div>
+          ))}
+        </article>
       </div>
     </section>
 
     <!-- Section 3: Next Actions -->
-    <section class="hp-section" style="--section-accent: #e84a8a;">
+    <section class="hp-section" style="--section-accent: #FF6B2B;">
       <div class="hp-section__bg">
         <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/workshop/printer-action-cf.jpg'); background-position: center;"></div>
       </div>
@@ -177,7 +166,7 @@ const schema = {
       <div class="hp-section__grain"></div>
 
       <div class="hp-section__shell hp-section__shell--start"> 
-        <article class="hp-card">
+        <article class="hp-card scroll-in">
           <div class="hp-card__inner">
             <PageNextActions actions={[
               {label: 'Get a Quote', href: '/quote', description: 'Ready to start? Upload your files and get an estimate.', accent: 'teal'},

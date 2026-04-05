@@ -4,227 +4,219 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import PageNextActions from '../components/PageNextActions.astro';
 
 const stats = [
-  { value: '7', label: 'Active Repos' },
-  { value: '18+', label: 'Local Nodes' },
-  { value: '3', label: 'Events/Yr' },
+  { value: '100%', label: 'Open Source' },
+  { value: 'Growing', label: 'Maker Network' },
+  { value: 'Worldwide', label: 'Shipping' },
 ];
 
 const repos = [
   {
     name: '3d3d-platform',
-    desc: 'The website you are looking at. Built with Astro 6 and React.',
+    desc: 'This website. Built with Astro 6 and deployed on Cloudflare.',
     url: 'https://github.com/3d3dcanada/3d3d-main',
     lang: 'Astro',
   },
   {
-    name: 'ora-3d3d',
-    desc: 'AI-assisted coding and fabrication agent.',
-    url: 'https://github.com/3d3dcanada/',
-    lang: 'Rust / TS',
+    name: 'revolution-is-law',
+    desc: 'The Revolution brand site. Next.js, live on Vercel.',
+    url: 'https://github.com/3d3dcanada/revolution-is-law',
+    lang: 'Next.js',
   },
   {
-    name: 'codequest-3d3d',
-    desc: 'Interactive coding game interface for training.',
-    url: 'https://github.com/3d3dcanada/',
-    lang: 'C#',
-  },
-  {
-    name: '3d3d-crm',
-    desc: 'Client management and job routing backend.',
-    url: 'https://github.com/3d3dcanada/',
-    lang: 'NextJS',
-  },
-  {
-    name: 'sovereign-3d3d',
-    desc: 'Privacy-focused local sync app for offshore environments.',
-    url: 'https://github.com/3d3dcanada/',
-    lang: 'Rust',
+    name: '3d3d-printfiles',
+    desc: 'Public print files, jigs, and fixtures shared from the shop.',
+    url: 'https://github.com/3d3dcanada/3d3d-printfiles',
+    lang: 'STL / 3MF',
   },
 ];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Community & Open Source — 3D3D',
+  description: '3D3D is an open source manufacturing cooperative based in Fredericton. Access our code, join the network, or find us at events.',
+  url: 'https://3d3d.ca/community',
+};
 ---
 
-<BaseLayout title="Community & Open Source | 3D3D" description="3D3D is an open source manufacturing cooperative. Access our code, join the network, or find us at events." activePath="/community">
+<BaseLayout title="Community & Open Source | 3D3D" description="3D3D is an open source manufacturing cooperative. Access our code, join the network, or find us at events." activePath="/community" schema={schema}>
 
-  <section class="opp-page">
-    <div class="opp-shell">
-      <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Community'}]} />
-      
-      <div class="mb-6 rounded-xl overflow-hidden shadow-sm aspect-video">
-        <img src="/media/generated/network-03.jpg" alt="Engineers collaborating over a 3D CAD tablet at a race car garage" class="w-full h-full object-cover" />
+  <main class="hp-home">
+
+    <!-- Section 1: Hero -->
+    <section class="hp-section" style="--section-accent: #40c4c4;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/network-03.jpg'); background-position: center;"></div>
       </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
 
-      <div class="hero surface-panel">
-        <div class="hero__content">
-          <p class="opp-eyebrow">The Network</p>
-          <h1 class="opp-title">Community & Open Source</h1>
-          <p class="opp-intro">
-            We operate transparently. If we build a tool to make the cooperative run better, we open source it. 
-            If we design a part that can help someone fix a broken machine, we publish the model.
-            The 3D3D network relies on a shared pool of knowledge, hardware, and code.
-          </p>
-          
-          <div class="flex gap-4 mt-6">
-            <a href="https://github.com/3d3dcanada" target="_blank" class="opp-cta">GitHub Organization</a>
-            <a href="https://www.printables.com/@KTK3D_3050116" target="_blank" class="opp-cta" style="background: var(--color-orange-primary);">Printables Catalog</a>
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card">
+          <div class="hp-card__inner">
+            <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Community'}]} />
+            <p class="hp-card__eyebrow mt-4">The Network</p>
+            <h1 class="hp-card__title mt-2 mb-4">Community & Open Source</h1>
+            <p class="hp-card__copy hp-card__copy--lead">
+              We operate transparently. If we build a tool to make the cooperative run better, we open source it.
+              If we design a part that can help someone fix a broken machine, we publish the model.
+              The 3D3D network is small and early-stage — but everything we build is shared.
+            </p>
+            <div class="hp-card__cta-row hp-card__cta-row--start mt-6">
+              <a href="https://github.com/3d3dcanada" target="_blank" class="hp-cta hp-cta--accent">GitHub Organization</a>
+              <a href="https://www.printables.com/@KTK3D_3050116" target="_blank" class="hp-cta hp-cta--glass">Printables Catalog</a>
+            </div>
           </div>
-        </div>
+        </article>
       </div>
+    </section>
 
-      <div class="mt-8 border-t border-gray-200 pt-8">
-        <h2 class="text-2xl font-bold mb-6" style="color: var(--color-text-primary);">Active Repositories</h2>
-        <div class="grid sm:grid-cols-2 gap-4">
-          {repos.map(repo => (
-            <a href={repo.url} target="_blank" class="block p-4 border border-gray-200 rounded-lg hover:border-teal-400 hover:bg-teal-50/30 transition">
-              <div class="flex items-center justify-between mb-2">
-                <span class="font-mono font-bold text-sm text-teal-700">{repo.name}</span>
-                <span class="text-[10px] uppercase tracking-wider bg-gray-100 px-2 py-1 rounded text-gray-600">{repo.lang}</span>
-              </div>
-              <p class="text-xs text-gray-600 leading-relaxed">{repo.desc}</p>
-            </a>
-          ))}
-        </div>
+    <!-- Section 2: Active Repositories -->
+    <section class="hp-section" style="--section-accent: #e84a8a;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/software-01.jpg'); background-position: center;"></div>
       </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
 
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-12">
-        {stats.map((stat) => (
-          <div class="text-center p-4 rounded-xl border border-gray-200">
-            <span class="block font-display text-2xl font-bold" style="color: var(--color-teal-primary);">{stat.value}</span>
-            <span class="font-display text-[9px] uppercase tracking-widest">{stat.label}</span>
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow">Open Source</p>
+            <h2 class="hp-card__title mt-2 mb-2">Public Repositories</h2>
+            <p class="hp-card__copy mb-6">These are the repos we actively maintain. Other projects are in progress but not yet public.</p>
+
+            <div class="community-repo-grid">
+              {repos.map(repo => (
+                <a href={repo.url} target="_blank" rel="noopener noreferrer" class="community-repo-card">
+                  <div class="community-repo-card__header">
+                    <span class="community-repo-card__name">{repo.name}</span>
+                    <span class="community-repo-card__lang">{repo.lang}</span>
+                  </div>
+                  <p class="community-repo-card__desc">{repo.desc}</p>
+                </a>
+              ))}
+            </div>
           </div>
-        ))}
+        </article>
       </div>
+    </section>
 
-      <PageNextActions actions={[
-        {label: 'Sponsor an Event', href: '/sponsors', description: 'Fund these workshops for your community.', accent: 'teal'},
-        {label: 'Book a Call', href: '/book', description: 'Schedule a discovery call to plan your event.', accent: 'orange'},
-      ]} />
-    </div>
-  </section>
+    <!-- Section 3: Stats -->
+    <section class="hp-section" style="--section-accent: #40c4c4;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/fab-01.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow">Where We Stand</p>
+            <h2 class="hp-card__title mt-2 mb-6">The Network Today</h2>
+
+            <div class="community-stats">
+              {stats.map((stat) => (
+                <div class="community-stat">
+                  <span class="community-stat__value">{stat.value}</span>
+                  <span class="community-stat__label">{stat.label}</span>
+                </div>
+              ))}
+            </div>
+
+            <p class="hp-card__copy mb-6">We are a Fredericton-based cooperative that is still building out. No inflated numbers — just real work, real code, and real parts shipping from the shop.</p>
+
+            <PageNextActions actions={[
+              {label: 'Sponsor an Event', href: '/sponsors', description: 'Help fund workshops in your community.', accent: 'teal'},
+              {label: 'Book a Call', href: '/book', description: 'Talk to us about joining or collaborating.', accent: 'magenta'},
+            ]} />
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
 </BaseLayout>
 
 <style>
-  .opp-page {
-    min-height: 100svh;
-    display: flex;
-    align-items: center;
-    background: var(--color-surface-primary);
-    color: var(--color-text-primary);
-  }
-
-  .opp-shell {
-    width: min(100% - clamp(1.5rem, 4vw, 4rem), 720px);
-    margin: 0 auto;
+  .community-repo-grid {
     display: grid;
-    gap: 2rem;
-    padding-block: clamp(6rem, 10vw, 10rem);
-  }
-
-  .opp-eyebrow {
-    margin: 0;
-    font-family: var(--font-tech);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--color-teal-primary);
-    display: flex;
-    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
     gap: 0.8rem;
+    margin-bottom: 1.5rem;
   }
-
-  .opp-eyebrow::before {
-    content: '';
-    width: 2.75rem;
-    height: 2px;
-    background: var(--color-teal-primary);
-    flex-shrink: 0;
+  .community-repo-card {
+    display: block;
+    padding: 1rem 1.2rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
   }
-
-  .opp-title {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: clamp(3rem, 2rem + 4vw, 5.5rem);
-    line-height: 0.95;
-    letter-spacing: -0.04em;
-    color: var(--color-text-primary);
-    text-transform: uppercase;
+  .community-repo-card:hover {
+    border-color: rgba(64, 196, 196, 0.5);
+    transform: translateY(-2px);
   }
-
-  .opp-intro {
-    margin: 0;
-    max-width: 36rem;
-    font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.2rem);
-    line-height: 1.75;
-    color: var(--color-text-secondary);
-  }
-
-  .opp-listing {
-    display: grid;
-    gap: 1.4rem;
-    padding: clamp(1.5rem, 3vw, 2.5rem);
-  }
-
-  .opp-listing__header {
-    display: grid;
-    gap: 0.6rem;
-  }
-
-  .opp-listing__role {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: clamp(1.4rem, 1rem + 1.5vw, 2rem);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: var(--color-text-primary);
-  }
-
-  .opp-listing__meta {
+  .community-repo-card__header {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1.4rem;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+  .community-repo-card__name {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: rgba(246, 247, 250, 0.9);
+  }
+  .community-repo-card__lang {
     font-family: var(--font-tech);
-    font-size: 0.72rem;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(246, 247, 250, 0.5);
+    border-radius: 2px;
+  }
+  .community-repo-card__desc {
+    margin: 0;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: rgba(246, 247, 250, 0.45);
+  }
+
+  .community-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .community-stat {
+    text-align: center;
+    padding: 1.2rem 0.8rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+  }
+  .community-stat__value {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-teal-primary);
+  }
+  .community-stat__label {
+    font-family: var(--font-tech);
+    font-size: 0.6rem;
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--color-teal-primary);
-  }
-
-  .opp-listing__body {
-    display: grid;
-    gap: 0.8rem;
-  }
-
-  .opp-listing__body p {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.7;
-    color: var(--color-text-secondary);
-  }
-
-  .opp-cta {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: fit-content;
-    min-height: 3.4rem;
-    padding: 0.95rem 1.6rem;
-    background: var(--color-teal-primary);
-    color: #0F1112;
-    border: 3px solid var(--color-text-primary);
-    border-radius: 2px;
-    font-family: var(--font-tech);
-    font-size: 0.84rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
-    box-shadow: 0 14px 32px rgba(64, 196, 196, 0.22);
-  }
-
-  .opp-cta:hover {
-    background: #53D3D3;
-    box-shadow: 0 8px 24px rgba(64, 196, 196, 0.4);
-    transform: translateY(-2px);
+    color: rgba(246, 247, 250, 0.45);
   }
 </style>

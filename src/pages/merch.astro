@@ -1,0 +1,167 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageNextActions from '../components/PageNextActions.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Merch Store | 3D3D',
+  description: 'Official 3D3D merchandise — hats, shirts, stickers, and 3D printed goods. Every item ships from Fredericton, printed or stitched in-house or through trusted Canadian partners.',
+  url: 'https://3d3d.ca/merch',
+};
+---
+
+<BaseLayout title="Merch | 3D3D" description="Official 3D3D merchandise — hats, shirts, stickers, and 3D printed goods. Every item ships from Fredericton, printed or stitched in-house or through Canadian partners." activePath="/merch" schema={schema}>
+  <main class="hp-home">
+    <section class="pg-section pg-section--hero" style="--section-accent: #40C4C4;">
+      <div class="pg-section__bg">
+        <div class="pg-section__bg-img" style="background-image: url('/media/generated/fab-01.jpg'); background-position: center;"></div>
+      </div>
+      <div class="pg-section__scrim"></div>
+      <div class="pg-section__grain"></div>
+      <div class="pg-shell">
+        <article class="pg-card">
+          <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Shop', href: '/shop'}, {label: 'Merch'}]} />
+          <p class="pg-card__eyebrow" style="margin-top: 1rem;">Official Gear</p>
+          <h1 class="pg-card__title">Merch Store</h1>
+          <p class="pg-card__copy">Represent the network. Every item ships from Fredericton — printed, stitched, or cut in-house or through trusted Canadian partners.</p>
+          <div class="pg-card__cta-row">
+            <a href="/contact?subject=merch-order" class="pg-cta pg-cta--accent">Place an Order</a>
+            <a href="/shop" class="pg-cta pg-cta--glass">Back to Catalog</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="pg-section" style="--section-accent: #E84A8A;">
+      <div class="pg-section__bg">
+        <div class="pg-section__bg-img" style="background-image: url('/media/generated/fab-02.jpg'); background-position: center;"></div>
+      </div>
+      <div class="pg-section__scrim"></div>
+      <div class="pg-section__grain"></div>
+      <div class="pg-shell">
+        <article class="pg-card scroll-in">
+          <p class="pg-card__eyebrow">Headwear</p>
+          <h2 class="pg-card__title">Hats</h2>
+          <p class="pg-card__copy">Snapbacks, dad hats, and beanies. Embroidered 3D3D logo on dark fabric. One size fits most.</p>
+          <div class="pg-grid-3" style="margin-top: 1.5rem;">
+            <div class="pg-card pg-card--glass">
+              <p class="pg-card__eyebrow">Snapback</p>
+              <p class="pg-card__title" style="font-size: 1.1rem;">3D3D Classic</p>
+              <p class="pg-card__copy">Black snapback with embroidered teal 3D3D logo. Structured crown.</p>
+              <p style="color: #E84A8A; font-family: var(--font-tech); font-weight: 700; font-size: 1.1rem; margin-top: 0.5rem;">$35 CAD</p>
+            </div>
+            <div class="pg-card pg-card--glass">
+              <p class="pg-card__eyebrow">Dad Hat</p>
+              <p class="pg-card__title" style="font-size: 1.1rem;">3D3D Relaxed</p>
+              <p class="pg-card__copy">Washed black dad hat with small embroidered logo. Adjustable strap.</p>
+              <p style="color: #E84A8A; font-family: var(--font-tech); font-weight: 700; font-size: 1.1rem; margin-top: 0.5rem;">$30 CAD</p>
+            </div>
+            <div class="pg-card pg-card--glass">
+              <p class="pg-card__eyebrow">Beanie</p>
+              <p class="pg-card__title" style="font-size: 1.1rem;">3D3D Winter</p>
+              <p class="pg-card__copy">Cuffed knit beanie with woven label. Black with teal accent thread.</p>
+              <p style="color: #E84A8A; font-family: var(--font-tech); font-weight: 700; font-size: 1.1rem; margin-top: 0.5rem;">$25 CAD</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="pg-section" style="--section-accent: #FF6B2B;">
+      <div class="pg-section__bg">
+        <div class="pg-section__bg-img" style="background-image: url('/media/generated/fab-03.jpg'); background-position: center;"></div>
+      </div>
+      <div class="pg-section__scrim"></div>
+      <div class="pg-section__grain"></div>
+      <div class="pg-shell">
+        <article class="pg-card scroll-in">
+          <p class="pg-card__eyebrow">Apparel</p>
+          <h2 class="pg-card__title">Shirts</h2>
+          <p class="pg-card__copy">Heavy cotton tees with screen-printed or DTG graphics. Unisex sizing. Built to last, not to disintegrate after three washes.</p>
+          <div class="pg-grid-3" style="margin-top: 1.5rem;">
+            <div class="pg-card pg-card--glass">
+              <p class="pg-card__eyebrow">Tee</p>
+              <p class="pg-card__title" style="font-size: 1.1rem;">3D3D Logo Tee</p>
+              <p class="pg-card__copy">Black tee with large front logo. 100% cotton, 6 oz weight.</p>
+              <p style="color: #FF6B2B; font-family: var(--font-tech); font-weight: 700; font-size: 1.1rem; margin-top: 0.5rem;">$35 CAD</p>
+            </div>
+            <div class="pg-card pg-card--glass">
+              <p class="pg-card__eyebrow">Tee</p>
+              <p class="pg-card__title" style="font-size: 1.1rem;">Workshop Tee</p>
+              <p class="pg-card__copy">Dark charcoal with small chest logo. Relaxed fit.</p>
+              <p style="color: #FF6B2B; font-family: var(--font-tech); font-weight: 700; font-size: 1.1rem; margin-top: 0.5rem;">$35 CAD</p>
+            </div>
+            <div class="pg-card pg-card--glass">
+              <p class="pg-card__eyebrow">Long Sleeve</p>
+              <p class="pg-card__title" style="font-size: 1.1rem;">Field Crew LS</p>
+              <p class="pg-card__copy">Long sleeve with sleeve print. Built for the shop floor.</p>
+              <p style="color: #FF6B2B; font-family: var(--font-tech); font-weight: 700; font-size: 1.1rem; margin-top: 0.5rem;">$45 CAD</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="pg-section" style="--section-accent: #AAFF2A;">
+      <div class="pg-section__bg">
+        <div class="pg-section__bg-img" style="background-image: url('/media/generated/network-01.jpg'); background-position: center;"></div>
+      </div>
+      <div class="pg-section__scrim"></div>
+      <div class="pg-section__grain"></div>
+      <div class="pg-shell">
+        <article class="pg-card scroll-in">
+          <p class="pg-card__eyebrow">Accessories</p>
+          <h2 class="pg-card__title">Stickers &amp; Prints</h2>
+          <p class="pg-card__copy">Vinyl die-cut stickers, 3D printed keychains, and limited edition workshop badges. Small runs, no restocks.</p>
+          <div class="pg-grid-3" style="margin-top: 1.5rem;">
+            <div class="pg-card pg-card--glass">
+              <p class="pg-card__eyebrow">Sticker Pack</p>
+              <p class="pg-card__title" style="font-size: 1.1rem;">3D3D Logo Pack</p>
+              <p class="pg-card__copy">5-pack die-cut vinyl stickers. Waterproof, UV resistant.</p>
+              <p style="color: #AAFF2A; font-family: var(--font-tech); font-weight: 700; font-size: 1.1rem; margin-top: 0.5rem;">$8 CAD</p>
+            </div>
+            <div class="pg-card pg-card--glass">
+              <p class="pg-card__eyebrow">3D Printed</p>
+              <p class="pg-card__title" style="font-size: 1.1rem;">Custom Keychain</p>
+              <p class="pg-card__copy">3D printed keychain with your name or logo. ASA or PETG material.</p>
+              <p style="color: #AAFF2A; font-family: var(--font-tech); font-weight: 700; font-size: 1.1rem; margin-top: 0.5rem;">$12 CAD</p>
+            </div>
+            <div class="pg-card pg-card--glass">
+              <p class="pg-card__eyebrow">Limited</p>
+              <p class="pg-card__title" style="font-size: 1.1rem;">Workshop Badge</p>
+              <p class="pg-card__copy">3D printed maker badge with serial number. Limited runs.</p>
+              <p style="color: #AAFF2A; font-family: var(--font-tech); font-weight: 700; font-size: 1.1rem; margin-top: 0.5rem;">$15 CAD</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="pg-section pg-section--compact" style="--section-accent: #40C4C4;">
+      <div class="pg-section__bg">
+        <div class="pg-section__bg-img" style="background-image: url('/media/generated/network-02.jpg'); background-position: center;"></div>
+      </div>
+      <div class="pg-section__scrim"></div>
+      <div class="pg-section__grain"></div>
+      <div class="pg-shell">
+        <article class="pg-card scroll-in" style="text-align: center;">
+          <p class="pg-card__eyebrow">How to Order</p>
+          <h2 class="pg-card__title">Send us a message with what you want.</h2>
+          <p class="pg-card__copy" style="max-width: 36rem; margin-inline: auto;">Payments processed via e-transfer or invoice. Shipping included within Canada. International orders quoted on request.</p>
+          <div class="pg-card__cta-row" style="justify-content: center;">
+            <a href="/contact?subject=merch-order" class="pg-cta pg-cta--accent">Place an Order</a>
+            <a href="/shop" class="pg-cta pg-cta--glass">Browse the Catalog</a>
+          </div>
+        </article>
+        <div style="margin-top: 2rem;">
+          <PageNextActions actions={[
+            {label: 'Parts Catalog', href: '/shop', description: 'Browse the full fabrication catalog.', accent: 'teal'},
+            {label: 'Sponsors', href: '/sponsors', description: 'Support the project and get merch perks.', accent: 'magenta'},
+          ]} />
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

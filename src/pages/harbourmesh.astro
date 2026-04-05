@@ -1,0 +1,250 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageNextActions from '../components/PageNextActions.astro';
+
+const features = [
+  { title: 'Vessel Monitoring', desc: 'Real-time status of every sensor and system on your boat, mirrored in software.' },
+  { title: 'Offline Navigation Charts', desc: 'MBTiles + OpenLayers cartography that works without internet. Download before departure, navigate anywhere.' },
+  { title: 'Weather Routing', desc: 'GRIB-based route optimization. PredictWind-style weather analysis for passage planning.' },
+  { title: 'NMEA 0183/2000', desc: 'Full protocol support. GPS, depth, wind, engine, AIS — every marine instrument connected.' },
+  { title: 'AIS Tracking', desc: 'Real-time vessel identification and collision avoidance. See every ship in your area.' },
+  { title: 'AI Companion', desc: 'Ask questions about your boat systems, weather, or routing. It answers using real sensor data, not guesses.' },
+];
+
+const hardware = [
+  'GPS (NMEA GGA/RMC)',
+  'AIS (Position Reports, Safety Messages)',
+  'Depth Sounder (DBT, DPT)',
+  'Wind (MWV)',
+  'Engine (RPM, Oil Pressure, Temperature)',
+  'Tank Levels (Fuel, Water, Waste)',
+];
+
+const techStack = [
+  { label: 'Frontend', value: 'React + TypeScript + Vite' },
+  { label: 'UI', value: 'shadcn/ui + Tailwind CSS' },
+  { label: 'State', value: 'Zustand with persistence' },
+  { label: 'Maps', value: 'OpenLayers + MBTiles offline' },
+  { label: 'Security', value: 'AES-256-GCM · JWT · RBAC · mTLS' },
+  { label: 'Testing', value: '85%+ coverage (Vitest)' },
+  { label: 'Platforms', value: 'Raspberry Pi · Linux · Windows · macOS' },
+  { label: 'License', value: 'AGPL-3.0 (commercial available)' },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'HarbourMesh',
+  description: 'Marine IoT platform for vessel digital twin management. Offline-first navigation, NMEA integration, weather routing, and AI companion.',
+  url: 'https://3d3d.ca/harbourmesh',
+  applicationCategory: 'UtilitiesApplication',
+  operatingSystem: 'Linux, macOS, Windows, Raspberry Pi',
+  author: { '@type': 'Organization', name: '3D3D Atlantic Cooperative', url: 'https://3d3d.ca' },
+};
+---
+
+<BaseLayout title="HarbourMesh — Marine IoT Platform | 3D3D" description="Marine IoT platform for vessel monitoring and navigation. Offline charts, NMEA 0183/2000 integration, weather routing, AIS tracking, and AI companion. Works without internet." activePath="/harbourmesh" schema={schema}>
+
+  <main class="hp-home">
+
+    <!-- Section 1: Hero -->
+    <section class="hp-section" style="--section-accent: #40C4C4;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/real/evening-fleet.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
+          <div class="hp-card__inner">
+            <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Projects', href: '/projects'}, {label: 'HarbourMesh'}]} />
+            <p class="hp-card__eyebrow mt-4" style="color: #0EA5E9;">Marine IoT Platform</p>
+            <h1 class="hp-card__title mt-2 mb-4">HarbourMesh</h1>
+            <p class="hp-card__copy hp-card__copy--lead">
+              Marine IoT that works when you have no cell signal. Offline navigation charts, real-time NMEA integration, weather routing, AIS tracking, and an AI companion that knows your boat and its systems.
+            </p>
+            <div class="hp-card__cta-row hp-card__cta-row--start mt-6">
+              <a href="https://github.com/3d3dcanada/harbourmesh" target="_blank" rel="noopener noreferrer" class="hp-cta hp-cta--accent" style="background: #0EA5E9; border-color: #0EA5E9;">View on GitHub</a>
+              <a href="/contact?subject=harbourmesh" class="hp-cta hp-cta--glass">Commercial Licensing</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Section 2: Features -->
+    <section class="hp-section" style="--section-accent: #E84A8A;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/real/dawn-approach.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow" style="color: #0EA5E9;">Capabilities</p>
+            <h2 class="hp-card__title mt-2 mb-6">What It Does</h2>
+
+            <div class="hm-features">
+              {features.map((f) => (
+                <div class="hm-feature">
+                  <h3 class="hm-feature__title">{f.title}</h3>
+                  <p class="hm-feature__desc">{f.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Section 3: Hardware + Architecture -->
+    <section class="hp-section" style="--section-accent: #FF6B2B;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/real/helm-close.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow" style="color: #0EA5E9;">Architecture</p>
+            <h2 class="hp-card__title mt-2 mb-6">Built for the Ocean</h2>
+
+            <div class="hm-two-col">
+              <div>
+                <h3 class="hm-sub-title">Hardware Integration</h3>
+                <div class="hm-hw-list">
+                  {hardware.map((h) => (
+                    <span class="hm-hw-item"><span style="color: #0EA5E9;">→</span> {h}</span>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <h3 class="hm-sub-title">Tech Stack</h3>
+                <div class="hm-stack">
+                  {techStack.map((item) => (
+                    <div class="hm-stack__row">
+                      <span class="hm-stack__label">{item.label}</span>
+                      <span class="hm-stack__value">{item.value}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div class="hm-install mt-6">
+              <pre class="hm-install__code"><code>git clone https://github.com/3d3dcanada/harbourmesh.git
+cd harbourmesh/app && npm install
+npm run dev</code></pre>
+            </div>
+
+            <div class="mt-8">
+              <PageNextActions actions={[
+                {label: 'About 3D3D', href: '/about', description: 'The cooperative behind HarbourMesh.', accent: 'teal'},
+                {label: 'ORA Runtime', href: '/ora', description: 'Sovereign AI that powers the AI companion.', accent: 'magenta'},
+              ]} />
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>
+
+<style>
+  .hm-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+    gap: 0.8rem;
+  }
+  .hm-feature {
+    padding: 1.2rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(14, 165, 233, 0.15);
+    border-radius: 2px;
+  }
+  .hm-feature__title {
+    margin: 0 0 0.4rem;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    color: rgba(246, 247, 250, 0.9);
+  }
+  .hm-feature__desc {
+    margin: 0;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: rgba(246, 247, 250, 0.42);
+  }
+
+  .hm-two-col {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    gap: 2rem;
+  }
+  .hm-sub-title {
+    margin: 0 0 1rem;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: rgba(246, 247, 250, 0.8);
+  }
+  .hm-hw-list {
+    display: grid;
+    gap: 0.4rem;
+  }
+  .hm-hw-item {
+    font-size: 0.82rem;
+    color: rgba(246, 247, 250, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .hm-stack {
+    display: grid;
+    gap: 0.25rem;
+  }
+  .hm-stack__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.8rem;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .hm-stack__label {
+    font-family: var(--font-tech);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(246, 247, 250, 0.3);
+    flex-shrink: 0;
+  }
+  .hm-stack__value {
+    font-size: 0.78rem;
+    color: rgba(246, 247, 250, 0.6);
+    text-align: right;
+  }
+  .hm-install__code {
+    margin: 0;
+    padding: 1rem 1.2rem;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(14, 165, 233, 0.15);
+    border-radius: 2px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1.8;
+    color: #BAE6FD;
+    overflow-x: auto;
+  }
+</style>

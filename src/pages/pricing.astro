@@ -1,0 +1,353 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageNextActions from '../components/PageNextActions.astro';
+import { PRICING_TIERS } from '../data/workshops';
+
+const softwareProducts = [
+  { name: 'ORA Core', price: 'Free', period: 'forever', desc: 'Governed AI runtime. 8 MCP tools. Runs on your machine. Works with any LLM.', href: '/ora', cta: 'Get Started', accent: '#40C4C4', free: true },
+  { name: 'Aro Pitch Engine', price: '$29', period: 'one-time', desc: 'Pitch deck builder in one HTML file. 227 KB. No server. No subscription.', href: '/aro', cta: 'Buy / Download', accent: '#E84A8A' },
+  { name: 'PulZ Governance Kernel', price: 'Free', period: 'AGPL-3.0', desc: '47KB TypeScript. Decides if your AI is allowed to act. Evidence, confidence, audit trail.', href: '/governance-kernel', cta: 'Get the Kernel', accent: '#FF6B2B', free: true },
+  { name: 'OpenKernel EDU', price: 'Free', period: '', desc: 'Learn computer science with emoji. 23 opcodes. 6 languages. Runs in any browser.', href: '/openkernel', cta: 'Try Live', accent: '#AAFF2A', free: true },
+  { name: 'HarbourMesh', price: 'Free / $499', period: 'AGPL or commercial', desc: 'Marine IoT platform. Free for open source use. Commercial license for private modifications.', href: '/harbourmesh', cta: 'Learn More', accent: '#40C4C4' },
+  { name: 'Deck Builder Classic', price: 'Free', period: '', desc: 'Lightweight deck builder. 95 KB. The original.', href: '/downloads/deck-builder-classic.html', cta: 'Download', accent: '#E84A8A', free: true },
+];
+
+const fabricationPricing = [
+  { material: 'PLA', rate: '$0.12/g', use: 'Prototypes, gifts, display pieces' },
+  { material: 'PETG', rate: '$0.20/g', use: 'Functional parts, outdoor use' },
+  { material: 'TPU', rate: '$0.25/g', use: 'Flexible parts, seals, bumpers' },
+  { material: 'ABS', rate: '$0.25/g', use: 'Heat-resistant, post-processing' },
+  { material: 'ASA', rate: '$0.30/g', use: 'Marine, UV-stable, outdoor hardware' },
+];
+
+const donationOptions = [
+  { name: 'Ko-fi', desc: 'Card or PayPal. No account required.', href: 'https://ko-fi.com/3d3dca', accent: '#FF5E5B' },
+  { name: 'E-Transfer', desc: 'Send to info@3d3d.ca (Autodeposit). Zero fees.', href: 'mailto:info@3d3d.ca?subject=Donation%20-%203D3D&body=I\'d%20like%20to%20donate%20via%20e-Transfer.', accent: '#22C55E' },
+  { name: 'GitHub Sponsors', desc: 'Sponsor the org directly on GitHub.', href: 'https://github.com/3d3dcanada', accent: '#6B7280' },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Pricing — 3D3D',
+  description: 'Transparent pricing for all 3D3D products and services. Software, fabrication, workshops, and donations.',
+  url: 'https://3d3d.ca/pricing',
+};
+---
+
+<BaseLayout title="Pricing | 3D3D" description="Transparent pricing for all 3D3D products. Free open-source tools, paid software, 3D printing services, workshops. No tricks, no hidden fees." activePath="/pricing" schema={schema}>
+
+  <main class="hp-home">
+
+    <!-- Hero -->
+    <section class="hp-section" style="--section-accent: #40c4c4;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/fab-01.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
+          <div class="hp-card__inner">
+            <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Pricing'}]} />
+            <p class="hp-card__eyebrow mt-4">Transparent</p>
+            <h1 class="hp-card__title mt-2 mb-4">Pricing. No Tricks.</h1>
+            <p class="hp-card__copy hp-card__copy--lead">
+              Most of what we build is free and open source. The paid stuff is priced fairly — one-time purchases where possible, no dark patterns, no surprise fees. Everything listed. Everything honest.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Software Products -->
+    <section class="hp-section" style="--section-accent: #E84A8A;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/software-01.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow">Software</p>
+            <h2 class="hp-card__title mt-2 mb-6">Software Products</h2>
+
+            <div class="pr-grid">
+              {softwareProducts.map((p) => (
+                <div class={`pr-product ${p.free ? 'pr-product--free' : ''}`} style={`border-color: ${p.accent}25;`}>
+                  {p.badge && <span class="pr-badge" style={`background: ${p.accent};`}>{p.badge}</span>}
+                  <h3 class="pr-product__name" style={`color: ${p.accent};`}>{p.name}</h3>
+                  <div class="pr-product__price">
+                    <span class="pr-product__amount">{p.price}</span>
+                    {p.period && <span class="pr-product__period"> {p.period}</span>}
+                  </div>
+                  <p class="pr-product__desc">{p.desc}</p>
+                  <a href={p.href} class={`hp-cta ${p.free ? 'hp-cta--glass' : 'hp-cta--accent'}`} style={p.free ? '' : `background: ${p.accent}; border-color: ${p.accent};`}>{p.cta}</a>
+                </div>
+              ))}
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Fabrication -->
+    <section class="hp-section" style="--section-accent: #FF6B2B;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/fab-02.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow">Fabrication</p>
+            <h2 class="hp-card__title mt-2 mb-4">3D Printing Services</h2>
+            <p class="hp-card__copy mb-6">Quote-based pricing. Material rate + machine time + 25% platform fee. Makers keep 75%.</p>
+
+            <div class="pr-materials">
+              {fabricationPricing.map((m) => (
+                <div class="pr-material">
+                  <span class="pr-material__name">{m.material}</span>
+                  <span class="pr-material__rate">{m.rate}</span>
+                  <span class="pr-material__use">{m.use}</span>
+                </div>
+              ))}
+            </div>
+
+            <p class="hp-card__copy mt-4" style="font-size: 0.75rem; color: rgba(246,247,250,0.35);">
+              Machine rate: $3.00/hr. Quality, layer height, infill, and support multipliers apply. 5+ units get bulk discount. HST added based on province.
+            </p>
+
+            <div class="hp-card__cta-row hp-card__cta-row--start mt-4">
+              <button type="button" class="hp-cta hp-cta--accent" data-dialog-open="dlg-quote">Get a Quote</button>
+              <a href="/materials" class="hp-cta hp-cta--glass">Materials Guide</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Workshops -->
+    <section class="hp-section" style="--section-accent: #AAFF2A;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/network-03.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow">Education</p>
+            <h2 class="hp-card__title mt-2 mb-6">Workshop Pricing</h2>
+
+            <div class="pr-workshops">
+              {PRICING_TIERS.map((tier) => (
+                <div class="pr-workshop">
+                  <span class="pr-workshop__label">{tier.label}</span>
+                  <span class="pr-workshop__price">{tier.price}</span>
+                  {tier.note && <span class="pr-workshop__note">{tier.note}</span>}
+                </div>
+              ))}
+            </div>
+
+            <p class="hp-card__copy mt-4">
+              Custom pricing for schools, libraries, and community centres. We work with your budget.
+            </p>
+            <a href="/workshops" class="hp-cta hp-cta--glass mt-4">Browse Workshops</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Donations -->
+    <section class="hp-section" style="--section-accent: #40C4C4;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/network-01.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow">Support</p>
+            <h2 class="hp-card__title mt-2 mb-4">Support the Cooperative</h2>
+            <p class="hp-card__copy mb-6">
+              Most of what we build is free. If our tools helped you — raise money, build a part, teach a class, govern an AI agent — consider donating. Every dollar funds open-source development.
+            </p>
+
+            <div class="pr-donate-grid">
+              {donationOptions.map((d) => (
+                <a href={d.href} target={d.href.startsWith('http') ? '_blank' : undefined} rel={d.href.startsWith('http') ? 'noopener noreferrer' : undefined} class="pr-donate-card" style={`border-color: ${d.accent}30;`}>
+                  <h3 class="pr-donate-card__name" style={`color: ${d.accent};`}>{d.name}</h3>
+                  <p class="pr-donate-card__desc">{d.desc}</p>
+                </a>
+              ))}
+            </div>
+
+            <div class="mt-8">
+              <PageNextActions actions={[
+                {label: 'All Software', href: '/software', description: 'See everything we have built.', accent: 'teal'},
+                {label: 'Contact', href: '/contact', description: 'Custom pricing, enterprise, partnerships.', accent: 'magenta'},
+              ]} />
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>
+
+<style>
+  .pr-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+    gap: 0.7rem;
+  }
+  .pr-product {
+    padding: 1.3rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    position: relative;
+  }
+  .pr-badge {
+    position: absolute;
+    top: -0.5rem;
+    right: 0.8rem;
+    color: #fff;
+    font-family: var(--font-tech);
+    font-size: 0.52rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.18rem 0.45rem;
+    border-radius: 2px;
+  }
+  .pr-product__name {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+  }
+  .pr-product__price { margin: 0; }
+  .pr-product__amount {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: rgba(246, 247, 250, 0.9);
+  }
+  .pr-product__period {
+    font-size: 0.72rem;
+    color: rgba(246, 247, 250, 0.35);
+  }
+  .pr-product__desc {
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 1.55;
+    color: rgba(246, 247, 250, 0.4);
+    flex-grow: 1;
+  }
+  .pr-product--free .pr-product__amount { color: #4ADE80; }
+
+  .pr-materials { display: grid; gap: 0.35rem; }
+  .pr-material {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    align-items: baseline;
+    gap: 0.8rem;
+    padding: 0.5rem 0.7rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 2px;
+  }
+  .pr-material__name {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--color-teal-primary);
+    min-width: 3rem;
+  }
+  .pr-material__rate {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: rgba(246, 247, 250, 0.8);
+    white-space: nowrap;
+  }
+  .pr-material__use {
+    font-size: 0.72rem;
+    color: rgba(246, 247, 250, 0.35);
+  }
+
+  .pr-workshops { display: grid; gap: 0.35rem; max-width: 32rem; }
+  .pr-workshop {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .pr-workshop__label {
+    font-size: 0.82rem;
+    color: rgba(246, 247, 250, 0.65);
+    flex: 1;
+  }
+  .pr-workshop__price {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #E84A8A;
+    white-space: nowrap;
+  }
+  .pr-workshop__note {
+    font-size: 0.65rem;
+    color: rgba(246, 247, 250, 0.3);
+    font-style: italic;
+  }
+
+  .pr-donate-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+    gap: 0.7rem;
+  }
+  .pr-donate-card {
+    display: block;
+    padding: 1.2rem;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid;
+    border-radius: 2px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .pr-donate-card:hover {
+    transform: translateY(-2px);
+  }
+  .pr-donate-card__name {
+    margin: 0 0 0.3rem;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+  }
+  .pr-donate-card__desc {
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: rgba(246, 247, 250, 0.4);
+  }
+</style>

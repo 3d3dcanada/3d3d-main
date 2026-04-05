@@ -1,0 +1,575 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageNextActions from '../components/PageNextActions.astro';
+import { KERNELS, EMOJIASM_OPCODES, AUTHORITY_LEVELS, OPCODE_CATEGORIES } from '../data/openkernel';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'OpenKernel',
+    description: '5 emoji-native computational kernels for education, security, AI agent transparency, steganography research, and manufacturing control. 23 opcodes. Zero language barriers.',
+    url: 'https://3d3d.ca/openkernel',
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'Web (any browser)',
+    inLanguage: ['en', 'es', 'fr', 'zh', 'ar', 'hi'],
+    author: { '@type': 'Organization', name: '3D3D Atlantic Cooperative', url: 'https://3d3d.ca' },
+    keywords: 'emoji programming, computer science education, EmojiASM, AI governance, visual programming, sovereign computing',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      { '@type': 'Question', name: 'What is OpenKernel?', acceptedAnswer: { '@type': 'Answer', text: 'OpenKernel is a family of 5 emoji-native computational kernels that use emoji as the programming language. The core insight: emoji are universally understood symbols, eliminating the English-language barrier in computer science education.' } },
+      { '@type': 'Question', name: 'What is EmojiASM?', acceptedAnswer: { '@type': 'Answer', text: 'EmojiASM is a visual assembly language where every instruction is an emoji. 23 opcodes covering data, arithmetic, control flow, I/O, memory, and system operations. A 6-year-old can read it.' } },
+    ],
+  },
+];
+---
+
+<BaseLayout title="OpenKernel — 5 Emoji-Native Computational Kernels | 3D3D" description="OpenKernel: 5 emoji-native kernels for education, security, AI agents, steganography, and manufacturing. 23 opcodes. 6 languages. Zero barriers. Created by 3D3D. Powered by ORA." activePath="/openkernel" schema={schema}>
+
+  <main class="hp-home">
+
+    <!-- S1: Hero -->
+    <section class="hp-section" style="--section-accent: #40C4C4;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/software-01.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim" style="background: linear-gradient(135deg, rgba(15,12,41,0.9), rgba(30,27,75,0.7));"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
+          <div class="hp-card__inner">
+            <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Software', href: '/software'}, {label: 'OpenKernel'}]} />
+            <p class="hp-card__eyebrow mt-4" style="color: #F59E0B;">5 Kernels · 23 Opcodes · Zero Barriers</p>
+            <h1 class="hp-card__title mt-2 mb-4" style="font-size: clamp(2.6rem, 2rem + 3.5vw, 5rem);">OpenKernel</h1>
+            <p class="ok-manifesto">Computation doesn't require English.</p>
+            <p class="hp-card__copy hp-card__copy--lead mt-4" style="max-width: 40rem;">
+              5 emoji-native computational kernels — for education, enterprise security, AI agent transparency, steganography research, and manufacturing control. 6.5 billion people locked out of programming by language. OpenKernel removes the lock.
+            </p>
+
+            <div class="ok-hero-demo mt-6">
+              <pre class="ok-code"><code>📥 10        <span class="ok-comment"># LOAD 10 into R0</span>
+➕ 5         <span class="ok-comment"># ADD 5</span>
+🖨️           <span class="ok-comment"># PRINT (outputs: 15)</span>
+⏹️           <span class="ok-comment"># HALT</span></code></pre>
+              <p class="ok-code-caption">Your first program. Three emoji. Real computation.</p>
+            </div>
+
+            <p class="ok-brand mt-4">Created by <strong>3D3D</strong>. Powered by <strong>ORA</strong>.</p>
+            <div class="hp-card__cta-row hp-card__cta-row--start mt-5">
+              <a href="https://openkernel-edu.pages.dev/" target="_blank" rel="noopener noreferrer" class="hp-cta hp-cta--accent" style="background: #F59E0B; border-color: #F59E0B; color: #0F0D24;">Try EDU Live</a>
+              <a href="https://github.com/OpenKernel-edu/emoji-kernel-edu" target="_blank" rel="noopener noreferrer" class="hp-cta hp-cta--glass">View on GitHub</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- S2: The Vision -->
+    <section class="hp-section" style="--section-accent: #E84A8A;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/network-03.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in" style="text-align: center;">
+          <div class="hp-card__inner" style="align-items: center;">
+            <p class="hp-card__eyebrow" style="color: #8B5CF6;">The Insight</p>
+            <h2 class="hp-card__title mt-2 mb-6" style="max-width: 40rem;">Every programming language is built on English. Emoji are not.</h2>
+            <div class="ok-vision-grid">
+              <div class="ok-vision-card">
+                <span class="ok-vision-stat">6.5B</span>
+                <p>people don't speak English as a first language. They face a barrier before they can start learning to code.</p>
+              </div>
+              <div class="ok-vision-card">
+                <span class="ok-vision-stat" style="color: #F59E0B;">📥</span>
+                <p>means "input" in every country on Earth. No translation needed. Emoji are the first truly universal symbolic language.</p>
+              </div>
+              <div class="ok-vision-card">
+                <span class="ok-vision-stat" style="color: #EF4444;">≠</span>
+                <p>This is not Emojicode (syntax sugar). In OpenKernel, the emojis ARE the semantics. The visual concept IS the operation.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- S3: The 5 Kernels -->
+    <section class="hp-section" style="--section-accent: #FF6B2B;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/software-02.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow" style="color: #F59E0B;">The Family</p>
+            <h2 class="hp-card__title mt-2 mb-6">5 Kernels. One Mission.</h2>
+
+            <div class="ok-kernels">
+              {KERNELS.map((k) => (
+                <div class="ok-kernel" style={`border-color: ${k.accent}25;`}>
+                  <div class="ok-kernel__header">
+                    <span class="ok-kernel__emoji">{k.emoji}</span>
+                    <div>
+                      <h3 class="ok-kernel__name" style={`color: ${k.accent};`}>{k.name}</h3>
+                      <span class="ok-kernel__version">{k.version}</span>
+                    </div>
+                    <span class={`ok-kernel__status ok-kernel__status--${k.status}`}>
+                      {k.status === 'shipped' ? 'Shipped' : k.status === 'development' ? 'In Dev' : 'Planned'}
+                    </span>
+                  </div>
+                  <p class="ok-kernel__tagline">{k.tagline}</p>
+                  <p class="ok-kernel__desc">{k.description}</p>
+                  <div class="ok-kernel__features">
+                    {k.features.slice(0, 4).map((f) => (
+                      <span class="ok-kernel__feature"><span style={`color: ${k.accent};`}>→</span> {f}</span>
+                    ))}
+                  </div>
+                  <div class="ok-kernel__audience">
+                    {k.audience.slice(0, 3).map((a) => (
+                      <span class="ok-kernel__audience-tag">{a}</span>
+                    ))}
+                  </div>
+                  {k.liveUrl && <a href={k.liveUrl} target="_blank" rel="noopener noreferrer" class="ok-kernel__link" style={`color: ${k.accent};`}>Try it live →</a>}
+                </div>
+              ))}
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- S4: EmojiASM — Full ISA -->
+    <section class="hp-section" style="--section-accent: #AAFF2A;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/software-03.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow" style="color: #3B82F6;">Instruction Set Architecture</p>
+            <h2 class="hp-card__title mt-2 mb-2">EmojiASM — 23 Opcodes</h2>
+            <p class="hp-card__copy mb-6">A complete assembly language where every instruction is an emoji. 6 categories. Real computation.</p>
+
+            {OPCODE_CATEGORIES.map((cat) => {
+              const ops = EMOJIASM_OPCODES.filter(o => o.category === cat.id);
+              return (
+                <div class="ok-isa-group">
+                  <h3 class="ok-isa-group__title" style={`color: ${cat.color};`}>{cat.label}</h3>
+                  <div class="ok-isa-opcodes">
+                    {ops.map((op) => (
+                      <div class="ok-opcode">
+                        <span class="ok-opcode__emoji">{op.emoji}</span>
+                        <span class="ok-opcode__name" style={`color: ${cat.color};`}>{op.name}</span>
+                        <span class="ok-opcode__desc">{op.description}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- S5: EDU Deep Dive -->
+    <section class="hp-section" style="--section-accent: #40C4C4;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/network-01.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow" style="color: #F59E0B;">📚 Flagship</p>
+            <h2 class="hp-card__title mt-2 mb-4">OpenKernel EDU — Live Now</h2>
+            <p class="hp-card__copy mb-6">
+              The first kernel shipped. A complete CS education platform with guided walkthroughs, live OS simulations, and 6-language support. A non-English speaker can complete their first real program in under 10 minutes.
+            </p>
+
+            <div class="ok-edu-highlights">
+              <div class="ok-edu-hl"><strong>Guided Walkthroughs</strong> — glowing tiles show exactly which emoji to tap. A 5-year-old can follow along.</div>
+              <div class="ok-edu-hl"><strong>3 Live OS Simulations</strong> — single-core scheduling, multi-core networking, hexacore with embedded Snake game.</div>
+              <div class="ok-edu-hl"><strong>6 Languages</strong> — English, Espanol, Francais, 中文, العربية, हिन्दी from the first screen.</div>
+              <div class="ok-edu-hl"><strong>Real CS</strong> — CPU pipelines, page faults, context switches, process scheduling. Not a toy.</div>
+            </div>
+
+            <div class="hp-card__cta-row hp-card__cta-row--start mt-6">
+              <a href="https://openkernel-edu.pages.dev/" target="_blank" rel="noopener noreferrer" class="hp-cta hp-cta--accent" style="background: #F59E0B; border-color: #F59E0B; color: #0F0D24;">Try EDU Live</a>
+              <a href="/workshops" class="hp-cta hp-cta--glass">Bring to Your Classroom</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- S6: SECURE Preview — Authority Levels -->
+    <section class="hp-section" style="--section-accent: #E84A8A;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/fab-03.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow" style="color: #EF4444;">🔐 In Development</p>
+            <h2 class="hp-card__title mt-2 mb-4">OpenKernel SECURE — Authority Levels</h2>
+            <p class="hp-card__copy mb-6">
+              Enterprise security you can actually see. 6 authority levels, real-time audit streams, multi-party approval gates. Backed by the same 1,517-line TypeScript governance engine that powers PulZ — evidence validation, confidence scoring, decision state machines, and tamper-proof logging.
+            </p>
+
+            <div class="ok-authority">
+              {AUTHORITY_LEVELS.map((a) => (
+                <div class="ok-auth-row">
+                  <span class="ok-auth-badge" style={`background: ${a.color}; color: ${a.level === 'A5' ? '#fff' : '#0F0D24'};`}>{a.level}</span>
+                  <span class="ok-auth-emoji">{a.emoji}</span>
+                  <span class="ok-auth-name">{a.name}</span>
+                  <span class="ok-auth-desc">{a.description}</span>
+                </div>
+              ))}
+            </div>
+
+            <pre class="ok-code mt-6" style="max-width: 32rem;"><code><span class="ok-comment"># Approval gate in action:</span>
+Operation: 🗑️ DELETE /production/db
+Authority: A5 ⚫
+Approvals: 3/3 required
+├── 👤 Alice (Admin)    ✅
+├── 👤 Bob (Security)   ✅
+└── 👤 Carol (Ops)      ⏳ PENDING</code></pre>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- S7: ORA Integration -->
+    <section class="hp-section" style="--section-accent: #FF6B2B;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/software-01.jpg'); background-position: center 60%;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow" style="color: #4F46E5;">Integration</p>
+            <h2 class="hp-card__title mt-2 mb-4">Powered by ORA</h2>
+            <p class="hp-card__copy mb-4">
+              OpenKernel uses the same governance layer as ORA. The validation engine, evidence system, and approval queues are shared. One runtime. One set of rules. Five specialized kernels.
+            </p>
+
+            <div class="ok-ora-flow">
+              <span class="ok-ora-node" style="border-color: #F59E0B;">OpenKernel</span>
+              <span class="ok-ora-arrow">→</span>
+              <span class="ok-ora-node" style="border-color: #EF4444;">Governance Engine</span>
+              <span class="ok-ora-arrow">→</span>
+              <span class="ok-ora-node" style="border-color: #4F46E5;">ORA Runtime</span>
+              <span class="ok-ora-arrow">→</span>
+              <span class="ok-ora-node" style="border-color: #D4A847;">Odin Protocol</span>
+            </div>
+
+            <div class="hp-card__cta-row hp-card__cta-row--start mt-6">
+              <a href="/ora" class="hp-cta hp-cta--accent" style="background: #4F46E5; border-color: #4F46E5;">Learn About ORA</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- S8: CTA -->
+    <section class="hp-section" style="--section-accent: #AAFF2A;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/network-02.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim" style="background: linear-gradient(135deg, rgba(15,12,41,0.92), rgba(245,158,11,0.08));"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in" style="text-align: center;">
+          <div class="hp-card__inner" style="align-items: center;">
+            <p class="hp-card__eyebrow" style="color: #F59E0B;">Start Now</p>
+            <h2 class="hp-card__title mt-2 mb-4">Five Kernels. All Open Source.</h2>
+            <p class="hp-card__copy mb-6" style="max-width: 36rem; text-align: center;">
+              Every kernel is open source and free to use. Start with EDU. Contribute to the rest. We are building the universal foundation for accessible computer science.
+            </p>
+            <div class="hp-card__cta-row">
+              <a href="https://openkernel-edu.pages.dev/" target="_blank" rel="noopener noreferrer" class="hp-cta hp-cta--accent" style="background: #F59E0B; border-color: #F59E0B; color: #0F0D24;">Start with EDU</a>
+              <a href="https://github.com/OpenKernel-edu/emoji-kernel-edu" target="_blank" rel="noopener noreferrer" class="hp-cta hp-cta--glass">Contribute on GitHub</a>
+              <a href="/workshops" class="hp-cta hp-cta--glass">Bring to Your School</a>
+            </div>
+            <div class="mt-8" style="text-align: left; width: 100%;">
+              <PageNextActions actions={[
+                {label: 'ORA Runtime', href: '/ora', description: 'The AI runtime that governs the kernels.', accent: 'teal'},
+                {label: 'All Software', href: '/software', description: 'Everything built by 3D3D.', accent: 'magenta'},
+              ]} />
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>
+
+<style>
+  .ok-manifesto {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 0.9rem + 1vw, 1.6rem);
+    font-style: italic;
+    color: rgba(245, 158, 11, 0.7);
+    margin: 0;
+  }
+  .ok-brand {
+    font-family: var(--font-tech);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(246, 247, 250, 0.35);
+  }
+  .ok-brand strong { color: rgba(246, 247, 250, 0.65); }
+
+  .ok-code {
+    margin: 0;
+    padding: 1rem 1.2rem;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    border-radius: 2px;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    line-height: 2;
+    color: #FEF3C7;
+    overflow-x: auto;
+  }
+  .ok-comment { color: rgba(245, 158, 11, 0.4); font-size: 0.78rem; }
+  .ok-code-caption {
+    margin: 0.4rem 0 0;
+    font-family: var(--font-tech);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(246, 247, 250, 0.3);
+  }
+
+  /* Vision */
+  .ok-vision-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+    gap: 1rem;
+    max-width: 48rem;
+    text-align: left;
+  }
+  .ok-vision-card {
+    padding: 1.2rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(139, 92, 246, 0.15);
+    border-radius: 2px;
+  }
+  .ok-vision-stat {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    color: #8B5CF6;
+    margin-bottom: 0.5rem;
+  }
+  .ok-vision-card p { margin: 0; font-size: 0.8rem; line-height: 1.6; color: rgba(246, 247, 250, 0.45); }
+
+  /* Kernels */
+  .ok-kernels { display: grid; gap: 0.8rem; }
+  .ok-kernel {
+    padding: clamp(1.2rem, 2.5vw, 1.6rem);
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid;
+    border-radius: 2px;
+    display: grid;
+    gap: 0.5rem;
+  }
+  .ok-kernel__header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+  .ok-kernel__emoji { font-size: 1.8rem; line-height: 1; }
+  .ok-kernel__name {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 0.85rem + 0.5vw, 1.2rem);
+    text-transform: uppercase;
+  }
+  .ok-kernel__version {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: rgba(246, 247, 250, 0.3);
+  }
+  .ok-kernel__status {
+    margin-left: auto;
+    font-family: var(--font-tech);
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .ok-kernel__status--shipped { color: #4ADE80; border-color: #4ADE80; }
+  .ok-kernel__status--development { color: #FBBF24; border-color: #FBBF24; }
+  .ok-kernel__status--planned { color: rgba(246, 247, 250, 0.3); border-color: rgba(246, 247, 250, 0.15); }
+  .ok-kernel__tagline {
+    margin: 0;
+    font-style: italic;
+    font-size: 0.82rem;
+    color: rgba(246, 247, 250, 0.55);
+  }
+  .ok-kernel__desc { margin: 0; font-size: 0.78rem; line-height: 1.6; color: rgba(246, 247, 250, 0.4); }
+  .ok-kernel__features { display: grid; gap: 0.25rem; }
+  .ok-kernel__feature { font-size: 0.75rem; color: rgba(246, 247, 250, 0.42); display: flex; align-items: flex-start; gap: 0.4rem; }
+  .ok-kernel__audience { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+  .ok-kernel__audience-tag {
+    font-family: var(--font-tech);
+    font-size: 0.52rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.4rem;
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(246, 247, 250, 0.3);
+    border-radius: 2px;
+  }
+  .ok-kernel__link {
+    font-family: var(--font-tech);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ISA */
+  .ok-isa-group { margin-bottom: 1.2rem; }
+  .ok-isa-group__title {
+    margin: 0 0 0.5rem;
+    font-family: var(--font-tech);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .ok-isa-opcodes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+    gap: 0.4rem;
+  }
+  .ok-opcode {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.7rem;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 2px;
+  }
+  .ok-opcode__emoji { font-size: 1.1rem; line-height: 1; }
+  .ok-opcode__name { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; white-space: nowrap; }
+  .ok-opcode__desc { font-size: 0.68rem; color: rgba(246, 247, 250, 0.35); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  /* EDU highlights */
+  .ok-edu-highlights { display: grid; gap: 0.5rem; }
+  .ok-edu-hl {
+    padding: 0.8rem 1rem;
+    background: rgba(0, 0, 0, 0.25);
+    border-left: 2px solid #F59E0B;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: rgba(246, 247, 250, 0.45);
+  }
+  .ok-edu-hl strong { color: rgba(246, 247, 250, 0.85); }
+
+  /* Authority levels */
+  .ok-authority { display: grid; gap: 0.4rem; }
+  .ok-auth-row {
+    display: grid;
+    grid-template-columns: auto auto auto 1fr;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 0.7rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 2px;
+  }
+  .ok-auth-badge {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.2rem 0.4rem;
+    border-radius: 2px;
+    text-align: center;
+    min-width: 2rem;
+  }
+  .ok-auth-emoji { font-size: 1rem; }
+  .ok-auth-name {
+    font-family: var(--font-tech);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(246, 247, 250, 0.7);
+    white-space: nowrap;
+  }
+  .ok-auth-desc { font-size: 0.72rem; color: rgba(246, 247, 250, 0.35); }
+  @media (max-width: 560px) {
+    .ok-auth-row { grid-template-columns: auto auto 1fr; }
+    .ok-auth-desc { grid-column: 1 / -1; }
+  }
+
+  /* ORA flow */
+  .ok-ora-flow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+  .ok-ora-node {
+    padding: 0.5rem 0.8rem;
+    border: 1.5px solid;
+    border-radius: 2px;
+    font-family: var(--font-tech);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(246, 247, 250, 0.75);
+  }
+  .ok-ora-arrow { color: rgba(246, 247, 250, 0.25); font-size: 1rem; }
+</style>

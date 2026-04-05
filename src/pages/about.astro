@@ -16,18 +16,18 @@ const schema = {
 };
 
 const stats = [
-	{ value: `${CATALOG.length}`, label: 'Products' },
-	{ value: '5', label: 'Materials' },
+	{ value: `${CATALOG.length}+`, label: 'Products' },
 	{ value: '24-48h', label: 'Turnaround' },
-	{ value: '2', label: 'Events' },
+	{ value: 'Worldwide', label: 'Shipping' },
+	{ value: '100%', label: 'Open Source' },
 ];
 ---
 
-<BaseLayout title="About | 3D3D" description="Founder-operated specialty fabrication. Ken's story, from early open-source builds to boats, motorsport, route support, and field deployment." schema={schema} activePath="/about">
+<BaseLayout title="About | 3D3D" description="Specialty fabrication cooperative for marine, restoration, and field deployment. What we do, why we exist, and how the network works." schema={schema} activePath="/about">
 
   <main class="hp-home">
     
-    <!-- Section 1: The Ocean Story -->
+    <!-- Section 1: What We Do -->
     <section class="hp-section" style="--section-accent: #40c4c4;">
       <div class="hp-section__bg">
         <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/real/open-ocean-01.jpg'); background-position: center 40%;"></div>
@@ -36,23 +36,20 @@ const stats = [
       <div class="hp-section__scrim"></div>
       <div class="hp-section__grain"></div>
 
-      <div class="hp-section__shell hp-section__shell--start"> 
-        <article class="hp-card">
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
           <div class="hp-card__inner">
             <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'About'}]} />
-            <p class="hp-card__eyebrow mt-4">The Origin</p>
-            <h1 class="hp-card__title mt-2 mb-4">I know what breaks, because I have been there when it did.</h1>
+            <p class="hp-card__eyebrow mt-4">Who We Are</p>
+            <h1 class="hp-card__title mt-2 mb-4">Specialty fabrication for parts that survive real conditions.</h1>
             <p class="hp-card__copy">
-              Seventy-five knots sustained. Ninety-knot gusts. Four days of continuous survival in a bomb cyclone off the East Coast. There were only two of us on the sailboat, it was my first time at sea, and at the worst of it, we assessed whether pulling the EPIRB was survivable. We chose to endure without it.
+              3D3D is a manufacturing cooperative that builds replacement parts, custom hardware, and functional components for marine, automotive restoration, and field deployment. We print in engineering-grade materials — ASA, PA-CF, PP-GF — designed for UV exposure, saltwater, heat, and mechanical stress.
             </p>
             <p class="hp-card__copy mt-3">
-              That was my introduction to the ocean. My background is not in software, and it is not in rapid prototyping. It is in keeping complex machinery alive when failure has severe consequences.
-            </p>
-            <p class="hp-card__copy mt-3">
-              I have crossed the North Atlantic in eleven days aboard a stripped-down Volvo 60. I have seen thirty-metre waves, and I have fallen off them in a 60-foot Kevlar hull. Before the ocean, I spent ten years as a professional mechanic restoring AMC AMXs and Dodge Polaras. I know what it means to hunt for a part last manufactured in 1979, and I know how to fabricate it when the supply chain is dead.
+              You get firm quotes within 24 hours, parts shipping in 24 to 48 hours, and direct access to the operator building your part. No middlemen, no call centres, no mystery factories.
             </p>
             <div class="hp-card__cta-row hp-card__cta-row--start mt-6">
-              <button type="button" class="hp-cta hp-cta--accent" data-dialog-open="dlg-quote">Hire for Fabrication</button>
+              <button type="button" class="hp-cta hp-cta--accent" data-dialog-open="dlg-quote">Get a Quote</button>
             </div>
           </div>
         </article>
@@ -68,16 +65,16 @@ const stats = [
       <div class="hp-section__scrim"></div>
       <div class="hp-section__grain"></div>
 
-      <div class="hp-section__shell hp-section__shell--start"> 
-        <article class="hp-card">
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
           <div class="hp-card__inner">
             <p class="hp-card__eyebrow">The Model</p>
-            <h2 class="hp-card__title mt-2 mb-4">Not a print shop. An open source cooperative.</h2>
+            <h2 class="hp-card__title mt-2 mb-4">An open source manufacturing cooperative.</h2>
             <p class="hp-card__copy">
-              3D3D is not a traditional corporation. It operates as an open-source manufacturing cooperative. The designs, the code, the operational blueprints, and the failures are all shared. We build tools so that others can build them too, decentralized and locally.
+              We operate as a cooperative. Designs, code, operational blueprints, and documentation are all open source. We build tools so that makers anywhere can run the same quality process locally and independently.
             </p>
             <p class="hp-card__copy mt-3">
-              This model ensures that when supply chains fail, you aren't waiting on a shipment from across the world. You ping the network, download the tested file, and a local node builds it. That is the reality we are constructing. We operate transparently—makers keep 75% of order value.
+              When supply chains fail, you should not be waiting on a shipment from across the world. You contact the network, a local node builds the tested part, and it ships same-region. Makers keep 75% of order value.
             </p>
             
             <div class="hp-card__stats mt-8">
@@ -99,7 +96,7 @@ const stats = [
     </section>
 
     <!-- Section 3: How it Works & Next Steps -->
-    <section class="hp-section" style="--section-accent: #40c4c4;">
+    <section class="hp-section" style="--section-accent: #FF6B2B;">
       <div class="hp-section__bg">
         <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/workshop/printer-action-cf.jpg'); background-position: center;"></div>
       </div>
@@ -107,8 +104,8 @@ const stats = [
       <div class="hp-section__scrim"></div>
       <div class="hp-section__grain"></div>
 
-      <div class="hp-section__shell hp-section__shell--start"> 
-        <article class="hp-card">
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
           <div class="hp-card__inner">
             <p class="hp-card__eyebrow">The Execution</p>
             <h2 class="hp-card__title mt-2 mb-6">How it works on the ground.</h2>
@@ -129,7 +126,7 @@ const stats = [
             </div>
 
             <PageNextActions actions={[
-              {label: 'Get a Quote', href: '/quote', description: 'Start a project with an operator who shows up.', accent: 'teal'},
+              {label: 'Get a Quote', href: '/quote', description: 'Upload your file and get a firm quote.', accent: 'teal'},
               {label: 'Join the Network', href: '/network', description: 'Work with us as a maker or node operator.', accent: 'magenta'},
             ]} />
           </div>

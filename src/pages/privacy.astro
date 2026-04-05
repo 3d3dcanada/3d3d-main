@@ -1,76 +1,49 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Breadcrumbs from '../components/Breadcrumbs.astro';
-
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebPage',
-  name: 'Privacy Policy',
-  description: 'How 3D3D Atlantic Cooperative collects, uses, and protects your personal information.',
-  url: 'https://3d3d.ca/privacy',
-};
+import LegalLayout from '../layouts/LegalLayout.astro';
 ---
 
-<BaseLayout title="Privacy Policy | 3D3D" description="How 3D3D Atlantic Cooperative collects, uses, and protects your personal information." activePath="/privacy" schema={schema}>
+<LegalLayout
+  title="Privacy Policy | 3D3D"
+  description="How 3D3D Atlantic Cooperative collects, uses, and protects your personal information."
+  pageTitle="Privacy Policy"
+  eyebrow="Legal"
+  lastUpdated="April 2026"
+  activePath="/privacy"
+  accent="#40C4C4"
+>
+  <h2>Information We Collect</h2>
+  <p>When you place an order or submit a form, we collect: name, email address, shipping address, phone number (optional), and payment information. Payment data is processed by Stripe and never stored on our servers.</p>
 
-  <div class="pt-8 pb-12">
-    <section class="max-w-3xl mx-auto">
-      <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Legal'}, {label: 'Privacy Policy'}]} />
-      
-      <div class="mb-8 mt-4 rounded-xl overflow-hidden shadow-sm aspect-video sm:aspect-[21/9]">
-        <img src="/media/generated/network-02.jpg" alt="Printed part being packaged into a custom shipping box on a wooden workbench" class="w-full h-full object-cover" />
-      </div>
+  <h2>How We Use Your Information</h2>
+  <p>We use your information to: process and fulfill orders, communicate about your orders, route orders to the nearest qualified maker, improve our products and services, and send marketing communications (with your consent, per CASL).</p>
 
-      <p class="font-display text-xs font-semibold uppercase tracking-wider" style="color: var(--color-text-muted);">Legal</p>
-      <h1 class="font-display text-3xl font-bold mt-2 mb-2" style="color: var(--color-text-primary);">Privacy Policy</h1>
-      <p class="font-display text-xs mb-8" style="color: var(--color-text-muted);">Last updated: March 2026</p>
+  <h2>Information Sharing</h2>
+  <p>We share necessary order details (name, shipping address) with the maker fulfilling your order. We do not sell, rent, or trade your personal information. Third-party services we use: Formspree (form handling), Cloudflare (DNS and hosting). Payment processors will be added when transactions are enabled.</p>
 
-      <div class="space-y-6 text-sm leading-relaxed" style="color: var(--color-text-secondary);">
-        <div>
-          <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">Information We Collect</h2>
-          <p>When you place an order or submit a form, we collect: name, email address, shipping address, phone number (optional), and payment information. Payment data is processed by Stripe and never stored on our servers.</p>
-        </div>
+  <h2>Data Retention</h2>
+  <p>Order data is retained for 7 years for tax and legal compliance. You may request deletion of your personal data at any time by emailing info@3d3d.ca.</p>
 
-        <div>
-          <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">How We Use Your Information</h2>
-          <p>We use your information to: process and fulfill orders, communicate about your orders, route orders to the nearest qualified maker, improve our products and services, and send marketing communications (with your consent, per CASL).</p>
-        </div>
+  <h2>Cookies & Tracking</h2>
+  <p>We use essential cookies only (site functionality, cookie consent preference storage, Cloudflare bot management). Analytics cookies are only activated with your explicit consent via our cookie consent banner. We do not use third-party advertising, retargeting, or social media tracking cookies.</p>
 
-        <div>
-          <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">Information Sharing</h2>
-          <p>We share necessary order details (name, shipping address) with the maker fulfilling your order. We do not sell, rent, or trade your personal information. Third-party services we use: Formspree (form handling), Cloudflare (DNS and hosting). Payment processors will be added when transactions are enabled.</p>
-        </div>
+  <h2>Quebec Residents — Law 25</h2>
+  <p>If you are a resident of Quebec, your personal information is additionally protected under the Act respecting the protection of personal information in the private sector (Law 25). You have the right to: receive notice before collection, consent or refuse non-essential data collection, request data portability in a structured format, request de-indexing, and file complaints with the Commission d'accès à l'information du Québec (CAI). Our cookie consent banner provides Law 25 compliant opt-in controls.</p>
 
-        <div>
-          <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">Data Retention</h2>
-          <p>Order data is retained for 7 years for tax and legal compliance. You may request deletion of your personal data at any time by emailing info@3d3d.ca.</p>
-        </div>
+  <h2>International Visitors</h2>
+  <p>This website is operated from Canada under Canadian law (PIPEDA). If you access 3d3d.ca from the European Union, United Kingdom, or other jurisdictions with data protection laws, please be aware that your data is processed in Canada. Canada has been recognized by the European Commission as providing adequate data protection. We apply PIPEDA standards globally to all visitors.</p>
 
-        <div>
-          <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">Cookies</h2>
-          <p>We use essential cookies for site functionality and analytics cookies (if consented). No third-party advertising cookies are used.</p>
-        </div>
+  <h2>Breach Notification</h2>
+  <p>In accordance with PIPEDA's mandatory breach notification requirements (in force since November 2018), we will report any breach of security safeguards involving personal information to the Office of the Privacy Commissioner of Canada and notify affected individuals if the breach creates a real risk of significant harm.</p>
 
-        <div>
-          <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">Purpose Limitation</h2>
-          <p>Your personal information will not be used for purposes other than those described above without your additional consent, except where required by law. This principle is established under PIPEDA (Principle 3: Limiting Use, Disclosure, and Retention).</p>
-        </div>
+  <h2>Purpose Limitation</h2>
+  <p>Your personal information will not be used for purposes other than those described above without your additional consent, except where required by law. This principle is established under PIPEDA (Principle 3: Limiting Use, Disclosure, and Retention).</p>
 
-        <div>
-          <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">Your Rights</h2>
-          <p>Under PIPEDA and applicable provincial legislation, you have the right to access, correct, and request deletion of your personal information. Access requests will be addressed within 30 days. Contact our Privacy Officer at <a href="mailto:info@3d3d.ca" class="hover:underline" style="color: var(--color-teal-primary);">info@3d3d.ca</a> for any privacy-related requests.</p>
-        </div>
+  <h2>Your Rights</h2>
+  <p>Under PIPEDA and applicable provincial legislation, you have the right to access, correct, and request deletion of your personal information. Access requests will be addressed within 30 days.</p>
 
-        <div>
-          <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">Complaints</h2>
-          <p>If you are not satisfied with our response to a privacy concern, you may file a complaint with the Office of the Privacy Commissioner of Canada at <a href="https://www.priv.gc.ca" class="hover:underline" style="color: var(--color-teal-primary);" target="_blank" rel="noopener noreferrer">priv.gc.ca</a> or by calling 1-800-282-1376.</p>
-        </div>
+  <h2>Complaints</h2>
+  <p>If you are not satisfied with our response to a privacy concern, you may file a complaint with the Office of the Privacy Commissioner of Canada at priv.gc.ca or by calling 1-800-282-1376.</p>
 
-        <div>
-          <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">Privacy Officer</h2>
-          <p>3D3D Atlantic Cooperative, Moncton, NB, Canada. Privacy Officer: <a href="mailto:info@3d3d.ca" class="hover:underline" style="color: var(--color-teal-primary);">info@3d3d.ca</a>.</p>
-        </div>
-      </div>
-    </section>
-  </div>
-</BaseLayout>
+  <h2>Privacy Officer</h2>
+  <p>3D3D Atlantic Cooperative, Moncton, NB, Canada. Privacy Officer: <a href="mailto:info@3d3d.ca">info@3d3d.ca</a>.</p>
+</LegalLayout>

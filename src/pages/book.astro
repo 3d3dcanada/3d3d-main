@@ -18,14 +18,14 @@ const schema = {
 
 <BaseLayout
   title="Book a Call | 3D3D"
-  description="Fifteen minutes. Tell me the problem. I will tell you whether I can solve it. Book a discovery call or project discussion."
+  description="Fifteen minutes. Tell us the problem. We will tell you whether we can solve it. Book a discovery call or project discussion."
   schema={schema}
   activePath="/book"
 >
   <main class="hp-home">
 
     <!-- Section 1: Hero -->
-    <section class="hp-section" style="--section-accent: #e84a8a;">
+    <section class="hp-section" style="--section-accent: #40C4C4;">
       <div class="hp-section__bg">
         <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/software-01.jpg'); background-position: center;"></div>
       </div>
@@ -34,13 +34,13 @@ const schema = {
       <div class="hp-section__grain"></div>
 
       <div class="hp-section__shell hp-section__shell--start"> 
-        <article class="hp-card">
+        <article class="hp-card scroll-in">
           <div class="hp-card__inner">
             <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Services', href: '/contact'}, {label: 'Book a Call'}]} />
             <p class="hp-card__eyebrow mt-4">Schedule</p>
             <h1 class="hp-card__title mt-2 mb-4">Book a Call</h1>
             <p class="hp-card__copy hp-card__copy--lead">
-              Fifteen minutes. Tell me the problem. I will tell you whether I can solve it, what material it needs, and what the job takes. That is the whole call.
+              Fifteen minutes. Tell us the problem. We will tell you whether we can solve it, what material it needs, and what the job takes. That is the whole call.
             </p>
             <div class="hp-card__cta-row hp-card__cta-row--start mt-6">
               <a href="#calendar" class="hp-cta hp-cta--accent">Open Calendar</a>
@@ -52,7 +52,7 @@ const schema = {
     </section>
 
     <!-- Section 2: What to expect -->
-    <section class="hp-section" style="--section-accent: #40c4c4;">
+    <section class="hp-section" style="--section-accent: #E84A8A;">
       <div class="hp-section__bg">
         <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/real/race-morning-crew.jpg'); background-position: center;"></div>
       </div>
@@ -61,16 +61,16 @@ const schema = {
       <div class="hp-section__grain"></div>
 
       <div class="hp-section__shell hp-section__shell--start"> 
-        <article class="hp-card">
+        <article class="hp-card scroll-in">
           <div class="hp-card__inner">
             <p class="hp-card__eyebrow">Who you are talking to</p>
             <h2 class="hp-card__title mt-2 mb-6">Not a sales call. An engineering assessment.</h2>
-            
+
             <p class="hp-card__copy mb-4">
-              Twenty-year mechanical background. Ten years as a mechanic building performance engines and restoring classics. Offshore sailor with transatlantic passages, the Rolex Fastnet Race, and the 2026 Newport-Bermuda Race on the CV. Built 3D3D from an RV running three printers off a generator.
+              Our team brings 20 years of mechanical background, offshore sailing experience including transatlantic passages and the Rolex Fastnet Race, and production 3D printing in demanding environments. We know what breaks and why.
             </p>
             <p class="hp-card__copy mb-8">
-              I will assess your problem, tell you whether fabrication is the right path, and if it is, I will tell you exactly what material and process I would use. If it is not the right path, I will tell you that too.
+              We will assess your problem, tell you whether fabrication is the right path, and if it is, recommend the exact material and process. If fabrication is not the right approach, we will tell you that too.
             </p>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -97,7 +97,7 @@ const schema = {
     </section>
 
     <!-- Section 3: Calendar Embed -->
-    <section id="calendar" class="hp-section" style="--section-accent: #e84a8a; min-height: 100svh;">
+    <section id="calendar" class="hp-section" style="--section-accent: #FF6B2B; min-height: 100svh;">
       <div class="hp-section__bg">
         <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/software-02.jpg'); background-position: center;"></div>
       </div>
@@ -106,14 +106,20 @@ const schema = {
       <div class="hp-section__grain"></div>
 
       <div class="hp-section__shell hp-section__shell--start"> 
-        <div class="w-full max-w-4xl mx-auto py-12 relative z-10">
-          <BookingEmbed client:idle />
-        </div>
+        <article class="pg-card" style="padding: 0; overflow: hidden;">
+          <div style="padding: clamp(1.5rem, 3vw, 2.5rem);">
+            <p class="pg-card__eyebrow">Schedule</p>
+            <h2 class="pg-card__title" style="margin-bottom: 1.5rem;">Pick a time that works.</h2>
+          </div>
+          <div style="padding: 0 clamp(1rem, 2vw, 2rem) clamp(1.5rem, 3vw, 2.5rem);">
+            <BookingEmbed client:idle />
+          </div>
+        </article>
       </div>
     </section>
 
     <!-- Section 4: Next Actions -->
-    <section class="hp-section" style="--section-accent: #40c4c4;">
+    <section class="hp-section" style="--section-accent: #AAFF2A;">
       <div class="hp-section__bg">
         <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/fab-02.jpg'); background-position: center;"></div>
       </div>
@@ -122,7 +128,7 @@ const schema = {
       <div class="hp-section__grain"></div>
 
       <div class="hp-section__shell hp-section__shell--start"> 
-        <article class="hp-card">
+        <article class="hp-card scroll-in">
           <div class="hp-card__inner">
             <PageNextActions actions={[
               {label: 'Get a Quote', href: '/quote', description: 'Upload files and get a structured estimate.', accent: 'teal'},

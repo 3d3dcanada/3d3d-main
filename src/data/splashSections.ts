@@ -1,4 +1,4 @@
-export type SplashAccent = 'teal' | 'magenta' | 'orange';
+export type SplashAccent = 'teal' | 'magenta' | 'orange' | 'lime';
 
 export interface SplashSection {
   id: 'market' | 'services' | 'network' | 'learn' | 'about' | 'materials' | 'media' | 'faq';
@@ -25,6 +25,7 @@ export const ACCENT_HEX: Record<SplashAccent, string> = {
   orange: '#FF6B2B',
   teal: '#40C4C4',
   magenta: '#E84A8A',
+  lime: '#AAFF2A',
 };
 
 export const SPLASH_SECTIONS: SplashSection[] = [
@@ -83,7 +84,7 @@ export const SPLASH_SECTIONS: SplashSection[] = [
     highlights: ['Revenue sharing', 'Maker-first economics', 'Open source ethos', 'Global reach'],
     tags: ['Makers', 'Cooperative', 'Open network'],
     ctaLabel: 'View Opportunities',
-    href: '/opportunities',
+    href: '/shop',
     backgroundImage: '/images/splash-bg-network.png',
     accent: 'magenta',
     naturalColors: ['#F2D1E0', '#E84A8A', '#8A2356'],

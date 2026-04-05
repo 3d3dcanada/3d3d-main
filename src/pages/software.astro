@@ -1,0 +1,335 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PageNextActions from '../components/PageNextActions.astro';
+
+const products = [
+  {
+    name: 'ORA',
+    tagline: 'AI runtime that proves its answers before acting',
+    description: 'A governed AI runtime built in Rust with 8 MCP tools, evidence-based reasoning, durable memory, and the Odin Protocol. Runs on your machine, works with any LLM provider.',
+    status: 'Live',
+    statusColor: '#4ADE80',
+    accent: '#40C4C4',
+    stack: ['Rust', 'Axum', 'MCP', 'SQLite'],
+    href: '/ora',
+  },
+  {
+    name: 'OpenKernel',
+    tagline: 'Learn computer science with emoji instead of English',
+    description: 'Education, security, AI agent transparency, steganography, and manufacturing — all in emoji. 23 opcodes. 6 languages. Works in any browser.',
+    status: 'Live',
+    statusColor: '#4ADE80',
+    accent: '#E84A8A',
+    stack: ['TypeScript', 'React', 'Vite', 'EmojiASM'],
+    href: '/openkernel',
+  },
+  {
+    name: 'PulZ Governance Kernel',
+    tagline: 'Decides whether your AI is allowed to act',
+    description: '47KB TypeScript, zero dependencies. Evidence-backed decisions, confidence scoring, tamper-proof audit chains, and incident learning. Stops your AI from doing things it should not.',
+    status: 'Live',
+    statusColor: '#4ADE80',
+    accent: '#FF6B2B',
+    stack: ['TypeScript', 'Zero deps', '1,517 lines'],
+    href: '/governance-kernel',
+  },
+  {
+    name: 'HarbourMesh',
+    tagline: 'Boat monitoring and navigation that works offline',
+    description: 'Marine IoT platform. Offline navigation, NMEA 0183/2000, weather routing, AIS tracking, AI companion. Built for boats with no cell signal.',
+    status: 'Live',
+    statusColor: '#4ADE80',
+    accent: '#AAFF2A',
+    stack: ['TypeScript', 'React', 'Vite', 'OpenLayers'],
+    href: '/harbourmesh',
+  },
+  {
+    name: 'Sovereign AI',
+    tagline: 'Run AI models on your own hardware',
+    description: 'Ollama + OpenWebUI + MCP + ComfyUI, optimized for GTX 1070 (8GB VRAM). Everything runs locally. Nothing goes to the cloud.',
+    status: 'Live',
+    statusColor: '#4ADE80',
+    accent: '#40C4C4',
+    stack: ['Docker', 'Ollama', 'OpenWebUI', 'ComfyUI'],
+    href: 'https://github.com/3d3dcanada/sovereign-ai',
+    external: true,
+  },
+  {
+    name: 'Aro — The Pitch Engine',
+    tagline: 'Build pitch decks in one HTML file, no server needed',
+    description: 'One HTML file, 227 KB. Build investor-ready presentations with zero backend, zero cloud. Your data never leaves your machine. Free download.',
+    status: 'Live',
+    statusColor: '#4ADE80',
+    accent: '#E84A8A',
+    stack: ['HTML', 'CSS', 'JavaScript', '227 KB'],
+    href: '/aro',
+  },
+  {
+    name: 'Neon Shadow',
+    tagline: 'Open Source HTML Game About 3D Printing',
+    description: 'An open-source browser game that teaches 3D printing concepts through gameplay. No install, runs in any browser.',
+    status: 'Live',
+    statusColor: '#4ADE80',
+    accent: '#FF6B2B',
+    stack: ['HTML', 'CSS', 'JavaScript'],
+    href: 'https://github.com/3d3dcanada/neon-shadow',
+    external: true,
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Software Portfolio — 3D3D',
+  description: 'Open-source software built by 3D3D Atlantic Cooperative. AI runtimes, emoji kernels, marine IoT, and developer tools.',
+  url: 'https://3d3d.ca/software',
+};
+---
+
+<BaseLayout title="Free Tools & Local AI | 3D3D" description="Free, open source tools and local AI setup services. ORA governed runtime, marine IoT, pitch deck builder, and more. We set up AI on your hardware — no cloud, no subscription." activePath="/software" schema={schema}>
+
+  <main class="hp-home">
+
+    <!-- Hero -->
+    <section class="hp-section" style="--section-accent: #40C4C4;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/software-01.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
+          <div class="hp-card__inner">
+            <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Software'}]} />
+            <p class="hp-card__eyebrow mt-4">Software & AI</p>
+            <h1 class="hp-card__title mt-2 mb-4">Free Tools. Local AI. Open Source.</h1>
+            <p class="hp-card__copy hp-card__copy--lead" style="max-width: 40rem;">
+              Everything we build is free, open source, and runs on your hardware. We also set up local AI systems — models that learn your workflow, stay private, and cost nothing after install.
+            </p>
+            <div class="hp-card__cta-row hp-card__cta-row--start mt-4">
+              <a href="#own-your-ai" class="hp-cta hp-cta--accent">Own Your AI</a>
+              <a href="#tools" class="hp-cta hp-cta--glass">Browse Tools</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Own Your AI -->
+    <section id="own-your-ai" class="hp-section" style="--section-accent: #E84A8A;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/software-03.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow">Local AI Setup</p>
+            <h2 class="hp-card__title mt-2 mb-4">Own Your AI</h2>
+            <p class="hp-card__subtitle">Run models on your own hardware. No cloud fees. No data leaving your machine.</p>
+            <p class="hp-card__copy">
+              We install and configure a full local AI stack on your PC or server. Language models, image generation, code assistants, and task automation — all running privately on your hardware. We train the models on your workflow, configure the tools, and hand you the keys.
+            </p>
+
+            <div class="pg-grid-2 mt-6" style="gap: 0.6rem;">
+              <div style="padding: 1rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.08); border-radius: 2px;">
+                <strong style="color: #E84A8A; font-family: var(--font-tech); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;">What You Get</strong>
+                <ul class="hp-card__highlights mt-2">
+                  <li>Ollama + OpenWebUI for chat and reasoning</li>
+                  <li>ComfyUI for image generation</li>
+                  <li>MCP tools for desktop automation</li>
+                  <li>Models trained on your specific workflow</li>
+                </ul>
+              </div>
+              <div style="padding: 1rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.08); border-radius: 2px;">
+                <strong style="color: #E84A8A; font-family: var(--font-tech); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;">Why Local</strong>
+                <ul class="hp-card__highlights mt-2">
+                  <li>Your data never leaves your machine</li>
+                  <li>No monthly API fees after setup</li>
+                  <li>Works offline — no internet required</li>
+                  <li>Industry-specific models in development</li>
+                </ul>
+              </div>
+            </div>
+
+            <p class="hp-card__copy mt-4" style="font-size: 0.78rem; color: rgba(246,247,250,0.45);">
+              We run 6 local models daily on Ubuntu. Language models, coding assistants, image generators, and task automation agents — all on consumer hardware. This is what we deploy for clients.
+            </p>
+
+            <div class="hp-card__cta-row hp-card__cta-row--start mt-4">
+              <a href="/book" class="hp-cta hp-cta--accent">Book a Setup Call</a>
+              <a href="/ora" class="hp-cta hp-cta--glass">Learn About ORA</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Products -->
+    <section id="tools" class="hp-section" style="--section-accent: #FF6B2B;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/software-02.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in">
+          <div class="hp-card__inner">
+            <p class="hp-card__eyebrow">Open Source Tools</p>
+            <h2 class="hp-card__title mt-2 mb-6">Free to Use. Free to Modify.</h2>
+
+            <div class="sw-grid">
+              {products.map((p) => (
+                <article class="sw-product" style={`border-color: ${p.accent}20;`}>
+                  <div class="sw-product__header">
+                    <h3 class="sw-product__name" style={`color: ${p.accent};`}>{p.name}</h3>
+                    <span class="sw-product__status" style={`color: ${p.statusColor}; border-color: ${p.statusColor};`}>{p.status}</span>
+                  </div>
+                  <p class="sw-product__tagline">{p.tagline}</p>
+                  <p class="sw-product__desc">{p.description}</p>
+                  <div class="sw-product__stack">
+                    {p.stack.map((s) => <span class="sw-product__tech">{s}</span>)}
+                  </div>
+                  {p.href && (
+                    <a href={p.href} class="sw-product__link" style={`color: ${p.accent};`} target={p.external ? '_blank' : undefined} rel={p.external ? 'noopener noreferrer' : undefined}>
+                      {p.external ? 'View on GitHub →' : 'Learn More →'}
+                    </a>
+                  )}
+                </article>
+              ))}
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="hp-section" style="--section-accent: #FF6B2B;">
+      <div class="hp-section__bg">
+        <div class="hp-section__bg-img hp-section__bg-img--active" style="background-image: url('/media/generated/network-01.jpg'); background-position: center;"></div>
+      </div>
+      <div class="hp-section__vignette"></div>
+      <div class="hp-section__scrim"></div>
+      <div class="hp-section__grain"></div>
+
+      <div class="hp-section__shell hp-section__shell--start">
+        <article class="hp-card scroll-in" style="text-align: center;">
+          <div class="hp-card__inner" style="align-items: center;">
+            <p class="hp-card__eyebrow">Collaborate</p>
+            <h2 class="hp-card__title mt-2 mb-4">Build With Us</h2>
+            <p class="hp-card__copy mb-6" style="max-width: 36rem; text-align: center;">
+              Every project is open source. Fork it. Contribute. Or hire the cooperative to build something for your organization.
+            </p>
+            <div class="hp-card__cta-row">
+              <a href="https://github.com/3d3dcanada" target="_blank" rel="noopener noreferrer" class="hp-cta hp-cta--accent" style="background: #4F46E5; border-color: #4F46E5;">GitHub Organization</a>
+              <a href="/contact?subject=software" class="hp-cta hp-cta--glass">Hire 3D3D</a>
+            </div>
+            <div class="mt-8" style="text-align: left; width: 100%;">
+              <PageNextActions actions={[
+                {label: 'About 3D3D', href: '/about', description: 'The cooperative behind the code.', accent: 'teal'},
+                {label: 'ORA Runtime', href: '/ora', description: 'The governed AI runtime.', accent: 'magenta'},
+              ]} />
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>
+
+<style>
+  .sw-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.8rem;
+  }
+  @media (max-width: 480px) { .sw-stats { grid-template-columns: repeat(2, 1fr); } }
+  .sw-stat {
+    text-align: center;
+    padding: 0.8rem 0.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 2px;
+  }
+  .sw-stat__val {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #7C3AED;
+  }
+  .sw-stat__label {
+    font-family: var(--font-tech);
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(246, 247, 250, 0.35);
+  }
+
+  .sw-grid { display: grid; gap: 0.8rem; }
+  .sw-product {
+    padding: clamp(1.2rem, 2.5vw, 1.6rem);
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid;
+    border-radius: 2px;
+    display: grid;
+    gap: 0.45rem;
+  }
+  .sw-product__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .sw-product__name {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 0.85rem + 0.5vw, 1.2rem);
+    text-transform: uppercase;
+  }
+  .sw-product__status {
+    font-family: var(--font-tech);
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .sw-product__tagline {
+    margin: 0;
+    font-style: italic;
+    font-size: 0.78rem;
+    color: rgba(246, 247, 250, 0.5);
+  }
+  .sw-product__desc { margin: 0; font-size: 0.75rem; line-height: 1.6; color: rgba(246, 247, 250, 0.38); }
+  .sw-product__stack { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+  .sw-product__tech {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    padding: 0.15rem 0.4rem;
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(246, 247, 250, 0.3);
+    border-radius: 2px;
+  }
+  .sw-product__link {
+    font-family: var(--font-tech);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+</style>

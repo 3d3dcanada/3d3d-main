@@ -2,6 +2,8 @@
 import BaseHead from '../components/BaseHead.astro';
 import SiteFooterFull from '../components/SiteFooterFull.astro';
 import SiteRightSidebar from '../components/SiteRightSidebar.astro';
+import QuoteDrawerIsland from '../components/QuoteDrawerIsland';
+import SubscribeModal from '../components/SubscribeModal.astro';
 import { ACCENT_HEX } from '../data/splashSections';
 import {
   CATALOG,
@@ -79,20 +81,26 @@ const softwareProjects = [
   {
     name: 'Co-op Shop Catalog',
     stack: ['Astro', 'Catalog data', 'Cloudflare'],
-    note: 'Product catalog, pricing ranges, and direct pathways from discovery to purchase.',
+    note: 'Product catalog with real pricing. Browse, pick a material, and order.',
     href: '/shop',
   },
   {
     name: 'Campaign & Race Logs',
     stack: ['Astro', 'Content ops', 'SEO'],
-    note: 'Publishing workflow for offshore updates, build notes, and community documentation.',
+    note: 'Race updates, build logs, and community documentation. Published as it happens.',
     href: '/blog',
   },
   {
     name: 'Node Ops Toolkit',
     stack: ['Open source', 'Web apps', 'Automation'],
-    note: 'The maker-first infrastructure layer for distributed production and local operator pages.',
+    note: 'Tools for network operators: local pages, job routing, and production management.',
     href: '/network',
+  },
+  {
+    name: 'ORA — Sovereign AI Runtime',
+    stack: ['Rust', 'MCP', 'Odin Protocol'],
+    note: 'Constitutional AI runtime with 8 MCP tools, evidence provenance, and durable memory. Local-first, governed by design.',
+    href: '/ora',
   },
 ];
 
@@ -129,8 +137,8 @@ const initialPartnerPrice = formatSponsorPrice(
 <html lang="en">
 <head>
   <BaseHead
-    title="3D3D | Custom Fabrication, Software & Community — Fredericton, Canada"
-    description="Custom fabrication, software builds, event deployment, and a maker-first network built in Fredericton and deployed wherever the job lands."
+    title="3D3D | Custom 3D Printing & Fabrication — Fredericton, NB · Ships Worldwide"
+    description="Custom 3D printing for marine, automotive, and industrial applications. Firm quotes in 24 hours. A maker cooperative based in Fredericton, shipping worldwide."
     keywords="3D printing Fredericton, custom fabrication Canada, marine parts 3D print, event hire 3D printer, open source cooperative, 3D printing New Brunswick"
   />
 </head>
@@ -154,30 +162,29 @@ const initialPartnerPrice = formatSponsorPrice(
       <div class="hp-section__shell hp-section__shell--center">
         <article class="hp-card hp-card--hero">
           <div class="hp-card__inner">
-            <p class="hp-card__eyebrow">Fredericton, NB · Canada · Deployed Worldwide</p>
-            <h1 class="hp-card__hero-title">FOR THE ONES THAT GIVE A DAMN.</h1>
+            <p class="hp-card__eyebrow">Fredericton, NB · Ships Worldwide</p>
+            <h1 class="hp-card__hero-title">Custom Parts. Built to Survive.</h1>
             <p class="hp-card__copy hp-card__copy--lead">
-              Custom fabrication. Software. Community. Built from the ground up with grit, field
-              hours, and a willingness to make the weird jobs work.
+              We 3D print anything — from flexis and phone cases to marine hardware and carbon fiber nylon brackets. Send us your file or describe what you need. Firm quote in 24 hours.
             </p>
-            <div class="hp-card__cta-row">
-              <button type="button" class="hp-cta hp-cta--accent" data-dialog-open="dlg-quote">Open the Quote Desk</button>
-              <button type="button" class="hp-cta hp-cta--glass" data-dialog-open="dlg-events">Hire for Events</button>
-              <button type="button" class="hp-cta hp-cta--ghost" data-dialog-open="dlg-network">Join the Network</button>
+
+            <div class="hp-card__how-it-works">
+              <div class="hp-card__step"><span class="hp-card__step-num">1</span><span>Send us your file or idea</span></div>
+              <div class="hp-card__step"><span class="hp-card__step-num">2</span><span>Get a firm quote in 24hrs</span></div>
+              <div class="hp-card__step"><span class="hp-card__step-num">3</span><span>We print, inspect, and ship</span></div>
             </div>
-            <div class="hp-card__stats">
-              <div>
-                <strong>6 printers</strong>
-                <span>Field-ready fabrication stack</span>
-              </div>
-              <div>
-                <strong>1 operator</strong>
-                <span>Direct contact from intake to delivery</span>
-              </div>
-              <div>
-                <strong>0 fluff</strong>
-                <span>Just real work, routed fast</span>
-              </div>
+
+            <div class="hp-card__cta-row">
+              <button type="button" class="hp-cta hp-cta--accent" data-dialog-open="dlg-quote">Get a Quote</button>
+              <a href="/shop" class="hp-cta hp-cta--glass">Browse the Catalog</a>
+            </div>
+
+            <div class="hp-card__trust-strip">
+              <span>Ships Worldwide</span>
+              <span>All Materials</span>
+              <span>No Minimums</span>
+              <span>24hr Quotes</span>
+              <span>Free Assessment</span>
             </div>
           </div>
         </article>
@@ -189,7 +196,7 @@ const initialPartnerPrice = formatSponsorPrice(
       id="fabrication"
       data-observe-section
       class="hp-section"
-      style={`--section-accent: ${ACCENT_HEX.teal};`}
+      style={`--section-accent: ${ACCENT_HEX.magenta};`}
     >
       <div class="hp-section__bg" data-rotating-gallery data-rotate-interval="9000">
         {fabricationImages.map((image, index) => (
@@ -207,27 +214,28 @@ const initialPartnerPrice = formatSponsorPrice(
         <article class="hp-card">
           <div class="hp-card__inner">
             <p class="hp-card__eyebrow">Custom Fabrication</p>
-            <h2 class="hp-card__title">Need a part that doesn&apos;t exist?</h2>
-            <p class="hp-card__subtitle">Six printers. Deployable anywhere. Same-day triage when the job calls for it.</p>
+            <h2 class="hp-card__title">We print anything you need.</h2>
+            <p class="hp-card__subtitle">From a phone case to a marine bracket — every job gets the same attention.</p>
             <p class="hp-card__copy">
-              Marine hardware, automotive restoration, prototypes, replacement components, and the
-              ugly one-off problems that never fit a normal intake form.
+              PLA flexis, PETG functional parts, ASA for outdoor and marine, carbon fiber nylon for
+              engine bays, TPU for seals and bumpers. We handle prototypes, replacement components,
+              reverse engineering, and custom designs. No job too small, no material too specialized.
             </p>
             <ul class="hp-card__highlights">
-              <li>Marine-grade replacements</li>
-              <li>Reverse engineering</li>
-              <li>Automotive restoration</li>
-              <li>Field deployment support</li>
+              <li>Flexis, gifts, and custom designs</li>
+              <li>Functional replacement parts</li>
+              <li>Marine and automotive hardware</li>
+              <li>Engineering-grade materials</li>
             </ul>
             <div class="hp-card__tags">
-              <span class="hp-card__tag">Prusa MK2.5</span>
-              <span class="hp-card__tag">Bambu A1</span>
-              <span class="hp-card__tag">Creality K1</span>
-              <span class="hp-card__tag">Kobra 2 Max</span>
+              <span class="hp-card__tag">PLA / PETG / ASA</span>
+              <span class="hp-card__tag">Carbon Fiber Nylon</span>
+              <span class="hp-card__tag">TPU Flex</span>
+              <span class="hp-card__tag">Large Format</span>
             </div>
             <div class="hp-card__cta-row hp-card__cta-row--start">
-              <button type="button" class="hp-cta hp-cta--accent" data-dialog-open="dlg-quote">Get an Estimate</button>
-              <a href="/quote" class="hp-cta hp-cta--glass">Open the Full Quote Page</a>
+              <button type="button" class="hp-cta hp-cta--accent" data-dialog-open="dlg-quote">Get a Quote</button>
+              <a href="/quote" class="hp-cta hp-cta--glass">Upload a File</a>
             </div>
           </div>
         </article>
@@ -239,7 +247,7 @@ const initialPartnerPrice = formatSponsorPrice(
       id="story"
       data-observe-section
       class="hp-section"
-      style={`--section-accent: ${ACCENT_HEX.magenta};`}
+      style={`--section-accent: ${ACCENT_HEX.orange};`}
     >
       <div class="hp-section__bg" data-rotating-gallery data-rotate-interval="9000">
         {storyImages.map((image, index) => (
@@ -256,18 +264,14 @@ const initialPartnerPrice = formatSponsorPrice(
       <div class="hp-section__shell hp-section__shell--end">
         <article class="hp-card">
           <div class="hp-card__inner">
-            <p class="hp-card__eyebrow">The Story</p>
-            <h2 class="hp-card__title">Made from nothing. Built for everyone.</h2>
+            <p class="hp-card__eyebrow">The Cooperative</p>
+            <h2 class="hp-card__title">A cooperative of makers, not a storefront.</h2>
             <p class="hp-card__copy">
-              Ankylosing spondylitis ended a decade of trucking. Reinvention started in an RV with
-              three printers, a workbench, and a refusal to disappear quietly.
-            </p>
-            <p class="hp-card__copy">
-              Ten years sober. Still building. If you do not fit the normal job market, the maker
-              economy should still have room for you.
+              You work with real operators who build real parts. No sales reps, no outsourced intake.
+              Every quote, every build, and every shipment is handled by the people doing the work.
             </p>
             <div class="hp-card__cta-row hp-card__cta-row--start">
-              <a href="/about" class="hp-cta hp-cta--accent">Read the Full Story</a>
+              <a href="/about" class="hp-cta hp-cta--accent">About the Cooperative</a>
             </div>
           </div>
         </article>
@@ -279,7 +283,7 @@ const initialPartnerPrice = formatSponsorPrice(
       id="events"
       data-observe-section
       class="hp-section"
-      style={`--section-accent: ${ACCENT_HEX.magenta};`}
+      style={`--section-accent: ${ACCENT_HEX.lime};`}
     >
       <div class="hp-section__bg" data-rotating-gallery data-rotate-interval="9000">
         {eventImages.map((image, index) => (
@@ -300,8 +304,8 @@ const initialPartnerPrice = formatSponsorPrice(
             <h2 class="hp-card__title">Bring 3D3D to your event.</h2>
             <p class="hp-card__subtitle">Regattas, car shows, expos, conventions, and community days.</p>
             <p class="hp-card__copy">
-              Live printing, on-site troubleshooting, and video documentation from an operator who
-              knows how to work around crowds, weather, and field constraints.
+              Live printing, on-site troubleshooting, and video documentation. We work around
+              crowds, weather, and field constraints so your event runs clean.
             </p>
             <ul class="hp-card__highlights">
               <li>Live fabrication on-site</li>
@@ -310,7 +314,7 @@ const initialPartnerPrice = formatSponsorPrice(
               <li>Same-day problem solving</li>
             </ul>
             <div class="hp-card__cta-row hp-card__cta-row--start">
-              <button type="button" class="hp-cta hp-cta--accent" data-dialog-open="dlg-events">Book the Deployment Desk</button>
+              <button type="button" class="hp-cta hp-cta--accent" data-dialog-open="dlg-events">Book an Event</button>
               <a href="/book" class="hp-cta hp-cta--glass">Book a Call</a>
             </div>
           </div>
@@ -341,11 +345,11 @@ const initialPartnerPrice = formatSponsorPrice(
         <article class="hp-card">
           <div class="hp-card__inner">
             <p class="hp-card__eyebrow">Software & AI</p>
-            <h2 class="hp-card__title">We build digital too.</h2>
-            <p class="hp-card__subtitle">Websites, AI workflows, tools, and automations built fast and handed over cleanly.</p>
+            <h2 class="hp-card__title">Software that ships.</h2>
+            <p class="hp-card__subtitle">Websites, AI runtimes, automation pipelines, and tools — built fast, handed over clean.</p>
             <p class="hp-card__copy">
               The same mindset that solves a broken hardware workflow also ships better digital
-              systems. Practical scopes. Tight feedback loops. No agency theatre.
+              systems. Practical scopes. Tight feedback loops. You own the code when it is done.
             </p>
             <ul class="hp-card__highlights">
               <li>Custom websites & apps</li>
@@ -387,16 +391,16 @@ const initialPartnerPrice = formatSponsorPrice(
             <p class="hp-card__eyebrow">The Network</p>
             <h2 class="hp-card__title">3D3D connects Canada.</h2>
             <p class="hp-card__copy">
-              First makers in get a free site at <strong>yourname.3d3d.ca</strong>, operator
-              access, and a cooperative model designed to keep more value with the people doing the work.
+              A distributed cooperative for makers, coders, robotics techs, and documentarians across
+              Canada. We keep more value with the people doing the work.
             </p>
             <p class="hp-card__copy">
-              Makers, coders, artists, robotics techs, sailors, and documentarians all belong here
-              if they can carry their weight and share the road.
+              Members get operator access, job routing, and a cooperative model built around shared
+              production capacity.
             </p>
             <div class="hp-card__cta-row hp-card__cta-row--start">
               <button type="button" class="hp-cta hp-cta--accent" data-dialog-open="dlg-network">Apply to Join</button>
-              <a href="/network" class="hp-cta hp-cta--glass">Read the Opportunities</a>
+              <a href="/network" class="hp-cta hp-cta--glass">Learn More</a>
             </div>
           </div>
         </article>
@@ -428,8 +432,8 @@ const initialPartnerPrice = formatSponsorPrice(
             <p class="hp-card__eyebrow">Community Project</p>
             <h2 class="hp-card__title">The Old Girl.</h2>
             <p class="hp-card__copy">
-              A rescued Prusa MK2 turned into the community printer. Pick the file. Pay for
-              filament and shipping. No admin fee. No markup. No nonsense.
+              Community printer, open to everyone. Pick your file, pay for filament and shipping.
+              No admin fee. No markup.
             </p>
             <div class="hp-card__tags">
               <span class="hp-card__tag">Running 24/7</span>
@@ -458,7 +462,7 @@ const initialPartnerPrice = formatSponsorPrice(
       id="sponsor"
       data-observe-section
       class="hp-section hp-section--sponsor"
-      style={`--section-accent: ${ACCENT_HEX.magenta};`}
+      style={`--section-accent: ${ACCENT_HEX.lime};`}
     >
       <div class="hp-section__bg" data-rotating-gallery data-rotate-interval="9000">
         {sponsorImages.map((image, index) => (
@@ -478,11 +482,11 @@ const initialPartnerPrice = formatSponsorPrice(
             <div class="hp-sponsor-head">
               <div>
                 <p class="hp-card__eyebrow">Sponsorships</p>
-                <h2 class="hp-card__title">Sponsor the journey.</h2>
+                <h2 class="hp-card__title">Sponsor the work.</h2>
               </div>
               <p class="hp-card__copy">
-                Monthly or yearly support. USD, CAD, or EUR. Real perks, real production help, and
-                a path for brands or individuals to back the work without the page turning into fluff.
+                Monthly or yearly support in USD, CAD, or EUR. Real perks, production credits, and
+                a direct path for brands and individuals to back what we build.
               </p>
             </div>
 
@@ -506,9 +510,9 @@ const initialPartnerPrice = formatSponsorPrice(
             <p class="hp-tier__price" data-tier-price="supporter">{initialSupporterPrice}</p>
             <p class="hp-tier__meta" data-tier-meta="supporter">per month</p>
             <ul class="hp-tier__list">
-              <li>Custom high-spec filament keychain with their name or logo</li>
+              <li>Custom high-spec filament keychain with your name or logo</li>
               <li>Name and site credits as a sponsor</li>
-              <li>Hat or t-shirt of their choice</li>
+              <li>Hat or t-shirt of your choice</li>
               <li>Ko-fi thank-you post</li>
             </ul>
             <button
@@ -582,95 +586,8 @@ const initialPartnerPrice = formatSponsorPrice(
     </section>
   </main>
 
-  <dialog id="dlg-quote" class="hp-dialog">
-    <div class="hp-dialog__shell">
-      <div class="hp-dialog__header">
-        <div>
-          <p class="hp-card__eyebrow">Quote Desk</p>
-          <h3 class="hp-dialog__title">Get an estimate without leaving the page.</h3>
-        </div>
-        <button type="button" class="hp-dialog__close" data-dialog-close aria-label="Close the quote drawer">✕</button>
-      </div>
-
-      <form
-        action={FORM_ENDPOINT}
-        method="POST"
-        enctype="multipart/form-data"
-        class="hp-dialog__content hp-form"
-        data-analytics-submit="quote_drawer_submitted"
-        data-analytics-source="homepage-quote-drawer"
-      >
-        <input type="hidden" name="_subject" value="Homepage Quote Desk | 3D3D" />
-        <input type="hidden" name="source" value="homepage-quote-drawer" />
-
-        <div class="hp-form__grid">
-          <label class="hp-field">
-            <span>Name</span>
-            <input type="text" name="name" required placeholder="Your name" />
-          </label>
-          <label class="hp-field">
-            <span>Email</span>
-            <input type="email" name="email" required placeholder="you@example.com" />
-          </label>
-        </div>
-
-        <div class="hp-form__grid">
-          <label class="hp-field">
-            <span>Material</span>
-            <select name="material_preference" required>
-              <option value="">Select a material</option>
-              <option>PLA</option>
-              <option>PETG</option>
-              <option>ASA</option>
-              <option>TPU</option>
-              <option>ABS</option>
-              <option>Nylon CF</option>
-            </select>
-          </label>
-          <label class="hp-field">
-            <span>Urgency</span>
-            <select name="urgency" required>
-              <option>Standard</option>
-              <option>Rush</option>
-              <option>Same-day triage</option>
-            </select>
-          </label>
-        </div>
-
-        <div class="hp-form__grid">
-          <label class="hp-field">
-            <span>Dimensions</span>
-            <input type="text" name="dimensions" placeholder="L x W x H or send a file" />
-          </label>
-          <label class="hp-field">
-            <span>Quantity</span>
-            <input type="number" min="1" step="1" name="quantity" value="1" />
-          </label>
-        </div>
-
-        <label class="hp-field">
-          <span>Files</span>
-          <input type="file" name="attachment" accept=".stl,.3mf,.step,.stp,.obj,.pdf,.png,.jpg,.jpeg,.webp" multiple />
-          <small>STL, 3MF, STEP, PDF, photos, or reference shots.</small>
-        </label>
-
-        <label class="hp-field">
-          <span>What needs to be built?</span>
-          <textarea
-            name="message"
-            rows="5"
-            required
-            placeholder="What broke, what the part does, what environment it lives in, and any deadline that matters."
-          ></textarea>
-        </label>
-
-        <div class="hp-dialog__actions">
-          <button type="submit" class="hp-cta hp-cta--accent">Get an Estimate</button>
-          <a href="/quote" class="hp-cta hp-cta--glass">Open the Full Quote Page</a>
-        </div>
-      </form>
-    </div>
-  </dialog>
+  <!-- Quote Drawer (React island) -->
+  <QuoteDrawerIsland client:idle />
 
   <dialog id="dlg-events" class="hp-dialog">
     <div class="hp-dialog__shell">
@@ -744,7 +661,7 @@ const initialPartnerPrice = formatSponsorPrice(
         </div>
 
         <div class="hp-dialog__actions">
-          <button type="submit" class="hp-cta hp-cta--accent">Send the Booking Request</button>
+          <button type="submit" class="hp-cta hp-cta--accent">Send Booking Request</button>
           <a href="/book" class="hp-cta hp-cta--glass">Book a Call Instead</a>
         </div>
       </form>
@@ -756,7 +673,7 @@ const initialPartnerPrice = formatSponsorPrice(
       <div class="hp-dialog__header">
         <div>
           <p class="hp-card__eyebrow">Software & AI</p>
-          <h3 class="hp-dialog__title">A few real build lanes already in motion.</h3>
+          <h3 class="hp-dialog__title">Live projects. All built and shipped by 3D3D.</h3>
         </div>
         <button type="button" class="hp-dialog__close" data-dialog-close aria-label="Close the software drawer">✕</button>
       </div>
@@ -766,7 +683,7 @@ const initialPartnerPrice = formatSponsorPrice(
           {softwareProjects.map((project) => (
             <article class="hp-project-card">
               <div class="hp-project-card__preview">
-                <span>Workshop preview</span>
+                <span>{project.stack[0]}</span>
               </div>
               <div class="hp-project-card__body">
                 <h4>{project.name}</h4>
@@ -843,7 +760,7 @@ const initialPartnerPrice = formatSponsorPrice(
         <input type="hidden" name="source" value="homepage-network-drawer" />
 
         <div class="hp-note-list">
-          <p>What you get: a free site at <strong>yourname.3d3d.ca</strong>, node operator access, and an open source community that actually shares the work.</p>
+          <p>What you get: operator access, job routing, shared production capacity, and a cooperative community built around real work.</p>
         </div>
 
         <div class="hp-form__grid">
@@ -879,8 +796,8 @@ const initialPartnerPrice = formatSponsorPrice(
         </label>
 
         <div class="hp-dialog__actions">
-          <button type="submit" class="hp-cta hp-cta--accent">Submit the Application</button>
-          <a href="/network" class="hp-cta hp-cta--glass">Read the Full Opportunity Page</a>
+          <button type="submit" class="hp-cta hp-cta--accent">Submit Application</button>
+          <a href="/network" class="hp-cta hp-cta--glass">Learn More</a>
         </div>
       </form>
     </div>
@@ -911,7 +828,7 @@ const initialPartnerPrice = formatSponsorPrice(
 
         <div class="hp-note-list">
           <p data-sponsor-dialog-copy>
-            Pick the lane that fits and we will send the matching checkout path once the Stripe links are plugged in.
+            Pick the lane that fits and send your details. We'll follow up with payment info and get things moving.
           </p>
         </div>
 
@@ -948,7 +865,7 @@ const initialPartnerPrice = formatSponsorPrice(
 
         <div class="hp-dialog__actions">
           <button type="submit" class="hp-cta hp-cta--accent">Send Sponsorship Request</button>
-          <a href="/contact?subject=sponsorship" class="hp-cta hp-cta--glass">Open the Full Contact Page</a>
+          <a href="/contact?subject=sponsorship" class="hp-cta hp-cta--glass">Contact Us</a>
         </div>
       </form>
     </div>
@@ -957,6 +874,20 @@ const initialPartnerPrice = formatSponsorPrice(
   
 
   <SiteFooterFull />
+  <SubscribeModal />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "3D3D",
+    "url": "https://3d3d.ca",
+    "description": "Custom 3D printing for marine, automotive, and industrial applications. A maker cooperative based in Fredericton, shipping worldwide.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://3d3d.ca/shop?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  })} />
 
   <script is:inline>
     (() => {
@@ -1141,6 +1072,11 @@ const initialPartnerPrice = formatSponsorPrice(
           event.preventDefault();
           const dialogId = trigger.dataset.dialogOpen;
           if (!dialogId) return;
+          // Quote drawer is handled by React island
+          if (dialogId === 'dlg-quote') {
+            window.dispatchEvent(new CustomEvent('open-quote-drawer'));
+            return;
+          }
           if (dialogId === 'dlg-sponsor') populateSponsorDialog(trigger);
           openDialog(document.getElementById(dialogId));
         });
@@ -1507,6 +1443,58 @@ const initialPartnerPrice = formatSponsorPrice(
     color: #c8d0dc;
     font-size: 0.8rem;
     line-height: 1.5;
+  }
+
+  .hp-card__how-it-works {
+    display: flex;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+  }
+
+  .hp-card__step {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-tech);
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: rgba(246, 247, 250, 0.75);
+  }
+
+  .hp-card__step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.6rem;
+    height: 1.6rem;
+    border: 2px solid var(--section-accent);
+    border-radius: 2px;
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    color: var(--section-accent);
+    flex-shrink: 0;
+  }
+
+  .hp-card__trust-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .hp-card__trust-strip span {
+    padding: 0.3rem 0.7rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 2px;
+    font-family: var(--font-tech);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(246, 247, 250, 0.55);
   }
 
   .hp-cta {

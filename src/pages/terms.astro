@@ -1,81 +1,58 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Breadcrumbs from '../components/Breadcrumbs.astro';
-
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebPage',
-  name: 'Terms of Service',
-  description: 'Terms and conditions for using the 3D3D platform and ordering custom 3D prints.',
-  url: 'https://3d3d.ca/terms',
-};
+import LegalLayout from '../layouts/LegalLayout.astro';
 ---
 
-<BaseLayout title="Terms of Service | 3D3D" description="Terms and conditions for using the 3D3D platform and ordering custom 3D prints." activePath="/terms" schema={schema}>
+<LegalLayout
+  title="Terms of Service | 3D3D"
+  description="Terms and conditions for using the 3D3D platform and ordering custom 3D prints."
+  pageTitle="Terms of Service"
+  eyebrow="Legal"
+  lastUpdated="April 2026"
+  activePath="/terms"
+  accent="#E84A8A"
+>
+  <h2>1. Overview</h2>
+  <p>3D3D Atlantic Cooperative ("3D3D", "we") operates a distributed 3D printing marketplace. By using our platform, you agree to these terms.</p>
 
-  <div class="pt-8 pb-12">
-    <section class="max-w-3xl mx-auto">
-      <Breadcrumbs items={[{label: 'Home', href: '/'}, {label: 'Legal'}, {label: 'Terms of Service'}]} />
-      
-      <div class="mb-8 mt-4 rounded-xl overflow-hidden shadow-sm aspect-video sm:aspect-[21/9]">
-        <img src="/media/generated/fab-03.jpg" alt="Focused engineer in a dimly lit lab examining a dark grey 3D printed engine manifold" class="w-full h-full object-cover" />
-      </div>
+  <h2>2. Orders and Pricing</h2>
+  <p>All prices are in Canadian dollars (CAD) and include applicable surcharges. Tax is calculated based on the shipping province. Prices are subject to change without notice. Orders are confirmed upon payment processing.</p>
 
-      <p class="font-display text-xs font-semibold uppercase tracking-wider" style="color: var(--color-text-muted);">Legal</p>
-      <h1 class="font-display text-3xl font-bold mt-2 mb-2" style="color: var(--color-text-primary);">Terms of Service</h1>
-      <p class="font-display text-xs mb-8" style="color: var(--color-text-muted);">Last updated: March 2026</p>
+  <h2>3. Fulfillment</h2>
+  <p>Orders are fulfilled by independent makers in our cooperative network. Standard turnaround is 24-48 hours for printing, plus shipping time. We do not guarantee exact delivery dates but make reasonable efforts to meet estimated timelines.</p>
 
-      <div class="space-y-6 text-sm leading-relaxed" style="color: var(--color-text-secondary);">
-        <div>
-          <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">1. Overview</h2>
-          <p>3D3D Atlantic Cooperative ("3D3D", "we") operates a distributed 3D printing marketplace. By using our platform, you agree to these terms.</p>
-        </div>
+  <h2>4. Returns and Refunds</h2>
+  <p>Custom 3D printed items are made to order and are non-refundable unless defective. If your order has a quality issue, contact us within 7 days of receipt with photos. We will reprint or refund at our discretion.</p>
 
-        <div>
-          <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">2. Orders and Pricing</h2>
-          <p>All prices are in Canadian dollars (CAD) and include applicable surcharges. Tax is calculated based on the shipping province. Prices are subject to change without notice. Orders are confirmed upon payment processing.</p>
-        </div>
+  <h2>5. Intellectual Property</h2>
+  <p>Catalog products use open-source designs (Creative Commons licensed) from platforms like Printables, Thingiverse, and MakerWorld, as well as original 3D3D designs. By ordering a custom print, you warrant that you have the right to reproduce the design.</p>
 
-        <div>
-          <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">3. Fulfillment</h2>
-          <p>Orders are fulfilled by independent makers in our cooperative network. Standard turnaround is 24-48 hours for printing, plus shipping time. We do not guarantee exact delivery dates but make reasonable efforts to meet estimated timelines.</p>
-        </div>
+  <h2>6. Maker Terms</h2>
+  <p>Makers in the cooperative operate as independent contractors. 3D3D does not control the means or methods of production. Makers agree to meet quality standards and turnaround commitments as outlined in the Maker Agreement.</p>
 
-        <div>
-          <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">4. Returns and Refunds</h2>
-          <p>Custom 3D printed items are made to order and are non-refundable unless defective. If your order has a quality issue, contact us within 7 days of receipt with photos. We will reprint or refund at our discretion.</p>
-        </div>
+  <h2>7. Limitation of Liability</h2>
+  <p>3D3D is not liable for indirect, incidental, or consequential damages arising from use of our platform or products. Our total liability is limited to the amount paid for the specific order in question.</p>
 
-        <div>
-          <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">5. Intellectual Property</h2>
-          <p>Catalog products use open-source designs (Creative Commons licensed) from platforms like Printables, Thingiverse, and MakerWorld, as well as original 3D3D designs. By ordering a custom print, you warrant that you have the right to reproduce the design.</p>
-        </div>
+  <h2>8. Governing Law</h2>
+  <p>These terms are governed by the laws of the Province of New Brunswick, Canada. Disputes shall be resolved in the courts of the Province of New Brunswick.</p>
 
-        <div>
-          <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">6. Maker Terms</h2>
-          <p>Makers in the cooperative operate as independent contractors. 3D3D does not control the means or methods of production. Makers agree to meet quality standards and turnaround commitments as outlined in the Maker Agreement.</p>
-        </div>
+  <h2>8A. Consumer Protection</h2>
+  <p>These terms are subject to the New Brunswick Consumer Product Warranty and Liability Act (SNB 1978, c. C-18.1) and other applicable federal and provincial consumer protection legislation. Nothing in these terms limits your rights under provincial consumer protection law, including rights related to product quality, fitness for purpose, and remedies for defective goods.</p>
 
-        <div>
-          <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">7. Limitation of Liability</h2>
-          <p>3D3D is not liable for indirect, incidental, or consequential damages arising from use of our platform or products. Our total liability is limited to the amount paid for the specific order in question.</p>
-        </div>
+  <h2>9. On-Site Deployment Services</h2>
+  <p>On-site fabrication involves transporting equipment to client-specified locations. The client is responsible for providing adequate power supply, workspace safety, and environmental conditions (temperature, humidity). 3D3D assumes no liability for conditions at the deployment site. Travel costs quoted are estimates only — final costs are confirmed at time of booking.</p>
 
-        <div>
-          <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">8. Governing Law</h2>
-          <p>These terms are governed by the laws of the Province of New Brunswick, Canada. Disputes shall be resolved in the courts of the Province of New Brunswick.</p>
-        </div>
+  <h2>10. Network Member Websites</h2>
+  <p>Free websites provided on *.3d3d.ca subdomains to cooperative members are a network benefit, not a guaranteed service. 3D3D reserves the right to suspend or remove member sites that violate these terms or contain prohibited content. Content published on member subdomains is the sole responsibility of the respective member.</p>
 
-        <div>
-          <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">8A. Consumer Protection</h2>
-          <p>These terms are subject to the New Brunswick Consumer Product Warranty and Liability Act (SNB 1978, c. C-18.1) and other applicable federal and provincial consumer protection legislation. Nothing in these terms limits your rights under provincial consumer protection law, including rights related to product quality, fitness for purpose, and remedies for defective goods.</p>
-        </div>
+  <h2>11. Disclaimer of Warranties</h2>
+  <p>3D printed parts are not certified for safety-critical, load-bearing, life-support, or medical applications unless explicitly agreed in writing. FDM parts have inherent layer adhesion limitations. Material specifications are based on manufacturer datasheets under standard conditions — actual performance varies.</p>
 
-        <div>
-          <h2 class="font-display text-base font-semibold mb-2" style="color: var(--color-text-primary);">9. Contact</h2>
-          <p>Questions about these terms: <a href="mailto:info@3d3d.ca" class="hover:underline" style="color: var(--color-teal-primary);">info@3d3d.ca</a> · 506-953-2678</p>
-        </div>
-      </div>
-    </section>
-  </div>
-</BaseLayout>
+  <h2>12. Indemnification</h2>
+  <p>You agree to indemnify and hold harmless 3D3D Atlantic Cooperative, its operators, network members, and affiliates from any claims, damages, losses, liabilities, and expenses arising from your use of the platform, products, or services, or your violation of these terms.</p>
+
+  <h2>13. Changes to These Terms</h2>
+  <p>We may update these terms at any time. Material changes will be communicated via the website. Continued use of the platform after changes constitutes acceptance.</p>
+
+  <h2>14. Contact</h2>
+  <p>Questions about these terms: <a href="mailto:info@3d3d.ca">info@3d3d.ca</a> · <a href="https://wa.me/15069532678">WhatsApp</a> · 3D3D Atlantic Cooperative, Fredericton, NB, Canada.</p>
+</LegalLayout>

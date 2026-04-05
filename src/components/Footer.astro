@@ -88,6 +88,7 @@ const socialLinks = [
     <div class="site-footer__grid">
       {showCooperativeInfo && (
         <div class="site-footer__brand">
+          <img src="/favicon.png" alt="3D3D" class="site-footer__logo" loading="lazy" />
           <h2>3D3D</h2>
           <p class="site-footer__tagline">
             Specialty fabrication for marine, motorsport, and field deployment. Founder-operated. Remote-first and serving worldwide buyers.
@@ -183,6 +184,12 @@ const socialLinks = [
     display: grid;
     gap: 1rem;
     padding-right: 2rem;
+  }
+
+  .site-footer__logo {
+    width: clamp(3.5rem, 10vw, 5rem);
+    height: auto;
+    border-radius: 2px;
   }
 
   .site-footer__brand h2 {

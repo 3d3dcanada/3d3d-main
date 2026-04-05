@@ -5,12 +5,25 @@ const FORM_ENDPOINT = 'https://formspree.io/f/mldlydbl';
 <dialog id="dlg-subscribe" class="subscribe-dialog">
   <div class="subscribe-dialog__shell">
     <button type="button" class="subscribe-dialog__close" data-subscribe-close aria-label="Close subscribe dialog">&#x2715;</button>
+
+    <div class="subscribe-dialog__banner">
+      <div class="subscribe-dialog__banner-scrim"></div>
+    </div>
+
     <div class="subscribe-dialog__content">
       <p class="subscribe-dialog__eyebrow">Stay in the Loop</p>
       <h3 class="subscribe-dialog__title">Build updates. Material guides. First access.</h3>
       <p class="subscribe-dialog__copy">
         Real workshop notes, new product drops, and field deployment stories — delivered when there's something worth reading.
       </p>
+
+      <ul class="subscribe-dialog__benefits">
+        <li><span class="subscribe-dialog__benefit-icon" style="color: #40C4C4;">&#x25A0;</span> Early access to new products</li>
+        <li><span class="subscribe-dialog__benefit-icon" style="color: #E84A8A;">&#x25A0;</span> Workshop build updates</li>
+        <li><span class="subscribe-dialog__benefit-icon" style="color: #FF6B2B;">&#x25A0;</span> Discount codes for materials</li>
+        <li><span class="subscribe-dialog__benefit-icon" style="color: #AAFF2A;">&#x25A0;</span> Race campaign stories</li>
+      </ul>
+
       <form action={FORM_ENDPOINT} method="POST" class="subscribe-dialog__form" data-subscribe-form>
         <input type="hidden" name="_subject" value="New Subscriber | 3D3D" />
         <input type="hidden" name="source" value="subscribe-modal" />
@@ -39,7 +52,7 @@ const FORM_ENDPOINT = 'https://formspree.io/f/mldlydbl';
     border: none;
     background: transparent;
     padding: 0;
-    max-width: min(480px, calc(100vw - 2rem));
+    max-width: min(520px, calc(100vw - 2rem));
     width: 100%;
     border-radius: 2px;
     overflow: visible;
@@ -52,34 +65,54 @@ const FORM_ENDPOINT = 'https://formspree.io/f/mldlydbl';
 
   .subscribe-dialog__shell {
     position: relative;
-    background: rgba(10, 11, 12, 0.88);
+    background: rgba(10, 11, 12, 0.92);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    border: 3px solid rgba(64, 196, 196, 0.35);
+    border: 3px solid transparent;
+    border-image: linear-gradient(135deg, #40C4C4, #E84A8A) 1;
     border-radius: 2px;
-    padding: 2.5rem;
     color: #F6F7FA;
+    overflow: hidden;
+  }
+
+  .subscribe-dialog__banner {
+    position: relative;
+    height: 140px;
+    background: url('/media/real/golden-hour-01.jpg') center / cover no-repeat;
+  }
+
+  .subscribe-dialog__banner-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10, 11, 12, 0.3) 0%, rgba(10, 11, 12, 0.85) 100%);
   }
 
   .subscribe-dialog__close {
     position: absolute;
     top: 0.8rem;
     right: 0.8rem;
+    z-index: 2;
     width: 2rem;
     height: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: transparent;
+    background: rgba(10, 11, 12, 0.5);
     border: none;
-    color: rgba(246, 247, 250, 0.4);
+    color: rgba(246, 247, 250, 0.6);
     font-size: 0.9rem;
     cursor: pointer;
-    transition: color 0.15s ease;
+    border-radius: 2px;
+    transition: color 0.15s ease, background 0.15s ease;
   }
 
   .subscribe-dialog__close:hover {
     color: #F6F7FA;
+    background: rgba(10, 11, 12, 0.7);
+  }
+
+  .subscribe-dialog__content {
+    padding: 1.5rem 2rem 2rem;
   }
 
   .subscribe-dialog__eyebrow {
@@ -100,11 +133,36 @@ const FORM_ENDPOINT = 'https://formspree.io/f/mldlydbl';
   }
 
   .subscribe-dialog__copy {
-    margin: 0 0 1.25rem;
+    margin: 0 0 1rem;
     font-family: var(--font-body);
     font-size: 0.85rem;
     line-height: 1.6;
     color: rgba(246, 247, 250, 0.6);
+  }
+
+  .subscribe-dialog__benefits {
+    list-style: none;
+    margin: 0 0 1.25rem;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.45rem 1rem;
+  }
+
+  .subscribe-dialog__benefits li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-tech);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: rgba(246, 247, 250, 0.75);
+  }
+
+  .subscribe-dialog__benefit-icon {
+    font-size: 0.5rem;
+    flex-shrink: 0;
   }
 
   .subscribe-dialog__input-row {
@@ -116,7 +174,7 @@ const FORM_ENDPOINT = 'https://formspree.io/f/mldlydbl';
     flex: 1;
     padding: 0.7rem 1rem;
     background: rgba(255, 255, 255, 0.04);
-    border: 2px solid rgba(255, 255, 255, 0.12);
+    border: 3px solid rgba(255, 255, 255, 0.12);
     border-radius: 2px;
     color: #F6F7FA;
     font-family: var(--font-body);
@@ -172,12 +230,20 @@ const FORM_ENDPOINT = 'https://formspree.io/f/mldlydbl';
   }
 
   @media (max-width: 480px) {
-    .subscribe-dialog__shell {
-      padding: 1.8rem 1.2rem;
+    .subscribe-dialog__content {
+      padding: 1.2rem 1.2rem 1.5rem;
     }
 
     .subscribe-dialog__input-row {
       flex-direction: column;
+    }
+
+    .subscribe-dialog__benefits {
+      grid-template-columns: 1fr;
+    }
+
+    .subscribe-dialog__banner {
+      height: 100px;
     }
   }
 </style>

@@ -142,7 +142,7 @@ const initialPartnerPrice = formatSponsorPrice(
     keywords="3D printing Fredericton, custom fabrication Canada, marine parts 3D print, event hire 3D printer, open source cooperative, 3D printing New Brunswick"
   />
 </head>
-<body class="hp-page">
+<body class="hp-page racing-stripes">
   <main class="hp-home">
     <SiteRightSidebar />
 
@@ -162,16 +162,16 @@ const initialPartnerPrice = formatSponsorPrice(
       <div class="hp-section__shell hp-section__shell--center">
         <article class="hp-card hp-card--hero">
           <div class="hp-card__inner">
-            <p class="hp-card__eyebrow">Fredericton, NB · Ships Worldwide</p>
-            <h1 class="hp-card__hero-title">Custom Parts. Built to Survive.</h1>
+            <p class="hp-card__eyebrow">3D Printing · Software · Events · Cooperative Network</p>
+            <h1 class="hp-card__hero-title">We Build, Print, and Deploy</h1>
             <p class="hp-card__copy hp-card__copy--lead">
-              We 3D print anything — from flexis and phone cases to marine hardware and carbon fiber nylon brackets. Send us your file or describe what you need. Firm quote in 24 hours.
+              Custom 3D fabrication, production software, and field-ready event deployment — operated by makers, not middlemen. Upload a file, describe a part, or book a call. Firm quote in 24 hours.
             </p>
 
             <div class="hp-card__how-it-works">
-              <div class="hp-card__step"><span class="hp-card__step-num">1</span><span>Send us your file or idea</span></div>
-              <div class="hp-card__step"><span class="hp-card__step-num">2</span><span>Get a firm quote in 24hrs</span></div>
-              <div class="hp-card__step"><span class="hp-card__step-num">3</span><span>We print, inspect, and ship</span></div>
+              <div class="hp-card__step"><span class="hp-card__step-num">&#x2191;</span><span>Upload your file or describe the part</span></div>
+              <div class="hp-card__step"><span class="hp-card__step-num">&#x2713;</span><span>Get a firm quote within 24 hours</span></div>
+              <div class="hp-card__step"><span class="hp-card__step-num">&#x2750;</span><span>We print, inspect, and ship worldwide</span></div>
             </div>
 
             <div class="hp-card__cta-row">
@@ -180,11 +180,11 @@ const initialPartnerPrice = formatSponsorPrice(
             </div>
 
             <div class="hp-card__trust-strip">
-              <span>Ships Worldwide</span>
-              <span>All Materials</span>
-              <span>No Minimums</span>
-              <span>24hr Quotes</span>
-              <span>Free Assessment</span>
+              <span>&#x2708; Ships Worldwide</span>
+              <span>&#x25A6; All Materials</span>
+              <span>&#x2193; No Minimums</span>
+              <span>&#x23F1; 24hr Quotes</span>
+              <span>&#x2691; Free Assessment</span>
             </div>
           </div>
         </article>
@@ -490,6 +490,10 @@ const initialPartnerPrice = formatSponsorPrice(
               </p>
             </div>
 
+            <div class="hp-card__copy" style="margin-top: -0.25rem;">
+              <strong>Where your support goes:</strong> filament and material stock, race event deployment, open-source tools, community content, and workshop equipment. Every dollar is accounted for in public build logs.
+            </div>
+
             <div class="hp-sponsor-controls">
               <div class="hp-switch" role="group" aria-label="Select sponsorship currency">
                 <button type="button" class="hp-switch__button" data-currency-option="USD">USD</button>
@@ -505,7 +509,7 @@ const initialPartnerPrice = formatSponsorPrice(
         </article>
 
         <div class="hp-tier-grid">
-          <article class="hp-tier">
+          <article class="hp-tier" style="--section-accent: #40C4C4;">
             <p class="hp-tier__eyebrow">Supporter</p>
             <p class="hp-tier__price" data-tier-price="supporter">{initialSupporterPrice}</p>
             <p class="hp-tier__meta" data-tier-meta="supporter">per month</p>
@@ -525,7 +529,7 @@ const initialPartnerPrice = formatSponsorPrice(
             </button>
           </article>
 
-          <article class="hp-tier hp-tier--featured">
+          <article class="hp-tier hp-tier--featured" style="--section-accent: #E84A8A;">
             <span class="hp-tier__badge">Enhanced Package</span>
             <p class="hp-tier__eyebrow">Partner</p>
             <p class="hp-tier__price" data-tier-price="partner">{initialPartnerPrice}</p>
@@ -548,7 +552,7 @@ const initialPartnerPrice = formatSponsorPrice(
             </button>
           </article>
 
-          <article class="hp-tier">
+          <article class="hp-tier" style="--section-accent: #FF6B2B;">
             <p class="hp-tier__eyebrow">Investor</p>
             <div class="hp-tier__custom">
               <label class="hp-field hp-field--inline">
@@ -582,6 +586,10 @@ const initialPartnerPrice = formatSponsorPrice(
             </button>
           </article>
         </div>
+
+        <p class="hp-ko-fi-note">
+          All sponsorships processed securely via <a href="https://ko-fi.com/3d3dca" target="_blank" rel="noopener noreferrer">Ko-fi</a> — instant, no middlemen, direct to 3D3D.
+        </p>
       </div>
     </section>
   </main>
@@ -1263,9 +1271,16 @@ const initialPartnerPrice = formatSponsorPrice(
     background: var(--hp-card-bg);
     backdrop-filter: blur(20px) saturate(150%);
     -webkit-backdrop-filter: blur(20px) saturate(150%);
-    border: 1px solid var(--hp-card-border);
-    border-top: 2px solid var(--section-accent);
+    border: 3px solid var(--hp-card-border);
+    border-top: 4px solid var(--section-accent);
     box-shadow: var(--hp-card-shadow);
+    transform-style: preserve-3d;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.3s ease;
+  }
+
+  .hp-card:hover {
+    transform: translateY(-3px) translateZ(8px);
+    box-shadow: 0 16px 44px rgba(0, 0, 0, 0.4), 0 4px 0 color-mix(in srgb, var(--section-accent) 25%, transparent);
   }
 
   .hp-card--hero {
@@ -1410,7 +1425,7 @@ const initialPartnerPrice = formatSponsorPrice(
     padding: 0.35rem 0.7rem;
     border-radius: 2px;
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 3px solid rgba(255, 255, 255, 0.08);
     color: #f4efe8;
   }
 
@@ -1426,7 +1441,7 @@ const initialPartnerPrice = formatSponsorPrice(
     min-width: 9rem;
     padding: 0.8rem 0.9rem;
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 3px solid rgba(255, 255, 255, 0.08);
     border-radius: 2px;
   }
 
@@ -1452,6 +1467,21 @@ const initialPartnerPrice = formatSponsorPrice(
     flex-wrap: wrap;
   }
 
+  .hp-card__step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border: 3px solid var(--section-accent);
+    border-radius: 2px;
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    color: var(--section-accent);
+    flex-shrink: 0;
+    background: rgba(64, 196, 196, 0.08);
+  }
+
   .hp-card__step {
     display: flex;
     align-items: center;
@@ -1460,20 +1490,16 @@ const initialPartnerPrice = formatSponsorPrice(
     font-size: 0.78rem;
     font-weight: 500;
     color: rgba(246, 247, 250, 0.75);
+    padding: 0.5rem 0.7rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid var(--section-accent);
+    border-radius: 2px;
+    transition: transform 200ms ease, background 200ms ease;
   }
 
-  .hp-card__step-num {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.6rem;
-    height: 1.6rem;
-    border: 2px solid var(--section-accent);
-    border-radius: 2px;
-    font-family: var(--font-display);
-    font-size: 0.72rem;
-    color: var(--section-accent);
-    flex-shrink: 0;
+  .hp-card__step:hover {
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateX(2px);
   }
 
   .hp-card__trust-strip {
@@ -1482,20 +1508,29 @@ const initialPartnerPrice = formatSponsorPrice(
     gap: 0.5rem;
     margin-top: 1.5rem;
     padding-top: 1.2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 3px solid rgba(255, 255, 255, 0.08);
   }
 
   .hp-card__trust-strip span {
-    padding: 0.3rem 0.7rem;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.75rem;
+    border: 3px solid rgba(255, 255, 255, 0.12);
     border-radius: 2px;
     font-family: var(--font-tech);
     font-size: 0.62rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: rgba(246, 247, 250, 0.55);
+    color: rgba(246, 247, 250, 0.65);
   }
+
+  .hp-card__trust-strip span:nth-child(1) { border-color: rgba(64, 196, 196, 0.35); color: #40C4C4; }
+  .hp-card__trust-strip span:nth-child(2) { border-color: rgba(232, 74, 138, 0.35); color: #E84A8A; }
+  .hp-card__trust-strip span:nth-child(3) { border-color: rgba(255, 107, 43, 0.35); color: #FF6B2B; }
+  .hp-card__trust-strip span:nth-child(4) { border-color: rgba(170, 255, 42, 0.35); color: #AAFF2A; }
+  .hp-card__trust-strip span:nth-child(5) { border-color: rgba(64, 196, 196, 0.35); color: #40C4C4; }
 
   .hp-cta {
     display: inline-flex;
@@ -1504,7 +1539,7 @@ const initialPartnerPrice = formatSponsorPrice(
     min-height: 3rem;
     padding: 0.78rem 1.05rem;
     border-radius: 2px;
-    border: 1px solid transparent;
+    border: 3px solid transparent;
     background: transparent;
     color: #f4efe8;
     cursor: pointer;
@@ -1575,7 +1610,7 @@ const initialPartnerPrice = formatSponsorPrice(
     min-height: 2.5rem;
     padding: 0.55rem 0.75rem;
     border-radius: 2px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 3px solid rgba(255, 255, 255, 0.08);
     background: rgba(255, 255, 255, 0.05);
     color: #c8d0dc;
     cursor: pointer;
@@ -1606,13 +1641,27 @@ const initialPartnerPrice = formatSponsorPrice(
     background: var(--hp-card-bg);
     backdrop-filter: blur(20px) saturate(150%);
     -webkit-backdrop-filter: blur(20px) saturate(150%);
-    border: 1px solid var(--hp-card-border);
-    border-top: 2px solid var(--section-accent);
+    border: 3px solid var(--hp-card-border);
+    border-top: 4px solid var(--section-accent);
     box-shadow: var(--hp-card-shadow);
+    transform-style: preserve-3d;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.3s ease;
+  }
+
+  .hp-tier:hover {
+    transform: translateY(-3px) translateZ(8px);
+    box-shadow: 0 16px 44px rgba(0, 0, 0, 0.4), 0 4px 0 color-mix(in srgb, var(--section-accent) 25%, transparent);
   }
 
   .hp-tier--featured {
     border-color: color-mix(in srgb, var(--section-accent) 70%, white 30%);
+    border-width: 4px;
+    transform: scale(1.02);
+    z-index: 1;
+  }
+
+  .hp-tier--featured:hover {
+    transform: scale(1.02) translateY(-3px) translateZ(8px);
   }
 
   .hp-tier__badge {
@@ -1654,15 +1703,37 @@ const initialPartnerPrice = formatSponsorPrice(
   }
 
   .hp-tier__list li::before {
-    content: '•';
+    content: '\2713';
     position: absolute;
     left: 0;
     color: var(--section-accent);
+    font-weight: 700;
+    font-size: 0.8rem;
   }
 
   .hp-tier__custom {
     display: grid;
     gap: 0.65rem;
+  }
+
+  .hp-ko-fi-note {
+    text-align: center;
+    font-family: var(--font-tech);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    color: rgba(200, 208, 220, 0.5);
+    margin: 0;
+    padding: 0.5rem 0;
+  }
+
+  .hp-ko-fi-note a {
+    color: #40C4C4;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(64, 196, 196, 0.3);
+  }
+
+  .hp-ko-fi-note a:hover {
+    color: #f4efe8;
   }
 
   .hp-dialog {
@@ -1673,7 +1744,7 @@ const initialPartnerPrice = formatSponsorPrice(
     max-height: 100dvh;
     margin: 0 0 0 auto;
     padding: 0;
-    border: 1px solid var(--hp-nav-border);
+    border: 3px solid var(--hp-nav-border);
     border-right: none;
     border-radius: 2px 0 0 2px;
     background: var(--hp-nav-bg);
@@ -1700,7 +1771,7 @@ const initialPartnerPrice = formatSponsorPrice(
     justify-content: space-between;
     gap: 1rem;
     padding: 1.1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 3px solid rgba(255, 255, 255, 0.08);
   }
 
   .hp-dialog__close {
@@ -1709,7 +1780,7 @@ const initialPartnerPrice = formatSponsorPrice(
     justify-content: center;
     width: 2.75rem;
     height: 2.75rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 3px solid rgba(255, 255, 255, 0.08);
     border-radius: 2px;
     background: rgba(255, 255, 255, 0.05);
     color: #f4efe8;
@@ -1804,7 +1875,7 @@ const initialPartnerPrice = formatSponsorPrice(
     padding: 0.95rem;
     border-radius: 2px;
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 3px solid rgba(255, 255, 255, 0.08);
   }
 
   .hp-project-grid,
@@ -1818,7 +1889,7 @@ const initialPartnerPrice = formatSponsorPrice(
     gap: 0;
     overflow: hidden;
     border-radius: 2px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 3px solid rgba(255, 255, 255, 0.08);
     background: rgba(255, 255, 255, 0.05);
     text-decoration: none;
   }

@@ -9,7 +9,7 @@
   background: var(--glass-bg);
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
-  border: 1px solid var(--glass-border);
+  border: 3px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
 }
 
@@ -17,7 +17,7 @@
   background: var(--glass-bg-strong);
   backdrop-filter: blur(var(--glass-blur-strong));
   -webkit-backdrop-filter: blur(var(--glass-blur-strong));
-  border: 1px solid var(--glass-border);
+  border: 3px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
 }
 
@@ -25,7 +25,7 @@
   background: var(--glass-bg-dark);
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
-  border: 1px solid var(--glass-border-dark);
+  border: 3px solid var(--glass-border-dark);
   box-shadow: var(--glass-shadow-dark);
 }
 
@@ -33,7 +33,7 @@
   background: var(--glass-bg-dark-strong);
   backdrop-filter: blur(var(--glass-blur-strong));
   -webkit-backdrop-filter: blur(var(--glass-blur-strong));
-  border: 1px solid var(--glass-border-dark);
+  border: 3px solid var(--glass-border-dark);
   box-shadow: var(--glass-shadow-dark);
 }
 
@@ -53,10 +53,12 @@
   }
 
   .card-3d:hover {
-    transform: rotateY(-3deg) rotateX(2deg) translateZ(12px);
+    transform: rotateY(-3deg) rotateX(2deg) translateZ(16px) translateY(-4px);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35), 0 4px 0 rgba(64, 196, 196, 0.25);
   }
 
   .card-3d-reverse:hover {
-    transform: rotateY(3deg) rotateX(-2deg) translateZ(12px);
+    transform: rotateY(3deg) rotateX(-2deg) translateZ(16px) translateY(-4px);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35), 0 4px 0 rgba(64, 196, 196, 0.25);
   }
 }

@@ -1,20 +1,20 @@
 export interface WorkshopPricing {
-  label: string;
-  price: string;
-  note?: string;
+  label: string
+  price: string
+  note?: string
 }
 
 export interface Workshop {
-  id: string;
-  title: string;
-  type: 'workshop' | 'event' | 'bootcamp';
-  duration: string;
-  audience: string;
-  capacity: string;
-  pricing: WorkshopPricing[];
-  description: string;
-  whatYouGet: string[];
-  tags: string[];
+  id: string
+  title: string
+  type: 'workshop' | 'event' | 'bootcamp'
+  duration: string
+  audience: string
+  capacity: string
+  pricing: WorkshopPricing[]
+  description: string
+  whatYouGet: string[]
+  tags: string[]
 }
 
 export const WORKSHOPS: Workshop[] = [
@@ -118,9 +118,7 @@ export const WORKSHOPS: Workshop[] = [
     duration: 'Full event duration',
     audience: 'General public, all ages',
     capacity: 'Unlimited (walk-up)',
-    pricing: [
-      { label: 'Sponsor Funded', price: 'Contact us', note: 'Custom activation' },
-    ],
+    pricing: [{ label: 'Sponsor Funded', price: 'Contact us', note: 'Custom activation' }],
     description:
       'A live 3D printing activation booth for festivals, fairs, and community events. Walk-up demonstrations, live prints, and hands-on mini activities. Your brand on the enclosure if sponsored.',
     whatYouGet: [
@@ -201,13 +199,4 @@ export const WORKSHOPS: Workshop[] = [
     ],
     tags: ['Advanced', 'Slicer', 'Troubleshooting'],
   },
-];
-
-export const PRICING_TIERS: WorkshopPricing[] = [
-  { label: 'Standard Workshop (2h)', price: '$50' },
-  { label: 'Half-Day Bootcamp (4h)', price: '$100' },
-  { label: 'Student / Senior', price: '$25', note: '50% discount' },
-  { label: 'Group Rate (5+)', price: '$35 each', note: '30% discount' },
-  { label: 'Early Bird', price: '$40', note: 'Book 2+ weeks ahead' },
-  { label: 'Member Rate', price: '20% off', note: 'Network members' },
-];
+]

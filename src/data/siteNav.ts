@@ -1,112 +1,89 @@
-/**
- * Canonical site navigation structure.
- * Used by SiteSidebar, BottomNav, and SiteFooterFull.
- */
+export type AccentKey = 'teal' | 'magenta' | 'orange' | 'lime'
 
-export interface NavLink {
-  id: string;
-  label: string;
-  href: string;
-  external?: boolean;
+export interface NavItem {
+  label: string
+  href: string
+  accent: AccentKey
+  description?: string
+  external?: boolean
 }
 
-export interface NavGroup {
-  id: string;
-  label: string;
-  accent: string;
-  items: NavLink[];
+export const ACCENT_HEX: Record<AccentKey, string> = {
+  teal: '#40C4C4',
+  magenta: '#E84A8A',
+  orange: '#FF6B2B',
+  lime: '#AAFF2A',
 }
 
-export const SITE_NAV: NavGroup[] = [
+export const PRIMARY_NAV: NavItem[] = [
   {
-    id: 'fabrication',
-    label: 'Fabrication',
-    accent: '#40C4C4',
-    items: [
-      { id: 'quote', label: 'Quote', href: '/quote' },
-      { id: 'materials', label: 'Materials', href: '/materials' },
-      { id: 'fleet', label: 'Fleet', href: '/fleet' },
-      { id: 'faq', label: 'FAQ', href: '/faq' },
-    ],
+    label: 'Home',
+    href: '/',
+    accent: 'teal',
+    description: 'One homepage. Four divisions.',
   },
   {
-    id: 'story',
-    label: 'The Story',
-    accent: '#E84A8A',
-    items: [
-      { id: 'about', label: 'About', href: '/about' },
-      { id: 'workshops', label: 'Workshops & Events', href: '/workshops' },
-      { id: 'media', label: 'Media Studio', href: '/media' },
-      { id: 'blog', label: 'Blog', href: '/blog' },
-    ],
+    label: '3D3D',
+    href: '/3d3d',
+    accent: 'teal',
+    description: 'Distributed fabrication cooperative.',
   },
   {
-    id: 'shop',
-    label: 'Shop',
-    accent: '#FF6B2B',
-    items: [
-      { id: 'catalog', label: 'Catalog', href: '/shop' },
-      { id: 'merch', label: 'Merch', href: '/merch' },
-    ],
+    label: 'ORA',
+    href: '/ora',
+    accent: 'magenta',
+    description: 'AI memory, governance, and waitlist.',
   },
   {
-    id: 'community',
-    label: 'Community',
-    accent: '#AAFF2A',
-    items: [
-      { id: 'network', label: 'Join the Network', href: '/network' },
-      { id: 'join', label: 'Get a Free Website', href: '/join' },
-      { id: 'projects', label: 'Projects', href: '/projects' },
-      { id: 'community', label: 'Community', href: '/community' },
-      { id: 'sponsors', label: 'Sponsors', href: '/sponsors' },
-      { id: 'oldgirl', label: 'Old Girl', href: 'https://oldgirl.3d3d.ca', external: true },
-    ],
+    label: 'STRX',
+    href: '/strx',
+    accent: 'orange',
+    description: 'Rapid deployment field operations.',
   },
   {
-    id: 'software',
-    label: 'Software',
-    accent: '#40C4C4',
-    items: [
-      { id: 'portfolio', label: 'All Software', href: '/software' },
-      { id: 'ora', label: 'ORA Runtime', href: '/ora' },
-      { id: 'governance', label: 'Governance Kernel', href: '/governance-kernel' },
-      { id: 'openkernel', label: 'OpenKernel (5 Kernels)', href: '/openkernel' },
-      { id: 'harbourmesh', label: 'HarbourMesh', href: '/harbourmesh' },
-      { id: 'aro', label: 'Aro (Pitch Engine)', href: '/aro' },
-      { id: 'sovereign', label: 'Sovereign AI', href: 'https://github.com/3d3dcanada/sovereign-ai', external: true },
-      { id: 'thegothub', label: 'The GoT Hub', href: 'https://github.com/3d3dcanada/thegothub', external: true },
-      { id: 'github', label: 'GitHub', href: 'https://github.com/3d3dcanada', external: true },
-      { id: 'printables', label: 'Printables', href: 'https://www.printables.com/@KTK3D_3050116', external: true },
-    ],
+    label: 'THE KEN',
+    href: '/the-ken',
+    accent: 'lime',
+    description: 'Projects, proof, and the record.',
   },
-  {
-    id: 'contact',
-    label: 'Contact',
-    accent: '#E84A8A',
-    items: [
-      { id: 'pricing', label: 'Pricing', href: '/pricing' },
-      { id: 'contact', label: 'Contact', href: '/contact' },
-      { id: 'book', label: 'Book a Call', href: '/book' },
-      { id: 'whatsapp', label: 'WhatsApp', href: 'https://wa.me/15069532678', external: true },
-    ],
-  },
-  {
-    id: 'legal',
-    label: 'Legal',
-    accent: '#666666',
-    items: [
-      { id: 'privacy', label: 'Privacy', href: '/privacy' },
-      { id: 'terms', label: 'Terms', href: '/terms' },
-      { id: 'disclaimer', label: 'Disclaimer', href: '/disclaimer' },
-      { id: 'cookies', label: 'Cookies', href: '/cookies' },
-      { id: 'shipping', label: 'Shipping', href: '/shipping' },
-      { id: 'casl', label: 'CASL', href: '/casl' },
-      { id: 'accessibility', label: 'Accessibility', href: '/accessibility' },
-    ],
-  },
-];
+]
 
-export const SOCIAL_LINKS = [
+export const ACTION_LINKS: NavItem[] = [
+  {
+    label: 'Email',
+    href: 'mailto:info@3d3d.ca',
+    accent: 'teal',
+    description: 'Direct line.',
+    external: true,
+  },
+  {
+    label: 'GitHub',
+    href: 'https://github.com/3d3dcanada',
+    accent: 'magenta',
+    description: 'Open-source work.',
+    external: true,
+  },
+]
+
+export const BOTTOM_NAV: NavItem[] = [
+  PRIMARY_NAV[0],
+  PRIMARY_NAV[1],
+  PRIMARY_NAV[2],
+  PRIMARY_NAV[3],
+  {
+    ...PRIMARY_NAV[4],
+    label: 'KEN',
+  },
+]
+
+export interface SocialLink {
+  label: string
+  href: string
+  viewBox: string
+  path: string
+}
+
+export const SOCIAL_LINKS: SocialLink[] = [
   {
     label: 'YouTube',
     href: 'https://www.youtube.com/@3D3Dcanada',
@@ -149,12 +126,8 @@ export const SOCIAL_LINKS = [
     viewBox: '0 0 24 24',
     path: 'M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21.5c0 .27.16.59.67.5A10.02 10.02 0 0 0 22 12 10 10 0 0 0 12 2Z',
   },
-];
+]
 
-/** Bottom navigation bar tabs (mobile) */
-export const BOTTOM_NAV = [
-  { id: 'home', label: 'Home', href: '/', icon: 'home' },
-  { id: 'quote', label: 'Quote', href: '/quote', icon: 'quote' },
-  { id: 'workshops', label: 'Workshops', href: '/workshops', icon: 'community' },
-  { id: 'menu', label: 'Menu', href: '#menu', icon: 'menu' },
-] as const;
+export function getActiveNavLabel(pathname: string) {
+  return PRIMARY_NAV.find((item) => item.href === pathname)?.label ?? '3D3D'
+}

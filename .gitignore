@@ -1,7 +1,11 @@
 # build output
 dist/
+out/
+.next/
+
 # generated types
-.astro/
+next-env.d.ts
+tsconfig.tsbuildinfo
 
 # dependencies
 node_modules/
@@ -12,14 +16,16 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-
 # environment variables
 .env
 .env.production
+.env*.local
 
-# macOS-specific files
+# OS-specific
 .DS_Store
+Thumbs.db
 
-# jetbrains setting folder
+# editor
 .idea/
-.vercel
+.vscode/
+*.swp

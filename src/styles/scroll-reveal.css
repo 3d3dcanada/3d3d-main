@@ -1,190 +1,197 @@
-/* ─────────────────────────────────────────────────────────────────
-   Scroll-Driven Entrance Animations
-   March 2026 - CSS animation-timeline: view()
+/* ============================================================
+   SCROLL-REVEAL ANIMATION SYSTEM
+   Primary: CSS scroll-driven animations (animation-timeline: view())
+   Fallback: IntersectionObserver adds .scroll-revealed class
+   Respects prefers-reduced-motion
+   ============================================================ */
 
-   Browser support: Chrome 115+, Firefox 132+, Safari 18.4+
-   Fallback: src/scripts/scroll-fallback.ts (IntersectionObserver)
-   ───────────────────────────────────────────────────────────────── */
-
-/* -- Keyframes -------------------------------------------------- */
-
-@keyframes scroll-enter-up {
-  from { opacity: 0; transform: translateY(clamp(16px, 3vw, 32px)); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes scroll-enter-left {
-  from { opacity: 0; transform: translateX(-32px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes scroll-enter-right {
-  from { opacity: 0; transform: translateX(32px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes scroll-enter-scale {
-  from { opacity: 0; transform: scale(0.94); }
-  to   { opacity: 1; transform: scale(1); }
-}
-
-@keyframes scroll-enter-fade {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@keyframes scroll-enter-rotate-in {
-  from { opacity: 0; transform: perspective(800px) rotateY(-8deg) translateX(-24px); }
-  to   { opacity: 1; transform: none; }
-}
-
-@keyframes scroll-enter-pop {
-  from { opacity: 0; transform: scale(0.85) translateY(20px); }
-  to   { opacity: 1; transform: none; }
-}
-
-@keyframes scroll-enter-float-up {
-  from { opacity: 0; transform: translateY(40px) rotate(-1deg); }
-  to   { opacity: 1; transform: none; }
-}
-
-/* -- Utility Classes -------------------------------------------- */
-
-.scroll-in {
-  animation: scroll-enter-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-timeline: view();
-  animation-range: entry 0% entry 30%;
-}
-
-.scroll-in-left {
-  animation: scroll-enter-left 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-timeline: view();
-  animation-range: entry 0% entry 30%;
-}
-
-.scroll-in-right {
-  animation: scroll-enter-right 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-timeline: view();
-  animation-range: entry 0% entry 30%;
-}
-
-.scroll-in-scale {
-  animation: scroll-enter-scale 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-timeline: view();
-  animation-range: entry 0% entry 30%;
-}
-
-.scroll-in-fade {
-  animation: scroll-enter-fade 0.65s ease both;
-  animation-timeline: view();
-  animation-range: entry 0% entry 30%;
-}
-
+/* Base state: hidden until revealed */
+.scroll-in,
+.scroll-in-left,
+.scroll-in-right,
+.scroll-in-scale,
+.scroll-in-pop,
+.scroll-in-fade,
+.scroll-in-float,
 .scroll-in-rotate {
-  animation: scroll-enter-rotate-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-timeline: view();
-  animation-range: entry 0% entry 30%;
+  opacity: 0;
+  will-change: opacity, transform;
 }
 
-.scroll-in-pop {
-  animation: scroll-enter-pop 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-timeline: view();
-  animation-range: entry 0% entry 30%;
-}
-
-.scroll-in-float {
-  animation: scroll-enter-float-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-timeline: view();
-  animation-range: entry 0% entry 30%;
-}
-
-/* -- Stagger Delays --------------------------------------------- */
-
-.scroll-delay-1 { animation-range: entry 5% entry 35%; }
-.scroll-delay-2 { animation-range: entry 10% entry 40%; }
-.scroll-delay-3 { animation-range: entry 15% entry 45%; }
-.scroll-delay-4 { animation-range: entry 20% entry 50%; }
-
-/* -- JS Fallback State ------------------------------------------ */
-/* When animation-timeline is NOT supported, the fallback script
-   adds .scroll-fallback to <html>. Elements start hidden and
-   get .scroll-revealed via IntersectionObserver.                  */
-
-@supports not (animation-timeline: view()) {
-  .scroll-in,
-  .scroll-in-left,
-  .scroll-in-right,
-  .scroll-in-scale,
-  .scroll-in-fade,
-  .scroll-in-rotate,
-  .scroll-in-pop,
+/* === PRIMARY: CSS Scroll-Driven Animations (modern browsers) === */
+@supports (animation-timeline: view()) {
+  .scroll-in {
+    animation: reveal-up 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+  }
+  .scroll-in-left {
+    animation: reveal-left 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+  }
+  .scroll-in-right {
+    animation: reveal-right 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+  }
+  .scroll-in-scale {
+    animation: reveal-scale 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+  .scroll-in-pop {
+    animation: reveal-pop 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+  .scroll-in-fade {
+    animation: reveal-fade 1.2s ease both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 45%;
+  }
   .scroll-in-float {
-    animation: none;
+    animation: reveal-float 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 50%;
+  }
+  .scroll-in-rotate {
+    animation: reveal-rotate 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
   }
 }
 
-html.scroll-fallback .scroll-in,
-html.scroll-fallback .scroll-in-left,
-html.scroll-fallback .scroll-in-right,
-html.scroll-fallback .scroll-in-float {
-  opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+/* === FALLBACK: IntersectionObserver class-based (older browsers) === */
+@supports not (animation-timeline: view()) {
+  .scroll-revealed {
+    animation-fill-mode: both;
+  }
+  .scroll-in.scroll-revealed { animation: reveal-up 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+  .scroll-in-left.scroll-revealed { animation: reveal-left 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+  .scroll-in-right.scroll-revealed { animation: reveal-right 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+  .scroll-in-scale.scroll-revealed { animation: reveal-scale 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+  .scroll-in-pop.scroll-revealed { animation: reveal-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+  .scroll-in-fade.scroll-revealed { animation: reveal-fade 1s ease; }
+  .scroll-in-float.scroll-revealed { animation: reveal-float 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+  .scroll-in-rotate.scroll-revealed { animation: reveal-rotate 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
 }
 
-html.scroll-fallback .scroll-in-left {
-  transform: translateX(-32px);
+/* === STAGGER DELAYS === */
+.scroll-delay-1 { animation-delay: 0.1s; }
+.scroll-delay-2 { animation-delay: 0.2s; }
+.scroll-delay-3 { animation-delay: 0.3s; }
+.scroll-delay-4 { animation-delay: 0.4s; }
+.scroll-delay-5 { animation-delay: 0.5s; }
+.scroll-delay-6 { animation-delay: 0.6s; }
+
+/* === KEYFRAMES === */
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-html.scroll-fallback .scroll-in-right {
-  transform: translateX(32px);
+@keyframes reveal-left {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
-html.scroll-fallback .scroll-in-scale,
-html.scroll-fallback .scroll-in-pop {
-  opacity: 0;
-  transform: scale(0.94);
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+@keyframes reveal-right {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
-html.scroll-fallback .scroll-in-rotate {
-  opacity: 0;
-  transform: translateX(-24px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+@keyframes reveal-scale {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
 }
 
-html.scroll-fallback .scroll-in-fade {
-  opacity: 0;
-  transition: opacity 0.65s ease;
+@keyframes reveal-pop {
+  from { opacity: 0; transform: scale(0.8); }
+  60% { transform: scale(1.04); }
+  to { opacity: 1; transform: scale(1); }
 }
 
-html.scroll-fallback .scroll-revealed {
-  opacity: 1;
-  transform: none;
+@keyframes reveal-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-html.scroll-fallback .scroll-delay-1 { transition-delay: 0.1s; }
-html.scroll-fallback .scroll-delay-2 { transition-delay: 0.2s; }
-html.scroll-fallback .scroll-delay-3 { transition-delay: 0.3s; }
-html.scroll-fallback .scroll-delay-4 { transition-delay: 0.4s; }
+@keyframes reveal-float {
+  from { opacity: 0; transform: translateY(24px) rotate(1deg); }
+  to { opacity: 1; transform: translateY(0) rotate(0deg); }
+}
 
-/* -- Reduced Motion --------------------------------------------- */
+@keyframes reveal-rotate {
+  from { opacity: 0; transform: rotate(-3deg) translateY(20px); }
+  to { opacity: 1; transform: rotate(0) translateY(0); }
+}
 
+/* === REDUCED MOTION === */
 @media (prefers-reduced-motion: reduce) {
   .scroll-in,
   .scroll-in-left,
   .scroll-in-right,
   .scroll-in-scale,
-  .scroll-in-fade,
-  .scroll-in-rotate,
   .scroll-in-pop,
-  .scroll-in-float {
-    animation: none !important;
+  .scroll-in-fade,
+  .scroll-in-float,
+  .scroll-in-rotate {
     opacity: 1 !important;
     transform: none !important;
-    transition: none !important;
+    animation: none !important;
   }
+}
+
+/* === FLOATING IDLE ANIMATION === */
+@keyframes float-idle {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  33% { transform: translateY(-5px) rotate(0.4deg); }
+  66% { transform: translateY(-3px) rotate(-0.3deg); }
+}
+
+.floating {
+  animation: float-idle 7s ease-in-out infinite;
+}
+
+.floating:hover {
+  animation-play-state: paused;
+}
+
+/* === 3D HOVER TILT === */
+.hover-3d {
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms ease;
+  transform-style: preserve-3d;
+}
+
+.hover-3d:hover {
+  transform: perspective(800px) rotateY(-2.5deg) rotateX(1.5deg) translateZ(12px) scale(1.02);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* === GLASS MORPHISM VARIANTS === */
+.glass {
+  backdrop-filter: blur(16px) saturate(145%);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-strong {
+  backdrop-filter: blur(24px) saturate(160%);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.glass-light {
+  backdrop-filter: blur(16px) saturate(130%);
+  background: rgba(232, 244, 244, 0.7);
+  border: 1px solid rgba(42, 138, 138, 0.15);
+}
+
+.glass-light-strong {
+  backdrop-filter: blur(24px) saturate(140%);
+  background: rgba(232, 244, 244, 0.85);
+  border: 1px solid rgba(42, 138, 138, 0.2);
 }

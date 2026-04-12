@@ -1,3 +1,4 @@
+import { NewsletterSignup } from '@/components/newsletter-signup'
 import { SOCIAL_LINKS } from '@/data/siteNav'
 
 const LEGAL_LINKS = [
@@ -12,6 +13,8 @@ export function Footer() {
   return (
     <footer className="site-footer">
       <div className="site-footer__inner">
+        <NewsletterSignup variant="footer" source="footer" />
+
         {/* Social links row */}
         <div className="footer-socials">
           {SOCIAL_LINKS.map((link) => (
@@ -33,7 +36,9 @@ export function Footer() {
 
         {/* Info line */}
         <p>
-          <a href="mailto:info@3d3d.ca" style={{ color: 'var(--accent-teal)' }}>info@3d3d.ca</a>
+          <a href="mailto:info@3d3d.ca" style={{ color: 'var(--accent-teal)' }}>
+            info@3d3d.ca
+          </a>
           {' · '}3D3D · Ken · Atlantic Canada
         </p>
         <p className="site-footer__links">

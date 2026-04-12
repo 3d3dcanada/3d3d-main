@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 import Link from 'next/link'
 import { Card } from '@/components/card'
 import { Hero } from '@/components/hero'
@@ -98,13 +98,14 @@ function RenderSection({ section }: { section: ContentSection }) {
   )
 }
 
-export function ContentPage({ spec }: { spec: PageSpec }) {
+export function ContentPage({ spec, after }: { spec: PageSpec; after?: ReactNode }) {
   return (
     <PageFrame currentPath={spec.currentPath ?? spec.path}>
       <Hero {...spec.hero} />
       {spec.sections.map((section, index) => (
         <RenderSection key={section.id ?? `${section.title}-${index}`} section={section} />
       ))}
+      {after}
     </PageFrame>
   )
 }

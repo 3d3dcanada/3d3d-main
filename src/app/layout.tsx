@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   description:
     '3D printing networks. AI systems. Field operations. When it matters, it holds. Founder-operated in Atlantic Canada. Four divisions: 3D3D, ORA, STRX, and THE KEN.',
   metadataBase: new URL(siteMetadata.url),
+  icons: {
+    icon: '/media/brand/3d3d-logo.svg',
+  },
 }
 
 export const viewport: Viewport = {

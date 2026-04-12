@@ -2,7 +2,7 @@ import { ContentPage } from '@/components/content-page'
 import { routeSpecs } from '@/data/buildV2'
 import { buildMetadata } from '@/lib/seo'
 
-const spec = routeSpecs.strx
+const spec = routeSpecs.about
 
 export const metadata = buildMetadata({
   title: spec.title,
@@ -10,6 +10,6 @@ export const metadata = buildMetadata({
   path: spec.path,
 })
 
-export default function StrxPage() {
+export default function AboutPage() {
   return <ContentPage spec={spec} />
 }

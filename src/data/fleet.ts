@@ -34,7 +34,7 @@ export const FLEET: Printer[] = [
       'Fluidd + Mainsail dual interface',
       'Primary production machine',
     ],
-    image: '/media/fleet/creality-k1.jpg',
+    image: '/media/workshop/printer-frame-shot.jpg',
     accent: '#E84A8A',
   },
   {
@@ -55,7 +55,7 @@ export const FLEET: Printer[] = [
       'Near-silent operation',
       'Compact footprint, big output',
     ],
-    image: '/media/fleet/bambu-a1-mini.jpg',
+    image: '/media/workshop/printer-bed-benchy.jpg',
     accent: '#FF6B2B',
   },
   {
@@ -76,7 +76,7 @@ export const FLEET: Printer[] = [
       'Heated bed with glass surface',
       'Multi-material complex geometry',
     ],
-    image: '/media/fleet/bibo-2.jpg',
+    image: '/media/workshop/modular-parts-flatlay.jpg',
     accent: '#AAFF2A',
   },
   {
@@ -97,7 +97,7 @@ export const FLEET: Printer[] = [
       'Open-source firmware and hardware',
       'Battle-tested reliability',
     ],
-    image: '/media/fleet/prusa-mk25s.jpg',
+    image: '/media/workshop/printer-action-cf.jpg',
     accent: '#40C4C4',
   },
   {
@@ -118,7 +118,7 @@ export const FLEET: Printer[] = [
       'Oversize parts: helmets, panels, marine hardware',
       'Direct drive extruder for flexible materials',
     ],
-    image: '/media/fleet/kobra-2-max.jpg',
+    image: '/media/workshop/rv-lab-02.jpg',
     accent: '#E84A8A',
   },
   {

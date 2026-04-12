@@ -101,7 +101,7 @@ export const WORKSHOPS: Workshop[] = [
       { label: 'Public Session', price: '$25' },
     ],
     description:
-      'A condensed, accessible introduction to 3D printing designed for public library settings. Low barrier to entry, no experience required. Libraries provide the space; we bring the printers and the knowledge.',
+      'A condensed, accessible introduction to 3D printing designed for public library settings. Low barrier to entry, no experience required. Libraries provide the space; I bring the printers and the knowledge.',
     whatYouGet: [
       'Introduction to 3D printing concepts',
       'Live demonstration with library context',
@@ -118,7 +118,7 @@ export const WORKSHOPS: Workshop[] = [
     duration: 'Full event duration',
     audience: 'General public, all ages',
     capacity: 'Unlimited (walk-up)',
-    pricing: [{ label: 'Sponsor Funded', price: 'Contact us', note: 'Custom activation' }],
+    pricing: [{ label: 'Sponsor Funded', price: 'Email for scope', note: 'Custom activation' }],
     description:
       'A live 3D printing activation booth for festivals, fairs, and community events. Walk-up demonstrations, live prints, and hands-on mini activities. Your brand on the enclosure if sponsored.',
     whatYouGet: [

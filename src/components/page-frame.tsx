@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { BottomNav } from '@/components/bottom-nav'
 import { Footer } from '@/components/footer'
 import { RightSidebar } from '@/components/right-sidebar'
+import { StickyBottomCta } from '@/components/sticky-bottom-cta'
 
 type PageFrameProps = {
   currentPath: string
@@ -18,6 +19,7 @@ export function PageFrame({ currentPath, children }: PageFrameProps) {
         <Footer />
       </div>
       <RightSidebar />
+      <StickyBottomCta hidden={currentPath === '/quote'} />
       <BottomNav currentPath={currentPath} />
     </div>
   )

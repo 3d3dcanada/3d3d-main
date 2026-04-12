@@ -1,5 +1,13 @@
 import { SOCIAL_LINKS } from '@/data/siteNav'
 
+const LEGAL_LINKS = [
+  ['Privacy', '/privacy'],
+  ['Terms', '/terms'],
+  ['Cookies', '/cookies'],
+  ['CASL', '/casl'],
+  ['Accessibility', '/accessibility'],
+] as const
+
 export function Footer() {
   return (
     <footer className="site-footer">
@@ -27,6 +35,14 @@ export function Footer() {
         <p>
           <a href="mailto:info@3d3d.ca" style={{ color: 'var(--accent-teal)' }}>info@3d3d.ca</a>
           {' · '}3D3D · Ken · Atlantic Canada
+        </p>
+        <p className="site-footer__links">
+          {LEGAL_LINKS.map(([label, href], index) => (
+            <span key={href}>
+              {index > 0 ? ' · ' : null}
+              <a href={href}>{label}</a>
+            </span>
+          ))}
         </p>
       </div>
     </footer>

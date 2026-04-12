@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
-import { ACCENT_HEX, ACTION_LINKS, PRIMARY_NAV, SOCIAL_LINKS } from '@/data/siteNav'
+import { ACCENT_HEX, ACTION_LINKS, PRIMARY_NAV, SECONDARY_NAV, SOCIAL_LINKS } from '@/data/siteNav'
 
 interface RightSidebarProps {
   className?: string
@@ -65,8 +65,29 @@ export function RightSidebar({ className = '' }: RightSidebarProps) {
                   onClick={() => setMobileOpen(false)}
                 >
                   <span className="right-sidebar__nav-pip" />
-                  <span className="right-sidebar__nav-title">{item.label}</span>
-                  <span className="right-sidebar__nav-desc">{item.description}</span>
+                  <span>
+                    <span className="right-sidebar__nav-title">{item.label}</span>
+                    {item.description ? <span className="right-sidebar__nav-desc">{item.description}</span> : null}
+                  </span>
+                </Link>
+              )
+            })}
+            <span className="right-sidebar__nav-kicker">More routes</span>
+            {SECONDARY_NAV.map((item) => {
+              const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`right-sidebar__nav-link ${isActive ? 'right-sidebar__nav-link--active' : ''}`}
+                  style={{ '--nav-accent': ACCENT_HEX[item.accent] } as React.CSSProperties}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  <span className="right-sidebar__nav-pip" />
+                  <span>
+                    <span className="right-sidebar__nav-title">{item.label}</span>
+                    {item.description ? <span className="right-sidebar__nav-desc">{item.description}</span> : null}
+                  </span>
                 </Link>
               )
             })}

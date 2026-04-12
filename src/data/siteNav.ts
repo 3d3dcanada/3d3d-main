@@ -1,4 +1,6 @@
-export type AccentKey = 'teal' | 'magenta' | 'orange' | 'lime'
+import { ACCENTS, type AccentKey } from '@/data/buildV2'
+
+export type { AccentKey }
 
 export interface NavItem {
   label: string
@@ -8,44 +10,30 @@ export interface NavItem {
   external?: boolean
 }
 
-export const ACCENT_HEX: Record<AccentKey, string> = {
-  teal: '#40C4C4',
-  magenta: '#E84A8A',
-  orange: '#FF6B2B',
-  lime: '#AAFF2A',
-}
+export const ACCENT_HEX = ACCENTS
 
 export const PRIMARY_NAV: NavItem[] = [
-  {
-    label: 'Home',
-    href: '/',
-    accent: 'teal',
-    description: 'One homepage. Four divisions.',
-  },
-  {
-    label: '3D3D',
-    href: '/3d3d',
-    accent: 'teal',
-    description: 'Distributed fabrication cooperative.',
-  },
-  {
-    label: 'ORA',
-    href: '/ora',
-    accent: 'magenta',
-    description: 'AI memory, governance, and waitlist.',
-  },
-  {
-    label: 'STRX',
-    href: '/strx',
-    accent: 'orange',
-    description: 'Rapid deployment field operations.',
-  },
-  {
-    label: 'THE KEN',
-    href: '/the-ken',
-    accent: 'lime',
-    description: 'Projects, proof, and the record.',
-  },
+  { label: 'Home', href: '/', accent: 'teal', description: 'Problem, proof, quote.' },
+  { label: 'Marine', href: '/marine', accent: 'teal', description: 'The wedge: race teams and marine operators.' },
+  { label: 'The Ken', href: '/the-ken', accent: 'lime', description: 'Operator profile and mission briefs.' },
+  { label: 'STRX', href: '/strx', accent: 'orange', description: 'Rapid-response field engineering.' },
+  { label: 'Bermuda', href: '/newport-bermuda', accent: 'magenta', description: 'June 19, 2026 live campaign.' },
+  { label: '3D3D', href: '/3d3d', accent: 'teal', description: 'Fabrication, fleet, materials, workshops.' },
+  { label: 'ORA', href: '/ora', accent: 'magenta', description: '35-project software portfolio.' },
+  { label: 'Quote', href: '/quote', accent: 'orange', description: 'Multi-step intake with files.' },
+  { label: 'Contact', href: '/contact', accent: 'teal', description: 'Email-only project intake.' },
+  { label: 'Blog', href: '/blog', accent: 'lime', description: 'Field notes and campaign updates.' },
+]
+
+export const SECONDARY_NAV: NavItem[] = [
+  { label: 'About', href: '/about', accent: 'teal' },
+  { label: 'FAQ', href: '/faq', accent: 'lime' },
+  { label: 'Fleet', href: '/fleet', accent: 'teal' },
+  { label: 'Materials', href: '/materials', accent: 'magenta' },
+  { label: 'Workshops', href: '/workshops', accent: 'lime' },
+  { label: 'Projects', href: '/projects', accent: 'orange' },
+  { label: 'Media', href: '/media', accent: 'magenta' },
+  { label: 'Network', href: '/network', accent: 'lime' },
 ]
 
 export const ACTION_LINKS: NavItem[] = [
@@ -66,14 +54,11 @@ export const ACTION_LINKS: NavItem[] = [
 ]
 
 export const BOTTOM_NAV: NavItem[] = [
-  PRIMARY_NAV[0],
-  PRIMARY_NAV[1],
-  PRIMARY_NAV[2],
-  PRIMARY_NAV[3],
-  {
-    ...PRIMARY_NAV[4],
-    label: 'KEN',
-  },
+  { label: 'Home', href: '/', accent: 'teal' },
+  { label: 'Quote', href: '/quote', accent: 'orange' },
+  { label: 'Marine', href: '/marine', accent: 'teal' },
+  { label: 'STRX', href: '/strx', accent: 'orange' },
+  { label: 'KEN', href: '/the-ken', accent: 'lime' },
 ]
 
 export interface SocialLink {

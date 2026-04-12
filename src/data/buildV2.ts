@@ -628,7 +628,7 @@ export const pageSpecs: Record<string, PageSpec> = {
       eyebrow: 'Claim your node',
       title: 'Local machines should earn local work.',
       subtitle: 'The network routes work to capable operators and keeps manufacturing close to the problem.',
-      image: '/media/generated/network-01.jpg',
+      image: '/media/workshop/rv-lab-02.jpg',
       accent: 'lime',
       ctas: [{ label: 'Email interest', href: `mailto:${CONTACT_EMAIL}?subject=3D3D node interest` }],
     },
@@ -831,7 +831,7 @@ export const routeSpecs: Record<string, PageSpec> = {
         accent: 'magenta',
         eyebrow: 'Built record',
         title: 'Software depth and physical work sit together.',
-        image: '/media/generated/story-01.jpg',
+        image: '/media/workshop/machine-parts-flatlay.jpg',
         cards: projectCases.slice(0, 4),
       },
       {
@@ -856,7 +856,7 @@ export const routeSpecs: Record<string, PageSpec> = {
       eyebrow: 'Operational Reasoning Architecture',
       title: 'ORA is the governance backbone for the software ecosystem.',
       subtitle: 'AI, infrastructure, developer tools, web platforms, games, and libraries. Thirty-five projects built by one operator over four years.',
-      image: '/media/generated/software-01.jpg',
+      image: '/media/workshop/machine-parts-flatlay.jpg',
       accent: 'magenta',
       ctas: [
         { label: 'See the top projects', href: '#portfolio' },
@@ -880,7 +880,7 @@ export const routeSpecs: Record<string, PageSpec> = {
         accent: 'teal',
         eyebrow: 'Top 14',
         title: 'Detail pages are wired for the flagship projects.',
-        image: '/media/generated/software-02.jpg',
+        image: '/media/workshop/modular-parts-flatlay.jpg',
         cards: softwareProjects
           .filter((project) => oraDetailSlugs.has(project.slug))
           .map((project) => ({

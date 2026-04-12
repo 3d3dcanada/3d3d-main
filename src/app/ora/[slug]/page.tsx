@@ -45,7 +45,7 @@ export default async function OraDetailPage({ params }: OraParams) {
         eyebrow={`${project.category} · ${project.status}`}
         title={project.name}
         subtitle={project.tagline}
-        image="/media/generated/software-03.jpg"
+        image="/media/workshop/printer-frame-shot.jpg"
         accent={project.accent}
         ctas={[{ label: 'Back to ORA', href: '/ora' }]}
       />

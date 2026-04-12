@@ -69,12 +69,12 @@ export const trustRail = [
 ] as const
 
 export const materialPricing = [
-  { title: 'PLA', body: '$0.12/g - prototypes, gifts, display parts', accent: 'teal' },
-  { title: 'PETG', body: '$0.20/g - outdoor functional parts', accent: 'magenta' },
-  { title: 'TPU', body: '$0.25/g - seals, bumpers, flexible parts', accent: 'orange' },
-  { title: 'ABS', body: '$0.25/g - heat resistance and post-processing', accent: 'lime' },
-  { title: 'ASA', body: '$0.30/g - marine, UV-stable, outdoor work', accent: 'teal' },
-  { title: 'PA-CF', body: 'By quote - load-bearing and structural work', accent: 'magenta' },
+  { title: 'PLA', body: '$0.12/g - prototypes, gifts, display parts', image: '/media/workshop/galaxy-vase.jpg', accent: 'teal' },
+  { title: 'PETG', body: '$0.20/g - outdoor functional parts', image: '/media/workshop/custom-tv-mount.jpg', accent: 'magenta' },
+  { title: 'TPU', body: '$0.25/g - seals, bumpers, flexible parts', image: '/media/workshop/mouse-body-petgcf.jpg', accent: 'orange' },
+  { title: 'ABS', body: '$0.25/g - heat resistance and post-processing', image: '/media/workshop/nomad-joe-holder.jpg', accent: 'lime' },
+  { title: 'ASA', body: '$0.30/g - marine, UV-stable, outdoor work', image: '/media/workshop/winch-cup-holder.jpg', accent: 'teal' },
+  { title: 'PA-CF', body: 'By quote - load-bearing and structural work', image: '/media/workshop/fan-reducers.jpg', accent: 'magenta' },
 ] satisfies ContentCard[]
 
 export const strxPricing = [
@@ -82,34 +82,38 @@ export const strxPricing = [
     title: 'Single deployment',
     body: '$1,200 CAD/day, 2 day minimum. Travel and per diem billed at cost.',
     meta: 'Solo operator on-site, printer and tools, design, print, install, daily debrief.',
+    image: '/media/real/race-morning-crew.jpg',
     accent: 'orange',
   },
   {
     title: 'Race campaign embed',
     body: '$5,500 CAD/week. Full embed with a race team for pre-race through post-race.',
     meta: 'A week of the operation being unstuck.',
+    image: '/media/race/crew-racing-whiteshirts.jpg',
     accent: 'teal',
   },
   {
     title: 'Multi-week embed',
     body: '$18,000 CAD/month. Two to twelve week embedded field engineering.',
     meta: 'Priority over other commitments and weekly reporting.',
+    image: '/media/real/marina-night-01.jpg',
     accent: 'lime',
   },
   {
     title: 'Custom retainer',
     body: 'From $4,000 CAD/month. Three month minimum.',
     meta: 'Standby status, first four response hours, and priority parts work.',
+    image: '/media/real/dawn-approach.jpg',
     accent: 'magenta',
   },
 ] satisfies ContentCard[]
 
 export const sponsorTiers = [
-  { title: 'Crew', body: '$25 CAD - name on the campaign page and post-race update.', accent: 'teal' },
-  { title: 'Supporter', body: '$100 CAD - Crew tier plus sticker pack and video credit.', accent: 'magenta' },
-  { title: 'Partner', body: '$500 CAD - Supporter tier plus signed thank-you and Bermuda dock photo.', accent: 'orange' },
-  { title: 'Sponsor', body: '$2,500 CAD - Partner tier plus printer or dock signage where approvals allow.', accent: 'lime' },
-  { title: 'Title', body: '$10,000+ CAD - co-branded content and six months of priority response.', accent: 'teal' },
+  { title: 'Crew', body: '$25 CAD - name on the campaign page and post-race update.', image: '/media/race/fb-race-01.jpg', accent: 'teal' },
+  { title: 'Supporter', body: '$100 CAD - Crew tier plus sticker pack and video credit.', image: '/media/race/crew-deck-offshore.jpg', accent: 'magenta' },
+  { title: 'Partner', body: '$500 CAD - Supporter tier plus signed thank-you and Bermuda dock photo.', image: '/media/race/bermuda-marina-night.jpg', accent: 'orange' },
+  { title: 'Sponsor', body: '$2,500 CAD - Partner tier plus printer or dock signage where approvals allow.', image: '/media/race/dragon-sail-racing.jpg', accent: 'lime' },
+  { title: 'Title', body: '$10,000+ CAD - co-branded content and six months of priority response.', image: '/media/race/helm-racing-wake.jpg', accent: 'teal' },
 ] satisfies ContentCard[]
 
 export const missionBriefs = [
@@ -117,18 +121,21 @@ export const missionBriefs = [
     title: 'Mission 001 - The Five-Day Sprint',
     body: 'UK and France, 2025. CSM needed someone on the ground for Fastnet logistics. Fredericton to London, rail to Southampton, ferry to Cherbourg, three oversized suitcases, storage sorted, transfer complete, home the following Sunday.',
     meta: 'Five days. Three countries. Zero failures.',
+    image: '/media/race/fastnet-fleet-horizon.jpg',
     accent: 'lime',
   },
   {
     title: 'Mission 002 - The Thailand Operation',
     body: 'Thailand, 2023. Inventory flow for a resort development built partly from shipping containers. Vendor network, tracking software, scooter imports, rerouting around armed rebel activity, and the credit card returned clean.',
     meta: '$50,000 managed without unauthorized spend.',
+    image: '/media/workshop/machine-parts-flatlay.jpg',
     accent: 'orange',
   },
   {
     title: 'Mission 003 - The Hurricane',
     body: 'North Atlantic, February 2016. First time offshore, two-man crew, 75 knot sustained wind, 90+ knot gusts, waves over 30 ft, four days of storm, then nine more days to Antigua.',
     meta: 'The foundation for every later pressure decision.',
+    image: '/media/race/night-watch-offshore.jpg',
     accent: 'teal',
   },
 ] satisfies ContentCard[]
@@ -143,19 +150,43 @@ export const galleryBuckets = [
   {
     title: 'Racing',
     body: 'Fastnet, starts, sail handling, helm focus, and crew pressure.',
-    image: '/media/race/crew-sail-handling.jpg',
+    image: '/media/race/fleet-solent-racing.jpg',
     accent: 'magenta',
+  },
+  {
+    title: 'Crew & helm',
+    body: 'The hands on the wheel and the people behind the boat.',
+    image: '/media/race/helm-offshore-cup.jpg',
+    accent: 'orange',
+  },
+  {
+    title: 'Night watch',
+    body: 'Headlamps, dark horizons, and the hours nobody posts about.',
+    image: '/media/race/night-watch-headlamp.jpg',
+    accent: 'lime',
+  },
+  {
+    title: 'Marina & Bermuda',
+    body: 'Ports of call, dock work, and the return after a race.',
+    image: '/media/race/bermuda-marina-night.jpg',
+    accent: 'teal',
   },
   {
     title: 'Workshop builds',
     body: 'Printer action, fixtures, brackets, and parts that had to fit.',
     image: '/media/workshop/printer-action-cf.jpg',
-    accent: 'orange',
+    accent: 'magenta',
   },
   {
     title: 'RV lab',
     body: 'The early mobile shop: generator power, tight space, real work.',
     image: '/media/workshop/rv-lab-01.jpg',
+    accent: 'orange',
+  },
+  {
+    title: 'Custom prints',
+    body: 'Mouse bodies, winch holders, nomad brackets, and one-off fixes.',
+    image: '/media/workshop/winch-cup-holder.jpg',
     accent: 'lime',
   },
 ] satisfies ContentCard[]
@@ -165,36 +196,42 @@ export const projectCases = [
     title: 'JB-welded variable-pitch propeller',
     body: 'A get-home repair for CSM became the anchor proof: 3 Atlantic crossings, 50,000+ miles, multiple races, still bolted to the boat.',
     href: '/projects/jb-welded-propeller',
+    image: '/media/race/weddell-stern.jpg',
     accent: 'lime',
   },
   {
     title: 'Prusa Core One L to Bermuda',
     body: 'A compact additive manufacturing system rides aboard Osprey for Newport-Bermuda. The honest demo is dockside in Bermuda after arrival.',
     href: '/newport-bermuda',
+    image: '/media/race/fastnet-fleet-horizon.jpg',
     accent: 'magenta',
   },
   {
     title: 'Ironclad AI',
     body: 'Structural metalwork estimating for Trevor, a steel fabricator in Atlantic Canada.',
     href: '/ora',
+    image: '/media/workshop/modular-parts-flatlay.jpg',
     accent: 'orange',
   },
   {
     title: 'Invest East / Kingdom Builders',
     body: 'Web and AI work for Carly, kept consent-bound before naming more than public business context.',
     href: '/the-ken',
+    image: '/media/workshop/machine-parts-flatlay.jpg',
     accent: 'teal',
   },
   {
     title: 'RV lab origin',
     body: '3D3D learned lean inside a motorhome: printers, generator, filament, heat, repairs, and parts that still had to ship.',
     href: '/blog/rv-origin',
+    image: '/media/workshop/rv-lab-02.jpg',
     accent: 'lime',
   },
   {
     title: 'Marine material testing',
     body: 'ASA, PETG, TPU, and carbon-filled nylon chosen by environment, not by marketing copy.',
     href: '/materials',
+    image: '/media/workshop/printer-bed-benchy.jpg',
     accent: 'magenta',
   },
 ] satisfies ContentCard[]
@@ -559,7 +596,7 @@ export const pageSpecs: Record<string, PageSpec> = {
       eyebrow: 'Materials',
       title: 'Choose by environment first.',
       subtitle: 'Saltwater, UV, heat, load, flexibility, and chemical exposure matter more than filament hype.',
-      image: '/media/workshop/machine-parts-flatlay.jpg',
+      image: '/media/workshop/printer-bed-benchy.jpg',
       accent: 'teal',
       ctas: [{ label: 'Start a quote', href: '/quote' }],
     },
@@ -685,7 +722,7 @@ export const routeSpecs: Record<string, PageSpec> = {
         accent: 'magenta',
         eyebrow: 'Material reality',
         title: 'The environment picks the material.',
-        image: '/media/workshop/machine-parts-flatlay.jpg',
+        image: '/media/workshop/blue-prototype-part.jpg',
         cards: materialPricing,
         ctas: [{ label: 'Material guide', href: '/materials' }],
       },
@@ -736,7 +773,7 @@ export const routeSpecs: Record<string, PageSpec> = {
         accent: 'lime',
         eyebrow: 'Pricing',
         title: 'Published deployment anchors.',
-        image: '/media/real/race-morning-crew.jpg',
+        image: '/media/real/marina-night-02.jpg',
         cards: strxPricing,
       },
       {
@@ -810,7 +847,7 @@ export const routeSpecs: Record<string, PageSpec> = {
       eyebrow: 'Operator record',
       title: 'GED. Mechanic. First time offshore, survived the storm.',
       subtitle: 'The proof is the work: offshore sailing, field operations, fabrication, and software built under constraint.',
-      image: '/media/race/crew-racing-whiteshirts.jpg',
+      image: '/media/real/open-ocean-01.jpg',
       accent: 'lime',
       ctas: [
         { label: 'Mission briefs', href: '#mission-briefs' },
@@ -831,7 +868,7 @@ export const routeSpecs: Record<string, PageSpec> = {
         accent: 'magenta',
         eyebrow: 'Built record',
         title: 'Software depth and physical work sit together.',
-        image: '/media/workshop/machine-parts-flatlay.jpg',
+        image: '/media/workshop/rv-lab-03.jpg',
         cards: projectCases.slice(0, 4),
       },
       {
